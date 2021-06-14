@@ -25,10 +25,12 @@
 
 ## Other versions
 
+This is Vue.js 3 Tailwind CSS admin dashboard version
+
 <table>
     <tr>
-        <td align="center"><img src="https://justboil.me/svg/tailwind.svg" width="24" height="24" alt="Tailwind CSS"></td>
-        <td align="center"><img src="https://justboil.me/svg/tailwind.svg" width="24" height="24" alt="Tailwind CSS"></td>
+        <td align="center"><img src="https://justboil.me/svg/tailwind-logo.svg" width="161" height="20" alt="Tailwind CSS"></td>
+        <td align="center"><img src="https://justboil.me/svg/tailwind-logo.svg" width="161" height="20" alt="Tailwind CSS"></td>
     </tr>
     <tr>
         <td align="center"><a href="https://github.com/justboil/admin-one-tailwind" title="Free Tailwind CSS admin dashboard HTML"><img src="https://justboil.me/svg/language-html5.svg" width="64" height="64"></a></td>
