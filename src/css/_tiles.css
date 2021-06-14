@@ -1,0 +1,15 @@
+.tile {
+  @apply items-stretch flex-grow flex-shrink;
+}
+
+.tile.is-parent {
+  @apply p-3 md:flex;
+}
+
+.tile.is-ancestor {
+  @apply -mx-3 -mt-3 md:flex;
+}
+
+.tile.is-ancestor:not(:last-child) {
+  @apply mb-3;
+}

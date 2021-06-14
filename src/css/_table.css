@@ -1,0 +1,67 @@
+table {
+  @apply w-full;
+}
+
+thead {
+  @apply hidden md:table-header-group;
+}
+
+tr {
+  @apply max-w-full block relative border-b-4 border-gray-100
+    md:table-row md:border-b-0;
+}
+
+tr:last-child {
+  @apply border-b-0;
+}
+
+th {
+  @apply md:text-left md:py-2 md:px-3;
+}
+
+td {
+  @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
+    md:table-cell md:text-left md:py-2 md:px-3 md:align-middle md:border-b-0;
+}
+
+tr:nth-child(odd) td {
+  @apply md:bg-gray-50;
+}
+
+td:last-child {
+  @apply border-b-0;
+}
+
+tbody tr:hover td {
+  @apply md:bg-gray-100;
+}
+
+td:before {
+  content: attr(data-label);
+  @apply font-semibold pr-3 text-left md:hidden;
+}
+
+td.checkbox-cell, th.checkbox-cell {
+  @apply md:w-5;
+}
+
+td.progress-cell progress {
+  @apply flex w-2/5 self-center
+    md:w-full;
+}
+
+td.image-cell {
+  @apply border-b-0 md:w-6;
+}
+
+td.image-cell:before, td.actions-cell:before {
+  @apply hidden;
+}
+
+td.image-cell .image {
+  @apply w-24 h-24 mx-auto md:w-6 md:h-6;
+}
+
+.table-pagination {
+  @apply px-6 py-3 border-t border-gray-100;
+}

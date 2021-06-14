@@ -1,0 +1,111 @@
+@layer components {
+  .field:not(:last-child) {
+    @apply mb-3;
+  }
+
+  .field.spaced:not(:last-child) {
+    @apply mb-6;
+  }
+
+  .field-body .field .field {
+    @apply mb-0;
+  }
+
+  .field.addons {
+    @apply flex justify-start;
+  }
+
+  .field.addons .control.expanded {
+    @apply flex-grow flex-shrink;
+  }
+
+  .field.addons .control:first-child:not(:only-child) .input,
+  .field.addons .control:first-child:not(:only-child) .select select {
+    @apply rounded-r-none border-r-0;
+  }
+
+  .field.addons .control:last-child:not(:only-child) .input,
+  .field.addons .control:last-child:not(:only-child) .select select {
+    @apply rounded-l-none border-l-0;
+  }
+
+  .field.grouped {
+    @apply flex justify-start;
+  }
+
+  .field.grouped > .control:not(:last-child) {
+    @apply mr-3;
+  }
+
+  .field.grouped.multiline {
+    @apply flex-wrap;
+  }
+
+  .label {
+    @apply block font-bold mb-2;
+  }
+
+  .control {
+    @apply relative;
+  }
+
+  .control.icons-left, .control.icons-right {
+    @apply relative;
+  }
+
+  .input, .textarea, .select select, .file-cta, .file-name {
+    @apply px-3 py-2 border border-gray-400 rounded;
+  }
+
+  .input, .select select, .file-cta, .file-name {
+    @apply h-10;
+  }
+
+  .input, .textarea, .select select {
+    @apply w-full max-w-full focus:border-gray-100 focus:ring focus:outline-none bg-white;
+  }
+
+  .input[readonly] {
+    @apply pointer-events-none bg-gray-100;
+  }
+
+  .textarea {
+    @apply h-24;
+  }
+
+  .control.icons-left .icon, .control.icons-right .icon {
+    @apply absolute top-0 z-10 w-10 h-10;
+  }
+
+  .control.icons-left .input, .control.icons-left .select select {
+    @apply pl-10;
+  }
+
+  .control.icons-left .icon.left {
+    @apply left-0;
+  }
+
+  .control.icons-right .input, .control.icons-right .select select {
+    @apply pr-10;
+  }
+
+  .control.icons-right .icon.right {
+    @apply right-0;
+  }
+
+  .help {
+    @apply block text-xs text-gray-500 mt-1;
+  }
+
+  .file {
+    @apply flex items-stretch justify-start relative;
+  }
+
+  .upload {
+    @apply inline-flex;
+  }
+
+  .upload input[type=file] {
+    @apply absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1;
+  }
+}

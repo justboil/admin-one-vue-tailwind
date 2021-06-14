@@ -1,0 +1,31 @@
+body {
+  @apply bg-gray-50 text-base pt-14 md:pl-60;
+}
+
+#app {
+  @apply w-screen transition-all md:w-auto;
+}
+
+.main-section {
+  @apply p-6;
+}
+
+.dropdown {
+  @apply cursor-pointer;
+}
+
+.clipped, .clipped body {
+  @apply overflow-hidden;
+}
+
+.m-clipped, .m-clipped body {
+  @apply overflow-hidden md:overflow-visible;
+}
+
+.form-screen body {
+  @apply p-0;
+}
+
+.form-screen .main-section {
+  @apply flex h-screen items-center justify-center;
+}

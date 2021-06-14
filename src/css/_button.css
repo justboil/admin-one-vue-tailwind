@@ -1,0 +1,58 @@
+.button {
+  @apply inline-flex bg-white text-black border-gray-50 border cursor-pointer justify-center px-4 py-2 text-center
+    whitespace-nowrap rounded
+    hover:border-gray-500
+    focus:outline-none;
+}
+
+.button.addon-right {
+  @apply rounded-r-none;
+}
+
+.button.addon-left {
+  @apply rounded-l-none;
+}
+
+.button.small {
+  @apply text-xs p-1;
+}
+
+.button.small.textual {
+  @apply px-3;
+}
+
+.button.active {
+  @apply border-gray-300 hover:border-gray-500;
+}
+
+.button.green {
+  @apply bg-green-500 border-green-500 text-white hover:bg-green-600;
+}
+
+.button.red {
+  @apply bg-red-500 border-red-500 text-white hover:bg-red-600;
+}
+
+.button.blue {
+  @apply bg-blue-500 border-blue-500 text-white hover:bg-blue-600;
+}
+
+.button.light {
+  @apply bg-gray-100 border-gray-100 hover:bg-gray-200;
+}
+
+.buttons {
+  @apply flex items-center flex-wrap justify-start;
+}
+
+.buttons.nowrap {
+  @apply flex-nowrap;
+}
+
+.buttons.right {
+  @apply justify-end;
+}
+
+.buttons .button {
+  @apply mx-1;
+}

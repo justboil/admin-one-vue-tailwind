@@ -1,0 +1,19 @@
+progress {
+  @apply h-3 rounded-full overflow-hidden;
+}
+
+progress::-webkit-progress-bar {
+  @apply bg-gray-200;
+}
+
+progress::-webkit-progress-value {
+  @apply bg-green-500;
+}
+
+progress::-moz-progress-bar {
+  @apply bg-green-500;
+}
+
+progress::-ms-fill {
+  @apply bg-green-500 border-0;
+}
