@@ -12,7 +12,7 @@
 * Composition API
 * Reusable components
 
-Premium version is coming soon)
+Premium version is coming soon
 
 [comment]: <> (* [Premium version]&#40;https://justboil.me/tailwind-admin-templates&#41; available)
 
