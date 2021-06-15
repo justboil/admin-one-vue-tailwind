@@ -12,14 +12,14 @@
     <tiles>
       <card-widget
         class="tile"
-        color="green-500"
+        color="text-green-500"
         icon="account-multiple"
         :number="512"
         label="Clients"
       />
       <card-widget
         class="tile"
-        color="blue-500"
+        color="text-blue-500"
         icon="cart-outline"
         :number="7770"
         prefix="$"
@@ -27,7 +27,7 @@
       />
       <card-widget
         class="tile"
-        color="red-500"
+        color="text-red-500"
         icon="chart-timeline-variant"
         :number="256"
         suffix="%"
