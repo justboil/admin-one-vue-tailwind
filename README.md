@@ -12,10 +12,13 @@
 * Composition API
 * Reusable components
 
+Premium version is coming soon)
+
 [comment]: <> (* [Premium version]&#40;https://justboil.me/tailwind-admin-templates&#41; available)
 
 ## Table of Contents
 
+* [Other versions](#other-versions)
 * [Demo](#demo)
 * [Quick Start](#quick-start)
 * [Browser Support](#browser-support)
@@ -29,7 +32,7 @@ This is Vue.js 3 Tailwind CSS admin dashboard version
 
 <table>
     <tr>
-        <td align="center" colspan="2"><img src="https://justboil.me/images/tailwind-gh-logo.png" width="198" height="40" alt="Tailwind CSS"></td>
+        <td align="center" colspan="2"><a href="https://justboil.me/tailwind-admin-templates"><img src="https://justboil.me/images/tailwind-gh-logo.png" width="198" height="40" alt="Tailwind CSS admin dashboard templates"></a></td>
     </tr>
     <tr>
         <td align="center"><a href="https://github.com/justboil/admin-one-tailwind" title="Free Tailwind CSS admin dashboard HTML"><img src="https://justboil.me/svg/language-html5.svg" width="64" height="64"></a></td>
