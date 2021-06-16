@@ -2,7 +2,7 @@
   <div class="card bg-white border border-gray-100 rounded">
     <header v-if="title" class="flex items-stretch border-b border-gray-100">
       <p class="flex items-center py-3 px-4 flex-grow font-bold">
-        <icon v-if="icon" :icon="icon" />
+        <icon v-if="icon" :path="icon" class="mr-3" />
         {{ title }}
       </p>
       <a
@@ -12,7 +12,7 @@
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <icon :icon="headerIcon" />
+        <icon :path="headerIcon" />
       </a>
     </header>
     <div v-if="isEmpty" class="text-center py-12 text-gray-500">

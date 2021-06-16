@@ -41,10 +41,10 @@
       <td class="actions-cell">
         <div class="buttons right nowrap">
           <button class="button small green" type="button" @click="isModalActive = true">
-            <icon icon="eye" />
+            <icon :path="mdiEye" size="12" />
           </button>
           <button class="button small red" type="button" @click="isModalActive = true">
-            <icon icon="trash-can" />
+            <icon :path="mdiTrashCan" size="12" />
           </button>
         </div>
       </td>
@@ -75,6 +75,7 @@
 
 <script>
 import { computed, ref } from 'vue'
+import { mdiEye, mdiTrashCan } from '@mdi/js'
 import axios from 'axios'
 import slice from 'lodash/slice'
 import remove from 'lodash/remove'
@@ -148,7 +149,7 @@ export default {
       })
       .catch(error => {
         isLoading.value = false
-        console.error(error.message)
+        alert(error.message)
       })
 
     return {
@@ -159,7 +160,9 @@ export default {
       checkedRows,
       itemsPaginated,
       pagesList,
-      checked
+      checked,
+      mdiEye,
+      mdiTrashCan
     }
   }
 }

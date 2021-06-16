@@ -1,7 +1,7 @@
 <template>
-  <field :label="label" :wrap-body="true">
-    <field class="file" :addons="true">
-      <control :upload="true">
+  <field :label="label" wrap-body>
+    <field class="file" addons>
+      <control upload>
         <a class="button blue" :class="{'addon-right':file}">
           Upload
         </a>

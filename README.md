@@ -2,19 +2,25 @@
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1)](https://justboil.me/tailwind-admin-templates)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates)
 
-[![Free Tailwind CSS admin dashboard](https://justboil.me/images/one-vue3-tailwind/repository-preview-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-vue3-tailwind/repository-preview-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 **Admin One** is simple, beautiful and free Vue.js 3 Tailwind CSS admin dashboard
 
-* Free under MIT License
-* Built with Vue.js 3 & Tailwind CSS Framework
-* Vuex & Router
-* Composition API
+* Built with **Vue.js 3**, **Tailwind CSS** framework & **Composition API** 
+* SPA with **Vuex** & **Router**
+* **Production CSS** is only **24kb**
 * Reusable components
+* Free under MIT License
 
 Premium version is coming soon
 
 [comment]: <> (* [Premium version]&#40;https://justboil.me/tailwind-admin-templates&#41; available)
+
+## Responsive layout
+
+Mobile layout with hidden aside menu and collapsable cards & tables
+
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ## Table of Contents
 

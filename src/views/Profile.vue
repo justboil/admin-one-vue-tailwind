@@ -10,17 +10,17 @@
   </hero-bar>
   <main-section>
     <tiles>
-      <card-component title="Edit Profile" icon="account-circle" class="tile is-child">
+      <card-component title="Edit Profile" :icon="mdiAccountCircle" class="tile is-child">
         <form @submit.prevent="submit">
           <file-picker label="Avatar" />
           <divider/>
           <field label="Name" help="Required. Your name">
-            <control>
+            <control :icon-left="mdiAccount">
               <input v-model="userName" name="name" class="input" required />
             </control>
           </field>
           <field label="E-mail" help="Required. Your e-mail">
-            <control>
+            <control :icon-left="mdiMail" :icon-right="mdiCheck">
               <input v-model="userEmail" name="email" type="email" class="input" required />
             </control>
           </field>
@@ -34,7 +34,7 @@
           </field>
         </form>
       </card-component>
-      <card-component title="Profile" icon="account" class="tile is-child">
+      <card-component title="Profile" :icon="mdiAccount" class="tile is-child">
         <user-avatar class="w-48 h-48 mx-auto" />
         <divider/>
         <field label="Name">
@@ -48,10 +48,10 @@
         </field>
       </card-component>
     </tiles>
-    <card-component title="Change Password" icon="lock">
+    <card-component title="Change Password" :icon="mdiLock">
       <form @submit.prevent="submit">
         <field label="Current password" help="Required. Your current password">
-          <control>
+          <control :icon-left="mdiAsterisk">
             <input
               v-model="passwordForm.password_current"
               name="password_current"
@@ -66,7 +66,7 @@
         <divider/>
 
         <field label="New password" help="Required. New password">
-          <control>
+          <control :icon-left="mdiFormTextboxPassword">
             <input
               v-model="passwordForm.password"
               name="password"
@@ -79,7 +79,7 @@
         </field>
 
         <field label="Confirm password" help="Required. New password one more time">
-          <control>
+          <control :icon-left="mdiFormTextboxPassword">
             <input
               v-model="passwordForm.password_confirmation"
               name="password_confirmation"
@@ -108,6 +108,7 @@
 <script>
 import { ref, reactive, computed } from 'vue'
 import { useStore } from 'vuex'
+import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiCheck, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
 import MainSection from '@/components/MainSection'
 import CardComponent from '@/components/CardComponent'
 import TitleBar from '@/components/TitleBar'
@@ -171,7 +172,14 @@ export default {
       userEmail,
       titleStack,
       passwordForm,
-      submit
+      submit,
+      mdiAccount,
+      mdiAccountCircle,
+      mdiLock,
+      mdiMail,
+      mdiCheck,
+      mdiAsterisk,
+      mdiFormTextboxPassword
     }
   }
 }

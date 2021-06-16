@@ -13,14 +13,14 @@
       <card-widget
         class="tile"
         color="text-green-500"
-        icon="account-multiple"
+        :icon="mdiAccountMultiple"
         :number="512"
         label="Clients"
       />
       <card-widget
         class="tile"
         color="text-blue-500"
-        icon="cart-outline"
+        :icon="mdiCartOutline"
         :number="7770"
         prefix="$"
         label="Sales"
@@ -28,7 +28,7 @@
       <card-widget
         class="tile"
         color="text-red-500"
-        icon="chart-timeline-variant"
+        :icon="mdiChartTimelineVariant"
         :number="256"
         suffix="%"
         label="Performance"
@@ -37,8 +37,8 @@
 
     <card-component
       title="Performance"
-      icon="finance"
-      header-icon="reload"
+      :icon="mdiFinance"
+      :header-icon="mdiReload"
       class="mb-6"
       @header-icon-click="fillChartData"
     >
@@ -52,7 +52,11 @@
       </div>
     </card-component>
 
-    <card-component title="Clients" :has-table="true">
+    <notification color="blue" :icon="mdiMonitorCellphone">
+      <b>Responsive table.</b> Collapses on mobile
+    </notification>
+
+    <card-component :icon="mdiMonitorCellphone" title="Responsive table" has-table>
       <clients-table />
     </card-component>
   </main-section>
@@ -61,6 +65,14 @@
 <script>
 // @ is an alias to /src
 import { ref, onMounted } from 'vue'
+import {
+  mdiAccountMultiple,
+  mdiCartOutline,
+  mdiChartTimelineVariant,
+  mdiFinance,
+  mdiMonitorCellphone,
+  mdiReload
+} from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config'
 import LineChart from '@/components/Charts/LineChart'
 import MainSection from '@/components/MainSection'
@@ -70,6 +82,7 @@ import Tiles from '@/components/Tiles'
 import CardWidget from '@/components/CardWidget'
 import CardComponent from '@/components/CardComponent'
 import ClientsTable from '@/components/ClientsTable'
+import Notification from '@/components/Notification'
 
 export default {
   name: 'Home',
@@ -81,7 +94,8 @@ export default {
     CardWidget,
     Tiles,
     HeroBar,
-    TitleBar
+    TitleBar,
+    Notification
   },
   setup () {
     const titleStack = ref(['Admin', 'Dashboard'])
@@ -102,7 +116,13 @@ export default {
       titleStack,
       chartOptions,
       chartData,
-      fillChartData
+      fillChartData,
+      mdiAccountMultiple,
+      mdiCartOutline,
+      mdiChartTimelineVariant,
+      mdiFinance,
+      mdiMonitorCellphone,
+      mdiReload
     }
   }
 }

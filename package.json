@@ -1,14 +1,15 @@
 {
   "name": "admin-one-vue-tailwind",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --modern",
-    "build:gh-pages": "DEPLOY_ENV=GH_PAGES vue-cli-service build --modern",
+    "build:gh-pages": "DEPLOY_ENV=GH_PAGES vue-cli-service build --report",
     "lint": "vue-cli-service lint",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@mdi/js": "^5.9.55",
     "axios": "^0.21.1",
     "chart.js": "^3.3.2",
     "core-js": "^3.6.5",

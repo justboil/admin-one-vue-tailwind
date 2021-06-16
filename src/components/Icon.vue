@@ -1,6 +1,8 @@
 <template>
   <span :class="spanClass">
-    <i :class="iClass"></i>
+    <svg viewBox="0 0 24 24" :width="size" :height="size" class="inline-block">
+      <path :d="path" />
+    </svg>
   </span>
 </template>
 
@@ -9,22 +11,37 @@ import { computed } from 'vue'
 
 export default {
   name: 'Icon',
-  props: ['icon', 'w', 'h', 'size'],
+  props: {
+    path: {
+      required: true
+    },
+    w: {
+      type: String,
+      default: 'w-6'
+    },
+    h: {
+      type: String,
+      default: 'h-6'
+    },
+    size: {
+      default: 16
+    }
+  },
   setup (props) {
     const spanClass = computed(() => {
-      const w = props.w ? props.w : 'w-6'
-      const h = props.h ? props.h : 'h-6'
-
-      return `inline-flex justify-center items-center ${w} ${h}`
+      return `inline-flex justify-center items-center ${props.w} ${props.h}`
     })
 
-    const iClass = computed(() => {
-      const base = `inline-flex mdi mdi-${props.icon}`
-
-      return props.size ? `${base} mdi-${props.size}` : base
-    })
-
-    return { spanClass, iClass }
+    return { spanClass }
   }
 }
 </script>
+
+<style scoped>
+/*svg {*/
+/*  transform: rotate(var(--r, 0deg)) scale(var(--sx, 1), var(--sy, 1));*/
+/*}*/
+path {
+  fill: currentColor;
+}
+</style>

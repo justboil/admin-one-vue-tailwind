@@ -9,21 +9,22 @@
       :class="{'py-2': !isSubmenuList, 'p-3 text-sm': isSubmenuList}"
       @click="menuClick"
     >
-      <icon v-if="item.icon" :icon="item.icon" class="flex-none" w="w-12" />
+      <icon v-if="item.icon" :path="item.icon" class="flex-none" w="w-12" />
       <span class="flex-grow">{{ item.label }}</span>
-      <icon v-if="hasDropdown" :icon="dropdownIcon" class="flex-none" w="w-12" />
+      <icon v-if="hasDropdown" :path="dropdownIcon" class="flex-none" w="w-12" />
     </component>
     <aside-menu-list
       v-if="hasDropdown"
       :menu="item.menu"
       :class="{ 'hidden': !isDropdownActive, 'block bg-gray-600': isDropdownActive }"
-      :is-submenu-list="true"
+      is-submenu-list
     />
   </li>
 </template>
 
 <script>
 import { defineAsyncComponent, ref, computed } from 'vue'
+import { mdiMinus, mdiPlus } from '@mdi/js'
 import Icon from '@/components/Icon'
 
 export default {
@@ -50,7 +51,7 @@ export default {
 
     const hasDropdown = computed(() => !!props.item.menu)
 
-    const dropdownIcon = computed(() => isDropdownActive.value ? 'minus' : 'plus')
+    const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
 
     const itemTo = computed(() => props.item.to || null)
 

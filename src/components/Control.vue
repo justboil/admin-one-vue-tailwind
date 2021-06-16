@@ -1,8 +1,12 @@
 <template>
-  <component :is="is" class="control" :class="{'upload':upload, 'expanded':expanded, 'icons-left':iconLeft, 'icons-right':iconRight}">
+  <component
+    :is="is"
+    class="control"
+    :class="{'upload':upload, 'expanded':expanded, 'icons-left':iconLeft, 'icons-right':iconRight}"
+  >
     <slot/>
-    <control-icon v-if="iconLeft" :icon="iconLeft" />
-    <control-icon v-if="iconRight" :icon="iconRight" :is-right="true" />
+    <control-icon v-if="iconLeft" :icon="iconLeft"/>
+    <control-icon v-if="iconRight" :icon="iconRight" is-right/>
   </component>
 </template>
 

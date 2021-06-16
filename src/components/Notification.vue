@@ -3,7 +3,10 @@
     <div class="level">
       <div class="level-left">
         <div class="level-item">
-          <slot />
+          <div class="flex items-center">
+            <icon v-if="icon" :path="icon" class="mr-2" />
+            <span><slot /></span>
+          </div>
         </div>
       </div>
       <div class="level-right">
@@ -19,10 +22,15 @@
 
 <script>
 import { ref, computed } from 'vue'
+import Icon from '@/components/Icon'
 
 export default {
   name: 'Notification',
+  components: {
+    Icon
+  },
   props: {
+    icon: String,
     color: {
       type: String,
       required: true

@@ -6,11 +6,11 @@
       @click="toggle"
       ref="root"
     >
-      <a class="block py-2 px-3 bg-gray-100 md:bg-transparent" :class="{'flex items-center': hasUserAvatar, 'md:text-blue-500':isDropdownActive}">
+      <a class="flex items-center py-2 px-3 bg-gray-100 md:bg-transparent" :class="{'md:text-blue-500':isDropdownActive}">
         <slot />
-        <icon :icon="toggleDropdownIcon" class="hidden md:inline-flex" />
+        <icon :path="toggleDropdownIcon" class="hidden md:inline-flex" />
       </a>
-      <div class="text-sm md:border-gray-200 md:border-t-2 md:bg-white md:absolute md:top-full md:left-0 md:min-w-full md:z-20 md:shadow-md md:rounded-b" :class="{'md:hidden':!isDropdownActive}">
+      <div class="text-sm border-gray-100 border-b md:border-b-0 md:border-gray-200 md:border-t-2 md:bg-white md:absolute md:top-full md:left-0 md:min-w-full md:z-20 md:shadow-md md:rounded-b" :class="{'md:hidden':!isDropdownActive}">
         <slot name="dropdown" />
       </div>
     </nav-bar-item>
@@ -18,6 +18,7 @@
 
 <script>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem'
 import Icon from '@/components/Icon'
 
@@ -25,15 +26,7 @@ export default {
   name: 'NavBarMenu',
   components: { Icon, NavBarItem },
   props: {
-    isHoverable: {
-      type: Boolean,
-      default: false
-    },
     hasDivider: {
-      type: Boolean,
-      default: false
-    },
-    hasUserAvatar: {
       type: Boolean,
       default: false
     }
@@ -41,7 +34,7 @@ export default {
   setup () {
     const isDropdownActive = ref(false)
 
-    const toggleDropdownIcon = computed(() => isDropdownActive.value ? 'chevron-up' : 'chevron-down')
+    const toggleDropdownIcon = computed(() => isDropdownActive.value ? mdiChevronUp : mdiChevronDown)
 
     const toggle = () => {
       isDropdownActive.value = !isDropdownActive.value

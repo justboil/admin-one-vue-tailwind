@@ -9,6 +9,7 @@
 // @ is an alias to /src
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { mdiDesktopMac, mdiTable, mdiSquareEditOutline, mdiAccountCircle, mdiLock, mdiViewList, mdiCreditCard, mdiHelpCircle, mdiGithub } from '@mdi/js'
 import NavBar from '@/components/NavBar'
 import AsideMenu from '@/components/AsideMenu'
 import FooterBar from '@/components/FooterBar'
@@ -35,7 +36,7 @@ export default {
         [
           {
             to: '/',
-            icon: 'desktop-mac',
+            icon: mdiDesktopMac,
             label: 'Dashboard'
           }
         ],
@@ -44,28 +45,28 @@ export default {
           {
             to: '/tables',
             label: 'Tables',
-            icon: 'table',
+            icon: mdiTable,
             updateMark: true
           },
           {
             to: '/forms',
             label: 'Forms',
-            icon: 'square-edit-outline'
+            icon: mdiSquareEditOutline
           },
           {
             to: '/profile',
             label: 'Profile',
-            icon: 'account-circle'
+            icon: mdiAccountCircle
           },
           {
             to: '/login',
             label: 'Login',
-            icon: 'lock'
+            icon: mdiLock
           },
           {
             label: 'Submenus',
             subLabel: 'Submenus Example',
-            icon: 'view-list',
+            icon: mdiViewList,
             menu: [
               {
                 href: '#void',
@@ -83,13 +84,18 @@ export default {
           {
             href: 'https://admin-one.justboil.me',
             label: 'Premium Demo',
-            icon: 'credit-card',
+            icon: mdiCreditCard,
             prevent: true
           },
           {
             href: 'https://justboil.me/tailwind-admin-templates',
             label: 'About',
-            icon: 'help-circle'
+            icon: mdiHelpCircle
+          },
+          {
+            href: 'https://github.com/justboil/admin-one-vue-tailwind',
+            label: 'GitHub',
+            icon: mdiGithub
           }
         ]
       ]

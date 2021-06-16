@@ -12,7 +12,7 @@
         </div>
       </div>
       <div v-if="icon" class="level-item">
-        <icon :icon="icon" size="48px" w="20" h="20" :class="color" />
+        <icon :path="icon" size="48" w="w-20" h="h-20" :class="color" />
       </div>
     </div>
   </card-component>

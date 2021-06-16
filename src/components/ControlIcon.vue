@@ -1,5 +1,5 @@
 <template>
-  <icon :icon="icon" w="w-10" h="h-10" class="absolute top-0 z-10" :class="{'left-0':!isRight, 'right-0':isRight}" />
+  <icon :path="icon" w="w-10" h="h-10" class="absolute top-0 z-10" :class="{'left-0':!isRight, 'right-0':isRight}" />
 </template>
 
 <script>

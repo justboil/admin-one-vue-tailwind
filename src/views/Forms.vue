@@ -9,16 +9,16 @@
     </template>
   </hero-bar>
   <main-section>
-    <card-component title="Forms" icon="ballot">
+    <card-component title="Forms" :icon="mdiBallot">
       <form @submit.prevent="submit">
         <field label="From" wrap-body>
           <field>
-            <control icon-left="account">
+            <control :icon-left="mdiAccount">
               <input class="input" type="text" placeholder="Name">
             </control>
           </field>
           <field>
-            <control icon-left="mail" icon-right="check">
+            <control :icon-left="mdiMail" :icon-right="mdiCheck">
               <input class="input" type="email" placeholder="Email" value="alex@smith.com">
             </control>
           </field>
@@ -79,7 +79,7 @@
         </field>
       </form>
     </card-component>
-    <card-component title="Custom elements" icon="ballot-outline">
+    <card-component title="Custom elements" :icon="mdiBallotOutline">
 
       <field label="Checkbox" wrap-body>
         <check-radio-picker
@@ -120,6 +120,7 @@
 
 <script>
 import { ref, reactive } from 'vue'
+import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail, mdiCheck } from '@mdi/js'
 import MainSection from '@/components/MainSection'
 import TitleBar from '@/components/TitleBar'
 import CardComponent from '@/components/CardComponent'
@@ -162,13 +163,20 @@ export default {
       file: null
     })
 
-    const submit = () => console.log('Submit')
+    const submit = () => {
+      //
+    }
 
     return {
       titleStack,
       form,
       customElementsForm,
-      submit
+      submit,
+      mdiBallot,
+      mdiBallotOutline,
+      mdiAccount,
+      mdiMail,
+      mdiCheck
     }
   }
 }

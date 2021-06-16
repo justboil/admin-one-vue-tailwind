@@ -4,7 +4,7 @@
     class="w-60 fixed top-0 z-40 h-screen bg-gray-800 transition-all md:left-0"
     :class="{ '-left-60': !isAsideMobileExpanded, 'left-0': isAsideMobileExpanded }"
   >
-    <aside-tools :is-main-menu="true">
+    <aside-tools is-main-menu>
       <template #label>
         Admin <b class="font-black">One</b>
       </template>
@@ -52,8 +52,6 @@ export default {
         event.preventDefault()
         alert('Coming soon')
       }
-
-      console.log('menuClick', item)
     }
 
     return {
