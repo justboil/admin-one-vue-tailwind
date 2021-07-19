@@ -3,12 +3,12 @@ table {
 }
 
 thead {
-  @apply hidden md:table-header-group;
+  @apply hidden lg:table-header-group;
 }
 
 tr {
   @apply max-w-full block relative border-b-4 border-gray-100
-    md:table-row md:border-b-0;
+    lg:table-row lg:border-b-0;
 }
 
 tr:last-child {
@@ -16,16 +16,16 @@ tr:last-child {
 }
 
 th {
-  @apply md:text-left md:py-2 md:px-3;
+  @apply lg:text-left lg:py-2 lg:px-3;
 }
 
 td {
   @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
-    md:table-cell md:text-left md:py-2 md:px-3 md:align-middle md:border-b-0;
+    lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0;
 }
 
 tr:nth-child(odd) td {
-  @apply md:bg-gray-50;
+  @apply lg:bg-gray-50;
 }
 
 td:last-child {
@@ -33,25 +33,25 @@ td:last-child {
 }
 
 tbody tr:hover td {
-  @apply md:bg-gray-100;
+  @apply lg:bg-gray-100;
 }
 
 td:before {
   content: attr(data-label);
-  @apply font-semibold pr-3 text-left md:hidden;
+  @apply font-semibold pr-3 text-left lg:hidden;
 }
 
 td.checkbox-cell, th.checkbox-cell {
-  @apply md:w-5;
+  @apply lg:w-5;
 }
 
 td.progress-cell progress {
   @apply flex w-2/5 self-center
-    md:w-full;
+    lg:w-full;
 }
 
 td.image-cell {
-  @apply border-b-0 md:w-6;
+  @apply border-b-0 lg:w-6;
 }
 
 td.image-cell:before, td.actions-cell:before {
@@ -59,7 +59,7 @@ td.image-cell:before, td.actions-cell:before {
 }
 
 td.image-cell .image {
-  @apply w-24 h-24 mx-auto md:w-6 md:h-6;
+  @apply w-24 h-24 mx-auto lg:w-6 lg:h-6;
 }
 
 .table-pagination {

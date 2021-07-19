@@ -1,15 +1,21 @@
 <template>
   <title-bar :title-stack="titleStack" />
-  <hero-bar>
-    Dashboard
-    <template #right>
-      <router-link to="/" class="button light">
-        Button
-      </router-link>
-    </template>
-  </hero-bar>
+  <hero-bar>Dashboard</hero-bar>
   <main-section>
-    <tiles>
+    <notification color="info" :icon="mdiGithub" class="shadow-xl">
+      Please star this project on
+      <a href="https://github.com/justboil/admin-one-vue-tailwind" class="underline" target="_blank">GitHub</a>
+      <template #right>
+        <jb-button
+          href="https://github.com/justboil/admin-one-vue-tailwind"
+          :icon="mdiGithub"
+          label="GitHub"
+          target="_blank"
+          small
+        />
+      </template>
+    </notification>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
       <card-widget
         class="tile"
         color="text-green-500"
@@ -33,7 +39,7 @@
         suffix="%"
         label="Performance"
       />
-    </tiles>
+    </div>
 
     <card-component
       title="Performance"
@@ -42,17 +48,12 @@
       class="mb-6"
       @header-icon-click="fillChartData"
     >
-      <div v-if="chartData" class="chart-area">
-        <line-chart
-          ref="bigChart"
-          :chart-data="chartData"
-          :chart-options="chartOptions"
-        >
-        </line-chart>
+      <div v-if="chartData">
+        <line-chart :data="chartData" class="h-96"/>
       </div>
     </card-component>
 
-    <notification color="blue" :icon="mdiMonitorCellphone">
+    <notification color="info" :icon="mdiMonitorCellphone">
       <b>Responsive table.</b> Collapses on mobile
     </notification>
 
@@ -71,18 +72,19 @@ import {
   mdiChartTimelineVariant,
   mdiFinance,
   mdiMonitorCellphone,
-  mdiReload
+  mdiReload,
+  mdiGithub
 } from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config'
 import LineChart from '@/components/Charts/LineChart'
 import MainSection from '@/components/MainSection'
 import TitleBar from '@/components/TitleBar'
 import HeroBar from '@/components/HeroBar'
-import Tiles from '@/components/Tiles'
 import CardWidget from '@/components/CardWidget'
 import CardComponent from '@/components/CardComponent'
 import ClientsTable from '@/components/ClientsTable'
 import Notification from '@/components/Notification'
+import JbButton from '@/components/JbButton'
 
 export default {
   name: 'Home',
@@ -92,15 +94,13 @@ export default {
     LineChart,
     CardComponent,
     CardWidget,
-    Tiles,
     HeroBar,
     TitleBar,
-    Notification
+    Notification,
+    JbButton
   },
   setup () {
     const titleStack = ref(['Admin', 'Dashboard'])
-
-    const chartOptions = chartConfig.chartOptions
 
     const chartData = ref(null)
 
@@ -114,7 +114,6 @@ export default {
 
     return {
       titleStack,
-      chartOptions,
       chartData,
       fillChartData,
       mdiAccountMultiple,
@@ -122,7 +121,8 @@ export default {
       mdiChartTimelineVariant,
       mdiFinance,
       mdiMonitorCellphone,
-      mdiReload
+      mdiReload,
+      mdiGithub
     }
   }
 }

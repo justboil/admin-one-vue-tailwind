@@ -1,71 +1,62 @@
 <template>
-  <div v-if="!isDismissed" :class="componentClass">
-    <div class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <div class="flex items-center">
-            <icon v-if="icon" :path="icon" class="mr-2" />
-            <span><slot /></span>
-          </div>
-        </div>
+  <div
+    v-if="!isDismissed"
+    :class="componentClass"
+    class="px-3 py-6 md:py-3 mx-6 md:mx-0 mb-6 last:mb-0 border rounded transition-colors duration-150"
+  >
+    <level>
+      <div class="flex flex-col md:flex-row items-center">
+        <icon v-if="icon" :path="icon" w="w-10 md:w-5" h="h-10 md:h-5" size="24" class="md:mr-2" />
+        <span class="text-center md:text-left"><slot /></span>
       </div>
-      <div class="level-right">
-        <div class="level-item">
-          <button type="button" class="button small textual" @click="dismiss">
-            Dismiss
-          </button>
-        </div>
-      </div>
-    </div>
+      <slot v-if="hasRightSlot" name="right" />
+      <jb-button v-else :icon="mdiClose" @click="dismiss" small />
+    </level>
   </div>
 </template>
 
 <script>
 import { ref, computed } from 'vue'
+import { mdiClose } from '@mdi/js'
+import { colorsBg, colorsOutline } from '@/colors.js'
+import Level from '@/components/Level'
 import Icon from '@/components/Icon'
+import JbButton from '@/components/JbButton'
 
 export default {
   name: 'Notification',
   components: {
-    Icon
+    Icon,
+    Level,
+    JbButton
   },
+  emits: ['button-click'],
   props: {
     icon: String,
+    outline: Boolean,
     color: {
       type: String,
       required: true
     }
   },
-  setup (props) {
+  setup (props, { slots }) {
+    const componentClass = computed(() => props.outline ? colorsOutline[props.color] : colorsBg[props.color])
+
     const isDismissed = ref(false)
 
     const dismiss = () => {
       isDismissed.value = true
     }
 
-    const componentClass = computed(() => {
-      const base = 'notification px-3 py-6 rounded'
+    const hasRightSlot = computed(() => slots.right)
 
-      const colorMap = {
-        blue: 'bg-blue-500 text-white',
-        green: 'bg-green-500 text-white',
-        red: 'bg-red-500 text-white'
-      }
-
-      if (colorMap[props.color]) {
-        return `${base} ${colorMap[props.color]}`
-      }
-
-      return base
-    })
-
-    return { isDismissed, dismiss, componentClass }
+    return {
+      componentClass,
+      isDismissed,
+      dismiss,
+      hasRightSlot,
+      mdiClose
+    }
   }
 }
 </script>
-
-<style scoped>
-.notification:not(:last-child) {
-  @apply mb-6;
-}
-</style>

@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from 'axios'
 
 export default createStore({
   state: {
@@ -11,7 +12,11 @@ export default createStore({
     isFormScreen: false,
 
     /* Aside */
-    isAsideMobileExpanded: false
+    isAsideMobileExpanded: false,
+    isAsideLgActive: false,
+
+    /* Sample data (commonly used) */
+    clients: []
   },
   mutations: {
     /* A fit-them-all commit */
@@ -45,13 +50,30 @@ export default createStore({
         value: isShow
       })
     },
-    formScreenToggle ({ commit, state }, payload) {
-      commit('basic', {
-        key: 'isFormScreen',
-        value: payload
-      })
+    asideLgToggle ({ commit, state }, payload = null) {
+      commit('basic', { key: 'isAsideLgActive', value: payload !== null ? payload : !state.isAsideLgActive })
+    },
+    formScreenToggle ({ commit, state }, value) {
+      commit('basic', { key: 'isFormScreen', value })
 
-      document.documentElement.classList[payload ? 'add' : 'remove']('form-screen')
+      document.documentElement.classList[value ? 'add' : 'remove']('form-screen')
+    },
+    fetchClients ({ commit }) {
+      axios
+        .get('data-sources/clients.json')
+        .then(r => {
+          if (r.data) {
+            if (r.data.data) {
+              commit('basic', {
+                key: 'clients',
+                value: r.data.data
+              })
+            }
+          }
+        })
+        .catch(error => {
+          alert(error.message)
+        })
     }
   },
   modules: {

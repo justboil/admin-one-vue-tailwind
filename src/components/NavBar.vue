@@ -1,26 +1,35 @@
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen transition-all md:pl-60 md:w-auto md:items-stretch"
+    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen transition-all xl:pl-60 lg:w-auto lg:items-stretch"
     :class="{'ml-60':isAsideMobileExpanded}"
   >
     <div class="flex-1 items-stretch flex h-14">
-      <nav-bar-item class="items-center flex md:hidden" @click.prevent="menuToggleMobile">
+      <nav-bar-item type="flex lg:hidden" @click.prevent="menuToggleMobile">
         <icon :path="menuToggleMobileIcon" size="24" />
+      </nav-bar-item>
+      <nav-bar-item type="hidden lg:flex xl:hidden" @click.prevent="menuOpenLg">
+        <icon :path="mdiMenu" size="24" />
       </nav-bar-item>
       <nav-bar-item>
         <div class="control">
-          <input class="input border-0" placeholder="Search everywhere..." />
+          <input type="text" class="px-3 focus:ring rounded border-0" placeholder="Search everywhere..." />
         </div>
       </nav-bar-item>
     </div>
-    <div class="flex-none items-stretch flex h-14 md:hidden">
+    <div class="flex-none items-stretch flex h-14 lg:hidden">
       <nav-bar-item class="items-center flex" @click.prevent="menuNavBarToggle">
         <icon :path="menuNavBarToggleIcon" size="24" />
       </nav-bar-item>
     </div>
-    <div class="absolute w-screen top-14 left-0 bg-white border-b border-gray-100 overflow-auto shadow max-height-screen-menu md:items-stretch md:flex md:flex-grow md:static md:border-b-0 md:overflow-visible md:shadow-none" :class="{ 'hidden': !isMenuNavBarActive, 'block': isMenuNavBarActive }">
-      <div class="md:flex md:items-stretch md:justify-end md:ml-auto">
+    <div
+      class="absolute w-screen top-14 left-0 bg-white border-b border-gray-100 shadow
+        lg:w-auto lg:items-stretch lg:flex lg:flex-grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
+      :class="{ 'hidden': !isMenuNavBarActive, 'block': isMenuNavBarActive }"
+    >
+      <div
+        class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
+      >
         <nav-bar-menu has-divider>
           <nav-bar-item-label :icon="mdiMenu" label="Sample menu"/>
 
@@ -59,9 +68,6 @@
             </nav-bar-item>
           </template>
         </nav-bar-menu>
-        <nav-bar-item href="https://justboil.me/tailwind-admin-templates" has-divider is-desktop-icon-only>
-          <nav-bar-item-label :icon="mdiHelpCircleOutline" label="About" is-desktop-icon-only />
-        </nav-bar-item>
         <nav-bar-item href="https://github.com/justboil/admin-one-vue-tailwind" has-divider is-desktop-icon-only>
           <nav-bar-item-label :icon="mdiGithub" label="GitHub" is-desktop-icon-only />
         </nav-bar-item>
@@ -89,7 +95,6 @@ import {
   mdiCogOutline,
   mdiEmail,
   mdiLogout,
-  mdiHelpCircleOutline,
   mdiGithub
 } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem'
@@ -130,6 +135,10 @@ export default {
       isMenuNavBarActive.value = !isMenuNavBarActive.value
     }
 
+    const menuOpenLg = () => {
+      store.dispatch('asideLgToggle', true)
+    }
+
     return {
       isNavBarVisible,
       isAsideMobileExpanded,
@@ -139,6 +148,7 @@ export default {
       isMenuNavBarActive,
       menuNavBarToggleIcon,
       menuNavBarToggle,
+      menuOpenLg,
       mdiMenu,
       mdiClockOutline,
       mdiCloud,
@@ -147,7 +157,6 @@ export default {
       mdiCogOutline,
       mdiEmail,
       mdiLogout,
-      mdiHelpCircleOutline,
       mdiGithub
     }
   }

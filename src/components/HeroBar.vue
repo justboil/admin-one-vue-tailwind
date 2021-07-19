@@ -1,29 +1,28 @@
 <template>
   <section class="bg-white border-b border-gray-100 p-6">
-    <div class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <h1 class="text-3xl font-semibold leading-tight">
-            <slot />
-          </h1>
-        </div>
-      </div>
-      <div v-show="hasRightVisible" class="level-right">
-        <div class="level-item">
-          <slot name="right" />
-        </div>
-      </div>
-    </div>
+    <level>
+      <h1 class="text-3xl font-semibold leading-tight">
+        <slot />
+      </h1>
+      <jb-button href="https://tailwind-vue.justboil.me/" target="_blank" label="Premium version" :icon="mdiMonitorClean" />
+    </level>
   </section>
 </template>
 
 <script>
+import { mdiMonitorClean } from '@mdi/js'
+import Level from '@/components/Level'
+import JbButton from '@/components/JbButton'
+
 export default {
   name: 'HeroBar',
-  props: {
-    hasRightVisible: {
-      type: Boolean,
-      default: true
+  components: {
+    Level,
+    JbButton
+  },
+  setup () {
+    return {
+      mdiMonitorClean
     }
   }
 }

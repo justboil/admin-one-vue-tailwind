@@ -1,36 +1,40 @@
 <template>
-  <field :label="label" wrap-body>
-    <field class="file" addons>
-      <control upload>
-        <a class="button blue" :class="{'addon-right':file}">
-          Upload
-        </a>
-        <input type="file" ref="input" :accept="accept" @input="upload">
-      </control>
-      <control v-if="file">
-        <span class="inline-flex px-4 py-2 justify-center bg-gray-100 border-gray-200 border rounded-r">{{ file.name }}</span>
-      </control>
-    </field>
-  </field>
+  <div class="flex items-stretch justify-start relative">
+    <label class="inline-flex">
+      <jb-button
+        as="a"
+        label="Upload"
+        :icon="mdiUpload"
+        color="info"
+        :class="{ 'rounded-r-none': file }"
+      />
+      <input
+        type="file"
+        ref="input"
+        class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
+        :accept="accept"
+        @input="upload">
+    </label>
+    <div v-if="file">
+      <span class="inline-flex px-4 py-2 justify-center bg-gray-100 border-gray-200 border rounded-r">{{ file.name }}</span>
+    </div>
+  </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import Field from '@/components/Field'
-import Control from '@/components/Control'
+import { mdiUpload } from '@mdi/js'
+import JbButton from '@/components/JbButton'
 
 export default {
   name: 'FilePicker',
   components: {
-    Field,
-    Control
+    JbButton
   },
   props: {
     modelValue: [Object, File, Array],
-    label: {
-      type: String,
-      default: 'File'
-    },
+    label: String,
+    icon: String,
     accept: {
       type: String,
       default: null
@@ -40,10 +44,9 @@ export default {
   setup (props) {
     const file = ref(props.modelValue)
 
-    // const uploadPercent = ref(0)
-
     return {
-      file
+      file,
+      mdiUpload
     }
   },
   methods: {

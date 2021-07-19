@@ -7,11 +7,15 @@
 }
 
 .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check, .switch input[type=checkbox]+.check {
-  @apply border-gray-300 border hover:border-gray-400;
+  @apply border-gray-700 border transition-colors duration-200;
+}
+
+.checkbox input[type=checkbox]:focus+.check, .radio input[type=radio]:focus+.check, .switch input[type=checkbox]:focus+.check {
+  @apply ring ring-blue-700;
 }
 
 .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check {
-  @apply block w-5 h-5 ;
+  @apply block w-5 h-5;
 }
 
 .checkbox input[type=checkbox]+.check {
@@ -44,7 +48,7 @@
 
 .switch input[type=checkbox]+.check:before {
   content: '';
-  @apply block w-5 h-5 bg-white border border-gray-300;
+  @apply block w-5 h-5 bg-white border border-gray-700;
 }
 
 .switch input[type=checkbox]:checked+.check:before {

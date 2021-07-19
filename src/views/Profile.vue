@@ -1,160 +1,128 @@
 <template>
   <title-bar :title-stack="titleStack" />
-  <hero-bar>
-    Profile
-    <template #right>
-      <router-link to="/" class="button light">
-        Dashboard
-      </router-link>
-    </template>
-  </hero-bar>
+  <hero-bar>Profile</hero-bar>
   <main-section>
-    <tiles>
-      <card-component title="Edit Profile" :icon="mdiAccountCircle" class="tile is-child">
-        <form @submit.prevent="submit">
-          <file-picker label="Avatar" />
-          <divider/>
-          <field label="Name" help="Required. Your name">
-            <control :icon-left="mdiAccount">
-              <input v-model="userName" name="name" class="input" required />
-            </control>
-          </field>
-          <field label="E-mail" help="Required. Your e-mail">
-            <control :icon-left="mdiMail" :icon-right="mdiCheck">
-              <input v-model="userEmail" name="email" type="email" class="input" required />
-            </control>
-          </field>
-          <divider/>
-          <field>
-            <control>
-              <button type="submit" class="button blue">
-                Submit
-              </button>
-            </control>
-          </field>
-        </form>
-      </card-component>
-      <card-component title="Profile" :icon="mdiAccount" class="tile is-child">
-        <user-avatar class="w-48 h-48 mx-auto" />
-        <divider/>
-        <field label="Name">
-          <control>
-            <input class="input" :value="userName" readonly />
-          </control>
-        </field>
-        <divider/>
-        <field label="E-mail">
-          <input :value="userEmail" class="input" readonly />
-        </field>
-      </card-component>
-    </tiles>
-    <card-component title="Change Password" :icon="mdiLock">
-      <form @submit.prevent="submit">
-        <field label="Current password" help="Required. Your current password">
-          <control :icon-left="mdiAsterisk">
-            <input
-              v-model="passwordForm.password_current"
-              name="password_current"
-              type="password"
-              required
-              autcomplete="current-password"
-              class="input"
-            />
-          </control>
-        </field>
 
-        <divider/>
+    <card-component
+      title="Edit Profile"
+      class="lg:w-8/12 lg:mx-auto"
+      :icon="mdiAccountCircle"
+      @submit.prevent="submitProfile"
+      form
+    >
+      <field label="Avatar" help="Max 500kb">
+        <file-picker />
+      </field>
 
-        <field label="New password" help="Required. New password">
-          <control :icon-left="mdiFormTextboxPassword">
-            <input
-              v-model="passwordForm.password"
-              name="password"
-              type="password"
-              required
-              autocomplete="new-password"
-              class="input"
-            />
-          </control>
-        </field>
+      <field label="Name" help="Required. Your name">
+        <control :icon="mdiAccount" v-model="profileForm.name" name="username" required autocomplete="username"/>
+      </field>
+      <field label="E-mail" help="Required. Your e-mail">
+        <control :icon="mdiMail" type="email" name="email" v-model="profileForm.email" required autocomplete="email"/>
+      </field>
 
-        <field label="Confirm password" help="Required. New password one more time">
-          <control :icon-left="mdiFormTextboxPassword">
-            <input
-              v-model="passwordForm.password_confirmation"
-              name="password_confirmation"
-              type="password"
-              required
-              autocomplete="new-password"
-              class="input"
-            />
-          </control>
-        </field>
+      <divider/>
 
-        <divider/>
+      <jb-buttons>
+        <jb-button color="info" type="submit" label="Submit" />
+        <jb-button color="info" label="Options" outline />
+      </jb-buttons>
+    </card-component>
 
-        <field>
-          <control>
-            <button type="submit" class="button green">
-              Submit
-            </button>
-          </control>
-        </field>
-      </form>
+    <card-component
+      title="Change Password"
+      class="lg:w-8/12 lg:mx-auto"
+      :icon="mdiLock"
+      @submit.prevent="submitPass"
+      form
+    >
+      <field label="Current password" help="Required. Your current password">
+        <control
+          :icon="mdiAsterisk"
+          v-model="passwordForm.password_current"
+          name="password_current"
+          type="password"
+          required
+          autocomplete="current-password"
+        />
+      </field>
+
+      <divider/>
+
+      <field label="New password" help="Required. New password">
+        <control
+          :icon="mdiFormTextboxPassword"
+          v-model="passwordForm.password"
+          name="password"
+          type="password"
+          required
+          autocomplete="new-password"
+        />
+      </field>
+
+      <field label="Confirm password" help="Required. New password one more time">
+        <control
+          :icon="mdiFormTextboxPassword"
+          v-model="passwordForm.password_confirmation"
+          name="password_confirmation"
+          type="password"
+          required
+          autocomplete="new-password"
+        />
+      </field>
+
+      <divider/>
+
+      <jb-buttons>
+        <jb-button type="submit" color="info" label="Submit" />
+        <jb-button color="info" label="Options" outline />
+      </jb-buttons>
+
     </card-component>
   </main-section>
+
+  <bottom-other-pages-section />
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiCheck, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
+import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
 import MainSection from '@/components/MainSection'
 import CardComponent from '@/components/CardComponent'
 import TitleBar from '@/components/TitleBar'
 import HeroBar from '@/components/HeroBar'
-import Tiles from '@/components/Tiles'
-import UserAvatar from '@/components/UserAvatar'
 import Divider from '@/components/Divider'
 import Field from '@/components/Field'
 import Control from '@/components/Control'
 import FilePicker from '@/components/FilePicker'
+import JbButton from '@/components/JbButton'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
+import JbButtons from '@/components/JbButtons'
 
 export default {
   name: 'Profile',
   components: {
+    JbButtons,
     MainSection,
-    UserAvatar,
-    Tiles,
     HeroBar,
     TitleBar,
     CardComponent,
     Divider,
     Field,
     Control,
-    FilePicker
+    FilePicker,
+    JbButton,
+    BottomOtherPagesSection
   },
   setup () {
     const store = useStore()
 
     const titleStack = ref(['Admin', 'Profile'])
 
-    const userName = computed({
-      get: () => store.state.userName,
-      set: value => {
-        store.commit('user', {
-          name: value
-        })
-      }
-    })
-
-    const userEmail = computed({
-      get: () => store.state.userEmail,
-      set: value => {
-        store.commit('user', {
-          email: value
-        })
-      }
+    const profileForm = reactive({
+      name: store.state.userName,
+      email: store.state.userEmail
     })
 
     const passwordForm = reactive({
@@ -163,21 +131,24 @@ export default {
       password_confirmation: ''
     })
 
-    const submit = () => {
-      alert('Sample only')
+    const submitProfile = () => {
+      store.commit('user', profileForm)
+    }
+
+    const submitPass = () => {
+      //
     }
 
     return {
-      userName,
-      userEmail,
       titleStack,
+      profileForm,
       passwordForm,
-      submit,
+      submitProfile,
+      submitPass,
       mdiAccount,
       mdiAccountCircle,
       mdiLock,
       mdiMail,
-      mdiCheck,
       mdiAsterisk,
       mdiFormTextboxPassword
     }

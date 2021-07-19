@@ -8,7 +8,7 @@
 
 * Built with **Vue.js 3**, **Tailwind CSS** framework & **Composition API** 
 * SPA with **Vuex** & **Router**
-* **Production CSS** is only **24kb**
+* **Production CSS** is only **27kb**
 * Reusable components
 * Free under MIT License
 

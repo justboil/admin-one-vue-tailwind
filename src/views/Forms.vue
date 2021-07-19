@@ -1,83 +1,33 @@
 <template>
   <title-bar :title-stack="titleStack" />
-  <hero-bar>
-    Forms
-    <template #right>
-      <router-link to="/" class="button light">
-        Dashboard
-      </router-link>
-    </template>
-  </hero-bar>
+  <hero-bar>Forms</hero-bar>
   <main-section>
-    <card-component title="Forms" :icon="mdiBallot">
-      <form @submit.prevent="submit">
-        <field label="From" wrap-body>
-          <field>
-            <control :icon-left="mdiAccount">
-              <input class="input" type="text" placeholder="Name">
-            </control>
-          </field>
-          <field>
-            <control :icon-left="mdiMail" :icon-right="mdiCheck">
-              <input class="input" type="email" placeholder="Email" value="alex@smith.com">
-            </control>
-          </field>
-        </field>
+    <card-component title="Forms" :icon="mdiBallot" @submit.prevent="submit" form>
+      <field label="Grouped with icons">
+        <control :icon="mdiAccount" v-model="form.name" />
+        <control type="email" :icon="mdiMail" v-model="form.email" />
+      </field>
 
-        <field wrap-body>
-          <field help="Do not enter the leading zero">
-            <field addons>
-              <control>
-                <input class="input" value="+44" size="3" readonly>
-              </control>
-              <control expanded>
-                <input class="input" type="tel" placeholder="Your phone number">
-              </control>
-            </field>
-          </field>
-        </field>
+      <field label="With help line" help="Do not enter the leading zero">
+        <control type="tel" placeholder="Your phone number" v-model="form.phone" />
+      </field>
 
-        <field label="Department">
-          <control>
-            <div class="select">
-              <select name="s">
-                <option>Business development</option>
-                <option>Marketing</option>
-                <option>Sales</option>
-              </select>
-            </div>
-          </control>
-        </field>
+      <field label="Dropdown">
+        <control :options="selectOptions" v-model="form.department" />
+      </field>
 
-        <divider/>
+      <divider/>
 
-        <field label="Subject" help="Message subject">
-          <control>
-            <input class="input" type="text" placeholder="e.g. Partnership opportunity">
-          </control>
-        </field>
+      <field label="Question" help="Your question. Max 255 characters">
+        <control type="textarea" placeholder="Explain how we can help you"/>
+      </field>
 
-        <field label="Question" help="Your question. Max 255 characters">
-          <control>
-            <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
-          </control>
-        </field>
+      <divider/>
 
-        <divider/>
-
-        <field grouped>
-          <control>
-            <button type="submit" class="button green">
-              Submit
-            </button>
-          </control>
-          <control>
-            <button type="reset" class="button red">
-              Reset
-            </button>
-          </control>
-        </field>
-      </form>
+      <jb-buttons>
+        <jb-button type="submit" color="info" label="Submit" />
+        <jb-button type="reset" color="info" outline label="Reset" />
+      </jb-buttons>
     </card-component>
     <card-component title="Custom elements" :icon="mdiBallotOutline">
 
@@ -116,6 +66,8 @@
       <file-picker v-model="customElementsForm.file" />
     </card-component>
   </main-section>
+
+  <bottom-other-pages-section />
 </template>
 
 <script>
@@ -130,6 +82,9 @@ import HeroBar from '@/components/HeroBar'
 import Field from '@/components/Field'
 import Control from '@/components/Control'
 import Divider from '@/components/Divider.vue'
+import JbButton from '@/components/JbButton'
+import JbButtons from '@/components/JbButtons'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
 
 export default {
   name: 'Forms',
@@ -142,18 +97,27 @@ export default {
     CardComponent,
     TitleBar,
     Field,
-    Control
+    Control,
+    JbButton,
+    JbButtons,
+    BottomOtherPagesSection
   },
   setup () {
     const titleStack = ref(['Admin', 'Forms'])
 
+    const selectOptions = [
+      { id: 1, label: 'Business development' },
+      { id: 2, label: 'Marketing' },
+      { id: 3, label: 'Sales' }
+    ]
+
     const form = reactive({
-      name: null,
-      email: null,
-      phone: null,
-      department: null,
-      subject: null,
-      question: null
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '',
+      department: selectOptions[0],
+      subject: '',
+      question: ''
     })
 
     const customElementsForm = reactive({
@@ -169,6 +133,7 @@ export default {
 
     return {
       titleStack,
+      selectOptions,
       form,
       customElementsForm,
       submit,

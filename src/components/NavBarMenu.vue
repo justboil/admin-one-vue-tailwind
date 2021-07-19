@@ -1,19 +1,24 @@
 <template>
-    <nav-bar-item
-      :has-divider="hasDivider"
-      dropdown
-      class="dropdown"
-      @click="toggle"
-      ref="root"
+  <nav-bar-item
+    type="block"
+    :has-divider="hasDivider"
+    :active="isDropdownActive"
+    dropdown
+    class="dropdown"
+    @click="toggle"
+    ref="root"
+  >
+    <a class="flex items-center py-2 px-3 bg-gray-100 lg:bg-transparent">
+      <slot />
+      <icon :path="toggleDropdownIcon" class="hidden lg:inline-flex" />
+    </a>
+    <div
+      class="text-sm border-gray-100 border-b lg:border-b-0 lg:border-gray-200 lg:border-t-2 lg:bg-white lg:absolute lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:shadow-md lg:rounded-b"
+      :class="{'lg:hidden':!isDropdownActive}"
     >
-      <a class="flex items-center py-2 px-3 bg-gray-100 md:bg-transparent" :class="{'md:text-blue-500':isDropdownActive}">
-        <slot />
-        <icon :path="toggleDropdownIcon" class="hidden md:inline-flex" />
-      </a>
-      <div class="text-sm border-gray-100 border-b md:border-b-0 md:border-gray-200 md:border-t-2 md:bg-white md:absolute md:top-full md:left-0 md:min-w-full md:z-20 md:shadow-md md:rounded-b" :class="{'md:hidden':!isDropdownActive}">
-        <slot name="dropdown" />
-      </div>
-    </nav-bar-item>
+      <slot name="dropdown" />
+    </div>
+  </nav-bar-item>
 </template>
 
 <script>

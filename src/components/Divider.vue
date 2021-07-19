@@ -1,5 +1,5 @@
 <template>
-  <hr class="my-6 -mx-6">
+  <hr class="my-6 -mx-6 border-t border-gray-100">
 </template>
 
 <script>

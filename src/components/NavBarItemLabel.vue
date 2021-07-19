@@ -1,6 +1,6 @@
 <template>
   <icon :path="icon" />
-  <span class="px-2" :class="{'md:hidden':isDesktopIconOnly}">{{ label }}</span>
+  <span class="px-2" :class="{'lg:hidden':isDesktopIconOnly}">{{ label }}</span>
 </template>
 
 <script>

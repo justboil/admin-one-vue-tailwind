@@ -1,5 +1,10 @@
 <template>
-  <icon :path="icon" w="w-10" h="h-10" class="absolute top-0 z-10" :class="{'left-0':!isRight, 'right-0':isRight}" />
+  <icon
+    :path="icon"
+    w="w-10"
+    :h="h"
+    class="absolute top-0 left-0 z-10 pointer-events-none text-gray-500"
+  />
 </template>
 
 <script>
@@ -11,12 +16,8 @@ export default {
     Icon
   },
   props: {
-    icon: {
-      type: String
-    },
-    isRight: {
-      type: Boolean
-    }
+    icon: String,
+    h: String
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <hr class="hidden md:block md:my-2">
+  <hr class="hidden lg:block lg:my-2">
 </template>
 
 <script>

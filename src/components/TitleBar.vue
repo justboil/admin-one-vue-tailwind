@@ -1,36 +1,36 @@
 <template>
-  <section class="p-6 border-b border-gray-100">
-    <div class="level">
-      <div class="level-left">
-        <div class="level-item">
-          <ul>
-            <li v-for="(title, index) in titleStack" :key="index" class="title-stack-item inline-block pr-3 text-2xl text-gray-500">
-              {{ title }}
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          <div class="buttons is-right">
-            <a href="https://admin-one.justboil.me/" target="_blank" class="button blue" @click.prevent="prevent">
-              <icon :path="mdiCreditCard" class="mr-3" />
-              <span>Premium Demo</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="p-6">
+    <level>
+      <ul>
+        <li
+          v-for="(title, index) in titleStack"
+          :key="index"
+          class="title-stack-item inline-block pr-3 text-2xl text-gray-500 last:pr-0 last:font-black last:text-black">
+          {{ title }}
+        </li>
+      </ul>
+      <jb-button
+        href="https://github.com/justboil/admin-one-vue-tailwind"
+        color="info"
+        label="Star on GitHub"
+        target="_blank"
+        :icon="mdiGithub"
+      />
+    </level>
   </section>
 </template>
 
 <script>
-import Icon from '@/components/Icon'
-import { mdiCreditCard } from '@mdi/js'
+import { mdiGithub } from '@mdi/js'
+import Level from '@/components/Level'
+import JbButton from '@/components/JbButton'
 
 export default {
   name: 'TitleBar',
-  components: { Icon },
+  components: {
+    Level,
+    JbButton
+  },
   props: {
     titleStack: {
       type: Array,
@@ -38,13 +38,8 @@ export default {
     }
   },
   setup () {
-    const prevent = () => {
-      alert('Coming soon')
-    }
-
     return {
-      prevent,
-      mdiCreditCard
+      mdiGithub
     }
   }
 }
@@ -54,9 +49,5 @@ export default {
 li.title-stack-item:not(:last-child):after {
   content: '/';
   @apply inline-block pl-3;
-}
-
-li.title-stack-item:last-child {
-  @apply pr-0 font-black text-black;
 }
 </style>

@@ -1,43 +1,40 @@
 <template>
-  <div class="field" :class="{'addons':addons, 'grouped':grouped, 'multiline':multiline, 'spaced':spaced}">
-    <label v-if="label" class="label">{{ label }}</label>
-    <div v-if="wrapBody" class="field-body">
-      <slot/>
+  <div class="mb-6 last:mb-0">
+    <label v-if="label" class="block font-bold mb-2">{{ label }}</label>
+    <div :class="wrapperClass">
+      <slot />
     </div>
-    <slot v-else/>
-    <p v-if="help" class="help">{{ help }}</p>
+    <div v-if="help" class="text-xs text-gray-500 mt-1">{{ help }}</div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue'
+
 export default {
   name: 'Field',
   props: {
-    addons: {
-      type: Boolean,
-      default: false
-    },
-    grouped: {
-      type: Boolean,
-      default: false
-    },
-    multiline: {
-      type: Boolean,
-      default: false
-    },
-    spaced: {
-      type: Boolean,
-      default: false
-    },
-    wrapBody: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String
-    },
-    help: {
-      type: String
+    label: String,
+    help: String
+  },
+  setup (props, { slots }) {
+    const wrapperClass = computed(() => {
+      const base = []
+      const slotsLength = slots.default().length
+
+      if (slotsLength > 1) {
+        base.push('grid grid-cols-1 gap-3')
+      }
+
+      if (slotsLength === 2) {
+        base.push('md:grid-cols-2')
+      }
+
+      return base
+    })
+
+    return {
+      wrapperClass
     }
   }
 }

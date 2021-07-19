@@ -15,11 +15,19 @@ module.exports = {
       maxHeight: {
         'screen-menu': 'calc(100vh - 3.5rem)',
         modal: 'calc(100vh - 160px)'
+      },
+      transitionProperty: {
+        position: 'right, left, top, bottom, margin, padding'
       }
     }
   },
   variants: {
-    extend: {}
+    extend: {
+      margin: ['last'],
+    }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwind-scrollbar')
+  ]
 }

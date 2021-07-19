@@ -41,7 +41,16 @@ const routes = [
   },
   {
     meta: {
-      title: 'Login'
+      title: 'Ui'
+    },
+    path: '/ui',
+    name: 'ui',
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Ui')
+  },
+  {
+    meta: {
+      title: 'Login',
+      formScreen: true
     },
     path: '/login',
     name: 'login',
@@ -53,7 +62,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   scrollBehavior (to, from, savedPosition) {
-    return savedPosition || { x: 0, y: 0 }
+    return savedPosition || { top: 0 }
   }
 })
 
