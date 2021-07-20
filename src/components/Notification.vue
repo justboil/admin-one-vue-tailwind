@@ -30,7 +30,6 @@ export default {
     Level,
     JbButton
   },
-  emits: ['button-click'],
   props: {
     icon: String,
     outline: Boolean,
