@@ -109,7 +109,7 @@
         v-model="notificationSettingsModel"
       />
     </div>
-    </titled-section>
+  </titled-section>
 
   <main-section>
     <notification color="info" :icon="mdiInformationOutline" :outline="notificationsOutline">
