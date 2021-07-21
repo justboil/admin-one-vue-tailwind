@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-start -mb-3" :class="{'flex-col':column}">
+  <div class="flex justify-start flex-wrap -mb-3" :class="{'flex-col':column}">
     <label v-for="(value, key) in options" :key="key" :class="type" class="mr-6 mb-3 last:mr-0">
       <input
         :type="inputType"
