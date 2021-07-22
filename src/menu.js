@@ -66,8 +66,7 @@ export default [
     {
       href: 'https://tailwind-vue.justboil.me/',
       label: 'Premium version',
-      icon: mdiMonitorClean,
-      prevent: true
+      icon: mdiMonitorClean
     },
     {
       href: 'https://github.com/justboil/admin-one-vue-tailwind',

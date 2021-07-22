@@ -60,10 +60,7 @@ export default {
     }
 
     const menuClick = (event, item) => {
-      if (item.prevent) {
-        event.preventDefault()
-        alert('Coming soon')
-      }
+      //
     }
 
     return {
