@@ -15,9 +15,25 @@
 
 ## Responsive layout
 
+### Mobile & tablet
+
 Mobile layout with hidden aside menu and collapsable cards & tables
 
 [![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+
+### Small laptops 1024px
+
+Small laptop layout with show/hide aside menu option
+
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+
+### Laptops & desktops
+
+Classic layout with aside menus on the left
+
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-no-libs.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ## Table of Contents
 
