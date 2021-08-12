@@ -45,7 +45,15 @@ const routes = [
     },
     path: '/ui',
     name: 'ui',
-    component: () => import(/* webpackChunkName: "profile" */ '../views/Ui')
+    component: () => import(/* webpackChunkName: "ui" */ '../views/Ui')
+  },
+  {
+    meta: {
+      title: 'Responsive layout'
+    },
+    path: '/responsive',
+    name: 'responsive',
+    component: () => import(/* webpackChunkName: "responsive" */ '../views/Responsive')
   },
   {
     meta: {

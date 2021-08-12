@@ -1,5 +1,5 @@
 <template>
-  <titled-section>
+  <titled-section last>
     <h1 class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 mb-12">
         <span class="md:mr-3">Please star this project on</span>
         <a

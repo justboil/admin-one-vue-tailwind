@@ -7,7 +7,8 @@ import {
   mdiSquareEditOutline,
   mdiTable,
   mdiViewList,
-  mdiTelevisionGuide
+  mdiTelevisionGuide,
+  mdiResponsive
 } from '@mdi/js'
 
 export default [
@@ -36,6 +37,11 @@ export default [
       to: '/ui',
       label: 'UI',
       icon: mdiTelevisionGuide
+    },
+    {
+      to: '/responsive',
+      label: 'Responsive',
+      icon: mdiResponsive
     },
     {
       to: '/profile',
