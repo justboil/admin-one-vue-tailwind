@@ -1,6 +1,6 @@
 {
   "name": "admin-one-vue-tailwind",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
