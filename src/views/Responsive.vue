@@ -9,7 +9,7 @@
   </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 xl:w-4/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
+    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
       <img
         src="https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png"
         class="block rounded-3xl"
@@ -22,7 +22,7 @@
   </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 xl:w-4/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
+    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
       <img
         src="https://justboil.me/images/one-tailwind/repository-preview-1024.png"
         class="block rounded-3xl"
@@ -31,7 +31,7 @@
   </main-section>
 
   <main-section>
-    <div class="md:w-10/12 xl:w-4/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
+    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
       <img
         src="https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png"
         class="block rounded-3xl"
@@ -44,7 +44,7 @@
   </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 xl:w-4/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
+    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white">
       <img
         src="https://justboil.me/images/one-tailwind/repository-preview-no-libs.png"
         class="block rounded-3xl"
