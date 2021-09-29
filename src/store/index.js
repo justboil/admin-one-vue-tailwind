@@ -15,8 +15,12 @@ export default createStore({
     isAsideMobileExpanded: false,
     isAsideLgActive: false,
 
+    /* Dark mode */
+    darkMode: false,
+
     /* Sample data (commonly used) */
-    clients: []
+    clients: [],
+    history: []
   },
   mutations: {
     /* A fit-them-all commit */
@@ -50,23 +54,43 @@ export default createStore({
         value: isShow
       })
     },
+
     asideLgToggle ({ commit, state }, payload = null) {
       commit('basic', { key: 'isAsideLgActive', value: payload !== null ? payload : !state.isAsideLgActive })
     },
+
     formScreenToggle ({ commit, state }, value) {
       commit('basic', { key: 'isFormScreen', value })
 
       document.documentElement.classList[value ? 'add' : 'remove']('form-screen')
     },
-    fetchClients ({ commit }) {
+
+    darkMode ({ commit, state }) {
+      const value = !state.darkMode
+
+      document.documentElement.classList[value ? 'add' : 'remove']('dark')
+
+      commit('basic', {
+        key: 'darkMode',
+        value
+      })
+    },
+
+    fetch ({ commit }, payload) {
       axios
-        .get('data-sources/clients.json')
-        .then(r => {
+        .get(`data-sources/${payload}.json`)
+        .then((r) => {
           if (r.data) {
             if (r.data.data) {
               commit('basic', {
-                key: 'clients',
+                key: payload,
                 value: r.data.data
+              })
+            }
+            if (r.data.status) {
+              commit('basic', {
+                key: `${payload}Status`,
+                value: r.data.status
               })
             }
           }

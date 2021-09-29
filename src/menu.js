@@ -3,6 +3,7 @@ import {
   mdiDesktopMac,
   mdiGithub,
   mdiLock,
+  mdiAlertCircle,
   mdiMonitorClean,
   mdiSquareEditOutline,
   mdiTable,
@@ -52,6 +53,11 @@ export default [
       to: '/login',
       label: 'Login',
       icon: mdiLock
+    },
+    {
+      to: '/error',
+      label: 'Error',
+      icon: mdiAlertCircle
     },
     {
       label: 'Submenus',

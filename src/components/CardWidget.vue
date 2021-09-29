@@ -1,5 +1,15 @@
 <template>
-  <card-component mb="">
+  <card-component>
+    <level v-if="trend" class="mb-3" mobile>
+      <trend-pill :trend="trend" :trend-type="trendType" small />
+      <jb-button
+        :icon="mdiCog"
+        icon-w="w-4"
+        icon-h="h-4"
+        color="light"
+        small
+      />
+    </level>
     <level mobile>
       <div>
         <h3 class="text-lg leading-tight text-gray-500">
@@ -9,44 +19,39 @@
           <growing-number :value="number" :prefix="prefix" :suffix="suffix" />
         </h1>
       </div>
-      <icon v-if="icon" :path="icon" size="48" w="w-20" h="h-20" :class="color" />
+      <icon v-if="icon" :path="icon" size="48" w="" h="h-16" :class="color" />
     </level>
   </card-component>
 </template>
 
 <script>
+import { mdiCog } from '@mdi/js'
 import CardComponent from '@/components/CardComponent'
 import GrowingNumber from '@/components/GrowingNumber'
 import Icon from '@/components/Icon'
 import Level from '@/components/Level'
+import TrendPill from '@/components/TrendPill'
+import JbButton from '@/components/JbButton'
 
 export default {
   name: 'CardWidget',
-  components: { GrowingNumber, CardComponent, Icon, Level },
+  components: { JbButton, GrowingNumber, CardComponent, Icon, Level, TrendPill },
   props: {
-    icon: {
-      type: String,
-      default: null
-    },
     number: {
       type: Number,
       default: 0
     },
-    prefix: {
-      type: String,
-      default: null
-    },
-    suffix: {
-      type: String,
-      default: null
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    color: {
-      type: String,
-      default: null
+    icon: String,
+    prefix: String,
+    suffix: String,
+    label: String,
+    color: String,
+    trend: String,
+    trendType: String
+  },
+  setup () {
+    return {
+      mdiCog
     }
   }
 }

@@ -1,5 +1,8 @@
 <template>
-  <section class="px-0 py-6 md:px-6" :class="{'flex h-screen items-center justify-center':isFormScreen}">
+  <section
+    class="px-0 md:px-6"
+    :class="[ isFormScreen ? 'flex h-screen items-center justify-center' : 'py-6' ]"
+  >
     <slot/>
   </section>
 </template>

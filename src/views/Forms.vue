@@ -1,6 +1,11 @@
 <template>
   <title-bar :title-stack="titleStack" />
   <hero-bar>Forms</hero-bar>
+
+  <titled-section first>
+    Form examples
+  </titled-section>
+
   <main-section>
     <card-component title="Forms" :icon="mdiBallot" @submit.prevent="submit" form>
       <field label="Grouped with icons">
@@ -29,6 +34,13 @@
         <jb-button type="reset" color="info" outline label="Reset" />
       </jb-buttons>
     </card-component>
+  </main-section>
+
+  <titled-section>
+    Custom elements
+  </titled-section>
+
+  <main-section>
     <card-component title="Custom elements" :icon="mdiBallotOutline">
 
       <field label="Checkbox" wrap-body>
@@ -85,10 +97,12 @@ import Divider from '@/components/Divider.vue'
 import JbButton from '@/components/JbButton'
 import JbButtons from '@/components/JbButtons'
 import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
+import TitledSection from '@/components/TitledSection'
 
 export default {
   name: 'Forms',
   components: {
+    TitledSection,
     Divider,
     MainSection,
     HeroBar,

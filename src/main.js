@@ -7,7 +7,8 @@ import store from './store'
 import './css/main.css'
 
 /* Fetch sample data */
-store.dispatch('fetchClients')
+store.dispatch('fetch', 'clients')
+store.dispatch('fetch', 'history')
 
 /* Default title tag */
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'

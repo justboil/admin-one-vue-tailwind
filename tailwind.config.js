@@ -24,6 +24,8 @@ module.exports = {
   variants: {
     extend: {
       margin: ['last'],
+      fontWeight: ['last'],
+      textColor: ['last']
     }
   },
   plugins: [

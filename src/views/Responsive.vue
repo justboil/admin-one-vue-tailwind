@@ -4,7 +4,7 @@
 
   <hero-bar>Responsive layout</hero-bar>
 
-  <titled-section>
+  <titled-section first>
     Mobile & Tablet
   </titled-section>
 

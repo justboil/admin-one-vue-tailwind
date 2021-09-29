@@ -17,14 +17,16 @@
     </notification>
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
       <card-widget
-        class="tile"
+        trend="12%"
+        trend-type="up"
         color="text-green-500"
         :icon="mdiAccountMultiple"
         :number="512"
         label="Clients"
       />
       <card-widget
-        class="tile"
+        trend="12%"
+        trend-type="down"
         color="text-blue-500"
         :icon="mdiCartOutline"
         :number="7770"
@@ -32,7 +34,8 @@
         label="Sales"
       />
       <card-widget
-        class="tile"
+        trend="Overflow"
+        trend-type="alert"
         color="text-red-500"
         :icon="mdiChartTimelineVariant"
         :number="256"
@@ -40,6 +43,31 @@
         label="Performance"
       />
     </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+      <div class="flex flex-col justify-between">
+        <card-transaction-bar
+          v-for="(transaction,index) in transactionBarItems"
+          :key="index"
+          :amount="transaction.amount"
+          :date="transaction.date"
+          :business="transaction.business"
+          :type="transaction.type"
+          :name="transaction.name"
+          :account="transaction.account"/>
+      </div>
+      <div class="flex flex-col justify-between">
+        <card-client-bar
+          v-for="client in clientBarItems"
+          :key="client.id"
+          :name="client.name"
+          :login="client.login"
+          :date="client.created"
+          :progress="client.progress"/>
+      </div>
+    </div>
+
+    <title-sub-bar :icon="mdiChartPie" title="Trends overview"/>
 
     <card-component
       title="Performance"
@@ -53,6 +81,8 @@
       </div>
     </card-component>
 
+    <title-sub-bar :icon="mdiAccountMultiple" title="Clients"/>
+
     <notification color="info" :icon="mdiMonitorCellphone">
       <b>Responsive table.</b> Collapses on mobile
     </notification>
@@ -65,7 +95,8 @@
 
 <script>
 // @ is an alias to /src
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import {
   mdiAccountMultiple,
   mdiCartOutline,
@@ -73,7 +104,8 @@ import {
   mdiFinance,
   mdiMonitorCellphone,
   mdiReload,
-  mdiGithub
+  mdiGithub,
+  mdiChartPie
 } from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config'
 import LineChart from '@/components/Charts/LineChart'
@@ -85,10 +117,14 @@ import CardComponent from '@/components/CardComponent'
 import ClientsTable from '@/components/ClientsTable'
 import Notification from '@/components/Notification'
 import JbButton from '@/components/JbButton'
+import CardTransactionBar from '@/components/CardTransactionBar'
+import CardClientBar from '@/components/CardClientBar'
+import TitleSubBar from '@/components/TitleSubBar'
 
 export default {
   name: 'Home',
   components: {
+    TitleSubBar,
     MainSection,
     ClientsTable,
     LineChart,
@@ -97,7 +133,9 @@ export default {
     HeroBar,
     TitleBar,
     Notification,
-    JbButton
+    JbButton,
+    CardTransactionBar,
+    CardClientBar
   },
   setup () {
     const titleStack = ref(['Admin', 'Dashboard'])
@@ -112,17 +150,26 @@ export default {
       fillChartData()
     })
 
+    const store = useStore()
+
+    const clientBarItems = computed(() => store.state.clients.slice(0, 3))
+
+    const transactionBarItems = computed(() => store.state.history.slice(0, 3))
+
     return {
       titleStack,
       chartData,
       fillChartData,
+      clientBarItems,
+      transactionBarItems,
       mdiAccountMultiple,
       mdiCartOutline,
       mdiChartTimelineVariant,
       mdiFinance,
       mdiMonitorCellphone,
       mdiReload,
-      mdiGithub
+      mdiGithub,
+      mdiChartPie
     }
   }
 }

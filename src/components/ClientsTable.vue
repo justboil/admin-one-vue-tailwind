@@ -4,6 +4,11 @@
     <p>This is sample modal</p>
   </modal-box>
 
+  <modal-box v-model="isModalDangerActive" title="Please confirm action" button="danger" has-cancel>
+    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+    <p>This is sample modal</p>
+  </modal-box>
+
   <div v-if="checkedRows.length" class="bg-gray-50 p-3">
     <span v-for="checkedRow in checkedRows" :key="checkedRow.id" class="inline-block bg-gray-100 px-2 py-1 rounded-sm mr-2 text-sm">{{ checkedRow.name }}</span>
   </div>
@@ -25,9 +30,7 @@
     <tr v-for="client in itemsPaginated" :key="client.id">
       <checkbox-cell v-if="checkable" @checked="checked($event, client)"/>
       <td class="image-cell">
-        <div class="image">
-          <img :src="client.avatar" class="rounded-full">
-        </div>
+        <user-avatar :username="client.name" class="image" />
       </td>
       <td data-label="Name">{{ client.name }}</td>
       <td data-label="Company">{{ client.company }}</td>
@@ -41,7 +44,7 @@
       <td class="actions-cell">
         <jb-buttons type="justify-start lg:justify-end" no-wrap>
           <jb-button class="mr-3" color="success" :icon="mdiEye" small @click="isModalActive = true" />
-          <jb-button color="danger" :icon="mdiTrashCan" small @click="isModalActive = true" />
+          <jb-button color="danger" :icon="mdiTrashCan" small @click="isModalDangerActive = true" />
         </jb-buttons>
       </td>
     </tr>
@@ -73,6 +76,7 @@ import CheckboxCell from '@/components/CheckboxCell'
 import Level from '@/components/Level'
 import JbButtons from '@/components/JbButtons'
 import JbButton from '@/components/JbButton'
+import UserAvatar from '@/components/UserAvatar'
 
 export default {
   name: 'ClientsTable',
@@ -81,7 +85,8 @@ export default {
     CheckboxCell,
     Level,
     JbButtons,
-    JbButton
+    JbButton,
+    UserAvatar
   },
   props: {
     checkable: Boolean
@@ -92,6 +97,8 @@ export default {
     const items = computed(() => store.state.clients)
 
     const isModalActive = ref(false)
+
+    const isModalDangerActive = ref(false)
 
     const perPage = ref(10)
 
@@ -139,6 +146,7 @@ export default {
 
     return {
       isModalActive,
+      isModalDangerActive,
       currentPage,
       currentPageHuman,
       numPages,

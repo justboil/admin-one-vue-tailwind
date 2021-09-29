@@ -5,26 +5,23 @@
     button-label="Confirm"
     has-cancel
   >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
   <modal-box
     v-model="modalTwoActive"
-    title="Unhandled exception"
+    large-title="Unhandled exception"
     button="danger"
     shake
   >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
   <modal-box
     v-model="modalThreeActive"
-    title="Success"
+    large-title="Success"
     button="success"
   >
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
@@ -32,7 +29,7 @@
 
   <hero-bar>UI Components</hero-bar>
 
-  <titled-section>
+  <titled-section first>
     Modal examples
   </titled-section>
 
@@ -46,7 +43,6 @@
         hoverable
       >
         <div class="space-y-3">
-          <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
           <p>Click to see in action</p>
         </div>
 
@@ -60,14 +56,12 @@
       </card-component>
 
       <card-component
-        title="Unhandled exception"
-        :header-icon="mdiClose"
         @click="modalTwoActive = true"
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         hoverable
       >
         <div class="space-y-3">
-          <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+          <h1 class="text-2xl">Unhandled exception</h1>
           <p>Click to see in action</p>
         </div>
 
@@ -79,14 +73,12 @@
       </card-component>
 
       <card-component
-        title="Success"
-        :header-icon="mdiClose"
         @click="modalThreeActive = true"
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         hoverable
       >
         <div class="space-y-3">
-          <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+          <h1 class="text-2xl">Success</h1>
           <p>Click to see in action</p>
         </div>
 
@@ -211,6 +203,8 @@
       </card-component>
     </div>
 
+    <title-sub-bar :icon="mdiAlertCircle" title="Empty variation"/>
+
     <card-component empty/>
   </main-section>
 
@@ -248,10 +242,12 @@ import TitledSection from '@/components/TitledSection'
 import Field from '@/components/Field'
 import CheckRadioPicker from '@/components/CheckRadioPicker'
 import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
+import TitleSubBar from '@/components/TitleSubBar'
 
 export default {
   name: 'Ui',
   components: {
+    TitleSubBar,
     MainSection,
     HeroBar,
     TitleBar,

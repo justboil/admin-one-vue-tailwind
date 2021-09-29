@@ -1,7 +1,5 @@
 <template>
-  <div v-show="value" class="flex items-center flex-col justify-center overflow-hidden fixed inset-0 z-40">
-    <div class="absolute inset-0 bg-gray-900 bg-opacity-80" @click="cancel"></div>
-
+  <overlay v-show="value" @overlay-click="cancel">
     <card-component
       v-show="value"
       :title="title"
@@ -10,6 +8,7 @@
       @header-icon-click="cancel"
     >
       <div class="space-y-3">
+        <h1 v-if="largeTitle" class="text-2xl">{{ largeTitle }}</h1>
         <slot />
       </div>
 
@@ -20,7 +19,7 @@
         <jb-button v-if="hasCancel" label="Cancel" @click="cancel" :color="button" outline />
       </jb-buttons>
     </card-component>
-  </div>
+  </overlay>
 </template>
 
 <script>
@@ -30,10 +29,12 @@ import JbButton from '@/components/JbButton'
 import JbButtons from '@/components/JbButtons'
 import CardComponent from '@/components/CardComponent'
 import Divider from '@/components/Divider'
+import Overlay from '@/components/Overlay'
 
 export default {
   name: 'ModalBox',
   components: {
+    Overlay,
     JbButton,
     JbButtons,
     CardComponent,
@@ -41,13 +42,14 @@ export default {
   },
   props: {
     title: String,
+    largeTitle: String,
     button: {
       type: String,
       default: 'info'
     },
     buttonLabel: {
       type: String,
-      default: 'Confirm'
+      default: 'Done'
     },
     hasCancel: Boolean,
     modelValue: [String, Number, Boolean]

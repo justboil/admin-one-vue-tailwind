@@ -1,26 +1,26 @@
 <template>
   <component
     :is="form ? 'form' : 'div'"
-    class="card bg-white border border-gray-100 rounded"
-    :class="[mb, form ? 'block' : '']"
+    class="bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-900"
+    :class="[rounded]"
     @submit="submit"
   >
-    <header v-if="title" class="flex items-stretch border-b border-gray-100">
+    <header v-if="title" class="flex items-stretch border-b border-gray-100 dark:border-gray-700">
       <p class="flex items-center py-3 flex-grow font-bold" :class="[ icon ? 'px-4' : 'px-6' ]">
         <icon v-if="icon" :path="icon" class="mr-3" />
         {{ title }}
       </p>
       <a
-        v-if="headerIcon"
+        v-if="computedHeaderIcon"
         href="#"
         class="flex items-center py-3 px-4 justify-center"
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <icon :path="headerIcon" />
+        <icon :path="computedHeaderIcon" />
       </a>
     </header>
-    <div v-if="empty" class="text-center py-24 text-gray-500">
+    <div v-if="empty" class="text-center py-24 text-gray-500 dark:text-gray-400">
       <p>Nothing's here…</p>
     </div>
     <div v-else :class="{'p-6':!hasTable}">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mdiCog } from '@mdi/js'
+import { computed } from 'vue'
 import Icon from '@/components/Icon'
 
 export default {
@@ -42,13 +44,15 @@ export default {
     hasTable: Boolean,
     empty: Boolean,
     form: Boolean,
-    mb: {
+    rounded: {
       type: String,
-      default: 'mb-6 last:mb-0'
+      default: 'md:rounded'
     }
   },
   emits: ['header-icon-click', 'submit'],
   setup (props, { emit }) {
+    const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
+
     const headerIconClick = () => {
       emit('header-icon-click')
     }
@@ -57,7 +61,7 @@ export default {
       emit('submit', e)
     }
 
-    return { headerIconClick, submit }
+    return { computedHeaderIcon, headerIconClick, submit }
   }
 }
 </script>

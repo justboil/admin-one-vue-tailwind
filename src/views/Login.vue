@@ -1,6 +1,6 @@
 <template>
-  <main-section>
-    <card-component  class="w-11/12 md:w-5/12 shadow-2xl rounded-lg" @submit.prevent="submit" form>
+  <full-screen-section bg="login" v-slot="{ cardClass, cardRounded }">
+    <card-component  :class="cardClass" :rounded="cardRounded" @submit.prevent="submit" form>
 
       <field label="Login" help="Please enter your login">
         <control v-model="form.login" :icon="mdiAccount" name="login" autocomplete="username"/>
@@ -19,14 +19,14 @@
         <jb-button to="/" color="info" outline label="Back" />
       </jb-buttons>
     </card-component>
-  </main-section>
+  </full-screen-section>
 </template>
 
 <script>
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import MainSection from '@/components/MainSection'
+import FullScreenSection from '@/components/FullScreenSection'
 import CardComponent from '@/components/CardComponent'
 import CheckRadioPicker from '@/components/CheckRadioPicker'
 import Field from '@/components/Field'
@@ -38,7 +38,7 @@ import JbButtons from '@/components/JbButtons'
 export default {
   name: 'Login',
   components: {
-    MainSection,
+    FullScreenSection,
     CardComponent,
     CheckRadioPicker,
     Field,

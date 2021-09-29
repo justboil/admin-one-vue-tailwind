@@ -18,7 +18,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { mdiClose } from '@mdi/js'
-import { colorsBg, colorsOutline } from '@/colors.js'
+import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 import Level from '@/components/Level'
 import Icon from '@/components/Icon'
 import JbButton from '@/components/JbButton'
@@ -39,7 +39,9 @@ export default {
     }
   },
   setup (props, { slots }) {
-    const componentClass = computed(() => props.outline ? colorsOutline[props.color] : colorsBg[props.color])
+    const componentClass = computed(() => props.outline
+      ? colorsOutline[props.color]
+      : [...colorsBg[props.color], ...colorsBorders[props.color]])
 
     const isDismissed = ref(false)
 

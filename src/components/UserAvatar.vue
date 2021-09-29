@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="newUserAvatar" :alt="userName" class="rounded-full block h-auto w-full max-w-full" />
+    <img :src="avatar" :alt="name" class="rounded-full block h-auto w-full max-w-full" :class="bg" />
   </div>
 </template>
 
@@ -11,33 +11,28 @@ import { computed } from 'vue'
 export default {
   name: 'UserAvatar',
   props: {
-    avatar: {
+    username: String,
+    bg: {
       type: String,
-      default: null
+      default: 'bg-gray-100 dark:bg-gray-800'
+    },
+    api: {
+      type: String,
+      default: 'api/avataaars'
     }
   },
   setup (props) {
     const store = useStore()
 
-    const newUserAvatar = computed(() => {
-      if (props.avatar) {
-        return props.avatar
-      }
+    const avatar = computed(() => props.username
+      ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
+      : store.state.userAvatar)
 
-      if (store.state.userAvatar) {
-        return store.state.userAvatar
-      }
-
-      if (store.state.userName) {
-        return `https://avatars.dicebear.com/v2/human/${store.state.userName.replace(/[^a-z0-9]+/i, '')}.svg?options[mood][]=happy`
-      }
-
-      return null
-    })
+    const name = computed(() => props.username ? props.username : store.state.userName)
 
     return {
-      newUserAvatar,
-      userName: computed(() => store.state.userName)
+      name,
+      avatar
     }
   }
 }
