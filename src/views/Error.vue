@@ -11,7 +11,7 @@
       <divider />
 
       <jb-buttons>
-        <jb-button label="Done" to="/" color="info" />
+        <jb-button label="Done" to="/" color="danger" />
       </jb-buttons>
     </card-component>
   </full-screen-section>

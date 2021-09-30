@@ -8,7 +8,7 @@ thead {
 
 tr {
   @apply max-w-full block relative border-b-4 border-gray-100
-    lg:table-row lg:border-b-0;
+    lg:table-row lg:border-b-0 dark:border-gray-700;
 }
 
 tr:last-child {
@@ -21,11 +21,11 @@ th {
 
 td {
   @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
-    lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0;
+    lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
 }
 
 tr:nth-child(odd) td {
-  @apply lg:bg-gray-50;
+  @apply lg:bg-gray-50 lg:dark:bg-gray-800;
 }
 
 td:last-child {
@@ -33,7 +33,7 @@ td:last-child {
 }
 
 tbody tr:hover td {
-  @apply lg:bg-gray-100;
+  @apply lg:bg-gray-100 lg:dark:bg-gray-800;
 }
 
 td:before {
@@ -63,5 +63,5 @@ td.image-cell .image {
 }
 
 .table-pagination {
-  @apply px-6 py-3 border-t border-gray-100;
+  @apply px-6 py-3 border-t border-gray-100 dark:border-gray-700;
 }

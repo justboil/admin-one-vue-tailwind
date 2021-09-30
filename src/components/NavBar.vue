@@ -1,7 +1,8 @@
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen transition-all xl:pl-60 lg:w-auto lg:items-stretch"
+    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen
+    transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-900"
     :class="{'ml-60':isAsideMobileExpanded}"
   >
     <div class="flex-1 items-stretch flex h-14">
@@ -12,9 +13,7 @@
         <icon :path="mdiMenu" size="24" />
       </nav-bar-item>
       <nav-bar-item>
-        <div class="control">
-          <input type="text" class="px-3 focus:ring rounded border-0" placeholder="Search everywhere..." />
-        </div>
+        <control placeholder="Search everywhere..." transparent borderless />
       </nav-bar-item>
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
@@ -23,8 +22,8 @@
       </nav-bar-item>
     </div>
     <div
-      class="absolute w-screen top-14 left-0 bg-white border-b border-gray-100 shadow
-        lg:w-auto lg:items-stretch lg:flex lg:flex-grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none"
+      class="absolute w-screen top-14 left-0 bg-white shadow
+        lg:w-auto lg:items-stretch lg:flex lg:flex-grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
       :class="{ 'hidden': !isMenuNavBarActive, 'block': isMenuNavBarActive }"
     >
       <div
@@ -68,6 +67,9 @@
             </nav-bar-item>
           </template>
         </nav-bar-menu>
+        <nav-bar-item @click.prevent="toggleLightDark" has-divider is-desktop-icon-only>
+          <nav-bar-item-label :icon="mdiThemeLightDark" label="Light/Dark" is-desktop-icon-only />
+        </nav-bar-item>
         <nav-bar-item href="https://github.com/justboil/admin-one-vue-tailwind" has-divider is-desktop-icon-only>
           <nav-bar-item-label :icon="mdiGithub" label="GitHub" is-desktop-icon-only />
         </nav-bar-item>
@@ -95,7 +97,8 @@ import {
   mdiCogOutline,
   mdiEmail,
   mdiLogout,
-  mdiGithub
+  mdiGithub,
+  mdiThemeLightDark
 } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem'
 import NavBarItemLabel from '@/components/NavBarItemLabel'
@@ -103,10 +106,12 @@ import NavBarMenu from '@/components/NavBarMenu'
 import NavBarMenuDivider from '@/components/NavBarMenuDivider'
 import UserAvatar from '@/components/UserAvatar'
 import Icon from '@/components/Icon'
+import Control from '@/components/Control'
 
 export default {
   name: 'NavBar',
   components: {
+    Control,
     UserAvatar,
     NavBarMenu,
     NavBarItem,
@@ -116,6 +121,10 @@ export default {
   },
   setup () {
     const store = useStore()
+
+    const toggleLightDark = () => {
+      store.dispatch('darkMode')
+    }
 
     const isNavBarVisible = computed(() => !store.state.isFormScreen)
 
@@ -140,6 +149,7 @@ export default {
     }
 
     return {
+      toggleLightDark,
       isNavBarVisible,
       isAsideMobileExpanded,
       userName,
@@ -157,7 +167,8 @@ export default {
       mdiCogOutline,
       mdiEmail,
       mdiLogout,
-      mdiGithub
+      mdiGithub,
+      mdiThemeLightDark
     }
   }
 }

@@ -1,16 +1,22 @@
 <template>
-  <modal-box v-model="isModalActive" title="Please confirm action" has-cancel>
+  <modal-box v-model="isModalActive" title="Sample modal">
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
-  <modal-box v-model="isModalDangerActive" title="Please confirm action" button="danger" has-cancel>
+  <modal-box v-model="isModalDangerActive" large-title="Please confirm" button="danger" has-cancel>
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
-  <div v-if="checkedRows.length" class="bg-gray-50 p-3">
-    <span v-for="checkedRow in checkedRows" :key="checkedRow.id" class="inline-block bg-gray-100 px-2 py-1 rounded-sm mr-2 text-sm">{{ checkedRow.name }}</span>
+  <div v-if="checkedRows.length" class="bg-gray-50 p-3 dark:bg-gray-800">
+    <span
+      v-for="checkedRow in checkedRows"
+      :key="checkedRow.id"
+      class="inline-block bg-gray-100 px-2 py-1 rounded-sm mr-2 text-sm dark:bg-gray-700"
+    >
+      {{ checkedRow.name }}
+    </span>
   </div>
 
   <table>
@@ -39,7 +45,7 @@
         <progress max="100" :value="client.progress">{{ client.progress }}</progress>
       </td>
       <td data-label="Created">
-        <small class="text-gray-500" :title="client.created">{{ client.created }}</small>
+        <small class="text-gray-500 dark:text-gray-400" :title="client.created">{{ client.created }}</small>
       </td>
       <td class="actions-cell">
         <jb-buttons type="justify-start lg:justify-end" no-wrap>
@@ -59,6 +65,7 @@
           :active="page === currentPage"
           :label="page + 1"
           :key="page"
+          :outline="darkMode"
           small
         />
       </jb-buttons>
@@ -93,6 +100,8 @@ export default {
   },
   setup () {
     const store = useStore()
+
+    const darkMode = computed(() => store.state.darkMode)
 
     const items = computed(() => store.state.clients)
 
@@ -145,6 +154,7 @@ export default {
     }
 
     return {
+      darkMode,
       isModalActive,
       isModalDangerActive,
       currentPage,

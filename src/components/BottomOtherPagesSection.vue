@@ -1,6 +1,6 @@
 <template>
   <titled-section last>
-    <h1 class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 mb-12">
+    <h1 class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 dark:text-gray-400 mb-12">
         <span class="md:mr-3">Please star this project on</span>
         <a
           href="https://github.com/justboil/admin-one-vue-tailwind"
@@ -11,7 +11,7 @@
           <span>GitHub</span>
         </a>
     </h1>
-    <h1 class="text-2xl text-gray-500">
+    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
       Check out other components and layouts at<br>
       <template v-for="(screen, index) in screens" :key="screen.path">
         <router-link

@@ -12,7 +12,7 @@
     </level>
     <level mobile>
       <div>
-        <h3 class="text-lg leading-tight text-gray-500">
+        <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">

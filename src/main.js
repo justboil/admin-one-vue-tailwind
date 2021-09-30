@@ -10,6 +10,8 @@ import './css/main.css'
 store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
+store.dispatch('darkMode')
+
 /* Default title tag */
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 

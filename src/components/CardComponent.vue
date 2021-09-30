@@ -5,7 +5,9 @@
     :class="[rounded]"
     @submit="submit"
   >
-    <header v-if="title" class="flex items-stretch border-b border-gray-100 dark:border-gray-700">
+    <header
+      v-if="title"
+      class="flex items-stretch border-b border-gray-100 dark:border-gray-700">
       <p class="flex items-center py-3 flex-grow font-bold" :class="[ icon ? 'px-4' : 'px-6' ]">
         <icon v-if="icon" :path="icon" class="mr-3" />
         {{ title }}
@@ -13,7 +15,7 @@
       <a
         v-if="computedHeaderIcon"
         href="#"
-        class="flex items-center py-3 px-4 justify-center"
+        class="flex items-center py-3 px-4 justify-center ring-blue-700 focus:ring"
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
@@ -57,11 +59,21 @@ export default {
       emit('header-icon-click')
     }
 
+    // const headerFooterBorder = 'border-gray-100 dark:border-gray-700'
+
+    // const headerBorder = 'border-b'
+
     const submit = e => {
       emit('submit', e)
     }
 
-    return { computedHeaderIcon, headerIconClick, submit }
+    return {
+      computedHeaderIcon,
+      headerIconClick,
+      // headerFooterBorder,
+      // headerBorder,
+      submit
+    }
   }
 }
 </script>

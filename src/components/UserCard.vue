@@ -1,5 +1,5 @@
 <template>
-  <card-component class="items-center">
+  <card-component class="items-center" rounded="">
     <level type="justify-around lg:justify-center">
       <user-avatar class="lg:mx-12" button/>
       <div class="space-y-3 text-center md:text-left lg:mx-12">

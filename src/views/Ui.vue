@@ -30,6 +30,18 @@
   <hero-bar>UI Components</hero-bar>
 
   <titled-section first>
+    Dark mode
+  </titled-section>
+
+  <main-section>
+    <card-component class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
+      <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <jb-button label="Toggle" @click="darkModeToggle" outline />
+      </div>
+    </card-component>
+  </main-section>
+
+  <titled-section>
     Modal examples
   </titled-section>
 
@@ -90,7 +102,7 @@
   </main-section>
 
   <titled-section custom>
-    <h1 class="text-2xl text-gray-500">
+    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
       Notifications
     </h1>
     <div class="flex items-center justify-center mt-6">
@@ -132,7 +144,7 @@
       </template>
     </notification>
 
-    <notification color="white" :icon="mdiSelectColor">
+    <notification color="white" :icon="mdiSelectColor" :outline="notificationsOutline">
       <b>White</b>. Notification
     </notification>
 
@@ -158,7 +170,7 @@
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :small="buttonsSmall"/>
+        <jb-button color="white" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="light" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="info" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="success" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
@@ -169,7 +181,7 @@
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall"/>
+        <jb-button color="white" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="light" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="info" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="success" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
@@ -180,7 +192,7 @@
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" :icon="mdiOpenInNew" :small="buttonsSmall"/>
+        <jb-button color="white" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="light" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="info" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="success" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
@@ -195,11 +207,11 @@
   <main-section>
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2 ">
       <card-component title="With Title" mb="">
-        <div class="text-center py-24 lg:py-12 text-gray-500">With title</div>
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">With title</div>
       </card-component>
 
       <card-component title="Title & Icons" :icon="mdiMonitorCellphone" :header-icon="mdiClose" mb="">
-        <div class="text-center py-24 lg:py-12 text-gray-500">With title & icons</div>
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">With title & icons</div>
       </card-component>
     </div>
 
@@ -283,8 +295,8 @@ export default {
 
     const store = useStore()
 
-    const toast = () => {
-      store.dispatch('pushMessage', 'Welcome back. This is demo')
+    const darkModeToggle = () => {
+      store.dispatch('darkMode')
     }
 
     return {
@@ -297,7 +309,7 @@ export default {
       buttonSettingsModel,
       buttonsOutline,
       buttonsSmall,
-      toast,
+      darkModeToggle,
       mdiMonitorCellphone,
       mdiSelectColor,
       mdiFeather,

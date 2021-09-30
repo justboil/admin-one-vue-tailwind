@@ -9,7 +9,7 @@ export const colorsBg = {
 
 export const colorsBorders = {
   white: ['border-gray-300'],
-  light: ['border-gray-200'],
+  light: ['border-gray-200 dark:border-gray-400'],
   success: ['border-green-600'],
   danger: ['border-red-600'],
   warning: ['border-yellow-600'],
@@ -17,7 +17,8 @@ export const colorsBorders = {
 }
 
 export const colorsText = {
-  light: ['text-gray-700'],
+  white: ['text-black dark:text-gray-100'],
+  light: ['text-gray-700 dark:text-gray-400'],
   success: ['text-green-500'],
   danger: ['text-red-500'],
   warning: ['text-yellow-500'],
@@ -25,7 +26,7 @@ export const colorsText = {
 }
 
 export const colorsOutline = {
-  white: [...colorsBg.white, ...colorsBorders.white],
+  white: [...colorsText.white, ...colorsBorders.white],
   light: [...colorsText.light, ...colorsBorders.light],
   success: [...colorsText.success, ...colorsBorders.success],
   danger: [...colorsText.danger, ...colorsBorders.danger],
@@ -43,8 +44,8 @@ export const colorsButtons = {
 }
 
 export const colorsButtonsOutline = {
-  white: colorsButtons.white,
-  light: ['hover:bg-gray-100', ...colorsText.light, ...colorsBorders.light],
+  white: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900', ...colorsText.white, ...colorsBorders.white],
+  light: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900', ...colorsText.light, ...colorsBorders.light],
   success: ['hover:bg-green-500 hover:text-white', ...colorsText.success, ...colorsBorders.success],
   danger: ['hover:bg-red-500 hover:text-white', ...colorsText.danger, ...colorsBorders.danger],
   warning: ['hover:bg-yellow-500 hover:text-white', ...colorsText.warning, ...colorsBorders.warning],

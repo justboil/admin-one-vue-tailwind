@@ -2,11 +2,8 @@
   <title-bar :title-stack="titleStack" />
   <hero-bar>Forms</hero-bar>
 
-  <titled-section first>
-    Form examples
-  </titled-section>
-
   <main-section>
+    <title-sub-bar :icon="mdiBallotOutline" title="Forms example"/>
     <card-component title="Forms" :icon="mdiBallot" @submit.prevent="submit" form>
       <field label="Grouped with icons">
         <control :icon="mdiAccount" v-model="form.name" />
@@ -98,10 +95,12 @@ import JbButton from '@/components/JbButton'
 import JbButtons from '@/components/JbButtons'
 import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
 import TitledSection from '@/components/TitledSection'
+import TitleSubBar from '@/components/TitleSubBar'
 
 export default {
   name: 'Forms',
   components: {
+    TitleSubBar,
     TitledSection,
     Divider,
     MainSection,

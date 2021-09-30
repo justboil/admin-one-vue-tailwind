@@ -68,19 +68,16 @@ export default {
         'justify-center',
         'items-center',
         'whitespace-nowrap',
-        'ring-blue-700',
         'focus:outline-none',
         'transition-colors',
+        'focus:ring',
         'duration-150',
         'border',
         'rounded',
+        props.active ? 'ring ring-white' : 'ring-blue-700',
         props.small ? 'p-1' : 'p-2',
         props.outline ? colorsButtonsOutline[props.color] : colorsButtons[props.color]
       ]
-
-      if (props.active) {
-        base.push('ring')
-      }
 
       return base
     })

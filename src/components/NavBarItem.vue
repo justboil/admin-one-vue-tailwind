@@ -20,11 +20,11 @@ export default {
       type: String,
       default: 'flex'
     },
-    pX: String,
-    color: {
+    activeColor: {
       type: String,
-      default: 'text-gray-900 hover:text-blue-500'
-    }
+      default: 'text-blue-600'
+    },
+    pX: String
   },
   setup (props) {
     const is = computed(() => {
@@ -46,18 +46,13 @@ export default {
         'flex-grow-0',
         'flex-shrink-0',
         'relative',
-        props.color,
         'cursor-pointer',
-        'transition-colors',
-        'duration-150'
+        'hover:text-blue-500',
+        props.active ? props.activeColor : 'text-black dark:text-white dark:hover:text-gray-400'
       ]
 
       if (props.type === 'block') {
         base.push('lg:flex')
-      }
-
-      if (props.active) {
-        base.push('text-blue-600')
       }
 
       if (!props.dropdown) {
@@ -67,14 +62,14 @@ export default {
       }
 
       if (props.hasDivider) {
-        base.push('lg:border-r', 'lg:border-gray-100')
+        base.push('lg:border-r', 'lg:border-gray-100', 'lg:dark:border-gray-800')
       }
 
       if (props.isDesktopIconOnly) {
         base.push('lg:w-16', 'lg:justify-center')
       }
 
-      return base.join(' ')
+      return base
     })
 
     const activeClass = computed(() => {

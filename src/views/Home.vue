@@ -2,7 +2,7 @@
   <title-bar :title-stack="titleStack" />
   <hero-bar>Dashboard</hero-bar>
   <main-section>
-    <notification color="info" :icon="mdiGithub" class="shadow-xl">
+    <notification color="info" :icon="mdiGithub">
       Please star this project on
       <a href="https://github.com/justboil/admin-one-vue-tailwind" class="underline" target="_blank">GitHub</a>
       <template #right>

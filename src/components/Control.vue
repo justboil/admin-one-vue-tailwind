@@ -60,7 +60,9 @@ export default {
     modelValue: {
       type: [String, Number, Boolean, Array, Object],
       default: ''
-    }
+    },
+    borderless: Boolean,
+    transparent: Boolean
   },
   emits: ['update:modelValue', 'right-icon-click'],
   setup (props, { emit }) {
@@ -73,8 +75,11 @@ export default {
 
     const inputElClass = computed(() => {
       const base = [
-        'px-3 py-2 max-w-full focus:ring focus:outline-none border border-gray-700 rounded w-full',
-        computedType.value === 'textarea' ? 'h-24' : 'h-12'
+        'px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full',
+        'dark:placeholder-gray-400',
+        computedType.value === 'textarea' ? 'h-24' : 'h-12',
+        props.borderless ? 'border-0' : 'border',
+        props.transparent ? 'bg-transparent' : 'bg-white dark:bg-gray-800'
       ]
 
       if (props.icon) {

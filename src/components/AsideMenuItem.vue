@@ -4,9 +4,9 @@
       :is="componentIs"
       :to="itemTo"
       :href="itemHref"
-      exact-active-class="bg-gray-700"
-      class="flex text-gray-300 cursor-pointer hover:bg-gray-700"
-      :class="{'py-2': !isSubmenuList, 'p-3 text-sm': isSubmenuList}"
+      exact-active-class="bg-gray-700 dark:bg-gray-800"
+      class="flex text-gray-300 cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-700"
+      :class="[isSubmenuList ? 'p-3 text-sm' : 'py-2']"
       @click="menuClick"
     >
       <icon v-if="item.icon" :path="item.icon" class="flex-none" w="w-12" />
@@ -16,7 +16,7 @@
     <aside-menu-list
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="{ 'hidden': !isDropdownActive, 'block bg-gray-600': isDropdownActive }"
+      :class="{ 'hidden': !isDropdownActive, 'block bg-gray-600 dark:bg-gray-800': isDropdownActive }"
       is-submenu-list
     />
   </li>
@@ -35,14 +35,8 @@ export default {
   },
   emits: ['menu-click'],
   props: {
-    item: {
-      type: Object,
-      default: null
-    },
-    isSubmenuList: {
-      type: Boolean,
-      default: false
-    }
+    item: Object,
+    isSubmenuList: Boolean
   },
   setup (props, { emit }) {
     const isDropdownActive = ref(false)
