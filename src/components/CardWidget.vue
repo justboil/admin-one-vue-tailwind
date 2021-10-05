@@ -6,7 +6,8 @@
         :icon="mdiCog"
         icon-w="w-4"
         icon-h="h-4"
-        color="light"
+        :color="darkMode ? 'white' : 'light'"
+        :outline="darkMode"
         small
       />
     </level>
@@ -26,6 +27,8 @@
 
 <script>
 import { mdiCog } from '@mdi/js'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import CardComponent from '@/components/CardComponent'
 import GrowingNumber from '@/components/GrowingNumber'
 import Icon from '@/components/Icon'
@@ -50,7 +53,12 @@ export default {
     trendType: String
   },
   setup () {
+    const store = useStore()
+
+    const darkMode = computed(() => store.state.darkMode)
+
     return {
+      darkMode,
       mdiCog
     }
   }

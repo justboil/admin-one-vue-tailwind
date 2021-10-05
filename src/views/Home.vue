@@ -9,6 +9,7 @@
         <jb-button
           href="https://github.com/justboil/admin-one-vue-tailwind"
           :icon="mdiGithub"
+          :outline="darkMode"
           label="GitHub"
           target="_blank"
           small
@@ -156,12 +157,15 @@ export default {
 
     const transactionBarItems = computed(() => store.state.history.slice(0, 3))
 
+    const darkMode = computed(() => store.state.darkMode)
+
     return {
       titleStack,
       chartData,
       fillChartData,
       clientBarItems,
       transactionBarItems,
+      darkMode,
       mdiAccountMultiple,
       mdiCartOutline,
       mdiChartTimelineVariant,
