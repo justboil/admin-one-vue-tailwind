@@ -1,8 +1,8 @@
 <template>
   <aside
-    v-show="!isFormScreen"
+    v-show="!isFullScreen"
     class="w-60 fixed top-0 z-40 h-screen bg-gray-800 transition-position lg:left-0 overflow-y-scroll
-    scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-900 hover:scrollbar-thumb-gray-900
+    scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-600 scrollbar-track-gray-900
     dark:scrollbar-track-gray-800 dark:bg-gray-900"
     :class="[ isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
@@ -50,7 +50,7 @@ export default {
   setup () {
     const store = useStore()
 
-    const isFormScreen = computed(() => store.state.isFormScreen)
+    const isFullScreen = computed(() => store.state.isFullScreen)
 
     const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 
@@ -65,7 +65,7 @@ export default {
     }
 
     return {
-      isFormScreen,
+      isFullScreen,
       isAsideMobileExpanded,
       isAsideLgActive,
       asideLgClose,

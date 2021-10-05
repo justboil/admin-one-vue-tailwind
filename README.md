@@ -1,12 +1,13 @@
-# [Admin One &mdash; Free Vue.js 3 Tailwind Admin Dashboard](https://justboil.me/tailwind-admin-templates)
+# [Admin One &mdash; Free Vue.js 3 Tailwind Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard)
 
-[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.1.0)](https://justboil.me/tailwind-admin-templates)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates)
+[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.1.0)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates)
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-vue3-tailwind/repository-preview-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-vue3-tailwind/repository-preview-hi-res.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 **Admin One** is simple, beautiful and free Vue.js 3 Tailwind CSS admin dashboard
 
 * Built with **Vue.js 3**, **Tailwind CSS** framework & **Composition API** 
+* **Dark mode**
 * SPA with **Vuex** & **Router**
 * **Production CSS** is only **27kb**
 * Reusable components
@@ -19,21 +20,21 @@
 
 Mobile layout with hidden aside menu and collapsable cards & tables
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ### Small laptops 1024px
 
 Small laptop layout with show/hide aside menu option
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ### Laptops & desktops
 
 Classic layout with aside menus on the left
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-no-libs.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-tailwind/repository-preview-no-libs.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ## Table of Contents
 

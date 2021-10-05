@@ -8,8 +8,8 @@ export default createStore({
     userEmail: null,
     userAvatar: null,
 
-    /* FormScreen - fullscreen form layout (e.g. login page) */
-    isFormScreen: false,
+    /* fullScreen - fullscreen form layout (e.g. login page) */
+    isFullScreen: false,
 
     /* Aside */
     isAsideMobileExpanded: false,
@@ -59,10 +59,10 @@ export default createStore({
       commit('basic', { key: 'isAsideLgActive', value: payload !== null ? payload : !state.isAsideLgActive })
     },
 
-    formScreenToggle ({ commit, state }, value) {
-      commit('basic', { key: 'isFormScreen', value })
+    fullScreenToggle ({ commit, state }, value) {
+      commit('basic', { key: 'isFullScreen', value })
 
-      document.documentElement.classList[value ? 'add' : 'remove']('form-screen')
+      document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
     },
 
     darkMode ({ commit, state }) {

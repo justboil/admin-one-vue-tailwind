@@ -24,7 +24,7 @@
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-1024.png"
+        src="https://justboil.me/images/one-tailwind/repository-preview-1024.png?v=1.3"
         class="block"
       >
     </div>
@@ -33,7 +33,7 @@
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png"
+        src="https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png?v=1.3"
         class="block"
       >
     </div>
@@ -46,7 +46,7 @@
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-no-libs.png"
+        src="https://justboil.me/images/one-tailwind/repository-preview-no-libs.png?v=1.3"
         class="block"
       >
     </div>

@@ -58,7 +58,7 @@ const routes = [
   {
     meta: {
       title: 'Login',
-      formScreen: true
+      fullScreen: true
     },
     path: '/login',
     name: 'login',
@@ -67,7 +67,7 @@ const routes = [
   {
     meta: {
       title: 'Error',
-      formScreen: true
+      fullScreen: true
     },
     path: '/error',
     name: 'error',

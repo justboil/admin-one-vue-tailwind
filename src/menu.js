@@ -76,14 +76,16 @@ export default [
   'About',
   [
     {
-      href: 'https://tailwind-vue.justboil.me/',
+      href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard',
       label: 'Premium version',
-      icon: mdiMonitorClean
+      icon: mdiMonitorClean,
+      target: '_blank'
     },
     {
       href: 'https://github.com/justboil/admin-one-vue-tailwind',
       label: 'GitHub',
-      icon: mdiGithub
+      icon: mdiGithub,
+      target: '_blank'
     }
   ]
 ]

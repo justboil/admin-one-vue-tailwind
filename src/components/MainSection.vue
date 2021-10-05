@@ -1,7 +1,7 @@
 <template>
   <section
     class="px-0 md:px-6"
-    :class="[ isFormScreen ? 'flex h-screen items-center justify-center' : 'py-6' ]"
+    :class="[ isFullScreen ? 'flex h-screen items-center justify-center' : 'py-6' ]"
   >
     <slot/>
   </section>
@@ -16,10 +16,10 @@ export default {
   setup () {
     const store = useStore()
 
-    const isFormScreen = computed(() => store.state.isFormScreen)
+    const isFullScreen = computed(() => store.state.isFullScreen)
 
     return {
-      isFormScreen
+      isFullScreen
     }
   }
 }

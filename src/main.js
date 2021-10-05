@@ -10,7 +10,8 @@ import './css/main.css'
 store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
-store.dispatch('darkMode')
+/* Dark mode */
+// store.dispatch('darkMode')
 
 /* Default title tag */
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
@@ -20,7 +21,7 @@ router.beforeEach(to => {
   store.dispatch('asideMobileToggle', false)
   store.dispatch('asideLgToggle', false)
 
-  store.dispatch('formScreenToggle', !!to.meta.formScreen)
+  store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
 })
 
 router.afterEach(to => {

@@ -11,7 +11,7 @@
           <span>GitHub</span>
         </a>
     </h1>
-    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
+    <h1 class="text-2xl text-gray-500 dark:text-gray-400 mb-12">
       Check out other components and layouts at<br>
       <template v-for="(screen, index) in screens" :key="screen.path">
         <router-link
@@ -22,6 +22,9 @@
       </template>
       <br>
       screen samples
+    </h1>
+    <h1 class="text-2xl text-gray-500 dark:text-gray-400">
+      Get more with <a href="https://justboil.me/tailwind-admin-templates/vue-dashboard" target="_blank" class="text-blue-500">Premium version</a>
     </h1>
   </titled-section>
 </template>

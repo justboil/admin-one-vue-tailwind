@@ -4,6 +4,7 @@
       :is="componentIs"
       :to="itemTo"
       :href="itemHref"
+      :target="itemTarget"
       exact-active-class="bg-gray-700 dark:bg-gray-800"
       class="flex text-gray-300 cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-700"
       :class="[isSubmenuList ? 'p-3 text-sm' : 'py-2']"
@@ -51,6 +52,8 @@ export default {
 
     const itemHref = computed(() => props.item.href || null)
 
+    const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
+
     const menuClick = event => {
       emit('menu-click', event, props.item)
 
@@ -66,6 +69,7 @@ export default {
       dropdownIcon,
       itemTo,
       itemHref,
+      itemTarget,
       menuClick
     }
   }

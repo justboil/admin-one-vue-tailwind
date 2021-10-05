@@ -126,7 +126,7 @@ export default {
       store.dispatch('darkMode')
     }
 
-    const isNavBarVisible = computed(() => !store.state.isFormScreen)
+    const isNavBarVisible = computed(() => !store.state.isFullScreen)
 
     const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 

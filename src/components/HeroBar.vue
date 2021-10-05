@@ -4,13 +4,19 @@
       <h1 class="text-3xl font-semibold leading-tight">
         <slot />
       </h1>
-      <jb-button href="https://tailwind-vue.justboil.me/" target="_blank" label="Premium version" :icon="mdiMonitorClean" />
+      <jb-button
+        :label="darkMode ? 'Light Mode' : 'Dark Mode'"
+        :icon="mdiThemeLightDark"
+        @click="darkModeToggle"
+      />
     </level>
   </section>
 </template>
 
 <script>
-import { mdiMonitorClean } from '@mdi/js'
+import { mdiThemeLightDark } from '@mdi/js'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 import Level from '@/components/Level'
 import JbButton from '@/components/JbButton'
 
@@ -21,8 +27,18 @@ export default {
     JbButton
   },
   setup () {
+    const store = useStore()
+
+    const darkMode = computed(() => store.state.darkMode)
+
+    const darkModeToggle = () => {
+      store.dispatch('darkMode')
+    }
+
     return {
-      mdiMonitorClean
+      darkMode,
+      darkModeToggle,
+      mdiThemeLightDark
     }
   }
 }
