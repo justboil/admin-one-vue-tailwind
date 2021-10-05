@@ -1,6 +1,6 @@
 # [Admin One &mdash; Free Vue.js 3 Tailwind Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard)
 
-[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.1.0)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates)
+[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.3.0)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates)
 
 [![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-vue3-tailwind/repository-preview-hi-res.png?v=1.3)](https://justboil.github.io/admin-one-vue-tailwind/)
 
@@ -8,8 +8,9 @@
 
 * Built with **Vue.js 3**, **Tailwind CSS** framework & **Composition API** 
 * **Dark mode**
+* **Styled** scrollbars
 * SPA with **Vuex** & **Router**
-* **Production CSS** is only **27kb**
+* **Production CSS** is only **33kb**
 * Reusable components
 * Free under MIT License
 * [Premium version](https://justboil.me/tailwind-admin-templates/vue-dashboard) available
