@@ -7,6 +7,7 @@
       <jb-button
         :label="darkMode ? 'Light Mode' : 'Dark Mode'"
         :icon="mdiThemeLightDark"
+        :outline="darkMode"
         @click="darkModeToggle"
       />
     </level>

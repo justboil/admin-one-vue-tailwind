@@ -18,10 +18,7 @@ export default {
       type: String,
       required: true
     },
-    isDesktopIconOnly: {
-      type: Boolean,
-      default: false
-    }
+    isDesktopIconOnly: Boolean
   }
 }
 </script>
