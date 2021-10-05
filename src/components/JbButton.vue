@@ -74,7 +74,7 @@ export default {
         'duration-150',
         'border',
         'rounded',
-        props.active ? 'ring ring-white' : 'ring-blue-700',
+        props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
         props.small ? 'p-1' : 'p-2',
         props.outline ? colorsButtonsOutline[props.color] : colorsButtons[props.color]
       ]
