@@ -10,13 +10,20 @@
         <span class="text-center md:text-left"><slot /></span>
       </div>
       <slot v-if="hasRightSlot" name="right" />
-      <jb-button v-else :icon="mdiClose" @click="dismiss" small />
+      <jb-button
+        v-else
+        :icon="mdiClose"
+        :outline="outline || (darkMode && ['white', 'light'].indexOf(color) < 0)"
+        @click="dismiss"
+        small
+      />
     </level>
   </div>
 </template>
 
 <script>
 import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { mdiClose } from '@mdi/js'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 import Level from '@/components/Level'
@@ -51,11 +58,16 @@ export default {
 
     const hasRightSlot = computed(() => slots.right)
 
+    const store = useStore()
+
+    const darkMode = computed(() => store.state.darkMode)
+
     return {
       componentClass,
       isDismissed,
       dismiss,
       hasRightSlot,
+      darkMode,
       mdiClose
     }
   }
