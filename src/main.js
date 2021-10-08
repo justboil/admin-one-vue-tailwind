@@ -16,20 +16,21 @@ store.dispatch('fetch', 'history')
 /* Default title tag */
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 
-/* Collapse mobile aside menu on route change & set document title from route meta */
-router.beforeEach(to => {
-  store.dispatch('asideMobileToggle', false)
-  store.dispatch('asideLgToggle', false)
-
-  store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
-})
-
 router.afterEach(to => {
+  /* Set document title from route meta */
+
   if (to.meta && to.meta.title) {
     document.title = `${to.meta.title} — ${defaultDocumentTitle}`
   } else {
     document.title = defaultDocumentTitle
   }
+
+  /* Collapse mobile aside menu on route change */
+
+  store.dispatch('asideMobileToggle', false)
+  store.dispatch('asideLgToggle', false)
+
+  store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
 })
 
 createApp(App).use(store).use(router).mount('#app')
