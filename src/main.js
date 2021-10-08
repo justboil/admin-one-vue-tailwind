@@ -13,23 +13,24 @@ store.dispatch('fetch', 'history')
 /* Dark mode */
 // store.dispatch('darkMode')
 
+/* Collapse mobile aside menu on route change */
+router.beforeEach(to => {
+  store.dispatch('asideMobileToggle', false)
+  store.dispatch('asideLgToggle', false)
+})
+
 /* Default title tag */
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 
 router.afterEach(to => {
   /* Set document title from route meta */
-
   if (to.meta && to.meta.title) {
     document.title = `${to.meta.title} — ${defaultDocumentTitle}`
   } else {
     document.title = defaultDocumentTitle
   }
 
-  /* Collapse mobile aside menu on route change */
-
-  store.dispatch('asideMobileToggle', false)
-  store.dispatch('asideLgToggle', false)
-
+  /* Full screen mode */
   store.dispatch('fullScreenToggle', !!to.meta.fullScreen)
 })
 
