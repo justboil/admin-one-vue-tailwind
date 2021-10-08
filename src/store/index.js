@@ -18,6 +18,9 @@ export default createStore({
     /* Dark mode */
     darkMode: false,
 
+    /* Field focus with ctrl+k (to register only once) */
+    isFieldFocusRegistered: false,
+
     /* Sample data (commonly used) */
     clients: [],
     history: []

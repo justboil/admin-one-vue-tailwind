@@ -19,6 +19,7 @@
     ></textarea>
     <input
       v-else
+      ref="inputEl"
       v-model="computedValue"
       :name="name"
       :autocomplete="autocomplete"
@@ -37,7 +38,8 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { useStore } from 'vuex'
 import ControlIcon from '@/components/ControlIcon'
 
 export default {
@@ -62,7 +64,8 @@ export default {
       default: ''
     },
     borderless: Boolean,
-    transparent: Boolean
+    transparent: Boolean,
+    ctrlKFocus: Boolean
   },
   emits: ['update:modelValue', 'right-icon-click'],
   setup (props, { emit }) {
@@ -93,11 +96,49 @@ export default {
 
     const controlIconH = computed(() => props.type === 'textarea' ? 'h-full' : 'h-12')
 
+    const store = useStore()
+
+    const inputEl = ref(null)
+
+    if (props.ctrlKFocus) {
+      const fieldFocusHook = e => {
+        if (e.ctrlKey && e.key === 'k') {
+          e.preventDefault()
+          inputEl.value.focus()
+        } else if (e.key === 'Escape') {
+          inputEl.value.blur()
+        }
+      }
+
+      onMounted(() => {
+        if (!store.state.isFieldFocusRegistered) {
+          window.addEventListener('keydown', fieldFocusHook)
+
+          store.commit('basic', {
+            key: 'isFieldFocusRegistered',
+            value: true
+          })
+        } else {
+          console.error('Duplicate field focus event')
+        }
+      })
+
+      onBeforeUnmount(() => {
+        window.removeEventListener('keydown', fieldFocusHook)
+
+        store.commit('basic', {
+          key: 'isFieldFocusRegistered',
+          value: false
+        })
+      })
+    }
+
     return {
       computedValue,
       inputElClass,
       computedType,
-      controlIconH
+      controlIconH,
+      inputEl
     }
   }
 }

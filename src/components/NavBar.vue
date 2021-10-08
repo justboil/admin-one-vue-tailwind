@@ -13,7 +13,7 @@
         <icon :path="mdiMenu" size="24" />
       </nav-bar-item>
       <nav-bar-item>
-        <control placeholder="Search everywhere..." transparent borderless />
+        <nav-bar-search />
       </nav-bar-item>
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
@@ -106,12 +106,12 @@ import NavBarMenu from '@/components/NavBarMenu'
 import NavBarMenuDivider from '@/components/NavBarMenuDivider'
 import UserAvatar from '@/components/UserAvatar'
 import Icon from '@/components/Icon'
-import Control from '@/components/Control'
+import NavBarSearch from '@/components/NavBarSearch'
 
 export default {
   name: 'NavBar',
   components: {
-    Control,
+    NavBarSearch,
     UserAvatar,
     NavBarMenu,
     NavBarItem,
