@@ -1,7 +1,7 @@
 <template>
-  <card-component class="items-center" rounded="">
+  <card-component rounded="">
     <level type="justify-around lg:justify-center">
-      <user-avatar class="lg:mx-12" button/>
+      <user-avatar class="lg:mx-12"/>
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="flex justify-center md:block">
           <check-radio-picker
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { mdiCheckDecagram } from '@mdi/js'
 import Level from '@/components/Level'
@@ -45,10 +45,6 @@ export default {
     const userName = computed(() => store.state.userName)
 
     const userSwitchVal = ref([])
-
-    watch(userSwitchVal, value => {
-      store.dispatch('pushMessage', value && value.indexOf('one') > -1 ? 'Success! Now active' : 'Done! Now inactive')
-    })
 
     return {
       userName,
