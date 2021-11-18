@@ -49,7 +49,7 @@
       </td>
       <td class="actions-cell">
         <jb-buttons type="justify-start lg:justify-end" no-wrap>
-          <jb-button class="mr-3" color="success" :icon="mdiEye" small @click="isModalActive = true" />
+          <jb-button color="success" :icon="mdiEye" small @click="isModalActive = true" />
           <jb-button color="danger" :icon="mdiTrashCan" small @click="isModalDangerActive = true" />
         </jb-buttons>
       </td>
