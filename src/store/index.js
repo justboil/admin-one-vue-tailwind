@@ -48,7 +48,8 @@ export default createStore({
     asideMobileToggle ({ commit, state }, payload = null) {
       const isShow = payload !== null ? payload : !state.isAsideMobileExpanded
 
-      document.getElementById('app').classList[isShow ? 'add' : 'remove']('ml-60')
+      // @todo add lg:ml-0
+      document.getElementById('app').classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
 
       document.documentElement.classList[isShow ? 'add' : 'remove']('m-clipped')
 
