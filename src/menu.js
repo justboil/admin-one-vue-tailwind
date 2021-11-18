@@ -4,7 +4,7 @@ import {
   mdiGithub,
   mdiLock,
   mdiAlertCircle,
-  mdiMonitorClean,
+  mdiMonitorShimmer,
   mdiSquareEditOutline,
   mdiTable,
   mdiViewList,
@@ -78,7 +78,7 @@ export default [
     {
       href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard',
       label: 'Premium version',
-      icon: mdiMonitorClean,
+      icon: mdiMonitorShimmer,
       target: '_blank'
     },
     {
