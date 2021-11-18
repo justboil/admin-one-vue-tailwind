@@ -17,14 +17,14 @@
       </nav-bar-item>
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
-      <nav-bar-item class="items-center flex" @click.prevent="menuNavBarToggle">
+      <nav-bar-item @click.prevent="menuNavBarToggle">
         <icon :path="menuNavBarToggleIcon" size="24" />
       </nav-bar-item>
     </div>
     <div
       class="absolute w-screen top-14 left-0 bg-white shadow
         lg:w-auto lg:items-stretch lg:flex lg:flex-grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
-      :class="{ 'hidden': !isMenuNavBarActive, 'block': isMenuNavBarActive }"
+      :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div
         class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"

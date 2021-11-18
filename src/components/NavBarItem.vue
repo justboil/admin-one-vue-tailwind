@@ -23,8 +23,7 @@ export default {
     activeColor: {
       type: String,
       default: 'text-blue-600'
-    },
-    pX: String
+    }
   },
   setup (props) {
     const is = computed(() => {
@@ -56,9 +55,9 @@ export default {
       }
 
       if (!props.dropdown) {
-        base.push('py-2', props.pX ?? 'px-3')
+        base.push('py-2', 'px-3')
       } else {
-        base.push('p-0', 'lg:py-2', props.pX ?? 'lg:px-3')
+        base.push('p-0', 'lg:py-2', 'lg:px-3')
       }
 
       if (props.hasDivider) {
@@ -73,7 +72,7 @@ export default {
     })
 
     const activeClass = computed(() => {
-      return is.value === 'router-link' ? 'text-blue-500' : null
+      return is.value === 'router-link' ? props.activeColor : null
     })
 
     return { is, componentClass, activeClass }
