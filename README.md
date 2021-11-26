@@ -2,11 +2,12 @@
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.3.0)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-v3/repository-tailwind-vue3.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-v3/repository-tailwind-vue3-vite.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-**Admin One** is simple, beautiful and free Vue.js 3 TailwindCSS admin dashboard
+**Admin One** is simple, beautiful and free Vue.js 3 TailwindCSS admin dashboard.
 
 * Built with **Vue.js 3**, **TailwindCSS** framework & **Composition API** 
+* **Vite** and **Vue CLI** build tools
 * **Dark mode**
 * **Styled** scrollbars
 * SPA with **Vuex** & **Router**
@@ -94,15 +95,25 @@ https://tailwind-vue.justboil.me/
 
 ## Quick Start
 
+Get code & install. Then use either [Vue CLI](#vue-cli-builds) or [Vite](#vite-builds) builds.
+
+* [Get code & install](#get-code--install)
+* [Vue CLI builds](#vue-cli-builds)
+* [Vite builds](#vite-builds)
+
+### Get code & install
+
 #### Get the repo
 
-* [Create new repo](https://github.com/justboil/admin-one-vue-tailwind/generate) from this template
-* &hellip; or clone the repo on GitHub
+* [Create new repo](https://github.com/justboil/admin-one-vue-tailwind/generate) with this template
+* &hellip; or clone this repo on GitHub
 * &hellip; or [download .zip](https://github.com/justboil/admin-one-vue-tailwind/archive/master.zip) from GitHub
 
-#### Project setup
+#### Install
 
 `cd` to project's dir and run `npm install`
+
+### Vue CLI builds
 
 #### Compiles and hot-reloads for development
 ```
@@ -117,6 +128,20 @@ npm run build
 #### Lints and fixes files
 ```
 npm run lint
+```
+
+### Vite builds
+
+[Vite](https://vitejs.dev) is next Generation Frontend Tooling featuring unbundled web-development
+
+#### Compiles and hot-reloads for development
+```
+npm run build
+```
+
+#### Compiles and minifies for production
+```
+npm run build:vite
 ```
 
 ## Browser Support
@@ -147,3 +172,4 @@ The issue list is reserved exclusively for bug reports and feature requests. Tha
 - [JustBoil.me](https://justboil.me/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [Vue.js 3](https://v3.vuejs.org/)
+- [Vite](https://vitejs.dev)
