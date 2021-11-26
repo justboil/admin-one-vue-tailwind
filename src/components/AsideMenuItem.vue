@@ -41,12 +41,12 @@
 <script>
 import { defineAsyncComponent, ref, computed } from 'vue'
 import { mdiMinus, mdiPlus } from '@mdi/js'
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'AsideMenuItem',
   components: {
-    AsideMenuList: defineAsyncComponent(() => import('@/components/AsideMenuList')),
+    AsideMenuList: defineAsyncComponent(() => import('@/components/AsideMenuList.vue')),
     Icon
   },
   emits: ['menu-click'],

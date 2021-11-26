@@ -34,7 +34,7 @@
 <script>
 import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'CardComponent',

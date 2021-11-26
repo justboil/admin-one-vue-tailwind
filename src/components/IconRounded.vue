@@ -5,7 +5,7 @@
 <script>
 import { computed } from 'vue'
 import { colorsText, colorsBg } from '@/colors.js'
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'IconRounded',

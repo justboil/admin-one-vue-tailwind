@@ -40,7 +40,7 @@
 <script>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useStore } from 'vuex'
-import ControlIcon from '@/components/ControlIcon'
+import ControlIcon from '@/components/ControlIcon.vue'
 
 export default {
   name: 'Control',

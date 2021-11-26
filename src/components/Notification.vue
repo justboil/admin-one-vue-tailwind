@@ -26,9 +26,9 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { mdiClose } from '@mdi/js'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
-import Level from '@/components/Level'
-import Icon from '@/components/Icon'
-import JbButton from '@/components/JbButton'
+import Level from '@/components/Level.vue'
+import Icon from '@/components/Icon.vue'
+import JbButton from '@/components/JbButton.vue'
 
 export default {
   name: 'Notification',

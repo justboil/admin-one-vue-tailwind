@@ -34,9 +34,9 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { mdiMenu } from '@mdi/js'
-import AsideMenuList from '@/components/AsideMenuList'
-import NavBarItem from '@/components/NavBarItem'
-import Icon from '@/components/Icon'
+import AsideMenuList from '@/components/AsideMenuList.vue'
+import NavBarItem from '@/components/NavBarItem.vue'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'AsideMenu',

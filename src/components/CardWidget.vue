@@ -29,12 +29,12 @@
 import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import CardComponent from '@/components/CardComponent'
-import GrowingNumber from '@/components/GrowingNumber'
-import Icon from '@/components/Icon'
-import Level from '@/components/Level'
-import TrendPill from '@/components/TrendPill'
-import JbButton from '@/components/JbButton'
+import CardComponent from '@/components/CardComponent.vue'
+import GrowingNumber from '@/components/GrowingNumber.vue'
+import Icon from '@/components/Icon.vue'
+import Level from '@/components/Level.vue'
+import TrendPill from '@/components/TrendPill.vue'
+import JbButton from '@/components/JbButton.vue'
 
 export default {
   name: 'CardWidget',

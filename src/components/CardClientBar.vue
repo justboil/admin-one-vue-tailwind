@@ -16,10 +16,10 @@
 <script>
 import { computed } from 'vue'
 import { mdiTrendingDown, mdiTrendingUp, mdiTrendingNeutral } from '@mdi/js'
-import CardComponent from '@/components/CardComponent'
-import Level from '@/components/Level'
-import Pill from '@/components/Pill'
-import UserAvatar from '@/components/UserAvatar'
+import CardComponent from '@/components/CardComponent.vue'
+import Level from '@/components/Level.vue'
+import Pill from '@/components/Pill.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
 
 export default {
   name: 'CardClientBar',

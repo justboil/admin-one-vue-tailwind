@@ -24,11 +24,11 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import { mdiCheckDecagram } from '@mdi/js'
-import Level from '@/components/Level'
-import UserAvatar from '@/components/UserAvatar'
-import CardComponent from '@/components/CardComponent'
-import CheckRadioPicker from '@/components/CheckRadioPicker'
-import Pill from '@/components/Pill'
+import Level from '@/components/Level.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import Pill from '@/components/Pill.vue'
 
 export default {
   name: 'UserCard',

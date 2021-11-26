@@ -57,11 +57,11 @@
 
 <script>
 import { ref } from 'vue'
-import TitleBar from '@/components/TitleBar'
-import HeroBar from '@/components/HeroBar'
-import TitledSection from '@/components/TitledSection'
-import MainSection from '@/components/MainSection'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
+import TitleBar from '@/components/TitleBar.vue'
+import HeroBar from '@/components/HeroBar.vue'
+import TitledSection from '@/components/TitledSection.vue'
+import MainSection from '@/components/MainSection.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
 
 export default {
   name: 'Responsive',

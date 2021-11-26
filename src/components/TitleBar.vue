@@ -23,8 +23,8 @@
 
 <script>
 import { mdiGithub } from '@mdi/js'
-import Level from '@/components/Level'
-import JbButton from '@/components/JbButton'
+import Level from '@/components/Level.vue'
+import JbButton from '@/components/JbButton.vue'
 
 export default {
   name: 'TitleBar',

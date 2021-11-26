@@ -7,7 +7,7 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import MainSection from '@/components/MainSection'
+import MainSection from '@/components/MainSection.vue'
 
 export default {
   name: 'FullScreenSection',

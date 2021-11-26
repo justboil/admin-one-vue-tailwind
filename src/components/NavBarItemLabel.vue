@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'NavBarItemLabel',

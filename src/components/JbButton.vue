@@ -9,7 +9,7 @@
 import { mdiMenuUp } from '@mdi/js'
 import { computed } from 'vue'
 import { colorsButtons, colorsButtonsOutline } from '@/colors.js'
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'JbButton',

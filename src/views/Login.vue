@@ -26,14 +26,14 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection'
-import CardComponent from '@/components/CardComponent'
-import CheckRadioPicker from '@/components/CheckRadioPicker'
-import Field from '@/components/Field'
-import Control from '@/components/Control'
+import FullScreenSection from '@/components/FullScreenSection.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import Field from '@/components/Field.vue'
+import Control from '@/components/Control.vue'
 import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton'
-import JbButtons from '@/components/JbButtons'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
 
 export default {
   name: 'Login',

@@ -24,7 +24,7 @@
 <script>
 import { ref } from 'vue'
 import { mdiUpload } from '@mdi/js'
-import JbButton from '@/components/JbButton'
+import JbButton from '@/components/JbButton.vue'
 
 export default {
   name: 'FilePicker',

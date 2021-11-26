@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import FullScreenSection from '@/components/FullScreenSection'
-import CardComponent from '@/components/CardComponent'
+import FullScreenSection from '@/components/FullScreenSection.vue'
+import CardComponent from '@/components/CardComponent.vue'
 import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton'
-import JbButtons from '@/components/JbButtons'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
 
 export default {
   name: 'Error',

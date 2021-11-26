@@ -5,7 +5,7 @@
 <script>
 import { computed } from 'vue'
 import { mdiChevronUp, mdiChevronDown, mdiAlertCircleOutline } from '@mdi/js'
-import Pill from '@/components/Pill'
+import Pill from '@/components/Pill.vue'
 
 export default {
   name: 'CardWidget',

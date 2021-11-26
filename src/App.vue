@@ -11,10 +11,10 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import menu from '@/menu.js'
-import NavBar from '@/components/NavBar'
-import AsideMenu from '@/components/AsideMenu'
-import FooterBar from '@/components/FooterBar'
-import Overlay from '@/components/Overlay'
+import NavBar from '@/components/NavBar.vue'
+import AsideMenu from '@/components/AsideMenu.vue'
+import FooterBar from '@/components/FooterBar.vue'
+import Overlay from '@/components/Overlay.vue'
 
 export default {
   name: 'Home',

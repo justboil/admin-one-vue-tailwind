@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home'
+import Home from '@/views/Home.vue'
 
 const routes = [
   {
@@ -21,7 +21,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "tables" */ '../views/Tables')
+    component: () => import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
   },
   {
     meta: {
@@ -29,7 +29,7 @@ const routes = [
     },
     path: '/forms',
     name: 'forms',
-    component: () => import(/* webpackChunkName: "forms" */ '../views/Forms')
+    component: () => import(/* webpackChunkName: "forms" */ '@/views/Forms.vue')
   },
   {
     meta: {
@@ -37,7 +37,7 @@ const routes = [
     },
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile')
+    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
   },
   {
     meta: {
@@ -45,7 +45,7 @@ const routes = [
     },
     path: '/ui',
     name: 'ui',
-    component: () => import(/* webpackChunkName: "ui" */ '../views/Ui')
+    component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
   },
   {
     meta: {
@@ -53,7 +53,7 @@ const routes = [
     },
     path: '/responsive',
     name: 'responsive',
-    component: () => import(/* webpackChunkName: "responsive" */ '../views/Responsive')
+    component: () => import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
   },
   {
     meta: {
@@ -62,7 +62,7 @@ const routes = [
     },
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login')
+    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   },
   {
     meta: {
@@ -71,7 +71,7 @@ const routes = [
     },
     path: '/error',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */ '../views/Error')
+    component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
 

@@ -25,11 +25,11 @@
 <script>
 import { computed } from 'vue'
 import { mdiClose } from '@mdi/js'
-import JbButton from '@/components/JbButton'
-import JbButtons from '@/components/JbButtons'
-import CardComponent from '@/components/CardComponent'
-import Divider from '@/components/Divider'
-import Overlay from '@/components/Overlay'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import Divider from '@/components/Divider.vue'
+import Overlay from '@/components/Overlay.vue'
 
 export default {
   name: 'ModalBox',

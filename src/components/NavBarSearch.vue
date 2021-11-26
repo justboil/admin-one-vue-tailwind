@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Control from '@/components/Control'
+import Control from '@/components/Control.vue'
 
 export default {
   name: 'NavBarSearch',

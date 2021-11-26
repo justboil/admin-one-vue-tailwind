@@ -35,14 +35,14 @@
 <script>
 import { ref } from 'vue'
 import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
-import MainSection from '@/components/MainSection'
-import Notification from '@/components/Notification'
-import ClientsTable from '@/components/ClientsTable'
-import CardComponent from '@/components/CardComponent'
-import TitleBar from '@/components/TitleBar'
-import HeroBar from '@/components/HeroBar'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection'
-import TitleSubBar from '@/components/TitleSubBar'
+import MainSection from '@/components/MainSection.vue'
+import Notification from '@/components/Notification.vue'
+import ClientsTable from '@/components/ClientsTable.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import TitleBar from '@/components/TitleBar.vue'
+import HeroBar from '@/components/HeroBar.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import TitleSubBar from '@/components/TitleSubBar.vue'
 
 export default {
   name: 'Tables',

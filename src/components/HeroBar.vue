@@ -18,8 +18,8 @@
 import { mdiThemeLightDark } from '@mdi/js'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import Level from '@/components/Level'
-import JbButton from '@/components/JbButton'
+import Level from '@/components/Level.vue'
+import JbButton from '@/components/JbButton.vue'
 
 export default {
   name: 'HeroBar',

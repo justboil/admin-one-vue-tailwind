@@ -17,8 +17,8 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import Level from '@/components/Level'
-import JbLogo from '@/components/JbLogo'
+import Level from '@/components/Level.vue'
+import JbLogo from '@/components/JbLogo.vue'
 
 export default {
   name: 'FooterBar',

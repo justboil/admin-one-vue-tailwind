@@ -32,8 +32,8 @@
 <script>
 import { useRouter } from 'vue-router'
 import { mdiGithub } from '@mdi/js'
-import TitledSection from '@/components/TitledSection'
-import Icon from '@/components/Icon'
+import TitledSection from '@/components/TitledSection.vue'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'BottomOtherPagesSection',

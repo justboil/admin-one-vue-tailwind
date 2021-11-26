@@ -100,13 +100,13 @@ import {
   mdiGithub,
   mdiThemeLightDark
 } from '@mdi/js'
-import NavBarItem from '@/components/NavBarItem'
-import NavBarItemLabel from '@/components/NavBarItemLabel'
-import NavBarMenu from '@/components/NavBarMenu'
-import NavBarMenuDivider from '@/components/NavBarMenuDivider'
-import UserAvatar from '@/components/UserAvatar'
-import Icon from '@/components/Icon'
-import NavBarSearch from '@/components/NavBarSearch'
+import NavBarItem from '@/components/NavBarItem.vue'
+import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
+import NavBarMenu from '@/components/NavBarMenu.vue'
+import NavBarMenuDivider from '@/components/NavBarMenuDivider.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
+import Icon from '@/components/Icon.vue'
+import NavBarSearch from '@/components/NavBarSearch.vue'
 
 export default {
   name: 'NavBar',
