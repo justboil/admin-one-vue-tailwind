@@ -18,14 +18,14 @@ if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-sch
   store.dispatch('darkMode')
 }
 
+/* Default title tag */
+const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+
 /* Collapse mobile aside menu on route change */
 router.beforeEach(to => {
   store.dispatch('asideMobileToggle', false)
   store.dispatch('asideLgToggle', false)
 })
-
-/* Default title tag */
-const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 
 router.afterEach(to => {
   /* Set document title from route meta */
