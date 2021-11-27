@@ -81,7 +81,7 @@ export default {
       ]
 
       if (props.disabled) {
-        base.push('cursor-not-allowed', props.outline ? 'opacity-40' : 'opacity-60')
+        base.push('cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')
       }
 
       return base
