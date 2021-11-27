@@ -27,7 +27,7 @@ export default {
   },
   setup (props) {
     const iconStyle = computed(
-      () => props.bg ? colorsBg[props.type] : [...colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
+      () => props.bg ? colorsBg[props.type] : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
     )
 
     return {

@@ -48,7 +48,7 @@ export default {
   setup (props, { slots }) {
     const componentClass = computed(() => props.outline
       ? colorsOutline[props.color]
-      : [...colorsBg[props.color], ...colorsBorders[props.color]])
+      : [colorsBg[props.color], colorsBorders[props.color]])
 
     const isDismissed = ref(false)
 

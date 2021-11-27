@@ -27,14 +27,12 @@ export default {
   },
   setup (props) {
     const componentClass = computed(() => {
-      const base = [
-        'border',
-        props.small ? 'py-0.5 px-2 text-xs rounded-lg mr-1.5' : 'py-2 px-4 rounded-2xl mr-3'
-      ]
+      const baseColor = props.outline ? colorsOutline[props.type] : [colorsBg[props.type], colorsBorders[props.type]]
 
       return [
-        ...base,
-        props.outline ? colorsOutline[props.type] : [...colorsBg[props.type], colorsBorders[props.type]]
+        'border',
+        props.small ? 'py-0.5 px-2 text-xs rounded-lg mr-1.5' : 'py-2 px-4 rounded-2xl mr-3',
+        ...baseColor
       ]
     })
 
