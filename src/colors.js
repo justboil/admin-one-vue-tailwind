@@ -7,6 +7,15 @@ export const colorsBg = {
   info: ['bg-blue-500 text-white']
 }
 
+export const colorsBgHover = {
+  white: ['hover:bg-gray-50'],
+  light: ['hover:bg-gray-200'],
+  success: ['hover:bg-green-600'],
+  danger: ['hover:bg-red-600'],
+  warning: ['hover:bg-yellow-600'],
+  info: ['hover:bg-blue-600']
+}
+
 export const colorsBorders = {
   white: ['border-gray-300'],
   light: ['border-gray-200 dark:border-gray-400'],
@@ -34,20 +43,28 @@ export const colorsOutline = {
   info: [...colorsText.info, ...colorsBorders.info]
 }
 
-export const colorsButtons = {
-  white: ['hover:bg-gray-50', ...colorsBg.white, ...colorsBorders.white],
-  light: ['hover:bg-gray-200', ...colorsBg.light, ...colorsBorders.light],
-  success: ['hover:bg-green-600', ...colorsBg.success, ...colorsBorders.success],
-  danger: ['hover:bg-red-600', ...colorsBg.danger, ...colorsBorders.danger],
-  warning: ['hover:bg-yellow-600', ...colorsBg.warning, ...colorsBorders.warning],
-  info: ['hover:bg-blue-600', ...colorsBg.info, ...colorsBorders.info]
+export const colorsOutlineHover = {
+  white: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900'],
+  light: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900'],
+  success: ['hover:bg-green-500 hover:text-white'],
+  danger: ['hover:bg-red-500 hover:text-white'],
+  warning: ['hover:bg-yellow-500 hover:text-white'],
+  info: ['hover:bg-blue-500 hover:text-white']
 }
 
-export const colorsButtonsOutline = {
-  white: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900', ...colorsText.white, ...colorsBorders.white],
-  light: ['hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900', ...colorsText.light, ...colorsBorders.light],
-  success: ['hover:bg-green-500 hover:text-white', ...colorsText.success, ...colorsBorders.success],
-  danger: ['hover:bg-red-500 hover:text-white', ...colorsText.danger, ...colorsBorders.danger],
-  warning: ['hover:bg-yellow-500 hover:text-white', ...colorsText.warning, ...colorsBorders.warning],
-  info: ['hover:bg-blue-500 hover:text-white', ...colorsText.info, ...colorsBorders.info]
+export const getButtonColor = (color, isOutlined, hasHover) => {
+  const baseColor = isOutlined ? colorsText[color] : colorsBg[color]
+
+  const base = [
+    ...baseColor,
+    ...colorsBorders[color]
+  ]
+
+  if (hasHover) {
+    const hoverColor = isOutlined ? colorsOutlineHover[color] : colorsBgHover[color]
+
+    base.push(...hoverColor)
+  }
+
+  return base
 }

@@ -175,7 +175,7 @@
         <jb-button color="info" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="success" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
         <jb-button color="warning" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="danger" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
+        <jb-button color="danger" label="Button" :small="buttonsSmall" :outline="buttonsOutline" disabled/>
       </jb-buttons>
 
       <divider />

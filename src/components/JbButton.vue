@@ -1,5 +1,5 @@
 <template>
-  <component :is="is" :class="componentClass" :href="href" :type="computedType" :to="to" :target="target">
+  <component :is="is" :class="componentClass" :href="href" :type="computedType" :to="to" :target="target" :disabled="disabled">
     <icon v-if="icon" :path="icon" />
     <span v-if="label" :class="labelClass">{{ label }}</span>
   </component>
@@ -8,7 +8,7 @@
 <script>
 import { mdiMenuUp } from '@mdi/js'
 import { computed } from 'vue'
-import { colorsButtons, colorsButtonsOutline } from '@/colors.js'
+import { getButtonColor } from '@/colors.js'
 import Icon from '@/components/Icon.vue'
 
 export default {
@@ -30,6 +30,7 @@ export default {
     small: Boolean,
     outline: Boolean,
     active: Boolean,
+    disabled: Boolean,
     as: String
   },
   setup (props) {
@@ -76,8 +77,12 @@ export default {
         'rounded',
         props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
         props.small ? 'p-1' : 'p-2',
-        props.outline ? colorsButtonsOutline[props.color] : colorsButtons[props.color]
+        getButtonColor(props.color, props.outline, !props.disabled)
       ]
+
+      if (props.disabled) {
+        base.push('cursor-not-allowed', props.outline ? 'opacity-40' : 'opacity-60')
+      }
 
       return base
     })
