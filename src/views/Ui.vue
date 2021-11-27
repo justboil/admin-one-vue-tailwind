@@ -163,41 +163,41 @@
           name="buttons-switch"
           type="switch"
           v-model="buttonSettingsModel"
-          :options="{ outline: 'Outline', small: 'Small' }"
+          :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
         ></check-radio-picker>
       </field>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="light" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="info" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="success" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="warning" label="Button" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="danger" label="Button" :small="buttonsSmall" :outline="buttonsOutline" disabled/>
+        <jb-button color="white" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="light" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="info" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="success" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="warning" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="danger" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
       </jb-buttons>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="light" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="info" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="success" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="warning" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="danger" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
+        <jb-button color="white" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="light" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="info" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="success" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="warning" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="danger" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
       </jb-buttons>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="light" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="info" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="success" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="warning" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
-        <jb-button color="danger" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline"/>
+        <jb-button color="white" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="light" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="info" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="success" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="warning" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button color="danger" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
       </jb-buttons>
     </card-component>
   </main-section>
@@ -293,6 +293,8 @@ export default {
 
     const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
 
+    const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
+
     const store = useStore()
 
     const darkModeToggle = () => {
@@ -309,6 +311,7 @@ export default {
       buttonSettingsModel,
       buttonsOutline,
       buttonsSmall,
+      buttonsDisabled,
       darkModeToggle,
       mdiMonitorCellphone,
       mdiSelectColor,
