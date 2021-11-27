@@ -12,7 +12,9 @@ store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
 /* Dark mode */
-if (localStorage.getItem(darkModeKey)) {
+const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
+
+if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorageDarkModeValue === '1') {
   store.dispatch('darkMode')
 }
 

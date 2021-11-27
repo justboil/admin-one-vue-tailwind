@@ -74,11 +74,7 @@ export default createStore({
 
       document.documentElement.classList[value ? 'add' : 'remove']('dark')
 
-      if (value) {
-        localStorage.setItem(darkModeKey, '1')
-      } else {
-        localStorage.removeItem(darkModeKey)
-      }
+      localStorage.setItem(darkModeKey, value ? '1' : '0')
 
       commit('basic', {
         key: 'darkMode',
