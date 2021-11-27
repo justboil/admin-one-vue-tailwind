@@ -1,8 +1,8 @@
 <template>
   <component
-    :is="form ? 'form' : 'div'"
+    :is="is"
+    :class="componentClass"
     class="bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-900"
-    :class="[rounded]"
     @submit="submit"
   >
     <header
@@ -46,6 +46,7 @@ export default {
     hasTable: Boolean,
     empty: Boolean,
     form: Boolean,
+    hoverable: Boolean,
     rounded: {
       type: String,
       default: 'md:rounded'
@@ -53,25 +54,35 @@ export default {
   },
   emits: ['header-icon-click', 'submit'],
   setup (props, { emit }) {
+    const is = computed(() => props.form ? 'form' : 'div')
+
+    const componentClass = computed(() => {
+      const base = [
+        props.rounded
+      ]
+
+      if (props.hoverable) {
+        base.push('hover:shadow-lg transition-shadow duration-500')
+      }
+
+      return base
+    })
+
     const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
 
     const headerIconClick = () => {
       emit('header-icon-click')
     }
 
-    // const headerFooterBorder = 'border-gray-100 dark:border-gray-700'
-
-    // const headerBorder = 'border-b'
-
     const submit = e => {
       emit('submit', e)
     }
 
     return {
+      is,
+      componentClass,
       computedHeaderIcon,
       headerIconClick,
-      // headerFooterBorder,
-      // headerBorder,
       submit
     }
   }
