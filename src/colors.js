@@ -55,7 +55,6 @@ export const colorsOutlineHover = {
 export const getButtonColor = (color, isOutlined, hasHover) => {
   const base = [
     isOutlined ? colorsText[color] : colorsBg[color],
-    isOutlined ? colorsOutlineHover[color] : colorsBgHover[color],
     colorsBorders[color]
   ]
 
