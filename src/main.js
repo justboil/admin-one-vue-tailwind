@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import { darkModeKey } from '@/config.js'
 
 import './css/main.css'
 
@@ -11,7 +12,9 @@ store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
 /* Dark mode */
-// store.dispatch('darkMode')
+if (localStorage.getItem(darkModeKey)) {
+  store.dispatch('darkMode')
+}
 
 /* Collapse mobile aside menu on route change */
 router.beforeEach(to => {

@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import { darkModeKey } from '@/config.js'
 
 export default createStore({
   state: {
@@ -73,6 +74,12 @@ export default createStore({
       const value = !state.darkMode
 
       document.documentElement.classList[value ? 'add' : 'remove']('dark')
+
+      if (value) {
+        localStorage.setItem(darkModeKey, '1')
+      } else {
+        localStorage.removeItem(darkModeKey)
+      }
 
       commit('basic', {
         key: 'darkMode',
