@@ -3,14 +3,14 @@
     <label class="inline-flex">
       <jb-button
         as="a"
-        label="Upload"
-        :icon="mdiUpload"
-        color="info"
+        :label="label"
+        :icon="icon"
+        :color="color"
         :class="{ 'rounded-r-none': file }"
       />
       <input
         type="file"
-        ref="input"
+        ref="root"
         class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
         :accept="accept"
         @input="upload">
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { mdiUpload } from '@mdi/js'
+import { computed, ref, watch } from 'vue'
 import JbButton from '@/components/JbButton.vue'
 
 export default {
@@ -33,39 +33,58 @@ export default {
   },
   props: {
     modelValue: [Object, File, Array],
-    label: String,
-    icon: String,
+    label: {
+      type: String,
+      default: 'Upload'
+    },
+    icon: {
+      type: String,
+      default: mdiUpload
+    },
     accept: {
       type: String,
       default: null
+    },
+    color: {
+      type: String,
+      default: 'info'
     }
   },
   emits: ['update:modelValue'],
-  setup (props) {
+  setup (props, { emit }) {
+    const root = ref(null)
+
     const file = ref(props.modelValue)
 
-    return {
-      file,
-      mdiUpload
-    }
-  },
-  methods: {
-    upload (event) {
+    const modelValueProp = computed(() => props.modelValue)
+
+    watch(modelValueProp, value => {
+      file.value = value
+
+      if (!value) {
+        root.value.input.value = null
+      }
+    })
+
+    const upload = event => {
       const value = event.target.files || event.dataTransfer.files
 
-      this.file = value[0]
-      this.$emit('update:modelValue', this.file)
+      file.value = value[0]
+
+      emit('update:modelValue', file.value)
 
       // Use this as an example for handling file uploads
       // let formData = new FormData()
-      // formData.append('file', this.file)
+      // formData.append('file', file.value)
+
+      // const mediaStoreRoute = `/your-route/`
 
       // axios
-      //   .post(window.routeMediaStore, formData, {
+      //   .post(mediaStoreRoute, formData, {
       //     headers: {
       //       'Content-Type': 'multipart/form-data'
       //     },
-      //     onUploadProgress: this.progressEvent
+      //     onUploadProgress: progressEvent
       //   })
       //   .then(r => {
       //
@@ -73,20 +92,20 @@ export default {
       //   .catch(err => {
       //
       //   })
-    }//,
-    // progressEvent (progressEvent) {
-    //   this.uploadPercent = Math.round(
+    }
+
+    // const uploadPercent = ref(0)
+    //
+    // const progressEvent = progressEvent => {
+    //   uploadPercent.value = Math.round(
     //     (progressEvent.loaded * 100) / progressEvent.total
     //   )
     // }
-  },
-  watch: {
-    modelValue (value) {
-      this.file = value
 
-      if (!value) {
-        this.$refs.input.value = null
-      }
+    return {
+      root,
+      file,
+      upload
     }
   }
 }
