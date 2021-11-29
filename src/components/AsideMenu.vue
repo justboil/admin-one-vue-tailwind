@@ -1,3 +1,35 @@
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import { mdiMenu } from '@mdi/js'
+import AsideMenuList from '@/components/AsideMenuList.vue'
+import NavBarItem from '@/components/NavBarItem.vue'
+import Icon from '@/components/Icon.vue'
+
+const props = defineProps({
+  menu: {
+    type: Array,
+    default: () => []
+  }
+})
+
+const store = useStore()
+
+const isFullScreen = computed(() => store.state.isFullScreen)
+
+const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
+
+const isAsideLgActive = computed(() => store.state.isAsideLgActive)
+
+const asideLgClose = () => {
+  store.dispatch('asideLgToggle', false)
+}
+
+const menuClick = (event, item) => {
+  //
+}
+</script>
+
 <template>
   <aside
     v-show="!isFullScreen"
@@ -42,49 +74,3 @@
     </div>
   </aside>
 </template>
-
-<script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import { mdiMenu } from '@mdi/js'
-import AsideMenuList from '@/components/AsideMenuList.vue'
-import NavBarItem from '@/components/NavBarItem.vue'
-import Icon from '@/components/Icon.vue'
-
-export default {
-  name: 'AsideMenu',
-  components: { AsideMenuList, NavBarItem, Icon },
-  props: {
-    menu: {
-      type: Array,
-      default: () => []
-    }
-  },
-  setup () {
-    const store = useStore()
-
-    const isFullScreen = computed(() => store.state.isFullScreen)
-
-    const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
-
-    const isAsideLgActive = computed(() => store.state.isAsideLgActive)
-
-    const asideLgClose = () => {
-      store.dispatch('asideLgToggle', false)
-    }
-
-    const menuClick = (event, item) => {
-      //
-    }
-
-    return {
-      isFullScreen,
-      isAsideMobileExpanded,
-      isAsideLgActive,
-      asideLgClose,
-      menuClick,
-      mdiMenu
-    }
-  }
-}
-</script>

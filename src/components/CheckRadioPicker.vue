@@ -1,3 +1,38 @@
+<script setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  options: {
+    type: Object,
+    default: () => {}
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    default: 'checkbox'
+  },
+  column: Boolean,
+  modelValue: {
+    type: [Object, Array, String, Number],
+    default: null
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const computedValue = computed({
+  get: () => props.modelValue,
+  set: value => {
+    emit('update:modelValue', value)
+  }
+})
+
+const inputType = computed(() => props.type === 'radio' ? 'radio' : 'checkbox')
+</script>
+
 <template>
   <div
     class="flex justify-start flex-wrap -mb-3"
@@ -20,46 +55,3 @@
     </label>
   </div>
 </template>
-
-<script>
-import { computed } from 'vue'
-
-export default {
-  name: 'CheckRadioPicker',
-  props: {
-    options: {
-      type: Object,
-      default: () => {}
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    type: {
-      type: String,
-      default: 'checkbox'
-    },
-    column: Boolean,
-    modelValue: {
-      type: [Object, Array],
-      default: null
-    }
-  },
-  emits: ['update:modelValue'],
-  setup (props, { emit }) {
-    const computedValue = computed({
-      get: () => props.modelValue,
-      set: value => {
-        emit('update:modelValue', value)
-      }
-    })
-
-    const inputType = computed(() => props.type === 'radio' ? 'radio' : 'checkbox')
-
-    return {
-      computedValue,
-      inputType
-    }
-  }
-}
-</script>

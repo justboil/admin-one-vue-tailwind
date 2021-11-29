@@ -1,3 +1,33 @@
+<script setup>
+import { computed } from 'vue'
+import { colorsText, colorsBg } from '@/colors.js'
+import Icon from '@/components/Icon.vue'
+
+const props = defineProps({
+  icon: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  w: {
+    type: String,
+    default: 'w-12'
+  },
+  h: {
+    type: String,
+    default: 'h-12'
+  },
+  bg: Boolean,
+})
+
+const iconStyle = computed(
+  () => props.bg ? colorsBg[props.type] : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
+)
+</script>
+
 <template>
   <icon
     :path="icon"
@@ -8,44 +38,3 @@
     :class="iconStyle"
   />
 </template>
-
-<script>
-import { computed } from 'vue'
-import { colorsText, colorsBg } from '@/colors.js'
-import Icon from '@/components/Icon.vue'
-
-export default {
-  name: 'IconRounded',
-  components: {
-    Icon
-  },
-  props: {
-    icon: {
-      type: String,
-      default: null
-    },
-    type: {
-      type: String,
-      default: null
-    },
-    bg: Boolean,
-    w: {
-      type: String,
-      default: 'w-12'
-    },
-    h: {
-      type: String,
-      default: 'h-12'
-    }
-  },
-  setup (props) {
-    const iconStyle = computed(
-      () => props.bg ? colorsBg[props.type] : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
-    )
-
-    return {
-      iconStyle
-    }
-  }
-}
-</script>

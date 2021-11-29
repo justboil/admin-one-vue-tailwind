@@ -1,3 +1,20 @@
+<script setup>
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import { mdiCheckDecagram } from '@mdi/js'
+import Level from '@/components/Level.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import Pill from '@/components/Pill.vue'
+
+const store = useStore()
+
+const userName = computed(() => store.state.userName)
+
+const userSwitchVal = ref([])
+</script>
+
 <template>
   <card-component rounded="">
     <level type="justify-around lg:justify-center">
@@ -26,38 +43,3 @@
     </level>
   </card-component>
 </template>
-
-<script>
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
-import { mdiCheckDecagram } from '@mdi/js'
-import Level from '@/components/Level.vue'
-import UserAvatar from '@/components/UserAvatar.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import Pill from '@/components/Pill.vue'
-
-export default {
-  name: 'UserCard',
-  components: {
-    Level,
-    UserAvatar,
-    CardComponent,
-    CheckRadioPicker,
-    Pill
-  },
-  setup () {
-    const store = useStore()
-
-    const userName = computed(() => store.state.userName)
-
-    const userSwitchVal = ref([])
-
-    return {
-      userName,
-      userSwitchVal,
-      mdiCheckDecagram
-    }
-  }
-}
-</script>

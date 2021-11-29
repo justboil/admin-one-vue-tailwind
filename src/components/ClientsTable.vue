@@ -1,3 +1,73 @@
+<script setup>
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
+import { mdiEye, mdiTrashCan } from '@mdi/js'
+import ModalBox from '@/components/ModalBox.vue'
+import CheckboxCell from '@/components/CheckboxCell.vue'
+import Level from '@/components/Level.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import JbButton from '@/components/JbButton.vue'
+import UserAvatar from '@/components/UserAvatar.vue'
+
+const props = defineProps({
+  checkable: Boolean
+})
+
+const store = useStore()
+
+const darkMode = computed(() => store.state.darkMode)
+
+const items = computed(() => store.state.clients)
+
+const isModalActive = ref(false)
+
+const isModalDangerActive = ref(false)
+
+const perPage = ref(10)
+
+const currentPage = ref(0)
+
+const checkedRows = ref([])
+
+const itemsPaginated = computed(
+  () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+)
+
+const numPages = computed(() => Math.ceil(items.value.length / perPage.value))
+
+const currentPageHuman = computed(() => currentPage.value + 1)
+
+const pagesList = computed(() => {
+  const pagesList = []
+
+  for (let i = 0; i < numPages.value; i++) {
+    pagesList.push(i)
+  }
+
+  return pagesList
+})
+
+const remove = (arr, cb) => {
+  const newArr = []
+
+  arr.forEach(item => {
+    if (!cb(item)) {
+      newArr.push(item)
+    }
+  })
+
+  return newArr
+}
+
+const checked = (isChecked, client) => {
+  if (isChecked) {
+    checkedRows.value.push(client)
+  } else {
+    checkedRows.value = remove(checkedRows.value, row => row.id === client.id)
+  }
+}
+</script>
+
 <template>
   <modal-box
     v-model="isModalActive"
@@ -123,100 +193,3 @@
     </level>
   </div>
 </template>
-
-<script>
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
-import ModalBox from '@/components/ModalBox.vue'
-import CheckboxCell from '@/components/CheckboxCell.vue'
-import Level from '@/components/Level.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import JbButton from '@/components/JbButton.vue'
-import UserAvatar from '@/components/UserAvatar.vue'
-
-export default {
-  name: 'ClientsTable',
-  components: {
-    ModalBox,
-    CheckboxCell,
-    Level,
-    JbButtons,
-    JbButton,
-    UserAvatar
-  },
-  props: {
-    checkable: Boolean
-  },
-  setup () {
-    const store = useStore()
-
-    const darkMode = computed(() => store.state.darkMode)
-
-    const items = computed(() => store.state.clients)
-
-    const isModalActive = ref(false)
-
-    const isModalDangerActive = ref(false)
-
-    const perPage = ref(10)
-
-    const currentPage = ref(0)
-
-    const checkedRows = ref([])
-
-    const itemsPaginated = computed(
-      () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
-    )
-
-    const numPages = computed(() => Math.ceil(items.value.length / perPage.value))
-
-    const currentPageHuman = computed(() => currentPage.value + 1)
-
-    const pagesList = computed(() => {
-      const pagesList = []
-
-      for (let i = 0; i < numPages.value; i++) {
-        pagesList.push(i)
-      }
-
-      return pagesList
-    })
-
-    const remove = (arr, cb) => {
-      const newArr = []
-
-      arr.forEach(item => {
-        if (!cb(item)) {
-          newArr.push(item)
-        }
-      })
-
-      return newArr
-    }
-
-    const checked = (isChecked, client) => {
-      if (isChecked) {
-        checkedRows.value.push(client)
-      } else {
-        checkedRows.value = remove(checkedRows.value, row => row.id === client.id)
-      }
-    }
-
-    return {
-      darkMode,
-      isModalActive,
-      isModalDangerActive,
-      currentPage,
-      currentPageHuman,
-      numPages,
-      checkedRows,
-      itemsPaginated,
-      pagesList,
-      checked,
-      mdiEye,
-      mdiTrashCan
-    }
-  }
-}
-</script>

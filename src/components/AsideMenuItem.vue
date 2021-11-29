@@ -1,3 +1,46 @@
+<script setup>
+import { ref, computed } from 'vue'
+import { mdiMinus, mdiPlus } from '@mdi/js'
+import Icon from '@/components/Icon.vue'
+import AsideMenuList from '@/components/AsideMenuList'
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true
+  },
+  isSubmenuList: Boolean
+})
+
+const emit = defineEmits(['menu-click'])
+
+const isDropdownActive = ref(false)
+
+const componentIs = computed(() => props.item.to ? 'router-link' : 'a')
+
+const hasDropdown = computed(() => !!props.item.menu)
+
+const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
+
+const itemTo = computed(() => props.item.to || null)
+
+const itemHref = computed(() => props.item.href || null)
+
+const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
+
+const menuClick = event => {
+  emit('menu-click', event, props.item)
+
+  if (hasDropdown.value) {
+    isDropdownActive.value = !isDropdownActive.value
+  }
+}
+
+const styleActive = 'font-bold text-white'
+
+const styleInactive = 'text-gray-300'
+</script>
+
 <template>
   <li>
     <component
@@ -37,65 +80,3 @@
     />
   </li>
 </template>
-
-<script>
-import { defineAsyncComponent, ref, computed } from 'vue'
-import { mdiMinus, mdiPlus } from '@mdi/js'
-import Icon from '@/components/Icon.vue'
-
-export default {
-  name: 'AsideMenuItem',
-  components: {
-    AsideMenuList: defineAsyncComponent(() => import('@/components/AsideMenuList.vue')),
-    Icon
-  },
-  props: {
-    item: {
-      type: Object,
-      required: true
-    },
-    isSubmenuList: Boolean
-  },
-  emits: ['menu-click'],
-  setup (props, { emit }) {
-    const isDropdownActive = ref(false)
-
-    const componentIs = computed(() => props.item.to ? 'router-link' : 'a')
-
-    const hasDropdown = computed(() => !!props.item.menu)
-
-    const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
-
-    const itemTo = computed(() => props.item.to || null)
-
-    const itemHref = computed(() => props.item.href || null)
-
-    const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
-
-    const menuClick = event => {
-      emit('menu-click', event, props.item)
-
-      if (hasDropdown.value) {
-        isDropdownActive.value = !isDropdownActive.value
-      }
-    }
-
-    const styleActive = 'font-bold text-white'
-
-    const styleInactive = 'text-gray-300'
-
-    return {
-      isDropdownActive,
-      componentIs,
-      hasDropdown,
-      dropdownIcon,
-      itemTo,
-      itemHref,
-      itemTarget,
-      menuClick,
-      styleActive,
-      styleInactive
-    }
-  }
-}
-</script>

@@ -1,3 +1,43 @@
+<script setup>
+import { ref, computed, useSlots } from 'vue'
+import { useStore } from 'vuex'
+import { mdiClose } from '@mdi/js'
+import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
+import Level from '@/components/Level.vue'
+import Icon from '@/components/Icon.vue'
+import JbButton from '@/components/JbButton.vue'
+
+const props = defineProps({
+  icon: {
+    type: String,
+    default: null
+  },
+  outline: Boolean,
+  color: {
+    type: String,
+    required: true
+  }
+})
+
+const componentClass = computed(() => props.outline
+  ? colorsOutline[props.color]
+  : [colorsBg[props.color], colorsBorders[props.color]])
+
+const isDismissed = ref(false)
+
+const dismiss = () => {
+  isDismissed.value = true
+}
+
+const slots = useSlots()
+
+const hasRightSlot = computed(() => slots.right)
+
+const store = useStore()
+
+const darkMode = computed(() => store.state.darkMode)
+</script>
+
 <template>
   <div
     v-if="!isDismissed"
@@ -30,59 +70,3 @@
     </level>
   </div>
 </template>
-
-<script>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
-import { mdiClose } from '@mdi/js'
-import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
-import Level from '@/components/Level.vue'
-import Icon from '@/components/Icon.vue'
-import JbButton from '@/components/JbButton.vue'
-
-export default {
-  name: 'Notification',
-  components: {
-    Icon,
-    Level,
-    JbButton
-  },
-  props: {
-    icon: {
-      type: String,
-      default: null
-    },
-    outline: Boolean,
-    color: {
-      type: String,
-      required: true
-    }
-  },
-  setup (props, { slots }) {
-    const componentClass = computed(() => props.outline
-      ? colorsOutline[props.color]
-      : [colorsBg[props.color], colorsBorders[props.color]])
-
-    const isDismissed = ref(false)
-
-    const dismiss = () => {
-      isDismissed.value = true
-    }
-
-    const hasRightSlot = computed(() => slots.right)
-
-    const store = useStore()
-
-    const darkMode = computed(() => store.state.darkMode)
-
-    return {
-      componentClass,
-      isDismissed,
-      dismiss,
-      hasRightSlot,
-      darkMode,
-      mdiClose
-    }
-  }
-}
-</script>

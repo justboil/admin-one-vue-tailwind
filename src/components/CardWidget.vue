@@ -1,3 +1,54 @@
+<script setup>
+import { mdiCog } from '@mdi/js'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import CardComponent from '@/components/CardComponent.vue'
+import GrowingNumber from '@/components/GrowingNumber.vue'
+import Icon from '@/components/Icon.vue'
+import Level from '@/components/Level.vue'
+import TrendPill from '@/components/TrendPill.vue'
+import JbButton from '@/components/JbButton.vue'
+
+const props = defineProps({
+  number: {
+    type: Number,
+    default: 0
+  },
+  icon: {
+    type: String,
+    default: null
+  },
+  prefix: {
+    type: String,
+    default: null
+  },
+  suffix: {
+    type: String,
+    default: null
+  },
+  label: {
+    type: String,
+    default: null
+  },
+  color: {
+    type: String,
+    default: null
+  },
+  trend: {
+    type: String,
+    default: null
+  },
+  trendType: {
+    type: String,
+    default: null
+  }
+})
+
+const store = useStore()
+
+const darkMode = computed(() => store.state.darkMode)
+</script>
+
 <template>
   <card-component>
     <level
@@ -43,64 +94,3 @@
     </level>
   </card-component>
 </template>
-
-<script>
-import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-import CardComponent from '@/components/CardComponent.vue'
-import GrowingNumber from '@/components/GrowingNumber.vue'
-import Icon from '@/components/Icon.vue'
-import Level from '@/components/Level.vue'
-import TrendPill from '@/components/TrendPill.vue'
-import JbButton from '@/components/JbButton.vue'
-
-export default {
-  name: 'CardWidget',
-  components: { JbButton, GrowingNumber, CardComponent, Icon, Level, TrendPill },
-  props: {
-    number: {
-      type: Number,
-      default: 0
-    },
-    icon: {
-      type: String,
-      default: null
-    },
-    prefix: {
-      type: String,
-      default: null
-    },
-    suffix: {
-      type: String,
-      default: null
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    color: {
-      type: String,
-      default: null
-    },
-    trend: {
-      type: String,
-      default: null
-    },
-    trendType: {
-      type: String,
-      default: null
-    }
-  },
-  setup () {
-    const store = useStore()
-
-    const darkMode = computed(() => store.state.darkMode)
-
-    return {
-      darkMode,
-      mdiCog
-    }
-  }
-}
-</script>

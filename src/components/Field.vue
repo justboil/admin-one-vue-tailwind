@@ -1,3 +1,35 @@
+<script setup>
+import { computed, useSlots } from 'vue'
+
+const props = defineProps({
+  label: {
+    type: String,
+    default: null
+  },
+  help: {
+    type: String,
+    default: null
+  }
+})
+
+const slots = useSlots()
+
+const wrapperClass = computed(() => {
+  const base = []
+  const slotsLength = slots.default().length
+
+  if (slotsLength > 1) {
+    base.push('grid grid-cols-1 gap-3')
+  }
+
+  if (slotsLength === 2) {
+    base.push('md:grid-cols-2')
+  }
+
+  return base
+})
+</script>
+
 <template>
   <div class="mb-6 last:mb-0">
     <label
@@ -15,41 +47,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { computed } from 'vue'
-
-export default {
-  name: 'Field',
-  props: {
-    label: {
-      type: String,
-      default: null
-    },
-    help: {
-      type: String,
-      default: null
-    }
-  },
-  setup (props, { slots }) {
-    const wrapperClass = computed(() => {
-      const base = []
-      const slotsLength = slots.default().length
-
-      if (slotsLength > 1) {
-        base.push('grid grid-cols-1 gap-3')
-      }
-
-      if (slotsLength === 2) {
-        base.push('md:grid-cols-2')
-      }
-
-      return base
-    })
-
-    return {
-      wrapperClass
-    }
-  }
-}
-</script>

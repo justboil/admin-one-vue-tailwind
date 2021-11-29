@@ -1,3 +1,58 @@
+<script setup>
+import { mdiCog } from '@mdi/js'
+import { computed } from 'vue'
+import Icon from '@/components/Icon.vue'
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: null
+  },
+  icon: {
+    type: String,
+    default: null
+  },
+  headerIcon: {
+    type: String,
+    default: null
+  },
+  rounded: {
+    type: String,
+    default: 'md:rounded'
+  },
+  hasTable: Boolean,
+  empty: Boolean,
+  form: Boolean,
+  hoverable: Boolean,
+})
+
+const emit = defineEmits(['header-icon-click', 'submit'])
+
+const is = computed(() => props.form ? 'form' : 'div')
+
+const componentClass = computed(() => {
+  const base = [
+    props.rounded
+  ]
+
+  if (props.hoverable) {
+    base.push('hover:shadow-lg transition-shadow duration-500')
+  }
+
+  return base
+})
+
+const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
+
+const headerIconClick = () => {
+  emit('header-icon-click')
+}
+
+const submit = e => {
+  emit('submit', e)
+}
+</script>
+
 <template>
   <component
     :is="is"
@@ -44,70 +99,3 @@
     </div>
   </component>
 </template>
-
-<script>
-import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
-import Icon from '@/components/Icon.vue'
-
-export default {
-  name: 'CardComponent',
-  components: { Icon },
-  props: {
-    title: {
-      type: String,
-      default: null
-    },
-    icon: {
-      type: String,
-      default: null
-    },
-    headerIcon: {
-      type: String,
-      default: null
-    },
-    rounded: {
-      type: String,
-      default: 'md:rounded'
-    },
-    hasTable: Boolean,
-    empty: Boolean,
-    form: Boolean,
-    hoverable: Boolean,
-  },
-  emits: ['header-icon-click', 'submit'],
-  setup (props, { emit }) {
-    const is = computed(() => props.form ? 'form' : 'div')
-
-    const componentClass = computed(() => {
-      const base = [
-        props.rounded
-      ]
-
-      if (props.hoverable) {
-        base.push('hover:shadow-lg transition-shadow duration-500')
-      }
-
-      return base
-    })
-
-    const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
-
-    const headerIconClick = () => {
-      emit('header-icon-click')
-    }
-
-    const submit = e => {
-      emit('submit', e)
-    }
-
-    return {
-      is,
-      componentClass,
-      computedHeaderIcon,
-      headerIconClick,
-      submit
-    }
-  }
-}
-</script>

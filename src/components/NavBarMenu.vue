@@ -1,3 +1,41 @@
+<script setup>
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
+import NavBarItem from '@/components/NavBarItem.vue'
+import Icon from '@/components/Icon.vue'
+
+const props = defineProps({
+  hasDivider: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const isDropdownActive = ref(false)
+
+const toggleDropdownIcon = computed(() => isDropdownActive.value ? mdiChevronUp : mdiChevronDown)
+
+const toggle = () => {
+  isDropdownActive.value = !isDropdownActive.value
+}
+
+const root = ref(null)
+
+const forceClose = event => {
+  if (!root.value.$el.contains(event.target)) {
+    isDropdownActive.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', forceClose)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('click', forceClose)
+})
+</script>
+
 <template>
   <nav-bar-item
     ref="root"
@@ -25,53 +63,3 @@
     </div>
   </nav-bar-item>
 </template>
-
-<script>
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
-import NavBarItem from '@/components/NavBarItem.vue'
-import Icon from '@/components/Icon.vue'
-
-export default {
-  name: 'NavBarMenu',
-  components: { Icon, NavBarItem },
-  props: {
-    hasDivider: {
-      type: Boolean,
-      default: false
-    }
-  },
-  setup () {
-    const isDropdownActive = ref(false)
-
-    const toggleDropdownIcon = computed(() => isDropdownActive.value ? mdiChevronUp : mdiChevronDown)
-
-    const toggle = () => {
-      isDropdownActive.value = !isDropdownActive.value
-    }
-
-    const root = ref(null)
-
-    const forceClose = event => {
-      if (!root.value.$el.contains(event.target)) {
-        isDropdownActive.value = false
-      }
-    }
-
-    onMounted(() => {
-      window.addEventListener('click', forceClose)
-    })
-
-    onBeforeUnmount(() => {
-      window.removeEventListener('click', forceClose)
-    })
-
-    return {
-      isDropdownActive,
-      toggleDropdownIcon,
-      toggle,
-      root
-    }
-  }
-}
-</script>

@@ -1,21 +1,7 @@
-<template>
-  <icon
-    :path="icon"
-    class="transition-colors"
-  />
-  <span
-    class="px-2 transition-colors"
-    :class="{'lg:hidden':isDesktopIconOnly}"
-  >{{ label }}</span>
-</template>
-
-<script>
+<script setup>
 import Icon from '@/components/Icon.vue'
 
-export default {
-  name: 'NavBarItemLabel',
-  components: { Icon },
-  props: {
+const props = defineProps({
     icon: {
       type: String,
       required: true
@@ -26,5 +12,16 @@ export default {
     },
     isDesktopIconOnly: Boolean
   }
-}
+)
 </script>
+
+<template>
+  <icon
+    :path="icon"
+    class="transition-colors"
+  />
+  <span
+    class="px-2 transition-colors"
+    :class="{'lg:hidden':isDesktopIconOnly}"
+  >{{ label }}</span>
+</template>

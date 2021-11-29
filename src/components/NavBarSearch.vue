@@ -1,3 +1,7 @@
+<script setup>
+import Control from '@/components/Control.vue'
+</script>
+
 <template>
   <control
     ref="root"
@@ -7,14 +11,3 @@
     borderless
   />
 </template>
-
-<script>
-import Control from '@/components/Control.vue'
-
-export default {
-  name: 'NavBarSearch',
-  components: {
-    Control
-  }
-}
-</script>

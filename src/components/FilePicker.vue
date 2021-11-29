@@ -1,3 +1,84 @@
+<script setup>
+import { mdiUpload } from '@mdi/js'
+import { computed, ref, watch } from 'vue'
+import JbButton from '@/components/JbButton.vue'
+
+const props = defineProps({
+  modelValue: {
+    type: [Object, File, Array],
+    default: null
+  },
+  label: {
+    type: String,
+    default: 'Upload'
+  },
+  icon: {
+    type: String,
+    default: mdiUpload
+  },
+  accept: {
+    type: String,
+    default: null
+  },
+  color: {
+    type: String,
+    default: 'info'
+  }
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const root = ref(null)
+
+const file = ref(props.modelValue)
+
+const modelValueProp = computed(() => props.modelValue)
+
+watch(modelValueProp, value => {
+  file.value = value
+
+  if (!value) {
+    root.value.input.value = null
+  }
+})
+
+const upload = event => {
+  const value = event.target.files || event.dataTransfer.files
+
+  file.value = value[0]
+
+  emit('update:modelValue', file.value)
+
+  // Use this as an example for handling file uploads
+  // let formData = new FormData()
+  // formData.append('file', file.value)
+
+  // const mediaStoreRoute = `/your-route/`
+
+  // axios
+  //   .post(mediaStoreRoute, formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data'
+  //     },
+  //     onUploadProgress: progressEvent
+  //   })
+  //   .then(r => {
+  //
+  //   })
+  //   .catch(err => {
+  //
+  //   })
+}
+
+// const uploadPercent = ref(0)
+//
+// const progressEvent = progressEvent => {
+//   uploadPercent.value = Math.round(
+//     (progressEvent.loaded * 100) / progressEvent.total
+//   )
+// }
+</script>
+
 <template>
   <div class="flex items-stretch justify-start relative">
     <label class="inline-flex">
@@ -21,96 +102,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { mdiUpload } from '@mdi/js'
-import { computed, ref, watch } from 'vue'
-import JbButton from '@/components/JbButton.vue'
-
-export default {
-  name: 'FilePicker',
-  components: {
-    JbButton
-  },
-  props: {
-    modelValue: {
-      type: [Object, File, Array],
-      default: null
-    },
-    label: {
-      type: String,
-      default: 'Upload'
-    },
-    icon: {
-      type: String,
-      default: mdiUpload
-    },
-    accept: {
-      type: String,
-      default: null
-    },
-    color: {
-      type: String,
-      default: 'info'
-    }
-  },
-  emits: ['update:modelValue'],
-  setup (props, { emit }) {
-    const root = ref(null)
-
-    const file = ref(props.modelValue)
-
-    const modelValueProp = computed(() => props.modelValue)
-
-    watch(modelValueProp, value => {
-      file.value = value
-
-      if (!value) {
-        root.value.input.value = null
-      }
-    })
-
-    const upload = event => {
-      const value = event.target.files || event.dataTransfer.files
-
-      file.value = value[0]
-
-      emit('update:modelValue', file.value)
-
-      // Use this as an example for handling file uploads
-      // let formData = new FormData()
-      // formData.append('file', file.value)
-
-      // const mediaStoreRoute = `/your-route/`
-
-      // axios
-      //   .post(mediaStoreRoute, formData, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data'
-      //     },
-      //     onUploadProgress: progressEvent
-      //   })
-      //   .then(r => {
-      //
-      //   })
-      //   .catch(err => {
-      //
-      //   })
-    }
-
-    // const uploadPercent = ref(0)
-    //
-    // const progressEvent = progressEvent => {
-    //   uploadPercent.value = Math.round(
-    //     (progressEvent.loaded * 100) / progressEvent.total
-    //   )
-    // }
-
-    return {
-      root,
-      file,
-      upload
-    }
-  }
-}
-</script>

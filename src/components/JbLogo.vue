@@ -11,9 +11,3 @@
     />
   </svg>
 </template>
-
-<script>
-export default {
-  name: 'JbLogo'
-}
-</script>

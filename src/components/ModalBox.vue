@@ -1,3 +1,53 @@
+<script setup>
+import { computed } from 'vue'
+import { mdiClose } from '@mdi/js'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import Divider from '@/components/Divider.vue'
+import Overlay from '@/components/Overlay.vue'
+
+const props = defineProps({
+  title: {
+    type: String,
+    default: null
+  },
+  largeTitle: {
+    type: String,
+    default: null
+  },
+  button: {
+    type: String,
+    default: 'info'
+  },
+  buttonLabel: {
+    type: String,
+    default: 'Done'
+  },
+  hasCancel: Boolean,
+  modelValue: {
+    type: [String, Number, Boolean],
+    default: null
+  }
+})
+
+const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
+
+const value = computed({
+  get: () => props.modelValue,
+  set: value => emit('update:modelValue', value)
+})
+
+const confirmCancel = mode => {
+  value.value = false
+  emit(mode)
+}
+
+const confirm = () => confirmCancel('confirm')
+
+const cancel = () => confirmCancel('cancel')
+</script>
+
 <template>
   <overlay
     v-show="value"
@@ -39,70 +89,3 @@
     </card-component>
   </overlay>
 </template>
-
-<script>
-import { computed } from 'vue'
-import { mdiClose } from '@mdi/js'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Divider from '@/components/Divider.vue'
-import Overlay from '@/components/Overlay.vue'
-
-export default {
-  name: 'ModalBox',
-  components: {
-    Overlay,
-    JbButton,
-    JbButtons,
-    CardComponent,
-    Divider
-  },
-  props: {
-    title: {
-      type: String,
-      default: null
-    },
-    largeTitle: {
-      type: String,
-      default: null
-    },
-    button: {
-      type: String,
-      default: 'info'
-    },
-    buttonLabel: {
-      type: String,
-      default: 'Done'
-    },
-    hasCancel: Boolean,
-    modelValue: {
-      type: [String, Number, Boolean],
-      default: null
-    }
-  },
-  emits: ['update:modelValue', 'cancel', 'confirm'],
-  setup (props, { emit }) {
-    const value = computed({
-      get: () => props.modelValue,
-      set: value => emit('update:modelValue', value)
-    })
-
-    const confirmCancel = mode => {
-      value.value = false
-      emit(mode)
-    }
-
-    const confirm = () => confirmCancel('confirm')
-
-    const cancel = () => confirmCancel('cancel')
-
-    return {
-      value,
-      confirm,
-      cancel,
-      mdiClose
-    }
-  }
-}
-</script>
