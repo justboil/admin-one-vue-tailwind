@@ -17,8 +17,6 @@ const props = defineProps({
   }
 })
 
-const sdd = 'sd'
-
 const root = ref(null)
 
 let chart
