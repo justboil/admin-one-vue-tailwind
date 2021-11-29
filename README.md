@@ -1,6 +1,6 @@
 # [Admin One &mdash; Free Vue.js 3 Tailwind Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
-[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind?1.3.0)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+[![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
 [![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-v3/repository-tailwind-vue3-vite.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
@@ -8,10 +8,11 @@
 
 * Built with **Vue.js 3**, **TailwindCSS** framework & **Composition API** 
 * **Vite** and **Vue CLI** build tools
+* **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Dark mode**
 * **Styled** scrollbars
 * SPA with **Vuex** & **Router**
-* **Production CSS** is only **33kb**
+* **Production CSS** is only **34kb**
 * Reusable components
 * Free under MIT License
 * [Premium version](https://justboil.me/tailwind-admin-templates/vue-dashboard/) available
@@ -29,6 +30,7 @@
   * [Get code & install](#get-code--install)
   * [Vue CLI builds](#vue-cli-builds)
   * [Vite builds](#vite-builds)
+  * [Linting](#linting)
 * [Browser Support](#browser-support)
 * [Reporting Issues](#reporting-issues)
 * [Licensing](#licensing)
@@ -98,11 +100,6 @@ npm run serve
 npm run build
 ```
 
-#### Lints and fixes files
-```
-npm run lint
-```
-
 ### Vite builds
 
 [Vite](https://vitejs.dev) is next Generation Frontend Tooling featuring unbundled web-development
@@ -115,6 +112,18 @@ npm run build
 #### Compiles and minifies for production
 ```
 npm run build:vite
+```
+
+### Linting
+
+#### Lint
+```
+npm run lint
+```
+
+#### Lints and fixes files
+```
+npm run lint:fix
 ```
 
 ## Browser Support
