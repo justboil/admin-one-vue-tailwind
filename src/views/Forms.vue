@@ -1,3 +1,50 @@
+<script setup>
+import { ref, reactive } from 'vue'
+import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
+import MainSection from '@/components/MainSection.vue'
+import TitleBar from '@/components/TitleBar.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import FilePicker from '@/components/FilePicker.vue'
+import HeroBar from '@/components/HeroBar.vue'
+import Field from '@/components/Field.vue'
+import Control from '@/components/Control.vue'
+import Divider from '@/components/Divider.vue'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import TitledSection from '@/components/TitledSection.vue'
+import TitleSubBar from '@/components/TitleSubBar.vue'
+
+const titleStack = ref(['Admin', 'Forms'])
+
+const selectOptions = [
+  { id: 1, label: 'Business development' },
+  { id: 2, label: 'Marketing' },
+  { id: 3, label: 'Sales' }
+]
+
+const form = reactive({
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  phone: '',
+  department: selectOptions[0],
+  subject: '',
+  question: ''
+})
+
+const customElementsForm = reactive({
+  checkbox: ['lorem'],
+  radio: 'one',
+  switch: ['one'],
+  file: null
+})
+
+const submit = () => {
+  //
+}
+</script>
+
 <template>
   <title-bar :title-stack="titleStack" />
   <hero-bar>Forms</hero-bar>
@@ -78,84 +125,3 @@
 
   <bottom-other-pages-section />
 </template>
-
-<script>
-import { ref, reactive } from 'vue'
-import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail, mdiCheck } from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import FilePicker from '@/components/FilePicker.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
-
-export default {
-  name: 'Forms',
-  components: {
-    TitleSubBar,
-    TitledSection,
-    Divider,
-    MainSection,
-    HeroBar,
-    FilePicker,
-    CheckRadioPicker,
-    CardComponent,
-    TitleBar,
-    Field,
-    Control,
-    JbButton,
-    JbButtons,
-    BottomOtherPagesSection
-  },
-  setup () {
-    const titleStack = ref(['Admin', 'Forms'])
-
-    const selectOptions = [
-      { id: 1, label: 'Business development' },
-      { id: 2, label: 'Marketing' },
-      { id: 3, label: 'Sales' }
-    ]
-
-    const form = reactive({
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '',
-      department: selectOptions[0],
-      subject: '',
-      question: ''
-    })
-
-    const customElementsForm = reactive({
-      checkbox: ['lorem'],
-      radio: 'one',
-      switch: ['one'],
-      file: null
-    })
-
-    const submit = () => {
-      //
-    }
-
-    return {
-      titleStack,
-      selectOptions,
-      form,
-      customElementsForm,
-      submit,
-      mdiBallot,
-      mdiBallotOutline,
-      mdiAccount,
-      mdiMail,
-      mdiCheck
-    }
-  }
-}
-</script>

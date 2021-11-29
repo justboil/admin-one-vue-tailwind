@@ -1,3 +1,14 @@
+<script setup>
+import { ref } from 'vue'
+import TitleBar from '@/components/TitleBar.vue'
+import HeroBar from '@/components/HeroBar.vue'
+import TitledSection from '@/components/TitledSection.vue'
+import MainSection from '@/components/MainSection.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+
+const titleStack = ref(['Admin', 'Responsive layout'])
+</script>
+
 <template>
 
   <title-bar :title-stack="titleStack" />
@@ -54,30 +65,3 @@
 
   <bottom-other-pages-section />
 </template>
-
-<script>
-import { ref } from 'vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import MainSection from '@/components/MainSection.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-
-export default {
-  name: 'Responsive',
-  components: {
-    BottomOtherPagesSection,
-    MainSection,
-    TitledSection,
-    HeroBar,
-    TitleBar
-  },
-  setup () {
-    const titleStack = ref(['Admin', 'Responsive layout'])
-
-    return {
-      titleStack
-    }
-  }
-}
-</script>

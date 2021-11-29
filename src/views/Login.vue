@@ -1,3 +1,29 @@
+<script setup>
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { mdiAccount, mdiAsterisk } from '@mdi/js'
+import FullScreenSection from '@/components/FullScreenSection.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import Field from '@/components/Field.vue'
+import Control from '@/components/Control.vue'
+import Divider from '@/components/Divider.vue'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
+
+const form = reactive({
+  login: 'john.doe',
+  pass: 'highly-secure-password-fYjUw-',
+  remember: ['remember']
+})
+
+const router = useRouter()
+
+const submit = () => {
+  router.push('/')
+}
+</script>
+
 <template>
   <full-screen-section bg="login" v-slot="{ cardClass, cardRounded }">
     <card-component  :class="cardClass" :rounded="cardRounded" @submit.prevent="submit" form>
@@ -21,51 +47,3 @@
     </card-component>
   </full-screen-section>
 </template>
-
-<script>
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-
-export default {
-  name: 'Login',
-  components: {
-    FullScreenSection,
-    CardComponent,
-    CheckRadioPicker,
-    Field,
-    Control,
-    Divider,
-    JbButton,
-    JbButtons
-  },
-  setup () {
-    const form = reactive({
-      login: 'john.doe',
-      pass: 'very-secret-password-fYjUw-',
-      remember: ['remember']
-    })
-
-    const router = useRouter()
-
-    const submit = () => {
-      router.push('/')
-    }
-
-    return {
-      form,
-      submit,
-      mdiAccount,
-      mdiAsterisk
-    }
-  }
-}
-</script>

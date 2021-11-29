@@ -1,3 +1,43 @@
+<script setup>
+import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
+import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
+import MainSection from '@/components/MainSection.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import TitleBar from '@/components/TitleBar.vue'
+import Divider from '@/components/Divider.vue'
+import Field from '@/components/Field.vue'
+import Control from '@/components/Control.vue'
+import FilePicker from '@/components/FilePicker.vue'
+import JbButton from '@/components/JbButton.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import UserCard from '@/components/UserCard.vue'
+
+const store = useStore()
+
+const titleStack = ref(['Admin', 'Profile'])
+
+const profileForm = reactive({
+  name: store.state.userName,
+  email: store.state.userEmail
+})
+
+const passwordForm = reactive({
+  password_current: '',
+  password: '',
+  password_confirmation: ''
+})
+
+const submitProfile = () => {
+  store.commit('user', profileForm)
+}
+
+const submitPass = () => {
+  //
+}
+</script>
+
 <template>
   <title-bar :title-stack="titleStack" />
 
@@ -84,75 +124,3 @@
 
   <bottom-other-pages-section />
 </template>
-
-<script>
-import { ref, reactive } from 'vue'
-import { useStore } from 'vuex'
-import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import Divider from '@/components/Divider.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import FilePicker from '@/components/FilePicker.vue'
-import JbButton from '@/components/JbButton.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import UserCard from '@/components/UserCard.vue'
-
-export default {
-  name: 'Profile',
-  components: {
-    UserCard,
-    JbButtons,
-    MainSection,
-    TitleBar,
-    CardComponent,
-    Divider,
-    Field,
-    Control,
-    FilePicker,
-    JbButton,
-    BottomOtherPagesSection
-  },
-  setup () {
-    const store = useStore()
-
-    const titleStack = ref(['Admin', 'Profile'])
-
-    const profileForm = reactive({
-      name: store.state.userName,
-      email: store.state.userEmail
-    })
-
-    const passwordForm = reactive({
-      password_current: '',
-      password: '',
-      password_confirmation: ''
-    })
-
-    const submitProfile = () => {
-      store.commit('user', profileForm)
-    }
-
-    const submitPass = () => {
-      //
-    }
-
-    return {
-      titleStack,
-      profileForm,
-      passwordForm,
-      submitProfile,
-      submitPass,
-      mdiAccount,
-      mdiAccountCircle,
-      mdiLock,
-      mdiMail,
-      mdiAsterisk,
-      mdiFormTextboxPassword
-    }
-  }
-}
-</script>

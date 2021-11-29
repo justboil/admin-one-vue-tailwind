@@ -1,3 +1,11 @@
+<script setup>
+import FullScreenSection from '@/components/FullScreenSection.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import Divider from '@/components/Divider.vue'
+import JbButton from '@/components/JbButton.vue'
+import JbButtons from '@/components/JbButtons.vue'
+</script>
+
 <template>
   <full-screen-section bg="error" v-slot="{ cardClass, cardRounded }">
     <card-component :class="cardClass" :rounded="cardRounded">
@@ -16,22 +24,3 @@
     </card-component>
   </full-screen-section>
 </template>
-
-<script>
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-
-export default {
-  name: 'Error',
-  components: {
-    FullScreenSection,
-    CardComponent,
-    Divider,
-    JbButton,
-    JbButtons
-  }
-}
-</script>

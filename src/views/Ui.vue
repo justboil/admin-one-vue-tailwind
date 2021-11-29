@@ -1,3 +1,59 @@
+<script setup>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import {
+  mdiMonitorCellphone,
+  mdiSelectColor,
+  mdiFeather,
+  mdiInformationOutline,
+  mdiCheckCircleOutline,
+  mdiAlertCircle,
+  mdiAlertCircleOutline,
+  mdiOpenInNew,
+  mdiClose
+} from '@mdi/js'
+import MainSection from '@/components/MainSection.vue'
+import HeroBar from '@/components/HeroBar.vue'
+import TitleBar from '@/components/TitleBar.vue'
+import CardComponent from '@/components/CardComponent.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import JbButton from '@/components/JbButton.vue'
+import Notification from '@/components/Notification.vue'
+import Divider from '@/components/Divider.vue'
+import ModalBox from '@/components/ModalBox.vue'
+import TitledSection from '@/components/TitledSection.vue'
+import Field from '@/components/Field.vue'
+import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
+import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import TitleSubBar from '@/components/TitleSubBar.vue'
+
+const titleStack = ref(['Admin', 'UI Components'])
+
+const modalOneActive = ref(false)
+
+const modalTwoActive = ref(false)
+
+const modalThreeActive = ref(false)
+
+const notificationSettingsModel = ref([])
+
+const notificationsOutline = computed(() => notificationSettingsModel.value.indexOf('outline') > -1)
+
+const buttonSettingsModel = ref([])
+
+const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline') > -1)
+
+const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
+
+const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
+
+const store = useStore()
+
+const darkModeToggle = () => {
+  store.dispatch('darkMode')
+}
+</script>
+
 <template>
   <modal-box
     v-model="modalOneActive"
@@ -222,111 +278,3 @@
 
   <bottom-other-pages-section />
 </template>
-
-<script>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
-import {
-  mdiMonitorCellphone,
-  mdiSelectColor,
-  mdiFeather,
-  mdiInformationOutline,
-  mdiCheckCircleOutline,
-  mdiAlertCircle,
-  mdiAlertCircleOutline,
-  mdiOpenInNew,
-  mdiReload,
-  mdiPlusCircle,
-  mdiBroadcast,
-  mdiLifebuoy,
-  mdiClose
-} from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import JbButton from '@/components/JbButton.vue'
-import Notification from '@/components/Notification.vue'
-import Divider from '@/components/Divider.vue'
-import ModalBox from '@/components/ModalBox.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import Field from '@/components/Field.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
-
-export default {
-  name: 'Ui',
-  components: {
-    TitleSubBar,
-    MainSection,
-    HeroBar,
-    TitleBar,
-    CardComponent,
-    JbButtons,
-    JbButton,
-    Notification,
-    Divider,
-    ModalBox,
-    TitledSection,
-    CheckRadioPicker,
-    Field,
-    BottomOtherPagesSection
-  },
-  setup () {
-    const titleStack = ref(['Admin', 'UI Components'])
-
-    const modalOneActive = ref(false)
-
-    const modalTwoActive = ref(false)
-
-    const modalThreeActive = ref(false)
-
-    const notificationSettingsModel = ref([])
-
-    const notificationsOutline = computed(() => notificationSettingsModel.value.indexOf('outline') > -1)
-
-    const buttonSettingsModel = ref([])
-
-    const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline') > -1)
-
-    const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
-
-    const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
-
-    const store = useStore()
-
-    const darkModeToggle = () => {
-      store.dispatch('darkMode')
-    }
-
-    return {
-      titleStack,
-      modalOneActive,
-      modalTwoActive,
-      modalThreeActive,
-      notificationSettingsModel,
-      notificationsOutline,
-      buttonSettingsModel,
-      buttonsOutline,
-      buttonsSmall,
-      buttonsDisabled,
-      darkModeToggle,
-      mdiMonitorCellphone,
-      mdiSelectColor,
-      mdiFeather,
-      mdiInformationOutline,
-      mdiCheckCircleOutline,
-      mdiAlertCircle,
-      mdiAlertCircleOutline,
-      mdiOpenInNew,
-      mdiReload,
-      mdiPlusCircle,
-      mdiBroadcast,
-      mdiLifebuoy,
-      mdiClose
-    }
-  }
-}
-</script>
