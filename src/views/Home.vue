@@ -50,9 +50,16 @@ const darkMode = computed(() => store.state.darkMode)
   <title-bar :title-stack="titleStack" />
   <hero-bar>Dashboard</hero-bar>
   <main-section>
-    <notification color="info" :icon="mdiGithub">
+    <notification
+      color="info"
+      :icon="mdiGithub"
+    >
       Please star this project on
-      <a href="https://github.com/justboil/admin-one-vue-tailwind" class="underline" target="_blank">GitHub</a>
+      <a
+        href="https://github.com/justboil/admin-one-vue-tailwind"
+        class="underline"
+        target="_blank"
+      >GitHub</a>
       <template #right>
         <jb-button
           href="https://github.com/justboil/admin-one-vue-tailwind"
@@ -103,7 +110,8 @@ const darkMode = computed(() => store.state.darkMode)
           :business="transaction.business"
           :type="transaction.type"
           :name="transaction.name"
-          :account="transaction.account"/>
+          :account="transaction.account"
+        />
       </div>
       <div class="flex flex-col justify-between">
         <card-client-bar
@@ -112,11 +120,15 @@ const darkMode = computed(() => store.state.darkMode)
           :name="client.name"
           :login="client.login"
           :date="client.created"
-          :progress="client.progress"/>
+          :progress="client.progress"
+        />
       </div>
     </div>
 
-    <title-sub-bar :icon="mdiChartPie" title="Trends overview"/>
+    <title-sub-bar
+      :icon="mdiChartPie"
+      title="Trends overview"
+    />
 
     <card-component
       title="Performance"
@@ -126,17 +138,30 @@ const darkMode = computed(() => store.state.darkMode)
       @header-icon-click="fillChartData"
     >
       <div v-if="chartData">
-        <line-chart :data="chartData" class="h-96"/>
+        <line-chart
+          :data="chartData"
+          class="h-96"
+        />
       </div>
     </card-component>
 
-    <title-sub-bar :icon="mdiAccountMultiple" title="Clients"/>
+    <title-sub-bar
+      :icon="mdiAccountMultiple"
+      title="Clients"
+    />
 
-    <notification color="info" :icon="mdiMonitorCellphone">
+    <notification
+      color="info"
+      :icon="mdiMonitorCellphone"
+    >
       <b>Responsive table.</b> Collapses on mobile
     </notification>
 
-    <card-component :icon="mdiMonitorCellphone" title="Responsive table" has-table>
+    <card-component
+      :icon="mdiMonitorCellphone"
+      title="Responsive table"
+      has-table
+    >
       <clients-table />
     </card-component>
   </main-section>

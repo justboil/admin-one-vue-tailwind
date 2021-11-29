@@ -48,38 +48,71 @@ const submitPass = () => {
       <card-component
         title="Edit Profile"
         :icon="mdiAccountCircle"
-        @submit.prevent="submitProfile"
         form
+        @submit.prevent="submitProfile"
       >
-        <field label="Avatar" help="Max 500kb">
+        <field
+          label="Avatar"
+          help="Max 500kb"
+        >
           <file-picker />
         </field>
 
-        <field label="Name" help="Required. Your name">
-          <control :icon="mdiAccount" v-model="profileForm.name" name="username" required autocomplete="username"/>
+        <field
+          label="Name"
+          help="Required. Your name"
+        >
+          <control
+            v-model="profileForm.name"
+            :icon="mdiAccount"
+            name="username"
+            required
+            autocomplete="username"
+          />
         </field>
-        <field label="E-mail" help="Required. Your e-mail">
-          <control :icon="mdiMail" type="email" name="email" v-model="profileForm.email" required autocomplete="email"/>
+        <field
+          label="E-mail"
+          help="Required. Your e-mail"
+        >
+          <control
+            v-model="profileForm.email"
+            :icon="mdiMail"
+            type="email"
+            name="email"
+            required
+            autocomplete="email"
+          />
         </field>
 
-        <divider/>
+        <divider />
 
         <jb-buttons>
-          <jb-button color="info" type="submit" label="Submit" />
-          <jb-button color="info" label="Options" outline />
+          <jb-button
+            color="info"
+            type="submit"
+            label="Submit"
+          />
+          <jb-button
+            color="info"
+            label="Options"
+            outline
+          />
         </jb-buttons>
       </card-component>
 
       <card-component
         title="Change Password"
         :icon="mdiLock"
-        @submit.prevent="submitPass"
         form
+        @submit.prevent="submitPass"
       >
-        <field label="Current password" help="Required. Your current password">
+        <field
+          label="Current password"
+          help="Required. Your current password"
+        >
           <control
-            :icon="mdiAsterisk"
             v-model="passwordForm.password_current"
+            :icon="mdiAsterisk"
             name="password_current"
             type="password"
             required
@@ -87,12 +120,15 @@ const submitPass = () => {
           />
         </field>
 
-        <divider/>
+        <divider />
 
-        <field label="New password" help="Required. New password">
+        <field
+          label="New password"
+          help="Required. New password"
+        >
           <control
-            :icon="mdiFormTextboxPassword"
             v-model="passwordForm.password"
+            :icon="mdiFormTextboxPassword"
             name="password"
             type="password"
             required
@@ -100,10 +136,13 @@ const submitPass = () => {
           />
         </field>
 
-        <field label="Confirm password" help="Required. New password one more time">
+        <field
+          label="Confirm password"
+          help="Required. New password one more time"
+        >
           <control
-            :icon="mdiFormTextboxPassword"
             v-model="passwordForm.password_confirmation"
+            :icon="mdiFormTextboxPassword"
             name="password_confirmation"
             type="password"
             required
@@ -111,13 +150,20 @@ const submitPass = () => {
           />
         </field>
 
-        <divider/>
+        <divider />
 
         <jb-buttons>
-          <jb-button type="submit" color="info" label="Submit" />
-          <jb-button color="info" label="Options" outline />
+          <jb-button
+            type="submit"
+            color="info"
+            label="Submit"
+          />
+          <jb-button
+            color="info"
+            label="Options"
+            outline
+          />
         </jb-buttons>
-
       </card-component>
     </div>
   </main-section>

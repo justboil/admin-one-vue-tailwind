@@ -25,24 +25,61 @@ const submit = () => {
 </script>
 
 <template>
-  <full-screen-section bg="login" v-slot="{ cardClass, cardRounded }">
-    <card-component  :class="cardClass" :rounded="cardRounded" @submit.prevent="submit" form>
-
-      <field label="Login" help="Please enter your login">
-        <control v-model="form.login" :icon="mdiAccount" name="login" autocomplete="username"/>
+  <full-screen-section
+    v-slot="{ cardClass, cardRounded }"
+    bg="login"
+  >
+    <card-component
+      :class="cardClass"
+      :rounded="cardRounded"
+      form
+      @submit.prevent="submit"
+    >
+      <field
+        label="Login"
+        help="Please enter your login"
+      >
+        <control
+          v-model="form.login"
+          :icon="mdiAccount"
+          name="login"
+          autocomplete="username"
+        />
       </field>
 
-      <field label="Password" help="Please enter your password">
-        <control v-model="form.pass" :icon="mdiAsterisk" type="password" name="password" autocomplete="current-password"/>
+      <field
+        label="Password"
+        help="Please enter your password"
+      >
+        <control
+          v-model="form.pass"
+          :icon="mdiAsterisk"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+        />
       </field>
 
-      <check-radio-picker name="remember" v-model="form.remember" :options="{ remember: 'Remember' }" />
+      <check-radio-picker
+        v-model="form.remember"
+        name="remember"
+        :options="{ remember: 'Remember' }"
+      />
 
       <divider />
 
       <jb-buttons>
-        <jb-button type="submit" color="info" label="Login" />
-        <jb-button to="/" color="info" outline label="Back" />
+        <jb-button
+          type="submit"
+          color="info"
+          label="Login"
+        />
+        <jb-button
+          to="/"
+          color="info"
+          outline
+          label="Back"
+        />
       </jb-buttons>
     </card-component>
   </full-screen-section>

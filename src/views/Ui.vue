@@ -92,7 +92,11 @@ const darkModeToggle = () => {
   <main-section>
     <card-component class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
       <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
-        <jb-button label="Toggle" @click="darkModeToggle" outline />
+        <jb-button
+          label="Toggle"
+          outline
+          @click="darkModeToggle"
+        />
       </div>
     </card-component>
   </main-section>
@@ -106,9 +110,9 @@ const darkModeToggle = () => {
       <card-component
         title="Confirm modal"
         :header-icon="mdiClose"
+        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        hoverable
         @click="modalOneActive = true"
-        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-        hoverable
       >
         <div class="space-y-3">
           <p>Click to see in action</p>
@@ -117,42 +121,58 @@ const darkModeToggle = () => {
         <divider />
 
         <jb-buttons>
-          <jb-button label="Confirm" color="info" />
-          <jb-button label="Cancel" color="info" outline />
+          <jb-button
+            label="Confirm"
+            color="info"
+          />
+          <jb-button
+            label="Cancel"
+            color="info"
+            outline
+          />
         </jb-buttons>
-
       </card-component>
 
       <card-component
+        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        hoverable
         @click="modalTwoActive = true"
-        class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-        hoverable
       >
         <div class="space-y-3">
-          <h1 class="text-2xl">Unhandled exception</h1>
+          <h1 class="text-2xl">
+            Unhandled exception
+          </h1>
           <p>Click to see in action</p>
         </div>
 
         <divider />
 
         <jb-buttons>
-          <jb-button label="Done" color="danger" />
+          <jb-button
+            label="Done"
+            color="danger"
+          />
         </jb-buttons>
       </card-component>
 
       <card-component
-        @click="modalThreeActive = true"
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         hoverable
+        @click="modalThreeActive = true"
       >
         <div class="space-y-3">
-          <h1 class="text-2xl">Success</h1>
+          <h1 class="text-2xl">
+            Success
+          </h1>
           <p>Click to see in action</p>
         </div>
 
         <divider />
 
-        <jb-button label="Done" color="success" />
+        <jb-button
+          label="Done"
+          color="success"
+        />
       </card-component>
     </div>
   </main-section>
@@ -163,48 +183,96 @@ const darkModeToggle = () => {
     </h1>
     <div class="flex items-center justify-center mt-6">
       <check-radio-picker
+        v-model="notificationSettingsModel"
         type="switch"
         name="notifications-switch"
         :options="{ outline: 'Outline' }"
-        v-model="notificationSettingsModel"
       />
     </div>
   </titled-section>
 
   <main-section>
-    <notification color="info" :icon="mdiInformationOutline" :outline="notificationsOutline">
+    <notification
+      color="info"
+      :icon="mdiInformationOutline"
+      :outline="notificationsOutline"
+    >
       <b>Info state</b>. Notification
       <template #right>
-        <jb-button :icon="mdiOpenInNew" label="Button" color="info" :outline="notificationsOutline" small />
+        <jb-button
+          :icon="mdiOpenInNew"
+          label="Button"
+          color="info"
+          :outline="notificationsOutline"
+          small
+        />
       </template>
     </notification>
 
-    <notification color="success" :icon="mdiCheckCircleOutline" :outline="notificationsOutline">
+    <notification
+      color="success"
+      :icon="mdiCheckCircleOutline"
+      :outline="notificationsOutline"
+    >
       <b>Success state</b>. Notification
       <template #right>
-        <jb-button :icon="mdiOpenInNew" label="Button" color="success" :outline="notificationsOutline" small />
+        <jb-button
+          :icon="mdiOpenInNew"
+          label="Button"
+          color="success"
+          :outline="notificationsOutline"
+          small
+        />
       </template>
     </notification>
 
-    <notification color="warning" :icon="mdiAlertCircleOutline" :outline="notificationsOutline">
+    <notification
+      color="warning"
+      :icon="mdiAlertCircleOutline"
+      :outline="notificationsOutline"
+    >
       <b>Warning state</b>. Notification
       <template #right>
-        <jb-button :icon="mdiOpenInNew" label="Button" color="warning" :outline="notificationsOutline" small />
+        <jb-button
+          :icon="mdiOpenInNew"
+          label="Button"
+          color="warning"
+          :outline="notificationsOutline"
+          small
+        />
       </template>
     </notification>
 
-    <notification color="danger" :icon="mdiAlertCircle" :outline="notificationsOutline">
+    <notification
+      color="danger"
+      :icon="mdiAlertCircle"
+      :outline="notificationsOutline"
+    >
       <b>Danger state</b>. Notification
       <template #right>
-        <jb-button :icon="mdiOpenInNew" label="Button" color="danger" :outline="notificationsOutline" small />
+        <jb-button
+          :icon="mdiOpenInNew"
+          label="Button"
+          color="danger"
+          :outline="notificationsOutline"
+          small
+        />
       </template>
     </notification>
 
-    <notification color="white" :icon="mdiSelectColor" :outline="notificationsOutline">
+    <notification
+      color="white"
+      :icon="mdiSelectColor"
+      :outline="notificationsOutline"
+    >
       <b>White</b>. Notification
     </notification>
 
-    <notification color="light" :icon="mdiFeather" :outline="notificationsOutline">
+    <notification
+      color="light"
+      :icon="mdiFeather"
+      :outline="notificationsOutline"
+    >
       <b>Light</b>. Notification
     </notification>
   </main-section>
@@ -213,47 +281,160 @@ const darkModeToggle = () => {
 
   <main-section>
     <card-component>
-
       <field label="Settings">
         <check-radio-picker
+          v-model="buttonSettingsModel"
           name="buttons-switch"
           type="switch"
-          v-model="buttonSettingsModel"
           :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
-        ></check-radio-picker>
+        />
       </field>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="light" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="info" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="success" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="warning" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="danger" label="Button" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button
+          color="white"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="light"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="info"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="success"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="warning"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="danger"
+          label="Button"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
       </jb-buttons>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="light" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="info" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="success" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="warning" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="danger" label="Button" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button
+          color="white"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="light"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="info"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="success"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="warning"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="danger"
+          label="Button"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
       </jb-buttons>
 
       <divider />
 
       <jb-buttons>
-        <jb-button color="white" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="light" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="info" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="success" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="warning" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
-        <jb-button color="danger" :icon="mdiOpenInNew" :small="buttonsSmall" :outline="buttonsOutline" :disabled="buttonsDisabled"/>
+        <jb-button
+          color="white"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="light"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="info"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="success"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="warning"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
+        <jb-button
+          color="danger"
+          :icon="mdiOpenInNew"
+          :small="buttonsSmall"
+          :outline="buttonsOutline"
+          :disabled="buttonsDisabled"
+        />
       </jb-buttons>
     </card-component>
   </main-section>
@@ -262,18 +443,33 @@ const darkModeToggle = () => {
 
   <main-section>
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2 ">
-      <card-component title="With Title" mb="">
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">With title</div>
+      <card-component
+        title="With Title"
+        mb=""
+      >
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+          With title
+        </div>
       </card-component>
 
-      <card-component title="Title & Icons" :icon="mdiMonitorCellphone" :header-icon="mdiClose" mb="">
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">With title & icons</div>
+      <card-component
+        title="Title & Icons"
+        :icon="mdiMonitorCellphone"
+        :header-icon="mdiClose"
+        mb=""
+      >
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+          With title & icons
+        </div>
       </card-component>
     </div>
 
-    <title-sub-bar :icon="mdiAlertCircle" title="Empty variation"/>
+    <title-sub-bar
+      :icon="mdiAlertCircle"
+      title="Empty variation"
+    />
 
-    <card-component empty/>
+    <card-component empty />
   </main-section>
 
   <bottom-other-pages-section />

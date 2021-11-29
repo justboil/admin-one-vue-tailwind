@@ -10,7 +10,6 @@ const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
 
 <template>
-
   <title-bar :title-stack="titleStack" />
 
   <hero-bar>Responsive layout</hero-bar>
