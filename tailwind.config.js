@@ -40,7 +40,8 @@ module.exports = {
     extend: {
       margin: ['last'],
       fontWeight: ['last'],
-      textColor: ['last']
+      textColor: ['last'],
+      borderWidth: ['dark']
     },
     scrollbar: ['dark', 'rounded']
   },
