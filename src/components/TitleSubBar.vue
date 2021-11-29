@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 import Icon from '@/components/Icon.vue'
 import JbButton from '@/components/JbButton.vue'
 
-const props = defineProps({
+defineProps({
   icon: {
     type: String,
     default: null

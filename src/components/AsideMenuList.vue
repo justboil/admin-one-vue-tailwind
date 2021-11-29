@@ -1,7 +1,7 @@
 <script setup>
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
 
-const props = defineProps({
+defineProps({
   isSubmenuList: {
     type: Boolean,
     default: false

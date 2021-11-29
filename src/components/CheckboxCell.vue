@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 
-const props = defineProps({
+defineProps({
   type: {
     type: String,
     default: 'td'

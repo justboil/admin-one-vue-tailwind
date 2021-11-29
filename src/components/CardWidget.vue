@@ -9,7 +9,7 @@ import Level from '@/components/Level.vue'
 import TrendPill from '@/components/TrendPill.vue'
 import JbButton from '@/components/JbButton.vue'
 
-const props = defineProps({
+defineProps({
   number: {
     type: Number,
     default: 0

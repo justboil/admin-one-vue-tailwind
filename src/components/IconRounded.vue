@@ -20,7 +20,7 @@ const props = defineProps({
     type: String,
     default: 'h-12'
   },
-  bg: Boolean,
+  bg: Boolean
 })
 
 const iconStyle = computed(

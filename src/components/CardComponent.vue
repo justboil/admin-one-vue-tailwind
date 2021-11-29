@@ -23,7 +23,7 @@ const props = defineProps({
   hasTable: Boolean,
   empty: Boolean,
   form: Boolean,
-  hoverable: Boolean,
+  hoverable: Boolean
 })
 
 const emit = defineEmits(['header-icon-click', 'submit'])

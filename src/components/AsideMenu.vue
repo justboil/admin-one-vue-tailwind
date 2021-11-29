@@ -6,7 +6,7 @@ import AsideMenuList from '@/components/AsideMenuList.vue'
 import NavBarItem from '@/components/NavBarItem.vue'
 import Icon from '@/components/Icon.vue'
 
-const props = defineProps({
+defineProps({
   menu: {
     type: Array,
     default: () => []

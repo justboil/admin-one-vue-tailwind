@@ -4,7 +4,7 @@ import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
 import Icon from '@/components/Icon.vue'
 
-const props = defineProps({
+defineProps({
   hasDivider: {
     type: Boolean,
     default: false

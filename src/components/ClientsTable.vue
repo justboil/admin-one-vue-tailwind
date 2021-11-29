@@ -9,7 +9,7 @@ import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 
-const props = defineProps({
+defineProps({
   checkable: Boolean
 })
 

@@ -3,7 +3,7 @@ import { mdiGithub } from '@mdi/js'
 import Level from '@/components/Level.vue'
 import JbButton from '@/components/JbButton.vue'
 
-const props = defineProps({
+defineProps({
   titleStack: {
     type: Array,
     default: () => []

@@ -21,7 +21,7 @@ const props = defineProps({
   hasDivider: Boolean,
   isDesktopIconOnly: Boolean,
   dropdown: Boolean,
-  active: Boolean,
+  active: Boolean
 })
 
 const is = computed(() => {

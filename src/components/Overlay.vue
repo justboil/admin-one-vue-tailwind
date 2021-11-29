@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   zIndex: {
     type: String,
     default: 'z-50'

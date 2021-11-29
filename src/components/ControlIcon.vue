@@ -1,16 +1,16 @@
 <script setup>
 import Icon from '@/components/Icon.vue'
 
-const props = defineProps({
-    icon: {
-      type: String,
-      default: null
-    },
-    h: {
-      type: String,
-      default: null
-    }
+defineProps({
+  icon: {
+    type: String,
+    default: null
+  },
+  h: {
+    type: String,
+    default: null
   }
+}
 )
 </script>
 

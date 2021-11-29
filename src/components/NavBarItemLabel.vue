@@ -1,17 +1,17 @@
 <script setup>
 import Icon from '@/components/Icon.vue'
 
-const props = defineProps({
-    icon: {
-      type: String,
-      required: true
-    },
-    label: {
-      type: String,
-      required: true
-    },
-    isDesktopIconOnly: Boolean
-  }
+defineProps({
+  icon: {
+    type: String,
+    required: true
+  },
+  label: {
+    type: String,
+    required: true
+  },
+  isDesktopIconOnly: Boolean
+}
 )
 </script>
 

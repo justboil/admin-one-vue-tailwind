@@ -1,7 +1,7 @@
 <script setup>
 import { computed, useSlots } from 'vue'
 
-const props = defineProps({
+defineProps({
   label: {
     type: String,
     default: null

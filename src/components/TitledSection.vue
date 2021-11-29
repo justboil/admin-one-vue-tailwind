@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   custom: Boolean,
   first: Boolean,
   last: Boolean
