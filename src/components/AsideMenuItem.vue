@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
-import AsideMenuList from '@/components/AsideMenuList'
+import AsideMenuList from '@/components/AsideMenuList.vue'
 
 const props = defineProps({
   item: {
