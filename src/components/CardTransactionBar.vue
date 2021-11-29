@@ -1,16 +1,37 @@
 <template>
-  <card-component class="mb-6 last:mb-0" hoverable>
+  <card-component
+    class="mb-6 last:mb-0"
+    hoverable
+  >
     <level>
       <level type="justify-start">
-        <icon-rounded :icon="icon.icon" :type="icon.type" class="md:mr-6"/>
+        <icon-rounded
+          :icon="icon.icon"
+          :type="icon.type"
+          class="md:mr-6"
+        />
         <div class="text-center space-y-1 md:text-left md:mr-6">
-          <h4 class="text-xl">${{ amount }}</h4>
-          <p class="text-gray-500 dark:text-gray-400"><b>{{ date }}</b> via {{ business }}</p>
+          <h4 class="text-xl">
+            ${{ amount }}
+          </h4>
+          <p class="text-gray-500 dark:text-gray-400">
+            <b>{{ date }}</b> via {{ business }}
+          </p>
         </div>
       </level>
       <div class="text-center md:text-right space-y-1">
         <p>{{ name }}</p>
-        <div><pill type="info" :text="account" small/> <pill :type="icon.type" :text="type" small/></div>
+        <div>
+          <pill
+            type="info"
+            :text="account"
+            small
+          /> <pill
+            :type="icon.type"
+            :text="type"
+            small
+          />
+        </div>
       </div>
     </level>
   </card-component>
@@ -28,12 +49,30 @@ export default {
   name: 'CardProductBar',
   components: { CardComponent, Level, Pill, IconRounded },
   props: {
-    amount: Number,
-    date: String,
-    business: String,
-    type: String,
-    name: String,
-    account: String
+    amount: {
+      type: Number,
+      required: true
+    },
+    date: {
+      type: String,
+      required: true
+    },
+    business: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    account: {
+      type: String,
+      required: true
+    }
   },
   setup (props) {
     const icon = computed(() => {

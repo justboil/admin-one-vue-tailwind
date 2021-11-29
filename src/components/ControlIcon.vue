@@ -16,8 +16,14 @@ export default {
     Icon
   },
   props: {
-    icon: String,
-    h: String
+    icon: {
+      type: String,
+      default: null
+    },
+    h: {
+      type: String,
+      default: null
+    }
   }
 }
 </script>

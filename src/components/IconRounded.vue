@@ -1,5 +1,12 @@
 <template>
-  <icon :path="icon" :w="w" :h="h" size="24" class="rounded-full" :class="iconStyle"/>
+  <icon
+    :path="icon"
+    :w="w"
+    :h="h"
+    size="24"
+    class="rounded-full"
+    :class="iconStyle"
+  />
 </template>
 
 <script>
@@ -13,8 +20,14 @@ export default {
     Icon
   },
   props: {
-    icon: String,
-    type: String,
+    icon: {
+      type: String,
+      default: null
+    },
+    type: {
+      type: String,
+      default: null
+    },
     bg: Boolean,
     w: {
       type: String,

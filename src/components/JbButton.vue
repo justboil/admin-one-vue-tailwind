@@ -1,7 +1,21 @@
 <template>
-  <component :is="is" :class="componentClass" :href="href" :type="computedType" :to="to" :target="target" :disabled="disabled">
-    <icon v-if="icon" :path="icon" />
-    <span v-if="label" :class="labelClass">{{ label }}</span>
+  <component
+    :is="is"
+    :class="componentClass"
+    :href="href"
+    :type="computedType"
+    :to="to"
+    :target="target"
+    :disabled="disabled"
+  >
+    <icon
+      v-if="icon"
+      :path="icon"
+    />
+    <span
+      v-if="label"
+      :class="labelClass"
+    >{{ label }}</span>
   </component>
 </template>
 
@@ -17,21 +31,42 @@ export default {
     Icon
   },
   props: {
-    label: [String, Number],
-    icon: String,
-    href: String,
-    target: String,
-    to: [String, Object],
-    type: String,
+    label: {
+      type: [String, Number],
+      default: null
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    href: {
+      type: String,
+      default: null
+    },
+    target: {
+      type: String,
+      default: null
+    },
+    to: {
+      type: [String, Object],
+      default: null
+    },
+    type: {
+      type: String,
+      default: null
+    },
     color: {
       type: String,
       default: 'white'
     },
+    as: {
+      type: String,
+      default: null
+    },
     small: Boolean,
     outline: Boolean,
     active: Boolean,
-    disabled: Boolean,
-    as: String
+    disabled: Boolean
   },
   setup (props) {
     const is = computed(() => {

@@ -1,6 +1,11 @@
 <template>
   <span :class="spanClass">
-    <svg viewBox="0 0 24 24" :width="size" :height="size" class="inline-block">
+    <svg
+      viewBox="0 0 24 24"
+      :width="size"
+      :height="size"
+      class="inline-block"
+    >
       <path :d="path" />
     </svg>
   </span>
@@ -13,6 +18,7 @@ export default {
   name: 'Icon',
   props: {
     path: {
+      type: String,
       required: true
     },
     w: {
@@ -24,6 +30,7 @@ export default {
       default: 'h-6'
     },
     size: {
+      type: [String, Number],
       default: 16
     }
   },

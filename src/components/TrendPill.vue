@@ -1,5 +1,10 @@
 <template>
-  <pill :text="trend" :type="trendStyle.style" :icon="trendStyle.icon" :small="small"/>
+  <pill
+    :text="trend"
+    :type="trendStyle.style"
+    :icon="trendStyle.icon"
+    :small="small"
+  />
 </template>
 
 <script>
@@ -11,8 +16,14 @@ export default {
   name: 'CardWidget',
   components: { Pill },
   props: {
-    trend: String,
-    trendType: String,
+    trend: {
+      type: String,
+      required: true
+    },
+    trendType: {
+      type: String,
+      default: null
+    },
     small: Boolean
   },
   setup (props) {

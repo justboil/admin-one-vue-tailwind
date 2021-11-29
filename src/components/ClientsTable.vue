@@ -1,15 +1,26 @@
 <template>
-  <modal-box v-model="isModalActive" title="Sample modal">
+  <modal-box
+    v-model="isModalActive"
+    title="Sample modal"
+  >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
-  <modal-box v-model="isModalDangerActive" large-title="Please confirm" button="danger" has-cancel>
+  <modal-box
+    v-model="isModalDangerActive"
+    large-title="Please confirm"
+    button="danger"
+    has-cancel
+  >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
   </modal-box>
 
-  <div v-if="checkedRows.length" class="bg-gray-50 p-3 dark:bg-gray-800">
+  <div
+    v-if="checkedRows.length"
+    class="bg-gray-50 p-3 dark:bg-gray-800"
+  >
     <span
       v-for="checkedRow in checkedRows"
       :key="checkedRow.id"
@@ -21,39 +32,78 @@
 
   <table>
     <thead>
-    <tr>
-      <th v-if="checkable"></th>
-      <th></th>
-      <th>Name</th>
-      <th>Company</th>
-      <th>City</th>
-      <th>Progress</th>
-      <th>Created</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th v-if="checkable" />
+        <th />
+        <th>Name</th>
+        <th>Company</th>
+        <th>City</th>
+        <th>Progress</th>
+        <th>Created</th>
+        <th />
+      </tr>
     </thead>
     <tbody>
-    <tr v-for="client in itemsPaginated" :key="client.id">
-      <checkbox-cell v-if="checkable" @checked="checked($event, client)"/>
-      <td class="image-cell">
-        <user-avatar :username="client.name" class="image" />
-      </td>
-      <td data-label="Name">{{ client.name }}</td>
-      <td data-label="Company">{{ client.company }}</td>
-      <td data-label="City">{{ client.city }}</td>
-      <td data-label="Progress" class="progress-cell">
-        <progress max="100" :value="client.progress">{{ client.progress }}</progress>
-      </td>
-      <td data-label="Created">
-        <small class="text-gray-500 dark:text-gray-400" :title="client.created">{{ client.created }}</small>
-      </td>
-      <td class="actions-cell">
-        <jb-buttons type="justify-start lg:justify-end" no-wrap>
-          <jb-button color="success" :icon="mdiEye" small @click="isModalActive = true" />
-          <jb-button color="danger" :icon="mdiTrashCan" small @click="isModalDangerActive = true" />
-        </jb-buttons>
-      </td>
-    </tr>
+      <tr
+        v-for="client in itemsPaginated"
+        :key="client.id"
+      >
+        <checkbox-cell
+          v-if="checkable"
+          @checked="checked($event, client)"
+        />
+        <td class="image-cell">
+          <user-avatar
+            :username="client.name"
+            class="image"
+          />
+        </td>
+        <td data-label="Name">
+          {{ client.name }}
+        </td>
+        <td data-label="Company">
+          {{ client.company }}
+        </td>
+        <td data-label="City">
+          {{ client.city }}
+        </td>
+        <td
+          data-label="Progress"
+          class="progress-cell"
+        >
+          <progress
+            max="100"
+            :value="client.progress"
+          >
+            {{ client.progress }}
+          </progress>
+        </td>
+        <td data-label="Created">
+          <small
+            class="text-gray-500 dark:text-gray-400"
+            :title="client.created"
+          >{{ client.created }}</small>
+        </td>
+        <td class="actions-cell">
+          <jb-buttons
+            type="justify-start lg:justify-end"
+            no-wrap
+          >
+            <jb-button
+              color="success"
+              :icon="mdiEye"
+              small
+              @click="isModalActive = true"
+            />
+            <jb-button
+              color="danger"
+              :icon="mdiTrashCan"
+              small
+              @click="isModalDangerActive = true"
+            />
+          </jb-buttons>
+        </td>
+      </tr>
     </tbody>
   </table>
   <div class="table-pagination">
@@ -61,12 +111,12 @@
       <jb-buttons>
         <jb-button
           v-for="page in pagesList"
-          @click="currentPage = page"
+          :key="page"
           :active="page === currentPage"
           :label="page + 1"
-          :key="page"
           :outline="darkMode"
           small
+          @click="currentPage = page"
         />
       </jb-buttons>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>

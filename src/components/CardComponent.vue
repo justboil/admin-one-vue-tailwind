@@ -7,9 +7,17 @@
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-gray-700">
-      <p class="flex items-center py-3 flex-grow font-bold" :class="[ icon ? 'px-4' : 'px-6' ]">
-        <icon v-if="icon" :path="icon" class="mr-3" />
+      class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
+    >
+      <p
+        class="flex items-center py-3 flex-grow font-bold"
+        :class="[ icon ? 'px-4' : 'px-6' ]"
+      >
+        <icon
+          v-if="icon"
+          :path="icon"
+          class="mr-3"
+        />
         {{ title }}
       </p>
       <a
@@ -22,10 +30,16 @@
         <icon :path="computedHeaderIcon" />
       </a>
     </header>
-    <div v-if="empty" class="text-center py-24 text-gray-500 dark:text-gray-400">
+    <div
+      v-if="empty"
+      class="text-center py-24 text-gray-500 dark:text-gray-400"
+    >
       <p>Nothing's here…</p>
     </div>
-    <div v-else :class="{'p-6':!hasTable}">
+    <div
+      v-else
+      :class="{'p-6':!hasTable}"
+    >
       <slot />
     </div>
   </component>
@@ -40,17 +54,26 @@ export default {
   name: 'CardComponent',
   components: { Icon },
   props: {
-    title: String,
-    icon: String,
-    headerIcon: String,
+    title: {
+      type: String,
+      default: null
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    headerIcon: {
+      type: String,
+      default: null
+    },
+    rounded: {
+      type: String,
+      default: 'md:rounded'
+    },
     hasTable: Boolean,
     empty: Boolean,
     form: Boolean,
     hoverable: Boolean,
-    rounded: {
-      type: String,
-      default: 'md:rounded'
-    }
   },
   emits: ['header-icon-click', 'submit'],
   setup (props, { emit }) {

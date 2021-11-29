@@ -2,29 +2,36 @@
   <div class="relative">
     <select
       v-if="computedType === 'select'"
+      :id="id"
       v-model="computedValue"
       :name="name"
-      :id="id"
-      :class="inputElClass">
-      <option v-for="option in options" :key="option.id ?? option" :value="option">{{ option.label ?? option }}</option>
+      :class="inputElClass"
+    >
+      <option
+        v-for="option in options"
+        :key="option.id ?? option"
+        :value="option"
+      >
+        {{ option.label ?? option }}
+      </option>
     </select>
     <textarea
       v-else-if="computedType === 'textarea'"
+      :id="id"
       v-model="computedValue"
       :class="inputElClass"
       :name="name"
-      :id="id"
       :placeholder="placeholder"
       :required="required"
-    ></textarea>
+    />
     <input
       v-else
+      :id="id"
       ref="inputEl"
       v-model="computedValue"
       :name="name"
       :autocomplete="autocomplete"
       :required="required"
-      :id="id"
       :placeholder="placeholder"
       :type="computedType"
       :class="inputElClass"
@@ -48,13 +55,30 @@ export default {
     ControlIcon
   },
   props: {
-    name: String,
-    id: String,
-    required: Boolean,
-    autocomplete: String,
-    placeholder: String,
-    icon: String,
-    options: Array,
+    name: {
+      type: String,
+      default: null
+    },
+    id: {
+      type: String,
+      default: null
+    },
+    autocomplete: {
+      type: String,
+      default: null
+    },
+    placeholder: {
+      type: String,
+      default: null
+    },
+    icon: {
+      type: String,
+      default: null
+    },
+    options: {
+      type: Array,
+      default: null
+    },
     type: {
       type: String,
       default: 'text'
@@ -63,6 +87,7 @@ export default {
       type: [String, Number, Boolean, Array, Object],
       default: ''
     },
+    required: Boolean,
     borderless: Boolean,
     transparent: Boolean,
     ctrlKFocus: Boolean

@@ -1,6 +1,12 @@
 <template>
-  <icon :path="icon" class="transition-colors" />
-  <span class="px-2 transition-colors" :class="{'lg:hidden':isDesktopIconOnly}">{{ label }}</span>
+  <icon
+    :path="icon"
+    class="transition-colors"
+  />
+  <span
+    class="px-2 transition-colors"
+    :class="{'lg:hidden':isDesktopIconOnly}"
+  >{{ label }}</span>
 </template>
 
 <script>

@@ -6,16 +6,26 @@
   >
     <level>
       <div class="flex flex-col md:flex-row items-center">
-        <icon v-if="icon" :path="icon" w="w-10 md:w-5" h="h-10 md:h-5" size="24" class="md:mr-2" />
+        <icon
+          v-if="icon"
+          :path="icon"
+          w="w-10 md:w-5"
+          h="h-10 md:h-5"
+          size="24"
+          class="md:mr-2"
+        />
         <span class="text-center md:text-left"><slot /></span>
       </div>
-      <slot v-if="hasRightSlot" name="right" />
+      <slot
+        v-if="hasRightSlot"
+        name="right"
+      />
       <jb-button
         v-else
         :icon="mdiClose"
         :outline="outline || (darkMode && ['white', 'light'].indexOf(color) < 0)"
-        @click="dismiss"
         small
+        @click="dismiss"
       />
     </level>
   </div>
@@ -38,7 +48,10 @@ export default {
     JbButton
   },
   props: {
-    icon: String,
+    icon: {
+      type: String,
+      default: null
+    },
     outline: Boolean,
     color: {
       type: String,

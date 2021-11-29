@@ -1,6 +1,15 @@
 <template>
-  <div class="inline-flex items-center last:mr-0" :class="componentClass">
-    <icon v-if="icon" :path="icon" h="h-4" w="w-4" class="mr-2" />
+  <div
+    class="inline-flex items-center last:mr-0"
+    :class="componentClass"
+  >
+    <icon
+      v-if="icon"
+      :path="icon"
+      h="h-4"
+      w="w-4"
+      class="mr-2"
+    />
     <span>{{ text }}</span>
   </div>
 </template>
@@ -16,12 +25,18 @@ export default {
     Icon
   },
   props: {
-    text: String,
+    text: {
+      type: String,
+      required: true
+    },
     type: {
       type: String,
       required: true
     },
-    icon: String,
+    icon: {
+      type: String,
+      default: null
+    },
     small: Boolean,
     outline: Boolean
   },

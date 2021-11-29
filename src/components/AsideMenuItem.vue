@@ -2,10 +2,10 @@
   <li>
     <component
       :is="componentIs"
+      v-slot="vSlot"
       :to="itemTo"
       :href="itemHref"
       :target="itemTarget"
-      v-slot="vSlot"
       class="flex cursor-pointer hover:bg-gray-600 dark:hover:bg-gray-700"
       :class="[isSubmenuList ? 'p-3 text-sm' : 'py-2']"
       @click="menuClick"
@@ -49,11 +49,14 @@ export default {
     AsideMenuList: defineAsyncComponent(() => import('@/components/AsideMenuList.vue')),
     Icon
   },
-  emits: ['menu-click'],
   props: {
-    item: Object,
+    item: {
+      type: Object,
+      required: true
+    },
     isSubmenuList: Boolean
   },
+  emits: ['menu-click'],
   setup (props, { emit }) {
     const isDropdownActive = ref(false)
 

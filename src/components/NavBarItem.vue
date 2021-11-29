@@ -1,5 +1,11 @@
 <template>
-  <component :is="is" :class="componentClass" :to="to" :href="href" :exact-active-class="activeClass">
+  <component
+    :is="is"
+    :class="componentClass"
+    :to="to"
+    :href="href"
+    :exact-active-class="activeClass"
+  >
     <slot />
   </component>
 </template>
@@ -10,12 +16,14 @@ import { computed } from 'vue'
 export default {
   name: 'NavBarItem',
   props: {
-    href: String,
-    to: String,
-    hasDivider: Boolean,
-    isDesktopIconOnly: Boolean,
-    dropdown: Boolean,
-    active: Boolean,
+    href: {
+      type: String,
+      default: null
+    },
+    to: {
+      type: String,
+      default: null
+    },
     type: {
       type: String,
       default: 'flex'
@@ -23,7 +31,11 @@ export default {
     activeColor: {
       type: String,
       default: 'text-blue-600'
-    }
+    },
+    hasDivider: Boolean,
+    isDesktopIconOnly: Boolean,
+    dropdown: Boolean,
+    active: Boolean,
   },
   setup (props) {
     const is = computed(() => {

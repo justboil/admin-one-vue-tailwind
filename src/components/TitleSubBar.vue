@@ -1,10 +1,20 @@
 <template>
   <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
     <div class="flex items-center justify-start">
-      <icon v-if="icon" :path="icon" class="mr-3"/>
-      <h1 class="text-2xl">{{ title }}</h1>
+      <icon
+        v-if="icon"
+        :path="icon"
+        class="mr-3"
+      />
+      <h1 class="text-2xl">
+        {{ title }}
+      </h1>
     </div>
-    <jb-button :icon="mdiCog" :outline="darkMode" small />
+    <jb-button
+      :icon="mdiCog"
+      :outline="darkMode"
+      small
+    />
   </section>
 </template>
 
@@ -22,8 +32,14 @@ export default {
     JbButton
   },
   props: {
-    icon: String,
-    title: String
+    icon: {
+      type: String,
+      default: null
+    },
+    title: {
+      type: String,
+      required: true
+    }
   },
   setup () {
     const store = useStore()

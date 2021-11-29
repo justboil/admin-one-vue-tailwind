@@ -18,7 +18,6 @@ export default {
   components: {
     AsideMenuItem
   },
-  emits: ['menu-click'],
   props: {
     isSubmenuList: {
       type: Boolean,
@@ -29,6 +28,7 @@ export default {
       default: () => []
     }
   },
+  emits: ['menu-click'],
   setup (props, { emit }) {
     const menuClick = (event, item) => {
       emit('menu-click', event, item)

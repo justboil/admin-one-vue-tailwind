@@ -1,6 +1,11 @@
 <template>
   <div>
-    <img :src="avatar" :alt="name" class="rounded-full block h-auto w-full max-w-full" :class="bg" />
+    <img
+      :src="avatar"
+      :alt="name"
+      class="rounded-full block h-auto w-full max-w-full"
+      :class="bg"
+    >
   </div>
 </template>
 
@@ -11,7 +16,10 @@ import { computed } from 'vue'
 export default {
   name: 'UserAvatar',
   props: {
-    username: String,
+    username: {
+      type: String,
+      default: null
+    },
     bg: {
       type: String,
       default: 'bg-gray-100 dark:bg-gray-800'

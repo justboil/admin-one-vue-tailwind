@@ -1,14 +1,28 @@
 <template>
-  <card-component class="mb-6 last:mb-0" hoverable>
+  <card-component
+    class="mb-6 last:mb-0"
+    hoverable
+  >
     <level>
       <level type="justify-start">
-        <user-avatar class="w-12 h-12 md:mr-6" :username="name"/>
+        <user-avatar
+          class="w-12 h-12 md:mr-6"
+          :username="name"
+        />
         <div class="text-center md:text-left">
-          <h4 class="text-xl">{{ name }} <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span></h4>
-          <p class="text-gray-500 dark:text-gray-400">{{ date }}</p>
+          <h4 class="text-xl">
+            {{ name }} <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
+          </h4>
+          <p class="text-gray-500 dark:text-gray-400">
+            {{ date }}
+          </p>
         </div>
       </level>
-      <pill :type="pillType" :text="pillText" :icon="pillIcon"/>
+      <pill
+        :type="pillType"
+        :text="pillText"
+        :icon="pillIcon"
+      />
     </level>
   </card-component>
 </template>
@@ -25,12 +39,30 @@ export default {
   name: 'CardClientBar',
   components: { CardComponent, Level, Pill, UserAvatar },
   props: {
-    name: String,
-    login: String,
-    date: String,
-    progress: Number,
-    text: String,
-    type: String
+    name: {
+      type: String,
+      required: true
+    },
+    login: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: String,
+      required: true
+    },
+    progress: {
+      type: Number,
+      default: 0
+    },
+    text: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      default: null
+    }
   },
   setup (props) {
     const pillType = computed(() => {

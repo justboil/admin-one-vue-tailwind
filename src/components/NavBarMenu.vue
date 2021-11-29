@@ -1,16 +1,19 @@
 <template>
   <nav-bar-item
+    ref="root"
     type="block"
     :has-divider="hasDivider"
     :active="isDropdownActive"
     dropdown
     class="dropdown"
     @click="toggle"
-    ref="root"
   >
     <a class="flex items-center py-2 px-3 bg-gray-100 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent">
       <slot />
-      <icon :path="toggleDropdownIcon" class="hidden lg:inline-flex transition-colors" />
+      <icon
+        :path="toggleDropdownIcon"
+        class="hidden lg:inline-flex transition-colors"
+      />
     </a>
     <div
       class="text-sm border-gray-100 border-b lg:border-b-0 lg:border-gray-200 lg:border-t lg:bg-white lg:absolute

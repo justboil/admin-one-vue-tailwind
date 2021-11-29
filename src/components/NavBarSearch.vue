@@ -1,5 +1,11 @@
 <template>
-  <control ref="root" placeholder="Search (ctrl+k)" ctrl-k-focus transparent borderless />
+  <control
+    ref="root"
+    placeholder="Search (ctrl+k)"
+    ctrl-k-focus
+    transparent
+    borderless
+  />
 </template>
 
 <script>
