@@ -104,14 +104,19 @@ npm run build
 
 [Vite](https://vitejs.dev) is next Generation Frontend Tooling featuring unbundled web-development
 
-#### Compiles and hot-reloads for development
+#### Hot-reloads for development
 ```
-npm run build
+npm run dev
 ```
 
-#### Compiles and minifies for production
+#### Builds and minifies for production
 ```
 npm run build:vite
+```
+
+#### Serves recently built app
+```
+npm run serve:vite
 ```
 
 ### Linting
