@@ -2,7 +2,7 @@
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
-[![Free Vue 3 Tailwind CSS admin dashboard](https://justboil.me/images/one-v3/repository-tailwind-vue3-vite.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS admin dashboard](https://static.justboil.me/templates/one/repo-tailwind-vue.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 **Admin One** is simple, beautiful and free Vue.js 3 TailwindCSS admin dashboard.
 
