@@ -21,7 +21,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-m-hi-res.png"
+        src="https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png"
         class="block"
       >
     </div>
@@ -34,7 +34,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-1024.png?v=1.3"
+        src="https://static.justboil.me/templates/one/one-tailwind-vue-1024.png"
         class="block"
       >
     </div>
@@ -43,7 +43,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-1024-menu.png?v=1.3"
+        src="https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png"
         class="block"
       >
     </div>
@@ -56,7 +56,7 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   <main-section>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
-        src="https://justboil.me/images/one-tailwind/repository-preview-no-libs.png?v=1.3"
+        src="https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png"
         class="block"
       >
     </div>
