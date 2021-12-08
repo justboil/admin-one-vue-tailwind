@@ -86,19 +86,11 @@ export default createStore({
       axios
         .get(`data-sources/${payload}.json`)
         .then((r) => {
-          if (r.data) {
-            if (r.data.data) {
-              commit('basic', {
-                key: payload,
-                value: r.data.data
-              })
-            }
-            if (r.data.status) {
-              commit('basic', {
-                key: `${payload}Status`,
-                value: r.data.status
-              })
-            }
+          if (r.data && r.data.data) {
+            commit('basic', {
+              key: payload,
+              value: r.data.data
+            })
           }
         })
         .catch(error => {
