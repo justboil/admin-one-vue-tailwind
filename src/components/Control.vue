@@ -94,7 +94,7 @@ if (props.ctrlKFocus) {
         value: true
       })
     } else {
-      console.error('Duplicate field focus event')
+      // console.error('Duplicate field focus event')
     }
   })
 
