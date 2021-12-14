@@ -7,13 +7,13 @@ progress::-webkit-progress-bar {
 }
 
 progress::-webkit-progress-value {
-  @apply bg-green-500;
+  @apply bg-emerald-500;
 }
 
 progress::-moz-progress-bar {
-  @apply bg-green-500;
+  @apply bg-emerald-500;
 }
 
 progress::-ms-fill {
-  @apply bg-green-500 border-0;
+  @apply bg-emerald-500 border-0;
 }

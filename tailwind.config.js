@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [
+  content: [
     './public/index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
@@ -35,15 +35,6 @@ module.exports = {
         fadeIn: 'fadeIn 250ms ease-in-out'
       }
     }
-  },
-  variants: {
-    extend: {
-      margin: ['last'],
-      fontWeight: ['last'],
-      textColor: ['last'],
-      borderWidth: ['dark']
-    },
-    scrollbar: ['dark', 'rounded']
   },
   plugins: [
     require('@tailwindcss/forms'),

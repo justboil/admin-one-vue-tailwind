@@ -75,7 +75,7 @@ const darkMode = computed(() => store.state.darkMode)
       <card-widget
         trend="12%"
         trend-type="up"
-        color="text-green-500"
+        color="text-emerald-500"
         :icon="mdiAccountMultiple"
         :number="512"
         label="Clients"

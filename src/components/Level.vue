@@ -17,7 +17,7 @@ export default {
 
     const parentBaseClass = ['block', 'md:flex']
 
-    const childBaseClass = ['flex', 'flex-shrink-0', 'flex-grow-0', 'items-center', 'justify-center']
+    const childBaseClass = ['flex', 'shrink-0', 'grow-0', 'items-center', 'justify-center']
 
     return h(
       'div',

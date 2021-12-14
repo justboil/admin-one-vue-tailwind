@@ -23,7 +23,7 @@
 }
 
 .switch input[type=checkbox]+.check {
-  @apply flex items-center flex-shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+  @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
 }
 
 .radio input[type=radio]+.check, .switch input[type=checkbox]+.check, .switch input[type=checkbox]+.check:before {

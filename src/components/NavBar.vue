@@ -94,7 +94,7 @@ const menuOpenLg = () => {
     </div>
     <div
       class="absolute w-screen top-14 left-0 bg-white shadow
-        lg:w-auto lg:items-stretch lg:flex lg:flex-grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
+        lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
       :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div

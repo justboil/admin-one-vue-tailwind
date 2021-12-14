@@ -40,8 +40,8 @@ const componentClass = computed(() => {
   const base = [
     props.type,
     'items-center',
-    'flex-grow-0',
-    'flex-shrink-0',
+    'grow-0',
+    'shrink-0',
     'relative',
     'cursor-pointer',
     'hover:text-blue-500',

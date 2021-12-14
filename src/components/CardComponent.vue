@@ -65,7 +65,7 @@ const submit = e => {
       class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
     >
       <p
-        class="flex items-center py-3 flex-grow font-bold"
+        class="flex items-center py-3 grow font-bold"
         :class="[ icon ? 'px-4' : 'px-6' ]"
       >
         <icon

@@ -61,7 +61,7 @@ const styleInactive = 'text-gray-300'
         w="w-12"
       />
       <span
-        class="flex-grow"
+        class="grow"
         :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
       >{{ item.label }}</span>
       <icon
