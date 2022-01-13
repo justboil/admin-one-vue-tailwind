@@ -33,7 +33,7 @@ td:last-child {
 }
 
 tbody tr:hover td {
-  @apply lg:bg-gray-100 lg:dark:bg-gray-800;
+  @apply lg:bg-gray-100 lg:dark:bg-gray-700 lg:dark:bg-opacity-70;
 }
 
 td:before {
@@ -63,5 +63,5 @@ td.image-cell .image {
 }
 
 .table-pagination {
-  @apply px-6 py-3 border-t border-gray-100 dark:border-gray-700;
+  @apply px-6 py-3 border-t border-gray-100 dark:border-gray-800;
 }
