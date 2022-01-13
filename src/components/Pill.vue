@@ -33,7 +33,7 @@ const componentClass = computed(() => {
 
 <template>
   <div
-    class="inline-flex items-center last:mr-0"
+    class="inline-flex items-center last:mr-0 capitalize"
     :class="componentClass"
   >
     <icon
