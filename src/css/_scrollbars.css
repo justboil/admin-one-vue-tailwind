@@ -28,6 +28,14 @@ html::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500;
 }
 
+html.scrollbars-light {
+  scrollbar-color: #9ca3af #f3f4f6;
+}
+
+html.scrollbars-light::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
 html.dark {
   scrollbar-color: #374151 #111827;
 }
@@ -56,6 +64,18 @@ html.dark::-webkit-scrollbar-thumb:hover {
 
 #aside::-webkit-scrollbar-thumb {
   @apply bg-gray-600;
+}
+
+.scrollbars-light #aside {
+  scrollbar-color: #d1d5db #f9fafb;
+}
+
+.scrollbars-light #aside::-webkit-scrollbar-track {
+  @apply bg-gray-50;
+}
+
+.scrollbars-light #aside::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
 }
 
 .dark #aside {
