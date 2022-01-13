@@ -129,10 +129,9 @@ const menuOpenLg = () => {
           </template>
         </nav-bar-menu>
         <nav-bar-menu has-divider>
-          <user-avatar class="w-6 h-6 mr-3 inline-flex" />
-          <div>
-            <span>{{ userName }}</span>
-          </div>
+          <nav-bar-item-label :label="userName">
+            <user-avatar class="w-6 h-6 mr-3 inline-flex" />
+          </nav-bar-item-label>
 
           <template #dropdown>
             <nav-bar-item to="/profile">
