@@ -160,7 +160,7 @@ const checked = (isChecked, client) => {
             no-wrap
           >
             <jb-button
-              color="success"
+              color="info"
               :icon="mdiEye"
               small
               @click="isModalActive = true"
