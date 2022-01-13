@@ -15,6 +15,8 @@ export default createStore({
     asideMenuItemInactiveStyle: '',
     asideSubmenuListStyle: '',
     navBarItemLabelStyle: '',
+    navBarItemLabelHoverStyle: '',
+    navBarItemLabelActiveColorStyle: '',
     navBarMenuListUpperLabelStyle: '',
     overlayStyle: '',
 

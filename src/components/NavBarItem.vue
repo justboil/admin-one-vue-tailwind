@@ -17,7 +17,7 @@ const props = defineProps({
   },
   activeColor: {
     type: String,
-    default: 'text-blue-600'
+    default: null
   },
   hasDivider: Boolean,
   isDesktopIconOnly: Boolean,
@@ -40,6 +40,8 @@ const is = computed(() => {
 const store = useStore()
 
 const componentClass = computed(() => {
+  const activeColor = props.activeColor ?? `${store.state.navBarItemLabelActiveColorStyle} dark:text-gray-400`
+
   const base = [
     props.type,
     'items-center',
@@ -47,8 +49,9 @@ const componentClass = computed(() => {
     'shrink-0',
     'relative',
     'cursor-pointer',
-    store.state.navBarItemLabelStyle,
-    props.active ? props.activeColor : 'text-black dark:text-white dark:hover:text-gray-400'
+    props.active
+      ? activeColor
+      : `${store.state.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${store.state.navBarItemLabelHoverStyle}`
   ]
 
   if (props.type === 'block') {
