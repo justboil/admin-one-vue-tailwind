@@ -57,6 +57,7 @@ const cancel = () => confirmCancel('cancel')
       v-show="value"
       :title="title"
       class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
+      rounded="rounded-lg"
       :header-icon="mdiClose"
       @header-icon-click="cancel"
     >
