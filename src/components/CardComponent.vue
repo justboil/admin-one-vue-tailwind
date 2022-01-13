@@ -57,12 +57,12 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-900"
+    class="bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-800"
     @submit="submit"
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-gray-700"
+      class="flex items-stretch border-b border-gray-100 dark:border-gray-800"
     >
       <p
         class="flex items-center py-3 grow font-bold"
