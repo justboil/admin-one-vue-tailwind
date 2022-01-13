@@ -4,7 +4,7 @@ import Icon from '@/components/Icon.vue'
 defineProps({
   icon: {
     type: String,
-    required: true
+    default: null
   },
   label: {
     type: String,
@@ -16,12 +16,14 @@ defineProps({
 </script>
 
 <template>
+  <slot />
   <icon
+    v-if="icon"
     :path="icon"
     class="transition-colors"
   />
   <span
     class="px-2 transition-colors"
-    :class="{'lg:hidden':isDesktopIconOnly}"
+    :class="{ 'lg:hidden':isDesktopIconOnly && icon }"
   >{{ label }}</span>
 </template>
