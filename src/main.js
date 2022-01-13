@@ -11,6 +11,9 @@ import './css/main.css'
 store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
+/* App style */
+store.dispatch('setStyle', 'basic')
+
 /* Dark mode */
 const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
 

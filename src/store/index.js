@@ -1,9 +1,23 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { darkModeKey } from '@/config.js'
+import * as styles from '@/styles.js'
 
 export default createStore({
   state: {
+    /* Styles */
+    asideStyle: '',
+    asideBrandStyle: '',
+    asideMenuCloseLgStyle: '',
+    asideMenuLabelStyle: '',
+    asideMenuItemStyle: '',
+    asideMenuItemActiveStyle: '',
+    asideMenuItemInactiveStyle: '',
+    asideSubmenuListStyle: '',
+    navBarItemLabelStyle: '',
+    navBarMenuListUpperLabelStyle: '',
+    overlayStyle: '',
+
     /* User */
     userName: null,
     userEmail: null,
@@ -32,6 +46,13 @@ export default createStore({
       state[payload.key] = payload.value
     },
 
+    /* Styles */
+    styles (state, payload) {
+      for (const key in payload) {
+        state[`${key}Style`] = payload[key]
+      }
+    },
+
     /* User */
     user (state, payload) {
       if (payload.name) {
@@ -46,6 +67,15 @@ export default createStore({
     }
   },
   actions: {
+    setStyle ({ commit }, payload) {
+      const style = styles[payload] ?? styles.default
+
+      document.body.className = style.body
+      document.documentElement.className = style.html
+
+      commit('styles', style)
+    },
+
     asideMobileToggle ({ commit, state }, payload = null) {
       const isShow = payload !== null ? payload : !state.isAsideMobileExpanded
 

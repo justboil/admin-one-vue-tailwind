@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
@@ -13,6 +14,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['menu-click'])
+
+const store = useStore()
+
+const asideMenuItemStyle = computed(() => store.state.asideMenuItemStyle)
+
+const asideMenuItemActiveStyle = computed(() => store.state.asideMenuItemActiveStyle)
+
+const asideMenuItemInactiveStyle = computed(() => store.state.asideMenuItemInactiveStyle)
+
+const asideSubmenuListStyle = computed(() => store.state.asideSubmenuListStyle)
 
 const isDropdownActive = ref(false)
 
@@ -35,10 +46,6 @@ const menuClick = event => {
     isDropdownActive.value = !isDropdownActive.value
   }
 }
-
-const styleActive = 'font-bold text-white'
-
-const styleInactive = 'text-gray-300'
 </script>
 
 <template>
@@ -49,33 +56,33 @@ const styleInactive = 'text-gray-300'
       :to="itemTo"
       :href="itemHref"
       :target="itemTarget"
-      class="flex cursor-pointer hover:bg-gray-600 hover:bg-opacity-50 dark:hover:bg-gray-700 dark:hover:bg-opacity-50"
-      :class="[isSubmenuList ? 'p-3 text-sm' : 'py-2']"
+      class="flex cursor-pointer dark:hover:bg-gray-700 dark:hover:bg-opacity-50"
+      :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
     >
       <icon
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : asideMenuItemInactiveStyle ]"
         w="w-12"
       />
       <span
         class="grow"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : asideMenuItemInactiveStyle ]"
       >{{ item.label }}</span>
       <icon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : asideMenuItemInactiveStyle ]"
         w="w-12"
       />
     </component>
     <aside-menu-list
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="{ 'hidden': !isDropdownActive, 'block bg-gray-700 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-50': isDropdownActive }"
+      :class="[ asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800 dark:bg-opacity-50' : 'hidden' ]"
       is-submenu-list
     />
   </li>

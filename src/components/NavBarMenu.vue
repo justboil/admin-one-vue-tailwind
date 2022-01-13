@@ -1,4 +1,5 @@
 <script setup>
+import { useStore } from 'vuex'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
@@ -10,6 +11,10 @@ defineProps({
     default: false
   }
 })
+
+const store = useStore()
+
+const navBarMenuListUpperLabelStyle = computed(() => store.state.navBarMenuListUpperLabelStyle)
 
 const isDropdownActive = ref(false)
 
@@ -46,7 +51,10 @@ onBeforeUnmount(() => {
     class="dropdown"
     @click="toggle"
   >
-    <a class="flex items-center py-2 px-3 bg-gray-100 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent">
+    <a
+      class="flex items-center py-2 px-3 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent"
+      :class="[ navBarMenuListUpperLabelStyle ]"
+    >
       <slot />
       <icon
         :path="toggleDropdownIcon"

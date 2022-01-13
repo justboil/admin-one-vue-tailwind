@@ -1,4 +1,5 @@
 <script setup>
+import { useStore } from 'vuex'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -36,6 +37,8 @@ const is = computed(() => {
   return 'div'
 })
 
+const store = useStore()
+
 const componentClass = computed(() => {
   const base = [
     props.type,
@@ -44,7 +47,7 @@ const componentClass = computed(() => {
     'shrink-0',
     'relative',
     'cursor-pointer',
-    'hover:text-blue-500',
+    store.state.navBarItemLabelStyle,
     props.active ? props.activeColor : 'text-black dark:text-white dark:hover:text-gray-400'
   ]
 
