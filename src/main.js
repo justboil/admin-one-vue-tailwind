@@ -18,7 +18,7 @@ store.dispatch('setStyle', 'basic')
 const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
 
 if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorageDarkModeValue === '1') {
-  store.dispatch('darkMode')
+  store.dispatch('darkMode', true)
 }
 
 /* Default title tag */

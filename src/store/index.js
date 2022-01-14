@@ -26,7 +26,7 @@ export default createStore({
     userAvatar: null,
 
     /* fullScreen - fullscreen form layout (e.g. login page) */
-    isFullScreen: false,
+    isFullScreen: true,
 
     /* Aside */
     isAsideMobileExpanded: false,
@@ -101,8 +101,8 @@ export default createStore({
       document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
     },
 
-    darkMode ({ commit, state }) {
-      const value = !state.darkMode
+    darkMode ({ commit, state }, payload = null) {
+      const value = payload !== null ? payload : !state.darkMode
 
       document.documentElement.classList[value ? 'add' : 'remove']('dark')
 
