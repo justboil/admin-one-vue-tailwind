@@ -1,6 +1,6 @@
 {
   "name": "admin-one-vue-tailwind",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "vite --host",
     "serve": "vue-cli-service serve",
