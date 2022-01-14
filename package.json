@@ -23,7 +23,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
     "@tailwindcss/forms": "^0.4.0",
-    "@types/tailwindcss": "^2.2.4",
+    "@types/tailwindcss": "^3.0.2",
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/cli-plugin-babel": "5.0.0-rc.1",
     "@vue/cli-plugin-eslint": "5.0.0-rc.1",
@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "^7.20.0",
     "postcss": "^8.3.0",
     "postcss-import": "^14.0.2",
-    "tailwindcss": "^3.0.2",
+    "tailwindcss": "^3.0.14",
     "vite": "^2.6.14"
   }
 }
