@@ -12,7 +12,7 @@
 * **Dark mode**
 * **Styled** scrollbars
 * SPA with **Vuex** & **Router**
-* **Production CSS** is only **37kb**
+* **Production CSS** is only **38kb**
 * Reusable components
 * Free under MIT License
 * [Premium version](https://justboil.me/tailwind-admin-templates/vue-dashboard/) available
