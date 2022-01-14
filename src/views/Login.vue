@@ -20,7 +20,7 @@ const form = reactive({
 const router = useRouter()
 
 const submit = () => {
-  router.push('/')
+  router.push('/dashboard')
 }
 </script>
 
@@ -75,7 +75,7 @@ const submit = () => {
           label="Login"
         />
         <jb-button
-          to="/"
+          to="/dashboard"
           color="info"
           outline
           label="Back"
