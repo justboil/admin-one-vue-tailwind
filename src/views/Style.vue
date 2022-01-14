@@ -50,7 +50,11 @@ const click = slug => {
         @click="click(style.slug)"
       >
         <div class="mb-3 md:mb-6">
-          <img :src="`https://static.justboil.me/templates/one/small/${style.slug}.png`" width="955" height="540">
+          <img
+            :src="`https://static.justboil.me/templates/one/small/${style.slug}.png`"
+            width="955"
+            height="540"
+          >
         </div>
 
         <h1 class="text-xl md:text-2xl font-black">
