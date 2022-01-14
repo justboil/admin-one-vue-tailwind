@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { sectionBgLogin, sectionBgLoginDark, sectionBgError, sectionBgErrorDark } from '@/colors'
 import MainSection from '@/components/MainSection.vue'
 
 const props = defineProps({
@@ -15,22 +16,23 @@ const store = useStore()
 
 const darkMode = computed(() => store.state.darkMode)
 
-const componentClass = computed(() => {
-  const bgs = {
-    login: 'bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500',
-    loginDark: 'bg-gradient-to-tr from-purple-900 via-pink-900 to-red-900',
-    error: 'bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500',
-    errorDark: 'bg-gradient-to-tr from-pink-900 via-red-900 to-yellow-900'
+const colorClass = computed(() => {
+  switch (props.bg) {
+    case 'login':
+      return darkMode.value ? sectionBgLoginDark : sectionBgLogin
+    case 'error':
+      return darkMode.value ? sectionBgErrorDark : sectionBgError
   }
 
-  const bgKey = darkMode.value ? `${props.bg}Dark` : props.bg
-
-  return bgs[bgKey] ?? ''
+  return ''
 })
 </script>
 
 <template>
-  <main-section :class="componentClass">
+  <main-section
+    class="flex h-screen items-center justify-center"
+    :class="colorClass"
+  >
     <slot
       card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12 shadow-2xl"
       card-rounded="rounded-lg"
