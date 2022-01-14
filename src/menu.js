@@ -9,14 +9,15 @@ import {
   mdiTable,
   mdiViewList,
   mdiTelevisionGuide,
-  mdiResponsive
+  mdiResponsive,
+  mdiPalette
 } from '@mdi/js'
 
 export default [
   'General',
   [
     {
-      to: '/',
+      to: '/dashboard',
       icon: mdiDesktopMac,
       label: 'Dashboard'
     }
@@ -43,6 +44,11 @@ export default [
       to: '/responsive',
       label: 'Responsive',
       icon: mdiResponsive
+    },
+    {
+      to: '/',
+      label: 'Styles',
+      icon: mdiPalette
     },
     {
       to: '/profile',
