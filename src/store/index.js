@@ -69,13 +69,15 @@ export default createStore({
     }
   },
   actions: {
-    setStyle ({ commit }, payload) {
+    setStyle ({ commit, dispatch }, payload) {
       const style = styles[payload] ?? styles.default
 
       document.body.className = style.body
       document.documentElement.className = style.html
 
       commit('styles', style)
+
+      dispatch('darkMode', false)
     },
 
     asideMobileToggle ({ commit, state }, payload = null) {
