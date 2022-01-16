@@ -46,7 +46,7 @@ const menuClick = (event, item) => {
     :class="[ asideStyle, isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
     <div
-      class="flex flex-row w-full flex-1 h-14 items-center"
+      class="flex flex-row w-full flex-1 h-14 items-center dark:bg-gray-900"
       :class="[ asideBrandStyle ]"
     >
       <nav-bar-item
