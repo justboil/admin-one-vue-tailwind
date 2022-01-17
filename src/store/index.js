@@ -54,7 +54,7 @@ export default createStore({
     /* Styles */
     styles (state, payload) {
       for (const key in payload) {
-        if (['body','html'].includes(key)) {
+        if (['body', 'html'].includes(key)) {
           continue
         }
 
