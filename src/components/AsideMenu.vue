@@ -42,11 +42,12 @@ const menuClick = (event, item) => {
   <aside
     v-show="!isFullScreen"
     id="aside"
-    class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 dark:border-r dark:border-gray-800 dark:bg-gray-900"
+    class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0
+    dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70"
     :class="[ asideStyle, isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
     <div
-      class="flex flex-row w-full flex-1 h-14 items-center dark:bg-gray-900"
+      class="flex flex-row w-full flex-1 h-14 items-center dark:bg-transparent"
       :class="[ asideBrandStyle ]"
     >
       <nav-bar-item

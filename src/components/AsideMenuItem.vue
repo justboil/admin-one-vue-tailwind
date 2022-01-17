@@ -56,7 +56,7 @@ const menuClick = event => {
       :to="itemTo"
       :href="itemHref"
       :target="itemTarget"
-      class="flex cursor-pointer dark:hover:bg-gray-700 dark:hover:bg-opacity-50"
+      class="flex cursor-pointer dark:hover:bg-gray-700/50"
       :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
     >
@@ -82,7 +82,7 @@ const menuClick = event => {
     <aside-menu-list
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="[ asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800 dark:bg-opacity-50' : 'hidden' ]"
+      :class="[ asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800/50' : 'hidden' ]"
       is-submenu-list
     />
   </li>
