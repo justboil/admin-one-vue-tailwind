@@ -10,7 +10,7 @@ export const colorsBg = {
   success: 'bg-emerald-500 text-white',
   danger: 'bg-red-500 text-white',
   warning: 'bg-yellow-500 text-white',
-  info: 'bg-blue-500 text-white'
+  info: 'bg-blue-600 text-white'
 }
 
 export const colorsBgHover = {
@@ -19,7 +19,7 @@ export const colorsBgHover = {
   success: 'hover:bg-emerald-600',
   danger: 'hover:bg-red-600',
   warning: 'hover:bg-yellow-600',
-  info: 'hover:bg-blue-600'
+  info: 'hover:bg-blue-500'
 }
 
 export const colorsBorders = {
@@ -28,7 +28,7 @@ export const colorsBorders = {
   success: 'border-emerald-600',
   danger: 'border-red-600',
   warning: 'border-yellow-600',
-  info: 'border-blue-600'
+  info: 'border-blue-700'
 }
 
 export const colorsText = {
@@ -37,7 +37,7 @@ export const colorsText = {
   success: 'text-emerald-500',
   danger: 'text-red-500',
   warning: 'text-yellow-500',
-  info: 'text-blue-500'
+  info: 'text-blue-600'
 }
 
 export const colorsOutline = {
@@ -55,7 +55,7 @@ export const colorsOutlineHover = {
   success: 'hover:bg-emerald-500 hover:text-white',
   danger: 'hover:bg-red-500 hover:text-white',
   warning: 'hover:bg-yellow-500 hover:text-white',
-  info: 'hover:bg-blue-500 hover:text-white'
+  info: 'hover:bg-blue-600 hover:text-white'
 }
 
 export const getButtonColor = (color, isOutlined, hasHover) => {

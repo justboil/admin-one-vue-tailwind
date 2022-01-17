@@ -29,7 +29,7 @@ for (const routeIndex in routes) {
       <span class="md:mr-3">Please star this project on</span>
       <a
         href="https://github.com/justboil/admin-one-vue-tailwind"
-        class="inline-flex items-center justify-center text-blue-500"
+        class="inline-flex items-center justify-center text-blue-600"
         target="_blank"
       >
         <icon
@@ -48,7 +48,7 @@ for (const routeIndex in routes) {
       >
         <router-link
           :to="screen.path"
-          class="text-blue-500"
+          class="text-blue-600"
         >
           {{ screen.title }}
         </router-link>
@@ -63,7 +63,7 @@ for (const routeIndex in routes) {
       Get more with <a
         href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
         target="_blank"
-        class="text-blue-500"
+        class="text-blue-600"
       >Premium version</a>
     </h1>
   </titled-section>

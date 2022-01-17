@@ -25,7 +25,7 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
         Get more with <a
           href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
           target="_blank"
-          class="text-blue-500"
+          class="text-blue-600"
         >Premium version</a>
       </div>
       <div class="md:py-2">
