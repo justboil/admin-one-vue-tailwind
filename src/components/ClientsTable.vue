@@ -176,7 +176,7 @@ const checked = (isChecked, client) => {
       </tr>
     </tbody>
   </table>
-  <div class="px-6 py-3 border-t border-gray-100 dark:border-gray-800">
+  <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800">
     <level>
       <jb-buttons>
         <jb-button
