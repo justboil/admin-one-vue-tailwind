@@ -7,10 +7,6 @@ const props = defineProps({
     type: String,
     default: null
   },
-  bg: {
-    type: String,
-    default: 'bg-gray-100 dark:bg-gray-800'
-  },
   api: {
     type: String,
     default: 'api/avataaars'
@@ -18,6 +14,8 @@ const props = defineProps({
 })
 
 const store = useStore()
+
+const lightBgStyle = computed(() => store.state.lightBgStyle)
 
 const avatar = computed(() => props.username
   ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
@@ -31,8 +29,8 @@ const name = computed(() => props.username ? props.username : store.state.userNa
     <img
       :src="avatar"
       :alt="name"
-      class="rounded-full block h-auto w-full max-w-full"
-      :class="bg"
+      class="rounded-full block h-auto w-full max-w-full dark:bg-gray-800"
+      :class="lightBgStyle"
     >
   </div>
 </template>

@@ -1,4 +1,5 @@
 <script setup>
+import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { colorsText, colorsBg } from '@/colors.js'
 import Icon from '@/components/Icon.vue'
@@ -23,8 +24,10 @@ const props = defineProps({
   bg: Boolean
 })
 
+const store = useStore()
+
 const iconStyle = computed(
-  () => props.bg ? colorsBg[props.type] : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
+  () => props.bg ? colorsBg[props.type] : [colorsText[props.type], `${store.state.lightBgStyle} dark:bg-gray-800`]
 )
 </script>
 
