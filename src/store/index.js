@@ -7,6 +7,7 @@ export default createStore({
   state: {
     /* Styles */
     lightBorderStyle: '',
+    lightBgStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
     asideMenuCloseLgStyle: '',
