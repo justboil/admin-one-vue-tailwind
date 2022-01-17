@@ -17,6 +17,12 @@ const store = useStore()
 
 const lightBorderStyle = computed(() => store.state.lightBorderStyle)
 
+const lightBgStyle = computed(() => store.state.lightBgStyle)
+
+const tableTrStyle = computed(() => store.state.tableTrStyle)
+
+const tableTrOddStyle = computed(() => store.state.tableTrOddStyle)
+
 const darkMode = computed(() => store.state.darkMode)
 
 const items = computed(() => store.state.clients)
@@ -91,12 +97,14 @@ const checked = (isChecked, client) => {
 
   <div
     v-if="checkedRows.length"
-    class="bg-gray-50 p-3 dark:bg-gray-800"
+    class="bg-opacity-50 p-3 dark:bg-gray-800"
+    :class="lightBgStyle"
   >
     <span
       v-for="checkedRow in checkedRows"
       :key="checkedRow.id"
-      class="inline-block bg-gray-100 px-2 py-1 rounded-sm mr-2 text-sm dark:bg-gray-700"
+      class="inline-block px-2 py-1 rounded-sm mr-2 text-sm dark:bg-gray-700"
+      :class="lightBgStyle"
     >
       {{ checkedRow.name }}
     </span>
@@ -117,8 +125,9 @@ const checked = (isChecked, client) => {
     </thead>
     <tbody>
       <tr
-        v-for="client in itemsPaginated"
+        v-for="(client, index) in itemsPaginated"
         :key="client.id"
+        :class="[tableTrStyle, index % 2 === 0 ? tableTrOddStyle : '']"
       >
         <checkbox-cell
           v-if="checkable"

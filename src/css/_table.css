@@ -7,7 +7,7 @@ thead {
 }
 
 tr {
-  @apply max-w-full block relative border-b-4 border-gray-100
+  @apply max-w-full block relative border-b-4
     lg:table-row lg:border-b-0 dark:border-gray-700;
 }
 
@@ -20,20 +20,20 @@ th {
 }
 
 td {
-  @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
+  @apply flex justify-between text-right py-3 px-4 align-top border-b
     lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
-}
-
-tr:nth-child(odd) td {
-  @apply lg:bg-gray-50 lg:dark:bg-gray-800;
 }
 
 td:last-child {
   @apply border-b-0;
 }
 
-tbody tr:hover td {
-  @apply lg:bg-gray-100 lg:dark:bg-gray-700 lg:dark:bg-opacity-70;
+tbody tr, tbody tr:nth-child(odd) {
+  @apply lg:dark:hover:bg-gray-700 lg:dark:hover:bg-opacity-70;
+}
+
+tbody tr:nth-child(odd) {
+  @apply lg:dark:bg-gray-800;
 }
 
 td:before {
