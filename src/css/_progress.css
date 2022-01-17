@@ -3,7 +3,7 @@ progress {
 }
 
 progress::-webkit-progress-bar {
-  @apply bg-gray-200 dark:bg-blue-200;
+  @apply bg-blue-200;
 }
 
 progress::-webkit-progress-value {

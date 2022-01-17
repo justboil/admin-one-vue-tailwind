@@ -31,7 +31,7 @@
 }
 
 .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
-  @apply bg-no-repeat bg-center bg-blue-500 border-blue-500 border-4;
+  @apply bg-no-repeat bg-center bg-blue-600 border-blue-600 border-4;
 }
 
 .checkbox input[type=checkbox]:checked+.check {
@@ -43,7 +43,7 @@
 }
 
 .switch input[type=checkbox]:checked+.check {
-  @apply bg-blue-500 border-blue-500;
+  @apply bg-blue-600 border-blue-600;
 }
 
 .switch input[type=checkbox]+.check:before {
@@ -53,7 +53,7 @@
 
 .switch input[type=checkbox]:checked+.check:before {
   transform: translate3d(110%, 0 ,0);
-  @apply border-blue-500;
+  @apply border-blue-600;
 }
 
 .checkbox .control-label, .radio .control-label, .switch .control-label {
