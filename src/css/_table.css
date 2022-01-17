@@ -61,7 +61,3 @@ td.image-cell:before, td.actions-cell:before {
 td.image-cell .image {
   @apply w-24 h-24 mx-auto lg:w-6 lg:h-6;
 }
-
-.table-pagination {
-  @apply px-6 py-3 border-t border-gray-100 dark:border-gray-800;
-}
