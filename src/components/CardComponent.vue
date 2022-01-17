@@ -24,7 +24,8 @@ const props = defineProps({
   hasTable: Boolean,
   empty: Boolean,
   form: Boolean,
-  hoverable: Boolean
+  hoverable: Boolean,
+  modal: Boolean
 })
 
 const emit = defineEmits(['header-icon-click', 'submit'])
@@ -38,7 +39,8 @@ const lightBorderStyle = computed(() => store.state.lightBorderStyle)
 const componentClass = computed(() => {
   const base = [
     props.rounded,
-    lightBorderStyle.value
+    lightBorderStyle.value,
+    props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900/70'
   ]
 
   if (props.hoverable) {
@@ -63,7 +65,7 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border dark:bg-gray-900 dark:border-gray-800"
+    class="bg-white border dark:border-gray-800"
     @submit="submit"
   >
     <header
