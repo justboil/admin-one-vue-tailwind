@@ -6,6 +6,7 @@ import * as styles from '@/styles.js'
 export default createStore({
   state: {
     /* Styles */
+    lightBorderStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
     asideMenuCloseLgStyle: '',
@@ -18,6 +19,8 @@ export default createStore({
     navBarItemLabelHoverStyle: '',
     navBarItemLabelActiveColorStyle: '',
     navBarMenuListUpperLabelStyle: '',
+    tableTrStyle: '',
+    tableTrOddStyle: '',
     overlayStyle: '',
 
     /* User */
