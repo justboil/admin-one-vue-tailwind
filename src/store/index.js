@@ -76,8 +76,6 @@ export default createStore({
       document.documentElement.className = style.html
 
       commit('styles', style)
-
-      dispatch('darkMode', false)
     },
 
     asideMobileToggle ({ commit, state }, payload = null) {
