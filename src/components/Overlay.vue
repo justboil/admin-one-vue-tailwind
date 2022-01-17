@@ -34,7 +34,7 @@ const overlayStyle = computed(() => store.state.overlayStyle)
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute inset-0 bg-gradient-to-tr opacity-90"
+        class="absolute inset-0 bg-gradient-to-tr opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
         :class="[overlayStyle]"
         @click="overlayClick"
       />
