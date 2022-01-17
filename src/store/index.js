@@ -54,6 +54,10 @@ export default createStore({
     /* Styles */
     styles (state, payload) {
       for (const key in payload) {
+        if (['body','html'].includes(key)) {
+          continue
+        }
+
         state[`${key}Style`] = payload[key]
       }
     },
