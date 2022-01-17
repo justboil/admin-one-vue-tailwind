@@ -20,7 +20,7 @@ import {
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
 import NavBarMenu from '@/components/NavBarMenu.vue'
-import NavBarMenuDivider from '@/components/NavBarMenuDivider.vue'
+import Divider from '@/components/Divider.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import Icon from '@/components/Icon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
@@ -121,7 +121,7 @@ const menuOpenLg = () => {
                 label="Item Two"
               />
             </nav-bar-item>
-            <nav-bar-menu-divider />
+            <divider nav-bar />
             <nav-bar-item>
               <nav-bar-item-label
                 :icon="mdiCrop"
@@ -154,7 +154,7 @@ const menuOpenLg = () => {
                 label="Messages"
               />
             </nav-bar-item>
-            <nav-bar-menu-divider />
+            <divider nav-bar />
             <nav-bar-item>
               <nav-bar-item-label
                 :icon="mdiLogout"
