@@ -7,6 +7,8 @@ import JbButton from '@/components/JbButton.vue'
 
 const store = useStore()
 
+const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+
 const darkMode = computed(() => store.state.darkMode)
 
 const darkModeToggle = () => {
@@ -15,7 +17,10 @@ const darkModeToggle = () => {
 </script>
 
 <template>
-  <section class="bg-white border-t border-b border-gray-100 p-6 dark:bg-gray-900 dark:border-gray-900 dark:text-white">
+  <section
+    :class="lightBorderStyle"
+    class="bg-white border-t border-b p-6 dark:bg-gray-900 dark:border-gray-900 dark:text-white"
+  >
     <level>
       <h1 class="text-3xl font-semibold leading-tight">
         <slot />

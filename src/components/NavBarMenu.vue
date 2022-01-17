@@ -14,6 +14,8 @@ defineProps({
 
 const store = useStore()
 
+const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+
 const navBarMenuListUpperLabelStyle = computed(() => store.state.navBarMenuListUpperLabelStyle)
 
 const isDropdownActive = ref(false)
@@ -62,10 +64,10 @@ onBeforeUnmount(() => {
       />
     </a>
     <div
-      class="text-sm border-gray-100 border-b lg:border-b-0 lg:border-gray-200 lg:border-t lg:bg-white lg:absolute
+      class="text-sm border-b lg:border-b-0 lg:border-gray-200 lg:border-t lg:bg-white lg:absolute
           lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:shadow-md lg:rounded-b lg:dark:bg-gray-800
           dark:border-gray-700"
-      :class="{'lg:hidden':!isDropdownActive}"
+      :class="[lightBorderStyle, {'lg:hidden':!isDropdownActive}]"
     >
       <slot name="dropdown" />
     </div>

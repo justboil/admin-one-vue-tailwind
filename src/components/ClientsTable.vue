@@ -15,6 +15,8 @@ defineProps({
 
 const store = useStore()
 
+const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+
 const darkMode = computed(() => store.state.darkMode)
 
 const items = computed(() => store.state.clients)
@@ -176,7 +178,10 @@ const checked = (isChecked, client) => {
       </tr>
     </tbody>
   </table>
-  <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800">
+  <div
+    :class="lightBorderStyle"
+    class="p-3 lg:px-6 border-t dark:border-gray-800"
+  >
     <level>
       <jb-buttons>
         <jb-button

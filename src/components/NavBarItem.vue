@@ -65,7 +65,7 @@ const componentClass = computed(() => {
   }
 
   if (props.hasDivider) {
-    base.push('lg:border-r', 'lg:border-gray-100', 'lg:dark:border-gray-800')
+    base.push('lg:border-r', store.state.lightBorderStyle, 'lg:dark:border-gray-800')
   }
 
   if (props.isDesktopIconOnly) {

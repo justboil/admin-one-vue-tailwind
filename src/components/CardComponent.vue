@@ -1,5 +1,6 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
+import { useStore } from 'vuex'
 import { computed } from 'vue'
 import Icon from '@/components/Icon.vue'
 
@@ -30,9 +31,14 @@ const emit = defineEmits(['header-icon-click', 'submit'])
 
 const is = computed(() => props.form ? 'form' : 'div')
 
+const store = useStore()
+
+const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+
 const componentClass = computed(() => {
   const base = [
-    props.rounded
+    props.rounded,
+    lightBorderStyle.value
   ]
 
   if (props.hoverable) {
@@ -57,12 +63,13 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border border-gray-100 dark:bg-gray-900 dark:border-gray-800"
+    class="bg-white border dark:bg-gray-900 dark:border-gray-800"
     @submit="submit"
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-gray-800"
+      :class="lightBorderStyle"
+      class="flex items-stretch border-b dark:border-gray-800"
     >
       <p
         class="flex items-center py-3 grow font-bold"
