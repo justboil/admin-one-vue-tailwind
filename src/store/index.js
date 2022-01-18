@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import {darkModeKey, styleKey } from '@/config.js'
+import { darkModeKey, styleKey } from '@/config.js'
 import * as styles from '@/styles.js'
 
 export default createStore({
