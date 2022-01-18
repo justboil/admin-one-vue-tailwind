@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { darkModeKey } from '@/config.js'
+import { darkModeKey, styleKey } from '@/config.js'
 
 import './css/main.css'
 
@@ -12,12 +12,10 @@ store.dispatch('fetch', 'clients')
 store.dispatch('fetch', 'history')
 
 /* App style */
-store.dispatch('setStyle', 'basic')
+store.dispatch('setStyle', localStorage[styleKey] ?? 'basic')
 
 /* Dark mode */
-const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
-
-if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorageDarkModeValue === '1') {
+if ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage[darkModeKey] === '1') {
   store.dispatch('darkMode', true)
 }
 
