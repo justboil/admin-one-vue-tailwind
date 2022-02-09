@@ -89,7 +89,6 @@ const darkMode = computed(() => store.state.darkMode)
         size="48"
         w=""
         h="h-16"
-        :class="color"
       />
     </level>
   </card-component>

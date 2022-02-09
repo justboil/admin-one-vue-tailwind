@@ -37,7 +37,6 @@ const iconStyle = computed(
     :w="w"
     :h="h"
     size="24"
-    class="rounded-full"
-    :class="iconStyle"
+    class="rounded-full border-2 border-gray-900"
   />
 </template>

@@ -29,8 +29,7 @@ const name = computed(() => props.username ? props.username : store.state.userNa
     <img
       :src="avatar"
       :alt="name"
-      class="rounded-full block h-auto w-full max-w-full dark:bg-gray-800"
-      :class="lightBgStyle"
+      class="rounded-full -border-2 border-gray-900 block h-auto w-full max-w-full dark:bg-gray-800"
     >
   </div>
 </template>
