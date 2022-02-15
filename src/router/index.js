@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Style from '@/views/Style.vue'
 import Home from '@/views/Home.vue'
 
 const routes = [
@@ -9,7 +10,7 @@ const routes = [
     },
     path: '/',
     name: 'style',
-    component: () => import(/* webpackChunkName: "style" */ '@/views/Style.vue')
+    component: Style
   },
   {
     // Document title tag
