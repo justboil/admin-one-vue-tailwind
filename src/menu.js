@@ -27,8 +27,7 @@ export default [
     {
       to: '/tables',
       label: 'Tables',
-      icon: mdiTable,
-      updateMark: true
+      icon: mdiTable
     },
     {
       to: '/forms',
