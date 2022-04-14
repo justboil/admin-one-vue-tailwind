@@ -1,12 +1,16 @@
-# [Admin One &mdash; Free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+# [Admin One &mdash; Free Vue 3.x Tailwind 3.x Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+
+### Tailwind 3.x Vue 3.x with Vue CLI, Vite or Laravel
 
 [![Free Vue 3 Tailwind 3 admin dashboard with dark mode](https://static.justboil.me/templates/one/repo-tailwind-vue.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 [![Vue Tailwind white & dark styles](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard.
+### Tailwind 3.x Vue 3.x with Vue CLI, Vite or Laravel
+
+**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard. Laravel 9.x integration available.
 
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
 * **Vite** and **Vue CLI** build tools
