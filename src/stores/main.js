@@ -3,7 +3,7 @@ import * as styles from '@/styles'
 import { darkModeKey, styleKey } from '@/config'
 import axios from 'axios'
 
-export const useMainStore = defineStore('root', {
+export const useMainStore = defineStore('main', {
   state: () => ({
     /* Styles */
     lightBorderStyle: '',
@@ -98,7 +98,7 @@ export const useMainStore = defineStore('root', {
       document.documentElement.classList[payload ? 'add' : 'remove']('full-screen')
     },
 
-    darkMode (payload = null) {
+    setDarkMode (payload = null) {
       const value = payload !== null ? payload : !this.darkMode
 
       document.documentElement.classList[value ? 'add' : 'remove']('dark')
