@@ -24,3 +24,4 @@ npx tailwindcss init
 
 ### Copy styles, components and scripts
 
+WIP - work in progress. Full guide is coming soon...
