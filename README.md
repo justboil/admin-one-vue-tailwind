@@ -21,7 +21,7 @@
 * **Production CSS** is only **38kb**
 * Reusable components
 * Free under MIT License
-* [Laravel 9.x integration](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel/README.md) available
+* [Laravel 9.x integration](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel-guide/README.md) available
 * [Premium version](https://justboil.me/tailwind-admin-templates/vue-dashboard/) available
 
 ## Table of Contents
@@ -141,7 +141,7 @@ npm run lint:fix
 
 ### Laravel 9.x integration
 
-This dashboard can be integrated with Laravel 9.x Jetstream Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel/README.md) for more information
+This dashboard can be integrated with Laravel 9.x Jetstream Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel-guide/README.md) for more information
 
 ## Browser Support
 
