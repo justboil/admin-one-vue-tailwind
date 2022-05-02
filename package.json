@@ -18,8 +18,7 @@
     "numeral": "^2.0.6",
     "pinia": "^2.0.13",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
