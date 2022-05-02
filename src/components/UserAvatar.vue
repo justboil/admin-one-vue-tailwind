@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -13,15 +13,15 @@ const props = defineProps({
   }
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBgStyle = computed(() => store.state.lightBgStyle)
+const lightBgStyle = computed(() => mainStore.lightBgStyle)
 
 const avatar = computed(() => props.username
   ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
-  : store.state.userAvatar)
+  : mainStore.userAvatar)
 
-const name = computed(() => props.username ? props.username : store.state.userName)
+const name = computed(() => props.username ? props.username : mainStore.userName)
 </script>
 
 <template>

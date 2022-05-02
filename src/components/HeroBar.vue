@@ -1,18 +1,18 @@
 <script setup>
 import { mdiThemeLightDark } from '@mdi/js'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 import Level from '@/components/Level.vue'
 import JbButton from '@/components/JbButton.vue'
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 
 const darkModeToggle = () => {
-  store.dispatch('darkMode')
+  mainStore.setDarkMode()
 }
 </script>
 

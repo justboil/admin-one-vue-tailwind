@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import {
   mdiAccountMultiple,
   mdiCartOutline,
@@ -37,13 +37,13 @@ onMounted(() => {
   fillChartData()
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const clientBarItems = computed(() => store.state.clients.slice(0, 3))
+const clientBarItems = computed(() => mainStore.clients.slice(0, 3))
 
-const transactionBarItems = computed(() => store.state.history.slice(0, 3))
+const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>

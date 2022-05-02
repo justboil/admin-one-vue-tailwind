@@ -1,7 +1,7 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import CardComponent from '@/components/CardComponent.vue'
 import GrowingNumber from '@/components/GrowingNumber.vue'
 import Icon from '@/components/Icon.vue'
@@ -44,9 +44,9 @@ defineProps({
   }
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>

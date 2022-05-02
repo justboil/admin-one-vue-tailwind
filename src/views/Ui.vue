@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import {
   mdiMonitorCellphone,
   mdiSelectColor,
@@ -47,10 +47,10 @@ const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') >
 
 const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
 
-const store = useStore()
+const mainStore = useMainStore()
 
 const darkModeToggle = () => {
-  store.dispatch('darkMode')
+  mainStore.setDarkMode()
 }
 </script>
 

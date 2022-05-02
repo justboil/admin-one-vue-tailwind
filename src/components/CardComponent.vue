@@ -1,6 +1,6 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 import Icon from '@/components/Icon.vue'
 
@@ -32,9 +32,9 @@ const emit = defineEmits(['header-icon-click', 'submit'])
 
 const is = computed(() => props.form ? 'form' : 'div')
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 
 const componentClass = computed(() => {
   const base = [

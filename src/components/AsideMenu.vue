@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { mdiMenu } from '@mdi/js'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 import NavBarItem from '@/components/NavBarItem.vue'
@@ -13,24 +13,24 @@ defineProps({
   }
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const asideStyle = computed(() => store.state.asideStyle)
+const asideStyle = computed(() => mainStore.asideStyle)
 
-const asideBrandStyle = computed(() => store.state.asideBrandStyle)
+const asideBrandStyle = computed(() => mainStore.asideBrandStyle)
 
-const asideMenuCloseLgStyle = computed(() => store.state.asideMenuCloseLgStyle)
+const asideMenuCloseLgStyle = computed(() => mainStore.asideMenuCloseLgStyle)
 
-const asideMenuLabelStyle = computed(() => store.state.asideMenuLabelStyle)
+const asideMenuLabelStyle = computed(() => mainStore.asideMenuLabelStyle)
 
-const isFullScreen = computed(() => store.state.isFullScreen)
+const isFullScreen = computed(() => mainStore.isFullScreen)
 
-const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
+const isAsideMobileExpanded = computed(() => mainStore.isAsideMobileExpanded)
 
-const isAsideLgActive = computed(() => store.state.isAsideLgActive)
+const isAsideLgActive = computed(() => mainStore.isAsideLgActive)
 
 const asideLgClose = () => {
-  store.dispatch('asideLgToggle', false)
+  mainStore.asideLgToggle(false)
 }
 
 const menuClick = (event, item) => {

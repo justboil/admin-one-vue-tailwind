@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { sectionBgLogin } from '@/colors.js'
 import MainSection from '@/components/MainSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
@@ -17,15 +17,15 @@ const styles = [
   }
 ]
 
-const store = useStore()
+const mainStore = useMainStore()
 
-store.dispatch('darkMode', false)
+mainStore.setDarkMode(false)
 
 const router = useRouter()
 
 const click = slug => {
-  store.dispatch('setStyle', slug)
-  store.dispatch('darkMode', false)
+  mainStore.setStyle(slug)
+  mainStore.setDarkMode(false)
   router.push('/dashboard')
 }
 </script>
@@ -39,7 +39,7 @@ const click = slug => {
       Pick a style&hellip;
     </h1>
     <h2 class="text-xl md:text-2xl text-center text-white mb-12 md:mb-24">
-      Style switching with a single <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">store.dispatch()</code>
+      Style switching with a single <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">action()</code>
     </h2>
     <div class="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
       <card-component

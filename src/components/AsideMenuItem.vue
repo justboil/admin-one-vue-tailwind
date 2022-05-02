@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
@@ -15,15 +15,15 @@ const props = defineProps({
 
 const emit = defineEmits(['menu-click'])
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const asideMenuItemStyle = computed(() => store.state.asideMenuItemStyle)
+const asideMenuItemStyle = computed(() => mainStore.asideMenuItemStyle)
 
-const asideMenuItemActiveStyle = computed(() => store.state.asideMenuItemActiveStyle)
+const asideMenuItemActiveStyle = computed(() => mainStore.asideMenuItemActiveStyle)
 
-const asideMenuItemInactiveStyle = computed(() => store.state.asideMenuItemInactiveStyle)
+const asideMenuItemInactiveStyle = computed(() => mainStore.asideMenuItemInactiveStyle)
 
-const asideSubmenuListStyle = computed(() => store.state.asideSubmenuListStyle)
+const asideSubmenuListStyle = computed(() => mainStore.asideSubmenuListStyle)
 
 const isDropdownActive = ref(false)
 

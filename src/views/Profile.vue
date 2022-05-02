@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
@@ -14,13 +14,13 @@ import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import UserCard from '@/components/UserCard.vue'
 
-const store = useStore()
+const mainStore = useMainStore()
 
 const titleStack = ref(['Admin', 'Profile'])
 
 const profileForm = reactive({
-  name: store.state.userName,
-  email: store.state.userEmail
+  name: mainStore.userName,
+  email: mainStore.userEmail
 })
 
 const passwordForm = reactive({
@@ -30,7 +30,7 @@ const passwordForm = reactive({
 })
 
 const submitProfile = () => {
-  store.commit('user', profileForm)
+  mainStore.setUser(profileForm)
 }
 
 const submitPass = () => {

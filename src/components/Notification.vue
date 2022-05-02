@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, useSlots } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { mdiClose } from '@mdi/js'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 import Level from '@/components/Level.vue'
@@ -33,9 +33,9 @@ const slots = useSlots()
 
 const hasRightSlot = computed(() => slots.right)
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>

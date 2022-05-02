@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import ModalBox from '@/components/ModalBox.vue'
 import CheckboxCell from '@/components/CheckboxCell.vue'
@@ -13,19 +13,19 @@ defineProps({
   checkable: Boolean
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 
-const lightBgStyle = computed(() => store.state.lightBgStyle)
+const lightBgStyle = computed(() => mainStore.lightBgStyle)
 
-const tableTrStyle = computed(() => store.state.tableTrStyle)
+const tableTrStyle = computed(() => mainStore.tableTrStyle)
 
-const tableTrOddStyle = computed(() => store.state.tableTrOddStyle)
+const tableTrOddStyle = computed(() => mainStore.tableTrOddStyle)
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 
-const items = computed(() => store.state.clients)
+const items = computed(() => mainStore.clients)
 
 const isModalActive = ref(false)
 

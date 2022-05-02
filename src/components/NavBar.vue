@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import {
   mdiForwardburger,
   mdiBackburger,
@@ -25,23 +25,23 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import Icon from '@/components/Icon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 
 const toggleLightDark = () => {
-  store.dispatch('darkMode')
+  mainStore.setDarkMode()
 }
 
-const isNavBarVisible = computed(() => !store.state.isFullScreen)
+const isNavBarVisible = computed(() => !mainStore.isFullScreen)
 
-const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
+const isAsideMobileExpanded = computed(() => mainStore.isAsideMobileExpanded)
 
-const userName = computed(() => store.state.userName)
+const userName = computed(() => mainStore.userName)
 
 const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
 
-const menuToggleMobile = () => store.dispatch('asideMobileToggle')
+const menuToggleMobile = () => mainStore.asideMobileToggle()
 
 const isMenuNavBarActive = ref(false)
 
@@ -52,7 +52,7 @@ const menuNavBarToggle = () => {
 }
 
 const menuOpenLg = () => {
-  store.dispatch('asideLgToggle', true)
+  mainStore.asideLgToggle(true)
 }
 </script>
 

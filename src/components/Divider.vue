@@ -1,14 +1,14 @@
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 
 const props = defineProps({
   navBar: Boolean
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -37,10 +37,10 @@ const is = computed(() => {
   return 'div'
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
 const componentClass = computed(() => {
-  const activeColor = props.activeColor ?? `${store.state.navBarItemLabelActiveColorStyle} dark:text-gray-400`
+  const activeColor = props.activeColor ?? `${mainStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
 
   const base = [
     props.type,
@@ -51,7 +51,7 @@ const componentClass = computed(() => {
     'cursor-pointer',
     props.active
       ? activeColor
-      : `${store.state.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${store.state.navBarItemLabelHoverStyle}`
+      : `${mainStore.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${mainStore.navBarItemLabelHoverStyle}`
   ]
 
   if (props.type === 'block') {
@@ -65,7 +65,7 @@ const componentClass = computed(() => {
   }
 
   if (props.hasDivider) {
-    base.push('lg:border-r', store.state.lightBorderStyle, 'lg:dark:border-gray-800')
+    base.push('lg:border-r', mainStore.lightBorderStyle, 'lg:dark:border-gray-800')
   }
 
   if (props.isDesktopIconOnly) {

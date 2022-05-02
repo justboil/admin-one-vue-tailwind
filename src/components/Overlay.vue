@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 
 defineProps({
   zIndex: {
@@ -15,9 +15,9 @@ const overlayClick = event => {
   emit('overlay-click', event)
 }
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const overlayStyle = computed(() => store.state.overlayStyle)
+const overlayStyle = computed(() => mainStore.overlayStyle)
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { sectionBgLogin, sectionBgLoginDark, sectionBgError, sectionBgErrorDark } from '@/colors'
 import MainSection from '@/components/MainSection.vue'
 
@@ -12,9 +12,9 @@ const props = defineProps({
   }
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const darkMode = computed(() => store.state.darkMode)
+const darkMode = computed(() => mainStore.darkMode)
 
 const colorClass = computed(() => {
   switch (props.bg) {

@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
@@ -12,11 +12,11 @@ defineProps({
   }
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => store.state.lightBorderStyle)
+const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
 
-const navBarMenuListUpperLabelStyle = computed(() => store.state.navBarMenuListUpperLabelStyle)
+const navBarMenuListUpperLabelStyle = computed(() => mainStore.navBarMenuListUpperLabelStyle)
 
 const isDropdownActive = ref(false)
 
