@@ -27,7 +27,6 @@
     "@vitejs/plugin-vue": "^2.0.0",
     "@vue/cli-plugin-babel": "^5.0.0",
     "@vue/cli-plugin-eslint": "^5.0.0",
-    "@vue/cli-plugin-router": "^5.0.0",
     "@vue/cli-service": "^5.0.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-standard": "^6.0.0",
