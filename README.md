@@ -15,10 +15,11 @@
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
 * **Vite** and **Vue CLI** build tools
 * **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
+* **Pinia** state library (official Vuex 5)
 * **Dark mode**
 * **Styled** scrollbars
-* SPA with **Vuex** & **Router**
-* **Production CSS** is only **38kb**
+* SPA with **Router**
+* **Production CSS** is only **&thickapprox;38kb**
 * Reusable components
 * Free under MIT License
 * [Laravel 9.x integration](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel-guide/README.md) available
