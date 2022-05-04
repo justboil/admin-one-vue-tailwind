@@ -1,8 +1,23 @@
 # Free Laravel Vue 3.x Tailwind 3.x Dashboard
 
+[![Vue 3.x Tailwind 3.x admin dashboard demo](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+
 This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
 **Please note:** this document is work in progress, so [some things are missing](#work-in-progress).
+
+**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard with Laravel 9.x integration.
+
+* Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
+* **Laravel Mix** build tools
+* **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
+* **Pinia** state library (official Vuex 5)
+* **Dark mode**
+* **Styled** scrollbars
+* **Jetstream** with **Inertia + Vue** stack
+* **Production CSS** is only **&thickapprox;38kb**
+* Reusable components
+* Free under MIT License
 
 ## Table of contents
 
@@ -18,7 +33,7 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 
 * [Install Laravel](https://laravel.com/docs/installation) application
 * [Install Jetstream](https://jetstream.laravel.com/2.x/installation.html) with Inertia + Vue stack
-* `cd` to project dir and run `npm i vuex @mdi/js chart.js numeral autoprefixer -D`
+* `cd` to project dir and run `npm i pinia @mdi/js chart.js numeral autoprefixer -D`
 
 Add `require('autoprefixer')` to PostCSS plugin options in `webpack.mix.js`:
 
@@ -40,7 +55,7 @@ Clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vu
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
 * Copy `.laravel-guide/tailwind.config.js` to `/`
-* Copy `src/components` `src/store` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
+* Copy `src/components` `src/stores` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
 * Copy `.laravel-guide/resources/js/app.js` to `resources/js/` (this is an adapted version of src/main.js)
 * Copy `src/App.vue` to `resources/layouts/`
 * Copy `.laravel-guide/resources/js/Pages/Auth/Login.vue` to `resources/js/Pages/Auth/`
@@ -51,7 +66,7 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 ##### In resources/layouts/App.vue
 
 * Replace `<router-view />` with `<slot />`
-* Add `store.dispatch('fullScreenToggle', false)` after `const store = useStore()`
+* Add `mainStore.fullScreenToggle(false)` after `const mainStore = useMainStore()`
 
 ##### In resources/views/app.blade.php
 
@@ -364,13 +379,17 @@ indent_size = 2
 
 ### Fix Pages/Welcome.vue
 
-In case, you need Pages/Welcome.vue, add `mounted` hook to remove unnecessary padding, which is set by default:
+In case, you need Pages/Welcome.vue, add `import` and `setup()` to remove unnecessary padding, which is set by default:
 
 ```js
+import { useMainStore } from '@/stores/main'
+// ...
+
 export default defineComponent({
   // ...
-  mounted () {
-    this.$store.dispatch('fullScreenToggle', true)
+  setup () {
+    const mainStore = useMainStore()
+    mainStore.fullScreenToggle(true)
   }
 })
 ```
