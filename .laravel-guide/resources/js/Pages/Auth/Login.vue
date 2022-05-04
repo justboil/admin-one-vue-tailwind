@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useMainStore } from '@/stores/main'
 import { useForm } from '@inertiajs/inertia-vue3'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import FullScreenSection from '@/components/FullScreenSection.vue'
@@ -17,9 +17,9 @@ const form = useForm({
   remember: []
 })
 
-const store = useStore()
+const mainStore = useMainStore()
 
-store.dispatch('fullScreenToggle', true)
+mainStore.fullScreenToggle(true)
 
 const submit = () => {
   form
