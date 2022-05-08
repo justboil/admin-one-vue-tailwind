@@ -1,6 +1,6 @@
 # Vuex fallback guide
 
-[Admin One](https://github.com/justboil/admin-one-vue-tailwind) now uses [Pinia](https://pinia.vuejs.org/) as a state management library instead of Vuex. This is because the official state management library for Vue has changed to Pinia.
+[Admin One](https://github.com/justboil/admin-one-vue-tailwind) now uses [Pinia](https://pinia.vuejs.org/) as a state management library instead of Vuex. This is because the official state management library for Vue has changed to Pinia (official Vuex 5).
 
 However, if you still would like to use Vuex, general steps are described below. Please check [v2.1.0](https://github.com/justboil/admin-one-vue-tailwind/releases/tag/v2.1.0) for reference.
 
