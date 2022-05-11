@@ -1,7 +1,7 @@
 <script>
-import { h } from 'vue'
+import { h, defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'JbButtons',
   props: {
     noWrap: Boolean,
@@ -51,5 +51,5 @@ export default {
         : null
     )
   }
-}
+})
 </script>
