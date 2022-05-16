@@ -6,6 +6,7 @@ import { darkModeKey, styleKey } from '@/config.js'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
+import { Inertia } from '@inertiajs/inertia'
 
 const pinia = createPinia()
 
@@ -34,3 +35,9 @@ mainStore.setStyle(localStorage[styleKey] ?? 'basic')
 if ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage[darkModeKey] === '1') {
   mainStore.setDarkMode(true)
 }
+
+/* Collapse mobile aside menu on route change */
+Inertia.on('navigate', (event) => {
+  mainStore.asideMobileToggle(false)
+  mainStore.asideLgToggle(false)
+})
