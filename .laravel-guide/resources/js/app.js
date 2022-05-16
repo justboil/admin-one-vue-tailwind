@@ -10,7 +10,7 @@ import { Inertia } from '@inertiajs/inertia'
 
 const pinia = createPinia()
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,
@@ -22,7 +22,7 @@ createInertiaApp({
       .mixin({ methods: { route }})
       .mount(el)
   },
-});
+})
 
 InertiaProgress.init({ color: '#4B5563' })
 
