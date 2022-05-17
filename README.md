@@ -14,6 +14,7 @@
 
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
 * **Vite** and **Vue CLI** build tools
+* **Laravel Jetstream Inertia Vue** integration available &mdash; [Info](#laravel-9x-integration)
 * **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Pinia** state library (official Vuex 5)
 * **Dark mode**
@@ -22,7 +23,6 @@
 * **Production CSS** is only **&thickapprox;38kb**
 * Reusable components
 * Free under MIT License
-* [Laravel 9.x integration](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel-guide/README.md) available
 * [Premium version](https://justboil.me/tailwind-admin-templates/vue-dashboard/) available
 
 ## Table of Contents
@@ -142,7 +142,7 @@ npm run lint:fix
 
 ### Laravel 9.x integration
 
-This dashboard can be integrated with Laravel 9.x Jetstream Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/blob/master/.laravel-guide/README.md) for more information
+This dashboard can be integrated with Laravel 9.x Jetstream Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
 
 ## Browser Support
 
