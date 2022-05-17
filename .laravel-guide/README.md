@@ -110,9 +110,9 @@ Here's the result:
 
 Add route in `routes/web.php`. There's a `/dashboard` route already defined by default, so just replace `Inertia::render('Dashboard')` with `Inertia::render('Home')`:
 
-```injectablephp
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Home');
+```php
+Route::get('/dashboard', function () {
+  return Inertia::render('Home');
 })->name('dashboard');
 ```
 
@@ -151,7 +151,7 @@ export default [
 
 Route names reflect ones defined in `routes/web.php`:
 
-```injectablephp
+```php
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Home');
 })->name('dashboard');
