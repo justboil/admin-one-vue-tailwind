@@ -54,6 +54,10 @@ const menuNavBarToggle = () => {
 const menuOpenLg = () => {
   mainStore.asideLgToggle(true)
 }
+
+const logout = () => {
+  //
+}
 </script>
 
 <template>
@@ -185,7 +189,10 @@ const menuOpenLg = () => {
             is-desktop-icon-only
           />
         </nav-bar-item>
-        <nav-bar-item is-desktop-icon-only>
+        <nav-bar-item
+          is-desktop-icon-only
+          @click="logout"
+        >
           <nav-bar-item-label
             :icon="mdiLogout"
             label="Log out"
