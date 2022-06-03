@@ -25,6 +25,7 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 * [Copy styles, components and scripts](#copy-styles-components-and-scripts)
 * [Add pages](#add-pages)
 * [Fix router links](#fix-router-links)
+* [Add Inertia-related stuff](#add-inertia-related-stuff)
 * [Optional steps](#optional-steps)
 * [Delete unused files](#delete-unused-files)
 * [Work in progress](#work-in-progress)
@@ -364,6 +365,41 @@ Then, update attributes in `<component>`:
     <slot />
   </component>
 </template>
+```
+
+## Add Inertia-related stuff
+
+##### resources/js/components/UserAvatar.vue
+
+Fix `avatar` computed property, so it fetches user's profile photo from backend
+
+```vue
+<script setup>
+import { usePage } from '@inertiajs/inertia-vue3'
+// ...
+const avatar = computed(() => props.username
+  ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
+  : usePage().props.value.user.profile_photo_url)
+// ...
+</script>
+```
+
+##### resources/js/components/NavBar.vue
+
+Update `userName` and `logout`:
+
+```vue
+<script setup>
+import { usePage } from '@inertiajs/inertia-vue3'
+import { Inertia } from '@inertiajs/inertia'
+// ...
+
+const userName = computed(() => usePage().props.value.user.name)
+
+const logout = () => {
+  Inertia.post(route('logout'))
+}
+</script>
 ```
 
 ## Optional steps
