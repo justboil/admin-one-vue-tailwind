@@ -6,6 +6,8 @@ import axios from 'axios'
 export const useMainStore = defineStore('main', {
   state: () => ({
     /* Styles */
+    style: '',
+    bodyStyle: '',
     lightBorderStyle: '',
     lightBgStyle: '',
     asideStyle: '',
@@ -60,20 +62,21 @@ export const useMainStore = defineStore('main', {
     },
 
     setStyle (payload) {
-      const style = styles[payload] ?? styles.basic
+      if (!styles[payload]) {
+        return
+      }
+
+      this.style = payload
+
+      const style = styles[payload]
 
       document.body.className = style.body
-      document.documentElement.className = style.html
 
       if (localStorage[styleKey] !== payload) {
         localStorage.setItem(styleKey, payload)
       }
 
       for (const key in style) {
-        if (['body', 'html'].includes(key)) {
-          continue
-        }
-
         this[`${key}Style`] = style[key]
       }
     },
