@@ -5,7 +5,7 @@ export const basic = {
   body: `bg-gray-50 ${bodyBase}`,
   lightBorder: 'border-gray-100',
   lightBg: 'bg-gray-100',
-  aside: 'bg-gray-800',
+  aside: 'bg-gray-800 aside-scrollbars-gray',
   asideBrand: 'bg-gray-900 text-white',
   asideMenuCloseLg: 'text-white',
   asideMenuLabel: 'text-gray-400',
@@ -23,11 +23,11 @@ export const basic = {
 }
 
 export const white = {
-  html: 'scrollbars-light',
+  html: '',
   body: `bg-white ${bodyBase}`,
   lightBorder: 'border-gray-100',
   lightBg: 'bg-gray-100',
-  aside: 'bg-white border-r border-gray-100',
+  aside: 'bg-white border-r border-gray-100 aside-scrollbars-light',
   asideBrand: '',
   asideMenuCloseLg: '',
   asideMenuLabel: 'dark:text-gray-400',

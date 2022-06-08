@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   content: [
     './public/index.html',
@@ -5,6 +7,10 @@ module.exports = {
   ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    asideScrollbars: {
+      light: 'light',
+      gray: 'gray'
+    },
     extend: {
       zIndex: {
         '-1': '-1'
@@ -37,6 +43,28 @@ module.exports = {
     }
   },
   plugins: [
-    require('@tailwindcss/forms')
+    require('@tailwindcss/forms'),
+    plugin(function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'aside-scrollbars': value => {
+            const track = value === 'light' ? '50' : '900'
+            const thumb = value === 'light' ? '300' : '600'
+            const color = value === 'light' ? 'gray' : value
+
+            return {
+              scrollbarColor: `${theme(`colors.${color}.${thumb}`)} ${theme(`colors.${color}.${track}`)}`,
+              '&::-webkit-scrollbar-track': {
+                backgroundColor: theme(`colors.${color}.${track}`)
+              },
+              '&::-webkit-scrollbar-thumb': {
+                backgroundColor: theme(`colors.${color}.${thumb}`)
+              }
+            }
+          }
+        },
+        { values: theme('asideScrollbars') }
+      )
+    })
   ]
 }
