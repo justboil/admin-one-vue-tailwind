@@ -7,14 +7,8 @@ import CardComponent from '@/components/CardComponent.vue'
 import JbLogo from '@/components/JbLogo.vue'
 
 const styles = [
-  {
-    slug: 'white',
-    title: 'White'
-  },
-  {
-    slug: 'basic',
-    title: 'Basic'
-  }
+  'white',
+  'basic'
 ]
 
 const mainStore = useMainStore()
@@ -48,18 +42,18 @@ const click = slug => {
         class="cursor-pointer shadow-2xl"
         rounded="rounded-2xl"
         hoverable
-        @click="click(style.slug)"
+        @click="click(style)"
       >
         <div class="mb-3 md:mb-6">
           <img
-            :src="`https://static.justboil.me/templates/one/small/${style.slug}.png`"
+            :src="`https://static.justboil.me/templates/one/small/${style}.png`"
             width="955"
             height="540"
           >
         </div>
 
-        <h1 class="text-xl md:text-2xl font-black">
-          {{ style.title }}
+        <h1 class="text-xl md:text-2xl font-black capitalize">
+          {{ style }}
         </h1>
         <h2 class="text-lg md:text-xl">
           & Dark mode
