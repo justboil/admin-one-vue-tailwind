@@ -28,9 +28,7 @@ const form = useForm({
   remember: []
 })
 
-const mainStore = useMainStore()
-
-mainStore.fullScreenToggle(true)
+useMainStore().fullScreenToggle(true)
 
 const submit = () => {
   form
