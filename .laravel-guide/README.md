@@ -57,7 +57,7 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 * Copy `.laravel-guide/tailwind.config.js` to `/`
 * Copy `src/components` `src/stores` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
-* Copy `.laravel-guide/resources/js/app.js` to `resources/js/` (this is an adapted version of src/main.js)
+* Copy `.laravel-guide/resources/js/` to `resources/js/`
 * Copy `src/App.vue` to `resources/layouts/`
 * Copy `.laravel-guide/resources/js/Pages/Auth/Login.vue` to `resources/js/Pages/Auth/`
 * Copy `src/css` to `resources/css`
