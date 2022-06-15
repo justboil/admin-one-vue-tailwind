@@ -30,7 +30,7 @@ const colorClass = computed(() => {
 
 <template>
   <main-section
-    class="flex h-screen items-center justify-center"
+    class="flex min-h-screen items-center justify-center"
     :class="colorClass"
   >
     <slot
