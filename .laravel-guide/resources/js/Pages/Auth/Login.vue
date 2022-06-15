@@ -1,6 +1,6 @@
 <script setup>
 import { useMainStore } from '@/stores/main'
-import { useForm, Link } from '@inertiajs/inertia-vue3'
+import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import FullScreenSection from '@/components/FullScreenSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
@@ -43,6 +43,8 @@ const submit = () => {
 </script>
 
 <template>
+  <Head title="Login" />
+
   <full-screen-section
     v-slot="{ cardClass, cardRounded }"
     bg="login"
