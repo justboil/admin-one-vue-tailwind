@@ -42,7 +42,7 @@ const props = defineProps({
   ctrlKFocus: Boolean
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'setRef'])
 
 const computedValue = computed({
   get: () => props.modelValue,
@@ -73,7 +73,21 @@ const controlIconH = computed(() => props.type === 'textarea' ? 'h-full' : 'h-12
 
 const mainStore = useMainStore()
 
+const selectEl = ref(null)
+
+const textareaEl = ref(null)
+
 const inputEl = ref(null)
+
+onMounted(() => {
+  if (selectEl.value) {
+    emit('setRef', selectEl.value)
+  } else if (textareaEl.value) {
+    emit('setRef', textareaEl.value)
+  } else {
+    emit('setRef', inputEl.value)
+  }
+})
 
 if (props.ctrlKFocus) {
   const fieldFocusHook = e => {
