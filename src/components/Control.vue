@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  inputmode: {
+    type: String,
+    default: null
+  },
   icon: {
     type: String,
     default: null
@@ -147,6 +151,7 @@ if (props.ctrlKFocus) {
       ref="inputEl"
       v-model="computedValue"
       :name="name"
+      :inputmode="inputmode"
       :autocomplete="autocomplete"
       :required="required"
       :placeholder="placeholder"
