@@ -42,7 +42,7 @@ const props = defineProps({
   ctrlKFocus: Boolean
 })
 
-const emit = defineEmits(['update:modelValue', 'right-icon-click'])
+const emit = defineEmits(['update:modelValue'])
 
 const computedValue = computed({
   get: () => props.modelValue,
