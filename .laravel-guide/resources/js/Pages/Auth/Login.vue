@@ -48,7 +48,6 @@ const submit = () => {
   <full-screen-section
     v-slot="{ cardClass, cardRounded }"
     bg="login"
-    class="flex-col"
   >
     <card-component
       :class="cardClass"
@@ -67,27 +66,31 @@ const submit = () => {
 
       <field
         label="Email"
+        label-for="email"
         help="Please enter your email"
       >
         <control
           v-model="form.email"
           :icon="mdiAccount"
-          name="email"
+          id="email"
           autocomplete="email"
           type="email"
+          required
         />
       </field>
 
       <field
         label="Password"
+        label-for="password"
         help="Please enter your password"
       >
         <control
           v-model="form.password"
           :icon="mdiAsterisk"
           type="password"
-          name="password"
+          id="password"
           autocomplete="current-password"
+          required
         />
       </field>
 
@@ -105,19 +108,21 @@ const submit = () => {
             type="submit"
             color="info"
             label="Login"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
           />
           <jb-button
-            route-name="register"
+            v-if="canResetPassword"
+            route-name="password.request"
             color="info"
             outline
-            label="Register"
+            label="Remind"
           />
         </jb-buttons>
         <Link
-          v-if="canResetPassword"
-          :href="route('password.request')"
+          :href="route('register')"
         >
-          Forgot?
+          Register
         </Link>
       </Level>
     </card-component>
