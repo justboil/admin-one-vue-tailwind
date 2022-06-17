@@ -440,6 +440,5 @@ export default defineComponent({
 As mentioned, this guide is WIP - work in progress. Contributions open. Here's the list of what's missing right now:
 
 * Pages for resources/Pages/API
-* Pages for resources/Pages/Auth (except Login.vue)
 * Pages for resources/Pages/Profile
-* Unused default Jetstream files list
+* Safe-to-delete unused Jetstream files list
