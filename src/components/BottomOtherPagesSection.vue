@@ -24,7 +24,7 @@ for (const routeIndex in routes) {
 </script>
 
 <template>
-  <titled-section last>
+  <TitledSection last>
     <h1 class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 dark:text-gray-400 mb-12">
       <span class="md:mr-3">Please star this project on</span>
       <a
@@ -32,7 +32,7 @@ for (const routeIndex in routes) {
         class="inline-flex items-center justify-center text-blue-600"
         target="_blank"
       >
-        <icon
+        <Icon
           :path="mdiGithub"
           size="36"
           class="mr-1"
@@ -46,12 +46,12 @@ for (const routeIndex in routes) {
         v-for="(screen, index) in screens"
         :key="screen.path"
       >
-        <router-link
+        <RouterLink
           :to="screen.path"
           class="text-blue-600"
         >
           {{ screen.title }}
-        </router-link>
+        </RouterLink>
         <template v-if="index + 1 < screens.length">
           ,
         </template>
@@ -66,5 +66,5 @@ for (const routeIndex in routes) {
         class="text-blue-600"
       >Premium version</a>
     </h1>
-  </titled-section>
+  </TitledSection>
 </template>

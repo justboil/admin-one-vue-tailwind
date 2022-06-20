@@ -46,130 +46,130 @@ const submit = () => {
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
-  <hero-bar>Forms</hero-bar>
+  <TitleBar :title-stack="titleStack" />
+  <HeroBar>Forms</HeroBar>
 
-  <main-section>
-    <title-sub-bar
+  <MainSection>
+    <TitleSubBar
       :icon="mdiBallotOutline"
       title="Forms example"
     />
-    <card-component
+    <CardComponent
       title="Forms"
       :icon="mdiBallot"
       form
       @submit.prevent="submit"
     >
-      <field label="Grouped with icons">
-        <control
+      <Field label="Grouped with icons">
+        <Control
           v-model="form.name"
           :icon="mdiAccount"
         />
-        <control
+        <Control
           v-model="form.email"
           type="email"
           :icon="mdiMail"
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="With help line"
         help="Do not enter the leading zero"
       >
-        <control
+        <Control
           v-model="form.phone"
           type="tel"
           placeholder="Your phone number"
         />
-      </field>
+      </Field>
 
-      <field label="Dropdown">
-        <control
+      <Field label="Dropdown">
+        <Control
           v-model="form.department"
           :options="selectOptions"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <field
+      <Field
         label="Question"
         help="Your question. Max 255 characters"
       >
-        <control
+        <Control
           type="textarea"
           placeholder="Explain how we can help you"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           type="submit"
           color="info"
           label="Submit"
         />
-        <jb-button
+        <JbButton
           type="reset"
           color="info"
           outline
           label="Reset"
         />
-      </jb-buttons>
-    </card-component>
-  </main-section>
+      </JbButtons>
+    </CardComponent>
+  </MainSection>
 
-  <titled-section>
+  <TitledSection>
     Custom elements
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
-    <card-component
+  <MainSection>
+    <CardComponent
       title="Custom elements"
       :icon="mdiBallotOutline"
     >
-      <field
+      <Field
         label="Checkbox"
         wrap-body
       >
-        <check-radio-picker
+        <CheckRadioPicker
           v-model="customElementsForm.checkbox"
           name="sample-checkbox"
           :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <field
+      <Field
         label="Radio"
         wrap-body
       >
-        <check-radio-picker
+        <CheckRadioPicker
           v-model="customElementsForm.radio"
           name="sample-radio"
           type="radio"
           :options="{ one: 'One', two: 'Two' }"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <field label="Switch">
-        <check-radio-picker
+      <Field label="Switch">
+        <CheckRadioPicker
           v-model="customElementsForm.switch"
           name="sample-switch"
           type="switch"
           :options="{ one: 'One', two: 'Two' }"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <file-picker v-model="customElementsForm.file" />
-    </card-component>
-  </main-section>
+      <FilePicker v-model="customElementsForm.file" />
+    </CardComponent>
+  </MainSection>
 
-  <bottom-other-pages-section />
+  <BottomOtherPagesSection />
 </template>

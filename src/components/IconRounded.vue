@@ -32,7 +32,7 @@ const iconStyle = computed(
 </script>
 
 <template>
-  <icon
+  <Icon
     :path="icon"
     :w="w"
     :h="h"

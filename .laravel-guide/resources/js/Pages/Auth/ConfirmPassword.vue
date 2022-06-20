@@ -32,30 +32,30 @@ const submit = () => {
 <template>
   <Head title="Secure Area" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <field>
+      <Field>
         <div class="mb-4 text-sm text-gray-600">
           This is a secure area of the application. Please confirm your password before continuing.
         </div>
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Password"
         label-for="password"
         help="Please enter your password to confirm"
       >
-        <control
+        <Control
           id="password"
           @set-ref="passwordInput = $event"
           v-model="form.password"
@@ -63,17 +63,17 @@ const submit = () => {
           required
           autocomplete="current-password"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <jb-button
+      <JbButton
         type="submit"
         color="info"
         label="Confirm"
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
       />
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

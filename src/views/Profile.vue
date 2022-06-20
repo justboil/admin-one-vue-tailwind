@@ -39,42 +39,42 @@ const submitPass = () => {
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
+  <TitleBar :title-stack="titleStack" />
 
-  <user-card />
+  <UserCard />
 
-  <main-section>
+  <MainSection>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <card-component
+      <CardComponent
         title="Edit Profile"
         :icon="mdiAccountCircle"
         form
         @submit.prevent="submitProfile"
       >
-        <field
+        <Field
           label="Avatar"
           help="Max 500kb"
         >
-          <file-picker />
-        </field>
+          <FilePicker />
+        </Field>
 
-        <field
+        <Field
           label="Name"
           help="Required. Your name"
         >
-          <control
+          <Control
             v-model="profileForm.name"
             :icon="mdiAccount"
             name="username"
             required
             autocomplete="username"
           />
-        </field>
-        <field
+        </Field>
+        <Field
           label="E-mail"
           help="Required. Your e-mail"
         >
-          <control
+          <Control
             v-model="profileForm.email"
             :icon="mdiMail"
             type="email"
@@ -82,35 +82,35 @@ const submitPass = () => {
             required
             autocomplete="email"
           />
-        </field>
+        </Field>
 
-        <divider />
+        <Divider />
 
-        <jb-buttons>
-          <jb-button
+        <JbButtons>
+          <JbButton
             color="info"
             type="submit"
             label="Submit"
           />
-          <jb-button
+          <JbButton
             color="info"
             label="Options"
             outline
           />
-        </jb-buttons>
-      </card-component>
+        </JbButtons>
+      </CardComponent>
 
-      <card-component
+      <CardComponent
         title="Change Password"
         :icon="mdiLock"
         form
         @submit.prevent="submitPass"
       >
-        <field
+        <Field
           label="Current password"
           help="Required. Your current password"
         >
-          <control
+          <Control
             v-model="passwordForm.password_current"
             :icon="mdiAsterisk"
             name="password_current"
@@ -118,15 +118,15 @@ const submitPass = () => {
             required
             autocomplete="current-password"
           />
-        </field>
+        </Field>
 
-        <divider />
+        <Divider />
 
-        <field
+        <Field
           label="New password"
           help="Required. New password"
         >
-          <control
+          <Control
             v-model="passwordForm.password"
             :icon="mdiFormTextboxPassword"
             name="password"
@@ -134,13 +134,13 @@ const submitPass = () => {
             required
             autocomplete="new-password"
           />
-        </field>
+        </Field>
 
-        <field
+        <Field
           label="Confirm password"
           help="Required. New password one more time"
         >
-          <control
+          <Control
             v-model="passwordForm.password_confirmation"
             :icon="mdiFormTextboxPassword"
             name="password_confirmation"
@@ -148,25 +148,25 @@ const submitPass = () => {
             required
             autocomplete="new-password"
           />
-        </field>
+        </Field>
 
-        <divider />
+        <Divider />
 
-        <jb-buttons>
-          <jb-button
+        <JbButtons>
+          <JbButton
             type="submit"
             color="info"
             label="Submit"
           />
-          <jb-button
+          <JbButton
             color="info"
             label="Options"
             outline
           />
-        </jb-buttons>
-      </card-component>
+        </JbButtons>
+      </CardComponent>
     </div>
-  </main-section>
+  </MainSection>
 
-  <bottom-other-pages-section />
+  <BottomOtherPagesSection />
 </template>

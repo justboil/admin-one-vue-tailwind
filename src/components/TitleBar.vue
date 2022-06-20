@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <section class="p-6">
-    <level>
+    <Level>
       <ul>
         <li
           v-for="(title, index) in titleStack"
@@ -24,14 +24,14 @@ defineProps({
           {{ title }}
         </li>
       </ul>
-      <jb-button
+      <JbButton
         href="https://github.com/justboil/admin-one-vue-tailwind"
         color="info"
         label="Star on GitHub"
         target="_blank"
         :icon="mdiGithub"
       />
-    </level>
+    </Level>
   </section>
 </template>
 

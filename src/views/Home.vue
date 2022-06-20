@@ -47,10 +47,10 @@ const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
-  <hero-bar>Dashboard</hero-bar>
-  <main-section>
-    <notification
+  <TitleBar :title-stack="titleStack" />
+  <HeroBar>Dashboard</HeroBar>
+  <MainSection>
+    <Notification
       color="info"
       :icon="mdiGithub"
     >
@@ -61,7 +61,7 @@ const darkMode = computed(() => mainStore.darkMode)
         target="_blank"
       >GitHub</a>
       <template #right>
-        <jb-button
+        <JbButton
           href="https://github.com/justboil/admin-one-vue-tailwind"
           :icon="mdiGithub"
           :outline="darkMode"
@@ -70,9 +70,9 @@ const darkMode = computed(() => mainStore.darkMode)
           small
         />
       </template>
-    </notification>
+    </Notification>
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-      <card-widget
+      <CardWidget
         trend="12%"
         trend-type="up"
         color="text-emerald-500"
@@ -80,7 +80,7 @@ const darkMode = computed(() => mainStore.darkMode)
         :number="512"
         label="Clients"
       />
-      <card-widget
+      <CardWidget
         trend="12%"
         trend-type="down"
         color="text-blue-500"
@@ -89,7 +89,7 @@ const darkMode = computed(() => mainStore.darkMode)
         prefix="$"
         label="Sales"
       />
-      <card-widget
+      <CardWidget
         trend="Overflow"
         trend-type="alert"
         color="text-red-500"
@@ -102,7 +102,7 @@ const darkMode = computed(() => mainStore.darkMode)
 
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
       <div class="flex flex-col justify-between">
-        <card-transaction-bar
+        <CardTransactionBar
           v-for="(transaction,index) in transactionBarItems"
           :key="index"
           :amount="transaction.amount"
@@ -114,7 +114,7 @@ const darkMode = computed(() => mainStore.darkMode)
         />
       </div>
       <div class="flex flex-col justify-between">
-        <card-client-bar
+        <CardClientBar
           v-for="client in clientBarItems"
           :key="client.id"
           :name="client.name"
@@ -125,12 +125,12 @@ const darkMode = computed(() => mainStore.darkMode)
       </div>
     </div>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiChartPie"
       title="Trends overview"
     />
 
-    <card-component
+    <CardComponent
       title="Performance"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -143,26 +143,26 @@ const darkMode = computed(() => mainStore.darkMode)
           class="h-96"
         />
       </div>
-    </card-component>
+    </CardComponent>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiAccountMultiple"
       title="Clients"
     />
 
-    <notification
+    <Notification
       color="info"
       :icon="mdiMonitorCellphone"
     >
       <b>Responsive table.</b> Collapses on mobile
-    </notification>
+    </Notification>
 
-    <card-component
+    <CardComponent
       :icon="mdiMonitorCellphone"
       title="Responsive table"
       has-table
     >
-      <clients-table />
-    </card-component>
-  </main-section>
+      <ClientsTable />
+    </CardComponent>
+  </MainSection>
 </template>

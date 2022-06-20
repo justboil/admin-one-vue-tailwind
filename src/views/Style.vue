@@ -25,7 +25,7 @@ const click = slug => {
 </script>
 
 <template>
-  <main-section
+  <MainSection
     :class="sectionBgLogin"
     class="min-h-screen"
   >
@@ -36,7 +36,7 @@ const click = slug => {
       Style switching with a single <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">action()</code>
     </h2>
     <div class="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
-      <card-component
+      <CardComponent
         v-for="style in styles"
         :key="style"
         class="cursor-pointer shadow-2xl"
@@ -58,12 +58,12 @@ const click = slug => {
         <h2 class="text-lg md:text-xl">
           & Dark mode
         </h2>
-      </card-component>
+      </CardComponent>
     </div>
     <div class="mx-auto mt-12 mb-6">
       <a href="https://justboil.me">
-        <jb-logo class="w-auto h-8 md:h-10 mx-auto text-white" />
+        <JbLogo class="w-auto h-8 md:h-10 mx-auto text-white" />
       </a>
     </div>
-  </main-section>
+  </MainSection>
 </template>

@@ -158,7 +158,7 @@ if (props.ctrlKFocus) {
       :type="computedType"
       :class="inputElClass"
     >
-    <control-icon
+    <ControlIcon
       v-if="icon"
       :icon="icon"
       :h="controlIconH"

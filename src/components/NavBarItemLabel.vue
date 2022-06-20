@@ -17,7 +17,7 @@ defineProps({
 
 <template>
   <slot />
-  <icon
+  <Icon
     v-if="icon"
     :path="icon"
     class="transition-colors"

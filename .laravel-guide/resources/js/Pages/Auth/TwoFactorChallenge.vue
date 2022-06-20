@@ -45,19 +45,19 @@ const submit = () => {
 <template>
   <Head title="Two-factor Confirmation" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <field>
+      <Field>
         <div class="mb-4 text-sm text-gray-600">
           <template v-if="! recovery">
             Please confirm access to your account by entering the authentication code provided by your authenticator application.
@@ -67,15 +67,15 @@ const submit = () => {
             Please confirm access to your account by entering one of your emergency recovery codes.
           </template>
         </div>
-      </field>
+      </Field>
 
-      <field
+      <Field
         v-if="!recovery"
         label="Code"
         label-for="code"
         help="Please enter one-time code"
       >
-        <control
+        <Control
           id="code"
           @set-ref="codeInput = $event"
           v-model="form.code"
@@ -84,15 +84,15 @@ const submit = () => {
           autofocus
           autocomplete="one-time-code"
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         v-else
         label="Recovery Code"
         label-for="recovery_code"
         help="Please enter recovery code"
       >
-        <control
+        <Control
           id="recovery_code"
           @set-ref="recoveryCodeInput = $event"
           v-model="form.recovery_code"
@@ -100,12 +100,12 @@ const submit = () => {
           class="mt-1 block w-full"
           autocomplete="one-time-code"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
       <Level>
-        <jb-button
+        <JbButton
           type="submit"
           color="info"
           label="Log in"
@@ -122,6 +122,6 @@ const submit = () => {
           </template>
         </button>
       </Level>
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

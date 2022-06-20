@@ -10,57 +10,57 @@ const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
+  <TitleBar :title-stack="titleStack" />
 
-  <hero-bar>Responsive layout</hero-bar>
+  <HeroBar>Responsive layout</HeroBar>
 
-  <titled-section first>
+  <TitledSection first>
     Mobile & Tablet
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
+  <MainSection>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png"
         class="block"
       >
     </div>
-  </main-section>
+  </MainSection>
 
-  <titled-section>
+  <TitledSection>
     Small laptop 1024px
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
+  <MainSection>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024.png"
         class="block"
       >
     </div>
-  </main-section>
+  </MainSection>
 
-  <main-section>
+  <MainSection>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png"
         class="block"
       >
     </div>
-  </main-section>
+  </MainSection>
 
-  <titled-section>
+  <TitledSection>
     Laptop & desktop
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
+  <MainSection>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png"
         class="block"
       >
     </div>
-  </main-section>
+  </MainSection>
 
-  <bottom-other-pages-section />
+  <BottomOtherPagesSection />
 </template>

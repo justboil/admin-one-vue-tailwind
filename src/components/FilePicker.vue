@@ -82,7 +82,7 @@ const upload = event => {
 <template>
   <div class="flex items-stretch justify-start relative">
     <label class="inline-flex">
-      <jb-button
+      <JbButton
         as="a"
         :label="label"
         :icon="icon"

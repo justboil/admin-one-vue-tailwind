@@ -119,7 +119,7 @@ Route::get('/dashboard', function () {
 
 ## Fix router links
 
-Here we replace router-link with Inertia Link.
+Here we replace RouterLink with Inertia Link.
 
 ##### resources/js/menu.js
 
@@ -204,7 +204,7 @@ const activeInactiveStyle = computed(
 In `<template>` section:
 
 * In `<component>` remove `v-slot` and `:to` attributes
-* Inside `<component>` replace `:class` attribute for `<icon>`, `<span>` and another `<icon>` with `:class="activeInactiveStyle"`
+* Inside `<component>` replace `:class` attribute for `<Icon>`, `<span>` and another `<Icon>` with `:class="activeInactiveStyle"`
 
 ```vue
 <template>
@@ -219,7 +219,7 @@ In `<template>` section:
     :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
     @click="menuClick"
   >
-    <icon
+    <Icon
       v-if="item.icon"
       :path="item.icon"
       class="flex-none"
@@ -230,7 +230,7 @@ In `<template>` section:
       class="grow"
       :class="activeInactiveStyle"
     >{{ item.label }}</span>
-    <icon
+    <Icon
       v-if="hasDropdown"
       :path="dropdownIcon"
       class="flex-none"

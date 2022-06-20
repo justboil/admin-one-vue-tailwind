@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <icon
+  <Icon
     :path="icon"
     w="w-10"
     :h="h"

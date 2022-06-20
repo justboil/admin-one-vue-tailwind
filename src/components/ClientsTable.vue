@@ -77,15 +77,15 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <modal-box
+  <ModalBox
     v-model="isModalActive"
     title="Sample modal"
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <modal-box
+  <ModalBox
     v-model="isModalDangerActive"
     large-title="Please confirm"
     button="danger"
@@ -93,7 +93,7 @@ const checked = (isChecked, client) => {
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
   <div
     v-if="checkedRows.length"
@@ -129,12 +129,12 @@ const checked = (isChecked, client) => {
         :key="client.id"
         :class="[tableTrStyle, index % 2 === 0 ? tableTrOddStyle : '']"
       >
-        <checkbox-cell
+        <CheckboxCell
           v-if="checkable"
           @checked="checked($event, client)"
         />
         <td class="image-cell">
-          <user-avatar
+          <UserAvatar
             :username="client.name"
             class="image"
           />
@@ -166,23 +166,23 @@ const checked = (isChecked, client) => {
           >{{ client.created }}</small>
         </td>
         <td class="actions-cell">
-          <jb-buttons
+          <JbButtons
             type="justify-start lg:justify-end"
             no-wrap
           >
-            <jb-button
+            <JbButton
               color="info"
               :icon="mdiEye"
               small
               @click="isModalActive = true"
             />
-            <jb-button
+            <JbButton
               color="danger"
               :icon="mdiTrashCan"
               small
               @click="isModalDangerActive = true"
             />
-          </jb-buttons>
+          </JbButtons>
         </td>
       </tr>
     </tbody>
@@ -191,9 +191,9 @@ const checked = (isChecked, client) => {
     :class="lightBorderStyle"
     class="p-3 lg:px-6 border-t dark:border-gray-800"
   >
-    <level>
-      <jb-buttons>
-        <jb-button
+    <Level>
+      <JbButtons>
+        <JbButton
           v-for="page in pagesList"
           :key="page"
           :active="page === currentPage"
@@ -202,8 +202,8 @@ const checked = (isChecked, client) => {
           small
           @click="currentPage = page"
         />
-      </jb-buttons>
+      </JbButtons>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
-    </level>
+    </Level>
   </div>
 </template>

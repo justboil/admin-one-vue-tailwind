@@ -44,7 +44,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <nav-bar-item
+  <NavBarItem
     ref="root"
     type="block"
     :has-divider="hasDivider"
@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
       :class="[ navBarMenuListUpperLabelStyle ]"
     >
       <slot />
-      <icon
+      <Icon
         :path="toggleDropdownIcon"
         class="hidden lg:inline-flex transition-colors"
       />
@@ -71,5 +71,5 @@ onBeforeUnmount(() => {
     >
       <slot name="dropdown" />
     </div>
-  </nav-bar-item>
+  </NavBarItem>
 </template>

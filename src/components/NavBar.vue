@@ -68,35 +68,35 @@ const logout = () => {
     :class="[lightBorderStyle, {'ml-60 lg:ml-0':isAsideMobileExpanded}]"
   >
     <div class="flex-1 items-stretch flex h-14">
-      <nav-bar-item
+      <NavBarItem
         type="flex lg:hidden"
         @click.prevent="menuToggleMobile"
       >
-        <icon
+        <Icon
           :path="menuToggleMobileIcon"
           size="24"
         />
-      </nav-bar-item>
-      <nav-bar-item
+      </NavBarItem>
+      <NavBarItem
         type="hidden lg:flex xl:hidden"
         @click.prevent="menuOpenLg"
       >
-        <icon
+        <Icon
           :path="mdiMenu"
           size="24"
         />
-      </nav-bar-item>
-      <nav-bar-item>
-        <nav-bar-search />
-      </nav-bar-item>
+      </NavBarItem>
+      <NavBarItem>
+        <NavBarSearch />
+      </NavBarItem>
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
-      <nav-bar-item @click.prevent="menuNavBarToggle">
-        <icon
+      <NavBarItem @click.prevent="menuNavBarToggle">
+        <Icon
           :path="menuNavBarToggleIcon"
           size="24"
         />
-      </nav-bar-item>
+      </NavBarItem>
     </div>
     <div
       class="absolute w-screen top-14 left-0 bg-white shadow
@@ -106,99 +106,99 @@ const logout = () => {
       <div
         class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
-        <nav-bar-menu has-divider>
-          <nav-bar-item-label
+        <NavBarMenu has-divider>
+          <NavBarItemLabel
             :icon="mdiMenu"
             label="Sample menu"
           />
 
           <template #dropdown>
-            <nav-bar-item>
-              <nav-bar-item-label
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiClockOutline"
                 label="Item One"
               />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiCloud"
                 label="Item Two"
               />
-            </nav-bar-item>
-            <divider nav-bar />
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <Divider nav-bar />
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiCrop"
                 label="Item Last"
               />
-            </nav-bar-item>
+            </NavBarItem>
           </template>
-        </nav-bar-menu>
-        <nav-bar-menu has-divider>
-          <nav-bar-item-label :label="userName">
-            <user-avatar class="w-6 h-6 mr-3 inline-flex" />
-          </nav-bar-item-label>
+        </NavBarMenu>
+        <NavBarMenu has-divider>
+          <NavBarItemLabel :label="userName">
+            <UserAvatar class="w-6 h-6 mr-3 inline-flex" />
+          </NavBarItemLabel>
 
           <template #dropdown>
-            <nav-bar-item to="/profile">
-              <nav-bar-item-label
+            <NavBarItem to="/profile">
+              <NavBarItemLabel
                 :icon="mdiAccount"
                 label="My Profile"
               />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiCogOutline"
                 label="Settings"
               />
-            </nav-bar-item>
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiEmail"
                 label="Messages"
               />
-            </nav-bar-item>
-            <divider nav-bar />
-            <nav-bar-item>
-              <nav-bar-item-label
+            </NavBarItem>
+            <Divider nav-bar />
+            <NavBarItem>
+              <NavBarItemLabel
                 :icon="mdiLogout"
                 label="Log Out"
               />
-            </nav-bar-item>
+            </NavBarItem>
           </template>
-        </nav-bar-menu>
-        <nav-bar-item
+        </NavBarMenu>
+        <NavBarItem
           has-divider
           is-desktop-icon-only
           @click.prevent="toggleLightDark"
         >
-          <nav-bar-item-label
+          <NavBarItemLabel
             :icon="mdiThemeLightDark"
             label="Light/Dark"
             is-desktop-icon-only
           />
-        </nav-bar-item>
-        <nav-bar-item
+        </NavBarItem>
+        <NavBarItem
           href="https://github.com/justboil/admin-one-vue-tailwind"
           has-divider
           is-desktop-icon-only
         >
-          <nav-bar-item-label
+          <NavBarItemLabel
             :icon="mdiGithub"
             label="GitHub"
             is-desktop-icon-only
           />
-        </nav-bar-item>
-        <nav-bar-item
+        </NavBarItem>
+        <NavBarItem
           is-desktop-icon-only
           @click="logout"
         >
-          <nav-bar-item-label
+          <NavBarItemLabel
             :icon="mdiLogout"
             label="Log out"
             is-desktop-icon-only
           />
-        </nav-bar-item>
+        </NavBarItem>
       </div>
     </div>
   </nav>

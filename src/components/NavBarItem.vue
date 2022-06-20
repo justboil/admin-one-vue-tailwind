@@ -31,7 +31,7 @@ const is = computed(() => {
   }
 
   if (props.to) {
-    return 'router-link'
+    return 'RouterLink'
   }
 
   return 'div'
@@ -76,7 +76,7 @@ const componentClass = computed(() => {
 })
 
 const activeClass = computed(() => {
-  return is.value === 'router-link' ? props.activeColor : null
+  return is.value === 'RouterLink' ? props.activeColor : null
 })
 </script>
 

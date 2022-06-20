@@ -23,11 +23,11 @@ const overlayClick = () => {
 </script>
 
 <template>
-  <nav-bar />
-  <aside-menu :menu="menu" />
-  <router-view />
-  <footer-bar />
-  <overlay
+  <NavBar />
+  <AsideMenu :menu="menu" />
+  <RouterView />
+  <FooterBar />
+  <Overlay
     v-show="isAsideLgActive"
     z-index="z-30"
     @overlay-click="overlayClick"

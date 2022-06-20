@@ -44,7 +44,7 @@ const trendStyle = computed(() => {
 </script>
 
 <template>
-  <pill
+  <Pill
     :text="trend"
     :type="trendStyle.style"
     :icon="trendStyle.icon"

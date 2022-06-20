@@ -40,25 +40,25 @@ const submit = () => {
 <template>
   <Head title="Register" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       class="my-24"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <field
+      <Field
         label="Name"
         label-for="name"
         help="Please enter your name"
       >
-        <control
+        <Control
           v-model="form.name"
           id="name"
           :icon="mdiAccount"
@@ -66,14 +66,14 @@ const submit = () => {
           type="text"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Email"
         label-for="email"
         help="Please enter your email"
       >
-        <control
+        <Control
           v-model="form.email"
           id="email"
           :icon="mdiEmail"
@@ -81,14 +81,14 @@ const submit = () => {
           type="email"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Password"
         label-for="password"
         help="Please enter new password"
       >
-        <control
+        <Control
           v-model="form.password"
           id="password"
           :icon="mdiFormTextboxPassword"
@@ -96,14 +96,14 @@ const submit = () => {
           autocomplete="new-password"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Confirm Password"
         label-for="password_confirmation"
         help="Please confirm your password"
       >
-        <control
+        <Control
           v-model="form.password_confirmation"
           id="password_confirmation"
           :icon="mdiFormTextboxPassword"
@@ -111,32 +111,32 @@ const submit = () => {
           autocomplete="new-password"
           required
         />
-      </field>
+      </Field>
 
-      <check-radio-picker
+      <CheckRadioPicker
         v-if="hasTermsAndPrivacyPolicyFeature"
         v-model="form.terms"
         name="remember"
         :options="{ agree: 'I agree to the Terms' }"
       />
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           type="submit"
           color="info"
           label="Register"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         />
-        <jb-button
+        <JbButton
           route-name="login"
           color="info"
           outline
           label="Login"
         />
-      </jb-buttons>
-    </card-component>
-  </full-screen-section>
+      </JbButtons>
+    </CardComponent>
+  </FullScreenSection>
 </template>

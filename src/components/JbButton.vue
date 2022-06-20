@@ -48,7 +48,7 @@ const is = computed(() => {
   }
 
   if (props.to) {
-    return 'router-link'
+    return 'RouterLink'
   }
 
   if (props.href) {
@@ -104,7 +104,7 @@ const componentClass = computed(() => {
     :target="target"
     :disabled="disabled"
   >
-    <icon
+    <Icon
       v-if="icon"
       :path="icon"
     />

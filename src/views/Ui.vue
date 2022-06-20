@@ -55,59 +55,59 @@ const darkModeToggle = () => {
 </script>
 
 <template>
-  <modal-box
+  <ModalBox
     v-model="modalOneActive"
     title="Please confirm action"
     button-label="Confirm"
     has-cancel
   >
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <modal-box
+  <ModalBox
     v-model="modalTwoActive"
     large-title="Unhandled exception"
     button="danger"
     shake
   >
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <modal-box
+  <ModalBox
     v-model="modalThreeActive"
     large-title="Success"
     button="success"
   >
     <p>This is sample modal</p>
-  </modal-box>
+  </ModalBox>
 
-  <title-bar :title-stack="titleStack" />
+  <TitleBar :title-stack="titleStack" />
 
-  <hero-bar>UI Components</hero-bar>
+  <HeroBar>UI Components</HeroBar>
 
-  <titled-section first>
+  <TitledSection first>
     Dark mode
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
-    <card-component class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
+  <MainSection>
+    <CardComponent class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
       <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
-        <jb-button
+        <JbButton
           label="Toggle"
           outline
           @click="darkModeToggle"
         />
       </div>
-    </card-component>
-  </main-section>
+    </CardComponent>
+  </MainSection>
 
-  <titled-section>
+  <TitledSection>
     Modal examples
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
+  <MainSection>
     <div class="space-y-12">
-      <card-component
+      <CardComponent
         title="Confirm modal"
         :header-icon="mdiClose"
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
@@ -118,22 +118,22 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <divider />
+        <Divider />
 
-        <jb-buttons>
-          <jb-button
+        <JbButtons>
+          <JbButton
             label="Confirm"
             color="info"
           />
-          <jb-button
+          <JbButton
             label="Cancel"
             color="info"
             outline
           />
-        </jb-buttons>
-      </card-component>
+        </JbButtons>
+      </CardComponent>
 
-      <card-component
+      <CardComponent
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         hoverable
         @click="modalTwoActive = true"
@@ -145,17 +145,17 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <divider />
+        <Divider />
 
-        <jb-buttons>
-          <jb-button
+        <JbButtons>
+          <JbButton
             label="Done"
             color="danger"
           />
-        </jb-buttons>
-      </card-component>
+        </JbButtons>
+      </CardComponent>
 
-      <card-component
+      <CardComponent
         class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         hoverable
         @click="modalThreeActive = true"
@@ -167,39 +167,39 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <divider />
+        <Divider />
 
-        <jb-button
+        <JbButton
           label="Done"
           color="success"
         />
-      </card-component>
+      </CardComponent>
     </div>
-  </main-section>
+  </MainSection>
 
-  <titled-section custom>
+  <TitledSection custom>
     <h1 class="text-2xl text-gray-500 dark:text-gray-400">
       Notifications
     </h1>
     <div class="flex items-center justify-center mt-6">
-      <check-radio-picker
+      <CheckRadioPicker
         v-model="notificationSettingsModel"
         type="switch"
         name="notifications-switch"
         :options="{ outline: 'Outline' }"
       />
     </div>
-  </titled-section>
+  </TitledSection>
 
-  <main-section>
-    <notification
+  <MainSection>
+    <Notification
       color="info"
       :icon="mdiInformationOutline"
       :outline="notificationsOutline"
     >
       <b>Info state</b>. Notification
       <template #right>
-        <jb-button
+        <JbButton
           :icon="mdiOpenInNew"
           label="Button"
           color="info"
@@ -207,16 +207,16 @@ const darkModeToggle = () => {
           small
         />
       </template>
-    </notification>
+    </Notification>
 
-    <notification
+    <Notification
       color="success"
       :icon="mdiCheckCircleOutline"
       :outline="notificationsOutline"
     >
       <b>Success state</b>. Notification
       <template #right>
-        <jb-button
+        <JbButton
           :icon="mdiOpenInNew"
           label="Button"
           color="success"
@@ -224,16 +224,16 @@ const darkModeToggle = () => {
           small
         />
       </template>
-    </notification>
+    </Notification>
 
-    <notification
+    <Notification
       color="warning"
       :icon="mdiAlertCircleOutline"
       :outline="notificationsOutline"
     >
       <b>Warning state</b>. Notification
       <template #right>
-        <jb-button
+        <JbButton
           :icon="mdiOpenInNew"
           label="Button"
           color="warning"
@@ -241,16 +241,16 @@ const darkModeToggle = () => {
           small
         />
       </template>
-    </notification>
+    </Notification>
 
-    <notification
+    <Notification
       color="danger"
       :icon="mdiAlertCircle"
       :outline="notificationsOutline"
     >
       <b>Danger state</b>. Notification
       <template #right>
-        <jb-button
+        <JbButton
           :icon="mdiOpenInNew"
           label="Button"
           color="danger"
@@ -258,89 +258,89 @@ const darkModeToggle = () => {
           small
         />
       </template>
-    </notification>
+    </Notification>
 
-    <notification
+    <Notification
       color="white"
       :icon="mdiSelectColor"
       :outline="notificationsOutline"
     >
       <b>White</b>. Notification
-    </notification>
+    </Notification>
 
-    <notification
+    <Notification
       color="light"
       :icon="mdiFeather"
       :outline="notificationsOutline"
     >
       <b>Light</b>. Notification
-    </notification>
-  </main-section>
+    </Notification>
+  </MainSection>
 
-  <titled-section>Buttons</titled-section>
+  <TitledSection>Buttons</TitledSection>
 
-  <main-section>
-    <card-component>
-      <field label="Settings">
-        <check-radio-picker
+  <MainSection>
+    <CardComponent>
+      <Field label="Settings">
+        <CheckRadioPicker
           v-model="buttonSettingsModel"
           name="buttons-switch"
           type="switch"
           :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           color="white"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="light"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="info"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="success"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="warning"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="danger"
           label="Button"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-      </jb-buttons>
+      </JbButtons>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           color="white"
           label="Button"
           :icon="mdiOpenInNew"
@@ -348,7 +348,7 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="light"
           label="Button"
           :icon="mdiOpenInNew"
@@ -356,7 +356,7 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="info"
           label="Button"
           :icon="mdiOpenInNew"
@@ -364,7 +364,7 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="success"
           label="Button"
           :icon="mdiOpenInNew"
@@ -372,7 +372,7 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="warning"
           label="Button"
           :icon="mdiOpenInNew"
@@ -380,7 +380,7 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="danger"
           label="Button"
           :icon="mdiOpenInNew"
@@ -388,71 +388,71 @@ const darkModeToggle = () => {
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-      </jb-buttons>
+      </JbButtons>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           color="white"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="light"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="info"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="success"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="warning"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-        <jb-button
+        <JbButton
           color="danger"
           :icon="mdiOpenInNew"
           :small="buttonsSmall"
           :outline="buttonsOutline"
           :disabled="buttonsDisabled"
         />
-      </jb-buttons>
-    </card-component>
-  </main-section>
+      </JbButtons>
+    </CardComponent>
+  </MainSection>
 
-  <titled-section>Cards</titled-section>
+  <TitledSection>Cards</TitledSection>
 
-  <main-section>
+  <MainSection>
     <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2 ">
-      <card-component
+      <CardComponent
         title="With Title"
         mb=""
       >
         <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
           With title
         </div>
-      </card-component>
+      </CardComponent>
 
-      <card-component
+      <CardComponent
         title="Title & Icons"
         :icon="mdiMonitorCellphone"
         :header-icon="mdiClose"
@@ -461,16 +461,16 @@ const darkModeToggle = () => {
         <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
           With title & icons
         </div>
-      </card-component>
+      </CardComponent>
     </div>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiAlertCircle"
       title="Empty variation"
     />
 
-    <card-component empty />
-  </main-section>
+    <CardComponent empty />
+  </MainSection>
 
-  <bottom-other-pages-section />
+  <BottomOtherPagesSection />
 </template>

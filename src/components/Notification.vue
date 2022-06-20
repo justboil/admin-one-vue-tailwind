@@ -44,9 +44,9 @@ const darkMode = computed(() => mainStore.darkMode)
     :class="componentClass"
     class="px-3 py-6 md:py-3 mx-6 md:mx-0 mb-6 last:mb-0 border rounded transition-colors duration-150"
   >
-    <level>
+    <Level>
       <div class="flex flex-col md:flex-row items-center">
-        <icon
+        <Icon
           v-if="icon"
           :path="icon"
           w="w-10 md:w-5"
@@ -60,13 +60,13 @@ const darkMode = computed(() => mainStore.darkMode)
         v-if="hasRightSlot"
         name="right"
       />
-      <jb-button
+      <JbButton
         v-else
         :icon="mdiClose"
         :outline="outline || (darkMode && ['white', 'light'].indexOf(color) < 0)"
         small
         @click="dismiss"
       />
-    </level>
+    </Level>
   </div>
 </template>

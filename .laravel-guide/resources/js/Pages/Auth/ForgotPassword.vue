@@ -33,48 +33,48 @@ const submit = () => {
 <template>
   <Head title="Forgot Password" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <notification-in-card 
+      <NotificationInCard 
         v-if="status"
         color="info"
       >
         {{ status }}
-      </notification-in-card>
+      </NotificationInCard>
 
-      <field>
+      <Field>
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+          Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
         </div>
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Email"
         help="Please enter your email"
       >
-        <control
+        <Control
           v-model="form.email"
           :icon="mdiEmail"
           autocomplete="email"
           type="email"
           required
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
       <Level>
-        <jb-button
+        <JbButton
           type="submit"
           color="info"
           label="Email link"
@@ -87,6 +87,6 @@ const submit = () => {
           Back to login
         </Link>
       </Level>
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

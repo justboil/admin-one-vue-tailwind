@@ -49,11 +49,11 @@ const cancel = () => confirmCancel('cancel')
 </script>
 
 <template>
-  <overlay
+  <Overlay
     v-show="value"
     @overlay-click="cancel"
   >
-    <card-component
+    <CardComponent
       v-show="value"
       :title="title"
       class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
@@ -72,22 +72,22 @@ const cancel = () => confirmCancel('cancel')
         <slot />
       </div>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           :label="buttonLabel"
           :color="button"
           @click="confirm"
         />
-        <jb-button
+        <JbButton
           v-if="hasCancel"
           label="Cancel"
           :color="button"
           outline
           @click="cancel"
         />
-      </jb-buttons>
-    </card-component>
-  </overlay>
+      </JbButtons>
+    </CardComponent>
+  </Overlay>
 </template>

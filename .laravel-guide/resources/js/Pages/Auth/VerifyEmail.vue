@@ -32,35 +32,35 @@ const submit = () => {
 <template>
   <Head title="Email Verification" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <notification-in-card 
+      <NotificationInCard 
         v-if="verificationLinkSent"
         color="info"
       >
         A new verification link has been sent to the email address you provided during registration.
-      </notification-in-card>
+      </NotificationInCard>
 
-      <field>
+      <Field>
         <div class="mb-4 text-sm text-gray-600">
           Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
         </div>
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
       <Level>
-        <jb-button
+        <JbButton
           type="submit"
           color="info"
           label="Resend Verification Email"
@@ -75,6 +75,6 @@ const submit = () => {
           Logout
         </Link>
       </Level>
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

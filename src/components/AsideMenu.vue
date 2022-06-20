@@ -50,18 +50,18 @@ const menuClick = (event, item) => {
       class="flex flex-row w-full flex-1 h-14 items-center dark:bg-transparent"
       :class="[ asideBrandStyle ]"
     >
-      <nav-bar-item
+      <NavBarItem
         type="hidden lg:flex xl:hidden"
         :active-color="asideMenuCloseLgStyle"
         active
         @click="asideLgClose"
       >
-        <icon
+        <Icon
           :path="mdiMenu"
           class="cursor-pointer"
           size="24"
         />
-      </nav-bar-item>
+      </NavBarItem>
       <div class="flex-1 px-3">
         <span>Admin</span> <b class="font-black">One</b>
       </div>
@@ -76,7 +76,7 @@ const menuClick = (event, item) => {
         >
           {{ menuGroup }}
         </p>
-        <aside-menu-list
+        <AsideMenuList
           v-else
           :key="`b-${index}`"
           :menu="menuGroup"

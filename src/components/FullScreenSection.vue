@@ -29,7 +29,7 @@ const colorClass = computed(() => {
 </script>
 
 <template>
-  <main-section
+  <MainSection
     class="flex min-h-screen items-center justify-center"
     :class="colorClass"
   >
@@ -37,5 +37,5 @@ const colorClass = computed(() => {
       card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12 shadow-2xl"
       card-rounded="rounded-lg"
     />
-  </main-section>
+  </MainSection>
 </template>

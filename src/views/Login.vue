@@ -25,62 +25,62 @@ const submit = () => {
 </script>
 
 <template>
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <field
+      <Field
         label="Login"
         help="Please enter your login"
       >
-        <control
+        <Control
           v-model="form.login"
           :icon="mdiAccount"
           name="login"
           autocomplete="username"
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Password"
         help="Please enter your password"
       >
-        <control
+        <Control
           v-model="form.pass"
           :icon="mdiAsterisk"
           type="password"
           name="password"
           autocomplete="current-password"
         />
-      </field>
+      </Field>
 
-      <check-radio-picker
+      <CheckRadioPicker
         v-model="form.remember"
         name="remember"
         :options="{ remember: 'Remember' }"
       />
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           type="submit"
           color="info"
           label="Login"
         />
-        <jb-button
+        <JbButton
           to="/dashboard"
           color="info"
           outline
           label="Back"
         />
-      </jb-buttons>
-    </card-component>
-  </full-screen-section>
+      </JbButtons>
+    </CardComponent>
+  </FullScreenSection>
 </template>

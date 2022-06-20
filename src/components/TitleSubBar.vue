@@ -24,7 +24,7 @@ const darkMode = computed(() => mainStore.darkMode)
 <template>
   <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
     <div class="flex items-center justify-start">
-      <icon
+      <Icon
         v-if="icon"
         :path="icon"
         class="mr-3"
@@ -33,7 +33,7 @@ const darkMode = computed(() => mainStore.darkMode)
         {{ title }}
       </h1>
     </div>
-    <jb-button
+    <JbButton
       :icon="mdiCog"
       :outline="darkMode"
       small

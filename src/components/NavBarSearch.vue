@@ -3,7 +3,7 @@ import Control from '@/components/Control.vue'
 </script>
 
 <template>
-  <control
+  <Control
     ref="root"
     placeholder="Search (ctrl+k)"
     ctrl-k-focus

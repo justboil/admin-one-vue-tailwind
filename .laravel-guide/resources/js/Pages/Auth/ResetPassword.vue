@@ -41,24 +41,24 @@ const submit = () => {
 <template>
   <Head title="Reset Password" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <field
+      <Field
         label="Email"
         label-for="email"
         help="Please enter your email"
       >
-        <control
+        <Control
           v-model="form.email"
           :icon="mdiEmail"
           autocomplete="email"
@@ -66,14 +66,14 @@ const submit = () => {
           id="email"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Password"
         label-for="password"
         help="Please enter new password"
       >
-        <control
+        <Control
           v-model="form.password"
           :icon="mdiFormTextboxPassword"
           type="password"
@@ -81,14 +81,14 @@ const submit = () => {
           id="password"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Confirm Password"
         label-for="password_confirmation"
         help="Please confirm new password"
       >
-        <control
+        <Control
           v-model="form.password_confirmation"
           :icon="mdiFormTextboxPassword"
           type="password"
@@ -96,17 +96,17 @@ const submit = () => {
           id="password_confirmation"
           required
         />
-      </field>
+      </Field>
 
-      <divider />
+      <Divider />
 
-      <jb-button
+      <JbButton
         type="submit"
         color="info"
         label="Reset password"
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
       />
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

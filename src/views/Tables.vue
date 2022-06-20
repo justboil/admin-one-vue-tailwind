@@ -14,58 +14,58 @@ const titleStack = ref(['Admin', 'Tables'])
 </script>
 
 <template>
-  <title-bar :title-stack="titleStack" />
-  <hero-bar>Tables</hero-bar>
-  <main-section>
-    <notification
+  <TitleBar :title-stack="titleStack" />
+  <HeroBar>Tables</HeroBar>
+  <MainSection>
+    <Notification
       color="info"
       :icon="mdiMonitorCellphone"
     >
       <b>Responsive table.</b> Collapses on mobile
-    </notification>
+    </Notification>
 
-    <card-component
+    <CardComponent
       class="mb-6"
       title="Clients"
       :icon="mdiAccountMultiple"
       has-table
     >
-      <clients-table checkable />
-    </card-component>
+      <ClientsTable checkable />
+    </CardComponent>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiTableBorder"
       title="Wrapped variation"
     />
 
-    <notification
+    <Notification
       color="success"
       :icon="mdiTableBorder"
     >
       <b>Tightly wrapped</b> &mdash; table header becomes card header
-    </notification>
+    </Notification>
 
-    <card-component
+    <CardComponent
       class="mb-6"
       has-table
     >
-      <clients-table checkable />
-    </card-component>
+      <ClientsTable checkable />
+    </CardComponent>
 
-    <title-sub-bar
+    <TitleSubBar
       :icon="mdiTableOff"
       title="Empty variation"
     />
 
-    <notification
+    <Notification
       color="danger"
       :icon="mdiTableOff"
     >
       <b>Empty table.</b> When there's nothing to show
-    </notification>
+    </Notification>
 
-    <card-component empty />
-  </main-section>
+    <CardComponent empty />
+  </MainSection>
 
-  <bottom-other-pages-section />
+  <BottomOtherPagesSection />
 </template>

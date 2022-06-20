@@ -45,31 +45,31 @@ const submit = () => {
 <template>
   <Head title="Login" />
 
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <validation-errors />
+      <ValidationErrors />
 
-      <notification-in-card 
+      <NotificationInCard 
         v-if="status"
         color="info"
       >
         {{ status }}
-      </notification-in-card>
+      </NotificationInCard>
 
-      <field
+      <Field
         label="Email"
         label-for="email"
         help="Please enter your email"
       >
-        <control
+        <Control
           v-model="form.email"
           :icon="mdiAccount"
           id="email"
@@ -77,14 +77,14 @@ const submit = () => {
           type="email"
           required
         />
-      </field>
+      </Field>
 
-      <field
+      <Field
         label="Password"
         label-for="password"
         help="Please enter your password"
       >
-        <control
+        <Control
           v-model="form.password"
           :icon="mdiAsterisk"
           type="password"
@@ -92,39 +92,39 @@ const submit = () => {
           autocomplete="current-password"
           required
         />
-      </field>
+      </Field>
 
-      <check-radio-picker
+      <CheckRadioPicker
         v-model="form.remember"
         name="remember"
         :options="{ remember: 'Remember' }"
       />
 
-      <divider />
+      <Divider />
 
       <Level>
-        <jb-buttons>
-          <jb-button
+        <JbButtons>
+          <JbButton
             type="submit"
             color="info"
             label="Login"
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           />
-          <jb-button
+          <JbButton
             v-if="canResetPassword"
             route-name="password.request"
             color="info"
             outline
             label="Remind"
           />
-        </jb-buttons>
+        </JbButtons>
         <Link
           :href="route('register')"
         >
           Register
         </Link>
       </Level>
-    </card-component>
-  </full-screen-section>
+    </CardComponent>
+  </FullScreenSection>
 </template>

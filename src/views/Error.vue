@@ -7,11 +7,11 @@ import JbButtons from '@/components/JbButtons.vue'
 </script>
 
 <template>
-  <full-screen-section
+  <FullScreenSection
     v-slot="{ cardClass, cardRounded }"
     bg="error"
   >
-    <card-component
+    <CardComponent
       :class="cardClass"
       :rounded="cardRounded"
     >
@@ -23,15 +23,15 @@ import JbButtons from '@/components/JbButtons.vue'
         <p>An Error Occurred</p>
       </div>
 
-      <divider />
+      <Divider />
 
-      <jb-buttons>
-        <jb-button
+      <JbButtons>
+        <JbButton
           label="Done"
           to="/dashboard"
           color="danger"
         />
-      </jb-buttons>
-    </card-component>
-  </full-screen-section>
+      </JbButtons>
+    </CardComponent>
+  </FullScreenSection>
 </template>

@@ -77,7 +77,7 @@ const submit = e => {
         class="flex items-center py-3 grow font-bold"
         :class="[ icon ? 'px-4' : 'px-6' ]"
       >
-        <icon
+        <Icon
           v-if="icon"
           :path="icon"
           class="mr-3"
@@ -91,7 +91,7 @@ const submit = e => {
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <icon :path="computedHeaderIcon" />
+        <Icon :path="computedHeaderIcon" />
       </a>
     </header>
     <div

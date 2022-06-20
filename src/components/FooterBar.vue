@@ -16,7 +16,7 @@ const isFooterBarVisible = computed(() => !mainStore.isFullScreen)
     v-show="isFooterBarVisible"
     class="bg-white py-2 px-6 dark:bg-gray-900/70"
   >
-    <level>
+    <Level>
       <div class="text-center md:text-left">
         <b>&copy; {{ year }}, <a
           href="https://justboil.me/"
@@ -30,9 +30,9 @@ const isFooterBarVisible = computed(() => !mainStore.isFullScreen)
       </div>
       <div class="md:py-2">
         <a href="https://justboil.me">
-          <jb-logo class="w-auto h-8 md:h-6" />
+          <JbLogo class="w-auto h-8 md:h-6" />
         </a>
       </div>
-    </level>
+    </Level>
   </footer>
 </template>

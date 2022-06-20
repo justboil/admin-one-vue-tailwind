@@ -27,7 +27,7 @@ const asideSubmenuListStyle = computed(() => mainStore.asideSubmenuListStyle)
 
 const isDropdownActive = ref(false)
 
-const componentIs = computed(() => props.item.to ? 'router-link' : 'a')
+const componentIs = computed(() => props.item.to ? 'RouterLink' : 'a')
 
 const hasDropdown = computed(() => !!props.item.menu)
 
@@ -60,7 +60,7 @@ const menuClick = event => {
       :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
     >
-      <icon
+      <Icon
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
@@ -71,7 +71,7 @@ const menuClick = event => {
         class="grow"
         :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : asideMenuItemInactiveStyle ]"
       >{{ item.label }}</span>
-      <icon
+      <Icon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"
@@ -79,7 +79,7 @@ const menuClick = event => {
         w="w-12"
       />
     </component>
-    <aside-menu-list
+    <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
       :class="[ asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800/50' : 'hidden' ]"

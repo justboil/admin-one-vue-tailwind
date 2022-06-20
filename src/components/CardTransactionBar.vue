@@ -59,13 +59,13 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <card-component
+  <CardComponent
     class="mb-6 last:mb-0"
     hoverable
   >
-    <level>
-      <level type="justify-start">
-        <icon-rounded
+    <Level>
+      <Level type="justify-start">
+        <IconRounded
           :icon="icon.icon"
           :type="icon.type"
           class="md:mr-6"
@@ -78,21 +78,21 @@ const icon = computed(() => {
             <b>{{ date }}</b> via {{ business }}
           </p>
         </div>
-      </level>
+      </Level>
       <div class="text-center md:text-right space-y-1">
         <p>{{ name }}</p>
         <div>
-          <pill
+          <Pill
             type="info"
             :text="account"
             small
-          /> <pill
+          /> <Pill
             :type="icon.type"
             :text="type"
             small
           />
         </div>
       </div>
-    </level>
-  </card-component>
+    </Level>
+  </CardComponent>
 </template>

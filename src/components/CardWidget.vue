@@ -50,18 +50,18 @@ const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
-  <card-component>
-    <level
+  <CardComponent>
+    <Level
       v-if="trend"
       class="mb-3"
       mobile
     >
-      <trend-pill
+      <TrendPill
         :trend="trend"
         :trend-type="trendType"
         small
       />
-      <jb-button
+      <JbButton
         :icon="mdiCog"
         icon-w="w-4"
         icon-h="h-4"
@@ -69,21 +69,21 @@ const darkMode = computed(() => mainStore.darkMode)
         :outline="darkMode"
         small
       />
-    </level>
-    <level mobile>
+    </Level>
+    <Level mobile>
       <div>
         <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">
-          <growing-number
+          <GrowingNumber
             :value="number"
             :prefix="prefix"
             :suffix="suffix"
           />
         </h1>
       </div>
-      <icon
+      <Icon
         v-if="icon"
         :path="icon"
         size="48"
@@ -91,6 +91,6 @@ const darkMode = computed(() => mainStore.darkMode)
         h="h-16"
         :class="color"
       />
-    </level>
-  </card-component>
+    </Level>
+  </CardComponent>
 </template>
