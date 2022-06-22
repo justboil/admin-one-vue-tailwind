@@ -40,11 +40,9 @@ router.beforeEach(to => {
 
 router.afterEach(to => {
   /* Set document title from route meta */
-  if (to.meta && to.meta.title) {
-    document.title = `${to.meta.title} — ${defaultDocumentTitle}`
-  } else {
-    document.title = defaultDocumentTitle
-  }
+  document.title = to.meta?.title
+    ? `${to.meta.title} — ${defaultDocumentTitle}`
+    : defaultDocumentTitle
 
   /* Full screen mode */
   mainStore.fullScreenToggle(!!to.meta.fullScreen)
