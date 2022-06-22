@@ -10,6 +10,11 @@ body {
   @apply cursor-pointer;
 }
 
+li.stack-item:not(:last-child):after {
+  content: '/';
+  @apply inline-block pl-3;
+}
+
 .m-clipped, .m-clipped body {
   @apply overflow-hidden lg:overflow-visible;
 }

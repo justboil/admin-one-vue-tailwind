@@ -33,10 +33,3 @@ defineProps({
     </Level>
   </section>
 </template>
-
-<style scoped>
-li.stack-item:not(:last-child):after {
-  content: '/';
-  @apply inline-block pl-3;
-}
-</style>
