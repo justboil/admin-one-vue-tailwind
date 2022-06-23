@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Style from '@/views/Style.vue'
-import Home from '@/views/Home.vue'
+import Style from '@/views/StyleView.vue'
+import Home from '@/views/HomeView.vue'
 
 const routes = [
   {
@@ -31,7 +31,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
+    component: () => import(/* webpackChunkName: "tables" */ '@/views/TablesView.vue')
   },
   {
     meta: {
@@ -39,7 +39,7 @@ const routes = [
     },
     path: '/forms',
     name: 'forms',
-    component: () => import(/* webpackChunkName: "forms" */ '@/views/Forms.vue')
+    component: () => import(/* webpackChunkName: "forms" */ '@/views/FormsView.vue')
   },
   {
     meta: {
@@ -47,7 +47,7 @@ const routes = [
     },
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '@/views/ProfileView.vue')
   },
   {
     meta: {
@@ -55,7 +55,7 @@ const routes = [
     },
     path: '/ui',
     name: 'ui',
-    component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
+    component: () => import(/* webpackChunkName: "ui" */ '@/views/UiView.vue')
   },
   {
     meta: {
@@ -63,7 +63,7 @@ const routes = [
     },
     path: '/responsive',
     name: 'responsive',
-    component: () => import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
+    component: () => import(/* webpackChunkName: "responsive" */ '@/views/ResponsiveView.vue')
   },
   {
     meta: {
@@ -72,7 +72,7 @@ const routes = [
     },
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '@/views/LoginView.vue')
   },
   {
     meta: {
@@ -81,7 +81,7 @@ const routes = [
     },
     path: '/error',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
+    component: () => import(/* webpackChunkName: "error" */ '@/views/ErrorView.vue')
   }
 ]
 
