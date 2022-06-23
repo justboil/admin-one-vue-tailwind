@@ -2,43 +2,30 @@
   "name": "admin-one-vue-tailwind",
   "version": "2.3.0",
   "scripts": {
-    "dev": "vite --host",
-    "serve": "vue-cli-service serve",
-    "serve:vite": "vite preview",
-    "build": "vue-cli-service build",
-    "build:vite": "vite build",
-    "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@mdi/js": "^6.4.95",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
-    "core-js": "^3.6.5",
     "numeral": "^2.0.6",
     "pinia": "^2.0.13",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.16.3",
     "@tailwindcss/forms": "^0.5.1",
     "@types/tailwindcss": "^3.0.2",
-    "@vitejs/plugin-vue": "^2.0.0",
-    "@vue/cli-plugin-babel": "^5.0.0",
-    "@vue/cli-plugin-eslint": "^5.0.0",
-    "@vue/cli-service": "^5.0.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/eslint-config-standard": "^6.0.0",
+    "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.2.6",
-    "eslint": "^7.32.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.1",
-    "eslint-plugin-vue": "^7.20.0",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^9.0.0",
     "postcss": "^8.3.0",
     "postcss-import": "^14.0.2",
     "tailwindcss": "^3.0.14",
-    "vite": "^2.6.14"
+    "vite": "^2.9.12"
   }
 }
