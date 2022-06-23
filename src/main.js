@@ -33,7 +33,7 @@ if ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dar
 const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 
 /* Collapse mobile aside menu on route change */
-router.beforeEach(to => {
+router.beforeEach(() => {
   mainStore.asideMobileToggle(false)
   mainStore.asideLgToggle(false)
 })

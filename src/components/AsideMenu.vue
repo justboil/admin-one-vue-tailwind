@@ -33,7 +33,7 @@ const asideLgClose = () => {
   mainStore.asideLgToggle(false)
 }
 
-const menuClick = (event, item) => {
+const menuClick = () => {
   //
 }
 </script>
