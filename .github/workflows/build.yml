@@ -26,8 +26,6 @@ jobs:
         run: |
           npm install
           npm run build
-        env:
-          DEPLOY_ENV: GH_PAGES
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
