@@ -1,20 +1,20 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import FilePicker from '@/components/FilePicker.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import SectionTitleBar from '@/components/SectionTitleBar.vue'
+import CardBox from '@/components/CardBox.vue'
+import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormFilePicker from '@/components/FormFilePicker.vue'
+import SectionHeroBar from '@/components/SectionHeroBar.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
+import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
+import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 
 const titleStack = ref(['Admin', 'Forms'])
 
@@ -46,130 +46,130 @@ const submit = () => {
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
-  <HeroBar>Forms</HeroBar>
+  <SectionTitleBar :title-stack="titleStack" />
+  <SectionHeroBar>Forms</SectionHeroBar>
 
-  <MainSection>
-    <TitleSubBar
+  <SectionMain>
+    <SectionTitleBarSub
       :icon="mdiBallotOutline"
       title="Forms example"
     />
-    <CardComponent
+    <CardBox
       title="Forms"
       :icon="mdiBallot"
       form
       @submit.prevent="submit"
     >
-      <Field label="Grouped with icons">
-        <Control
+      <FormField label="Grouped with icons">
+        <FormControl
           v-model="form.name"
           :icon="mdiAccount"
         />
-        <Control
+        <FormControl
           v-model="form.email"
           type="email"
           :icon="mdiMail"
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="With help line"
         help="Do not enter the leading zero"
       >
-        <Control
+        <FormControl
           v-model="form.phone"
           type="tel"
           placeholder="Your phone number"
         />
-      </Field>
+      </FormField>
 
-      <Field label="Dropdown">
-        <Control
+      <FormField label="Dropdown">
+        <FormControl
           v-model="form.department"
           :options="selectOptions"
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <Field
+      <FormField
         label="Question"
         help="Your question. Max 255 characters"
       >
-        <Control
+        <FormControl
           type="textarea"
           placeholder="Explain how we can help you"
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButtons>
-        <JbButton
+      <BaseButtons>
+        <BaseButton
           type="submit"
           color="info"
           label="Submit"
         />
-        <JbButton
+        <BaseButton
           type="reset"
           color="info"
           outline
           label="Reset"
         />
-      </JbButtons>
-    </CardComponent>
-  </MainSection>
+      </BaseButtons>
+    </CardBox>
+  </SectionMain>
 
-  <TitledSection>
+  <SectionTitle>
     Custom elements
-  </TitledSection>
+  </SectionTitle>
 
-  <MainSection>
-    <CardComponent
+  <SectionMain>
+    <CardBox
       title="Custom elements"
       :icon="mdiBallotOutline"
     >
-      <Field
+      <FormField
         label="Checkbox"
         wrap-body
       >
-        <CheckRadioPicker
+        <FormCheckRadioPicker
           v-model="customElementsForm.checkbox"
           name="sample-checkbox"
           :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <Field
+      <FormField
         label="Radio"
         wrap-body
       >
-        <CheckRadioPicker
+        <FormCheckRadioPicker
           v-model="customElementsForm.radio"
           name="sample-radio"
           type="radio"
           :options="{ one: 'One', two: 'Two' }"
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <Field label="Switch">
-        <CheckRadioPicker
+      <FormField label="Switch">
+        <FormCheckRadioPicker
           v-model="customElementsForm.switch"
           name="sample-switch"
           type="switch"
           :options="{ one: 'One', two: 'Two' }"
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <FilePicker v-model="customElementsForm.file" />
-    </CardComponent>
-  </MainSection>
+      <FormFilePicker v-model="customElementsForm.file" />
+    </CardBox>
+  </SectionMain>
 
-  <BottomOtherPagesSection />
+  <SectionBottomOtherPages />
 </template>

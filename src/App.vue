@@ -5,7 +5,7 @@ import menu from '@/menu.js'
 import NavBar from '@/components/NavBar.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
-import Overlay from '@/components/Overlay.vue'
+import OverlayLayer from '@/components/OverlayLayer.vue'
 
 const mainStore = useMainStore()
 
@@ -27,7 +27,7 @@ const overlayClick = () => {
   <AsideMenu :menu="menu" />
   <RouterView />
   <FooterBar />
-  <Overlay
+  <OverlayLayer
     v-show="isAsideLgActive"
     z-index="z-30"
     @overlay-click="overlayClick"

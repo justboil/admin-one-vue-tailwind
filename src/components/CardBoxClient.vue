@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
 import { mdiTrendingDown, mdiTrendingUp, mdiTrendingNeutral } from '@mdi/js'
-import CardComponent from '@/components/CardComponent.vue'
-import Level from '@/components/Level.vue'
-import Pill from '@/components/Pill.vue'
+import CardBox from '@/components/CardBox.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
+import PillTag from '@/components/PillTag.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 
 const props = defineProps({
@@ -65,12 +65,12 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
 </script>
 
 <template>
-  <CardComponent
+  <CardBox
     class="mb-6 last:mb-0"
     hoverable
   >
-    <Level>
-      <Level type="justify-start">
+    <BaseLevel>
+      <BaseLevel type="justify-start">
         <UserAvatar
           class="w-12 h-12 md:mr-6"
           :username="name"
@@ -83,12 +83,12 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
             {{ date }}
           </p>
         </div>
-      </Level>
-      <Pill
+      </BaseLevel>
+      <PillTag
         :type="pillType"
         :text="pillText"
         :icon="pillIcon"
       />
-    </Level>
-  </CardComponent>
+    </BaseLevel>
+  </CardBox>
 </template>

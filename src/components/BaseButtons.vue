@@ -2,7 +2,7 @@
 import { h, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'JbButtons',
+  name: 'BaseButtons',
   props: {
     noWrap: Boolean,
     type: {

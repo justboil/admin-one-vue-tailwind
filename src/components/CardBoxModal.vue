@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from 'vue'
 import { mdiClose } from '@mdi/js'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Divider from '@/components/Divider.vue'
-import Overlay from '@/components/Overlay.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
+import CardBox from '@/components/CardBox.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import OverlayLayer from '@/components/OverlayLayer.vue'
 
 const props = defineProps({
   title: {
@@ -49,11 +49,11 @@ const cancel = () => confirmCancel('cancel')
 </script>
 
 <template>
-  <Overlay
+  <OverlayLayer
     v-show="value"
     @overlay-click="cancel"
   >
-    <CardComponent
+    <CardBox
       v-show="value"
       :title="title"
       class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
@@ -72,22 +72,22 @@ const cancel = () => confirmCancel('cancel')
         <slot />
       </div>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButtons>
-        <JbButton
+      <BaseButtons>
+        <BaseButton
           :label="buttonLabel"
           :color="button"
           @click="confirm"
         />
-        <JbButton
+        <BaseButton
           v-if="hasCancel"
           label="Cancel"
           :color="button"
           outline
           @click="cancel"
         />
-      </JbButtons>
-    </CardComponent>
-  </Overlay>
+      </BaseButtons>
+    </CardBox>
+  </OverlayLayer>
 </template>

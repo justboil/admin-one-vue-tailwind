@@ -2,12 +2,12 @@
 import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
 import { useMainStore } from '@/stores/main'
-import CardComponent from '@/components/CardComponent.vue'
-import GrowingNumber from '@/components/GrowingNumber.vue'
-import Icon from '@/components/Icon.vue'
-import Level from '@/components/Level.vue'
-import TrendPill from '@/components/TrendPill.vue'
-import JbButton from '@/components/JbButton.vue'
+import CardBox from '@/components/CardBox.vue'
+import NumberDynamic from '@/components/NumberDynamic.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
+import PillTagTrend from '@/components/PillTagTrend.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 defineProps({
   number: {
@@ -50,18 +50,18 @@ const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
-  <CardComponent>
-    <Level
+  <CardBox>
+    <BaseLevel
       v-if="trend"
       class="mb-3"
       mobile
     >
-      <TrendPill
+      <PillTagTrend
         :trend="trend"
         :trend-type="trendType"
         small
       />
-      <JbButton
+      <BaseButton
         :icon="mdiCog"
         icon-w="w-4"
         icon-h="h-4"
@@ -69,21 +69,21 @@ const darkMode = computed(() => mainStore.darkMode)
         :outline="darkMode"
         small
       />
-    </Level>
-    <Level mobile>
+    </BaseLevel>
+    <BaseLevel mobile>
       <div>
         <h3 class="text-lg leading-tight text-gray-500 dark:text-gray-400">
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">
-          <GrowingNumber
+          <NumberDynamic
             :value="number"
             :prefix="prefix"
             :suffix="suffix"
           />
         </h1>
       </div>
-      <Icon
+      <BaseIcon
         v-if="icon"
         :path="icon"
         size="48"
@@ -91,6 +91,6 @@ const darkMode = computed(() => mainStore.darkMode)
         h="h-16"
         :class="color"
       />
-    </Level>
-  </CardComponent>
+    </BaseLevel>
+  </CardBox>
 </template>

@@ -1,7 +1,7 @@
 <script setup>
 import { mdiGithub } from '@mdi/js'
-import Level from '@/components/Level.vue'
-import JbButton from '@/components/JbButton.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 defineProps({
   titleStack: {
@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <section class="p-6">
-    <Level>
+    <BaseLevel>
       <ul>
         <li
           v-for="(title, index) in titleStack"
@@ -23,13 +23,13 @@ defineProps({
           {{ title }}
         </li>
       </ul>
-      <JbButton
+      <BaseButton
         href="https://github.com/justboil/admin-one-vue-tailwind"
         color="info"
         label="Star on GitHub"
         target="_blank"
         :icon="mdiGithub"
       />
-    </Level>
+    </BaseLevel>
   </section>
 </template>

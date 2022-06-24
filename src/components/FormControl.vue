@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { useMainStore } from '@/stores/main'
-import ControlIcon from '@/components/ControlIcon.vue'
+import FormControlIcon from '@/components/FormControlIcon.vue'
 
 const props = defineProps({
   name: {
@@ -158,7 +158,7 @@ if (props.ctrlKFocus) {
       :type="computedType"
       :class="inputElClass"
     >
-    <ControlIcon
+    <FormControlIcon
       v-if="icon"
       :icon="icon"
       :h="controlIconH"

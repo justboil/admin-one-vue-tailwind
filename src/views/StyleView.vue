@@ -2,9 +2,9 @@
 import { useRouter } from 'vue-router'
 import { useMainStore } from '@/stores/main'
 import { sectionBgLogin } from '@/colors.js'
-import MainSection from '@/components/MainSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import JbLogo from '@/components/JbLogo.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import CardBox from '@/components/CardBox.vue'
+import JustboilLogo from '@/components/JustboilLogo.vue'
 
 const styles = [
   'white',
@@ -25,7 +25,7 @@ const click = slug => {
 </script>
 
 <template>
-  <MainSection
+  <SectionMain
     :class="sectionBgLogin"
     class="min-h-screen"
   >
@@ -36,7 +36,7 @@ const click = slug => {
       Style switching with a single <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">action()</code>
     </h2>
     <div class="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
-      <CardComponent
+      <CardBox
         v-for="style in styles"
         :key="style"
         class="cursor-pointer shadow-2xl"
@@ -58,12 +58,12 @@ const click = slug => {
         <h2 class="text-lg md:text-xl">
           & Dark mode
         </h2>
-      </CardComponent>
+      </CardBox>
     </div>
     <div class="mx-auto mt-12 mb-6">
       <a href="https://justboil.me">
-        <JbLogo class="w-auto h-8 md:h-10 mx-auto text-white" />
+        <JustboilLogo class="w-auto h-8 md:h-10 mx-auto text-white" />
       </a>
     </div>
-  </MainSection>
+  </SectionMain>
 </template>

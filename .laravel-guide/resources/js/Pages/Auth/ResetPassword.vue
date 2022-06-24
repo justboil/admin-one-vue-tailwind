@@ -2,13 +2,13 @@
 import { useMainStore } from '@/stores/main'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import ValidationErrors from '@/components/ValidationErrors.vue'
+import SectionFullScreen from '@/components/SectionFullScreen.vue'
+import CardBox from '@/components/CardBox.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import FormValidationErrors from '@/components/FormValidationErrors.vue'
 
 const props = defineProps({
   email: {
@@ -41,24 +41,24 @@ const submit = () => {
 <template>
   <Head title="Reset Password" />
 
-  <FullScreenSection
+  <SectionFullScreen
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <CardComponent
+    <CardBox
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <ValidationErrors />
+      <FormValidationErrors />
 
-      <Field
+      <FormField
         label="Email"
         label-for="email"
         help="Please enter your email"
       >
-        <Control
+        <FormControl
           v-model="form.email"
           :icon="mdiEmail"
           autocomplete="email"
@@ -66,14 +66,14 @@ const submit = () => {
           id="email"
           required
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Password"
         label-for="password"
         help="Please enter new password"
       >
-        <Control
+        <FormControl
           v-model="form.password"
           :icon="mdiFormTextboxPassword"
           type="password"
@@ -81,14 +81,14 @@ const submit = () => {
           id="password"
           required
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Confirm Password"
         label-for="password_confirmation"
         help="Please confirm new password"
       >
-        <Control
+        <FormControl
           v-model="form.password_confirmation"
           :icon="mdiFormTextboxPassword"
           type="password"
@@ -96,17 +96,17 @@ const submit = () => {
           id="password_confirmation"
           required
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButton
+      <BaseButton
         type="submit"
         color="info"
         label="Reset password"
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
       />
-    </CardComponent>
-  </FullScreenSection>
+    </CardBox>
+  </SectionFullScreen>
 </template>

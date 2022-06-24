@@ -1,5 +1,5 @@
 <script setup>
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 defineProps({
   icon: {
@@ -15,7 +15,7 @@ defineProps({
 </script>
 
 <template>
-  <Icon
+  <BaseIcon
     :path="icon"
     w="w-10"
     :h="h"

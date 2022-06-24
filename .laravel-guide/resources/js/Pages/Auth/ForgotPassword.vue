@@ -2,15 +2,15 @@
 import { useMainStore } from '@/stores/main'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import ValidationErrors from '@/components/ValidationErrors.vue'
-import NotificationInCard from '@/components/NotificationInCard.vue'
-import Level from '@/components/Level.vue'
+import SectionFullScreen from '@/components/SectionFullScreen.vue'
+import CardBox from '@/components/CardBox.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import FormValidationErrors from '@/components/FormValidationErrors.vue'
+import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
 
 defineProps({
   status: {
@@ -33,48 +33,48 @@ const submit = () => {
 <template>
   <Head title="Forgot Password" />
 
-  <FullScreenSection
+  <SectionFullScreen
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <CardComponent
+    <CardBox
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <ValidationErrors />
+      <FormValidationErrors />
 
-      <NotificationInCard 
+      <NotificationBarInCard 
         v-if="status"
         color="info"
       >
         {{ status }}
-      </NotificationInCard>
+      </NotificationBarInCard>
 
-      <Field>
+      <FormField>
         <div class="mb-4 text-sm text-gray-600">
           Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
         </div>
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Email"
         help="Please enter your email"
       >
-        <Control
+        <FormControl
           v-model="form.email"
           :icon="mdiEmail"
           autocomplete="email"
           type="email"
           required
         />
-      </Field>
+      </FormField>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <Level>
-        <JbButton
+      <BaseLevel>
+        <BaseButton
           type="submit"
           color="info"
           label="Email link"
@@ -86,7 +86,7 @@ const submit = () => {
         >
           Back to login
         </Link>
-      </Level>
-    </CardComponent>
-  </FullScreenSection>
+      </BaseLevel>
+    </CardBox>
+  </SectionFullScreen>
 </template>

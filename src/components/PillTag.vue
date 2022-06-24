@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
   text: {
@@ -36,7 +36,7 @@ const componentClass = computed(() => {
     class="inline-flex items-center last:mr-0 capitalize"
     :class="componentClass"
   >
-    <Icon
+    <BaseIcon
       v-if="icon"
       :path="icon"
       h="h-4"

@@ -3,7 +3,7 @@ import { useMainStore } from '@/stores/main'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 defineProps({
   hasDivider: {
@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
       :class="[ navBarMenuListUpperLabelStyle ]"
     >
       <slot />
-      <Icon
+      <BaseIcon
         :path="toggleDropdownIcon"
         class="hidden lg:inline-flex transition-colors"
       />

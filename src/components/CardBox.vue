@@ -2,7 +2,7 @@
 import { mdiCog } from '@mdi/js'
 import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
   title: {
@@ -77,7 +77,7 @@ const submit = e => {
         class="flex items-center py-3 grow font-bold"
         :class="[ icon ? 'px-4' : 'px-6' ]"
       >
-        <Icon
+        <BaseIcon
           v-if="icon"
           :path="icon"
           class="mr-3"
@@ -91,7 +91,7 @@ const submit = e => {
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
-        <Icon :path="computedHeaderIcon" />
+        <BaseIcon :path="computedHeaderIcon" />
       </a>
     </header>
     <div

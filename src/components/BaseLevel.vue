@@ -2,7 +2,7 @@
 import { h, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Level',
+  name: 'BaseLevel',
   props: {
     mobile: Boolean,
     type: {

@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiMinus, mdiPlus } from '@mdi/js'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 
 const props = defineProps({
@@ -60,7 +60,7 @@ const menuClick = event => {
       :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
     >
-      <Icon
+      <BaseIcon
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
@@ -71,7 +71,7 @@ const menuClick = event => {
         class="grow"
         :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : asideMenuItemInactiveStyle ]"
       >{{ item.label }}</span>
-      <Icon
+      <BaseIcon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"

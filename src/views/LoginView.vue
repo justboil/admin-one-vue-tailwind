@@ -2,14 +2,14 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
+import SectionFullScreen from '@/components/SectionFullScreen.vue'
+import CardBox from '@/components/CardBox.vue'
+import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
 
 const form = reactive({
   login: 'john.doe',
@@ -25,62 +25,62 @@ const submit = () => {
 </script>
 
 <template>
-  <FullScreenSection
+  <SectionFullScreen
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <CardComponent
+    <CardBox
       :class="cardClass"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <Field
+      <FormField
         label="Login"
         help="Please enter your login"
       >
-        <Control
+        <FormControl
           v-model="form.login"
           :icon="mdiAccount"
           name="login"
           autocomplete="username"
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Password"
         help="Please enter your password"
       >
-        <Control
+        <FormControl
           v-model="form.pass"
           :icon="mdiAsterisk"
           type="password"
           name="password"
           autocomplete="current-password"
         />
-      </Field>
+      </FormField>
 
-      <CheckRadioPicker
+      <FormCheckRadioPicker
         v-model="form.remember"
         name="remember"
         :options="{ remember: 'Remember' }"
       />
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButtons>
-        <JbButton
+      <BaseButtons>
+        <BaseButton
           type="submit"
           color="info"
           label="Login"
         />
-        <JbButton
+        <BaseButton
           to="/dashboard"
           color="info"
           outline
           label="Back"
         />
-      </JbButtons>
-    </CardComponent>
-  </FullScreenSection>
+      </BaseButtons>
+    </CardBox>
+  </SectionFullScreen>
 </template>

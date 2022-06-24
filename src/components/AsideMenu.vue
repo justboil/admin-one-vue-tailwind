@@ -4,7 +4,7 @@ import { useMainStore } from '@/stores/main'
 import { mdiMenu } from '@mdi/js'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 import NavBarItem from '@/components/NavBarItem.vue'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 defineProps({
   menu: {
@@ -56,7 +56,7 @@ const menuClick = () => {
         active
         @click="asideLgClose"
       >
-        <Icon
+        <BaseIcon
           :path="mdiMenu"
           class="cursor-pointer"
           size="24"

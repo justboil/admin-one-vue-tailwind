@@ -1,17 +1,17 @@
 <script setup>
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
+import SectionFullScreen from '@/components/SectionFullScreen.vue'
+import CardBox from '@/components/CardBox.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
 </script>
 
 <template>
-  <FullScreenSection
+  <SectionFullScreen
     v-slot="{ cardClass, cardRounded }"
     bg="error"
   >
-    <CardComponent
+    <CardBox
       :class="cardClass"
       :rounded="cardRounded"
     >
@@ -23,15 +23,15 @@ import JbButtons from '@/components/JbButtons.vue'
         <p>An Error Occurred</p>
       </div>
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButtons>
-        <JbButton
+      <BaseButtons>
+        <BaseButton
           label="Done"
           to="/dashboard"
           color="danger"
         />
-      </JbButtons>
-    </CardComponent>
-  </FullScreenSection>
+      </BaseButtons>
+    </CardBox>
+  </SectionFullScreen>
 </template>

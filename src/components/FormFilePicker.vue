@@ -1,7 +1,7 @@
 <script setup>
 import { mdiUpload } from '@mdi/js'
 import { computed, ref, watch } from 'vue'
-import JbButton from '@/components/JbButton.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const props = defineProps({
   modelValue: {
@@ -82,7 +82,7 @@ const upload = event => {
 <template>
   <div class="flex items-stretch justify-start relative">
     <label class="inline-flex">
-      <JbButton
+      <BaseButton
         as="a"
         :label="label"
         :icon="icon"

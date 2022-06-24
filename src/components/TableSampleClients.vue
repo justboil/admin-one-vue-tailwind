@@ -2,11 +2,11 @@
 import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
-import ModalBox from '@/components/ModalBox.vue'
-import CheckboxCell from '@/components/CheckboxCell.vue'
-import Level from '@/components/Level.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import JbButton from '@/components/JbButton.vue'
+import CardBoxModal from '@/components/CardBoxModal.vue'
+import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
+import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 
 defineProps({
@@ -77,15 +77,15 @@ const checked = (isChecked, client) => {
 </script>
 
 <template>
-  <ModalBox
+  <CardBoxModal
     v-model="isModalActive"
     title="Sample modal"
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </ModalBox>
+  </CardBoxModal>
 
-  <ModalBox
+  <CardBoxModal
     v-model="isModalDangerActive"
     large-title="Please confirm"
     button="danger"
@@ -93,7 +93,7 @@ const checked = (isChecked, client) => {
   >
     <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
     <p>This is sample modal</p>
-  </ModalBox>
+  </CardBoxModal>
 
   <div
     v-if="checkedRows.length"
@@ -129,7 +129,7 @@ const checked = (isChecked, client) => {
         :key="client.id"
         :class="[tableTrStyle, index % 2 === 0 ? tableTrOddStyle : '']"
       >
-        <CheckboxCell
+        <TableCheckboxCell
           v-if="checkable"
           @checked="checked($event, client)"
         />
@@ -166,23 +166,23 @@ const checked = (isChecked, client) => {
           >{{ client.created }}</small>
         </td>
         <td class="actions-cell">
-          <JbButtons
+          <BaseButtons
             type="justify-start lg:justify-end"
             no-wrap
           >
-            <JbButton
+            <BaseButton
               color="info"
               :icon="mdiEye"
               small
               @click="isModalActive = true"
             />
-            <JbButton
+            <BaseButton
               color="danger"
               :icon="mdiTrashCan"
               small
               @click="isModalDangerActive = true"
             />
-          </JbButtons>
+          </BaseButtons>
         </td>
       </tr>
     </tbody>
@@ -191,9 +191,9 @@ const checked = (isChecked, client) => {
     :class="lightBorderStyle"
     class="p-3 lg:px-6 border-t dark:border-gray-800"
   >
-    <Level>
-      <JbButtons>
-        <JbButton
+    <BaseLevel>
+      <BaseButtons>
+        <BaseButton
           v-for="page in pagesList"
           :key="page"
           :active="page === currentPage"
@@ -202,8 +202,8 @@ const checked = (isChecked, client) => {
           small
           @click="currentPage = page"
         />
-      </JbButtons>
+      </BaseButtons>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
-    </Level>
+    </BaseLevel>
   </div>
 </template>

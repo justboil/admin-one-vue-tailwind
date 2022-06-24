@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
 import { mdiCashMinus, mdiCashPlus, mdiReceipt, mdiCreditCardOutline } from '@mdi/js'
-import CardComponent from '@/components/CardComponent.vue'
-import Level from '@/components/Level.vue'
-import Pill from '@/components/Pill.vue'
+import CardBox from '@/components/CardBox.vue'
+import BaseLevel from '@/components/BaseLevel.vue'
+import PillTag from '@/components/PillTag.vue'
 import IconRounded from '@/components/IconRounded.vue'
 
 const props = defineProps({
@@ -59,12 +59,12 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <CardComponent
+  <CardBox
     class="mb-6 last:mb-0"
     hoverable
   >
-    <Level>
-      <Level type="justify-start">
+    <BaseLevel>
+      <BaseLevel type="justify-start">
         <IconRounded
           :icon="icon.icon"
           :type="icon.type"
@@ -78,21 +78,21 @@ const icon = computed(() => {
             <b>{{ date }}</b> via {{ business }}
           </p>
         </div>
-      </Level>
+      </BaseLevel>
       <div class="text-center md:text-right space-y-1">
         <p>{{ name }}</p>
         <div>
-          <Pill
+          <PillTag
             type="info"
             :text="account"
             small
-          /> <Pill
+          /> <PillTag
             :type="icon.type"
             :text="type"
             small
           />
         </div>
       </div>
-    </Level>
-  </CardComponent>
+    </BaseLevel>
+  </CardBox>
 </template>

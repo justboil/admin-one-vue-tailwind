@@ -20,9 +20,9 @@ import {
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
 import NavBarMenu from '@/components/NavBarMenu.vue'
-import Divider from '@/components/Divider.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
 const mainStore = useMainStore()
@@ -72,7 +72,7 @@ const logout = () => {
         type="flex lg:hidden"
         @click.prevent="menuToggleMobile"
       >
-        <Icon
+        <BaseIcon
           :path="menuToggleMobileIcon"
           size="24"
         />
@@ -81,7 +81,7 @@ const logout = () => {
         type="hidden lg:flex xl:hidden"
         @click.prevent="menuOpenLg"
       >
-        <Icon
+        <BaseIcon
           :path="mdiMenu"
           size="24"
         />
@@ -92,7 +92,7 @@ const logout = () => {
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
       <NavBarItem @click.prevent="menuNavBarToggle">
-        <Icon
+        <BaseIcon
           :path="menuNavBarToggleIcon"
           size="24"
         />
@@ -125,7 +125,7 @@ const logout = () => {
                 label="Item Two"
               />
             </NavBarItem>
-            <Divider nav-bar />
+            <DividerHorizontal nav-bar />
             <NavBarItem>
               <NavBarItemLabel
                 :icon="mdiCrop"
@@ -158,7 +158,7 @@ const logout = () => {
                 label="Messages"
               />
             </NavBarItem>
-            <Divider nav-bar />
+            <DividerHorizontal nav-bar />
             <NavBarItem>
               <NavBarItemLabel
                 :icon="mdiLogout"

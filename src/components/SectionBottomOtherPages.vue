@@ -1,8 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { mdiGithub } from '@mdi/js'
-import TitledSection from '@/components/TitledSection.vue'
-import Icon from '@/components/Icon.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 const router = useRouter()
 
@@ -24,7 +24,7 @@ for (const routeIndex in routes) {
 </script>
 
 <template>
-  <TitledSection last>
+  <SectionTitle last>
     <h1 class="flex items-center justify-center flex-col md:flex-row text-2xl text-gray-500 dark:text-gray-400 mb-12">
       <span class="md:mr-3">Please star this project on</span>
       <a
@@ -32,7 +32,7 @@ for (const routeIndex in routes) {
         class="inline-flex items-center justify-center text-blue-600"
         target="_blank"
       >
-        <Icon
+        <BaseIcon
           :path="mdiGithub"
           size="36"
           class="mr-1"
@@ -66,5 +66,5 @@ for (const routeIndex in routes) {
         class="text-blue-600"
       >Premium version</a>
     </h1>
-  </TitledSection>
+  </SectionTitle>
 </template>

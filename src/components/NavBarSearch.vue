@@ -1,9 +1,9 @@
 <script setup>
-import Control from '@/components/Control.vue'
+import FormControl from '@/components/FormControl.vue'
 </script>
 
 <template>
-  <Control
+  <FormControl
     ref="root"
     placeholder="Search (ctrl+k)"
     ctrl-k-focus

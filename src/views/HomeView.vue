@@ -13,17 +13,17 @@ import {
 } from '@mdi/js'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 import LineChart from '@/components/Charts/LineChart.vue'
-import MainSection from '@/components/MainSection.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import CardWidget from '@/components/CardWidget.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import ClientsTable from '@/components/ClientsTable.vue'
-import Notification from '@/components/Notification.vue'
-import JbButton from '@/components/JbButton.vue'
-import CardTransactionBar from '@/components/CardTransactionBar.vue'
-import CardClientBar from '@/components/CardClientBar.vue'
-import TitleSubBar from '@/components/TitleSubBar.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import SectionTitleBar from '@/components/SectionTitleBar.vue'
+import SectionHeroBar from '@/components/SectionHeroBar.vue'
+import CardBoxWidget from '@/components/CardBoxWidget.vue'
+import CardBox from '@/components/CardBox.vue'
+import TableSampleClients from '@/components/TableSampleClients.vue'
+import NotificationBar from '@/components/NotificationBar.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import CardBoxTransaction from '@/components/CardBoxTransaction.vue'
+import CardBoxClient from '@/components/CardBoxClient.vue'
+import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 
 const titleStack = ref(['Admin', 'Dashboard'])
 
@@ -47,10 +47,10 @@ const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
-  <HeroBar>Dashboard</HeroBar>
-  <MainSection>
-    <Notification
+  <SectionTitleBar :title-stack="titleStack" />
+  <SectionHeroBar>Dashboard</SectionHeroBar>
+  <SectionMain>
+    <NotificationBar
       color="info"
       :icon="mdiGithub"
     >
@@ -61,7 +61,7 @@ const darkMode = computed(() => mainStore.darkMode)
         target="_blank"
       >GitHub</a>
       <template #right>
-        <JbButton
+        <BaseButton
           href="https://github.com/justboil/admin-one-vue-tailwind"
           :icon="mdiGithub"
           :outline="darkMode"
@@ -70,9 +70,9 @@ const darkMode = computed(() => mainStore.darkMode)
           small
         />
       </template>
-    </Notification>
+    </NotificationBar>
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-      <CardWidget
+      <CardBoxWidget
         trend="12%"
         trend-type="up"
         color="text-emerald-500"
@@ -80,7 +80,7 @@ const darkMode = computed(() => mainStore.darkMode)
         :number="512"
         label="Clients"
       />
-      <CardWidget
+      <CardBoxWidget
         trend="12%"
         trend-type="down"
         color="text-blue-500"
@@ -89,7 +89,7 @@ const darkMode = computed(() => mainStore.darkMode)
         prefix="$"
         label="Sales"
       />
-      <CardWidget
+      <CardBoxWidget
         trend="Overflow"
         trend-type="alert"
         color="text-red-500"
@@ -102,7 +102,7 @@ const darkMode = computed(() => mainStore.darkMode)
 
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
       <div class="flex flex-col justify-between">
-        <CardTransactionBar
+        <CardBoxTransaction
           v-for="(transaction,index) in transactionBarItems"
           :key="index"
           :amount="transaction.amount"
@@ -114,7 +114,7 @@ const darkMode = computed(() => mainStore.darkMode)
         />
       </div>
       <div class="flex flex-col justify-between">
-        <CardClientBar
+        <CardBoxClient
           v-for="client in clientBarItems"
           :key="client.id"
           :name="client.name"
@@ -125,12 +125,12 @@ const darkMode = computed(() => mainStore.darkMode)
       </div>
     </div>
 
-    <TitleSubBar
+    <SectionTitleBarSub
       :icon="mdiChartPie"
       title="Trends overview"
     />
 
-    <CardComponent
+    <CardBox
       title="Performance"
       :icon="mdiFinance"
       :header-icon="mdiReload"
@@ -143,26 +143,26 @@ const darkMode = computed(() => mainStore.darkMode)
           class="h-96"
         />
       </div>
-    </CardComponent>
+    </CardBox>
 
-    <TitleSubBar
+    <SectionTitleBarSub
       :icon="mdiAccountMultiple"
       title="Clients"
     />
 
-    <Notification
+    <NotificationBar
       color="info"
       :icon="mdiMonitorCellphone"
     >
       <b>Responsive table.</b> Collapses on mobile
-    </Notification>
+    </NotificationBar>
 
-    <CardComponent
+    <CardBox
       :icon="mdiMonitorCellphone"
       title="Responsive table"
       has-table
     >
-      <ClientsTable />
-    </CardComponent>
-  </MainSection>
+      <TableSampleClients />
+    </CardBox>
+  </SectionMain>
 </template>

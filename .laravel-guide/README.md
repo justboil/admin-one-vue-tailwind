@@ -204,7 +204,7 @@ const activeInactiveStyle = computed(
 In `<template>` section:
 
 * In `<component>` remove `v-slot` and `:to` attributes
-* Inside `<component>` replace `:class` attribute for `<Icon>`, `<span>` and another `<Icon>` with `:class="activeInactiveStyle"`
+* Inside `<component>` replace `:class` attribute for `<BaseIcon>`, `<span>` and another `<BaseIcon>` with `:class="activeInactiveStyle"`
 
 ```vue
 <template>
@@ -219,7 +219,7 @@ In `<template>` section:
     :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
     @click="menuClick"
   >
-    <Icon
+    <BaseIcon
       v-if="item.icon"
       :path="item.icon"
       class="flex-none"
@@ -230,7 +230,7 @@ In `<template>` section:
       class="grow"
       :class="activeInactiveStyle"
     >{{ item.label }}</span>
-    <Icon
+    <BaseIcon
       v-if="hasDropdown"
       :path="dropdownIcon"
       class="flex-none"
@@ -244,7 +244,7 @@ In `<template>` section:
 </template>
 ```
 
-##### resources/js/components/JbButton.vue
+##### resources/js/components/BaseButton.vue
 
 Add `Link` import to `<script setup>`:
 

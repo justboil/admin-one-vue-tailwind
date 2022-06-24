@@ -3,15 +3,15 @@ import { useMainStore } from '@/stores/main'
 import { useForm, usePage, Head } from '@inertiajs/inertia-vue3'
 import { computed } from 'vue'
 import { mdiAccount, mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
-import FullScreenSection from '@/components/FullScreenSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import CheckRadioPicker from '@/components/CheckRadioPicker.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import Divider from '@/components/Divider.vue'
-import JbButton from '@/components/JbButton.vue'
-import JbButtons from '@/components/JbButtons.vue'
-import ValidationErrors from '@/components/ValidationErrors.vue'
+import SectionFullScreen from '@/components/SectionFullScreen.vue'
+import CardBox from '@/components/CardBox.vue'
+import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
+import FormValidationErrors from '@/components/FormValidationErrors.vue'
 
 const form = useForm({
   name: '',
@@ -40,25 +40,25 @@ const submit = () => {
 <template>
   <Head title="Register" />
 
-  <FullScreenSection
+  <SectionFullScreen
     v-slot="{ cardClass, cardRounded }"
     bg="login"
   >
-    <CardComponent
+    <CardBox
       :class="cardClass"
       class="my-24"
       :rounded="cardRounded"
       form
       @submit.prevent="submit"
     >
-      <ValidationErrors />
+      <FormValidationErrors />
 
-      <Field
+      <FormField
         label="Name"
         label-for="name"
         help="Please enter your name"
       >
-        <Control
+        <FormControl
           v-model="form.name"
           id="name"
           :icon="mdiAccount"
@@ -66,14 +66,14 @@ const submit = () => {
           type="text"
           required
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Email"
         label-for="email"
         help="Please enter your email"
       >
-        <Control
+        <FormControl
           v-model="form.email"
           id="email"
           :icon="mdiEmail"
@@ -81,14 +81,14 @@ const submit = () => {
           type="email"
           required
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Password"
         label-for="password"
         help="Please enter new password"
       >
-        <Control
+        <FormControl
           v-model="form.password"
           id="password"
           :icon="mdiFormTextboxPassword"
@@ -96,14 +96,14 @@ const submit = () => {
           autocomplete="new-password"
           required
         />
-      </Field>
+      </FormField>
 
-      <Field
+      <FormField
         label="Confirm Password"
         label-for="password_confirmation"
         help="Please confirm your password"
       >
-        <Control
+        <FormControl
           v-model="form.password_confirmation"
           id="password_confirmation"
           :icon="mdiFormTextboxPassword"
@@ -111,32 +111,32 @@ const submit = () => {
           autocomplete="new-password"
           required
         />
-      </Field>
+      </FormField>
 
-      <CheckRadioPicker
+      <FormCheckRadioPicker
         v-if="hasTermsAndPrivacyPolicyFeature"
         v-model="form.terms"
         name="remember"
         :options="{ agree: 'I agree to the Terms' }"
       />
 
-      <Divider />
+      <DividerHorizontal />
 
-      <JbButtons>
-        <JbButton
+      <BaseButtons>
+        <BaseButton
           type="submit"
           color="info"
           label="Register"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         />
-        <JbButton
+        <BaseButton
           route-name="login"
           color="info"
           outline
           label="Login"
         />
-      </JbButtons>
-    </CardComponent>
-  </FullScreenSection>
+      </BaseButtons>
+    </CardBox>
+  </SectionFullScreen>
 </template>

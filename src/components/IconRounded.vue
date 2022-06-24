@@ -2,7 +2,7 @@
 import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 import { colorsText, colorsBg } from '@/colors.js'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
   icon: {
@@ -32,7 +32,7 @@ const iconStyle = computed(
 </script>
 
 <template>
-  <Icon
+  <BaseIcon
     :path="icon"
     :w="w"
     :h="h"

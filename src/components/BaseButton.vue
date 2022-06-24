@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { getButtonColor } from '@/colors.js'
-import Icon from '@/components/Icon.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
   label: {
@@ -104,7 +104,7 @@ const componentClass = computed(() => {
     :target="target"
     :disabled="disabled"
   >
-    <Icon
+    <BaseIcon
       v-if="icon"
       :path="icon"
     />

@@ -1,66 +1,66 @@
 <script setup>
 import { ref } from 'vue'
-import TitleBar from '@/components/TitleBar.vue'
-import HeroBar from '@/components/HeroBar.vue'
-import TitledSection from '@/components/TitledSection.vue'
-import MainSection from '@/components/MainSection.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
+import SectionTitleBar from '@/components/SectionTitleBar.vue'
+import SectionHeroBar from '@/components/SectionHeroBar.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 
 const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <SectionTitleBar :title-stack="titleStack" />
 
-  <HeroBar>Responsive layout</HeroBar>
+  <SectionHeroBar>Responsive layout</SectionHeroBar>
 
-  <TitledSection first>
+  <SectionTitle first>
     Mobile & Tablet
-  </TitledSection>
+  </SectionTitle>
 
-  <MainSection>
+  <SectionMain>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png"
         class="block"
       >
     </div>
-  </MainSection>
+  </SectionMain>
 
-  <TitledSection>
+  <SectionTitle>
     Small laptop 1024px
-  </TitledSection>
+  </SectionTitle>
 
-  <MainSection>
+  <SectionMain>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024.png"
         class="block"
       >
     </div>
-  </MainSection>
+  </SectionMain>
 
-  <MainSection>
+  <SectionMain>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png"
         class="block"
       >
     </div>
-  </MainSection>
+  </SectionMain>
 
-  <TitledSection>
+  <SectionTitle>
     Laptop & desktop
-  </TitledSection>
+  </SectionTitle>
 
-  <MainSection>
+  <SectionMain>
     <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png"
         class="block"
       >
     </div>
-  </MainSection>
+  </SectionMain>
 
-  <BottomOtherPagesSection />
+  <SectionBottomOtherPages />
 </template>

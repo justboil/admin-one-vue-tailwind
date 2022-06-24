@@ -2,8 +2,8 @@
 import { mdiCog } from '@mdi/js'
 import { computed } from 'vue'
 import { useMainStore } from '@/stores/main'
-import Icon from '@/components/Icon.vue'
-import JbButton from '@/components/JbButton.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 defineProps({
   icon: {
@@ -24,7 +24,7 @@ const darkMode = computed(() => mainStore.darkMode)
 <template>
   <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
     <div class="flex items-center justify-start">
-      <Icon
+      <BaseIcon
         v-if="icon"
         :path="icon"
         class="mr-3"
@@ -33,7 +33,7 @@ const darkMode = computed(() => mainStore.darkMode)
         {{ title }}
       </h1>
     </div>
-    <JbButton
+    <BaseButton
       :icon="mdiCog"
       :outline="darkMode"
       small

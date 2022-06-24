@@ -2,16 +2,16 @@
 import { ref, reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
-import MainSection from '@/components/MainSection.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import TitleBar from '@/components/TitleBar.vue'
-import Divider from '@/components/Divider.vue'
-import Field from '@/components/Field.vue'
-import Control from '@/components/Control.vue'
-import FilePicker from '@/components/FilePicker.vue'
-import JbButton from '@/components/JbButton.vue'
-import BottomOtherPagesSection from '@/components/BottomOtherPagesSection.vue'
-import JbButtons from '@/components/JbButtons.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import CardBox from '@/components/CardBox.vue'
+import SectionTitleBar from '@/components/SectionTitleBar.vue'
+import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import FormField from '@/components/FormField.vue'
+import FormControl from '@/components/FormControl.vue'
+import FormFilePicker from '@/components/FormFilePicker.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
 import UserCard from '@/components/UserCard.vue'
 
 const mainStore = useMainStore()
@@ -39,42 +39,42 @@ const submitPass = () => {
 </script>
 
 <template>
-  <TitleBar :title-stack="titleStack" />
+  <SectionTitleBar :title-stack="titleStack" />
 
   <UserCard />
 
-  <MainSection>
+  <SectionMain>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <CardComponent
+      <CardBox
         title="Edit Profile"
         :icon="mdiAccountCircle"
         form
         @submit.prevent="submitProfile"
       >
-        <Field
+        <FormField
           label="Avatar"
           help="Max 500kb"
         >
-          <FilePicker />
-        </Field>
+          <FormFilePicker />
+        </FormField>
 
-        <Field
+        <FormField
           label="Name"
           help="Required. Your name"
         >
-          <Control
+          <FormControl
             v-model="profileForm.name"
             :icon="mdiAccount"
             name="username"
             required
             autocomplete="username"
           />
-        </Field>
-        <Field
+        </FormField>
+        <FormField
           label="E-mail"
           help="Required. Your e-mail"
         >
-          <Control
+          <FormControl
             v-model="profileForm.email"
             :icon="mdiMail"
             type="email"
@@ -82,35 +82,35 @@ const submitPass = () => {
             required
             autocomplete="email"
           />
-        </Field>
+        </FormField>
 
-        <Divider />
+        <DividerHorizontal />
 
-        <JbButtons>
-          <JbButton
+        <BaseButtons>
+          <BaseButton
             color="info"
             type="submit"
             label="Submit"
           />
-          <JbButton
+          <BaseButton
             color="info"
             label="Options"
             outline
           />
-        </JbButtons>
-      </CardComponent>
+        </BaseButtons>
+      </CardBox>
 
-      <CardComponent
+      <CardBox
         title="Change Password"
         :icon="mdiLock"
         form
         @submit.prevent="submitPass"
       >
-        <Field
+        <FormField
           label="Current password"
           help="Required. Your current password"
         >
-          <Control
+          <FormControl
             v-model="passwordForm.password_current"
             :icon="mdiAsterisk"
             name="password_current"
@@ -118,15 +118,15 @@ const submitPass = () => {
             required
             autocomplete="current-password"
           />
-        </Field>
+        </FormField>
 
-        <Divider />
+        <DividerHorizontal />
 
-        <Field
+        <FormField
           label="New password"
           help="Required. New password"
         >
-          <Control
+          <FormControl
             v-model="passwordForm.password"
             :icon="mdiFormTextboxPassword"
             name="password"
@@ -134,13 +134,13 @@ const submitPass = () => {
             required
             autocomplete="new-password"
           />
-        </Field>
+        </FormField>
 
-        <Field
+        <FormField
           label="Confirm password"
           help="Required. New password one more time"
         >
-          <Control
+          <FormControl
             v-model="passwordForm.password_confirmation"
             :icon="mdiFormTextboxPassword"
             name="password_confirmation"
@@ -148,25 +148,25 @@ const submitPass = () => {
             required
             autocomplete="new-password"
           />
-        </Field>
+        </FormField>
 
-        <Divider />
+        <DividerHorizontal />
 
-        <JbButtons>
-          <JbButton
+        <BaseButtons>
+          <BaseButton
             type="submit"
             color="info"
             label="Submit"
           />
-          <JbButton
+          <BaseButton
             color="info"
             label="Options"
             outline
           />
-        </JbButtons>
-      </CardComponent>
+        </BaseButtons>
+      </CardBox>
     </div>
-  </MainSection>
+  </SectionMain>
 
-  <BottomOtherPagesSection />
+  <SectionBottomOtherPages />
 </template>
