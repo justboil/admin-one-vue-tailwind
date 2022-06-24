@@ -2,18 +2,18 @@
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
-### Tailwind 3.x Vue 3.x with Vue CLI, Vite or Laravel
+### Tailwind 3.x Vue 3.x with Vite or Laravel
 
 [![Free Vue 3 Tailwind 3 admin dashboard with dark mode](https://static.justboil.me/templates/one/repo-tailwind-vue.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 [![Vue Tailwind white & dark styles](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-### Tailwind 3.x Vue 3.x with Vue CLI, Vite or Laravel
+### Tailwind 3.x Vue 3.x with Vite or Laravel
 
 **Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard. Laravel 9.x integration available.
 
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
-* **Vite** and **Vue CLI** build tools
+* **Vite** under the hood &mdash; [Info](https://vitejs.dev)
 * **Laravel Jetstream Inertia Vue** integration available &mdash; [Info](#laravel-9x-integration)
 * **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Pinia** state library (official Vuex 5)
@@ -36,7 +36,6 @@
   * [Premium dashboard demo](#premium-dashboard-demo)
 * [Quick Start](#quick-start)
   * [Get code & install](#get-code--install)
-  * [Vue CLI builds](#vue-cli-builds)
   * [Vite builds](#vite-builds)
   * [Linting](#linting)
   * [Laravel 9.x integration](#laravel-9x-integration)
@@ -79,11 +78,12 @@ https://tailwind-vue.justboil.me/
 
 ## Quick Start
 
-Get code & install. Then use either [Vue CLI](#vue-cli-builds) or [Vite](#vite-builds) builds.
+Get code & install. Then `dev` or `build` with [Vite](#vite-builds) or [integrate with Laravel](#laravel-9x-integration).
 
 * [Get code & install](#get-code--install)
-* [Vue CLI builds](#vue-cli-builds)
 * [Vite builds](#vite-builds)
+* [Linting](#linting)
+* [Laravel 9.x integration](#laravel-9x-integration)
 
 ### Get code & install
 
@@ -97,47 +97,34 @@ Get code & install. Then use either [Vue CLI](#vue-cli-builds) or [Vite](#vite-b
 
 `cd` to project's dir and run `npm install`
 
-### Vue CLI builds
-
-#### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-#### Compiles and minifies for production
-```
-npm run build
-```
-
 ### Vite builds
 
 [Vite](https://vitejs.dev) is next Generation Frontend Tooling featuring unbundled web-development
 
 #### Hot-reloads for development
+
 ```
 npm run dev
 ```
 
 #### Builds and minifies for production
+
 ```
-npm run build:vite
+npm run build
 ```
 
 #### Serves recently built app
+
 ```
-npm run serve:vite
+npm run preview
 ```
 
 ### Linting
 
 #### Lint
+
 ```
 npm run lint
-```
-
-#### Lints and fixes files
-```
-npm run lint:fix
 ```
 
 ### Laravel 9.x integration
@@ -164,7 +151,7 @@ The issue list is reserved exclusively for bug reports and feature requests. Tha
 
 ## Licensing
 
-- Copyright &copy; 2019-2021 JustBoil.me (https://justboil.me)
+- Copyright &copy; 2019-2022 JustBoil.me (https://justboil.me)
 - Licensed under MIT
 
 ## Useful Links
