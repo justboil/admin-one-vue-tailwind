@@ -1,5 +1,6 @@
 <script setup>
 import { useMainStore } from '@/stores/main'
+import { RouterLink } from 'vue-router'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -31,7 +32,7 @@ const is = computed(() => {
   }
 
   if (props.to) {
-    return 'RouterLink'
+    return RouterLink
   }
 
   return 'div'
@@ -74,10 +75,6 @@ const componentClass = computed(() => {
 
   return base
 })
-
-const activeClass = computed(() => {
-  return is.value === 'RouterLink' ? props.activeColor : null
-})
 </script>
 
 <template>
@@ -86,7 +83,7 @@ const activeClass = computed(() => {
     :class="componentClass"
     :to="to"
     :href="href"
-    :exact-active-class="activeClass"
+    :exact-active-class="props.activeColor"
   >
     <slot />
   </component>

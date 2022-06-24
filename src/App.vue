@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterView } from 'vue-router'
 import { useMainStore } from '@/stores/main'
 import menu from '@/menu.js'
 import NavBar from '@/components/NavBar.vue'

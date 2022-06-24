@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { mdiGithub } from '@mdi/js'
 import SectionTitle from '@/components/SectionTitle.vue'
 import BaseIcon from '@/components/BaseIcon.vue'

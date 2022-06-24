@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 
@@ -48,7 +49,7 @@ const is = computed(() => {
   }
 
   if (props.to) {
-    return 'RouterLink'
+    return RouterLink
   }
 
   if (props.href) {

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useMainStore } from '@/stores/main'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -27,7 +28,7 @@ const asideSubmenuListStyle = computed(() => mainStore.asideSubmenuListStyle)
 
 const isDropdownActive = ref(false)
 
-const componentIs = computed(() => props.item.to ? 'RouterLink' : 'a')
+const componentIs = computed(() => props.item.to ? RouterLink : 'a')
 
 const hasDropdown = computed(() => !!props.item.menu)
 
