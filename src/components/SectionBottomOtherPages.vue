@@ -4,9 +4,7 @@ import { mdiGithub } from '@mdi/js'
 import SectionTitle from '@/components/SectionTitle.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 
-const router = useRouter()
-
-const routes = router.getRoutes()
+const routes = useRouter().getRoutes()
 
 const screens = []
 
