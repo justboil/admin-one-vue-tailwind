@@ -66,8 +66,10 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 ##### In resources/layouts/App.vue
 
-* Replace `<router-view />` with `<slot />`
+* Remove `import { RouterView } from 'vue-router'`
+* Replace `<RouterView />` with `<slot />`
 * Add `mainStore.fullScreenToggle(false)` after `const mainStore = useMainStore()`
+* `mainStore.setUser()` is no longer needed, since we'll [fetch this data from backend](#add-inertia-related-stuff)
 
 ##### In resources/views/app.blade.php
 
@@ -75,11 +77,11 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 ## Add Pages
 
-Let's just add first page. You can repeat these steps for other pages, if you wish to.
+Let's just add first page. You can repeat these steps for other pages, if you wish to. Please note, that `SectionBottomOtherPages` should be removed where present, as it depends on vue-router.
 
-First, copy `src/views/Home.vue` (justboil/admin-one-vue-tailwind project) to `resources/js/Pages/` (your Laravel project).
+First, copy `src/views/HomeView.vue` (justboil/admin-one-vue-tailwind project) to `resources/js/Pages/` (your Laravel project).
 
-Then, open `resources/js/Pages/Home.vue` and add these lines to `<script setup>`:
+Then, open `resources/js/Pages/HomeView.vue` and add these lines to `<script setup>`:
 
 ```vue
 <script setup>
@@ -166,7 +168,7 @@ Now, let's update vue files, to make them work with route names and Inertia link
 
 ##### resources/js/components/AsideMenuItem.vue
 
-Add `Link` import to `<script setup>`:
+Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
 
 ```vue
 <script setup>
@@ -246,7 +248,7 @@ In `<template>` section:
 
 ##### resources/js/components/BaseButton.vue
 
-Add `Link` import to `<script setup>`:
+Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
 
 ```vue
 <script setup>
@@ -307,7 +309,7 @@ Remove `:to` and replace `:href` in `<component>` with `:href="routeName ? route
 
 ##### resources/js/components/NavBarItem.vue
 
-Add `Link` import to `<script setup>`:
+Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
 
 ```vue
 <script setup>
