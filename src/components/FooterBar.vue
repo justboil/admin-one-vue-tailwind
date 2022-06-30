@@ -23,7 +23,7 @@ const isFooterBarVisible = computed(() => !mainStore.isFullScreen)
           target="_blank"
         >JustBoil.me</a>.</b>
         Get more with <a
-          href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
+          href="https://tailwind-vue.justboil.me/"
           target="_blank"
           class="text-blue-600"
         >Premium version</a>

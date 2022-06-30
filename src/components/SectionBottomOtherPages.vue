@@ -59,7 +59,7 @@ for (const routeIndex in routes) {
     </h1>
     <h1 class="text-2xl text-gray-500 dark:text-gray-400">
       Get more with <a
-        href="https://justboil.me/tailwind-admin-templates/vue-dashboard/"
+        href="https://tailwind-vue.justboil.me/"
         target="_blank"
         class="text-blue-600"
       >Premium version</a>

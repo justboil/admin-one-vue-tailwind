@@ -81,7 +81,7 @@ export default [
   'About',
   [
     {
-      href: 'https://justboil.me/tailwind-admin-templates/vue-dashboard/',
+      href: 'https://tailwind-vue.justboil.me/',
       label: 'Premium version',
       icon: mdiMonitorShimmer,
       target: '_blank'
