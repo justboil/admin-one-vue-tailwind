@@ -11,8 +11,7 @@ defineProps({
     required: true
   },
   isDesktopIconOnly: Boolean
-}
-)
+})
 </script>
 
 <template>
