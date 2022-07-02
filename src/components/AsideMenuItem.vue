@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emit = defineEmits(['menu-click'])
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 
 const isDropdownActive = ref(false)
 
@@ -50,32 +50,32 @@ const menuClick = event => {
       :href="itemHref"
       :target="itemTarget"
       class="flex cursor-pointer dark:hover:bg-gray-700/50"
-      :class="[ mainStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
+      :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
     >
       <BaseIcon
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
-        :class="[ vSlot && vSlot.isExactActive ? mainStore.asideMenuItemActiveStyle : mainStore.asideMenuItemInactiveStyle ]"
+        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
         w="w-12"
       />
       <span
         class="grow"
-        :class="[ vSlot && vSlot.isExactActive ? mainStore.asideMenuItemActiveStyle : mainStore.asideMenuItemInactiveStyle ]"
+        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
       >{{ item.label }}</span>
       <BaseIcon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"
-        :class="[ vSlot && vSlot.isExactActive ? mainStore.asideMenuItemActiveStyle : mainStore.asideMenuItemInactiveStyle ]"
+        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
         w="w-12"
       />
     </component>
     <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="[ mainStore.asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800/50' : 'hidden' ]"
+      :class="[ styleStore.asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800/50' : 'hidden' ]"
       is-submenu-list
     />
   </li>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import {
   mdiMonitorCellphone,
   mdiSelectColor,
@@ -47,7 +47,7 @@ const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') >
 
 const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 </script>
 
 <template>
@@ -91,7 +91,7 @@ const mainStore = useMainStore()
         <BaseButton
           label="Toggle"
           outline
-          @click="mainStore.setDarkMode()"
+          @click="styleStore.setDarkMode()"
         />
       </div>
     </CardBox>

@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
@@ -12,7 +12,7 @@ defineProps({
   }
 })
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 
 const isDropdownActive = ref(false)
 
@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
   >
     <a
       class="flex items-center py-2 px-3 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent"
-      :class="mainStore.navBarMenuListUpperLabelStyle"
+      :class="styleStore.navBarMenuListUpperLabelStyle"
     >
       <slot />
       <BaseIcon

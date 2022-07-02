@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 
 defineProps({
   zIndex: {
@@ -14,7 +14,7 @@ const overlayClick = event => {
   emit('overlay-click', event)
 }
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const mainStore = useMainStore()
     >
       <div
         class="absolute inset-0 bg-gradient-to-tr opacity-90 dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
-        :class="mainStore.overlayStyle"
+        :class="styleStore.overlayStyle"
         @click="overlayClick"
       />
     </transition>

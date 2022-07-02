@@ -1,27 +1,8 @@
 import { defineStore } from 'pinia'
-import * as styles from '@/styles'
-import { darkModeKey, styleKey } from '@/config'
 import axios from 'axios'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
-    /* Styles */
-    style: '',
-    bodyStyle: '',
-    asideStyle: '',
-    asideBrandStyle: '',
-    asideMenuCloseLgStyle: '',
-    asideMenuLabelStyle: '',
-    asideMenuItemStyle: '',
-    asideMenuItemActiveStyle: '',
-    asideMenuItemInactiveStyle: '',
-    asideSubmenuListStyle: '',
-    navBarItemLabelStyle: '',
-    navBarItemLabelHoverStyle: '',
-    navBarItemLabelActiveColorStyle: '',
-    navBarMenuListUpperLabelStyle: '',
-    overlayStyle: '',
-
     /* User */
     userName: null,
     userEmail: null,
@@ -33,9 +14,6 @@ export const useMainStore = defineStore('main', {
     /* Aside */
     isAsideMobileExpanded: false,
     isAsideLgActive: false,
-
-    /* Dark mode */
-    darkMode: false,
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -57,26 +35,6 @@ export const useMainStore = defineStore('main', {
       }
     },
 
-    setStyle (payload) {
-      if (!styles[payload]) {
-        return
-      }
-
-      this.style = payload
-
-      const style = styles[payload]
-
-      document.body.className = style.body
-
-      if (localStorage[styleKey] !== payload) {
-        localStorage.setItem(styleKey, payload)
-      }
-
-      for (const key in style) {
-        this[`${key}Style`] = style[key]
-      }
-    },
-
     asideMobileToggle (payload = null) {
       const isShow = payload !== null ? payload : !this.isAsideMobileExpanded
 
@@ -95,16 +53,6 @@ export const useMainStore = defineStore('main', {
       this.isFullScreen = payload
 
       document.documentElement.classList[payload ? 'add' : 'remove']('full-screen')
-    },
-
-    setDarkMode (payload = null) {
-      const value = payload !== null ? payload : !this.darkMode
-
-      document.documentElement.classList[value ? 'add' : 'remove']('dark')
-
-      localStorage.setItem(darkModeKey, value ? '1' : '0')
-
-      this.darkMode = value
     },
 
     fetch (sampleDataKey) {

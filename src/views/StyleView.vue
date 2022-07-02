@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import { sectionBgLogin } from '@/colors.js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -11,15 +11,15 @@ const styles = [
   'basic'
 ]
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 
-mainStore.setDarkMode(false)
+styleStore.setDarkMode(false)
 
 const router = useRouter()
 
 const click = slug => {
-  mainStore.setStyle(slug)
-  mainStore.setDarkMode(false)
+  styleStore.setStyle(slug)
+  styleStore.setDarkMode(false)
   router.push('/dashboard')
 }
 </script>

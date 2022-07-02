@@ -1,10 +1,10 @@
 <script setup>
 import { mdiThemeLightDark } from '@mdi/js'
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 </script>
 
 <template>
@@ -16,9 +16,9 @@ const mainStore = useMainStore()
         <slot />
       </h1>
       <BaseButton
-        :label="mainStore.darkMode ? 'Light Mode' : 'Dark Mode'"
+        :label="styleStore.darkMode ? 'Light Mode' : 'Dark Mode'"
         :icon="mdiThemeLightDark"
-        @click="mainStore.setDarkMode()"
+        @click="styleStore.setDarkMode()"
       />
     </BaseLevel>
   </section>

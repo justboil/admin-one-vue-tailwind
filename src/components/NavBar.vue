@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useMainStore } from '@/stores/main'
+import { useMainStore } from '@/stores/main.js'
+import { useStyleStore } from '@/stores/style.js'
 import {
   mdiForwardburger,
   mdiBackburger,
@@ -28,9 +29,10 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
 const mainStore = useMainStore()
+const styleStore = useStyleStore()
 
 const toggleLightDark = () => {
-  mainStore.setDarkMode()
+  styleStore.setDarkMode()
 }
 
 const isNavBarVisible = computed(() => !mainStore.isFullScreen)

@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style.js'
 import { RouterLink } from 'vue-router'
 import { computed } from 'vue'
 
@@ -38,9 +38,9 @@ const is = computed(() => {
   return 'div'
 })
 
-const mainStore = useMainStore()
+const styleStore = useStyleStore()
 
-const activeColor = props.activeColor ?? `${mainStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
+const activeColor = props.activeColor ?? `${styleStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
 
 const componentClass = computed(() => {
   const base = [
@@ -52,7 +52,7 @@ const componentClass = computed(() => {
     'cursor-pointer',
     props.active
       ? activeColor
-      : `${mainStore.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${mainStore.navBarItemLabelHoverStyle}`
+      : `${styleStore.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${styleStore.navBarItemLabelHoverStyle}`
   ]
 
   if (props.type === 'block') {

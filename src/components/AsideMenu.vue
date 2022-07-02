@@ -1,5 +1,6 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useMainStore } from '@/stores/main.js'
+import { useStyleStore } from '@/stores/style.js'
 import { mdiMenu } from '@mdi/js'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 import NavBarItem from '@/components/NavBarItem.vue'
@@ -14,6 +15,8 @@ defineProps({
 
 const mainStore = useMainStore()
 
+const styleStore = useStyleStore()
+
 const menuClick = () => {
   //
 }
@@ -25,15 +28,15 @@ const menuClick = () => {
     id="aside"
     class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 overflow-y-auto
     dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70"
-    :class="[ mainStore.asideStyle, mainStore.isAsideMobileExpanded ? 'left-0' : '-left-60', mainStore.isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
+    :class="[ styleStore.asideStyle, mainStore.isAsideMobileExpanded ? 'left-0' : '-left-60', mainStore.isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
     <div
       class="flex flex-row w-full flex-1 h-14 items-center dark:bg-transparent"
-      :class="[ mainStore.asideBrandStyle ]"
+      :class="[ styleStore.asideBrandStyle ]"
     >
       <NavBarItem
         type="hidden lg:flex xl:hidden"
-        :active-color="mainStore.asideMenuCloseLgStyle"
+        :active-color="styleStore.asideMenuCloseLgStyle"
         active
         @click="mainStore.asideLgToggle(false)"
       >
@@ -53,7 +56,7 @@ const menuClick = () => {
           v-if="typeof menuGroup === 'string'"
           :key="`a-${index}`"
           class="p-3 text-xs uppercase"
-          :class="mainStore.asideMenuLabelStyle"
+          :class="styleStore.asideMenuLabelStyle"
         >
           {{ menuGroup }}
         </p>
