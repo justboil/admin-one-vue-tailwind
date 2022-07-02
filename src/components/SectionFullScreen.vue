@@ -14,14 +14,12 @@ const props = defineProps({
 
 const mainStore = useMainStore()
 
-const darkMode = computed(() => mainStore.darkMode)
-
 const colorClass = computed(() => {
   switch (props.bg) {
     case 'login':
-      return darkMode.value ? sectionBgLoginDark : sectionBgLogin
+      return mainStore.darkMode ? sectionBgLoginDark : sectionBgLogin
     case 'error':
-      return darkMode.value ? sectionBgErrorDark : sectionBgError
+      return mainStore.darkMode ? sectionBgErrorDark : sectionBgError
   }
 
   return ''

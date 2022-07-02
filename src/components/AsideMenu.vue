@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiMenu } from '@mdi/js'
 import AsideMenuList from '@/components/AsideMenuList.vue'
@@ -15,24 +14,6 @@ defineProps({
 
 const mainStore = useMainStore()
 
-const asideStyle = computed(() => mainStore.asideStyle)
-
-const asideBrandStyle = computed(() => mainStore.asideBrandStyle)
-
-const asideMenuCloseLgStyle = computed(() => mainStore.asideMenuCloseLgStyle)
-
-const asideMenuLabelStyle = computed(() => mainStore.asideMenuLabelStyle)
-
-const isFullScreen = computed(() => mainStore.isFullScreen)
-
-const isAsideMobileExpanded = computed(() => mainStore.isAsideMobileExpanded)
-
-const isAsideLgActive = computed(() => mainStore.isAsideLgActive)
-
-const asideLgClose = () => {
-  mainStore.asideLgToggle(false)
-}
-
 const menuClick = () => {
   //
 }
@@ -40,21 +21,21 @@ const menuClick = () => {
 
 <template>
   <aside
-    v-show="!isFullScreen"
+    v-show="!mainStore.isFullScreen"
     id="aside"
     class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 overflow-y-auto
     dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70"
-    :class="[ asideStyle, isAsideMobileExpanded ? 'left-0' : '-left-60', isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
+    :class="[ mainStore.asideStyle, mainStore.isAsideMobileExpanded ? 'left-0' : '-left-60', mainStore.isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
   >
     <div
       class="flex flex-row w-full flex-1 h-14 items-center dark:bg-transparent"
-      :class="[ asideBrandStyle ]"
+      :class="[ mainStore.asideBrandStyle ]"
     >
       <NavBarItem
         type="hidden lg:flex xl:hidden"
-        :active-color="asideMenuCloseLgStyle"
+        :active-color="mainStore.asideMenuCloseLgStyle"
         active
-        @click="asideLgClose"
+        @click="mainStore.asideLgToggle(false)"
       >
         <BaseIcon
           :path="mdiMenu"
@@ -72,7 +53,7 @@ const menuClick = () => {
           v-if="typeof menuGroup === 'string'"
           :key="`a-${index}`"
           class="p-3 text-xs uppercase"
-          :class="[ asideMenuLabelStyle ]"
+          :class="mainStore.asideMenuLabelStyle"
         >
           {{ menuGroup }}
         </p>

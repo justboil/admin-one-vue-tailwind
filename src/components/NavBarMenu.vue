@@ -14,8 +14,6 @@ defineProps({
 
 const mainStore = useMainStore()
 
-const navBarMenuListUpperLabelStyle = computed(() => mainStore.navBarMenuListUpperLabelStyle)
-
 const isDropdownActive = ref(false)
 
 const toggleDropdownIcon = computed(() => isDropdownActive.value ? mdiChevronUp : mdiChevronDown)
@@ -53,7 +51,7 @@ onBeforeUnmount(() => {
   >
     <a
       class="flex items-center py-2 px-3 dark:bg-gray-800 lg:bg-transparent lg:dark:bg-transparent"
-      :class="[ navBarMenuListUpperLabelStyle ]"
+      :class="mainStore.navBarMenuListUpperLabelStyle"
     >
       <slot />
       <BaseIcon

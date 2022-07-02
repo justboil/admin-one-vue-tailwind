@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, useSlots } from 'vue'
-import { useMainStore } from '@/stores/main'
 import { mdiClose } from '@mdi/js'
 import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 import BaseLevel from '@/components/BaseLevel.vue'
@@ -32,10 +31,6 @@ const dismiss = () => {
 const slots = useSlots()
 
 const hasRightSlot = computed(() => slots.right)
-
-const mainStore = useMainStore()
-
-const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
@@ -63,7 +58,7 @@ const darkMode = computed(() => mainStore.darkMode)
       <BaseButton
         v-else
         :icon="mdiClose"
-        :outline="outline || (darkMode && ['white', 'light'].indexOf(color) < 0)"
+        :outline="outline"
         small
         @click="dismiss"
       />

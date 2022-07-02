@@ -1,7 +1,5 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
-import { useMainStore } from '@/stores/main'
 import BaseIcon from '@/components/BaseIcon.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
@@ -15,10 +13,6 @@ defineProps({
     required: true
   }
 })
-
-const mainStore = useMainStore()
-
-const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
@@ -35,7 +29,6 @@ const darkMode = computed(() => mainStore.darkMode)
     </div>
     <BaseButton
       :icon="mdiCog"
-      :outline="darkMode"
       small
     />
   </section>

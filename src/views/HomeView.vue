@@ -42,8 +42,6 @@ const mainStore = useMainStore()
 const clientBarItems = computed(() => mainStore.clients.slice(0, 3))
 
 const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
-
-const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
@@ -64,7 +62,6 @@ const darkMode = computed(() => mainStore.darkMode)
         <BaseButton
           href="https://github.com/justboil/admin-one-vue-tailwind"
           :icon="mdiGithub"
-          :outline="darkMode"
           label="GitHub"
           target="_blank"
           small

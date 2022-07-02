@@ -1,7 +1,5 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
-import { useMainStore } from '@/stores/main'
 import CardBox from '@/components/CardBox.vue'
 import NumberDynamic from '@/components/NumberDynamic.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -43,10 +41,6 @@ defineProps({
     default: null
   }
 })
-
-const mainStore = useMainStore()
-
-const darkMode = computed(() => mainStore.darkMode)
 </script>
 
 <template>
@@ -65,8 +59,7 @@ const darkMode = computed(() => mainStore.darkMode)
         :icon="mdiCog"
         icon-w="w-4"
         icon-h="h-4"
-        :color="darkMode ? 'white' : 'light'"
-        :outline="darkMode"
+        color="white"
         small
       />
     </BaseLevel>

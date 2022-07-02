@@ -15,8 +15,6 @@ defineProps({
 
 const mainStore = useMainStore()
 
-const darkMode = computed(() => mainStore.darkMode)
-
 const items = computed(() => mainStore.clients)
 
 const isModalActive = ref(false)
@@ -190,7 +188,6 @@ const checked = (isChecked, client) => {
           :key="page"
           :active="page === currentPage"
           :label="page + 1"
-          :outline="darkMode"
           small
           @click="currentPage = page"
         />

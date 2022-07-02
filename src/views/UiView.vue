@@ -48,10 +48,6 @@ const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') >
 const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
 
 const mainStore = useMainStore()
-
-const darkModeToggle = () => {
-  mainStore.setDarkMode()
-}
 </script>
 
 <template>
@@ -95,7 +91,7 @@ const darkModeToggle = () => {
         <BaseButton
           label="Toggle"
           outline
-          @click="darkModeToggle"
+          @click="mainStore.setDarkMode()"
         />
       </div>
     </CardBox>
