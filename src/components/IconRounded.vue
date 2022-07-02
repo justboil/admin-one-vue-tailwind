@@ -1,5 +1,4 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 import { colorsText, colorsBg } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -24,10 +23,8 @@ const props = defineProps({
   bg: Boolean
 })
 
-const mainStore = useMainStore()
-
 const iconStyle = computed(
-  () => props.bg ? colorsBg[props.type] : [colorsText[props.type], `${mainStore.lightBgStyle} dark:bg-gray-800`]
+  () => props.bg ? colorsBg[props.type] : colorsText[props.type]
 )
 </script>
 
@@ -37,7 +34,7 @@ const iconStyle = computed(
     :w="w"
     :h="h"
     size="24"
-    class="rounded-full"
+    class="rounded-full bg-gray-100 dark:bg-gray-800"
     :class="iconStyle"
   />
 </template>

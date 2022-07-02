@@ -8,7 +8,6 @@ export const useMainStore = defineStore('main', {
     /* Styles */
     style: '',
     bodyStyle: '',
-    lightBgStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
     asideMenuCloseLgStyle: '',
