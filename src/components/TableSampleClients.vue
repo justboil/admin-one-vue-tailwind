@@ -15,8 +15,6 @@ defineProps({
 
 const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
-
 const lightBgStyle = computed(() => mainStore.lightBgStyle)
 
 const tableTrStyle = computed(() => mainStore.tableTrStyle)
@@ -188,8 +186,7 @@ const checked = (isChecked, client) => {
     </tbody>
   </table>
   <div
-    :class="lightBorderStyle"
-    class="p-3 lg:px-6 border-t dark:border-gray-800"
+    class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800"
   >
     <BaseLevel>
       <BaseButtons>

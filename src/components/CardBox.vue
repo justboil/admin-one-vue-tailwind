@@ -1,6 +1,5 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
-import { useMainStore } from '@/stores/main'
 import { computed } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 
@@ -32,14 +31,9 @@ const emit = defineEmits(['header-icon-click', 'submit'])
 
 const is = computed(() => props.form ? 'form' : 'div')
 
-const mainStore = useMainStore()
-
-const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
-
 const componentClass = computed(() => {
   const base = [
     props.rounded,
-    lightBorderStyle.value,
     props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900/70'
   ]
 
@@ -65,13 +59,12 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border dark:border-gray-800"
+    class="bg-white border border-gray-100 dark:border-gray-800"
     @submit="submit"
   >
     <header
       v-if="title"
-      :class="lightBorderStyle"
-      class="flex items-stretch border-b dark:border-gray-800"
+      class="flex items-stretch border-b border-gray-100 dark:border-gray-800"
     >
       <p
         class="flex items-center py-3 grow font-bold"

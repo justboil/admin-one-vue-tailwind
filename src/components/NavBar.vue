@@ -29,8 +29,6 @@ import NavBarSearch from '@/components/NavBarSearch.vue'
 
 const mainStore = useMainStore()
 
-const lightBorderStyle = computed(() => mainStore.lightBorderStyle)
-
 const toggleLightDark = () => {
   mainStore.setDarkMode()
 }
@@ -65,9 +63,9 @@ const logout = () => {
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b z-30 w-screen
+    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen
     transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
-    :class="[lightBorderStyle, {'ml-60 lg:ml-0':isAsideMobileExpanded}]"
+    :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"
   >
     <div class="flex-1 items-stretch flex h-14">
       <NavBarItem

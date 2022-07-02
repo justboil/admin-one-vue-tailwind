@@ -40,9 +40,9 @@ const is = computed(() => {
 
 const mainStore = useMainStore()
 
-const componentClass = computed(() => {
-  const activeColor = props.activeColor ?? `${mainStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
+const activeColor = props.activeColor ?? `${mainStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
 
+const componentClass = computed(() => {
   const base = [
     props.type,
     'items-center',
@@ -66,7 +66,7 @@ const componentClass = computed(() => {
   }
 
   if (props.hasDivider) {
-    base.push('lg:border-r', mainStore.lightBorderStyle, 'lg:dark:border-gray-800')
+    base.push('lg:border-r', 'border-gray-100', 'lg:dark:border-gray-800')
   }
 
   if (props.isDesktopIconOnly) {
@@ -83,7 +83,6 @@ const componentClass = computed(() => {
     :class="componentClass"
     :to="to"
     :href="href"
-    :exact-active-class="props.activeColor"
   >
     <slot />
   </component>
