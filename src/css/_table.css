@@ -7,21 +7,25 @@ thead {
 }
 
 tr {
-  @apply max-w-full block relative border-b-4
-    lg:table-row lg:border-b-0 dark:border-gray-700;
+  @apply max-w-full block relative border-b-4 border-gray-100
+    lg:table-row lg:border-b-0 dark:border-gray-800;
 }
 
 tr:last-child {
   @apply border-b-0;
 }
 
+td:not(:first-child) {
+  @apply lg:border-l lg:border-t-0 lg:border-r-0 lg:border-b-0 lg:border-gray-100 lg:dark:border-slate-700;
+}
+
 th {
-  @apply lg:text-left lg:py-2 lg:px-3;
+  @apply lg:text-left lg:p-3;
 }
 
 td {
-  @apply flex justify-between text-right py-3 px-4 align-top border-b
-    lg:table-cell lg:text-left lg:py-2 lg:px-3 lg:align-middle lg:border-b-0 dark:border-gray-700;
+  @apply flex justify-between text-right py-3 px-4 align-top border-b border-gray-100
+    lg:table-cell lg:text-left lg:p-3 lg:align-middle lg:border-b-0 dark:border-gray-800;
 }
 
 td:last-child {
@@ -29,35 +33,14 @@ td:last-child {
 }
 
 tbody tr, tbody tr:nth-child(odd) {
-  @apply lg:dark:hover:bg-gray-700 lg:dark:hover:bg-opacity-70;
+  @apply lg:hover:bg-gray-100 lg:dark:hover:bg-gray-700/70;
 }
 
 tbody tr:nth-child(odd) {
-  @apply lg:dark:bg-gray-800;
+  @apply lg:bg-gray-50 lg:dark:bg-gray-800;
 }
 
 td:before {
   content: attr(data-label);
   @apply font-semibold pr-3 text-left lg:hidden;
-}
-
-td.checkbox-cell, th.checkbox-cell {
-  @apply lg:w-5;
-}
-
-td.progress-cell progress {
-  @apply flex w-2/5 self-center
-    lg:w-full;
-}
-
-td.image-cell {
-  @apply border-b-0 lg:w-6;
-}
-
-td.image-cell:before, td.actions-cell:before {
-  @apply hidden;
-}
-
-td.image-cell .image {
-  @apply w-24 h-24 mx-auto lg:w-6 lg:h-6;
 }

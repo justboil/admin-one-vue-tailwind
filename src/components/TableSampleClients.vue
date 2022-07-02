@@ -15,12 +15,6 @@ defineProps({
 
 const mainStore = useMainStore()
 
-const lightBgStyle = computed(() => mainStore.lightBgStyle)
-
-const tableTrStyle = computed(() => mainStore.tableTrStyle)
-
-const tableTrOddStyle = computed(() => mainStore.tableTrOddStyle)
-
 const darkMode = computed(() => mainStore.darkMode)
 
 const items = computed(() => mainStore.clients)
@@ -95,14 +89,12 @@ const checked = (isChecked, client) => {
 
   <div
     v-if="checkedRows.length"
-    class="bg-opacity-50 p-3 dark:bg-gray-800"
-    :class="lightBgStyle"
+    class="p-3 bg-gray-100/50 dark:bg-gray-800"
   >
     <span
       v-for="checkedRow in checkedRows"
       :key="checkedRow.id"
-      class="inline-block px-2 py-1 rounded-sm mr-2 text-sm dark:bg-gray-700"
-      :class="lightBgStyle"
+      class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700"
     >
       {{ checkedRow.name }}
     </span>
@@ -123,18 +115,17 @@ const checked = (isChecked, client) => {
     </thead>
     <tbody>
       <tr
-        v-for="(client, index) in itemsPaginated"
+        v-for="client in itemsPaginated"
         :key="client.id"
-        :class="[tableTrStyle, index % 2 === 0 ? tableTrOddStyle : '']"
       >
         <TableCheckboxCell
           v-if="checkable"
           @checked="checked($event, client)"
         />
-        <td class="image-cell">
+        <td class="border-b-0 lg:w-6 before:hidden">
           <UserAvatar
             :username="client.name"
-            class="image"
+            class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
           />
         </td>
         <td data-label="Name">
@@ -148,22 +139,26 @@ const checked = (isChecked, client) => {
         </td>
         <td
           data-label="Progress"
-          class="progress-cell"
+          class="lg:w-32"
         >
           <progress
+            class="flex w-2/5 self-center lg:w-full"
             max="100"
             :value="client.progress"
           >
             {{ client.progress }}
           </progress>
         </td>
-        <td data-label="Created">
+        <td 
+          data-label="Created"
+          class="lg:w-1 whitespace-nowrap"
+        >
           <small
             class="text-gray-500 dark:text-gray-400"
             :title="client.created"
           >{{ client.created }}</small>
         </td>
-        <td class="actions-cell">
+        <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons
             type="justify-start lg:justify-end"
             no-wrap

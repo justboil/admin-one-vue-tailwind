@@ -21,8 +21,6 @@ export const useMainStore = defineStore('main', {
     navBarItemLabelHoverStyle: '',
     navBarItemLabelActiveColorStyle: '',
     navBarMenuListUpperLabelStyle: '',
-    tableTrStyle: '',
-    tableTrOddStyle: '',
     overlayStyle: '',
 
     /* User */

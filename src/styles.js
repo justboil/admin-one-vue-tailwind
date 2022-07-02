@@ -15,8 +15,6 @@ export const basic = {
   navBarItemLabelHover: 'hover:text-blue-500',
   navBarItemLabelActiveColor: 'text-blue-600',
   navBarMenuListUpperLabel: 'bg-gray-100',
-  tableTr: 'lg:hover:bg-gray-100',
-  tableTrOdd: 'lg:bg-gray-50',
   overlay: 'from-gray-700 via-gray-900 to-gray-700'
 }
 
@@ -35,7 +33,5 @@ export const white = {
   navBarItemLabelHover: 'hover:text-black',
   navBarItemLabelActiveColor: 'text-black',
   navBarMenuListUpperLabel: 'bg-gray-50',
-  tableTr: 'lg:hover:bg-gray-100',
-  tableTrOdd: 'lg:bg-gray-50',
   overlay: 'from-white via-gray-100 to-white'
 }
