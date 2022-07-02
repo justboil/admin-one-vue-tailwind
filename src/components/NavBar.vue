@@ -15,7 +15,9 @@ import {
   mdiEmail,
   mdiLogout,
   mdiGithub,
-  mdiThemeLightDark
+  mdiThemeLightDark,
+  mdiMonitorShimmer,
+  mdiOpenInNew
 } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
@@ -106,6 +108,30 @@ const logout = () => {
       <div
         class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
+        <div class="hidden lg:flex items-center">
+          <a
+            class="inline-flex items-center justify-center lg:mr-3 bg-blue-300 hover:bg-blue-400 transition-colors py-1 px-4 text-blue-700 hover:text-blue-800 text-sm rounded-full"
+            target="_blank"
+            href="https://tailwind-vue.justboil.me/"
+          >
+            <span class="mr-1">Check premium</span>
+            <BaseIcon
+              :path="mdiOpenInNew"
+              w="w-4"
+              h="h-4"
+            />
+          </a>
+        </div>
+        <NavBarItem
+          class="lg:hidden" 
+          target="_blank"
+          href="https://tailwind-vue.justboil.me/"
+        >
+          <NavBarItemLabel
+            :icon="mdiMonitorShimmer"
+            label="Premium version"
+          />
+        </NavBarItem>
         <NavBarMenu has-divider>
           <NavBarItemLabel
             :icon="mdiMenu"
