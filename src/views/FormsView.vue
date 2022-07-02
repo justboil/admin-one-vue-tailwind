@@ -9,7 +9,7 @@ import FormFilePicker from '@/components/FormFilePicker.vue'
 import SectionHeroBar from '@/components/SectionHeroBar.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
@@ -90,7 +90,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <FormField
         label="Question"
@@ -102,7 +102,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton
@@ -140,7 +140,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <FormField
         label="Radio"
@@ -154,7 +154,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <FormField label="Switch">
         <FormCheckRadioPicker
@@ -165,7 +165,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <FormFilePicker v-model="customElementsForm.file" />
     </CardBox>

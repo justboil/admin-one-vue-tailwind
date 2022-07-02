@@ -19,7 +19,7 @@ import CardBox from '@/components/CardBox.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import FormField from '@/components/FormField.vue'
@@ -118,7 +118,7 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <BaseButtons>
           <BaseButton
@@ -145,7 +145,7 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <BaseButtons>
           <BaseButton
@@ -167,7 +167,7 @@ const darkModeToggle = () => {
           <p>Click to see in action</p>
         </div>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <BaseButton
           label="Done"
@@ -290,7 +290,7 @@ const darkModeToggle = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton
@@ -337,7 +337,7 @@ const darkModeToggle = () => {
         />
       </BaseButtons>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton
@@ -390,7 +390,7 @@ const darkModeToggle = () => {
         />
       </BaseButtons>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton

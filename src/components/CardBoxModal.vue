@@ -4,7 +4,7 @@ import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 
 const props = defineProps({
@@ -72,7 +72,7 @@ const cancel = () => confirmCancel('cancel')
         <slot />
       </div>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton

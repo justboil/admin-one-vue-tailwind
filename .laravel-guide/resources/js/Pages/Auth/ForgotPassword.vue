@@ -6,7 +6,7 @@ import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
 import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
@@ -71,7 +71,7 @@ const submit = () => {
         />
       </FormField>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseLevel>
         <BaseButton

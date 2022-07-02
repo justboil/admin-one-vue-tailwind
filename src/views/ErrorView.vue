@@ -1,7 +1,7 @@
 <script setup>
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 </script>
@@ -23,7 +23,7 @@ import BaseButtons from '@/components/BaseButtons.vue'
         <p>An Error Occurred</p>
       </div>
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseButtons>
         <BaseButton

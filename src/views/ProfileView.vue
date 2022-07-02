@@ -5,7 +5,7 @@ import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTex
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import SectionTitleBar from '@/components/SectionTitleBar.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import FormFilePicker from '@/components/FormFilePicker.vue'
@@ -84,7 +84,7 @@ const submitPass = () => {
           />
         </FormField>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <BaseButtons>
           <BaseButton
@@ -120,7 +120,7 @@ const submitPass = () => {
           />
         </FormField>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <FormField
           label="New password"
@@ -150,7 +150,7 @@ const submitPass = () => {
           />
         </FormField>
 
-        <DividerHorizontal />
+        <BaseDivider />
 
         <BaseButtons>
           <BaseButton

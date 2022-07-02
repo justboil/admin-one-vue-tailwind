@@ -7,7 +7,7 @@ import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
@@ -100,7 +100,7 @@ const submit = () => {
         :options="{ remember: 'Remember' }"
       />
 
-      <DividerHorizontal />
+      <BaseDivider />
 
       <BaseLevel>
         <BaseButtons>

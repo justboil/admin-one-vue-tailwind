@@ -22,7 +22,7 @@ import {
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
 import NavBarMenu from '@/components/NavBarMenu.vue'
-import DividerHorizontal from '@/components/DividerHorizontal.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
@@ -149,7 +149,7 @@ const logout = () => {
                 label="Item Two"
               />
             </NavBarItem>
-            <DividerHorizontal nav-bar />
+            <BaseDivider nav-bar />
             <NavBarItem>
               <NavBarItemLabel
                 :icon="mdiCrop"
@@ -182,7 +182,7 @@ const logout = () => {
                 label="Messages"
               />
             </NavBarItem>
-            <DividerHorizontal nav-bar />
+            <BaseDivider nav-bar />
             <NavBarItem>
               <NavBarItemLabel
                 :icon="mdiLogout"
