@@ -58,7 +58,7 @@ const menuNavBarToggle = () => {
 }
 
 const menuOpenLg = () => {
-  mainStore.asideLgToggle(true)
+  layoutStore.asideLgToggle(true)
 }
 
 const logout = () => {
