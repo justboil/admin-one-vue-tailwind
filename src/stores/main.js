@@ -8,13 +8,6 @@ export const useMainStore = defineStore('main', {
     userEmail: null,
     userAvatar: null,
 
-    /* fullScreen - fullscreen form layout (e.g. login page) */
-    isFullScreen: true,
-
-    /* Aside */
-    isAsideMobileExpanded: false,
-    isAsideLgActive: false,
-
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
 
@@ -33,26 +26,6 @@ export const useMainStore = defineStore('main', {
       if (payload.avatar) {
         this.userAvatar = payload.avatar
       }
-    },
-
-    asideMobileToggle (payload = null) {
-      const isShow = payload !== null ? payload : !this.isAsideMobileExpanded
-
-      document.getElementById('app').classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
-
-      document.documentElement.classList[isShow ? 'add' : 'remove']('m-clipped')
-
-      this.isAsideMobileExpanded = isShow
-    },
-
-    asideLgToggle (payload = null) {
-      this.isAsideLgActive = payload !== null ? payload : !this.isAsideLgActive
-    },
-
-    fullScreenToggle (payload) {
-      this.isFullScreen = payload
-
-      document.documentElement.classList[payload ? 'add' : 'remove']('full-screen')
     },
 
     fetch (sampleDataKey) {

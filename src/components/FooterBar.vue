@@ -1,14 +1,12 @@
 <script setup>
 import { computed } from 'vue'
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 import BaseLevel from '@/components/BaseLevel.vue'
 import JustboilLogo from '@/components/JustboilLogo.vue'
 
-const mainStore = useMainStore()
-
 const year = computed(() => new Date().getFullYear())
 
-const isFooterBarVisible = computed(() => !mainStore.isFullScreen)
+const isFooterBarVisible = computed(() => !useLayoutStore().isFullScreen)
 </script>
 
 <template>

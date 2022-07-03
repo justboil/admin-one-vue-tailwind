@@ -1,7 +1,8 @@
 <script setup>
 import { computed } from 'vue'
 import { RouterView } from 'vue-router'
-import { useMainStore } from '@/stores/main'
+import { useMainStore } from '@/stores/main.js'
+import { useLayoutStore } from '@/stores/layout.js'
 import menu from '@/menu.js'
 import NavBar from '@/components/NavBar.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
@@ -16,10 +17,12 @@ mainStore.setUser({
   avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
 })
 
-const isAsideLgActive = computed(() => mainStore.isAsideLgActive)
+const layoutStore = useLayoutStore()
+
+const isAsideLgActive = computed(() => layoutStore.isAsideLgActive)
 
 const overlayClick = () => {
-  mainStore.asideLgToggle(false)
+  layoutStore.asideLgToggle(false)
 }
 </script>
 

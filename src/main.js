@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 import { useMainStore } from '@/stores/main.js'
 import { useStyleStore } from '@/stores/style.js'
+import { useLayoutStore } from '@/stores/layout.js'
 import { darkModeKey, styleKey } from '@/config.js'
 
 import './css/main.css'
@@ -18,6 +19,7 @@ createApp(App).use(router).use(pinia).mount('#app')
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia)
 const styleStore = useStyleStore(pinia)
+const layoutStore = useLayoutStore(pinia)
 
 /* Fetch sample data */
 mainStore.fetch('clients')
@@ -36,8 +38,8 @@ const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 
 /* Collapse mobile aside menu on route change */
 router.beforeEach(() => {
-  mainStore.asideMobileToggle(false)
-  mainStore.asideLgToggle(false)
+  layoutStore.asideMobileToggle(false)
+  layoutStore.asideLgToggle(false)
 })
 
 router.afterEach(to => {
@@ -47,5 +49,5 @@ router.afterEach(to => {
     : defaultDocumentTitle
 
   /* Full screen mode */
-  mainStore.fullScreenToggle(!!to.meta.fullScreen)
+  layoutStore.fullScreenToggle(!!to.meta.fullScreen)
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head } from '@inertiajs/inertia-vue3'
 import { ref } from 'vue'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
@@ -10,7 +10,7 @@ import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
 
-useMainStore().fullScreenToggle(true)
+useLayoutStore().fullScreenToggle(true)
 
 const form = useForm({
   password: ''

@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main.js'
 import { useStyleStore } from '@/stores/style.js'
+import { useLayoutStore } from '@/stores/layout.js'
 import {
   mdiForwardburger,
   mdiBackburger,
@@ -29,21 +30,24 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
 const mainStore = useMainStore()
+
+const userName = computed(() => mainStore.userName)
+
 const styleStore = useStyleStore()
 
 const toggleLightDark = () => {
   styleStore.setDarkMode()
 }
 
-const isNavBarVisible = computed(() => !mainStore.isFullScreen)
+const layoutStore = useLayoutStore()
 
-const isAsideMobileExpanded = computed(() => mainStore.isAsideMobileExpanded)
+const isNavBarVisible = computed(() => !layoutStore.isFullScreen)
 
-const userName = computed(() => mainStore.userName)
+const isAsideMobileExpanded = computed(() => layoutStore.isAsideMobileExpanded)
 
 const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
 
-const menuToggleMobile = () => mainStore.asideMobileToggle()
+const menuToggleMobile = () => layoutStore.asideMobileToggle()
 
 const isMenuNavBarActive = ref(false)
 

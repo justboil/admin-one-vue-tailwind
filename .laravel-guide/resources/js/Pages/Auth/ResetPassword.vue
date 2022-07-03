@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
@@ -28,7 +28,7 @@ const form = useForm({
   password_confirmation: '',
 })
 
-useMainStore().fullScreenToggle(true)
+useLayoutStore().fullScreenToggle(true)
 
 const submit = () => {
   form

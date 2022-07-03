@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, usePage, Head } from '@inertiajs/inertia-vue3'
 import { computed } from 'vue'
 import { mdiAccount, mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
@@ -21,7 +21,7 @@ const form = useForm({
   terms: [],
 })
 
-useMainStore().fullScreenToggle(true)
+useLayoutStore().fullScreenToggle(true)
 
 const hasTermsAndPrivacyPolicyFeature = computed(() => usePage().props.value.jetstream.hasTermsAndPrivacyPolicyFeature )
 

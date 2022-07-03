@@ -1,5 +1,5 @@
 <script setup>
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
@@ -23,7 +23,7 @@ const form = useForm({
   email: ''
 })
 
-useMainStore().fullScreenToggle(true)
+useLayoutStore().fullScreenToggle(true)
 
 const submit = () => {
   form.post(route('password.email'))
