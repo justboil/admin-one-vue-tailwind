@@ -68,8 +68,8 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 * Remove `import { RouterView } from 'vue-router'`
 * Replace `<RouterView />` with `<slot />`
-* Add `mainStore.fullScreenToggle(false)` after `const mainStore = useMainStore()`
-* `mainStore.setUser()` is no longer needed, since we'll [fetch this data from backend](#add-inertia-related-stuff)
+* Add `layoutStore.fullScreenToggle(false)` after `const layoutStore = useLayoutStore()`
+* `mainStore.setUser()`, `const mainStore = useMainStore()` and `import { useMainStore } from '@/stores/main.js'` are no longer needed, since we'll [fetch this data from backend](#add-inertia-related-stuff)
 
 ##### In resources/views/app.blade.php
 
@@ -90,7 +90,7 @@ import App from '@/Layouts/App.vue'
 // ...
 </script>
 ```
-Wrap the content inside `<template>` with `<app>`. Then add `<Head title="Dashboard" />`
+Wrap the content inside `<template>` with `<App>`. Then add `<Head title="Dashboard" />`
 
 Here's an original `<template>`:
 
@@ -105,9 +105,9 @@ Here's the result:
 ```vue
 <template>
   <Head title="Dashboard" />
-  <app>
+  <App>
     <!-- ... -->
-  </app>
+  </App>
 </template>
 ```
 
@@ -198,8 +198,8 @@ Add `const activeInactiveStyle`:
 ```javascript
 const activeInactiveStyle = computed(
   () => props.item.route && route().current(props.item.route)
-    ? asideMenuItemActiveStyle.value
-    : asideMenuItemInactiveStyle.value
+    ? styleStore.asideMenuItemActiveStyle
+    : styleStore.asideMenuItemInactiveStyle
 )
 ```
 
@@ -420,14 +420,13 @@ indent_size = 2
 In case, you need Pages/Welcome.vue, add `import` and `setup()` to remove unnecessary padding, which is set by default:
 
 ```js
-import { useMainStore } from '@/stores/main'
+import { useLayoutStore } from '@/stores/layout.js'
 // ...
 
 export default defineComponent({
   // ...
   setup () {
-    const mainStore = useMainStore()
-    mainStore.fullScreenToggle(true)
+    useLayoutStore().fullScreenToggle(true)
   }
 })
 ```
