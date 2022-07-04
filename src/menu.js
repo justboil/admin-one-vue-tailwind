@@ -65,15 +65,14 @@ export default [
       icon: mdiAlertCircle
     },
     {
-      label: 'Submenus',
-      subLabel: 'Submenus Example',
+      label: 'Dropdown',
       icon: mdiViewList,
       menu: [
         {
-          label: 'Sub-item One'
+          label: 'Item One'
         },
         {
-          label: 'Sub-item Two'
+          label: 'Item Two'
         }
       ]
     }
