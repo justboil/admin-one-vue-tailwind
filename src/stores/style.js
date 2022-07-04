@@ -5,7 +5,6 @@ import { darkModeKey, styleKey } from '@/config'
 export const useStyleStore = defineStore('style', {
   state: () => ({
     /* Styles */
-    style: '',
     bodyStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
@@ -29,8 +28,6 @@ export const useStyleStore = defineStore('style', {
       if (!styles[payload]) {
         return
       }
-
-      this.style = payload
 
       const style = styles[payload]
 
