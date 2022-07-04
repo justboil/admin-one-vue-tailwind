@@ -49,7 +49,7 @@ mix.js('resources/js/app.js', 'public/js')
   .webpackConfig(require('./webpack.config'))
 ```
 
-### Copy styles, components and scripts
+## Copy styles, components and scripts
 
 Clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project locally into a separate folder
 
