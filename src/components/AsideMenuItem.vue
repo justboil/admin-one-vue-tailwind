@@ -20,17 +20,7 @@ const styleStore = useStyleStore()
 
 const isDropdownActive = ref(false)
 
-const componentIs = computed(() => props.item.to ? RouterLink : 'a')
-
 const hasDropdown = computed(() => !!props.item.menu)
-
-const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
-
-const itemTo = computed(() => props.item.to || null)
-
-const itemHref = computed(() => props.item.href || null)
-
-const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
 
 const menuClick = event => {
   emit('menu-click', event, props.item)
@@ -44,11 +34,11 @@ const menuClick = event => {
 <template>
   <li>
     <component
-      :is="componentIs"
+      :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
-      :to="itemTo"
-      :href="itemHref"
-      :target="itemTarget"
+      :to="item.to || null"
+      :href="item.href || null"
+      :target="item.target || null"
       class="flex cursor-pointer dark:hover:bg-gray-700/50"
       :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
       @click="menuClick"
@@ -66,7 +56,7 @@ const menuClick = event => {
       >{{ item.label }}</span>
       <BaseIcon
         v-if="hasDropdown"
-        :path="dropdownIcon"
+        :path="isDropdownActive ? mdiMinus : mdiPlus"
         class="flex-none"
         :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
         w="w-12"

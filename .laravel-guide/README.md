@@ -186,44 +186,30 @@ Now, let's update vue files, to make them work with route names and Inertia link
 
 ##### resources/js/components/AsideMenuItem.vue
 
-Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
+Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>` and add consts:
 
 ```vue
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
 // ...
-</script>
-```
 
-In `<script setup>` section replace following const declarations with the ones below:
-
-```javascript
-const componentIs = computed(() => props.item.route ? Link : 'a')
-```
-
-```javascript
+// Add itemHref
 const itemHref = computed(() => props.item.route ? route(props.item.route) : props.item.href)
-```
 
-```javascript
-const itemTarget = computed(() => props.item.target ? props.item.target : null)
-```
-
-Remove `const itemTo`
-
-Add `const activeInactiveStyle`:
-
-```javascript
+// Add activeInactiveStyle
 const activeInactiveStyle = computed(
   () => props.item.route && route().current(props.item.route)
     ? styleStore.asideMenuItemActiveStyle
     : styleStore.asideMenuItemInactiveStyle
 )
+
+// ...
+</script>
 ```
 
 In `<template>` section:
 
-* In `<component>` remove `v-slot` and `:to` attributes
+* In `<component>` remove `v-slot` and `:to` attributes; replace `:is` and `:href`
 * Inside `<component>` replace `:class` attribute for `<BaseIcon>`, `<span>` and another `<BaseIcon>` with `:class="activeInactiveStyle"`
 
 ```vue
@@ -232,9 +218,9 @@ In `<template>` section:
   <!-- ... -->
 
   <component
-    :is="componentIs"
+    :is="item.route ? Link : 'a'"
     :href="itemHref"
-    :target="itemTarget"
+    :target="item.target ?? null"
     class="flex cursor-pointer dark:hover:bg-gray-700/50"
     :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
     @click="menuClick"
@@ -252,7 +238,7 @@ In `<template>` section:
     >{{ item.label }}</span>
     <BaseIcon
       v-if="hasDropdown"
-      :path="dropdownIcon"
+      :path="isDropdownActive ? mdiMinus : mdiPlus"
       class="flex-none"
       :class="activeInactiveStyle"
       w="w-12"
