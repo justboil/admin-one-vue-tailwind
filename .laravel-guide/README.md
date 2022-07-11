@@ -129,11 +129,11 @@ Here's the result:
 </template>
 ```
 
-Add route in `routes/web.php`. There's a `/dashboard` route already defined by default, so just replace `Inertia::render('Dashboard')` with `Inertia::render('Home')`:
+Add route in `routes/web.php`. There's a `/dashboard` route already defined by default, so just replace `Inertia::render('Dashboard')` with `Inertia::render('HomeView')`:
 
 ```php
 Route::get('/dashboard', function () {
-  return Inertia::render('Home');
+  return Inertia::render('HomeView');
 })->name('dashboard');
 ```
 
@@ -222,7 +222,7 @@ In `<template>` section:
     :href="itemHref"
     :target="item.target ?? null"
     class="flex cursor-pointer dark:hover:bg-gray-700/50"
-    :class="[ asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
+    :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
     @click="menuClick"
   >
     <BaseIcon
