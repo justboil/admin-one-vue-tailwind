@@ -1,5 +1,11 @@
 # Free Laravel Vue 3.x Tailwind 3.x Dashboard
 
+### Important
+
+This guide version is a bit outdated as it uses webpack.mix.js. Newer version for vite.config.js will be posted within the next 24 hours.
+
+<hr>
+
 [![Vue 3.x Tailwind 3.x admin dashboard demo](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
