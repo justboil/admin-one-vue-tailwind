@@ -5,8 +5,7 @@ import Home from '@/views/HomeView.vue'
 const routes = [
   {
     meta: {
-      title: 'Select style',
-      fullScreen: true
+      title: 'Select style'
     },
     path: '/',
     name: 'style',
@@ -64,8 +63,7 @@ const routes = [
   },
   {
     meta: {
-      title: 'Login',
-      fullScreen: true
+      title: 'Login'
     },
     path: '/login',
     name: 'login',
@@ -73,8 +71,7 @@ const routes = [
   },
   {
     meta: {
-      title: 'Error',
-      fullScreen: true
+      title: 'Error'
     },
     path: '/error',
     name: 'error',
