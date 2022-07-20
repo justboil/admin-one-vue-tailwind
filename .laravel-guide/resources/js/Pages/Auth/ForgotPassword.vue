@@ -2,6 +2,7 @@
 import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail } from '@mdi/js'
+import LayoutGuest from '@/layouts/LayoutGuest.vue'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormField from '@/components/FormField.vue'
@@ -31,62 +32,64 @@ const submit = () => {
 </script>
 
 <template>
-  <Head title="Forgot Password" />
+  <LayoutGuest>
+    <Head title="Forgot Password" />
 
-  <SectionFullScreen
-    v-slot="{ cardClass, cardRounded }"
-    bg="login"
-  >
-    <CardBox
-      :class="cardClass"
-      :rounded="cardRounded"
-      form
-      @submit.prevent="submit"
+    <SectionFullScreen
+      v-slot="{ cardClass, cardRounded }"
+      bg="login"
     >
-      <FormValidationErrors />
-
-      <NotificationBarInCard 
-        v-if="status"
-        color="info"
+      <CardBox
+        :class="cardClass"
+        :rounded="cardRounded"
+        form
+        @submit.prevent="submit"
       >
-        {{ status }}
-      </NotificationBarInCard>
+        <FormValidationErrors />
 
-      <FormField>
-        <div class="mb-4 text-sm text-gray-600">
-          Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
-        </div>
-      </FormField>
-
-      <FormField
-        label="Email"
-        help="Please enter your email"
-      >
-        <FormControl
-          v-model="form.email"
-          :icon="mdiEmail"
-          autocomplete="email"
-          type="email"
-          required
-        />
-      </FormField>
-
-      <BaseDivider />
-
-      <BaseLevel>
-        <BaseButton
-          type="submit"
+        <NotificationBarInCard 
+          v-if="status"
           color="info"
-          label="Email link"
-          :class="{ 'opacity-25': form.processing }"
-          :disabled="form.processing"
-        />
-        <Link
-          :href="route('login')"
         >
-          Back to login
-        </Link>
-      </BaseLevel>
-    </CardBox>
-  </SectionFullScreen>
+          {{ status }}
+        </NotificationBarInCard>
+
+        <FormField>
+          <div class="mb-4 text-sm text-gray-600">
+            Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
+          </div>
+        </FormField>
+
+        <FormField
+          label="Email"
+          help="Please enter your email"
+        >
+          <FormControl
+            v-model="form.email"
+            :icon="mdiEmail"
+            autocomplete="email"
+            type="email"
+            required
+          />
+        </FormField>
+
+        <BaseDivider />
+
+        <BaseLevel>
+          <BaseButton
+            type="submit"
+            color="info"
+            label="Email link"
+            :class="{ 'opacity-25': form.processing }"
+            :disabled="form.processing"
+          />
+          <Link
+            :href="route('login')"
+          >
+            Back to login
+          </Link>
+        </BaseLevel>
+      </CardBox>
+    </SectionFullScreen>
+  </LayoutGuest>
 </template>

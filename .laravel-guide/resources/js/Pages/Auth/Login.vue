@@ -2,6 +2,7 @@
 import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
+import LayoutGuest from '@/layouts/LayoutGuest.vue'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
@@ -43,88 +44,90 @@ const submit = () => {
 </script>
 
 <template>
-  <Head title="Login" />
+  <LayoutGuest>
+    <Head title="Login" />
 
-  <SectionFullScreen
-    v-slot="{ cardClass, cardRounded }"
-    bg="login"
-  >
-    <CardBox
-      :class="cardClass"
-      :rounded="cardRounded"
-      form
-      @submit.prevent="submit"
+    <SectionFullScreen
+      v-slot="{ cardClass, cardRounded }"
+      bg="login"
     >
-      <FormValidationErrors />
-
-      <NotificationBarInCard 
-        v-if="status"
-        color="info"
+      <CardBox
+        :class="cardClass"
+        :rounded="cardRounded"
+        form
+        @submit.prevent="submit"
       >
-        {{ status }}
-      </NotificationBarInCard>
+        <FormValidationErrors />
 
-      <FormField
-        label="Email"
-        label-for="email"
-        help="Please enter your email"
-      >
-        <FormControl
-          v-model="form.email"
-          :icon="mdiAccount"
-          id="email"
-          autocomplete="email"
-          type="email"
-          required
-        />
-      </FormField>
-
-      <FormField
-        label="Password"
-        label-for="password"
-        help="Please enter your password"
-      >
-        <FormControl
-          v-model="form.password"
-          :icon="mdiAsterisk"
-          type="password"
-          id="password"
-          autocomplete="current-password"
-          required
-        />
-      </FormField>
-
-      <FormCheckRadioPicker
-        v-model="form.remember"
-        name="remember"
-        :options="{ remember: 'Remember' }"
-      />
-
-      <BaseDivider />
-
-      <BaseLevel>
-        <BaseButtons>
-          <BaseButton
-            type="submit"
-            color="info"
-            label="Login"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-          />
-          <BaseButton
-            v-if="canResetPassword"
-            route-name="password.request"
-            color="info"
-            outline
-            label="Remind"
-          />
-        </BaseButtons>
-        <Link
-          :href="route('register')"
+        <NotificationBarInCard 
+          v-if="status"
+          color="info"
         >
-          Register
-        </Link>
-      </BaseLevel>
-    </CardBox>
-  </SectionFullScreen>
+          {{ status }}
+        </NotificationBarInCard>
+
+        <FormField
+          label="Email"
+          label-for="email"
+          help="Please enter your email"
+        >
+          <FormControl
+            v-model="form.email"
+            :icon="mdiAccount"
+            id="email"
+            autocomplete="email"
+            type="email"
+            required
+          />
+        </FormField>
+
+        <FormField
+          label="Password"
+          label-for="password"
+          help="Please enter your password"
+        >
+          <FormControl
+            v-model="form.password"
+            :icon="mdiAsterisk"
+            type="password"
+            id="password"
+            autocomplete="current-password"
+            required
+          />
+        </FormField>
+
+        <FormCheckRadioPicker
+          v-model="form.remember"
+          name="remember"
+          :options="{ remember: 'Remember' }"
+        />
+
+        <BaseDivider />
+
+        <BaseLevel>
+          <BaseButtons>
+            <BaseButton
+              type="submit"
+              color="info"
+              label="Login"
+              :class="{ 'opacity-25': form.processing }"
+              :disabled="form.processing"
+            />
+            <BaseButton
+              v-if="canResetPassword"
+              route-name="password.request"
+              color="info"
+              outline
+              label="Remind"
+            />
+          </BaseButtons>
+          <Link
+            :href="route('register')"
+          >
+            Register
+          </Link>
+        </BaseLevel>
+      </CardBox>
+    </SectionFullScreen>
+  </LayoutGuest>
 </template>

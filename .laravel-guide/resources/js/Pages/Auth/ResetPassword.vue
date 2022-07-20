@@ -2,6 +2,7 @@
 import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail, mdiFormTextboxPassword } from '@mdi/js'
+import LayoutGuest from '@/layouts/LayoutGuest.vue'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormField from '@/components/FormField.vue'
@@ -39,74 +40,76 @@ const submit = () => {
 </script>
 
 <template>
-  <Head title="Reset Password" />
+  <LayoutGuest>
+    <Head title="Reset Password" />
 
-  <SectionFullScreen
-    v-slot="{ cardClass, cardRounded }"
-    bg="login"
-  >
-    <CardBox
-      :class="cardClass"
-      :rounded="cardRounded"
-      form
-      @submit.prevent="submit"
+    <SectionFullScreen
+      v-slot="{ cardClass, cardRounded }"
+      bg="login"
     >
-      <FormValidationErrors />
-
-      <FormField
-        label="Email"
-        label-for="email"
-        help="Please enter your email"
+      <CardBox
+        :class="cardClass"
+        :rounded="cardRounded"
+        form
+        @submit.prevent="submit"
       >
-        <FormControl
-          v-model="form.email"
-          :icon="mdiEmail"
-          autocomplete="email"
-          type="email"
-          id="email"
-          required
+        <FormValidationErrors />
+
+        <FormField
+          label="Email"
+          label-for="email"
+          help="Please enter your email"
+        >
+          <FormControl
+            v-model="form.email"
+            :icon="mdiEmail"
+            autocomplete="email"
+            type="email"
+            id="email"
+            required
+          />
+        </FormField>
+
+        <FormField
+          label="Password"
+          label-for="password"
+          help="Please enter new password"
+        >
+          <FormControl
+            v-model="form.password"
+            :icon="mdiFormTextboxPassword"
+            type="password"
+            autocomplete="new-password"
+            id="password"
+            required
+          />
+        </FormField>
+
+        <FormField
+          label="Confirm Password"
+          label-for="password_confirmation"
+          help="Please confirm new password"
+        >
+          <FormControl
+            v-model="form.password_confirmation"
+            :icon="mdiFormTextboxPassword"
+            type="password"
+            autocomplete="new-password"
+            id="password_confirmation"
+            required
+          />
+        </FormField>
+
+        <BaseDivider />
+
+        <BaseButton
+          type="submit"
+          color="info"
+          label="Reset password"
+          :class="{ 'opacity-25': form.processing }"
+          :disabled="form.processing"
         />
-      </FormField>
-
-      <FormField
-        label="Password"
-        label-for="password"
-        help="Please enter new password"
-      >
-        <FormControl
-          v-model="form.password"
-          :icon="mdiFormTextboxPassword"
-          type="password"
-          autocomplete="new-password"
-          id="password"
-          required
-        />
-      </FormField>
-
-      <FormField
-        label="Confirm Password"
-        label-for="password_confirmation"
-        help="Please confirm new password"
-      >
-        <FormControl
-          v-model="form.password_confirmation"
-          :icon="mdiFormTextboxPassword"
-          type="password"
-          autocomplete="new-password"
-          id="password_confirmation"
-          required
-        />
-      </FormField>
-
-      <BaseDivider />
-
-      <BaseButton
-        type="submit"
-        color="info"
-        label="Reset password"
-        :class="{ 'opacity-25': form.processing }"
-        :disabled="form.processing"
-      />
-    </CardBox>
-  </SectionFullScreen>
+      </CardBox>
+    </SectionFullScreen>
+  </LayoutGuest>
 </template>
