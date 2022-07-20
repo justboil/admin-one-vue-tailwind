@@ -46,7 +46,6 @@ onBeforeUnmount(() => {
     :has-divider="hasDivider"
     :active="isDropdownActive"
     dropdown
-    class="dropdown"
     @click="toggle"
   >
     <a
