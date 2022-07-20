@@ -13,6 +13,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import UserCard from '@/components/UserCard.vue'
+import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 
 const mainStore = useMainStore()
 
@@ -39,134 +40,136 @@ const submitPass = () => {
 </script>
 
 <template>
-  <SectionTitleBar :title-stack="titleStack" />
+  <LayoutAuthenticated>
+    <SectionTitleBar :title-stack="titleStack" />
 
-  <UserCard />
+    <UserCard />
 
-  <SectionMain>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <CardBox
-        title="Edit Profile"
-        :icon="mdiAccountCircle"
-        form
-        @submit.prevent="submitProfile"
-      >
-        <FormField
-          label="Avatar"
-          help="Max 500kb"
+    <SectionMain>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <CardBox
+          title="Edit Profile"
+          :icon="mdiAccountCircle"
+          form
+          @submit.prevent="submitProfile"
         >
-          <FormFilePicker />
-        </FormField>
+          <FormField
+            label="Avatar"
+            help="Max 500kb"
+          >
+            <FormFilePicker />
+          </FormField>
 
-        <FormField
-          label="Name"
-          help="Required. Your name"
+          <FormField
+            label="Name"
+            help="Required. Your name"
+          >
+            <FormControl
+              v-model="profileForm.name"
+              :icon="mdiAccount"
+              name="username"
+              required
+              autocomplete="username"
+            />
+          </FormField>
+          <FormField
+            label="E-mail"
+            help="Required. Your e-mail"
+          >
+            <FormControl
+              v-model="profileForm.email"
+              :icon="mdiMail"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+            />
+          </FormField>
+
+          <BaseDivider />
+
+          <BaseButtons>
+            <BaseButton
+              color="info"
+              type="submit"
+              label="Submit"
+            />
+            <BaseButton
+              color="info"
+              label="Options"
+              outline
+            />
+          </BaseButtons>
+        </CardBox>
+
+        <CardBox
+          title="Change Password"
+          :icon="mdiLock"
+          form
+          @submit.prevent="submitPass"
         >
-          <FormControl
-            v-model="profileForm.name"
-            :icon="mdiAccount"
-            name="username"
-            required
-            autocomplete="username"
-          />
-        </FormField>
-        <FormField
-          label="E-mail"
-          help="Required. Your e-mail"
-        >
-          <FormControl
-            v-model="profileForm.email"
-            :icon="mdiMail"
-            type="email"
-            name="email"
-            required
-            autocomplete="email"
-          />
-        </FormField>
+          <FormField
+            label="Current password"
+            help="Required. Your current password"
+          >
+            <FormControl
+              v-model="passwordForm.password_current"
+              :icon="mdiAsterisk"
+              name="password_current"
+              type="password"
+              required
+              autocomplete="current-password"
+            />
+          </FormField>
 
-        <BaseDivider />
+          <BaseDivider />
 
-        <BaseButtons>
-          <BaseButton
-            color="info"
-            type="submit"
-            label="Submit"
-          />
-          <BaseButton
-            color="info"
-            label="Options"
-            outline
-          />
-        </BaseButtons>
-      </CardBox>
+          <FormField
+            label="New password"
+            help="Required. New password"
+          >
+            <FormControl
+              v-model="passwordForm.password"
+              :icon="mdiFormTextboxPassword"
+              name="password"
+              type="password"
+              required
+              autocomplete="new-password"
+            />
+          </FormField>
 
-      <CardBox
-        title="Change Password"
-        :icon="mdiLock"
-        form
-        @submit.prevent="submitPass"
-      >
-        <FormField
-          label="Current password"
-          help="Required. Your current password"
-        >
-          <FormControl
-            v-model="passwordForm.password_current"
-            :icon="mdiAsterisk"
-            name="password_current"
-            type="password"
-            required
-            autocomplete="current-password"
-          />
-        </FormField>
+          <FormField
+            label="Confirm password"
+            help="Required. New password one more time"
+          >
+            <FormControl
+              v-model="passwordForm.password_confirmation"
+              :icon="mdiFormTextboxPassword"
+              name="password_confirmation"
+              type="password"
+              required
+              autocomplete="new-password"
+            />
+          </FormField>
 
-        <BaseDivider />
+          <BaseDivider />
 
-        <FormField
-          label="New password"
-          help="Required. New password"
-        >
-          <FormControl
-            v-model="passwordForm.password"
-            :icon="mdiFormTextboxPassword"
-            name="password"
-            type="password"
-            required
-            autocomplete="new-password"
-          />
-        </FormField>
+          <BaseButtons>
+            <BaseButton
+              type="submit"
+              color="info"
+              label="Submit"
+            />
+            <BaseButton
+              color="info"
+              label="Options"
+              outline
+            />
+          </BaseButtons>
+        </CardBox>
+      </div>
+    </SectionMain>
 
-        <FormField
-          label="Confirm password"
-          help="Required. New password one more time"
-        >
-          <FormControl
-            v-model="passwordForm.password_confirmation"
-            :icon="mdiFormTextboxPassword"
-            name="password_confirmation"
-            type="password"
-            required
-            autocomplete="new-password"
-          />
-        </FormField>
-
-        <BaseDivider />
-
-        <BaseButtons>
-          <BaseButton
-            type="submit"
-            color="info"
-            label="Submit"
-          />
-          <BaseButton
-            color="info"
-            label="Options"
-            outline
-          />
-        </BaseButtons>
-      </CardBox>
-    </div>
-  </SectionMain>
-
-  <SectionBottomOtherPages />
+    <SectionBottomOtherPages />
+  </LayoutAuthenticated>
 </template>

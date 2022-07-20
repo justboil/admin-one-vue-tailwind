@@ -15,6 +15,7 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
+import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 
 const titleStack = ref(['Admin', 'Forms'])
 
@@ -46,130 +47,132 @@ const submit = () => {
 </script>
 
 <template>
-  <SectionTitleBar :title-stack="titleStack" />
-  <SectionHeroBar>Forms</SectionHeroBar>
+  <LayoutAuthenticated>
+    <SectionTitleBar :title-stack="titleStack" />
+    <SectionHeroBar>Forms</SectionHeroBar>
 
-  <SectionMain>
-    <SectionTitleBarSub
-      :icon="mdiBallotOutline"
-      title="Forms example"
-    />
-    <CardBox
-      title="Forms"
-      :icon="mdiBallot"
-      form
-      @submit.prevent="submit"
-    >
-      <FormField label="Grouped with icons">
-        <FormControl
-          v-model="form.name"
-          :icon="mdiAccount"
-        />
-        <FormControl
-          v-model="form.email"
-          type="email"
-          :icon="mdiMail"
-        />
-      </FormField>
-
-      <FormField
-        label="With help line"
-        help="Do not enter the leading zero"
+    <SectionMain>
+      <SectionTitleBarSub
+        :icon="mdiBallotOutline"
+        title="Forms example"
+      />
+      <CardBox
+        title="Forms"
+        :icon="mdiBallot"
+        form
+        @submit.prevent="submit"
       >
-        <FormControl
-          v-model="form.phone"
-          type="tel"
-          placeholder="Your phone number"
-        />
-      </FormField>
+        <FormField label="Grouped with icons">
+          <FormControl
+            v-model="form.name"
+            :icon="mdiAccount"
+          />
+          <FormControl
+            v-model="form.email"
+            type="email"
+            :icon="mdiMail"
+          />
+        </FormField>
 
-      <FormField label="Dropdown">
-        <FormControl
-          v-model="form.department"
-          :options="selectOptions"
-        />
-      </FormField>
+        <FormField
+          label="With help line"
+          help="Do not enter the leading zero"
+        >
+          <FormControl
+            v-model="form.phone"
+            type="tel"
+            placeholder="Your phone number"
+          />
+        </FormField>
 
-      <BaseDivider />
+        <FormField label="Dropdown">
+          <FormControl
+            v-model="form.department"
+            :options="selectOptions"
+          />
+        </FormField>
 
-      <FormField
-        label="Question"
-        help="Your question. Max 255 characters"
+        <BaseDivider />
+
+        <FormField
+          label="Question"
+          help="Your question. Max 255 characters"
+        >
+          <FormControl
+            type="textarea"
+            placeholder="Explain how we can help you"
+          />
+        </FormField>
+
+        <BaseDivider />
+
+        <BaseButtons>
+          <BaseButton
+            type="submit"
+            color="info"
+            label="Submit"
+          />
+          <BaseButton
+            type="reset"
+            color="info"
+            outline
+            label="Reset"
+          />
+        </BaseButtons>
+      </CardBox>
+    </SectionMain>
+
+    <SectionTitle>
+      Custom elements
+    </SectionTitle>
+
+    <SectionMain>
+      <CardBox
+        title="Custom elements"
+        :icon="mdiBallotOutline"
       >
-        <FormControl
-          type="textarea"
-          placeholder="Explain how we can help you"
-        />
-      </FormField>
+        <FormField
+          label="Checkbox"
+          wrap-body
+        >
+          <FormCheckRadioPicker
+            v-model="customElementsForm.checkbox"
+            name="sample-checkbox"
+            :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
+          />
+        </FormField>
 
-      <BaseDivider />
+        <BaseDivider />
 
-      <BaseButtons>
-        <BaseButton
-          type="submit"
-          color="info"
-          label="Submit"
-        />
-        <BaseButton
-          type="reset"
-          color="info"
-          outline
-          label="Reset"
-        />
-      </BaseButtons>
-    </CardBox>
-  </SectionMain>
+        <FormField
+          label="Radio"
+          wrap-body
+        >
+          <FormCheckRadioPicker
+            v-model="customElementsForm.radio"
+            name="sample-radio"
+            type="radio"
+            :options="{ one: 'One', two: 'Two' }"
+          />
+        </FormField>
 
-  <SectionTitle>
-    Custom elements
-  </SectionTitle>
+        <BaseDivider />
 
-  <SectionMain>
-    <CardBox
-      title="Custom elements"
-      :icon="mdiBallotOutline"
-    >
-      <FormField
-        label="Checkbox"
-        wrap-body
-      >
-        <FormCheckRadioPicker
-          v-model="customElementsForm.checkbox"
-          name="sample-checkbox"
-          :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
-        />
-      </FormField>
+        <FormField label="Switch">
+          <FormCheckRadioPicker
+            v-model="customElementsForm.switch"
+            name="sample-switch"
+            type="switch"
+            :options="{ one: 'One', two: 'Two' }"
+          />
+        </FormField>
 
-      <BaseDivider />
+        <BaseDivider />
 
-      <FormField
-        label="Radio"
-        wrap-body
-      >
-        <FormCheckRadioPicker
-          v-model="customElementsForm.radio"
-          name="sample-radio"
-          type="radio"
-          :options="{ one: 'One', two: 'Two' }"
-        />
-      </FormField>
+        <FormFilePicker v-model="customElementsForm.file" />
+      </CardBox>
+    </SectionMain>
 
-      <BaseDivider />
-
-      <FormField label="Switch">
-        <FormCheckRadioPicker
-          v-model="customElementsForm.switch"
-          name="sample-switch"
-          type="switch"
-          :options="{ one: 'One', two: 'Two' }"
-        />
-      </FormField>
-
-      <BaseDivider />
-
-      <FormFilePicker v-model="customElementsForm.file" />
-    </CardBox>
-  </SectionMain>
-
-  <SectionBottomOtherPages />
+    <SectionBottomOtherPages />
+  </LayoutAuthenticated>
 </template>

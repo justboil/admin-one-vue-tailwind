@@ -24,6 +24,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import CardBoxTransaction from '@/components/CardBoxTransaction.vue'
 import CardBoxClient from '@/components/CardBoxClient.vue'
 import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
+import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 
 const titleStack = ref(['Admin', 'Dashboard'])
 
@@ -45,121 +46,123 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
 </script>
 
 <template>
-  <SectionTitleBar :title-stack="titleStack" />
-  <SectionHeroBar>Dashboard</SectionHeroBar>
-  <SectionMain>
-    <NotificationBar
-      color="info"
-      :icon="mdiGithub"
-    >
-      Please star this project on
-      <a
-        href="https://github.com/justboil/admin-one-vue-tailwind"
-        class="underline"
-        target="_blank"
-      >GitHub</a>
-      <template #right>
-        <BaseButton
+  <LayoutAuthenticated>
+    <SectionTitleBar :title-stack="titleStack" />
+    <SectionHeroBar>Dashboard</SectionHeroBar>
+    <SectionMain>
+      <NotificationBar
+        color="info"
+        :icon="mdiGithub"
+      >
+        Please star this project on
+        <a
           href="https://github.com/justboil/admin-one-vue-tailwind"
-          :icon="mdiGithub"
-          label="GitHub"
+          class="underline"
           target="_blank"
-          small
+        >GitHub</a>
+        <template #right>
+          <BaseButton
+            href="https://github.com/justboil/admin-one-vue-tailwind"
+            :icon="mdiGithub"
+            label="GitHub"
+            target="_blank"
+            small
+          />
+        </template>
+      </NotificationBar>
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
+        <CardBoxWidget
+          trend="12%"
+          trend-type="up"
+          color="text-emerald-500"
+          :icon="mdiAccountMultiple"
+          :number="512"
+          label="Clients"
         />
-      </template>
-    </NotificationBar>
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-      <CardBoxWidget
-        trend="12%"
-        trend-type="up"
-        color="text-emerald-500"
+        <CardBoxWidget
+          trend="12%"
+          trend-type="down"
+          color="text-blue-500"
+          :icon="mdiCartOutline"
+          :number="7770"
+          prefix="$"
+          label="Sales"
+        />
+        <CardBoxWidget
+          trend="Overflow"
+          trend-type="alert"
+          color="text-red-500"
+          :icon="mdiChartTimelineVariant"
+          :number="256"
+          suffix="%"
+          label="Performance"
+        />
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="flex flex-col justify-between">
+          <CardBoxTransaction
+            v-for="(transaction,index) in transactionBarItems"
+            :key="index"
+            :amount="transaction.amount"
+            :date="transaction.date"
+            :business="transaction.business"
+            :type="transaction.type"
+            :name="transaction.name"
+            :account="transaction.account"
+          />
+        </div>
+        <div class="flex flex-col justify-between">
+          <CardBoxClient
+            v-for="client in clientBarItems"
+            :key="client.id"
+            :name="client.name"
+            :login="client.login"
+            :date="client.created"
+            :progress="client.progress"
+          />
+        </div>
+      </div>
+
+      <SectionTitleBarSub
+        :icon="mdiChartPie"
+        title="Trends overview"
+      />
+
+      <CardBox
+        title="Performance"
+        :icon="mdiFinance"
+        :header-icon="mdiReload"
+        class="mb-6"
+        @header-icon-click="fillChartData"
+      >
+        <div v-if="chartData">
+          <line-chart
+            :data="chartData"
+            class="h-96"
+          />
+        </div>
+      </CardBox>
+
+      <SectionTitleBarSub
         :icon="mdiAccountMultiple"
-        :number="512"
-        label="Clients"
+        title="Clients"
       />
-      <CardBoxWidget
-        trend="12%"
-        trend-type="down"
-        color="text-blue-500"
-        :icon="mdiCartOutline"
-        :number="7770"
-        prefix="$"
-        label="Sales"
-      />
-      <CardBoxWidget
-        trend="Overflow"
-        trend-type="alert"
-        color="text-red-500"
-        :icon="mdiChartTimelineVariant"
-        :number="256"
-        suffix="%"
-        label="Performance"
-      />
-    </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-      <div class="flex flex-col justify-between">
-        <CardBoxTransaction
-          v-for="(transaction,index) in transactionBarItems"
-          :key="index"
-          :amount="transaction.amount"
-          :date="transaction.date"
-          :business="transaction.business"
-          :type="transaction.type"
-          :name="transaction.name"
-          :account="transaction.account"
-        />
-      </div>
-      <div class="flex flex-col justify-between">
-        <CardBoxClient
-          v-for="client in clientBarItems"
-          :key="client.id"
-          :name="client.name"
-          :login="client.login"
-          :date="client.created"
-          :progress="client.progress"
-        />
-      </div>
-    </div>
+      <NotificationBar
+        color="info"
+        :icon="mdiMonitorCellphone"
+      >
+        <b>Responsive table.</b> Collapses on mobile
+      </NotificationBar>
 
-    <SectionTitleBarSub
-      :icon="mdiChartPie"
-      title="Trends overview"
-    />
-
-    <CardBox
-      title="Performance"
-      :icon="mdiFinance"
-      :header-icon="mdiReload"
-      class="mb-6"
-      @header-icon-click="fillChartData"
-    >
-      <div v-if="chartData">
-        <line-chart
-          :data="chartData"
-          class="h-96"
-        />
-      </div>
-    </CardBox>
-
-    <SectionTitleBarSub
-      :icon="mdiAccountMultiple"
-      title="Clients"
-    />
-
-    <NotificationBar
-      color="info"
-      :icon="mdiMonitorCellphone"
-    >
-      <b>Responsive table.</b> Collapses on mobile
-    </NotificationBar>
-
-    <CardBox
-      :icon="mdiMonitorCellphone"
-      title="Responsive table"
-      has-table
-    >
-      <TableSampleClients />
-    </CardBox>
-  </SectionMain>
+      <CardBox
+        :icon="mdiMonitorCellphone"
+        title="Responsive table"
+        has-table
+      >
+        <TableSampleClients />
+      </CardBox>
+    </SectionMain>
+  </LayoutAuthenticated>
 </template>

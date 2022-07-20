@@ -47,7 +47,4 @@ router.afterEach(to => {
   document.title = to.meta?.title
     ? `${to.meta.title} — ${defaultDocumentTitle}`
     : defaultDocumentTitle
-
-  /* Full screen mode */
-  layoutStore.fullScreenToggle(!!to.meta.fullScreen)
 })

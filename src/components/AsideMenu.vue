@@ -24,7 +24,6 @@ const menuClick = () => {
 
 <template>
   <aside
-    v-show="!layoutStore.isFullScreen"
     id="aside"
     class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 overflow-y-auto
     dark:border-r dark:border-gray-800 dark:bg-gray-900/70 lg:dark:bg-gray-900 xl:dark:bg-gray-900/70"

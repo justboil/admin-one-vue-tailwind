@@ -1,11 +1,3 @@
-body {
-  @apply pt-14 xl:pl-60;
-}
-
-#app {
-  @apply w-screen transition-position lg:w-auto;
-}
-
 .dropdown {
   @apply cursor-pointer;
 }
@@ -13,12 +5,4 @@ body {
 li.stack-item:not(:last-child):after {
   content: '/';
   @apply inline-block pl-3;
-}
-
-.m-clipped, .m-clipped body {
-  @apply overflow-hidden lg:overflow-visible;
-}
-
-.full-screen body {
-  @apply p-0;
 }

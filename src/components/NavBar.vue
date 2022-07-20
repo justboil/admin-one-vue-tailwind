@@ -41,8 +41,6 @@ const toggleLightDark = () => {
 
 const layoutStore = useLayoutStore()
 
-const isNavBarVisible = computed(() => !layoutStore.isFullScreen)
-
 const isAsideMobileExpanded = computed(() => layoutStore.isAsideMobileExpanded)
 
 const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
@@ -68,7 +66,6 @@ const logout = () => {
 
 <template>
   <nav
-    v-show="isNavBarVisible"
     class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen
     transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
     :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"

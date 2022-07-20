@@ -10,6 +10,7 @@ import FormControl from '@/components/FormControl.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
+import LayoutGuest from '@/layouts/LayoutGuest.vue'
 
 const form = reactive({
   login: 'john.doe',
@@ -25,62 +26,64 @@ const submit = () => {
 </script>
 
 <template>
-  <SectionFullScreen
-    v-slot="{ cardClass, cardRounded }"
-    bg="login"
-  >
-    <CardBox
-      :class="cardClass"
-      :rounded="cardRounded"
-      form
-      @submit.prevent="submit"
+  <LayoutGuest>
+    <SectionFullScreen
+      v-slot="{ cardClass, cardRounded }"
+      bg="login"
     >
-      <FormField
-        label="Login"
-        help="Please enter your login"
+      <CardBox
+        :class="cardClass"
+        :rounded="cardRounded"
+        form
+        @submit.prevent="submit"
       >
-        <FormControl
-          v-model="form.login"
-          :icon="mdiAccount"
-          name="login"
-          autocomplete="username"
-        />
-      </FormField>
-
-      <FormField
-        label="Password"
-        help="Please enter your password"
-      >
-        <FormControl
-          v-model="form.pass"
-          :icon="mdiAsterisk"
-          type="password"
-          name="password"
-          autocomplete="current-password"
-        />
-      </FormField>
-
-      <FormCheckRadioPicker
-        v-model="form.remember"
-        name="remember"
-        :options="{ remember: 'Remember' }"
-      />
-
-      <BaseDivider />
-
-      <BaseButtons>
-        <BaseButton
-          type="submit"
-          color="info"
+        <FormField
           label="Login"
+          help="Please enter your login"
+        >
+          <FormControl
+            v-model="form.login"
+            :icon="mdiAccount"
+            name="login"
+            autocomplete="username"
+          />
+        </FormField>
+
+        <FormField
+          label="Password"
+          help="Please enter your password"
+        >
+          <FormControl
+            v-model="form.pass"
+            :icon="mdiAsterisk"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+          />
+        </FormField>
+
+        <FormCheckRadioPicker
+          v-model="form.remember"
+          name="remember"
+          :options="{ remember: 'Remember' }"
         />
-        <BaseButton
-          to="/dashboard"
-          color="info"
-          outline
-          label="Back"
-        />
-      </BaseButtons>
-    </CardBox>
-  </SectionFullScreen>
+
+        <BaseDivider />
+
+        <BaseButtons>
+          <BaseButton
+            type="submit"
+            color="info"
+            label="Login"
+          />
+          <BaseButton
+            to="/dashboard"
+            color="info"
+            outline
+            label="Back"
+          />
+        </BaseButtons>
+      </CardBox>
+    </SectionFullScreen>
+  </LayoutGuest>
 </template>
