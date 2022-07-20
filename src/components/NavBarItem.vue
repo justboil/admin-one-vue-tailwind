@@ -45,11 +45,6 @@ const activeColor = props.activeColor ?? `${styleStore.navBarItemLabelActiveColo
 const componentClass = computed(() => {
   const base = [
     props.type,
-    'items-center',
-    'grow-0',
-    'shrink-0',
-    'relative',
-    'cursor-pointer',
     props.active
       ? activeColor
       : `${styleStore.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${styleStore.navBarItemLabelHoverStyle}`
@@ -79,6 +74,7 @@ const componentClass = computed(() => {
 
 <template>
   <component
+    class="items-center grow-0 shrink-0 relative cursor-pointer"
     :is="is"
     :class="componentClass"
     :to="to"
