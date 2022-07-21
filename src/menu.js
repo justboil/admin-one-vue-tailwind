@@ -1,6 +1,6 @@
 import {
   mdiAccountCircle,
-  mdiDesktopMac,
+  mdiMonitor,
   mdiGithub,
   mdiLock,
   mdiAlertCircle,
@@ -18,7 +18,7 @@ export default [
   [
     {
       to: '/dashboard',
-      icon: mdiDesktopMac,
+      icon: mdiMonitor,
       label: 'Dashboard'
     }
   ],

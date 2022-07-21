@@ -8,7 +8,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@mdi/js": "^6.4.95",
+    "@mdi/js": "^7.0.96",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
     "numeral": "^2.0.6",
