@@ -1,5 +1,4 @@
 <script setup>
-import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head } from '@inertiajs/inertia-vue3'
 import { nextTick, ref } from 'vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
@@ -11,8 +10,6 @@ import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
-
-useLayoutStore().fullScreenToggle(true)
 
 const recovery = ref(false);
 

@@ -1,26 +1,20 @@
 # Free Laravel Vue 3.x Tailwind 3.x Dashboard
 
-### Important
-
-This guide version is a bit outdated as it uses webpack.mix.js. Newer version for vite.config.js will be posted within the next 24 hours.
-
-<hr>
-
 [![Vue 3.x Tailwind 3.x admin dashboard demo](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
 **Please note:** this document is work in progress, so [some things are missing](#work-in-progress).
 
-**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard with Laravel 9.x integration.
+**Admin One** is simple, fast and free Vue.js 3.x Tailwind CSS 3.x admin dashboard with Laravel 9.x integration.
 
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
-* **Laravel Mix** build tools
+* **Laravel** build tools
+* **Laravel Breeze** with **Inertia + Vue** stack
 * **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Pinia** state library (official Vuex 5)
 * **Dark mode**
 * **Styled** scrollbars
-* **Jetstream** with **Inertia + Vue** stack
 * **Production CSS** is only **&thickapprox;38kb**
 * Reusable components
 * Free under MIT License
@@ -38,37 +32,50 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 
 ## Install
 
-* [Install Laravel](https://laravel.com/docs/installation) application
-* [Install Jetstream](https://jetstream.laravel.com/2.x/installation.html) with Inertia + Vue stack
-* `cd` to project dir and run `npm i pinia @mdi/js chart.js numeral autoprefixer -D`
+##### Install Laravel
 
-Add `require('autoprefixer')` to PostCSS plugin options in `webpack.mix.js`:
+First, [install Laravel](https://laravel.com/docs/installation) application
 
-```javascript
-mix.js('resources/js/app.js', 'public/js')
-  .vue()
-  .postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ])
-  .webpackConfig(require('./webpack.config'))
+##### Install Breeze
+
+Then `cd` to project dir and install Breeze with Vue option
+
+```bash
+composer require laravel/breeze --dev
+
+php artisan breeze:install vue
+
+npm install
+php artisan migrate
+```
+
+##### Install dependencies
+
+```bash
+npm i pinia @mdi/js chart.js numeral -D
 ```
 
 ## Copy styles, components and scripts
 
-Clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project locally into a separate folder
+**Before you start,** we recommend to remove/rename Laravel Breeze's original folders — `resources/js/Components` and `resources/js/Layouts`
+
+Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project somewhere locally (into any separate folder)
 
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
 * Copy `tailwind.config.js` to `/`
-* Copy `src/components` `src/stores` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
+* Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
 * Copy `.laravel-guide/resources/js/` to `resources/js/`
-* Copy `src/App.vue` to `resources/layouts/`
-* Copy `.laravel-guide/resources/js/Pages/Auth/Login.vue` to `resources/js/Pages/Auth/`
-* Copy `src/css` to `resources/css`
 * Delete `resources/css/app.css`
-* Rename `resources/css/main.css` to `app.css`
+* Copy `src/css` to `resources/css`
+
+##### lowecase vs Capitalized folder names
+
+Fresh Laravel install with Breeze provides **Capitalized** folder names such as `Components`, `Layouts`, etc. For the sake of simplicity we just follow Vue conventions with lowercase folder names. However, you may opt-in to capitalize folder names:
+
+* Make sure you've removed original Laravel Breeze's `resources/js/Layouts` and `resources/js/Components` folders
+* Rename the folders you've copied in the previous section: `resources/js/layouts` to `Layouts`; `components` to `Components`; `stores` to `Stores`
+* Replace in imports: `@/layouts/` with `@/Layouts/`; `@/components/` with `@/Components/`; `@/stores/` with `@/Stores/`
 
 ##### In tailwind.config.js
 
@@ -78,7 +85,6 @@ Replace `content`, to reflect Laravel's structure:
 module.exports = {
   content: [
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-    './vendor/laravel/jetstream/**/*.blade.php',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.vue',
@@ -87,13 +93,6 @@ module.exports = {
   // ...
 }
 ```
-
-##### In resources/layouts/App.vue
-
-* Remove `import { RouterView } from 'vue-router'`
-* Replace `<RouterView />` with `<slot />`
-* Add `layoutStore.fullScreenToggle(false)` after `const layoutStore = useLayoutStore()`
-* `mainStore.setUser()`, `const mainStore = useMainStore()` and `import { useMainStore } from '@/stores/main.js'` are no longer needed, since we'll [fetch this data from backend](#add-inertia-related-stuff)
 
 ##### In resources/views/app.blade.php
 
@@ -105,33 +104,19 @@ Let's just add first page. You can repeat these steps for other pages, if you wi
 
 First, copy `src/views/HomeView.vue` (justboil/admin-one-vue-tailwind project) to `resources/js/Pages/` (your Laravel project).
 
-Then, open `resources/js/Pages/HomeView.vue` and add these lines to `<script setup>`:
+Then, open `resources/js/Pages/HomeView.vue` and add `<Head>`:
 
 ```vue
 <script setup>
 import { Head } from '@inertiajs/inertia-vue3'
-import App from '@/Layouts/App.vue'
 // ...
 </script>
-```
-Wrap the content inside `<template>` with `<App>`. Then add `<Head title="Dashboard" />`
 
-Here's an original `<template>`:
-
-```vue
 <template>
-  <!-- ... -->
-</template>
-```
-
-Here's the result:
-
-```vue
-<template>
-  <Head title="Dashboard" />
-  <App>
+  <LayoutAuthenticated>
+    <Head title="Dashboard" />
     <!-- ... -->
-  </App>
+  </LayoutAuthenticated>
 </template>
 ```
 
@@ -140,7 +125,7 @@ Add route in `routes/web.php`. There's a `/dashboard` route already defined by d
 ```php
 Route::get('/dashboard', function () {
   return Inertia::render('HomeView');
-})->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 ```
 
 ## Fix router links
@@ -159,17 +144,17 @@ export default [
   [
     {
       route: 'dashboard',
-      icon: mdiDesktopMac,
+      icon: mdiMonitor,
       label: 'Dashboard'
     },
     {
       route: 'dashboard2',
-      icon: mdiDesktopMac,
+      icon: mdiMonitor,
       label: 'Dashboard 2'
     },
     {
       href: 'https://example.com/',
-      icon: mdiDesktopMac,
+      icon: mdiMonitor,
       label: 'Example.com'
     }
   ]
@@ -381,19 +366,25 @@ Then, update attributes in `<component>`:
 
 ## Add Inertia-related stuff
 
-##### resources/js/components/UserAvatar.vue
+##### resources/js/components/UserAvatarCurrentUser.vue
 
-Fix `avatar` computed property, so it fetches user's profile photo from backend
+Let's fetch user avatar initials based on username stored in database.
 
 ```vue
 <script setup>
+import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
-// ...
-const avatar = computed(() => props.username
-  ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
-  : usePage().props.value.user.profile_photo_url)
-// ...
+import UserAvatar from '@/components/UserAvatar.vue'
+
+const userName = computed(() => usePage().props.value.auth.user.name)
 </script>
+
+<template>
+  <UserAvatar
+    :username="userName"
+    api="initials"
+  />
+</template>
 ```
 
 ##### resources/js/components/NavBar.vue
@@ -406,7 +397,7 @@ import { usePage } from '@inertiajs/inertia-vue3'
 import { Inertia } from '@inertiajs/inertia'
 // ...
 
-const userName = computed(() => usePage().props.value.user.name)
+const userName = computed(() => usePage().props.value.auth.user.name)
 
 const logout = () => {
   Inertia.post(route('logout'))
@@ -416,7 +407,7 @@ const logout = () => {
 
 ## Optional steps
 
-### Fix .editorconfig
+## Fix .editorconfig
 
 Add to .editorconfig:
 
@@ -425,31 +416,6 @@ Add to .editorconfig:
 indent_size = 2
 ```
 
-### Fix Pages/Welcome.vue
+## resources/js/bootstrap.js
 
-In case, you need Pages/Welcome.vue, add `import` and `setup()` to remove unnecessary padding, which is set by default:
-
-```js
-import { useLayoutStore } from '@/stores/layout.js'
-// ...
-
-export default defineComponent({
-  // ...
-  setup () {
-    useLayoutStore().fullScreenToggle(true)
-  }
-})
-```
-
-## Delete unused files
-
-* Delete resources/js/bootstrap.js
-* ...other items are coming soon
-
-## Work in progress
-
-As mentioned, this guide is WIP - work in progress. Contributions open. Here's the list of what's missing right now:
-
-* Pages for resources/Pages/API
-* Pages for resources/Pages/Profile
-* Safe-to-delete unused Jetstream files list
+Global lodash and axios aren't needed, as we import them directly when needed. Most likely, you'd not need axios at all, as Laravel pushes all data via Inertia.

@@ -1,5 +1,4 @@
 <script setup>
-import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { computed } from 'vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
@@ -20,8 +19,6 @@ const props = defineProps({
 })
 
 const form = useForm()
-
-useLayoutStore().fullScreenToggle(true)
 
 const verificationLinkSent = computed(() => props.status === 'verification-link-sent')
 

@@ -1,5 +1,4 @@
 <script setup>
-import { useLayoutStore } from '@/stores/layout.js'
 import { useForm, Head, Link } from '@inertiajs/inertia-vue3'
 import { mdiEmail } from '@mdi/js'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
@@ -23,8 +22,6 @@ defineProps({
 const form = useForm({
   email: ''
 })
-
-useLayoutStore().fullScreenToggle(true)
 
 const submit = () => {
   form.post(route('password.email'))
