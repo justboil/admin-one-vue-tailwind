@@ -4,8 +4,6 @@
 
 This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
-**Please note:** this document is work in progress, so [some things are missing](#work-in-progress).
-
 **Admin One** is simple, fast and free Vue.js 3.x Tailwind CSS 3.x admin dashboard with Laravel 9.x integration.
 
 * Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
@@ -407,7 +405,7 @@ const logout = () => {
 
 ## Optional steps
 
-## Fix .editorconfig
+##### Fix .editorconfig
 
 Add to .editorconfig:
 
@@ -416,6 +414,6 @@ Add to .editorconfig:
 indent_size = 2
 ```
 
-## resources/js/bootstrap.js
+##### resources/js/bootstrap.js
 
-Global lodash and axios aren't needed, as we import them directly when needed. Most likely, you'd not need axios at all, as Laravel pushes all data via Inertia.
+Global `lodash` and `axios` aren't needed, as we import them directly when needed. Most likely, you'd not need `axios` at all, as Laravel pushes all data via Inertia.
