@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiCheckDecagram } from '@mdi/js'
 import BaseLevel from '@/components/BaseLevel.vue'
-import UserAvatar from '@/components/UserAvatar.vue'
+import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
 import PillTag from '@/components/PillTag.vue'
@@ -18,7 +18,7 @@ const userSwitchVal = ref([])
 <template>
   <CardBox rounded="">
     <BaseLevel type="justify-around lg:justify-center">
-      <UserAvatar class="lg:mx-12" />
+      <UserAvatarCurrentUser class="lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="flex justify-center md:block">
           <FormCheckRadioPicker

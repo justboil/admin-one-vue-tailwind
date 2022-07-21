@@ -25,7 +25,7 @@ import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
 import NavBarMenu from '@/components/NavBarMenu.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
-import UserAvatar from '@/components/UserAvatar.vue'
+import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
@@ -163,7 +163,7 @@ const logout = () => {
         </NavBarMenu>
         <NavBarMenu has-divider>
           <NavBarItemLabel :label="userName">
-            <UserAvatar class="w-6 h-6 mr-3 inline-flex" />
+            <UserAvatarCurrentUser class="w-6 h-6 mr-3 inline-flex" />
           </NavBarItemLabel>
 
           <template #dropdown>
