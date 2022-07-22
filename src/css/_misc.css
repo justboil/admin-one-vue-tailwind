@@ -1,4 +1,4 @@
-li.stack-item:not(:last-child):after {
+li.section-title-bar-stack-item:not(:last-child):after {
   content: '/';
   @apply inline-block pl-3;
 }
