@@ -20,18 +20,20 @@ const overlayClick = () => {
 </script>
 
 <template>
-  <div
-    :class="[styleStore.appStyle, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
-    class="pt-14 xl:pl-60 w-screen transition-position lg:w-auto"
-  >
-    <NavBar />
-    <AsideMenu :menu="menu" />
-    <slot />
-    <FooterBar />
-    <OverlayLayer
-      v-show="isAsideLgActive"
-      z-index="z-30"
-      @overlay-click="overlayClick"
-    />
+  <div :class="{ 'dark': styleStore.darkMode }">
+    <div
+      :class="[styleStore.appStyle, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
+      class="pt-14 xl:pl-60 w-screen transition-position lg:w-auto"
+    >
+      <NavBar />
+      <AsideMenu :menu="menu" />
+      <slot />
+      <FooterBar />
+      <OverlayLayer
+        v-show="isAsideLgActive"
+        z-index="z-30"
+        @overlay-click="overlayClick"
+      />
+    </div>
   </div>
 </template>

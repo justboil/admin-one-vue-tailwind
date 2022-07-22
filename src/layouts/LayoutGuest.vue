@@ -5,7 +5,9 @@ const styleStore = useStyleStore()
 </script>
 
 <template>
-  <div :class="styleStore.appStyle">
-    <slot />
+  <div :class="{ 'dark': styleStore.darkMode }">
+    <div :class="styleStore.appStyle">
+      <slot />
+    </div>
   </div>
 </template>
