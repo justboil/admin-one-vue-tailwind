@@ -29,11 +29,9 @@ export const useStyleStore = defineStore('style', {
         return
       }
 
-      const style = styles[payload]
+      localStorage.setItem(styleKey, payload)
 
-      if (localStorage[styleKey] !== payload) {
-        localStorage.setItem(styleKey, payload)
-      }
+      const style = styles[payload]
 
       for (const key in style) {
         this[`${key}Style`] = style[key]
