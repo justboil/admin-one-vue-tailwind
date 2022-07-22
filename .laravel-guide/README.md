@@ -25,8 +25,7 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 * [Fix router links](#fix-router-links)
 * [Add Inertia-related stuff](#add-inertia-related-stuff)
 * [Optional steps](#optional-steps)
-* [Delete unused files](#delete-unused-files)
-* [Work in progress](#work-in-progress)
+* [More information](#more-information)
 
 ## Install
 
@@ -405,7 +404,11 @@ const logout = () => {
 
 ## Optional steps
 
-##### Fix .editorconfig
+### Default style
+
+It's likely, you'll use only one app style, either `basic` or one of listed in `src/styles.js`. Follow [this guide](https://justboil.github.io/docs/customization/#default-style) to set one of choice.
+
+### Fix .editorconfig
 
 Add to .editorconfig:
 
@@ -414,6 +417,11 @@ Add to .editorconfig:
 indent_size = 2
 ```
 
-##### resources/js/bootstrap.js
+### resources/js/bootstrap.js
 
 Global `lodash` and `axios` aren't needed, as we import them directly when needed. Most likely, you'd not need `axios` at all, as Laravel pushes all data via Inertia.
+
+## More information
+
+* [Laravel Docs](https://laravel.com/docs)
+* [Inertia](https://inertiajs.com/)
