@@ -1,7 +1,7 @@
-const bgBase = 'dark:bg-gray-800 dark:text-gray-100'
+const appBase = 'dark:bg-gray-800 dark:text-gray-100'
 
 export const basic = {
-  bg: `bg-gray-50 ${bgBase}`,
+  app: `bg-gray-50 ${appBase}`,
   aside: 'bg-gray-800 aside-scrollbars-gray',
   asideBrand: 'bg-gray-900 text-white',
   asideMenuCloseLg: 'text-white',
@@ -18,7 +18,7 @@ export const basic = {
 }
 
 export const white = {
-  bg: `bg-white ${bgBase}`,
+  app: `bg-white ${appBase}`,
   aside: 'bg-white border-r border-gray-100 aside-scrollbars-light',
   asideBrand: '',
   asideMenuCloseLg: '',

@@ -21,7 +21,7 @@ const overlayClick = () => {
 
 <template>
   <div
-    :class="[styleStore.bgStyle, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
+    :class="[styleStore.appStyle, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
     class="pt-14 xl:pl-60 w-screen transition-position lg:w-auto"
   >
     <NavBar />

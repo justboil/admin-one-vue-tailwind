@@ -1,5 +1,11 @@
+<script setup>
+import { useStyleStore } from '@/stores/style.js'
+
+const styleStore = useStyleStore()
+</script>
+
 <template>
-  <div>
+  <div :class="styleStore.appStyle">
     <slot />
   </div>
 </template>
