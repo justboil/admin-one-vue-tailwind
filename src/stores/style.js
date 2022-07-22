@@ -42,6 +42,10 @@ export const useStyleStore = defineStore('style', {
       this.darkMode = payload !== null ? payload : !this.darkMode
 
       localStorage.setItem(darkModeKey, this.darkMode ? '1' : '0')
+
+      if (document) {
+        document.documentElement.classList[this.darkMode ? 'add' : 'remove']('dark-scrollbars')
+      }
     }
   }
 })

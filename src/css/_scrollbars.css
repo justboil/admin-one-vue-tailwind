@@ -28,19 +28,19 @@ html::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500;
 }
 
-html.dark {
+html.dark-scrollbars {
   scrollbar-color: #374151 #111827;
 }
 
-html.dark::-webkit-scrollbar-track {
+html.dark-scrollbars::-webkit-scrollbar-track {
   @apply bg-gray-900;
 }
 
-html.dark::-webkit-scrollbar-thumb {
+html.dark-scrollbars::-webkit-scrollbar-thumb {
   @apply bg-gray-700;
 }
 
-html.dark::-webkit-scrollbar-thumb:hover {
+html.dark-scrollbars::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-600;
 }
 
