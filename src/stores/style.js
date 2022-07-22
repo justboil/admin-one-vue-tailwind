@@ -5,7 +5,7 @@ import { darkModeKey, styleKey } from '@/config'
 export const useStyleStore = defineStore('style', {
   state: () => ({
     /* Styles */
-    bgStyle: '',
+    appStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
     asideMenuCloseLgStyle: '',
