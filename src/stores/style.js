@@ -5,7 +5,7 @@ import { darkModeKey, styleKey } from '@/config'
 export const useStyleStore = defineStore('style', {
   state: () => ({
     /* Styles */
-    bodyStyle: '',
+    bgStyle: '',
     asideStyle: '',
     asideBrandStyle: '',
     asideMenuCloseLgStyle: '',
@@ -30,8 +30,6 @@ export const useStyleStore = defineStore('style', {
       }
 
       const style = styles[payload]
-
-      document.body.className = style.body
 
       if (localStorage[styleKey] !== payload) {
         localStorage.setItem(styleKey, payload)

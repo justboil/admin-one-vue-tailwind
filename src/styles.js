@@ -1,7 +1,7 @@
-const bodyBase = 'text-base dark:bg-gray-800 dark:text-gray-100'
+const bgBase = 'dark:bg-gray-800 dark:text-gray-100'
 
 export const basic = {
-  body: `bg-gray-50 ${bodyBase}`,
+  bg: `bg-gray-50 ${bgBase}`,
   aside: 'bg-gray-800 aside-scrollbars-gray',
   asideBrand: 'bg-gray-900 text-white',
   asideMenuCloseLg: 'text-white',
@@ -18,7 +18,7 @@ export const basic = {
 }
 
 export const white = {
-  body: `bg-white ${bodyBase}`,
+  bg: `bg-white ${bgBase}`,
   aside: 'bg-white border-r border-gray-100 aside-scrollbars-light',
   asideBrand: '',
   asideMenuCloseLg: '',
