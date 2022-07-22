@@ -20,7 +20,7 @@ const overlayClick = () => {
 </script>
 
 <template>
-  <div :class="{ 'dark': styleStore.darkMode }">
+  <div :class="{ 'dark': styleStore.darkMode, 'overflow-hidden lg:overflow-visible': layoutStore.isAsideMobileExpanded }">
     <div
       :class="[styleStore.appStyle, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
       class="pt-14 xl:pl-60 w-screen transition-position lg:w-auto"

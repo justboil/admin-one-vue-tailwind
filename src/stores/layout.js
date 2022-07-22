@@ -8,11 +8,7 @@ export const useLayoutStore = defineStore('layout', {
 
   actions: {
     asideMobileToggle (payload = null) {
-      const isShow = payload !== null ? payload : !this.isAsideMobileExpanded
-
-      document.getElementById('app').classList[isShow ? 'add' : 'remove']('overflow-hidden', 'lg:overflow-visible')
-
-      this.isAsideMobileExpanded = isShow
+      this.isAsideMobileExpanded = payload !== null ? payload : !this.isAsideMobileExpanded
     },
 
     asideLgToggle (payload = null) {
