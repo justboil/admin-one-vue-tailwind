@@ -29,7 +29,7 @@ export const useStyleStore = defineStore('style', {
         return
       }
 
-      localStorage.setItem(styleKey, payload)
+      localStorage?.setItem(styleKey, payload)
 
       const style = styles[payload]
 
@@ -41,11 +41,9 @@ export const useStyleStore = defineStore('style', {
     setDarkMode (payload = null) {
       this.darkMode = payload !== null ? payload : !this.darkMode
 
-      localStorage.setItem(darkModeKey, this.darkMode ? '1' : '0')
+      localStorage?.setItem(darkModeKey, this.darkMode ? '1' : '0')
 
-      if (document) {
-        document.documentElement.classList[this.darkMode ? 'add' : 'remove']('dark-scrollbars')
-      }
+      document?.documentElement.classList[this.darkMode ? 'add' : 'remove']('dark-scrollbars')
     }
   }
 })
