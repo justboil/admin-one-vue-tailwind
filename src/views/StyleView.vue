@@ -5,6 +5,7 @@ import { sectionBgLogin } from '@/colors.js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import JustboilLogo from '@/components/JustboilLogo.vue'
+import LayoutGuest from '@/layouts/LayoutGuest.vue'
 
 const styles = [
   'white',
