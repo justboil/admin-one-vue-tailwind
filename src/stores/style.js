@@ -29,7 +29,7 @@ export const useStyleStore = defineStore('style', {
         return
       }
 
-      if (localStorage) {
+      if (typeof localStorage !== 'undefined') {
         localStorage.setItem(styleKey, payload)
       }
 
