@@ -18,7 +18,7 @@ const props = defineProps({
   },
   rounded: {
     type: String,
-    default: 'md:rounded'
+    default: 'md:rounded-2xl'
   },
   hasTable: Boolean,
   empty: Boolean,

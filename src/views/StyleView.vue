@@ -42,7 +42,6 @@ const click = slug => {
           v-for="style in styles"
           :key="style"
           class="cursor-pointer shadow-2xl"
-          rounded="rounded-2xl"
           hoverable
           @click="click(style)"
         >

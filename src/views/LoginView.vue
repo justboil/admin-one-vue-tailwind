@@ -28,12 +28,11 @@ const submit = () => {
 <template>
   <LayoutGuest>
     <SectionFullScreen
-      v-slot="{ cardClass, cardRounded }"
+      v-slot="{ cardClass }"
       bg="login"
     >
       <CardBox
         :class="cardClass"
-        :rounded="cardRounded"
         form
         @submit.prevent="submit"
       >

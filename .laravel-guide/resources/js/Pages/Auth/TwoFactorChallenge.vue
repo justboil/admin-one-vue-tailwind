@@ -45,12 +45,11 @@ const submit = () => {
     <Head title="Two-factor Confirmation" />
 
     <SectionFullScreen
-      v-slot="{ cardClass, cardRounded }"
+      v-slot="{ cardClass }"
       bg="login"
     >
       <CardBox
         :class="cardClass"
-        :rounded="cardRounded"
         form
         @submit.prevent="submit"
       >

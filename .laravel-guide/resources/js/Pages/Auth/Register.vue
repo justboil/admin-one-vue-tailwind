@@ -40,13 +40,12 @@ const submit = () => {
     <Head title="Register" />
 
     <SectionFullScreen
-      v-slot="{ cardClass, cardRounded }"
+      v-slot="{ cardClass }"
       bg="login"
     >
       <CardBox
         :class="cardClass"
         class="my-24"
-        :rounded="cardRounded"
         form
         @submit.prevent="submit"
       >

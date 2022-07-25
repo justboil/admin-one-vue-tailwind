@@ -10,12 +10,11 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
 <template>
   <LayoutGuest>
     <SectionFullScreen
-      v-slot="{ cardClass, cardRounded }"
+      v-slot="{ cardClass }"
       bg="error"
     >
       <CardBox
         :class="cardClass"
-        :rounded="cardRounded"
       >
         <div class="space-y-3">
           <h1 class="text-2xl">

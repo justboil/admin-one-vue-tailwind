@@ -32,12 +32,11 @@ const submit = () => {
     <Head title="Email Verification" />
 
     <SectionFullScreen
-      v-slot="{ cardClass, cardRounded }"
+      v-slot="{ cardClass }"
       bg="login"
     >
       <CardBox
         :class="cardClass"
-        :rounded="cardRounded"
         form
         @submit.prevent="submit"
       >
