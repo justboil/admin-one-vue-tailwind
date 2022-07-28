@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
+import { colorsBgLight, colorsOutline } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
@@ -20,15 +20,13 @@ const props = defineProps({
   outline: Boolean
 })
 
-const componentClass = computed(() => {
-  const baseColor = props.outline ? colorsOutline[props.type] : [colorsBg[props.type], colorsBorders[props.type]]
-
-  return [
+const componentClass = computed(() => (
+  [
     'border',
     props.small ? 'py-0.5 px-2 text-xs rounded-lg mr-1.5' : 'py-2 px-4 rounded-2xl mr-3',
-    ...baseColor
+    props.outline ? colorsOutline[props.type] : colorsBgLight[props.type]
   ]
-})
+))
 </script>
 
 <template>

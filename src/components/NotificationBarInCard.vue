@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { colorsBg, colorsBorders } from '@/colors.js'
+import { colorsBgLight } from '@/colors.js'
 
 const props = defineProps({
   color: {
@@ -9,7 +9,7 @@ const props = defineProps({
   }
 })
 
-const componentClass = computed(() => [colorsBg[props.color], colorsBorders[props.color]])
+const componentClass = computed(() => colorsBgLight[props.color])
 </script>
 
 <template>

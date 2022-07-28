@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { colorsText, colorsBg } from '@/colors.js'
+import { colorsText, colorsBgLight } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
@@ -24,7 +24,7 @@ const props = defineProps({
 })
 
 const iconStyle = computed(
-  () => props.bg ? colorsBg[props.type] : colorsText[props.type]
+  () => props.bg ? colorsBgLight[props.type] : colorsText[props.type]
 )
 </script>
 

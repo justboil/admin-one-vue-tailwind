@@ -4,7 +4,7 @@ import { useStyleStore } from '@/stores/style.js'
 import {
   mdiMonitorCellphone,
   mdiSelectColor,
-  mdiFeather,
+  mdiContrastCircle,
   mdiInformationOutline,
   mdiCheckCircleOutline,
   mdiAlertCircle,
@@ -267,11 +267,11 @@ const styleStore = useStyleStore()
       </NotificationBar>
 
       <NotificationBar
-        color="light"
-        :icon="mdiFeather"
+        color="contrast"
+        :icon="mdiContrastCircle"
         :outline="notificationsOutline"
       >
-        <b>Light</b>. NotificationBar
+        <b>Contrast</b>. NotificationBar
       </NotificationBar>
     </SectionMain>
 
@@ -299,7 +299,7 @@ const styleStore = useStyleStore()
             :disabled="buttonsDisabled"
           />
           <BaseButton
-            color="light"
+            color="contrast"
             label="Button"
             :small="buttonsSmall"
             :outline="buttonsOutline"
@@ -347,7 +347,7 @@ const styleStore = useStyleStore()
             :disabled="buttonsDisabled"
           />
           <BaseButton
-            color="light"
+            color="contrast"
             label="Button"
             :icon="mdiOpenInNew"
             :small="buttonsSmall"
@@ -399,7 +399,7 @@ const styleStore = useStyleStore()
             :disabled="buttonsDisabled"
           />
           <BaseButton
-            color="light"
+            color="contrast"
             :icon="mdiOpenInNew"
             :small="buttonsSmall"
             :outline="buttonsOutline"

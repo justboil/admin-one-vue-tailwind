@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, useSlots } from 'vue'
 import { mdiClose } from '@mdi/js'
-import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
+import { colorsBgLight, colorsOutline } from '@/colors.js'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -20,7 +20,8 @@ const props = defineProps({
 
 const componentClass = computed(() => props.outline
   ? colorsOutline[props.color]
-  : [colorsBg[props.color], colorsBorders[props.color]])
+  : colorsBgLight[props.color]
+)
 
 const isDismissed = ref(false)
 
