@@ -259,19 +259,19 @@ const styleStore = useStyleStore()
       </NotificationBar>
 
       <NotificationBar
-        color="white"
-        :icon="mdiSelectColor"
-        :outline="notificationsOutline"
-      >
-        <b>White</b>. NotificationBar
-      </NotificationBar>
-
-      <NotificationBar
         color="contrast"
         :icon="mdiContrastCircle"
         :outline="notificationsOutline"
       >
         <b>Contrast</b>. NotificationBar
+      </NotificationBar>
+
+      <NotificationBar
+        color="white"
+        :icon="mdiSelectColor"
+        :outline="notificationsOutline"
+      >
+        <b>White</b>. NotificationBar
       </NotificationBar>
     </SectionMain>
 
