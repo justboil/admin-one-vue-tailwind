@@ -1,5 +1,4 @@
 <script setup>
-import { mdiCog } from '@mdi/js'
 import CardBox from '@/components/CardBox.vue'
 import NumberDynamic from '@/components/NumberDynamic.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -53,14 +52,12 @@ defineProps({
       <PillTagTrend
         :trend="trend"
         :trend-type="trendType"
-        small
       />
       <BaseButton
-        :icon="mdiCog"
-        icon-w="w-4"
-        icon-h="h-4"
-        color="white"
+        color="info"
+        icon="eye"
         small
+        @click="detail()"
       />
     </BaseLevel>
     <BaseLevel mobile>

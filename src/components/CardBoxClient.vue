@@ -5,6 +5,7 @@ import CardBox from '@/components/CardBox.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import PillTag from '@/components/PillTag.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
+import numeral from 'numeral'
 
 const props = defineProps({
   name: {
@@ -19,7 +20,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  progress: {
+  amt: {
     type: Number,
     default: 0
   },
@@ -38,11 +39,11 @@ const pillType = computed(() => {
     return props.type
   }
 
-  if (props.progress) {
-    if (props.progress >= 60) {
+  if (props.amt) {
+    if (props.amt >= 60) {
       return 'success'
     }
-    if (props.progress >= 40) {
+    if (props.amt >= 40) {
       return 'warning'
     }
 
@@ -56,12 +57,12 @@ const pillIcon = computed(() => {
   return {
     success: mdiTrendingUp,
     warning: mdiTrendingNeutral,
-    danger: mdiTrendingDown,
+    danger: null,
     info: null
   }[pillType.value]
 })
 
-const pillText = computed(() => props.text ?? `${props.progress}%`)
+const pillText = computed(() => props.text ?? `$${numeral(props.amt).format('0,0')}`)
 </script>
 
 <template>
@@ -77,7 +78,7 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
         />
         <div class="text-center md:text-left">
           <h4 class="text-xl">
-            {{ name }} <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
+            {{ name }} <span class="text-gray-500 dark:text-gray-400"> - {{ login }}</span>
           </h4>
           <p class="text-gray-500 dark:text-gray-400">
             {{ date }}

@@ -10,19 +10,100 @@ import {
   mdiViewList,
   mdiTelevisionGuide,
   mdiResponsive,
-  mdiPalette
+  mdiPalette,
+  mdiCashPlus,
+  mdiCashMinus,
+  mdiCashLock,
+  mdiHomeLightningBoltOutline,
+  mdiHomePlusOutline,
+  mdiHomeEditOutline,
+  mdiHomeRemoveOutline,
+  mdiHomeClockOutline,
+  mdiHomeVariantOutline
 } from '@mdi/js'
 
+
 export default [
-  'General',
+  'รายการวันนี้',
+  [
+    {
+      to: '/today-sends',
+      icon: 'cashPlus',
+      label: 'ยอดส่งวันนี้',
+      countData : 'countSendToday',
+      countColor : 'success'
+    },
+    {
+      to: '/today-receives',
+      icon: 'cashMinus',
+      label: 'ยอดรับวันนี้',
+      countData : 'countReceiveToday',
+      countColor : 'danger'
+    },
+    {
+      to: '/today-bit',
+      icon: 'homeLightningBoltOutline',
+      label: 'บิท/เปียร์วันนี้',
+      countData : 'countBitToday',
+      countColor : 'warning'
+    }
+  ],
+  'วงแชร์',
+  [
+    {
+      to: '/group-create',
+      icon: 'homePlusOutline',
+      label: 'สร้างวงแชร์'
+    },
+    {
+      to: '/today-sends',
+      icon: 'homeClockOutline',
+      label: 'วงวันนี้',
+      countData : 'countSendToday'
+    },
+    {
+      to: '/today-sends',
+      icon: 'homeVariantOutline',
+      label: 'วงกำลังเล่น',
+      countData : 'countSendToday'
+    },
+    {
+      to: '/today-sends',
+      icon: 'homeEditOutline',
+      label: 'วงสร้างใหม่',
+      countData : 'countSendToday'
+    },
+    {
+      to: '/today-sends',
+      icon: 'homeRemoveOutline',
+      label: 'วงจบแล้ว',
+      countData : 'countSendToday'
+    },
+  ],
+  'ทั่วไป',
   [
     {
       to: '/dashboard',
-      icon: mdiMonitor,
-      label: 'Dashboard'
+      icon: 'monitor',
+      label: 'ภาพรวมบ้านแชร์'
+    },
+    {
+      to: '/debt',
+      icon: 'cashLock',
+      label: 'ยอดค้างจ่าย'
+    },
+    {
+      to: '/debt',
+      icon: 'cashLock',
+      label: 'มือเป็น-มือตาย'
+    },
+    {
+      to: '/debt',
+      icon: 'accountMultiple',
+      label: 'ลูกแชร์'
     }
   ],
-  'Examples',
+  'รายงาน',
   [
     {
       to: '/tables',

@@ -89,9 +89,9 @@ const submit = e => {
     </header>
     <div
       v-if="empty"
-      class="text-center py-24 text-gray-500 dark:text-gray-400"
+      class="text-center py-10 text-gray-500 dark:text-gray-400"
     >
-      <p>Nothing's here…</p>
+      <p>ไม่มีรายการ...</p>
     </div>
     <div
       v-else

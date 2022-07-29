@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const avatar = computed(
-  () => props.avatar ?? `https://avatars.dicebear.com/api/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
+  () => props.avatar ?? `https://avatars.dicebear.com/api/${props.api}/${props.username}.svg`
 )
 
 const username = computed(() => props.username)

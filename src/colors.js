@@ -7,19 +7,19 @@ export const sectionBgErrorDark = `${sectionBgBase} from-pink-900 via-red-900 to
 export const colorsBg = {
   white: 'bg-white text-black',
   light: 'bg-gray-100 text-black',
-  success: 'bg-emerald-600 text-white',
-  danger: 'bg-red-600 text-white',
-  warning: 'bg-yellow-600 text-white',
-  info: 'bg-blue-600 text-white'
+  success: 'bg-emerald-500 text-white',
+  danger: 'bg-red-500 text-white',
+  warning: 'bg-yellow-500 text-white',
+  info: 'bg-blue-500 text-white'
 }
 
 export const colorsBgHover = {
   white: 'hover:bg-gray-50',
   light: 'hover:bg-gray-200',
   success: 'hover:bg-emerald-700',
-  danger: 'hover:bg-red-700',
+  danger: 'hover:bg-red-600',
   warning: 'hover:bg-yellow-700',
-  info: 'hover:bg-blue-700'
+  info: 'hover:bg-blue-600'
 }
 
 export const colorsBorders = {

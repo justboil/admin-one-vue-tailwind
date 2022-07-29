@@ -36,7 +36,7 @@ const userSwitchVal = ref([])
           <PillTag
             text="Verified"
             type="info"
-            :icon="mdiCheckDecagram"
+            icon="checkDecagram"
           />
         </div>
       </div>

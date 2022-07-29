@@ -1,6 +1,7 @@
 <script setup>
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import AuthService from '@/services/auth'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -13,15 +14,17 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
 
 const form = reactive({
-  login: 'john.doe',
-  pass: 'highly-secure-password-fYjUw-',
+  login: 'admin',
+  pass: 'admin',
   remember: ['remember']
 })
 
 const router = useRouter()
 
 const submit = () => {
-  router.push('/dashboard')
+  AuthService.login({username:form.login,password:form.pass}).then(() => {
+    router.push("/dashboard")
+  })
 }
 </script>
 
@@ -42,7 +45,7 @@ const submit = () => {
         >
           <FormControl
             v-model="form.login"
-            :icon="mdiAccount"
+            icon="account"
             name="login"
             autocomplete="username"
           />
@@ -54,7 +57,7 @@ const submit = () => {
         >
           <FormControl
             v-model="form.pass"
-            :icon="mdiAsterisk"
+            icon="asterisk"
             type="password"
             name="password"
             autocomplete="current-password"
@@ -75,12 +78,12 @@ const submit = () => {
             color="info"
             label="Login"
           />
-          <BaseButton
+          <!-- <BaseButton
             to="/dashboard"
             color="info"
             outline
             label="Back"
-          />
+          /> -->
         </BaseButtons>
       </CardBox>
     </SectionFullScreen>

@@ -7,7 +7,7 @@ const mainStore = useMainStore()
 
 <template>
   <UserAvatar
-    :username="mainStore.userName"
-    :avatar="mainStore.userAvatar"
+    :username="mainStore.currentUser.userInfo.nameHome"
+    :avatar="mainStore.currentUser.avatar"
   />
 </template>

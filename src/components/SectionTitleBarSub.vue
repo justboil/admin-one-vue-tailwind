@@ -28,7 +28,7 @@ defineProps({
       </h1>
     </div>
     <BaseButton
-      :icon="mdiCog"
+      icon="cog"
       small
     />
   </section>

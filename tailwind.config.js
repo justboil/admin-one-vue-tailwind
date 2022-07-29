@@ -42,6 +42,9 @@ module.exports = {
         fadeOut: 'fadeOut 250ms ease-in-out',
         fadeIn: 'fadeIn 250ms ease-in-out'
       }
+    },
+    fontFamily: {
+      'Kanit': ['Kanit', 'sans-serif']
     }
   },
   plugins: [

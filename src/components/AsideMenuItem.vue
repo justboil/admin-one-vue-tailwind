@@ -2,9 +2,11 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useStyleStore } from '@/stores/style.js'
+import { useMainStore } from '@/stores/main'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
+import PillTag from '@/components/PillTag.vue'
 
 const props = defineProps({
   item: {
@@ -15,6 +17,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['menu-click'])
+const mainStore = useMainStore();
 
 const styleStore = useStyleStore()
 
@@ -53,7 +56,17 @@ const menuClick = event => {
       <span
         class="grow"
         :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
-      >{{ item.label }}</span>
+      >{{ item.label }}
+      
+      <PillTag
+        v-if="item.countData && mainStore[item.countData] > 0"
+        :text="mainStore[item.countData]"
+        :type="item.countColor"
+        small="true"
+      />
+
+      </span>
+      
       <BaseIcon
         v-if="hasDropdown"
         :path="isDropdownActive ? mdiMinus : mdiPlus"

@@ -49,7 +49,7 @@ const submitPass = () => {
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <CardBox
           title="Edit Profile"
-          :icon="mdiAccountCircle"
+          icon="accountCircle"
           form
           @submit.prevent="submitProfile"
         >
@@ -66,7 +66,7 @@ const submitPass = () => {
           >
             <FormControl
               v-model="profileForm.name"
-              :icon="mdiAccount"
+              icon="account"
               name="username"
               required
               autocomplete="username"
@@ -78,7 +78,7 @@ const submitPass = () => {
           >
             <FormControl
               v-model="profileForm.email"
-              :icon="mdiMail"
+              icon="mail"
               type="email"
               name="email"
               required
@@ -104,7 +104,7 @@ const submitPass = () => {
 
         <CardBox
           title="Change Password"
-          :icon="mdiLock"
+          icon="lock"
           form
           @submit.prevent="submitPass"
         >
@@ -114,7 +114,7 @@ const submitPass = () => {
           >
             <FormControl
               v-model="passwordForm.password_current"
-              :icon="mdiAsterisk"
+              icon="asterisk"
               name="password_current"
               type="password"
               required
@@ -130,7 +130,7 @@ const submitPass = () => {
           >
             <FormControl
               v-model="passwordForm.password"
-              :icon="mdiFormTextboxPassword"
+              icon="formTextboxPassword"
               name="password"
               type="password"
               required
@@ -144,7 +144,7 @@ const submitPass = () => {
           >
             <FormControl
               v-model="passwordForm.password_confirmation"
-              :icon="mdiFormTextboxPassword"
+              icon="formTextboxPassword"
               name="password_confirmation"
               type="password"
               required

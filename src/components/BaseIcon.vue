@@ -25,16 +25,6 @@ const spanClass = computed(() => `inline-flex justify-center items-center ${prop
 
 <template>
   <span :class="spanClass">
-    <svg
-      viewBox="0 0 24 24"
-      :width="size"
-      :height="size"
-      class="inline-block"
-    >
-      <path
-        fill="currentColor"
-        :d="path"
-      />
-    </svg>
+      <mdicon :name="path" :width="size" :height="size" class="inline-block"/> 
   </span>
 </template>

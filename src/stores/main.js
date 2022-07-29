@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia'
+import { getCurrentUser , getCountSendToday ,getCountReceiveToday , getCountBitToday } from '@/utils'
 import axios from 'axios'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
     /* User */
-    userName: null,
-    userEmail: null,
-    userAvatar: null,
-
+    currentUser : getCurrentUser(),
+    countSendToday : getCountSendToday(),
+    countReceiveToday : getCountReceiveToday(),
+    countBitToday : getCountBitToday(),
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
 
@@ -17,17 +18,17 @@ export const useMainStore = defineStore('main', {
   }),
   actions: {
     setUser (payload) {
-      if (payload.name) {
-        this.userName = payload.name
-      }
-      if (payload.email) {
-        this.userEmail = payload.email
-      }
-      if (payload.avatar) {
-        this.userAvatar = payload.avatar
-      }
+      this.currentUser = payload
     },
-
+    setCountSendToday(count){
+      this.countSendToday = count
+    },
+    setCountReceiveToday(count){
+      this.countReceiveToday = count
+    },
+    setCountBitToday(count){
+      this.countBitToday = count
+    },
     fetch (sampleDataKey) {
       axios
         .get(`data-sources/${sampleDataKey}.json`)

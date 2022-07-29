@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
-import TableSampleClients from '@/components/TableSampleClients.vue'
+import TableGroupsToday from '@/components/TableGroupsToday.vue'
 import CardBox from '@/components/CardBox.vue'
 import SectionTitleBar from '@/components/SectionTitleBar.vue'
 import SectionHeroBar from '@/components/SectionHeroBar.vue'
@@ -21,7 +21,7 @@ const titleStack = ref(['Admin', 'Tables'])
     <SectionMain>
       <NotificationBar
         color="info"
-        :icon="mdiMonitorCellphone"
+        icon="monitorCellphone"
       >
         <b>Responsive table.</b> Collapses on mobile
       </NotificationBar>
@@ -29,20 +29,20 @@ const titleStack = ref(['Admin', 'Tables'])
       <CardBox
         class="mb-6"
         title="Clients"
-        :icon="mdiAccountMultiple"
+        icon="accountMultiple"
         has-table
       >
-        <TableSampleClients checkable />
+        <TableGroupsToday checkable />
       </CardBox>
 
       <SectionTitleBarSub
-        :icon="mdiTableBorder"
+        icon="tableBorder"
         title="Wrapped variation"
       />
 
       <NotificationBar
         color="success"
-        :icon="mdiTableBorder"
+        icon="tableBorder"
       >
         <b>Tightly wrapped</b> &mdash; table header becomes card header
       </NotificationBar>
@@ -51,17 +51,17 @@ const titleStack = ref(['Admin', 'Tables'])
         class="mb-6"
         has-table
       >
-        <TableSampleClients checkable />
+        <TableGroupsToday checkable />
       </CardBox>
 
       <SectionTitleBarSub
-        :icon="mdiTableOff"
+        icon="tableOff"
         title="Empty variation"
       />
 
       <NotificationBar
         color="danger"
-        :icon="mdiTableOff"
+        icon="tableOff"
       >
         <b>Empty table.</b> When there's nothing to show
       </NotificationBar>

@@ -57,7 +57,7 @@ const hasRightSlot = computed(() => slots.right)
       />
       <BaseButton
         v-else
-        :icon="mdiClose"
+        icon="close"
         :outline="outline"
         small
         @click="dismiss"

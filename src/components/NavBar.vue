@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useMainStore } from '@/stores/main.js'
 import { useStyleStore } from '@/stores/style.js'
 import { useLayoutStore } from '@/stores/layout.js'
@@ -29,9 +30,13 @@ import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
+import AuthService from '@/services/auth'
+
 const mainStore = useMainStore()
 
-const userName = computed(() => mainStore.userName)
+const router = useRouter()
+
+const nameHome = computed(() => mainStore.currentUser.userInfo.nameHome)
 
 const styleStore = useStyleStore()
 
@@ -60,7 +65,8 @@ const menuOpenLg = () => {
 }
 
 const logout = () => {
-  //
+  AuthService.logout();
+  router.push("/login")
 }
 </script>
 
@@ -89,9 +95,9 @@ const logout = () => {
           size="24"
         />
       </NavBarItem>
-      <NavBarItem>
+      <!-- <NavBarItem>
         <NavBarSearch />
-      </NavBarItem>
+      </NavBarItem> -->
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
       <NavBarItem @click.prevent="menuNavBarToggle">
@@ -109,7 +115,7 @@ const logout = () => {
       <div
         class="max-h-screen-menu overflow-y-auto lg:overflow-visible lg:flex lg:items-stretch lg:justify-end lg:ml-auto"
       >
-        <div class="hidden lg:flex items-center">
+        <!-- <div class="hidden lg:flex items-center">
           <a
             class="inline-flex items-center justify-center lg:mr-3 bg-blue-300 hover:bg-blue-400 transition-colors py-1 px-4 text-blue-700 hover:text-blue-800 text-sm rounded-full"
             target="_blank"
@@ -122,8 +128,8 @@ const logout = () => {
               h="h-4"
             />
           </a>
-        </div>
-        <NavBarItem
+        </div> -->
+        <!-- <NavBarItem
           class="lg:hidden" 
           target="_blank"
           href="https://tailwind-vue.justboil.me/"
@@ -132,8 +138,8 @@ const logout = () => {
             :icon="mdiMonitorShimmer"
             label="Premium version"
           />
-        </NavBarItem>
-        <NavBarMenu has-divider>
+        </NavBarItem> -->
+        <!-- <NavBarMenu has-divider>
           <NavBarItemLabel
             :icon="mdiMenu"
             label="Sample menu"
@@ -160,35 +166,35 @@ const logout = () => {
               />
             </NavBarItem>
           </template>
-        </NavBarMenu>
+        </NavBarMenu> -->
         <NavBarMenu has-divider>
-          <NavBarItemLabel :label="userName">
+          <NavBarItemLabel :label="nameHome">
             <UserAvatarCurrentUser class="w-6 h-6 mr-3 inline-flex" />
           </NavBarItemLabel>
 
           <template #dropdown>
             <NavBarItem to="/profile">
               <NavBarItemLabel
-                :icon="mdiAccount"
+                icon="account"
                 label="My Profile"
               />
             </NavBarItem>
             <NavBarItem>
               <NavBarItemLabel
-                :icon="mdiCogOutline"
+                icon="cogOutline"
                 label="Settings"
               />
             </NavBarItem>
             <NavBarItem>
               <NavBarItemLabel
-                :icon="mdiEmail"
+                icon="email"
                 label="Messages"
               />
             </NavBarItem>
             <BaseDivider nav-bar />
             <NavBarItem>
               <NavBarItemLabel
-                :icon="mdiLogout"
+                icon="logout"
                 label="Log Out"
               />
             </NavBarItem>
@@ -205,7 +211,7 @@ const logout = () => {
             is-desktop-icon-only
           />
         </NavBarItem>
-        <NavBarItem
+        <!-- <NavBarItem
           href="https://github.com/justboil/admin-one-vue-tailwind"
           has-divider
           is-desktop-icon-only
@@ -215,13 +221,13 @@ const logout = () => {
             label="GitHub"
             is-desktop-icon-only
           />
-        </NavBarItem>
+        </NavBarItem> -->
         <NavBarItem
           is-desktop-icon-only
           @click="logout"
         >
           <NavBarItemLabel
-            :icon="mdiLogout"
+            icon="logout"
             label="Log out"
             is-desktop-icon-only
           />

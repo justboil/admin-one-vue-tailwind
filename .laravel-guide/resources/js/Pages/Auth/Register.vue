@@ -59,7 +59,7 @@ const submit = () => {
           <FormControl
             v-model="form.name"
             id="name"
-            :icon="mdiAccount"
+            icon="account"
             autocomplete="name"
             type="text"
             required
@@ -74,7 +74,7 @@ const submit = () => {
           <FormControl
             v-model="form.email"
             id="email"
-            :icon="mdiEmail"
+            icon="email"
             autocomplete="email"
             type="email"
             required
@@ -89,7 +89,7 @@ const submit = () => {
           <FormControl
             v-model="form.password"
             id="password"
-            :icon="mdiFormTextboxPassword"
+            icon="formTextboxPassword"
             type="password"
             autocomplete="new-password"
             required
@@ -104,7 +104,7 @@ const submit = () => {
           <FormControl
             v-model="form.password_confirmation"
             id="password_confirmation"
-            :icon="mdiFormTextboxPassword"
+            icon="formTextboxPassword"
             type="password"
             autocomplete="new-password"
             required

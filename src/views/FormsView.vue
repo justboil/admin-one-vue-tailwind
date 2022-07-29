@@ -53,24 +53,24 @@ const submit = () => {
 
     <SectionMain>
       <SectionTitleBarSub
-        :icon="mdiBallotOutline"
+        icon="ballotOutline"
         title="Forms example"
       />
       <CardBox
         title="Forms"
-        :icon="mdiBallot"
+        icon="ballot"
         form
         @submit.prevent="submit"
       >
         <FormField label="Grouped with icons">
           <FormControl
             v-model="form.name"
-            :icon="mdiAccount"
+            icon="account"
           />
           <FormControl
             v-model="form.email"
             type="email"
-            :icon="mdiMail"
+            icon="mail"
           />
         </FormField>
 
@@ -129,7 +129,7 @@ const submit = () => {
     <SectionMain>
       <CardBox
         title="Custom elements"
-        :icon="mdiBallotOutline"
+        icon="ballotOutline"
       >
         <FormField
           label="Checkbox"

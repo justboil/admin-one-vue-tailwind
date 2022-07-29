@@ -62,7 +62,7 @@ const submit = () => {
         >
           <FormControl
             v-model="form.email"
-            :icon="mdiEmail"
+            icon="email"
             autocomplete="email"
             type="email"
             required

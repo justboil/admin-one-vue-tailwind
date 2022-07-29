@@ -17,7 +17,7 @@ const styleStore = useStyleStore()
       </h1>
       <BaseButton
         :label="styleStore.darkMode ? 'Light Mode' : 'Dark Mode'"
-        :icon="mdiThemeLightDark"
+        icon="themeLightDark"
         @click="styleStore.setDarkMode()"
       />
     </BaseLevel>

@@ -69,7 +69,7 @@ const submit = () => {
         >
           <FormControl
             v-model="form.email"
-            :icon="mdiAccount"
+            icon="account"
             id="email"
             autocomplete="email"
             type="email"
@@ -84,7 +84,7 @@ const submit = () => {
         >
           <FormControl
             v-model="form.password"
-            :icon="mdiAsterisk"
+            icon="asterisk"
             type="password"
             id="password"
             autocomplete="current-password"

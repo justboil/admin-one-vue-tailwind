@@ -2,7 +2,7 @@
   "name": "admin-one-vue-tailwind",
   "version": "3.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
@@ -11,6 +11,8 @@
     "@mdi/js": "^7.0.96",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
+    "mdi-vue": "^3.0.13",
+    "moment": "^2.29.4",
     "numeral": "^2.0.6",
     "pinia": "^2.0.13",
     "vue": "^3.0.0",

@@ -1,16 +1,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import { useMainStore } from '@/stores/main'
-import {
-  mdiAccountMultiple,
-  mdiCartOutline,
-  mdiChartTimelineVariant,
-  mdiFinance,
-  mdiMonitorCellphone,
-  mdiReload,
-  mdiGithub,
-  mdiChartPie
-} from '@mdi/js'
+import { useDashboardStore } from '@/stores/dashboard'
 import * as chartConfig from '@/components/Charts/chart.config.js'
 import LineChart from '@/components/Charts/LineChart.vue'
 import SectionMain from '@/components/SectionMain.vue'
@@ -18,7 +9,7 @@ import SectionTitleBar from '@/components/SectionTitleBar.vue'
 import SectionHeroBar from '@/components/SectionHeroBar.vue'
 import CardBoxWidget from '@/components/CardBoxWidget.vue'
 import CardBox from '@/components/CardBox.vue'
-import TableSampleClients from '@/components/TableSampleClients.vue'
+import TableGroupsToday from '@/components/TableGroupsToday.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import CardBoxTransaction from '@/components/CardBoxTransaction.vue'
@@ -26,7 +17,7 @@ import CardBoxClient from '@/components/CardBoxClient.vue'
 import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 
-const titleStack = ref(['Admin', 'Dashboard'])
+const titleStack = ref(['ภามรวมบ้านแชร์'])
 
 const chartData = ref(null)
 
@@ -39,64 +30,88 @@ onMounted(() => {
 })
 
 const mainStore = useMainStore()
-
 const clientBarItems = computed(() => mainStore.clients.slice(0, 3))
-
 const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
+
+const dashboardStore = useDashboardStore();
+const dashboard = computed(() => dashboardStore.dashboard);
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-    <SectionHeroBar>Dashboard</SectionHeroBar>
     <SectionMain>
-      <NotificationBar
-        color="info"
-        :icon="mdiGithub"
-      >
-        Please star this project on
-        <a
-          href="https://github.com/justboil/admin-one-vue-tailwind"
-          class="underline"
-          target="_blank"
-        >GitHub</a>
-        <template #right>
-          <BaseButton
-            href="https://github.com/justboil/admin-one-vue-tailwind"
-            :icon="mdiGithub"
-            label="GitHub"
-            target="_blank"
-            small
-          />
-        </template>
-      </NotificationBar>
+      <SectionTitleBarSub
+        icon="chartBoxOutline"
+        title="สรุปยอด"
+      />
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
         <CardBoxWidget
-          trend="12%"
-          trend-type="up"
+          :trend="dashboard.countSendToday"
           color="text-emerald-500"
-          :icon="mdiAccountMultiple"
-          :number="512"
-          label="Clients"
-        />
-        <CardBoxWidget
-          trend="12%"
-          trend-type="down"
-          color="text-blue-500"
-          :icon="mdiCartOutline"
-          :number="7770"
+          trend-type="up"
+          icon="cashPlus"
+          :number="dashboard.sumSendToday"
           prefix="$"
-          label="Sales"
+          label="ยอดส่งวันนี้ทั้งหมด"
         />
         <CardBoxWidget
-          trend="Overflow"
-          trend-type="alert"
+          :trend="dashboard.countReceiveToday"
           color="text-red-500"
-          :icon="mdiChartTimelineVariant"
-          :number="256"
-          suffix="%"
-          label="Performance"
+          trend-type="down"
+          icon="cashMinus"
+          :number="dashboard.sumReceiveToday"
+          prefix="$"
+          label="ยอดรับวันนี้ทั้งหมด"
         />
+        <CardBoxWidget
+          :trend="dashboard.countDebt"
+          trend-type="alert"
+          color="text-yellow-500"
+          icon="cashLock"
+          :number="dashboard.sumDebt"
+          prefix="$"
+          label="ยอดค้างจ่ายทั้งหมด"
+        />
+        
+      </div>
+
+      <SectionTitleBarSub
+        icon="homeSearchOutline"
+        title="ภาพรวมบ้านแชร์"
+      />
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 mb-6 ">
+        <CardBoxWidget
+          color="text-blue-600"
+          icon="homeHeart"
+          :number="dashboard.countGroup"
+          label="วงแชร์ทั้งหมด"
+        />
+        <CardBoxWidget
+          color="text-red-500"
+          icon="homeRemove"
+          :number="dashboard.countGroupExpired"
+          label="วงแชร์ที่เกินวันที่จบวงแล้ว"
+        />
+        <CardBoxWidget
+          color="text-yellow-500"
+          icon="accountMultiple"
+          :number="dashboard.countMember"
+          label="ลูกแชร์ทั้งหมด"
+        />
+        <CardBoxWidget
+          color="text-emerald-500"
+          icon="accountMultipleCheck"
+          :number="dashboard.countMemberEmpty"
+          label="ลูกแชร์ที่ว่าง"
+        />
+      </div>
+
+      <div class="mb-6">
+        <SectionTitleBarSub
+          icon="homeCircleOutline"
+          title="วงแชร์วันนี้"
+        />
+          <TableGroupsToday />
       </div>
 
       <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
@@ -114,24 +129,22 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
         </div>
         <div class="flex flex-col justify-between">
           <CardBoxClient
-            v-for="client in clientBarItems"
-            :key="client.id"
-            :name="client.name"
-            :login="client.login"
-            :date="client.created"
-            :progress="client.progress"
+            type="danger"
+            :name="dashboard.sumDebtMax ? dashboard.sumDebtMax.memberName : ''"
+            login="ลูกแชร์ที่มียอดค้างมากที่สุด"
+            :amt="dashboard.sumDebtMax ? dashboard.sumDebtMax.sumDebt : 0"
           />
         </div>
       </div>
 
       <SectionTitleBarSub
-        :icon="mdiChartPie"
+        icon="chartPie"
         title="Trends overview"
       />
 
       <CardBox
         title="Performance"
-        :icon="mdiFinance"
+        icon="finance"
         :header-icon="mdiReload"
         class="mb-6"
         @header-icon-click="fillChartData"
@@ -144,25 +157,7 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
         </div>
       </CardBox>
 
-      <SectionTitleBarSub
-        :icon="mdiAccountMultiple"
-        title="Clients"
-      />
-
-      <NotificationBar
-        color="info"
-        :icon="mdiMonitorCellphone"
-      >
-        <b>Responsive table.</b> Collapses on mobile
-      </NotificationBar>
-
-      <CardBox
-        :icon="mdiMonitorCellphone"
-        title="Responsive table"
-        has-table
-      >
-        <TableSampleClients />
-      </CardBox>
+     
     </SectionMain>
   </LayoutAuthenticated>
 </template>

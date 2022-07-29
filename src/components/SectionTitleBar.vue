@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <section class="p-6">
+  <section class="ml-6 mt-6">
     <BaseLevel>
       <ul>
         <li
@@ -23,13 +23,13 @@ defineProps({
           {{ title }}
         </li>
       </ul>
-      <BaseButton
+      <!-- <BaseButton
         href="https://github.com/justboil/admin-one-vue-tailwind"
         color="info"
         label="Star on GitHub"
         target="_blank"
         :icon="mdiGithub"
-      />
+      /> -->
     </BaseLevel>
   </section>
 </template>

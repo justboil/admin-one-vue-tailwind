@@ -1,21 +1,24 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Style from '@/views/StyleView.vue'
 import Home from '@/views/HomeView.vue'
+import AuthGuard from '@/utils/auth-guard'
 
 const routes = [
   {
     meta: {
-      title: 'Select style'
+      title: 'Welcome'
     },
     path: '/',
-    name: 'style',
-    component: Style
+    name: 'welcome',
+    redirect: "/login",
+    component: () => import('@/views/LoginView.vue')
   },
   {
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
-      title: 'Dashboard'
+      title: 'Dashboard',
+      loginRequired : true
     },
     path: '/dashboard',
     name: 'dashboard',
@@ -23,7 +26,17 @@ const routes = [
   },
   {
     meta: {
-      title: 'Tables'
+      title: 'ยอดส่งวันนี้',
+      loginRequired : true
+    },
+    path: '/today-sends',
+    name: 'today-sends',
+    component: () => import('@/views/SendTodayView.vue')
+  },
+  {
+    meta: {
+      title: 'Tables',
+      loginRequired : true
     },
     path: '/tables',
     name: 'tables',
@@ -31,7 +44,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Forms'
+      title: 'Forms',
+      loginRequired : true
     },
     path: '/forms',
     name: 'forms',
@@ -39,7 +53,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Profile'
+      title: 'Profile',
+      loginRequired : true
     },
     path: '/profile',
     name: 'profile',
@@ -80,11 +95,13 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { top: 0 }
   }
 })
+
+router.beforeEach(AuthGuard)
 
 export default router
