@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.1",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.2.6",
     "eslint": "^8.5.0",
