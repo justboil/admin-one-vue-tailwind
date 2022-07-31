@@ -4,7 +4,6 @@ import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 
 const props = defineProps({
@@ -56,7 +55,7 @@ const cancel = () => confirmCancel('cancel')
     <CardBox
       v-show="value"
       :title="title"
-      class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
+      class="shadow-lg max-h-modal w-11/12 md:w-3/5 lg:w-2/5 xl:w-4/12 z-50"
       :header-icon="mdiClose"
       modal
       @header-icon-click="cancel"
@@ -71,22 +70,22 @@ const cancel = () => confirmCancel('cancel')
         <slot />
       </div>
 
-      <BaseDivider />
-
-      <BaseButtons>
-        <BaseButton
-          :label="buttonLabel"
-          :color="button"
-          @click="confirm"
-        />
-        <BaseButton
-          v-if="hasCancel"
-          label="Cancel"
-          :color="button"
-          outline
-          @click="cancel"
-        />
-      </BaseButtons>
+      <template #footer>
+        <BaseButtons>
+          <BaseButton
+            :label="buttonLabel"
+            :color="button"
+            @click="confirm"
+          />
+          <BaseButton
+            v-if="hasCancel"
+            label="Cancel"
+            :color="button"
+            outline
+            @click="cancel"
+          />
+        </BaseButtons>
+      </template>
     </CardBox>
   </OverlayLayer>
 </template>

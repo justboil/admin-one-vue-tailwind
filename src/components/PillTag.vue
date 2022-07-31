@@ -17,21 +17,30 @@ const props = defineProps({
     default: null
   },
   small: Boolean,
-  outline: Boolean
+  outline: Boolean,
+  wrapped: Boolean
 })
 
-const componentClass = computed(() => (
-  [
+const componentClass = computed(() => {
+  const baseColor = props.outline ? colorsOutline[props.type] : colorsBgLight[props.type]
+
+  const base = [
     'border',
-    props.small ? 'py-0.5 px-2 text-xs rounded-lg mr-1.5' : 'py-2 px-4 rounded-2xl mr-3',
-    props.outline ? colorsOutline[props.type] : colorsBgLight[props.type]
+    props.small ? 'py-1 px-4 text-xs rounded-full' : 'py-2 px-6 rounded-full',
+    baseColor
   ]
-))
+
+  if (!props.wrapped) {
+    base.push(props.small ? 'mr-1.5' : 'mr-3', 'last:mr-0')
+  }
+
+  return base
+})
 </script>
 
 <template>
   <div
-    class="inline-flex items-center last:mr-0 capitalize"
+    class="inline-flex items-center capitalize"
     :class="componentClass"
   >
     <BaseIcon
@@ -39,7 +48,8 @@ const componentClass = computed(() => (
       :path="icon"
       h="h-4"
       w="w-4"
-      class="mr-2"
+      :class="small ? 'mr-1' : 'mr-2'"
+      :size="small ? 14 : 16"
     />
     <span>{{ text }}</span>
   </div>

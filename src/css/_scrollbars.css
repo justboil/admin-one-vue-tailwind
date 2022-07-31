@@ -1,13 +1,13 @@
-html,  #aside {
+html {
   scrollbar-width: thin;
 }
 
-html::-webkit-scrollbar, #aside::-webkit-scrollbar {
+html::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-html::-webkit-scrollbar-thumb, #aside::-webkit-scrollbar-thumb {
+html::-webkit-scrollbar-thumb {
   @apply rounded;
 }
 

@@ -20,7 +20,6 @@ const props = defineProps({
     type: String,
     default: null
   },
-  hasDivider: Boolean,
   isDesktopIconOnly: Boolean,
   dropdown: Boolean,
   active: Boolean
@@ -40,14 +39,14 @@ const is = computed(() => {
 
 const styleStore = useStyleStore()
 
-const activeColor = props.activeColor ?? `${styleStore.navBarItemLabelActiveColorStyle} dark:text-gray-400`
+const activeColor = props.activeColor ?? `${styleStore.navBarItemLabelActiveColorStyle} dark:text-slate-400`
 
 const componentClass = computed(() => {
   const base = [
     props.type,
     props.active
       ? activeColor
-      : `${styleStore.navBarItemLabelStyle} dark:text-white dark:hover:text-gray-400 ${styleStore.navBarItemLabelHoverStyle}`
+      : `${styleStore.navBarItemLabelStyle} dark:text-white dark:hover:text-slate-400 ${styleStore.navBarItemLabelHoverStyle}`
   ]
 
   if (props.type === 'block') {
@@ -58,10 +57,6 @@ const componentClass = computed(() => {
     base.push('py-2', 'px-3')
   } else {
     base.push('p-0', 'lg:py-2', 'lg:px-3')
-  }
-
-  if (props.hasDivider) {
-    base.push('lg:border-r', 'border-gray-100', 'lg:dark:border-gray-800')
   }
 
   if (props.isDesktopIconOnly) {

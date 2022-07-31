@@ -14,7 +14,7 @@ defineProps({
     <slot v-if="custom" />
     <h1
       v-else
-      class="text-2xl text-gray-500 dark:text-gray-400"
+      class="text-2xl text-gray-500 dark:text-slate-400"
     >
       <slot />
     </h1>

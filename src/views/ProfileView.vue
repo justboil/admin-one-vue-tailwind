@@ -1,23 +1,20 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { useMainStore } from '@/stores/main'
 import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import FormFilePicker from '@/components/FormFilePicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import UserCard from '@/components/UserCard.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 
 const mainStore = useMainStore()
-
-const titleStack = ref(['Admin', 'Profile'])
 
 const profileForm = reactive({
   name: mainStore.userName,
@@ -41,11 +38,25 @@ const submitPass = () => {
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-
-    <UserCard />
-
     <SectionMain>
+      <SectionTitleLineWithButton
+        :icon="mdiAccount"
+        title="Profile"
+        main
+      >
+        <BaseButton
+          href="https://github.com/justboil/admin-one-vue-tailwind"
+          target="_blank"
+          :icon="mdiGithub"
+          label="Star on GitHub"
+          color="contrast"
+          rounded-full
+          small
+        />
+      </SectionTitleLineWithButton>
+
+      <UserCard class="mb-6" />
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <CardBox
           title="Edit Profile"
@@ -86,20 +97,20 @@ const submitPass = () => {
             />
           </FormField>
 
-          <BaseDivider />
-
-          <BaseButtons>
-            <BaseButton
-              color="info"
-              type="submit"
-              label="Submit"
-            />
-            <BaseButton
-              color="info"
-              label="Options"
-              outline
-            />
-          </BaseButtons>
+          <template #footer>
+            <BaseButtons>
+              <BaseButton
+                color="info"
+                type="submit"
+                label="Submit"
+              />
+              <BaseButton
+                color="info"
+                label="Options"
+                outline
+              />
+            </BaseButtons>
+          </template>
         </CardBox>
 
         <CardBox
@@ -152,24 +163,22 @@ const submitPass = () => {
             />
           </FormField>
 
-          <BaseDivider />
-
-          <BaseButtons>
-            <BaseButton
-              type="submit"
-              color="info"
-              label="Submit"
-            />
-            <BaseButton
-              color="info"
-              label="Options"
-              outline
-            />
-          </BaseButtons>
+          <template #footer>
+            <BaseButtons>
+              <BaseButton
+                type="submit"
+                color="info"
+                label="Submit"
+              />
+              <BaseButton
+                color="info"
+                label="Options"
+                outline
+              />
+            </BaseButtons>
+          </template>
         </CardBox>
       </div>
     </SectionMain>
-
-    <SectionBottomOtherPages />
   </LayoutAuthenticated>
 </template>

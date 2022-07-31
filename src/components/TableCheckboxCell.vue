@@ -20,7 +20,7 @@ watch(checked, newVal => {
 <template>
   <component
     :is="type"
-    class="checkbox-cell"
+    class="lg:w-1"
   >
     <label class="checkbox">
       <input

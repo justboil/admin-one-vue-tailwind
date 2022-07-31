@@ -2,10 +2,7 @@
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
 
 defineProps({
-  isSubmenuList: {
-    type: Boolean,
-    default: false
-  },
+  isSubmenuList: Boolean,
   menu: {
     type: Array,
     default: () => []

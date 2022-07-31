@@ -188,7 +188,7 @@ const itemHref = computed(() => props.item.route ? route(props.item.route) : pro
 const activeInactiveStyle = computed(
   () => props.item.route && route().current(props.item.route)
     ? styleStore.asideMenuItemActiveStyle
-    : styleStore.asideMenuItemInactiveStyle
+    : ''
 )
 
 // ...
@@ -209,7 +209,7 @@ In `<template>` section:
     :is="item.route ? Link : 'a'"
     :href="itemHref"
     :target="item.target ?? null"
-    class="flex cursor-pointer dark:hover:bg-gray-700/50"
+    class="flex cursor-pointer dark:hover:bg-slate-700/50"
     :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
     @click="menuClick"
   >

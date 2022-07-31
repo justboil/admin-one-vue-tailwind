@@ -1,24 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
+import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
 import TableSampleClients from '@/components/TableSampleClients.vue'
 import CardBox from '@/components/CardBox.vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
-import SectionHeroBar from '@/components/SectionHeroBar.vue'
-import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
-import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-
-const titleStack = ref(['Admin', 'Tables'])
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import BaseButton from '@/components/BaseButton.vue'
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-    <SectionHeroBar>Tables</SectionHeroBar>
     <SectionMain>
+      <SectionTitleLineWithButton
+        :icon="mdiTableBorder"
+        title="Tables"
+        main
+      >
+        <BaseButton
+          href="https://github.com/justboil/admin-one-vue-tailwind"
+          target="_blank"
+          :icon="mdiGithub"
+          label="Star on GitHub"
+          color="contrast"
+          rounded-full
+          small
+        />
+      </SectionTitleLineWithButton>
       <NotificationBar
         color="info"
         :icon="mdiMonitorCellphone"
@@ -35,7 +43,7 @@ const titleStack = ref(['Admin', 'Tables'])
         <TableSampleClients checkable />
       </CardBox>
 
-      <SectionTitleBarSub
+      <SectionTitleLineWithButton
         :icon="mdiTableBorder"
         title="Wrapped variation"
       />
@@ -54,7 +62,7 @@ const titleStack = ref(['Admin', 'Tables'])
         <TableSampleClients checkable />
       </CardBox>
 
-      <SectionTitleBarSub
+      <SectionTitleLineWithButton
         :icon="mdiTableOff"
         title="Empty variation"
       />
@@ -68,7 +76,5 @@ const titleStack = ref(['Admin', 'Tables'])
 
       <CardBox empty />
     </SectionMain>
-
-    <SectionBottomOtherPages />
   </LayoutAuthenticated>
 </template>

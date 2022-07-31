@@ -45,6 +45,7 @@ const grow = m => {
 }
 
 const growInit = () => {
+  newValue.value = 0
   grow(props.value / (props.duration / 25))
 }
 
@@ -59,4 +60,4 @@ onMounted(() => {
 
 <template>
   <div>{{ prefix }}{{ newValueFormatted }}{{ suffix }}</div>
-</template>s
+</template>

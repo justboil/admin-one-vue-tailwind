@@ -1,9 +1,10 @@
 <script setup>
-import { useStyleStore } from '@/stores/style.js'
+import { mdiLogout, mdiClose } from '@mdi/js'
+import { computed } from 'vue'
 import { useLayoutStore } from '@/stores/layout.js'
-import { mdiMenu } from '@mdi/js'
+import { useStyleStore } from '@/stores/style.js'
 import AsideMenuList from '@/components/AsideMenuList.vue'
-import NavBarItem from '@/components/NavBarItem.vue'
+import AsideMenuItem from '@/components/AsideMenuItem.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 
 defineProps({
@@ -13,59 +14,69 @@ defineProps({
   }
 })
 
-const styleStore = useStyleStore()
+const emit = defineEmits(['menu-click'])
 
 const layoutStore = useLayoutStore()
 
-const menuClick = () => {
+const styleStore = useStyleStore()
+
+const logoutItem = computed(() => ({
+  label: 'Logout',
+  icon: mdiLogout,
+  color: 'info'
+}))
+
+const logoutItemClick = () => {
   //
+}
+
+const menuClick = (event, item) => {
+  emit('menu-click', event, item)
 }
 </script>
 
 <template>
   <aside
     id="aside"
-    class="w-60 fixed top-0 z-40 h-screen transition-position lg:left-0 overflow-y-auto
-    dark:border-r dark:border-gray-800 dark:bg-gray-900 xl:dark:bg-gray-900/70"
-    :class="[ styleStore.asideStyle, layoutStore.isAsideMobileExpanded ? 'left-0' : '-left-60', layoutStore.isAsideLgActive ? 'block' : 'lg:hidden xl:block' ]"
+    class="lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
+    :class="[ layoutStore.isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0', layoutStore.isAsideLgActive ? '' : 'lg:hidden xl:flex' ]"
   >
     <div
-      class="flex flex-row w-full flex-1 h-14 items-center dark:bg-transparent"
-      :class="[ styleStore.asideBrandStyle ]"
+      :class="styleStore.asideStyle"
+      class="lg:rounded-xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
     >
-      <NavBarItem
-        type="hidden lg:flex xl:hidden"
-        :active-color="styleStore.asideMenuCloseLgStyle"
-        active
-        @click="layoutStore.asideLgToggle(false)"
+      <div
+        :class="styleStore.asideBrandStyle"
+        class="flex flex-row h-14 items-center justify-between dark:bg-slate-900"
       >
-        <BaseIcon
-          :path="mdiMenu"
-          class="cursor-pointer"
-          size="24"
-        />
-      </NavBarItem>
-      <div class="flex-1 px-3">
-        <span>Admin</span> <b class="font-black">One</b>
-      </div>
-    </div>
-    <div>
-      <template v-for="(menuGroup, index) in menu">
-        <p
-          v-if="typeof menuGroup === 'string'"
-          :key="`a-${index}`"
-          class="p-3 text-xs uppercase"
-          :class="styleStore.asideMenuLabelStyle"
+        <div class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
+          <b class="font-black">One</b>
+        </div>
+        <button 
+          class="hidden lg:inline-block xl:hidden p-3"
+          @click.prevent="layoutStore.isAsideLgActive = false"
         >
-          {{ menuGroup }}
-        </p>
+          <BaseIcon
+            :path="mdiClose"
+          />
+        </button>
+      </div>
+      <div
+        :class="styleStore.darkMode ? 'aside-scrollbars-[slate]' : styleStore.asideScrollbarsStyle" 
+        class="flex-1 overflow-y-auto overflow-x-hidden"
+      >
         <AsideMenuList
-          v-else
-          :key="`b-${index}`"
-          :menu="menuGroup"
+          :menu="menu"
           @menu-click="menuClick"
         />
-      </template>
+      </div>
+
+      <ul>
+        <AsideMenuItem
+          :item="logoutItem"
+          @menu-click="logoutItemClick"
+        />
+      </ul>
     </div>
   </aside>
 </template>

@@ -1,8 +1,7 @@
-const sectionBgBase = 'bg-gradient-to-tr'
-export const sectionBgLogin = `${sectionBgBase} from-purple-400 via-pink-500 to-red-500`
-export const sectionBgLoginDark = `${sectionBgBase} from-purple-900 via-pink-900 to-red-900`
-export const sectionBgError = `${sectionBgBase} from-pink-400 via-red-500 to-yellow-500`
-export const sectionBgErrorDark = `${sectionBgBase} from-pink-900 via-red-900 to-yellow-900`
+const gradientBgBase = 'bg-gradient-to-tr'
+export const gradientBgPurplePink = `${gradientBgBase} from-purple-400 via-pink-500 to-red-500`
+export const gradientBgDark = `${gradientBgBase} from-slate-700 via-slate-900 to-slate-800`
+export const gradientBgPinkRed = `${gradientBgBase} from-pink-400 via-red-500 to-yellow-500`
 
 export const colorsBgLight = {
   white: 'bg-white text-black',
@@ -15,8 +14,8 @@ export const colorsBgLight = {
 }
 
 export const colorsText = {
-  white: 'text-black dark:text-gray-100',
-  light: 'text-gray-700 dark:text-gray-400',
+  white: 'text-black dark:text-slate-100',
+  light: 'text-gray-700 dark:text-slate-400',
   contrast: 'dark:text-white',
   success: 'text-emerald-500',
   danger: 'text-red-500',
@@ -27,7 +26,7 @@ export const colorsText = {
 export const colorsOutline = {
   white: [colorsText.white, 'border-gray-100'],
   light: [colorsText.light, 'border-gray-100'],
-  contrast: [colorsText.contrast, 'border-gray-900 dark:border-gray-100'],
+  contrast: [colorsText.contrast, 'border-gray-900 dark:border-slate-100'],
   success: [colorsText.success, 'border-emerald-500'],
   danger: [colorsText.danger, 'border-red-500'],
   warning: [colorsText.warning, 'border-yellow-500'],
@@ -47,7 +46,7 @@ export const getButtonColor = (color, isOutlined, hasHover) => {
     },
     bgHover: {
       white: 'hover:bg-gray-50',
-      contrast: 'hover:bg-gray-900 hover:dark:bg-gray-100',
+      contrast: 'hover:bg-gray-900 hover:dark:bg-slate-100',
       light: 'hover:bg-gray-200',
       success: 'hover:bg-emerald-700 hover:border-emerald-700 hover:dark:bg-emerald-600 hover:dark:border-emerald-600',
       danger: 'hover:bg-red-700 hover:border-red-700 hover:dark:bg-red-600 hover:dark:border-red-600',
@@ -56,7 +55,7 @@ export const getButtonColor = (color, isOutlined, hasHover) => {
     },
     borders: {
       white: 'border-gray-100',
-      contrast: 'border-gray-900 dark:border-gray-100',
+      contrast: 'border-gray-900 dark:border-slate-100',
       light: 'border-gray-100 dark:border-slate-700',
       success: 'border-emerald-600 dark:border-emerald-500',
       danger: 'border-red-600 dark:border-red-500',
@@ -64,18 +63,18 @@ export const getButtonColor = (color, isOutlined, hasHover) => {
       info: 'border-blue-600 dark:border-blue-500'
     },
     text: {
-      white: 'text-black dark:text-gray-100',
-      contrast: 'dark:text-gray-100',
-      light: 'text-gray-700 dark:text-gray-400',
+      white: 'text-black dark:text-slate-100',
+      contrast: 'dark:text-slate-100',
+      light: 'text-gray-700 dark:text-slate-400',
       success: 'text-emerald-600 dark:text-emerald-500',
       danger: 'text-red-600 dark:text-red-500',
       warning: 'text-yellow-600 dark:text-yellow-500',
       info: 'text-blue-600 dark:text-blue-500'
     },
     outlineHover: {
-      white: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900',
-      contrast: 'hover:bg-gray-800 hover:text-gray-100 hover:dark:bg-gray-100 hover:dark:text-black',
-      light: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900',
+      white: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-slate-900',
+      contrast: 'hover:bg-gray-800 hover:text-gray-100 hover:dark:bg-slate-100 hover:dark:text-black',
+      light: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-slate-900',
       success: 'hover:bg-emerald-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-emerald-600',
       danger: 'hover:bg-red-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-red-600',
       warning: 'hover:bg-yellow-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-yellow-600',

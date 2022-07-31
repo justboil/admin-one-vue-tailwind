@@ -72,15 +72,15 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
     <BaseLevel>
       <BaseLevel type="justify-start">
         <UserAvatar
-          class="w-12 h-12 md:mr-6"
+          class="w-12 h-12 mr-6"
           :username="name"
         />
-        <div class="text-center md:text-left">
-          <h4 class="text-xl">
-            {{ name }} <span class="text-gray-500 dark:text-gray-400">@{{ login }}</span>
+        <div class="text-center md:text-left overflow-hidden">
+          <h4 class="text-xl text-ellipsis ">
+            {{ name }}
           </h4>
-          <p class="text-gray-500 dark:text-gray-400">
-            {{ date }}
+          <p class="text-gray-500 dark:text-slate-400">
+            {{ date }} @ {{ login }}
           </p>
         </div>
       </BaseLevel>

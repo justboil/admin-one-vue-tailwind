@@ -13,8 +13,6 @@ import {
   mdiClose
 } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
-import SectionHeroBar from '@/components/SectionHeroBar.vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
 import CardBox from '@/components/CardBox.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -24,11 +22,8 @@ import CardBoxModal from '@/components/CardBoxModal.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import FormField from '@/components/FormField.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
-import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
-import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-
-const titleStack = ref(['Admin', 'UI Components'])
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 
 const modalOneActive = ref(false)
 
@@ -47,6 +42,8 @@ const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline
 const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
 
 const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
+
+const buttonsRounded = computed(() => buttonSettingsModel.value.indexOf('rounded') > -1)
 
 const styleStore = useStyleStore()
 </script>
@@ -79,20 +76,16 @@ const styleStore = useStyleStore()
       <p>This is sample modal</p>
     </CardBoxModal>
 
-    <SectionTitleBar :title-stack="titleStack" />
-
-    <SectionHeroBar>UI Components</SectionHeroBar>
-
     <SectionTitle first>
       Dark mode
     </SectionTitle>
 
     <SectionMain>
       <CardBox class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
           <BaseButton
             label="Toggle"
-            outline
+            color="contrast"
             @click="styleStore.setDarkMode()"
           />
         </div>
@@ -116,19 +109,19 @@ const styleStore = useStyleStore()
             <p>Click to see in action</p>
           </div>
 
-          <BaseDivider />
-
-          <BaseButtons>
-            <BaseButton
-              label="Confirm"
-              color="info"
-            />
-            <BaseButton
-              label="Cancel"
-              color="info"
-              outline
-            />
-          </BaseButtons>
+          <template #footer>
+            <BaseButtons>
+              <BaseButton
+                label="Confirm"
+                color="info"
+              />
+              <BaseButton
+                label="Cancel"
+                color="info"
+                outline
+              />
+            </BaseButtons>
+          </template>
         </CardBox>
 
         <CardBox
@@ -143,14 +136,14 @@ const styleStore = useStyleStore()
             <p>Click to see in action</p>
           </div>
 
-          <BaseDivider />
-
-          <BaseButtons>
-            <BaseButton
-              label="Done"
-              color="danger"
-            />
-          </BaseButtons>
+          <template #footer>
+            <BaseButtons>
+              <BaseButton
+                label="Done"
+                color="danger"
+              />
+            </BaseButtons>
+          </template>
         </CardBox>
 
         <CardBox
@@ -165,18 +158,18 @@ const styleStore = useStyleStore()
             <p>Click to see in action</p>
           </div>
 
-          <BaseDivider />
-
-          <BaseButton
-            label="Done"
-            color="success"
-          />
+          <template #footer>
+            <BaseButton
+              label="Done"
+              color="success"
+            />
+          </template>
         </CardBox>
       </div>
     </SectionMain>
 
     <SectionTitle custom>
-      <h1 class="text-2xl text-gray-500 dark:text-gray-400">
+      <h1 class="text-2xl text-gray-500 dark:text-slate-400">
         Notifications
       </h1>
       <div class="flex items-center justify-center mt-6">
@@ -284,7 +277,7 @@ const styleStore = useStyleStore()
             v-model="buttonSettingsModel"
             name="buttons-switch"
             type="switch"
-            :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
+            :options="{ outline: 'Outline', small: 'Small', rounded: 'Rounded', disabled: 'Disabled' }"
           />
         </FormField>
 
@@ -297,6 +290,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="contrast"
@@ -304,6 +298,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="info"
@@ -311,6 +306,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="success"
@@ -318,6 +314,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="warning"
@@ -325,6 +322,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="danger"
@@ -332,6 +330,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
         </BaseButtons>
 
@@ -345,6 +344,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="contrast"
@@ -353,6 +353,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="info"
@@ -361,6 +362,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="success"
@@ -369,6 +371,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="warning"
@@ -377,6 +380,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="danger"
@@ -385,6 +389,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
         </BaseButtons>
 
@@ -397,6 +402,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="contrast"
@@ -404,6 +410,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="info"
@@ -411,6 +418,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="success"
@@ -418,6 +426,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="warning"
@@ -425,6 +434,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
           <BaseButton
             color="danger"
@@ -432,6 +442,7 @@ const styleStore = useStyleStore()
             :small="buttonsSmall"
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
+            :rounded-full="buttonsRounded"
           />
         </BaseButtons>
       </CardBox>
@@ -445,7 +456,7 @@ const styleStore = useStyleStore()
           title="With Title"
           mb=""
         >
-          <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+          <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
             With title
           </div>
         </CardBox>
@@ -456,20 +467,18 @@ const styleStore = useStyleStore()
           :header-icon="mdiClose"
           mb=""
         >
-          <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+          <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
             With title & icons
           </div>
         </CardBox>
       </div>
 
-      <SectionTitleBarSub
+      <SectionTitleLineWithButton
         :icon="mdiAlertCircle"
         title="Empty variation"
       />
 
       <CardBox empty />
     </SectionMain>
-
-    <SectionBottomOtherPages />
   </LayoutAuthenticated>
 </template>

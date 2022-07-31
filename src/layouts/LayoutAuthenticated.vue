@@ -15,7 +15,7 @@ const layoutStore = useLayoutStore()
 const isAsideLgActive = computed(() => layoutStore.isAsideLgActive)
 
 const overlayClick = () => {
-  layoutStore.asideLgToggle(false)
+  layoutStore.isAsideLgActive = false
 }
 </script>
 

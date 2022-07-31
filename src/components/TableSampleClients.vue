@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
+import { useStyleStore } from '@/stores/style'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
@@ -13,6 +14,8 @@ defineProps({
   checkable: Boolean
 })
 
+const styleStore = useStyleStore()
+
 const mainStore = useMainStore()
 
 const items = computed(() => mainStore.clients)
@@ -21,7 +24,7 @@ const isModalActive = ref(false)
 
 const isModalDangerActive = ref(false)
 
-const perPage = ref(10)
+const perPage = ref(5)
 
 const currentPage = ref(0)
 
@@ -87,12 +90,12 @@ const checked = (isChecked, client) => {
 
   <div
     v-if="checkedRows.length"
-    class="p-3 bg-gray-100/50 dark:bg-gray-800"
+    class="p-3 bg-gray-100/50 dark:bg-slate-800"
   >
     <span
       v-for="checkedRow in checkedRows"
       :key="checkedRow.id"
-      class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700"
+      class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-slate-700"
     >
       {{ checkedRow.name }}
     </span>
@@ -152,7 +155,7 @@ const checked = (isChecked, client) => {
           class="lg:w-1 whitespace-nowrap"
         >
           <small
-            class="text-gray-500 dark:text-gray-400"
+            class="text-gray-500 dark:text-slate-400"
             :title="client.created"
           >{{ client.created }}</small>
         </td>
@@ -179,7 +182,7 @@ const checked = (isChecked, client) => {
     </tbody>
   </table>
   <div
-    class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800"
+    class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800"
   >
     <BaseLevel>
       <BaseButtons>
@@ -189,6 +192,7 @@ const checked = (isChecked, client) => {
           :active="page === currentPage"
           :label="page + 1"
           small
+          :outline="styleStore.darkMode"
           @click="currentPage = page"
         />
       </BaseButtons>

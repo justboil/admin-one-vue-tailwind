@@ -16,7 +16,7 @@ const userSwitchVal = ref([])
 </script>
 
 <template>
-  <CardBox rounded="">
+  <CardBox>
     <BaseLevel type="justify-around lg:justify-center">
       <UserAvatarCurrentUser class="lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">

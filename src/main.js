@@ -39,7 +39,7 @@ const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
 /* Collapse mobile aside menu on route change */
 router.beforeEach(() => {
   layoutStore.asideMobileToggle(false)
-  layoutStore.asideLgToggle(false)
+  layoutStore.isAsideLgActive = false
 })
 
 router.afterEach(to => {

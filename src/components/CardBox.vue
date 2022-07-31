@@ -1,6 +1,6 @@
 <script setup>
 import { mdiCog } from '@mdi/js'
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 
 const props = defineProps({
@@ -18,7 +18,7 @@ const props = defineProps({
   },
   rounded: {
     type: String,
-    default: 'md:rounded-2xl'
+    default: 'rounded-xl'
   },
   hasTable: Boolean,
   empty: Boolean,
@@ -31,10 +31,14 @@ const emit = defineEmits(['header-icon-click', 'submit'])
 
 const is = computed(() => props.form ? 'form' : 'div')
 
+const slots = useSlots()
+
+const footer = computed(() => slots.footer && !!slots.footer())
+
 const componentClass = computed(() => {
   const base = [
     props.rounded,
-    props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900/70'
+    props.modal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70'
   ]
 
   if (props.hoverable) {
@@ -59,14 +63,14 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border border-gray-100 dark:border-gray-800"
+    class="bg-white flex flex-col"
     @submit="submit"
   >
     <header
       v-if="title"
-      class="flex items-stretch border-b border-gray-100 dark:border-gray-800"
+      class="flex items-stretch border-b border-gray-100 dark:border-slate-800"
     >
-      <p
+      <div
         class="flex items-center py-3 grow font-bold"
         :class="[ icon ? 'px-4' : 'px-6' ]"
       >
@@ -76,28 +80,32 @@ const submit = e => {
           class="mr-3"
         />
         {{ title }}
-      </p>
-      <a
-        v-if="computedHeaderIcon"
-        href="#"
+      </div>
+      <button
         class="flex items-center py-3 px-4 justify-center ring-blue-700 focus:ring"
-        aria-label="more options"
-        @click.prevent="headerIconClick"
+        @click="headerIconClick"
       >
         <BaseIcon :path="computedHeaderIcon" />
-      </a>
+      </button>
     </header>
     <div
       v-if="empty"
-      class="text-center py-24 text-gray-500 dark:text-gray-400"
+      class="text-center py-24 text-gray-500 dark:text-slate-400"
     >
       <p>Nothing's here…</p>
     </div>
     <div
       v-else
+      class="flex-1"
       :class="{'p-6':!hasTable}"
     >
       <slot />
+    </div>
+    <div
+      v-if="footer"
+      class="p-6 border-t border-gray-100 dark:border-slate-800"
+    >
+      <slot name="footer" />
     </div>
   </component>
 </template>

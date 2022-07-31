@@ -1,21 +1,11 @@
 <script setup>
-import { ref } from 'vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
-import SectionHeroBar from '@/components/SectionHeroBar.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import SectionMain from '@/components/SectionMain.vue'
-import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-
-const titleStack = ref(['Admin', 'Responsive layout'])
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-
-    <SectionHeroBar>Responsive layout</SectionHeroBar>
-
     <SectionTitle first>
       Mobile & Tablet
     </SectionTitle>
@@ -63,7 +53,5 @@ const titleStack = ref(['Admin', 'Responsive layout'])
         >
       </div>
     </SectionMain>
-
-    <SectionBottomOtherPages />
   </LayoutAuthenticated>
 </template>

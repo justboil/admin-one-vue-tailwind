@@ -74,19 +74,15 @@ const icon = computed(() => {
           <h4 class="text-xl">
             ${{ amount }}
           </h4>
-          <p class="text-gray-500 dark:text-gray-400">
+          <p class="text-gray-500 dark:text-slate-400">
             <b>{{ date }}</b> via {{ business }}
           </p>
         </div>
       </BaseLevel>
-      <div class="text-center md:text-right space-y-1">
-        <p>{{ name }}</p>
+      <div class="text-center md:text-right space-y-2">
+        <p class="text-sm text-gray-500">{{ name }}</p>
         <div>
           <PillTag
-            type="info"
-            :text="account"
-            small
-          /> <PillTag
             :type="icon.type"
             :text="type"
             small

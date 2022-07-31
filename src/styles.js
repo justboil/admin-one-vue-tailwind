@@ -1,14 +1,14 @@
-const appBase = 'dark:bg-gray-800 dark:text-gray-100'
+const appBase = 'dark:bg-slate-800 dark:text-slate-100'
 
 export const basic = {
   app: `bg-gray-50 ${appBase}`,
-  aside: 'bg-gray-800 aside-scrollbars-gray',
+  aside: 'bg-gray-800',
+  asideScrollbars: 'aside-scrollbars-gray',
   asideBrand: 'bg-gray-900 text-white',
   asideMenuCloseLg: 'text-white',
   asideMenuLabel: 'text-gray-400',
-  asideMenuItem: 'hover:bg-gray-600 hover:bg-opacity-50',
+  asideMenuItem: 'text-gray-300 hover:text-white',
   asideMenuItemActive: 'font-bold text-white',
-  asideMenuItemInactive: 'text-gray-300',
   asideSubmenuList: 'bg-gray-700 bg-opacity-50',
   navBarItemLabel: 'text-black',
   navBarItemLabelHover: 'hover:text-blue-500',
@@ -18,14 +18,14 @@ export const basic = {
 }
 
 export const white = {
-  app: `bg-white ${appBase}`,
-  aside: 'bg-white border-r border-gray-100 aside-scrollbars-light',
+  app: `bg-gray-50 ${appBase}`,
+  aside: 'bg-white',
+  asideScrollbars: 'aside-scrollbars-light',
   asideBrand: '',
   asideMenuCloseLg: '',
-  asideMenuLabel: 'dark:text-gray-400',
+  asideMenuLabel: 'dark:text-slate-400',
   asideMenuItem: 'text-blue-600 hover:text-black dark:text-white',
   asideMenuItemActive: 'font-bold text-black dark:text-white',
-  asideMenuItemInactive: '',
   asideSubmenuList: 'bg-gray-50',
   navBarItemLabel: 'text-blue-600',
   navBarItemLabelHover: 'hover:text-black',

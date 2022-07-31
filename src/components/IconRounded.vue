@@ -1,16 +1,15 @@
 <script setup>
-import { computed } from 'vue'
 import { colorsText, colorsBgLight } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 
-const props = defineProps({
+defineProps({
   icon: {
     type: String,
     required: true
   },
   type: {
     type: String,
-    required: true
+    default: null
   },
   w: {
     type: String,
@@ -22,10 +21,6 @@ const props = defineProps({
   },
   bg: Boolean
 })
-
-const iconStyle = computed(
-  () => props.bg ? colorsBgLight[props.type] : colorsText[props.type]
-)
 </script>
 
 <template>
@@ -34,7 +29,7 @@ const iconStyle = computed(
     :w="w"
     :h="h"
     size="24"
-    class="rounded-full bg-gray-100 dark:bg-gray-800"
-    :class="iconStyle"
+    class="rounded-full"
+    :class="bg ? colorsBgLight[type] : [colorsText[type], 'bg-gray-50 dark:bg-slate-800']"
   />
 </template>

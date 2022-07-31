@@ -1,23 +1,18 @@
 <script setup>
-import { ref, reactive } from 'vue'
-import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
+import { reactive } from 'vue'
+import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
 import FormFilePicker from '@/components/FormFilePicker.vue'
-import SectionHeroBar from '@/components/SectionHeroBar.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
-import SectionBottomOtherPages from '@/components/SectionBottomOtherPages.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
-import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-
-const titleStack = ref(['Admin', 'Forms'])
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 
 const selectOptions = [
   { id: 1, label: 'Business development' },
@@ -48,14 +43,22 @@ const submit = () => {
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-    <SectionHeroBar>Forms</SectionHeroBar>
-
     <SectionMain>
-      <SectionTitleBarSub
+      <SectionTitleLineWithButton
         :icon="mdiBallotOutline"
         title="Forms example"
-      />
+        main
+      >
+        <BaseButton
+          href="https://github.com/justboil/admin-one-vue-tailwind"
+          target="_blank"
+          :icon="mdiGithub"
+          label="Star on GitHub"
+          color="contrast"
+          rounded-full
+          small
+        />
+      </SectionTitleLineWithButton>
       <CardBox
         title="Forms"
         :icon="mdiBallot"
@@ -104,21 +107,21 @@ const submit = () => {
           />
         </FormField>
 
-        <BaseDivider />
-
-        <BaseButtons>
-          <BaseButton
-            type="submit"
-            color="info"
-            label="Submit"
-          />
-          <BaseButton
-            type="reset"
-            color="info"
-            outline
-            label="Reset"
-          />
-        </BaseButtons>
+        <template #footer>
+          <BaseButtons>
+            <BaseButton
+              type="submit"
+              color="info"
+              label="Submit"
+            />
+            <BaseButton
+              type="reset"
+              color="info"
+              outline
+              label="Reset"
+            />
+          </BaseButtons>
+        </template>
       </CardBox>
     </SectionMain>
 
@@ -172,7 +175,5 @@ const submit = () => {
         <FormFilePicker v-model="customElementsForm.file" />
       </CardBox>
     </SectionMain>
-
-    <SectionBottomOtherPages />
   </LayoutAuthenticated>
 </template>

@@ -1,7 +1,6 @@
 <script setup>
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
@@ -11,7 +10,7 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
   <LayoutGuest>
     <SectionFullScreen
       v-slot="{ cardClass }"
-      bg="error"
+      bg="pinkRed"
     >
       <CardBox
         :class="cardClass"
@@ -24,15 +23,15 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
           <p>An Error Occurred</p>
         </div>
 
-        <BaseDivider />
-
-        <BaseButtons>
-          <BaseButton
-            label="Done"
-            to="/dashboard"
-            color="danger"
-          />
-        </BaseButtons>
+        <template #footer>
+          <BaseButtons>
+            <BaseButton
+              label="Done"
+              to="/dashboard"
+              color="danger"
+            />
+          </BaseButtons>
+        </template>
       </CardBox>
     </SectionFullScreen>
   </LayoutGuest>

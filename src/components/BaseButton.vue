@@ -40,7 +40,8 @@ const props = defineProps({
   small: Boolean,
   outline: Boolean,
   active: Boolean,
-  disabled: Boolean
+  disabled: Boolean,
+  roundedFull: Boolean
 })
 
 const is = computed(() => {
@@ -81,11 +82,23 @@ const componentClass = computed(() => {
     'focus:ring',
     'duration-150',
     'border',
-    'rounded',
+    props.roundedFull ? 'rounded-full' : 'rounded',
     props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
-    props.small ? 'p-1' : 'p-2',
     getButtonColor(props.color, props.outline, !props.disabled)
   ]
+
+  if (props.small) {
+    base.push(
+      'text-sm',
+      props.roundedFull ? 'px-3 py-1' : 'p-1'
+    )
+  } else {
+    base.push(
+      'py-2',
+      props.roundedFull ? 'px-6' : 'px-3'
+    )
+  }
+
 
   if (props.disabled) {
     base.push('cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')

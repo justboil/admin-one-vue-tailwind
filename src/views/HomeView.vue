@@ -14,8 +14,6 @@ import {
 import * as chartConfig from '@/components/Charts/chart.config.js'
 import LineChart from '@/components/Charts/LineChart.vue'
 import SectionMain from '@/components/SectionMain.vue'
-import SectionTitleBar from '@/components/SectionTitleBar.vue'
-import SectionHeroBar from '@/components/SectionHeroBar.vue'
 import CardBoxWidget from '@/components/CardBoxWidget.vue'
 import CardBox from '@/components/CardBox.vue'
 import TableSampleClients from '@/components/TableSampleClients.vue'
@@ -23,10 +21,9 @@ import NotificationBar from '@/components/NotificationBar.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import CardBoxTransaction from '@/components/CardBoxTransaction.vue'
 import CardBoxClient from '@/components/CardBoxClient.vue'
-import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-
-const titleStack = ref(['Admin', 'Dashboard'])
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import SectionBannerStarOnGitHub from '@/components/SectionBannerStarOnGitHub.vue'
 
 const chartData = ref(null)
 
@@ -47,29 +44,24 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
 
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-    <SectionHeroBar>Dashboard</SectionHeroBar>
     <SectionMain>
-      <NotificationBar
-        color="info"
-        :icon="mdiGithub"
+      
+      <SectionTitleLineWithButton
+        :icon="mdiChartTimelineVariant"
+        title="Overview"
+        main
       >
-        Please star this project on
-        <a
+        <BaseButton
           href="https://github.com/justboil/admin-one-vue-tailwind"
-          class="underline"
           target="_blank"
-        >GitHub</a>
-        <template #right>
-          <BaseButton
-            href="https://github.com/justboil/admin-one-vue-tailwind"
-            :icon="mdiGithub"
-            label="GitHub"
-            target="_blank"
-            small
-          />
-        </template>
-      </NotificationBar>
+          :icon="mdiGithub"
+          label="Star on GitHub"
+          color="contrast"
+          rounded-full
+          small
+        />
+      </SectionTitleLineWithButton>
+      
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
         <CardBoxWidget
           trend="12%"
@@ -99,7 +91,7 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
         />
       </div>
 
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="flex flex-col justify-between">
           <CardBoxTransaction
             v-for="(transaction,index) in transactionBarItems"
@@ -124,7 +116,9 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
         </div>
       </div>
 
-      <SectionTitleBarSub
+      <SectionBannerStarOnGitHub />
+
+      <SectionTitleLineWithButton
         :icon="mdiChartPie"
         title="Trends overview"
       />
@@ -144,7 +138,7 @@ const transactionBarItems = computed(() => mainStore.history.slice(0, 3))
         </div>
       </CardBox>
 
-      <SectionTitleBarSub
+      <SectionTitleLineWithButton
         :icon="mdiAccountMultiple"
         title="Clients"
       />

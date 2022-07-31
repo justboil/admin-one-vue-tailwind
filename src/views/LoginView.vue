@@ -7,7 +7,6 @@ import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
@@ -29,7 +28,7 @@ const submit = () => {
   <LayoutGuest>
     <SectionFullScreen
       v-slot="{ cardClass }"
-      bg="login"
+      bg="purplePink"
     >
       <CardBox
         :class="cardClass"
@@ -67,21 +66,21 @@ const submit = () => {
           :options="{ remember: 'Remember' }"
         />
 
-        <BaseDivider />
-
-        <BaseButtons>
-          <BaseButton
-            type="submit"
-            color="info"
-            label="Login"
-          />
-          <BaseButton
-            to="/dashboard"
-            color="info"
-            outline
-            label="Back"
-          />
-        </BaseButtons>
+        <template #footer>
+          <BaseButtons>
+            <BaseButton
+              type="submit"
+              color="info"
+              label="Login"
+            />
+            <BaseButton
+              to="/dashboard"
+              color="info"
+              outline
+              label="Back"
+            />
+          </BaseButtons>
+        </template>
       </CardBox>
     </SectionFullScreen>
   </LayoutGuest>

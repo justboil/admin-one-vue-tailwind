@@ -42,7 +42,7 @@ const submit = () => {
 
     <SectionFullScreen
       v-slot="{ cardClass }"
-      bg="login"
+      bg="purplePink"
     >
       <CardBox
         :class="cardClass"

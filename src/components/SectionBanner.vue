@@ -1,7 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useStyleStore } from '@/stores/style'
-import { gradientBgPurplePink, gradientBgDark, gradientBgPinkRed } from '@/colors'
+import { gradientBgPurplePink, gradientBgPinkRed } from '@/colors'
 
 const props = defineProps({
   bg: {
@@ -12,26 +11,22 @@ const props = defineProps({
 })
 
 const colorClass = computed(() => {
-  if (useStyleStore().darkMode) {
-    return gradientBgDark
-  }
-
   switch (props.bg) {
     case 'purplePink':
       return gradientBgPurplePink
     case 'pinkRed':
       return  gradientBgPinkRed
   }
-  
+
   return ''
 })
-</script>
 
+</script>
 <template>
   <div
-    class="flex min-h-screen items-center justify-center"
-    :class="colorClass"
+    :class="colorClass" 
+    class="mt-6 mb-6 rounded-2xl py-12 px-6 text-center"
   >
-    <slot card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12 shadow-2xl" />
+    <slot />
   </div>
 </template>

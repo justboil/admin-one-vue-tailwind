@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useStyleStore } from '@/stores/style.js'
 import { mdiMinus, mdiPlus } from '@mdi/js'
+import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 
@@ -11,14 +12,27 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  isSubmenuList: Boolean
+  isSubmenuList: Boolean,
 })
 
 const emit = defineEmits(['menu-click'])
 
 const styleStore = useStyleStore()
 
+const hasColor = computed(() => props.item && props.item.color)
+
+const asideMenuItemActiveStyle = computed(() => hasColor.value ? '' : styleStore.asideMenuItemActiveStyle)
+
 const isDropdownActive = ref(false)
+
+const componentClass = computed(() => (
+  [
+    props.isSubmenuList ? 'py-3 px-6 text-sm' : 'py-3',
+    hasColor.value
+      ? getButtonColor(props.item.color, false, true)
+      : styleStore.asideMenuItemStyle
+  ]
+))
 
 const hasDropdown = computed(() => !!props.item.menu)
 
@@ -39,33 +53,34 @@ const menuClick = event => {
       :to="item.to || null"
       :href="item.href || null"
       :target="item.target || null"
-      class="flex cursor-pointer dark:hover:bg-gray-700/50"
-      :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
+      class="flex cursor-pointer dark:text-slate-300 dark:hover:text-white"
+      :class="componentClass"
       @click="menuClick"
     >
       <BaseIcon
         v-if="item.icon"
         :path="item.icon"
-        class="flex-none"
-        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
-        w="w-12"
+        class="flex-none transition-size"
+        :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '' ]"
+        w="w-16"
+        :size="18"
       />
       <span
-        class="grow"
-        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
+        class="grow text-ellipsis line-clamp-1"
+        :class="[ {'pr-12':!hasDropdown}, vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '' ]"
       >{{ item.label }}</span>
       <BaseIcon
         v-if="hasDropdown"
         :path="isDropdownActive ? mdiMinus : mdiPlus"
-        class="flex-none"
-        :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
+        class="flex-none animate-fade-in-fast"
+        :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '' ]"
         w="w-12"
       />
     </component>
     <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="[ styleStore.asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-gray-800/50' : 'hidden' ]"
+      :class="[ styleStore.asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden' ]"
       is-submenu-list
     />
   </li>

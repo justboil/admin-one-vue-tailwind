@@ -45,5 +45,5 @@ if ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dar
 /* Collapse mobile aside menu on route change */
 Inertia.on('navigate', (event) => {
   layoutStore.asideMobileToggle(false)
-  layoutStore.asideLgToggle(false)
+  layoutStore.isAsideLgActive = false
 })
