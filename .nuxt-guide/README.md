@@ -141,7 +141,7 @@ if ((!currentStoredDarkMode && typeof window !== 'undefined' && window.matchMedi
 
 #### In stores/main.js
 
-Remove axios, you'll likely goinf to use Nuxt's fetch. Then add some sample data for `clients` and `history`.
+Remove `axios`, as you'll likely going to use Nuxt's `useFetch`. Then add some sample data for `clients` and `history`.
 
 ```javascript
 // import axios from 'axios'
@@ -182,7 +182,7 @@ export const useMainStore = defineStore('main', {
 })
 ```
 
-#### Rename layouts
+## Rename layouts
 
 * Rename `layouts/LayoutGuest.vue` to `default.vue`
 * Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
@@ -190,6 +190,8 @@ export const useMainStore = defineStore('main', {
 ## Copy pages
 
 Let's copy `views/LoginView.vue` with a guest layout and `views/HomeView.vue` with an authenticated layout.
+
+These pages will then be available under `/` and `/dashboard` url paths.
 
 #### LoginView.vue
 
@@ -235,7 +237,7 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 </template>
 ```
 
-## Replace <RouterLink> with <NuxtLink>
+## Replace `<RouterLink>` with `<NuxtLink>`
 
 Details are coming soon...
 
