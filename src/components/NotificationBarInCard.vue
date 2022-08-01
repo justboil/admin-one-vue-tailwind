@@ -1,22 +1,22 @@
 <script setup>
-import { computed } from 'vue'
 import { colorsBgLight } from '@/colors.js'
 
-const props = defineProps({
+defineProps({
   color: {
     type: String,
     required: true
+  },
+  isPlacedWithHeader: {
+    type: Boolean
   }
 })
-
-const componentClass = computed(() => colorsBgLight[props.color])
 </script>
 
 <template>
-  <div class="flex flex-col mb-6 -mt-6 -mr-6 -ml-6">
+  <div class="flex flex-col mb-6 -mt-6 -mr-6 -ml-6 animate-fadeIn">
     <div
-      :class="componentClass"
-      class="flex flex-col -m-px p-6 rounded-t-lg"
+      :class="[colorsBgLight[color], { 'rounded-t-xl': !isPlacedWithHeader }]"
+      class="flex flex-col p-6 transition-colors"
     >
       <slot />
     </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -13,6 +13,7 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 
 const selectOptions = [
   { id: 1, label: 'Business development' },
@@ -39,6 +40,26 @@ const customElementsForm = reactive({
 const submit = () => {
   //
 }
+
+const formStatusWithHeader = ref(['header'])
+
+const formStatusCurrent = ref(0)
+
+const formStatusOptions = [
+  null,
+  'success',
+  'danger',
+  'warning',
+  'info'
+]
+
+const formStatusSubmit = () => {
+  formStatusCurrent.value = 
+    formStatusOptions[formStatusCurrent.value + 1]
+    ? formStatusCurrent.value + 1
+    : 0
+}
+
 </script>
 
 <template>
@@ -173,6 +194,50 @@ const submit = () => {
         <BaseDivider />
 
         <FormFilePicker v-model="customElementsForm.file" />
+      </CardBox>
+
+      <SectionTitle>Form with status example</SectionTitle>
+
+      <CardBox
+        :title="formStatusWithHeader.length ? 'Form with status' : null"
+        class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+        form
+        @submit.prevent="formStatusSubmit"
+      >
+        <NotificationBarInCard
+          v-if="formStatusCurrent"
+          :color="formStatusOptions[formStatusCurrent]"
+          :is-placed-with-header="formStatusWithHeader.length"
+        >
+          <span><b class="capitalize">{{ formStatusOptions[formStatusCurrent] }}</b> state</span>
+        </NotificationBarInCard>
+        <FormField
+          label="Fields"
+        >
+          <FormControl
+            v-model="form.name"
+            :icon-left="mdiAccount"
+            help="Your full name"
+            placeholder="Name"
+          />
+        </FormField>
+
+        <FormField>
+          <FormCheckRadioPicker
+            v-model="formStatusWithHeader"
+            name="header-switch"
+            type="switch"
+            :options="{ header: 'Card with header' }"
+          />
+        </FormField>
+
+        <template #footer>
+          <BaseButton
+            label="Trigger"
+            type="submit"
+            color="info"
+          />
+        </template>
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
