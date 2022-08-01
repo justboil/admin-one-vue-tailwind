@@ -243,7 +243,7 @@ Details are coming soon...
 
 ## Remove/update imports
 
-Nuxt automatically imports any components in your `components/` directory. So may safely remove that imports from `<script setup>`. The only exception is for `components/Charts`, so import should be left as is.
+Nuxt automatically imports any components in your `components/` directory. So, you may safely remove that imports from `<script setup>`. The only exception is for `components/Charts`, so charts import should be left as is.
 
 ## Contributions open
 
