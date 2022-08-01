@@ -29,18 +29,18 @@ module.exports = {
         textColor: 'color'
       },
       keyframes: {
-        fadeOut: {
+        'fade-out': {
           from: { opacity: 1 },
           to: { opacity: 0 }
         },
-        fadeIn: {
+        'fade-in': {
           from: { opacity: 0 },
           to: { opacity: 1 }
         }
       },
       animation: {
-        fadeOut: 'fadeOut 250ms ease-in-out',
-        fadeIn: 'fadeIn 250ms ease-in-out'
+        'fade-out': 'fade-out 250ms ease-in-out',
+        'fade-in': 'fade-in 250ms ease-in-out'
       }
     }
   },
