@@ -2,11 +2,11 @@
 
 This guide will help you integrate your Nuxt.js 3.x application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
-**Please note:** this document is work in progress, so [some things are missing](#work-in-progress).
+**Please note:** this document is work in progress and Nuxt 3 is in Release Candidate state, so some things can be missing and warnings may occur.
 
 ## Table of contents
 
-* Some item
+... TOC is coming soon
 
 ## Install Nuxt.js 3.x app with Tailwind CSS
 
@@ -21,7 +21,6 @@ Then, let's install TailwindCSS. Check [Tailwind Nuxt installation guide](https:
 ```sh
 # Install tailwind
 npm install -D @nuxtjs/tailwindcss @tailwindcss/forms 
-#npm install -D tailwindcss postcss@latest autoprefixer@latest @nuxt/postcss8 postcss-import @tailwindcss/forms
 
 # Install other required packages
 npm i @mdi/js chart.js numeral
@@ -32,36 +31,39 @@ npm install --legacy-peer-deps pinia @pinia/nuxt
 
 ### Copy styles, components and scripts
 
-Clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project locally into a separate folder
+Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project somewhere locally (into any separate folder)
 
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to nuxt project** directory:
 
 * Copy `tailwind.config.js` to `/`
 * Copy `src/components` to `components/`
+* Copy `src/layouts` to `layouts/`
 * Copy `src/stores` to `stores/`
 * Copy `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `configs/`
-* Copy `src/views` to `pages/`
 * Copy `src/css` to `assets/css/`
-* Copy `src/App.vue` to `app.vue`
-* Copy `public/data-sources` `public/favicon.png` to `public/`
-*
-* Copy `.laravel/resources/js/app.js` to `resources/js/` (this is an adapted version of src/main.js)
-* Copy `src/App.vue` to `resources/layouts/`
-* Copy `.laravel/resources/js/Pages/Auth/Login.vue` to `resources/js/Pages/Auth/`
-* Copy `src/css` to `resources/css`
-* Delete `resources/css/app.css`
-* Rename `resources/css/main.css` to `app.css`
+* Copy `public/favicon.png` to `public/`
 
-### Update
+### Prepare items
 
 #### In nuxt.config.ts
 
 ```javascript
+import { defineNuxtConfig } from 'nuxt'
+
+// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  // ...
-  tailwindcss: {
-    cssPath: '~/assets/css/main.css',
-  }
+  buildModules: [
+    '@pinia/nuxt',
+  ],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: [
+    '@/assets/css/main.css',
+  ]
 })
 ```
 
@@ -83,21 +85,164 @@ module.exports = {
 }
 ```
 
-#### App.vue
-remove import { computed } from 'vue'
-replace <router-view/> with <NuxtPage/>
-replace @ with . in imports
-Wrap in <div>
+#### In App.vue
 
-Rename pages/Home.vue to index.vue
+```vue
+<script setup>
+import { useLayoutStore } from '@/stores/layout.js'
+import { useMainStore } from '@/stores/main.js'
+import { useStyleStore } from '@/stores/style.js'
+import { darkModeKey, styleKey } from '@/config.js'
 
-Replace <line-chart> with <charts-line-chart>
+useHead({
+  titleTemplate: (titleChunk) => {
+    const titleBase = 'Admin One Vue 3 Tailwind'
+    
+    return titleChunk ? `${titleChunk} - ${titleBase}` : titleBase
+  }
+})
 
-Remove/update imports
+const layoutStore = useLayoutStore()
 
-Wrap pages with a div
+useRouter().beforeEach(() => {
+  layoutStore.asideMobileToggle(false)
+  layoutStore.asideLgToggle(false)
+})
 
-Replace <RouterLink> with <NuxtLink>
+useMainStore().setUser({
+  name: 'John Doe',
+  email: 'john@example.com',
+  avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
+})
 
+const styleStore = useStyleStore()
 
-WIP - work in progress. Full guide is coming soon...
+const currentStyle = typeof localStorage !== 'undefined' && localStorage[styleKey] 
+  ? localStorage[styleKey]
+  : 'basic'
+
+styleStore.setStyle(currentStyle)
+
+const currentStoredDarkMode = typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
+
+if ((!currentStoredDarkMode && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) || currentStoredDarkMode) {
+  styleStore.setDarkMode(true)
+}
+</script>
+
+<template>
+  <div>
+    <NuxtLayout>
+      <NuxtPage/>
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+#### In stores/main.js
+
+Remove axios, you'll likely goinf to use Nuxt's fetch. Then add some sample data for `clients` and `history`.
+
+```javascript
+// import axios from 'axios'
+
+export const useMainStore = defineStore('main', {
+  state: () => ({
+    // ...
+
+    clients: [
+      { id: 19, avatar: "https://avatars.dicebear.com/v2/gridy/Howell-Hand.svg", login: "percy64", name: "Howell Hand", company: "Kiehn-Green", city: "Emelyside", progress: 70, created: "Mar 3, 2021" },
+      { id: 11, avatar: "https://avatars.dicebear.com/v2/gridy/Hope-Howe.svg", login: "dare.concepcion", name: "Hope Howe", company: "Nolan Inc", city: "Paristown", progress: 68, created: "Dec 1, 2021" }, 
+      { id: 32, avatar: "https://avatars.dicebear.com/v2/gridy/Nelson-Jerde.svg", login: "geovanni.kessler", name: "Nelson Jerde", company: "Nitzsche LLC", city: "Jailynbury", progress: 49, created: "May 18, 2021"},
+      { id: 22, avatar: "https://avatars.dicebear.com/v2/gridy/Kim-Weimann.svg", login: "macejkovic.dashawn", name: "Kim Weimann", company: "Brown-Lueilwitz", city: "New Emie", progress: 38, created: "May 4, 2021" }
+    ],
+    history: [
+      { amount: 375.53, name: "Home Loan Account", date: "3 days ago", type: "deposit", business: "Turcotte" },
+      { amount: 470.26, name: "Savings Account", date: "3 days ago", type: "payment", business: "Murazik - Graham" }, 
+      { amount: 971.34, name: "Checking Account", date: "5 days ago", type: "invoice", business: "Fahey - Keebler" }, 
+      { amount: 374.63, name: "Auto Loan Account", date: "7 days ago", type: "withdrawal", business: "Collier - Hintz" }
+    ]
+  }),
+  actions: {
+    // ...
+
+    fetch (sampleDataKey) {
+      // axios
+      //   .get(`data-sources/${sampleDataKey}.json`)
+      //   .then(r => {
+      //     if (r.data && r.data.data) {
+      //       this[sampleDataKey] = r.data.data
+      //     }
+      //   })
+      //   .catch(error => {
+      //     alert(error.message)
+      //   })
+    }
+  }
+})
+```
+
+#### Rename layouts
+
+* Rename `layouts/LayoutGuest.vue` to `default.vue`
+* Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
+
+## Copy pages
+
+Let's copy `views/LoginView.vue` with a guest layout and `views/HomeView.vue` with an authenticated layout.
+
+#### LoginView.vue
+
+Copy `views/LoginView.vue` to `pages/index.vue`
+
+Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` 
+
+**Why we need a div wrapper?** If you use `<NuxtLayout>` within your pages, make sure it is not the root element (or disable layout/page transitions) &mdash; [Info](https://v3.nuxtjs.org/guide/directory-structure/layouts#overriding-a-layout-on-a-per-page-basis)
+
+```vue
+<script setup>
+// import LayoutGuest from '@/layouts/LayoutGuest.vue'
+// ...
+</script>
+
+<template>
+  <div>
+    <NuxtLayout>
+      <!-- ... -->
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+#### HomeView.vue
+
+Copy `views/HomeView.vue` to `pages/dashboard.vue`
+
+Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` with a `name` prop. 
+
+```vue
+<script setup>
+// import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
+// ...
+</script>
+
+<template>
+  <div>
+    <NuxtLayout name="authenticated">
+      <!-- ... -->
+    </NuxtLayout>
+  </div>
+</template>
+```
+
+## Replace <RouterLink> with <NuxtLink>
+
+Details are coming soon...
+
+## Remove/update imports
+
+Nuxt automatically imports any components in your `components/` directory. So may safely remove that imports from `<script setup>`. The only exception is for `components/Charts`, so import should be left as is.
+
+## Contributions open
+
+WIP - work in progress. Some things are missing. Contributions open.
