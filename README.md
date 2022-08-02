@@ -140,7 +140,7 @@ This dashboard can be integrated with Laravel 9.x Breeze Inertia + Vue.js stack.
 
 ## Docs
 
-Customization & info: https://justboil.github.io/admin-one-vue-tailwind/
+Customization & info: https://justboil.github.io/docs/
 
 ## Browser Support
 
