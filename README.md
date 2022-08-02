@@ -41,6 +41,7 @@
   * [Linting](#linting)
   * [Nuxt 3.x integration](#nuxt-3-integration)
   * [Laravel 9.x integration](#laravel-9x-integration)
+* [Docs](#docs)
 * [Browser Support](#browser-support)
 * [Reporting Issues](#reporting-issues)
 * [Licensing](#licensing)
@@ -136,6 +137,10 @@ This dashboard can be integrated with Nuxt 3.x. [Check guide](https://github.com
 ### Laravel 9.x integration
 
 This dashboard can be integrated with Laravel 9.x Breeze Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
+
+## Docs
+
+Customization & info: https://justboil.github.io/admin-one-vue-tailwind/
 
 ## Browser Support
 
