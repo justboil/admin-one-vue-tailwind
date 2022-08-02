@@ -39,7 +39,7 @@
   * [Get code & install](#get-code--install)
   * [Vite builds](#vite-builds)
   * [Linting](#linting)
-  * [Nuxt 3.x integration](#nuxt-3-integration)
+  * [Nuxt 3.x integration](#nuxt-3x-integration)
   * [Laravel 9.x integration](#laravel-9x-integration)
 * [Docs](#docs)
 * [Browser Support](#browser-support)
@@ -81,11 +81,12 @@ https://tailwind-vue.justboil.me/
 
 ## Quick Start
 
-Get code & install. Then `dev` or `build` with [Vite](#vite-builds) or integrate with [Nuxt](#nuxt-3-integration) or [Laravel](#laravel-9x-integration)
+Get code & install. Then `dev` or `build` with [Vite](#vite-builds) or integrate with [Nuxt](#nuxt-3x-integration) or [Laravel](#laravel-9x-integration)
 
 * [Get code & install](#get-code--install)
 * [Vite builds](#vite-builds)
 * [Linting](#linting)
+* [Nuxt 3.x integration](#nuxt-3x-integration)
 * [Laravel 9.x integration](#laravel-9x-integration)
 
 ### Get code & install
@@ -130,7 +131,7 @@ npm run preview
 npm run lint
 ```
 
-### Nuxt 3 integration
+### Nuxt 3.x integration
 
 This dashboard can be integrated with Nuxt 3.x. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.nuxt-guide) for more information
 
