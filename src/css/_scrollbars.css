@@ -43,15 +43,3 @@ html.dark-scrollbars::-webkit-scrollbar-thumb {
 html.dark-scrollbars::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-600;
 }
-
-.dark #aside {
-  scrollbar-color: #374151 #111827;
-}
-
-.dark #aside::-webkit-scrollbar-track {
-  @apply bg-gray-900;
-}
-
-.dark #aside::-webkit-scrollbar-thumb {
-  @apply bg-gray-700;
-}
