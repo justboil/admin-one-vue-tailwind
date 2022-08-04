@@ -72,7 +72,7 @@ const menuClick = event => {
       <BaseIcon
         v-if="hasDropdown"
         :path="isDropdownActive ? mdiMinus : mdiPlus"
-        class="flex-none animate-fade-in-fast"
+        class="flex-none"
         :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '' ]"
         w="w-12"
       />
