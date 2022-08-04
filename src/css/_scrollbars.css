@@ -1,5 +1,6 @@
 html {
   scrollbar-width: thin;
+  scrollbar-color: #9ca3af #e5e7eb;
 }
 
 html::-webkit-scrollbar {
@@ -7,21 +8,12 @@ html::-webkit-scrollbar {
   height: 8px;
 }
 
-html::-webkit-scrollbar-thumb {
-  @apply rounded;
-}
-
-html {
-  @apply overflow-auto;
-  scrollbar-color: #9ca3af #e5e7eb;
-}
-
 html::-webkit-scrollbar-track {
   @apply bg-gray-200;
 }
 
 html::-webkit-scrollbar-thumb {
-  @apply bg-gray-400;
+  @apply bg-gray-400 rounded;
 }
 
 html::-webkit-scrollbar-thumb:hover {
