@@ -60,7 +60,7 @@ const menuClick = event => {
       <BaseIcon
         v-if="item.icon"
         :path="item.icon"
-        class="flex-none transition-size"
+        class="flex-none"
         :class="[ vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '' ]"
         w="w-16"
         :size="18"
