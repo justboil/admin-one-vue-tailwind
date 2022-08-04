@@ -197,46 +197,8 @@ const activeInactiveStyle = computed(
 
 In `<template>` section:
 
-* In `<component>` remove `v-slot` and `:to` attributes; replace `:is` and `:href`
+* In `<component>` remove `v-slot` and `:to` attributes; replace `:is` with `:is="item.route ? Link : 'a'"` and `:href` with `:href="itemHref"`
 * Inside `<component>` replace `:class` attribute for `<BaseIcon>`, `<span>` and another `<BaseIcon>` with `:class="activeInactiveStyle"`
-
-```vue
-<template>
-
-  <!-- ... -->
-
-  <component
-    :is="item.route ? Link : 'a'"
-    :href="itemHref"
-    :target="item.target ?? null"
-    class="flex cursor-pointer dark:hover:bg-slate-700/50"
-    :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
-    @click="menuClick"
-  >
-    <BaseIcon
-      v-if="item.icon"
-      :path="item.icon"
-      class="flex-none"
-      :class="activeInactiveStyle"
-      w="w-12"
-    />
-    <span
-      class="grow"
-      :class="activeInactiveStyle"
-    >{{ item.label }}</span>
-    <BaseIcon
-      v-if="hasDropdown"
-      :path="isDropdownActive ? mdiMinus : mdiPlus"
-      class="flex-none"
-      :class="activeInactiveStyle"
-      w="w-12"
-    />
-  </component>
-
-  <!-- ... -->
-
-</template>
-```
 
 ##### resources/js/components/BaseButton.vue
 
