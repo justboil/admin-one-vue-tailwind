@@ -8,12 +8,8 @@ export const useLayoutStore = defineStore('layout', {
   }),
 
   actions: {
-    asideMobileToggle (payload = null) {
-      this.isAsideMobileExpanded = payload !== null ? payload : !this.isAsideMobileExpanded
-    },
-
-    // asideLgToggle (payload = null) {
-    //   this.isAsideLgActive = payload !== null ? payload : !this.isAsideLgActive
-    // }
+    asideMobileToggle () {
+      this.isAsideMobileExpanded = !this.isAsideMobileExpanded
+    }
   }
 })

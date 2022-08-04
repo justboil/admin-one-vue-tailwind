@@ -105,8 +105,8 @@ useHead({
 const layoutStore = useLayoutStore()
 
 useRouter().beforeEach(() => {
-  layoutStore.asideMobileToggle(false)
-  layoutStore.asideLgToggle(false)
+  layoutStore.isAsideMobileExpanded = false
+  layoutStore.isAsideLgActive = false
 })
 
 useMainStore().setUser({
