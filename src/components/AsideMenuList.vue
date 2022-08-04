@@ -2,7 +2,7 @@
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
 
 defineProps({
-  isSubmenuList: Boolean,
+  isDropdownList: Boolean,
   menu: {
     type: Array,
     default: () => []
@@ -22,7 +22,7 @@ const menuClick = (event, item) => {
       v-for="(item, index) in menu"
       :key="index"
       :item="item"
-      :is-submenu-list="isSubmenuList"
+      :is-dropdown-list="isDropdownList"
       @menu-click="menuClick"
     />
   </ul>

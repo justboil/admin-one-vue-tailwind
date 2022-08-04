@@ -12,7 +12,7 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  isSubmenuList: Boolean,
+  isDropdownList: Boolean,
 })
 
 const emit = defineEmits(['menu-click'])
@@ -27,7 +27,7 @@ const isDropdownActive = ref(false)
 
 const componentClass = computed(() => (
   [
-    props.isSubmenuList ? 'py-3 px-6 text-sm' : 'py-3',
+    props.isDropdownList ? 'py-3 px-6 text-sm' : 'py-3',
     hasColor.value
       ? getButtonColor(props.item.color, false, true)
       : styleStore.asideMenuItemStyle
@@ -50,9 +50,9 @@ const menuClick = event => {
     <component
       :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
-      :to="item.to || null"
-      :href="item.href || null"
-      :target="item.target || null"
+      :to="item.to ?? null"
+      :href="item.href ?? null"
+      :target="item.target ?? null"
       class="flex cursor-pointer dark:text-slate-300 dark:hover:text-white"
       :class="componentClass"
       @click="menuClick"
@@ -80,8 +80,8 @@ const menuClick = event => {
     <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="[ styleStore.asideSubmenuListStyle, isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden' ]"
-      is-submenu-list
+      :class="[ styleStore.asideMenuDropdownStyle, isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden' ]"
+      is-dropdown-list
     />
   </li>
 </template>

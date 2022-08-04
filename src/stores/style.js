@@ -11,7 +11,7 @@ export const useStyleStore = defineStore('style', {
     asideMenuLabelStyle: '',
     asideMenuItemStyle: '',
     asideMenuItemActiveStyle: '',
-    asideSubmenuListStyle: '',
+    asideMenuDropdownStyle: '',
     navBarItemLabelStyle: '',
     navBarItemLabelHoverStyle: '',
     navBarItemLabelActiveColorStyle: '',
