@@ -40,15 +40,7 @@ const toggleLightDark = () => {
 
 const layoutStore = useLayoutStore()
 
-const isAsideMobileExpanded = computed(() => layoutStore.isAsideMobileExpanded)
-
-const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
-
-const menuToggleMobile = () => layoutStore.asideMobileToggle()
-
 const isMenuNavBarActive = ref(false)
-
-const menuNavBarToggleIcon = computed(() => isMenuNavBarActive.value ? mdiClose : mdiDotsVertical)
 
 const menuNavBarToggle = () => {
   isMenuNavBarActive.value = !isMenuNavBarActive.value
@@ -67,16 +59,16 @@ const logout = () => {
   <nav
     class="top-0 left-0 right-0 fixed bg-gray-50 h-14 z-30 w-screen
     transition-position xl:pl-60 lg:w-auto dark:bg-slate-800"
-    :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"
+    :class="{'ml-60 lg:ml-0':layoutStore.isAsideMobileExpanded}"
   >
     <div class="flex lg:items-stretch xl:max-w-6xl xl:mx-auto">
       <div class="flex-1 items-stretch flex h-14">
         <NavBarItem
           type="flex lg:hidden"
-          @click.prevent="menuToggleMobile"
+          @click.prevent="layoutStore.asideMobileToggle()"
         >
           <BaseIcon
-            :path="menuToggleMobileIcon"
+            :path="layoutStore.isAsideMobileExpanded ? mdiBackburger : mdiForwardburger"
             size="24"
           />
         </NavBarItem>
@@ -96,7 +88,7 @@ const logout = () => {
       <div class="flex-none items-stretch flex h-14 lg:hidden">
         <NavBarItem @click.prevent="menuNavBarToggle">
           <BaseIcon
-            :path="menuNavBarToggleIcon"
+            :path="isMenuNavBarActive ? mdiClose : mdiDotsVertical"
             size="24"
           />
         </NavBarItem>
