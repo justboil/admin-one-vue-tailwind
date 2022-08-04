@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { useLayoutStore } from '@/stores/layout.js'
 import { useStyleStore } from '@/stores/style.js'
 import menu from '@/menu.js'
@@ -11,8 +10,6 @@ import OverlayLayer from '@/components/OverlayLayer.vue'
 const styleStore = useStyleStore()
 
 const layoutStore = useLayoutStore()
-
-const isAsideLgActive = computed(() => layoutStore.isAsideLgActive)
 
 const overlayClick = () => {
   layoutStore.isAsideLgActive = false
@@ -30,7 +27,7 @@ const overlayClick = () => {
       <slot />
       <FooterBar />
       <OverlayLayer
-        v-show="isAsideLgActive"
+        v-show="layoutStore.isAsideLgActive"
         z-index="z-30"
         @overlay-click="overlayClick"
       />
