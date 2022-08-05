@@ -7,7 +7,6 @@ export const useStyleStore = defineStore('style', {
     /* Styles */
     asideStyle: '',
     asideBrandStyle: '',
-    asideMenuCloseLgStyle: '',
     asideMenuLabelStyle: '',
     asideMenuItemStyle: '',
     asideMenuItemActiveStyle: '',
