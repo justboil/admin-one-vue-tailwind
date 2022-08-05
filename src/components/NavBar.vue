@@ -17,8 +17,7 @@ import {
   mdiEmail,
   mdiLogout,
   mdiGithub,
-  mdiThemeLightDark,
-  mdiOpenInNew
+  mdiThemeLightDark
 } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
