@@ -69,8 +69,8 @@ const componentClass = computed(() => {
 
 <template>
   <component
-    class="items-center grow-0 shrink-0 relative cursor-pointer"
     :is="is"
+    class="items-center grow-0 shrink-0 relative cursor-pointer"
     :class="componentClass"
     :to="to"
     :href="href"
