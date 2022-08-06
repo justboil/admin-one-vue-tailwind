@@ -207,7 +207,7 @@ const formStatusSubmit = () => {
         <NotificationBarInCard
           v-if="formStatusCurrent"
           :color="formStatusOptions[formStatusCurrent]"
-          :is-placed-with-header="formStatusWithHeader.length"
+          :is-placed-with-header="!!formStatusWithHeader.length"
         >
           <span><b class="capitalize">{{ formStatusOptions[formStatusCurrent] }}</b> state</span>
         </NotificationBarInCard>
