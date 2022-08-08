@@ -8,8 +8,11 @@ const year = computed(() => new Date().getFullYear())
 </script>
 
 <template>
-  <footer class="py-2 px-6">
-    <BaseLevel :class="containerMaxW">
+  <footer
+    class="py-2 px-6"
+    :class="containerMaxW"
+  >
+    <BaseLevel>
       <div class="text-center md:text-left">
         <b>&copy;{{ year }}, <a
           href="https://justboil.me/"
