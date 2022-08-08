@@ -5,6 +5,10 @@ defineProps({
   zIndex: {
     type: String,
     default: 'z-50'
+  },
+  type: {
+    type: String,
+    default: 'flex'
   }
 })
 
@@ -19,8 +23,8 @@ const styleStore = useStyleStore()
 
 <template>
   <div
-    class="flex items-center flex-col justify-center overflow-hidden fixed inset-0"
-    :class="zIndex"
+    :class="[type, zIndex]"
+    class="items-center flex-col justify-center overflow-hidden fixed inset-0"
   >
     <transition
       enter-active-class="transition duration-150 ease-in"
