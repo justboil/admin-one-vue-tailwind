@@ -16,7 +16,10 @@ const layoutStore = useLayoutStore()
       :class="{ 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }"
       class="pt-14 xl:pl-60 w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
-      <NavBar :class="{ 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }" />
+      <NavBar
+        class="xl:pl-60" 
+        :class="{ 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }"
+      />
       <AsideMenu />
       <slot />
       <FooterBar />
