@@ -37,7 +37,7 @@ tbody tr, tbody tr:nth-child(odd) {
 }
 
 tbody tr:nth-child(odd) {
-  @apply lg:bg-gray-50 lg:dark:bg-slate-800;
+  @apply lg:bg-gray-100/50 lg:dark:bg-slate-800/50;
 }
 
 td:before {
