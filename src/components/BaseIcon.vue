@@ -36,5 +36,6 @@ const spanClass = computed(() => `inline-flex justify-center items-center ${prop
         :d="path"
       />
     </svg>
+    <slot />
   </span>
 </template>
