@@ -31,7 +31,7 @@
 }
 
 .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
-  @apply bg-no-repeat bg-center bg-blue-600 border-blue-600 border-4;
+  @apply bg-no-repeat bg-center border-4;
 }
 
 .checkbox input[type=checkbox]:checked+.check {
@@ -42,7 +42,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' /%3E%3C/svg%3E");
 }
 
-.switch input[type=checkbox]:checked+.check {
+.switch input[type=checkbox]:checked+.check, .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
   @apply bg-blue-600 border-blue-600;
 }
 
