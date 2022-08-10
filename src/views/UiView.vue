@@ -21,7 +21,7 @@ import BaseDivider from '@/components/BaseDivider.vue'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import FormField from '@/components/FormField.vue'
-import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 
@@ -173,7 +173,7 @@ const styleStore = useStyleStore()
         Notifications
       </h1>
       <div class="flex items-center justify-center mt-6">
-        <FormCheckRadioPicker
+        <FormCheckRadioGroup
           v-model="notificationSettingsModel"
           type="switch"
           name="notifications-switch"
@@ -273,7 +273,7 @@ const styleStore = useStyleStore()
     <SectionMain>
       <CardBox>
         <FormField label="Settings">
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="buttonSettingsModel"
             name="buttons-switch"
             type="switch"

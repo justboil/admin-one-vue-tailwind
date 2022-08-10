@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import { mdiBallot, mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import FormFilePicker from '@/components/FormFilePicker.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
@@ -159,7 +159,7 @@ const formStatusSubmit = () => {
           label="Checkbox"
           wrap-body
         >
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="customElementsForm.checkbox"
             name="sample-checkbox"
             :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
@@ -172,7 +172,7 @@ const formStatusSubmit = () => {
           label="Radio"
           wrap-body
         >
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="customElementsForm.radio"
             name="sample-radio"
             type="radio"
@@ -183,7 +183,7 @@ const formStatusSubmit = () => {
         <BaseDivider />
 
         <FormField label="Switch">
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="customElementsForm.switch"
             name="sample-switch"
             type="switch"
@@ -223,7 +223,7 @@ const formStatusSubmit = () => {
         </FormField>
 
         <FormField>
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="formStatusWithHeader"
             name="header-switch"
             type="switch"

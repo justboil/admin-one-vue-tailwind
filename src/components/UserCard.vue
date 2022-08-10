@@ -5,7 +5,7 @@ import { mdiCheckDecagram } from '@mdi/js'
 import BaseLevel from '@/components/BaseLevel.vue'
 import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import PillTag from '@/components/PillTag.vue'
 
 const mainStore = useMainStore()
@@ -21,7 +21,7 @@ const userSwitchVal = ref([])
       <UserAvatarCurrentUser class="lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="flex justify-center md:block">
-          <FormCheckRadioPicker
+          <FormCheckRadioGroup
             v-model="userSwitchVal"
             name="sample-switch"
             type="switch"

@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioPicker from '@/components/FormCheckRadioPicker.vue'
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -60,7 +60,7 @@ const submit = () => {
           />
         </FormField>
 
-        <FormCheckRadioPicker
+        <FormCheckRadioGroup
           v-model="form.remember"
           name="remember"
           :options="{ remember: 'Remember' }"
