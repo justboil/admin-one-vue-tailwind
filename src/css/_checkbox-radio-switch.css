@@ -55,7 +55,3 @@
   transform: translate3d(110%, 0 ,0);
   @apply border-blue-600;
 }
-
-.checkbox .control-label, .radio .control-label, .switch .control-label {
-  @apply pl-2;
-}

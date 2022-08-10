@@ -51,7 +51,7 @@ const inputType = computed(() => props.type === 'radio' ? 'radio' : 'checkbox')
         :value="key"
       >
       <span class="check" />
-      <span class="control-label">{{ value }}</span>
+      <span class="pl-2">{{ value }}</span>
     </label>
   </div>
 </template>
