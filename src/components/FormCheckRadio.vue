@@ -15,11 +15,11 @@ const props = defineProps({
     default: null
   },
   modelValue: {
-    type: [Boolean, String],
+    type: [Array, String, Number, Boolean],
     default: null
   },
   inputValue: {
-    type: [Boolean, String],
+    type: [String, Number, Boolean],
     required: true
   }
 })
