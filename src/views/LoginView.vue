@@ -64,7 +64,7 @@ const submit = () => {
           v-model="form.remember"
           name="remember"
           label="Remember"
-          :value="true"
+          :input-value="true"
         />
 
         <template #footer>
