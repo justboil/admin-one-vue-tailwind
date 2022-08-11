@@ -16,6 +16,10 @@ const props = defineProps({
     default: 'checkbox',
     validator: value => ['checkbox', 'radio', 'switch'].includes(value)
   },
+  componentClass: {
+    type: String,
+    default: null
+  },
   isColumn: Boolean,
   modelValue: {
     type: [Array, String, Number, Boolean],
@@ -46,6 +50,7 @@ const computedValue = computed({
       :name="name"
       :input-value="key"
       :label="value"
+      :class="componentClass"
     />
   </div>
 </template>
