@@ -1,12 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import FormCheckRadio from '@/components/FormCheckRadio.vue'
 
 const props = defineProps({
-  options: {
-    type: Object,
-    default: () => {}
-  },
   name: {
     type: String,
     required: true
@@ -15,10 +10,17 @@ const props = defineProps({
     type: String,
     default: 'checkbox'
   },
-  column: Boolean,
-  modelValue: {
-    type: [Object, Array, String, Number],
+  label: {
+    type: String,
     default: null
+  },
+  modelValue: {
+    type: [Boolean, String],
+    default: null
+  },
+  inputValue: {
+    type: [Boolean, String],
+    required: true
   }
 })
 
@@ -30,21 +32,22 @@ const computedValue = computed({
     emit('update:modelValue', value)
   }
 })
+
+const inputType = computed(() => props.type === 'radio' ? 'radio' : 'checkbox')
 </script>
 
 <template>
-  <div
-    class="flex justify-start flex-wrap -mb-3"
-    :class="{ 'flex-col': column }"
+  <label
+    :class="type"
+    class="mr-6 mb-3 last:mr-0"
   >
-    <FormCheckRadio
-      v-for="(value, key) in options"
-      :key="key"
+    <input
       v-model="computedValue"
-      :type="type"
+      :type="inputType"
       :name="name"
-      :input-value="key"
-      :label="value"
-    />
-  </div>
+      :value="inputValue"
+    >
+    <span class="check" />
+    <span class="pl-2">{{ label }}</span>
+  </label>
 </template>
