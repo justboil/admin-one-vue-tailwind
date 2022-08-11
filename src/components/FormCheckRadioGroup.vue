@@ -15,7 +15,7 @@ const props = defineProps({
     type: String,
     default: 'checkbox'
   },
-  column: Boolean,
+  isColumn: Boolean,
   modelValue: {
     type: [Object, Array, String, Number],
     default: null
@@ -35,7 +35,7 @@ const computedValue = computed({
 <template>
   <div
     class="flex justify-start flex-wrap -mb-3"
-    :class="{ 'flex-col': column }"
+    :class="{ 'flex-col': isColumn }"
   >
     <FormCheckRadio
       v-for="(value, key) in options"
