@@ -61,7 +61,7 @@ Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-on
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
 * Copy `tailwind.config.js` to `/`
-* Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menu.js` `src/styles.js` to `resources/js/`
+* Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/styles.js` to `resources/js/`
 * Copy `.laravel-guide/resources/js/` to `resources/js/`
 * Delete `resources/css/app.css`
 * Copy `src/css` to `resources/css`
@@ -129,11 +129,11 @@ Route::get('/dashboard', function () {
 
 Here we replace RouterLink with Inertia Link.
 
-##### resources/js/menu.js
+##### resources/js/menuAside.js
 
 Optionally, you can pass menu via Inertia shared props, so it's going to be controlled with PHP. Here we'd just use JS.
 
-`to` should be replaced with `route` which specifies route name defined in `routes/web.php`. For external links `href` should be used instead. Here's an example for `menu.js`:
+`to` should be replaced with `route` which specifies route name defined in `routes/web.php`. For external links `href` should be used instead. Here's an example for `menuAside.js`:
 
 ```javascript
 export default [
