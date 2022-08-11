@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
+import FormCheckRadio from '@/components/FormCheckRadio.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -14,7 +14,7 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
 const form = reactive({
   login: 'john.doe',
   pass: 'highly-secure-password-fYjUw-',
-  remember: ['remember']
+  remember: true
 })
 
 const router = useRouter()
@@ -60,10 +60,11 @@ const submit = () => {
           />
         </FormField>
 
-        <FormCheckRadioGroup
+        <FormCheckRadio
           v-model="form.remember"
           name="remember"
-          :options="{ remember: 'Remember' }"
+          label="Remember"
+          :value="true"
         />
 
         <template #footer>

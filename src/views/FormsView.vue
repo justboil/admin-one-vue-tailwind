@@ -14,6 +14,7 @@ import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
+import FormCheckRadio from '@/components/FormCheckRadio.vue'
 
 const selectOptions = [
   { id: 1, label: 'Business development' },
@@ -41,7 +42,7 @@ const submit = () => {
   //
 }
 
-const formStatusWithHeader = ref(['header'])
+const formStatusWithHeader = ref(true)
 
 const formStatusCurrent = ref(0)
 
@@ -199,7 +200,7 @@ const formStatusSubmit = () => {
       <SectionTitle>Form with status example</SectionTitle>
 
       <CardBox
-        :title="formStatusWithHeader.length ? 'Form with status' : null"
+        :title="formStatusWithHeader ? 'Form with status' : null"
         class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         form
         @submit.prevent="formStatusSubmit"
@@ -207,7 +208,7 @@ const formStatusSubmit = () => {
         <NotificationBarInCard
           v-if="formStatusCurrent"
           :color="formStatusOptions[formStatusCurrent]"
-          :is-placed-with-header="!!formStatusWithHeader.length"
+          :is-placed-with-header="formStatusWithHeader"
         >
           <span><b class="capitalize">{{ formStatusOptions[formStatusCurrent] }}</b> state</span>
         </NotificationBarInCard>
@@ -223,11 +224,12 @@ const formStatusSubmit = () => {
         </FormField>
 
         <FormField>
-          <FormCheckRadioGroup
+          <FormCheckRadio
             v-model="formStatusWithHeader"
             name="header-switch"
             type="switch"
-            :options="{ header: 'Card with header' }"
+            label="Card with header"
+            :input-value="true"
           />
         </FormField>
 
