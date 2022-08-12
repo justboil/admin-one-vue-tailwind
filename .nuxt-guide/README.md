@@ -39,7 +39,7 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 * Copy `src/components` to `components/`
 * Copy `src/layouts` to `layouts/`
 * Copy `src/stores` to `stores/`
-* Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/styles.js` to `configs/`
+* Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `configs/`
 * Copy `src/css` to `assets/css/`
 * Copy `public/favicon.png` to `public/`
 
@@ -90,7 +90,6 @@ module.exports = {
 ```vue
 <script setup>
 import { useLayoutStore } from '@/stores/layout.js'
-import { useMainStore } from '@/stores/main.js'
 import { useStyleStore } from '@/stores/style.js'
 import { darkModeKey, styleKey } from '@/config.js'
 
@@ -107,12 +106,6 @@ const layoutStore = useLayoutStore()
 useRouter().beforeEach(() => {
   layoutStore.isAsideMobileExpanded = false
   layoutStore.isAsideLgActive = false
-})
-
-useMainStore().setUser({
-  name: 'John Doe',
-  email: 'john@example.com',
-  avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
 })
 
 const styleStore = useStyleStore()

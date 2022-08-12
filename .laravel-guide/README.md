@@ -61,7 +61,7 @@ Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-on
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
 * Copy `tailwind.config.js` to `/`
-* Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/styles.js` to `resources/js/`
+* Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `resources/js/`
 * Copy `.laravel-guide/resources/js/` to `resources/js/`
 * Delete `resources/css/app.css`
 * Copy `src/css` to `resources/css`
@@ -72,7 +72,7 @@ Fresh Laravel install with Breeze provides **Capitalized** folder names such as 
 
 * Make sure you've removed original Laravel Breeze's `resources/js/Layouts` and `resources/js/Components` folders
 * Rename the folders you've copied in the previous section: `resources/js/layouts` to `Layouts`; `components` to `Components`; `stores` to `Stores`
-* Replace in imports: `@/layouts/` with `@/Layouts/`; `@/components/` with `@/Components/`; `@/stores/` with `@/Stores/`
+* Replace everywhere in imports: `@/layouts/` with `@/Layouts/`; `@/components/` with `@/Components/`; `@/stores/` with `@/Stores/`
 
 ##### In tailwind.config.js
 
@@ -129,11 +129,11 @@ Route::get('/dashboard', function () {
 
 Here we replace RouterLink with Inertia Link.
 
-##### resources/js/menuAside.js
+##### resources/js/menuAside.js and resources/js/menuNavBar.js
 
 Optionally, you can pass menu via Inertia shared props, so it's going to be controlled with PHP. Here we'd just use JS.
 
-`to` should be replaced with `route` which specifies route name defined in `routes/web.php`. For external links `href` should be used instead. Here's an example for `menuAside.js`:
+`to` should be replaced with `route` which specifies route name defined in `routes/web.php`. For external links `href` should be used instead. Here's an example for `menuAside.js` and `menuNavBar.js`:
 
 ```javascript
 export default [
@@ -269,54 +269,31 @@ Replace `RouterLink` imported from `vue-router` with `Link` import in `<script s
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
 // ...
-</script>
-```
 
-Replace `to` prop with `routeName` prop:
+// Add itemHref
+const itemHref = computed(() => props.item.route ? route(props.item.route) : props.item.href)
 
-```javascript
-const props = defineProps({
-  // ...
-  routeName: {
-    type: String,
-    default: null
-  }
-  // ...
-})
-```
-
-Update `const is` to return `Link` when `props.routeName` is set:
-
-```javascript
+// Update `const is` to return `Link` when `props.routeName` is set:
 const is = computed(() => {
-  if (props.href) {
+  if (props.item.href) {
     return 'a'
   }
 
-  if (props.routeName) {
-    return Link
+  if (props.item.route) {
+    return RouterLink
   }
 
-  return 'div'
+  return 'Link'
 })
+</script>
 ```
 
-Update `const activeClass` to match current route name:
-
-```javascript
-const activeClass = computed(
-  () => props.routeName && route().current(props.routeName) ? props.activeColor : null
-)
-```
-
-Then, update attributes in `<component>`:
+Then, remove `to` attribute and update `href` attributes in `<component>`:
 
 ```vue
 <template>
   <component
-    :is="is"
-    :class="[componentClass, activeClass]"
-    :href="routeName ? route(routeName) : href"
+    :href="itemHref"
   >
     <slot />
   </component>
@@ -346,21 +323,42 @@ const userName = computed(() => usePage().props.value.auth.user.name)
 </template>
 ```
 
-##### resources/js/components/NavBar.vue
-
-Update `userName` and `logout`:
+##### resources/js/components/NavBarItem.vue
 
 ```vue
 <script setup>
+// Add usePage:
 import { usePage } from '@inertiajs/inertia-vue3'
-import { Inertia } from '@inertiajs/inertia'
+// Remove unused useMainStore:
+// import { useMainStore } from '@/stores/main.js'
 // ...
 
-const userName = computed(() => usePage().props.value.auth.user.name)
+// Update itemLabel:
+const itemLabel = computed(() => props.item.isCurrentUser ? usePage().props.value.auth.user.name : props.item.label)
 
-const logout = () => {
-  Inertia.post(route('logout'))
+// ...
+</script>
+```
+
+##### resources/js/layouts/LayoutAuthenticated.vue
+
+```vue
+<script setup>
+// Add:
+import { Inertia } from '@inertiajs/inertia'
+
+// ...
+
+const menuClick = (event, item) => {
+  // ...
+
+  if (item.isLogout) {
+    // Add:
+    Inertia.post(route('logout'))
+  }
 }
+
+// ...
 </script>
 ```
 
