@@ -1,5 +1,6 @@
 <script setup>
 import { layoutAsidePadding } from '@/config.js'
+import menuAside from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
 import { useMainStore } from '@/stores/main.js'
 import { useLayoutStore } from '@/stores/layout.js'
@@ -40,7 +41,10 @@ const menuClick = (event, item) => {
         :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
         @menu-click="menuClick"
       />
-      <AsideMenu />
+      <AsideMenu
+        :menu="menuAside"
+        @menu-click="menuClick"
+      />
       <slot />
       <FooterBar />
     </div>

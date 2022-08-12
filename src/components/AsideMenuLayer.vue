@@ -23,12 +23,9 @@ const styleStore = useStyleStore()
 const logoutItem = computed(() => ({
   label: 'Logout',
   icon: mdiLogout,
-  color: 'info'
+  color: 'info',
+  isLogout: true
 }))
-
-const logoutItemClick = () => {
-  //
-}
 
 const menuClick = (event, item) => {
   emit('menu-click', event, item)
@@ -73,7 +70,7 @@ const menuClick = (event, item) => {
       <ul>
         <AsideMenuItem
           :item="logoutItem"
-          @menu-click="logoutItemClick"
+          @menu-click="menuClick"
         />
       </ul>
     </div>
