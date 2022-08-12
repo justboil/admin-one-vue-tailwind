@@ -8,7 +8,6 @@ export const basic = {
   navBarItemLabel: 'text-black',
   navBarItemLabelHover: 'hover:text-blue-500',
   navBarItemLabelActiveColor: 'text-blue-600',
-  navBarMenuListUpperLabel: 'bg-gray-100',
   overlay: 'from-gray-700 via-gray-900 to-gray-700'
 }
 
@@ -22,6 +21,5 @@ export const white = {
   navBarItemLabel: 'text-blue-600',
   navBarItemLabelHover: 'hover:text-black',
   navBarItemLabelActiveColor: 'text-black',
-  navBarMenuListUpperLabel: 'bg-gray-50',
   overlay: 'from-white via-gray-100 to-white'
 }
