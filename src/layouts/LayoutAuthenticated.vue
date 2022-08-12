@@ -1,11 +1,18 @@
 <script setup>
 import { layoutAsidePadding } from '@/config.js'
 import menuNavBar from '@/menuNavBar.js'
+import { useMainStore } from '@/stores/main.js'
 import { useLayoutStore } from '@/stores/layout.js'
 import { useStyleStore } from '@/stores/style.js'
 import NavBar from '@/components/NavBar.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
+
+useMainStore().setUser({
+  name: 'John Doe',
+  email: 'john@example.com',
+  avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
+})
 
 const styleStore = useStyleStore()
 
