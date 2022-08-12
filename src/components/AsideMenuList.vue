@@ -5,7 +5,7 @@ defineProps({
   isDropdownList: Boolean,
   menu: {
     type: Array,
-    default: () => []
+    required: true
   }
 })
 

@@ -10,7 +10,7 @@ import BaseIcon from '@/components/BaseIcon.vue'
 defineProps({
   menu: {
     type: Array,
-    default: () => []
+    required: true
   }
 })
 
