@@ -47,7 +47,7 @@ const componentClass = computed(() => {
   return base
 })
 
-const mainStore = useMainStore()
+const itemLabel = computed(() => props.item.isCurrentUser ? useMainStore().userName : props.item.label)
 
 const isDropdownActive = ref(false)
 
@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
       <span
         class="px-2 transition-colors"
         :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
-      >{{ item.isCurrentUser ? mainStore.userName : item.label }}</span>
+      >{{ itemLabel }}</span>
       <BaseIcon
         v-if="item.menu"
         :path="isDropdownActive ? mdiChevronUp : mdiChevronDown"
