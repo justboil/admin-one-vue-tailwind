@@ -4,7 +4,7 @@ const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
-    './public/index.html',
+    './index.html',
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   darkMode: 'class', // or 'media' or 'class'
