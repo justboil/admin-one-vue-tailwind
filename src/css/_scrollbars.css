@@ -1,37 +1,41 @@
-html {
-  scrollbar-width: thin;
-  scrollbar-color: #9ca3af #e5e7eb;
+@layer base {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #9ca3af #e5e7eb;
+  }
+  
+  html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  html::-webkit-scrollbar-track {
+    @apply bg-gray-200;
+  }
+  
+  html::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded;
+  }
+  
+  html::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
 }
 
-html::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-html::-webkit-scrollbar-track {
-  @apply bg-gray-200;
-}
-
-html::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 rounded;
-}
-
-html::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
-}
-
-html.dark-scrollbars {
-  scrollbar-color: #374151 #111827;
-}
-
-html.dark-scrollbars::-webkit-scrollbar-track {
-  @apply bg-gray-900;
-}
-
-html.dark-scrollbars::-webkit-scrollbar-thumb {
-  @apply bg-gray-700;
-}
-
-html.dark-scrollbars::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-600;
+@layer utilities {
+  .dark-scrollbars {
+    scrollbar-color: #374151 #111827;
+  }
+  
+  .dark-scrollbars::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+  
+  .dark-scrollbars::-webkit-scrollbar-thumb {
+    @apply bg-gray-700;
+  }
+  
+  .dark-scrollbars::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+  }
 }
