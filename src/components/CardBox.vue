@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     default: 'rounded-xl'
   },
+  flex: {
+    type: String,
+    default: 'flex-col'
+  },
   hasTable: Boolean,
   empty: Boolean,
   form: Boolean,
@@ -38,6 +42,7 @@ const footer = computed(() => slots.footer && !!slots.footer())
 const componentClass = computed(() => {
   const base = [
     props.rounded,
+    props.flex,
     props.modal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70'
   ]
 
@@ -63,7 +68,7 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white flex flex-col"
+    class="bg-white flex"
     @submit="submit"
   >
     <header
