@@ -1,5 +1,4 @@
 <script setup>
-import { layoutAsidePadding } from '@/config.js'
 import menuAside from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
 import { useMainStore } from '@/stores/main.js'
@@ -14,6 +13,8 @@ useMainStore().setUser({
   email: 'john@example.com',
   avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
 })
+
+const layoutAsidePadding = 'xl:pl-60'
 
 const styleStore = useStyleStore()
 
