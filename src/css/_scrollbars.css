@@ -1,23 +1,23 @@
 @layer base {
-  html {
+  body {
     scrollbar-width: thin;
     scrollbar-color: #9ca3af #e5e7eb;
   }
   
-  html::-webkit-scrollbar {
+  body::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   
-  html::-webkit-scrollbar-track {
+  body::-webkit-scrollbar-track {
     @apply bg-gray-200;
   }
   
-  html::-webkit-scrollbar-thumb {
+  body::-webkit-scrollbar-thumb {
     @apply bg-gray-400 rounded;
   }
   
-  html::-webkit-scrollbar-thumb:hover {
+  body::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-500;
   }
 }
