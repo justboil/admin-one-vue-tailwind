@@ -1,16 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import {
-  mdiForwardburger,
-  mdiBackburger,
   mdiClose,
   mdiDotsVertical,
-  mdiMenu,
 } from '@mdi/js'
 import { containerMaxW } from '@/config.js'
-import { useLayoutStore } from '@/stores/layout.js'
 import BaseIcon from '@/components/BaseIcon.vue'
-import FormControl from '@/components/FormControl.vue'
 import NavBarMenuList from '@/components/NavBarMenuList.vue'
 import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
 
@@ -27,8 +22,6 @@ const menuClick = (event, item) => {
   emit('menu-click', event, item)
 }
 
-const layoutStore = useLayoutStore()
-
 const isMenuNavBarActive = ref(false)
 </script>
 
@@ -39,32 +32,7 @@ const isMenuNavBarActive = ref(false)
       :class="containerMaxW"
     >
       <div class="flex flex-1 items-stretch h-14">
-        <NavBarItemPlain
-          display="flex lg:hidden"
-          @click.prevent="layoutStore.asideMobileToggle()"
-        >
-          <BaseIcon
-            :path="layoutStore.isAsideMobileExpanded ? mdiBackburger : mdiForwardburger"
-            size="24"
-          />
-        </NavBarItemPlain>
-        <NavBarItemPlain
-          display="hidden lg:flex xl:hidden"
-          @click.prevent="layoutStore.isAsideLgActive = true"
-        >
-          <BaseIcon
-            :path="mdiMenu"
-            size="24"
-          />
-        </NavBarItemPlain>
-        <NavBarItemPlain use-margin>
-          <FormControl
-            placeholder="Search (ctrl+k)"
-            ctrl-k-focus
-            transparent
-            borderless
-          />
-        </NavBarItemPlain>
+        <slot />
       </div>
       <div class="flex-none items-stretch flex h-14 lg:hidden">
         <NavBarItemPlain @click.prevent="isMenuNavBarActive = !isMenuNavBarActive">

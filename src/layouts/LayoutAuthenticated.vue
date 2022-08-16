@@ -1,10 +1,19 @@
 <script setup>
+import {
+  mdiForwardburger,
+  mdiBackburger,
+  mdiMenu
+} from '@mdi/js'
+import { useRouter } from 'vue-router'
 import menuAside from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
 import { useMainStore } from '@/stores/main.js'
 import { useLayoutStore } from '@/stores/layout.js'
 import { useStyleStore } from '@/stores/style.js'
+import BaseIcon from '@/components/BaseIcon.vue'
+import FormControl from '@/components/FormControl.vue'
 import NavBar from '@/components/NavBar.vue'
+import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
 
@@ -19,6 +28,13 @@ const layoutAsidePadding = 'xl:pl-60'
 const styleStore = useStyleStore()
 
 const layoutStore = useLayoutStore()
+
+const router = useRouter()
+
+router.beforeEach(() => {
+  layoutStore.isAsideMobileExpanded = false
+  layoutStore.isAsideLgActive = false
+})
 
 const menuClick = (event, item) => {
   if (item.isToggleLightDark) {
@@ -41,7 +57,34 @@ const menuClick = (event, item) => {
         :menu="menuNavBar"
         :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': layoutStore.isAsideMobileExpanded }]"
         @menu-click="menuClick"
-      />
+      >
+        <NavBarItemPlain
+          display="flex lg:hidden"
+          @click.prevent="layoutStore.asideMobileToggle()"
+        >
+          <BaseIcon
+            :path="layoutStore.isAsideMobileExpanded ? mdiBackburger : mdiForwardburger"
+            size="24"
+          />
+        </NavBarItemPlain>
+        <NavBarItemPlain
+          display="hidden lg:flex xl:hidden"
+          @click.prevent="layoutStore.isAsideLgActive = true"
+        >
+          <BaseIcon
+            :path="mdiMenu"
+            size="24"
+          />
+        </NavBarItemPlain>
+        <NavBarItemPlain use-margin>
+          <FormControl
+            placeholder="Search (ctrl+k)"
+            ctrl-k-focus
+            transparent
+            borderless
+          />
+        </NavBarItemPlain>
+      </NavBar>
       <AsideMenu
         :menu="menuAside"
         @menu-click="menuClick"
