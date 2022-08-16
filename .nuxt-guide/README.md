@@ -89,7 +89,6 @@ module.exports = {
 
 ```vue
 <script setup>
-import { useLayoutStore } from '@/stores/layout.js'
 import { useStyleStore } from '@/stores/style.js'
 import { darkModeKey, styleKey } from '@/config.js'
 
@@ -99,13 +98,6 @@ useHead({
     
     return titleChunk ? `${titleChunk} - ${titleBase}` : titleBase
   }
-})
-
-const layoutStore = useLayoutStore()
-
-useRouter().beforeEach(() => {
-  layoutStore.isAsideMobileExpanded = false
-  layoutStore.isAsideLgActive = false
 })
 
 const styleStore = useStyleStore()

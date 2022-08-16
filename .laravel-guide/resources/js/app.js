@@ -1,19 +1,17 @@
-import '../css/main.css';
+import '../css/main.css'
 
 import { createPinia } from 'pinia'
 import { useStyleStore } from '@/stores/style.js'
-import { useLayoutStore } from '@/stores/layout.js'
 
 import { darkModeKey, styleKey } from '@/config.js'
 
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
-import { Inertia } from '@inertiajs/inertia'
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { InertiaProgress } from '@inertiajs/progress'
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m'
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
 const pinia = createPinia()
 
@@ -29,10 +27,9 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: '#4B5563' });
+InertiaProgress.init({ color: '#4B5563' })
 
 const styleStore = useStyleStore(pinia)
-const layoutStore = useLayoutStore(pinia)
 
 /* App style */
 styleStore.setStyle(localStorage[styleKey] ?? 'basic')
@@ -41,9 +38,3 @@ styleStore.setStyle(localStorage[styleKey] ?? 'basic')
 if ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage[darkModeKey] === '1') {
   styleStore.setDarkMode(true)
 }
-
-/* Collapse mobile aside menu on route change */
-Inertia.on('navigate', (event) => {
-  layoutStore.isAsideMobileExpanded = false
-  layoutStore.isAsideLgActive = false
-})
