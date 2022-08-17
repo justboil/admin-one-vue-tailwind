@@ -100,9 +100,11 @@ export default [
       label: 'มือเป็น-มือตาย'
     },
     {
-      to: '/debt',
+      to: '/members',
       icon: 'accountMultiple',
-      label: 'ลูกแชร์'
+      label: 'ลูกแชร์',
+      countData : 'countMember',
+      countColor : 'info'
     }
   ],
   'รายงาน',

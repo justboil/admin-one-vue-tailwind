@@ -53,6 +53,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'ลูกแชร์',
+      loginRequired : true
+    },
+    path: '/members',
+    name: 'member',
+    component: () => import('@/views/MemberView.vue')
+  },
+  {
+    meta: {
       title: 'Tables',
       loginRequired : true
     },
