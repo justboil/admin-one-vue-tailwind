@@ -81,9 +81,8 @@ const cancel = () => confirmCancel('cancel')
         />
         <BaseButton
           v-if="hasCancel"
-          label="Cancel"
-          :color="button"
-          outline
+          label="ยกเลิก"
+          color="danger"
           @click="cancel"
         />
       </BaseButtons>

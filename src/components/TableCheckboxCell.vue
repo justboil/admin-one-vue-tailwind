@@ -1,16 +1,20 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch,computed } from 'vue'
 
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: 'td'
+  },
+  isChecked: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits(['checked'])
 
-const checked = ref(false)
+const checked = ref(props.isChecked)
 
 watch(checked, newVal => {
   emit('checked', newVal)
@@ -19,7 +23,7 @@ watch(checked, newVal => {
 
 <template>
   <component
-    :is="type"
+    :is="props.type"
     class="checkbox-cell"
   >
     <label class="checkbox">

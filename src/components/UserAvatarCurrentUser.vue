@@ -1,13 +1,28 @@
-<script setup>
-import { useMainStore } from '@/stores/main'
-import UserAvatar from '@/components/UserAvatar.vue'
-
-const mainStore = useMainStore()
-</script>
-
 <template>
   <UserAvatar
-    :username="mainStore.currentUser.userInfo.nameHome"
-    :avatar="mainStore.currentUser.avatar"
+    :username="username"
+    :avatar="avatar"
   />
 </template>
+
+<script>
+import UserAvatar from '@/components/UserAvatar.vue'
+
+export default {
+  components : {
+    UserAvatar
+  },
+  props : {
+    username : {
+      default : "999",
+      type : String
+    },
+    avatar : {
+      default : null,
+      type : String,
+    }
+  }
+}
+
+</script>
+

@@ -1,4 +1,9 @@
-export const getCurrentUser = () => {
+  export const getCurrentTime = () => {
+    const now = new Date()
+    return now.getHours() + ':' + now.getMinutes()
+  }
+  
+  export const getCurrentUser = () => {
     let user = null;
     try {
       user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')) : null;
@@ -87,5 +92,28 @@ export const getCurrentUser = () => {
       }
     } catch (error) {
       console.log(">>>> src/utils/index.js : setCountBitToday -> error", error)
+    }
+  }
+
+  export const getCountDebt = () => {
+    let count = 0;
+    try {
+        count = localStorage.getItem('countDebt') != null ? localStorage.getItem('countDebt') : 0;
+    } catch (error) {
+        console.log(">>>> src/utils/index.js : getCountDebt -> error", error)
+        count = 0;
+    }
+    return count;
+  }
+  
+  export const setCountDebt = (count) => {
+    try {
+      if (count) {
+        localStorage.setItem('countDebt',count)
+      } else {
+        localStorage.removeItem('countDebt');
+      }
+    } catch (error) {
+      console.log(">>>> src/utils/index.js : setCountDebt -> error", error)
     }
   }

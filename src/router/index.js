@@ -31,7 +31,25 @@ const routes = [
     },
     path: '/today-sends',
     name: 'today-sends',
-    component: () => import('@/views/SendTodayView.vue')
+    component: () => import('@/views/todays/SendTodayView.vue')
+  },
+  {
+    meta: {
+      title: 'ยอดค้างจ่าย',
+      loginRequired : true
+    },
+    path: '/debts',
+    name: 'debts',
+    component: () => import('@/views/DebtsView.vue')
+  },
+  {
+    meta: {
+      title: 'รายละเอียดยอดค้างจ่าย',
+      loginRequired : true
+    },
+    path: '/debt/detail/:id',
+    name: 'debt-detail',
+    component: () => import('@/views/DebtDetailView.vue')
   },
   {
     meta: {

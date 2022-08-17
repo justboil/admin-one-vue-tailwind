@@ -27,9 +27,6 @@ const styleStore = useStyleStore(pinia)
 const layoutStore = useLayoutStore(pinia)
 
 /* Fetch sample data */
-mainStore.fetch('clients')
-mainStore.fetch('history')
-
 dashboardStore.get()
 
 /* App style */

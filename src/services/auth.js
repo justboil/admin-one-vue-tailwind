@@ -2,6 +2,7 @@ import http from '@/constants/api';
 import { useMainStore } from '@/stores/main.js'
 import { setCurrentUser } from '@/utils'
 import DashboardService from '@/services/dashboard'
+import DebtService from '@/services/debt'
 
 
 class AuthService {
@@ -21,6 +22,7 @@ class AuthService {
                     DashboardService.getDashboardAmountSend();
                     DashboardService.getDashboardAmountReceive();
                     DashboardService.getBits();
+                    DebtService.getDebts();
                 }else{
                     console.log('response : ',response)    
                 }

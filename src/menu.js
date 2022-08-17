@@ -88,9 +88,11 @@ export default [
       label: 'ภาพรวมบ้านแชร์'
     },
     {
-      to: '/debt',
+      to: '/debts',
       icon: 'cashLock',
-      label: 'ยอดค้างจ่าย'
+      label: 'ยอดค้างจ่าย',
+      countData : 'countDebt',
+      countColor : 'warning'
     },
     {
       to: '/debt',
