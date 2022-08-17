@@ -24,6 +24,7 @@ import FormField from '@/components/FormField.vue'
 import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
 
 const modalOneActive = ref(false)
 
@@ -462,13 +463,27 @@ const styleStore = useStyleStore()
         </CardBox>
 
         <CardBox
-          title="Title & Icons"
+          title="Title, Icons & Footer"
           :icon="mdiMonitorCellphone"
           :header-button-icon="mdiClose"
         >
           <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
-            With title & icons
+            With title, icons & footer
           </div>
+
+          <template #footer>
+            <BaseButtons>
+              <BaseButton
+                label="Confirm"
+                color="info"
+              />
+              <BaseButton
+                label="Cancel"
+                color="info"
+                outline
+              />
+            </BaseButtons>
+          </template>
         </CardBox>
       </div>
 
@@ -477,7 +492,9 @@ const styleStore = useStyleStore()
         title="Empty variation"
       />
 
-      <CardBox empty />
+      <CardBox>
+        <CardBoxComponentEmpty />
+      </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
 </template>
