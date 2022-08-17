@@ -14,11 +14,12 @@
 
         <div class="grid lg:grid-cols-3">
             <FormControl
-            v-model="searchMember"
-            icon="accountSearchOutline"
-            class="mb-3 shadow-lg"
-            placeholder="ค้นหาลูกแชร์"
+                v-model="searchMember"
+                icon="accountSearchOutline"
+                class="mb-3 shadow-lg"
+                placeholder="ค้นหาลูกแชร์"
             />
+            
         </div>
         
         <CardBox
@@ -29,28 +30,52 @@
         >
             <div
             class="p-3 bg-gray-100/50 dark:bg-gray-800"
-            v-if="checkedRows.length > 0"
             >
-                <span
-                    v-for="checkedRow in checkedRows"
-                    :key="checkedRow.id"
-                    class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700 mb-1"
-                >
-                    {{ checkedRow.name }}
-                </span>
-                
-                <BaseButtons
-                    type="justify-start lg:justify-end"
-                    no-wrap
-                >
-                    <BaseButton
-                    color="danger"
-                    label="ลบลูกแชร์ทั้งหมด"
-                    icon="close"
-                    small
-                    @click="isModalActive = true"
+                <div  v-if="checkedRows.length == 0" class="grid lg:grid-cols-3 gap-3 mb-1">
+                    <FormControl
+                        v-model="addMember"
+                        icon="accountSearchOutline"
+                        class="shadow-lg"
+                        
+                        placeholder="กรอกชื่อเพื่อสร้างลูกแชร์"
                     />
-                </BaseButtons>
+                    <BaseButtons
+                    type="justify-center lg:justify-start"
+                    no-wrap
+                    >
+                        <BaseButton
+                            :disabled="addMember === ''"
+                            color="success"
+                            label="สร้างลูกแชร์"
+                            icon="accountPlusOutline"
+                            
+                        />
+                    </BaseButtons>
+                </div>
+                <div v-else >
+                    <span
+                        v-for="checkedRow in checkedRows"
+                        :key="checkedRow.id"
+                        class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700 mb-1"
+                    >
+                        {{ checkedRow.name }}
+                    </span>
+                    
+                    <BaseButtons
+                        type="justify-start lg:justify-end"
+                        no-wrap
+                    >
+                        <BaseButton
+                    
+                        color="danger"
+                        label="ลบลูกแชร์ทั้งหมด"
+                        icon="close"
+                        small
+                        @click="isModalActive = true"
+                        />
+                    </BaseButtons>
+                </div>
+                
                     
             </div>
 
@@ -69,58 +94,86 @@
                 v-for="member in itemsPaginated"
                 :key="member.id"
                 >
-                <TableCheckboxCell
-                    v-if="member.status === 'N'"
-                    :isChecked="member.checked"
-                    class="text-center border-b-0 lg:w-6 before:hidden"
-                    @checked="checked($event, member)"
-                />
-                <td v-else/>
-                <td class="border-b-0 lg:w-6 before:hidden">
-                    <UserAvatar
-                    :username="member.id"
-                    class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
-                    />
-                </td>
-                <td data-label="ลูกแชร์">
-                    <span >{{ member.name }}</span>
-                </td>
-                <td data-label="สถานะ">
-                    <span> {{ member.status == "Y" ? "กำลังเล่น " + member.numberOfGroup + " วง" : "ว่าง" }} </span>
-                </td>
-                <td class="before:hidden lg:w-6 whitespace-nowrap">
-                    <BaseButtons
-                    type="justify-start lg:justify-end"
-                    no-wrap
-                    >
-                    <BaseButton
+                    <TableCheckboxCell
                         v-if="member.status === 'N'"
-                        color="danger"
-                        label="ลบ"
-                        icon="close"
-                        small
-                        @click="confirm(
-                            'ยืนยันลบลูกแชร์ '+member.name+' ใช่หรือไม่ ?',
-                            member.id,
-                            deleteMember
-                        )"
+                        :isChecked="member.checked"
+                        class="text-center border-b-0 lg:w-6 before:hidden"
+                        @checked="checked($event, member)"
                     />
-                    <BaseButton
-                        color="warning"
-                        label="แก้ไข"
-                        icon="pencil"
-                        small
-                        @click="edit(member.id)"
-                    />
-                    <BaseButton
-                        color="info"
-                        label="รายละเอียด"
-                        icon="magnify"
-                        small
-                        @click="detail(member.id)"
-                    />
-                    </BaseButtons>
-                </td>
+                    <td v-else/>
+                    <td class="border-b-0 lg:w-6 before:hidden">
+                        <UserAvatar
+                        :username="member.id"
+                        class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+                        />
+                    </td>
+                    <td data-label="ลูกแชร์">
+                        <FormControl
+                            v-if="member.edit"
+                            v-model="member.name"
+                            icon="pencilOutline"
+                            class="shadow-lg w-48"
+                        />
+                        <span v-else>{{ member.name }}</span>
+                    </td>
+                    <td data-label="สถานะ">
+                        <span> {{ member.status == "Y" ? "เล่น " + member.numberOfGroup + " วง" : "ว่าง" }} </span>
+                    </td>
+                    <td class="before:hidden lg:w-6 whitespace-nowrap">
+                        <BaseButtons
+                        type="justify-start lg:justify-end"
+                        no-wrap
+                        v-if="!member.edit"
+                        >
+                            <BaseButton
+                                :disabled="member.status !== 'N'"
+                                color="danger"
+                                label="ลบ"
+                                icon="trashCanOutline"
+                                small
+                                @click="confirm(
+                                    'ยืนยันลบลูกแชร์ '+member.name+' ใช่หรือไม่ ?',
+                                    member.id,
+                                    deleteMember
+                                )"
+                            />
+                            <BaseButton
+                                color="warning"
+                                label="แก้ไข"
+                                icon="pencilOutline"
+                                small
+                                @click="edit(member.id)"
+                            />
+                            <BaseButton
+                                color="info"
+                                label="รายละเอียด"
+                                icon="accountDetailsOutline"
+                                small
+                                @click="detail(member.id)"
+                            />
+                        </BaseButtons>
+                        <BaseButtons
+                        type="justify-start"
+                        no-wrap
+                        v-else
+                        >
+                            <BaseButton
+                                color="info"
+                                label="บันทึก"
+                                icon="contentSave"
+                                small
+                                @click="saveEdit(member)"
+                            />
+                            <BaseButton
+                                color="danger"
+                                label="ยกเลิก"
+                                icon="close"
+                                small
+                                @click="cancelEdit(member)"
+                            />
+                            
+                        </BaseButtons>
+                    </td>
                 </tr>
             </tbody>
             </table>
@@ -175,7 +228,8 @@ export default {
             currentPage : 0,
             checkedRows : [],
             items : [],
-            searchMember : ""
+            searchMember : "",
+            addMember : ""
         }
     },
     watch : {
@@ -219,6 +273,16 @@ export default {
               this.idConfirm = null
               this.getMembers()
           }
+      },
+      edit(memberId){
+        this.items.map((item) => {
+            if(item.id === memberId){
+                item.edit = true
+            }
+        })
+      },
+      cancelEdit(member){
+        member.edit = false
       },
       detail(memberId){
         this.$router.push({
