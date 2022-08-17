@@ -3,6 +3,7 @@ import { useMainStore } from '@/stores/main.js'
 import { setCurrentUser } from '@/utils'
 import DashboardService from '@/services/dashboard'
 import DebtService from '@/services/debt'
+import MemberService from '@/services/member'
 
 
 class AuthService {
@@ -23,6 +24,7 @@ class AuthService {
                     DashboardService.getDashboardAmountReceive();
                     DashboardService.getBits();
                     DebtService.getDebts();
+                    MemberService.all();
                 }else{
                     console.log('response : ',response)    
                 }

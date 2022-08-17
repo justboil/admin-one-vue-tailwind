@@ -54,7 +54,7 @@ const menuClick = () => {
         <p
           v-if="typeof menuGroup === 'string'"
           :key="`a-${index}`"
-          class="p-3 text-xs uppercase"
+          class="p-3  uppercase"
           :class="styleStore.asideMenuLabelStyle"
         >
           {{ menuGroup }}

@@ -117,3 +117,26 @@
       console.log(">>>> src/utils/index.js : setCountDebt -> error", error)
     }
   }
+
+  export const getCountMember = () => {
+    let count = 0;
+    try {
+        count = localStorage.getItem('countMember') != null ? localStorage.getItem('countMember') : 0;
+    } catch (error) {
+        console.log(">>>> src/utils/index.js : getCountMember -> error", error)
+        count = 0;
+    }
+    return count;
+  }
+  
+  export const setCountMember = (count) => {
+    try {
+      if (count) {
+        localStorage.setItem('countMember',count)
+      } else {
+        localStorage.removeItem('countMember');
+      }
+    } catch (error) {
+      console.log(">>>> src/utils/index.js : setCountMember -> error", error)
+    }
+  }

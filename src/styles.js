@@ -7,7 +7,7 @@ export const basic = {
   asideMenuCloseLg: 'text-white',
   asideMenuLabel: 'text-gray-400',
   asideMenuItem: 'hover:bg-gray-600 hover:bg-opacity-50',
-  asideMenuItemActive: 'font-bold text-white',
+  asideMenuItemActive: 'font-bold text-white bg-gray-900 py-2',
   asideMenuItemInactive: 'text-gray-300',
   asideSubmenuList: 'bg-gray-700 bg-opacity-50',
   navBarItemLabel: 'text-black',

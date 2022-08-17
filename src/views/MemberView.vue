@@ -261,8 +261,8 @@ export default {
       }
     },
     methods: {
-      async getMembers(searchMember = "",order = "DESC",sort = "sumDebt"){
-        const resp = await MemberService.getAll();
+      async getMembers(searchMember = ""){
+        const resp = await MemberService.getAll(searchMember);
         if(resp.data){
           this.items = resp.data.data
         }

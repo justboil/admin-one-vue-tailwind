@@ -1,9 +1,22 @@
 import http from '@/constants/api';
 import authHeader from './auth-header'
+import { setCountMember } from '@/utils'
+import { useMainStore } from '@/stores/main';
 
 class MemberService{
-    getAll(){
-        return http.get(`/member`,{ headers : authHeader()});
+    all(){
+        return http.get(`/member`,{ headers : authHeader()})
+            .then(response => {
+                setCountMember(response.data.data.length)
+                useMainStore().setCountMember(response.data.data.length)
+                return response;
+            });
+    }
+    getAll(search){
+        if(!search){
+            search = ""
+        }
+        return http.get(`/member?search=`+search,{ headers : authHeader()})
     }
     get(id){
         return http.get(`/member/${id}`,{ headers : authHeader()});

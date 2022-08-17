@@ -43,15 +43,17 @@ const menuClick = event => {
       :href="item.href || null"
       :target="item.target || null"
       class="flex cursor-pointer dark:hover:bg-gray-700/50"
-      :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2' ]"
+      :class="[ styleStore.asideMenuItemStyle, isSubmenuList ? 'p-3 text-sm' : 'py-2 ' ]"
       @click="menuClick"
     >
       <BaseIcon
         v-if="item.icon"
+        size="20"
         :path="item.icon"
         class="flex-none"
         :class="[ vSlot && vSlot.isExactActive ? styleStore.asideMenuItemActiveStyle : styleStore.asideMenuItemInactiveStyle ]"
         w="w-12"
+        h=""
       />
       <span
         class="grow"
