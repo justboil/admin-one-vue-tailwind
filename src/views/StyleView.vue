@@ -41,7 +41,7 @@ const click = slug => {
             v-for="style in styles"
             :key="style"
             class="cursor-pointer bg-gray-50"
-            hoverable
+            is-hoverable
             @click="click(style)"
           >
             <div class="mb-3 md:mb-6">

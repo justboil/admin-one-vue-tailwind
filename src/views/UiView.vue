@@ -100,9 +100,9 @@ const styleStore = useStyleStore()
       <div class="space-y-12">
         <CardBox
           title="Confirm modal"
-          :header-icon="mdiClose"
+          :header-button-icon="mdiClose"
           class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-          hoverable
+          is-hoverable
           @click="modalOneActive = true"
         >
           <div class="space-y-3">
@@ -126,7 +126,7 @@ const styleStore = useStyleStore()
 
         <CardBox
           class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-          hoverable
+          is-hoverable
           @click="modalTwoActive = true"
         >
           <div class="space-y-3">
@@ -148,7 +148,7 @@ const styleStore = useStyleStore()
 
         <CardBox
           class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-          hoverable
+          is-hoverable
           @click="modalThreeActive = true"
         >
           <div class="space-y-3">
@@ -464,8 +464,7 @@ const styleStore = useStyleStore()
         <CardBox
           title="Title & Icons"
           :icon="mdiMonitorCellphone"
-          :header-icon="mdiClose"
-          mb=""
+          :header-button-icon="mdiClose"
         >
           <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
             With title & icons

@@ -61,7 +61,7 @@ const icon = computed(() => {
 <template>
   <CardBox
     class="mb-6 last:mb-0"
-    hoverable
+    is-hoverable
   >
     <BaseLevel>
       <BaseLevel type="justify-start">

@@ -125,9 +125,9 @@ const transactionBarItems = computed(() => mainStore.history)
       <CardBox
         title="Performance"
         :icon="mdiFinance"
-        :header-icon="mdiReload"
+        :header-button-icon="mdiReload"
         class="mb-6"
-        @header-icon-click="fillChartData"
+        @header-button-click="fillChartData"
       >
         <div v-if="chartData">
           <line-chart
