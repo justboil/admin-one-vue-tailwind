@@ -1,7 +1,14 @@
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
+    
     <SectionMain>
+      <SectionTitleBarSub
+        icon="homeOutline"
+        title="วงแชร์"
+        iconBtn="homePlusOutline"
+        textBtn="สร้างวงแชร์"
+        colorBtn="success"
+      />
         <CardBoxModal
             v-model="modalConfirm"
             title="ยืนยันอีกครั้ง"
@@ -11,16 +18,75 @@
             >
             <p>{{ textConfirm }}</p>
         </CardBoxModal>
+        <CardBox
+          title="ค้นหาวงแชร์"
+          icon="homeSearchOutline"
+          form
+          class="mb-3"
+          @submit.prevent="submit"
+        >
 
-        <div class="grid lg:grid-cols-3">
-            <FormControl
-                v-model="searchMember"
-                icon="accountSearchOutline"
-                class="mb-3 shadow-lg"
-                placeholder="ค้นหาลูกแชร์"
+          <div class="grid lg:grid-cols-5 gap-5">
+            <FormField label="วงแชร์">
+              <FormControl
+                v-model="search.name"
+                icon="home"
+                
+              />
+            </FormField>
+            <FormField label="ประเภท">
+              <FormControl
+                v-model="search.type"
+                :options="types"
+                icon=""
+                
+              />
+            </FormField>
+            <FormField label="เงินต้น">
+              <FormControl
+                v-model="search.amount"
+                icon="cash"
+                type="number"
+              />
+            </FormField>
+            <FormField label="จำนวนมือ">
+              <FormControl
+                v-model="search.numOfPlayer"
+                icon="accountMultiple"
+                type="number"
+              />
+            </FormField>
+            <FormField label="สถานะ">
+              <FormControl
+                v-model="search.status"
+                :options="status"
+              />
+            </FormField>
+          </div>
+
+        
+          <BaseDivider />
+
+          <BaseButtons
+            type="justify-center"
+            no-wrap
+          >
+            <BaseButton
+              type="submit"
+              color="info"
+              label="ค้นหา"
+              small
+              icon="magnify"
             />
-            
-        </div>
+            <BaseButton
+              type="reset"
+              color="danger"
+              label="ล้าง"
+              small
+              icon="refresh"
+            />
+          </BaseButtons>
+        </CardBox>
         
         <CardBox
             v-if="itemsPaginated.length > 0"
@@ -63,14 +129,14 @@
                         <UserAvatar
                         :username="group.id"
                         api="bottts"
-                        class="w-18 h-18 mx-auto lg:w-12 lg:h-12"
+                        class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
                         />
                     </td>
                     <td data-label="วงแชร์">
                         <span>{{ group.name }}</span>
                     </td>
                     <td data-label="ประเภทวง">
-                        <span>{{ group.type }}</span>
+                        <span>{{ getType(group.type) }}</span>
                     </td>
                     <td data-label="เงินต้น">
                         <span> {{ formatCurrency(group.amount) }} </span>
@@ -91,7 +157,7 @@
                         <span>{{ group.period }}</span>
                     </td>
                     <td data-label="วันที่ปัจจุบัน/งวดถัดไป">
-                        <span>{{ group.actionDate }}</span>
+                        <span>{{ formatDate(group.actionDate) }}</span>
                     </td>
                     <td data-label="สถานะ">
                         <span>{{ group.status }}</span>
@@ -171,6 +237,9 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import FormControl from '@/components/FormControl.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
+import FormField from '@/components/FormField.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
+import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 
 import GroupService from '@/services/group'
 import {getGroupType} from '@/constants/group'
@@ -191,7 +260,22 @@ export default {
             checkedRows : [],
             items : [],
             searchMember : "",
-            createError : ""
+            createError : "",
+            search : {
+              name : ""
+            },
+            types : [
+              { id: null, label: 'ทั้งหมด' },
+              { id: 1, label: 'ขั้นบันได' },
+              { id: 2, label: 'บิทดอกตาม' },
+              { id: 3, label: 'เรทดอกตาม' }
+            ],
+            status : [
+              { id: "", label: 'ทั้งหมด' },
+              { id: "P", label: 'วงกำลังเล่น' },
+              { id: "N", label: 'วงใหม่' },
+              { id: "S", label: 'วงจบแล้ว' }
+            ]
         }
     },
     watch : {
@@ -323,6 +407,9 @@ export default {
         return numeral(amt).format(0,0)
       },
       formatDate(date){
+        if(!date){
+          return ""
+        }
         return moment(new Date(date)).format('DD/MM/YYYY');
       },
       getType(type){
@@ -342,7 +429,10 @@ export default {
         CardBox,
         FormControl,
         BaseIcon,
-        NotificationBar
+        NotificationBar,
+        FormField,
+        BaseDivider,
+        SectionTitleBarSub
     }
 }
 </script>

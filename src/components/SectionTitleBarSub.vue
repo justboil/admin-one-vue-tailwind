@@ -8,6 +8,18 @@ defineProps({
     type: String,
     default: null
   },
+  iconBtn: {
+    type: String,
+    default: "cog"
+  },
+  textBtn: {
+    type: String,
+    default: ""
+  },
+  colorBtn: {
+    type: String,
+    default: ""
+  },
   title: {
     type: String,
     required: true
@@ -28,7 +40,9 @@ defineProps({
       </h1>
     </div>
     <BaseButton
-      icon="cog"
+      :icon="iconBtn"
+      :label="textBtn"
+      :color="colorBtn"
       small
     />
   </section>
