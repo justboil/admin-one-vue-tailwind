@@ -10,15 +10,16 @@
             <p>This is sample modal</p>
         </CardBoxModal>
 
-        <CardBoxModal
-            v-model="isModalDangerActive"
-            large-title="Please confirm"
-            button="danger"
-            has-cancel
-        >
-            <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-            <p>This is sample modal</p>
-        </CardBoxModal>
+        <div class="grid lg:grid-cols-3">
+            <FormControl
+                v-model="searchMember"
+                icon="accountSearchOutline"
+                class="mb-3 shadow-lg"
+                placeholder="ค้นหาลูกแชร์"
+            />
+            
+        </div>
+
         <CardBox
             v-if="itemsPaginated.length > 0"
             has-table
@@ -26,13 +27,14 @@
             <table>
             <thead>
                 <tr>
-                <th />
-                <th>ลูกแชร์</th>
-                <th>ยอดส่ง</th>
-                <th>ส่งแล้ว</th>
-                <th>เหลือส่ง</th>
-                <th>จำนวนวง</th>
-                <th />
+                    <th />
+                    <th />
+                    <th>ลูกแชร์</th>
+                    <th>ยอดส่ง</th>
+                    <th>ส่งแล้ว</th>
+                    <th>เหลือส่ง</th>
+                    <th>จำนวนวง</th>
+                    <th />
                 </tr>
             </thead>
             <tbody>
@@ -40,10 +42,15 @@
                 v-for="member in itemsPaginated"
                 :key="member.memberId"
                 >
+                <TableCheckboxCell
+                    :isChecked="member.checked"
+                    class="text-center border-b-0 lg:w-6 before:hidden"
+                    @checked="checked($event, member)"
+                />
                 <td class="border-b-0 lg:w-6 before:hidden">
                     <UserAvatar
                     :username="member.memberId"
-                    class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+                    class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
                     />
                 </td>
                 <td data-label="ลูกแชร์">
@@ -66,12 +73,20 @@
                     type="justify-start lg:justify-end"
                     no-wrap
                     >
-                    <BaseButton
-                        color="info"
-                        icon="eye"
-                        small
-                        @click="isModalActive = true"
-                    />
+                        <BaseButton
+                            color="success"
+                            icon="cashCheck"
+                            label="ส่งยอด"
+                            small
+                            @click="isModalActive = true"
+                        />
+                        <BaseButton
+                            color="info"
+                            icon="eye"
+                            label="รายละเอียด"
+                            small
+                            @click="isModalActive = true"
+                        />
 
                     </BaseButtons>
                 </td>
@@ -83,14 +98,14 @@
             >
             <BaseLevel>
                 <BaseButtons>
-                <BaseButton
-                    v-for="page in pagesList"
-                    :key="page"
-                    :active="page === currentPage"
-                    :label="page + 1"
-                    small
-                    @click="currentPage = page"
-                />
+                    <BaseButton
+                        v-for="page in pagesList"
+                        :key="page"
+                        :active="page === currentPage"
+                        :label="page + 1"
+                        small
+                        @click="currentPage = page"
+                    />
                 </BaseButtons>
                 <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
             </BaseLevel>
@@ -112,6 +127,7 @@ import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
+import FormControl from '@/components/FormControl.vue'
 import DashboardService from '@/services/dashboard'
 
 export default {
@@ -167,7 +183,8 @@ export default {
         BaseButtons,
         BaseButton,
         UserAvatar,
-        CardBox
+        CardBox,
+        FormControl
     }
 }
 </script>
