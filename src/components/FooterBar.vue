@@ -1,10 +1,9 @@
 <script setup>
-import { computed } from 'vue'
 import { containerMaxW } from '@/config.js';
 import BaseLevel from '@/components/BaseLevel.vue'
 import JustboilLogo from '@/components/JustboilLogo.vue'
 
-const year = computed(() => new Date().getFullYear())
+const year = new Date().getFullYear()
 </script>
 
 <template>
