@@ -42,61 +42,29 @@ export default [
     },
     {
       to: '/today-bit',
-      icon: 'homeLightningBoltOutline',
+      icon: 'cashCheck',
       label: 'บิท/เปียร์วันนี้',
       countData : 'countBitToday',
       countColor : 'warning'
     }
   ],
-  'วงแชร์',
-  [
-    {
-      to: '/group-create',
-      icon: 'homePlusOutline',
-      label: 'สร้างวงแชร์'
-    },
-    {
-      to: '/today-sends',
-      icon: 'homeClockOutline',
-      label: 'วงวันนี้',
-      countData : 'countSendToday'
-    },
-    {
-      to: '/today-sends',
-      icon: 'homeVariantOutline',
-      label: 'วงกำลังเล่น',
-      countData : 'countSendToday'
-    },
-    {
-      to: '/today-sends',
-      icon: 'homeEditOutline',
-      label: 'วงสร้างใหม่',
-      countData : 'countSendToday'
-    },
-    {
-      to: '/today-sends',
-      icon: 'homeRemoveOutline',
-      label: 'วงจบแล้ว',
-      countData : 'countSendToday'
-    },
-  ],
   'ทั่วไป',
   [
     {
       to: '/dashboard',
-      icon: 'monitor',
+      icon: 'chartBoxOutline',
       label: 'ภาพรวมบ้านแชร์'
     },
     {
       to: '/debts',
-      icon: 'cashLock',
+      icon: 'cashMultiple',
       label: 'ยอดค้างจ่าย',
       countData : 'countDebt',
       countColor : 'warning'
     },
     {
       to: '/debt',
-      icon: 'cashLock',
+      icon: 'accountCashOutline',
       label: 'มือเป็น-มือตาย'
     },
     {
@@ -105,76 +73,81 @@ export default [
       label: 'ลูกแชร์',
       countData : 'countMember',
       countColor : 'info'
-    }
+    },
+    {
+      to: '/groups',
+      icon: 'homeVariantOutline',
+      label: 'วงแชร์'
+    },
   ],
-  'รายงาน',
-  [
-    {
-      to: '/tables',
-      label: 'Tables',
-      icon: mdiTable
-    },
-    {
-      to: '/forms',
-      label: 'Forms',
-      icon: mdiSquareEditOutline
-    },
-    {
-      to: '/ui',
-      label: 'UI',
-      icon: mdiTelevisionGuide
-    },
-    {
-      to: '/responsive',
-      label: 'Responsive',
-      icon: mdiResponsive
-    },
-    {
-      to: '/',
-      label: 'Styles',
-      icon: mdiPalette
-    },
-    {
-      to: '/profile',
-      label: 'Profile',
-      icon: mdiAccountCircle
-    },
-    {
-      to: '/login',
-      label: 'Login',
-      icon: mdiLock
-    },
-    {
-      to: '/error',
-      label: 'Error',
-      icon: mdiAlertCircle
-    },
-    {
-      label: 'Dropdown',
-      icon: mdiViewList,
-      menu: [
-        {
-          label: 'Item One'
-        },
-        {
-          label: 'Item Two'
-        }
-      ]
-    }
-  ],
-  'About',
-  [
-    {
-      href: 'https://tailwind-vue.justboil.me/',
-      label: 'Premium version',
-      icon: mdiMonitorShimmer,
-      target: '_blank'
-    },
-    {
-      href: 'https://github.com/justboil/admin-one-vue-tailwind',
-      label: 'GitHub',
-      icon: mdiGithub,
-      target: '_blank'
-    }
-  ]
+  // 'รายงาน',
+  // [
+  //   {
+  //     to: '/tables',
+  //     label: 'Tables',
+  //     icon: mdiTable
+  //   },
+  //   {
+  //     to: '/forms',
+  //     label: 'Forms',
+  //     icon: mdiSquareEditOutline
+  //   },
+  //   {
+  //     to: '/ui',
+  //     label: 'UI',
+  //     icon: mdiTelevisionGuide
+  //   },
+  //   {
+  //     to: '/responsive',
+  //     label: 'Responsive',
+  //     icon: mdiResponsive
+  //   },
+  //   {
+  //     to: '/',
+  //     label: 'Styles',
+  //     icon: mdiPalette
+  //   },
+  //   {
+  //     to: '/profile',
+  //     label: 'Profile',
+  //     icon: mdiAccountCircle
+  //   },
+  //   {
+  //     to: '/login',
+  //     label: 'Login',
+  //     icon: mdiLock
+  //   },
+  //   {
+  //     to: '/error',
+  //     label: 'Error',
+  //     icon: mdiAlertCircle
+  //   },
+  //   {
+  //     label: 'Dropdown',
+  //     icon: mdiViewList,
+  //     menu: [
+  //       {
+  //         label: 'Item One'
+  //       },
+  //       {
+  //         label: 'Item Two'
+  //       }
+  //     ]
+  //   }
+  // ],
+  // 'About',
+  // [
+  //   {
+  //     href: 'https://tailwind-vue.justboil.me/',
+  //     label: 'Premium version',
+  //     icon: mdiMonitorShimmer,
+  //     target: '_blank'
+  //   },
+  //   {
+  //     href: 'https://github.com/justboil/admin-one-vue-tailwind',
+  //     label: 'GitHub',
+  //     icon: mdiGithub,
+  //     target: '_blank'
+  //   }
+  // ]
 ]

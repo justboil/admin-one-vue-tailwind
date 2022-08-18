@@ -62,6 +62,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'วงแชร์',
+      loginRequired : true
+    },
+    path: '/groups',
+    name: 'group',
+    component: () => import('@/views/GroupView.vue')
+  },
+  {
+    meta: {
       title: 'Tables',
       loginRequired : true
     },

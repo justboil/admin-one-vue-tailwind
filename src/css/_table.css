@@ -7,8 +7,8 @@ thead {
 }
 
 tr {
-  @apply max-w-full block relative border-b-4 border-gray-100
-    lg:table-row lg:border-b-0 dark:border-gray-800;
+  @apply max-w-full block relative border-b-4 border-gray-100 
+    lg:table-row lg:border-b-0  dark:border-gray-800 ;
 }
 
 tr:last-child {

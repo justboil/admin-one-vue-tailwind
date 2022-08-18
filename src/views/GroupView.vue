@@ -24,133 +24,92 @@
         
         <CardBox
             v-if="itemsPaginated.length > 0"
-            :title="'รายการลูกแชร์ ' + countChecked()"
+            title="รายการวงแชร์"
             class="shadow-lg"
             has-table
         >
-            <div
-            class="p-3 bg-gray-100/50 dark:bg-gray-800"
-            >
-                <div  v-if="checkedRows.length == 0" class="grid lg:grid-cols-3 gap-3 mb-1">
-                    <FormControl
-                        v-model="addMember"
-                        icon="accountSearchOutline"
-                        class="shadow-lg"
-                        
-                        placeholder="กรอกชื่อเพื่อสร้างลูกแชร์"
-                    />
-                    <BaseButtons
-                    type="justify-center lg:justify-start"
-                    no-wrap
-                    >
-                        <BaseButton
-                            :disabled="addMember === ''"
-                            color="success"
-                            label="สร้างลูกแชร์"
-                            icon="accountPlusOutline"
-                            @click="createMember()"
-                        />
-                    </BaseButtons>
-                    <NotificationBar
-                      v-if="createError"
-                      color="warning"
-                      icon="alertCircleOutline"
-                    >
-                      {{ createError }}
-                      <template #right>
-                        <BaseButton
-                          icon="close"
-                          label=""
-                          color="danger"
-                          small
-                          @click="createError = ''"
-                        />
-                      </template>
-                    </NotificationBar>
-                </div>
-                <div v-else >
-                    <span
-                        v-for="checkedRow in checkedRows"
-                        :key="checkedRow.id"
-                        class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700 mb-1"
-                    >
-                        {{ checkedRow.name }}
-                    </span>
-                    
-                    <BaseButtons
-                        type="justify-start lg:justify-end"
-                        no-wrap
-                    >
-                        <BaseButton
-                    
-                        color="danger"
-                        label="ลบลูกแชร์ทั้งหมด"
-                        icon="trashCanOutline"
-                        small
-                        @click="isModalActive = true"
-                        />
-                    </BaseButtons>
-                </div>
-                
-                    
-            </div>
-
-            <table>
+        <div class="overflow-x-auto">
+          <table>
             <thead>
                 <tr >
                     <th />
                     <th />
-                    <th class="text-center" >ชื่อ</th>
-                    <th class="text-center">สถานะ </th>
+                    <th class="text-center">วงแชร์</th>
+                    <th class="text-center">ประเภทวง</th>
+                    <th class="text-center">เงินต้น</th>
+                    <th class="text-center">จำนวนมือ</th>
+                    <th class="text-center">วันที่เริ่มวง</th>
+                    <th class="text-center">วันที่จบวง</th>
+                    <th class="text-center">รอบการส่งเงิน</th>
+                    <th class="text-center">งวดปัจจุบัน</th>
+                    <th class="text-center">วันที่ปัจจุบัน/งวดถัดไป</th>
+                    <th class="text-center">สถานะ</th>
                     <th />
                 </tr>
             </thead>
             <tbody>
                 <tr
-                v-for="member in itemsPaginated"
-                :key="member.id"
+                v-for="group in itemsPaginated"
+                :key="group.id"
                 >
                     <TableCheckboxCell
-                        v-if="member.status === 'N'"
-                        :isChecked="member.checked"
+                        v-if="group.status === 'N'"
+                        :isChecked="group.checked"
                         class="text-center border-b-0 lg:w-6 before:hidden"
-                        @checked="checked($event, member)"
+                        @checked="checked($event, group)"
                     />
                     <td v-else/>
                     <td class="border-b-0 lg:w-6 before:hidden">
                         <UserAvatar
-                        :username="member.id"
+                        :username="group.id"
+                        api="bottts"
                         class="w-18 h-18 mx-auto lg:w-12 lg:h-12"
                         />
                     </td>
-                    <td data-label="ชื่อ">
-                        <FormControl
-                            v-if="member.edit"
-                            v-model="member.nameEdit"
-                            icon="pencilOutline"
-                            class="shadow-lg w-48"
-                            :placeholder="member.name"
-                        />
-                        <span v-else>{{ member.name }}</span>
+                    <td data-label="วงแชร์">
+                        <span>{{ group.name }}</span>
+                    </td>
+                    <td data-label="ประเภทวง">
+                        <span>{{ group.type }}</span>
+                    </td>
+                    <td data-label="เงินต้น">
+                        <span> {{ formatCurrency(group.amount) }} </span>
+                    </td>
+                    <td data-label="จำนวนมือ">
+                        <span>{{ group.numOfPlayer }}</span>
+                    </td>
+                    <td data-label="วันที่เริ่มวง">
+                        <span>{{ formatDate(group.startDate) }}</span>
+                    </td>
+                    <td data-label="วันที่จบวง">
+                        <span>{{ formatDate(group.endDate) }}</span>
+                    </td>
+                    <td data-label="รอบการส่งเงิน">
+                        <span>{{ group.payRound }}</span>
+                    </td>
+                    <td data-label="งวดปัจจุบัน">
+                        <span>{{ group.period }}</span>
+                    </td>
+                    <td data-label="วันที่ปัจจุบัน/งวดถัดไป">
+                        <span>{{ group.actionDate }}</span>
                     </td>
                     <td data-label="สถานะ">
-                        <span> {{ member.status == "Y" ? "เล่น " + member.numberOfGroup + " วง" : "ว่าง" }} </span>
+                        <span>{{ group.status }}</span>
                     </td>
                     <td class="before:hidden lg:w-6 whitespace-nowrap">
                         <BaseButtons
                         type="justify-start lg:justify-end"
                         no-wrap
-                        v-if="!member.edit"
                         >
                             <BaseButton
-                                :disabled="member.status !== 'N'"
+                                :disabled="group.status !== 'N'"
                                 color="danger"
                                 label="ลบ"
                                 icon="trashCanOutline"
                                 small
                                 @click="confirm(
-                                    'ยืนยันลบลูกแชร์ '+member.name+' ใช่หรือไม่ ?',
-                                    member.id,
+                                    'ยืนยันลบลูกแชร์ '+group.name+' ใช่หรือไม่ ?',
+                                    group.id,
                                     deleteMember
                                 )"
                             />
@@ -159,41 +118,22 @@
                                 label="แก้ไข"
                                 icon="pencilOutline"
                                 small
-                                @click="edit(member.id)"
+                                @click="edit(group.id)"
                             />
                             <BaseButton
                                 color="info"
                                 label="รายละเอียด"
                                 icon="accountDetailsOutline"
                                 small
-                                @click="detail(member.id)"
+                                @click="detail(group.id)"
                             />
-                        </BaseButtons>
-                        <BaseButtons
-                        type="justify-start"
-                        no-wrap
-                        v-else
-                        >
-                            <BaseButton
-                                color="info"
-                                label="บันทึก"
-                                icon="contentSave"
-                                small
-                                @click="update(member)"
-                            />
-                            <BaseButton
-                                color="danger"
-                                label="ยกเลิก"
-                                icon="close"
-                                small
-                                @click="cancelEdit(member)"
-                            />
-                            
                         </BaseButtons>
                     </td>
                 </tr>
             </tbody>
             </table>
+        </div>
+          
             <div
             class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800"
             >
@@ -232,12 +172,16 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import FormControl from '@/components/FormControl.vue'
 import NotificationBar from '@/components/NotificationBar.vue'
 
-import MemberService from '@/services/member'
+import GroupService from '@/services/group'
+import {getGroupType} from '@/constants/group'
+
+import numeral from 'numeral'
+import moment from 'moment'
 
 export default {
     data(){
         return {
-            titleStack : ['ลูกแชร์'],
+            titleStack : ['วงแชร์'],
             textConfirm : "",
             modalConfirm : false,
             funcConfirm : Function,
@@ -247,7 +191,6 @@ export default {
             checkedRows : [],
             items : [],
             searchMember : "",
-            addMember : "",
             createError : ""
         }
     },
@@ -257,7 +200,7 @@ export default {
       }
     },
     created() {
-      this.getMembers()
+      this.getGroups()
     },
     computed : {
       itemsPaginated() {
@@ -280,8 +223,8 @@ export default {
       }
     },
     methods: {
-      async getMembers(searchMember = ""){
-        const resp = await MemberService.getAll(searchMember);
+      async getGroups(searchGroup = ""){
+        const resp = await GroupService.listGroup();
         if(resp.data){
           this.items = resp.data.data
         }
@@ -378,6 +321,12 @@ export default {
       },
       formatCurrency(amt){
         return numeral(amt).format(0,0)
+      },
+      formatDate(date){
+        return moment(new Date(date)).format('DD/MM/YYYY');
+      },
+      getType(type){
+        return getGroupType(type);
       }
     },
     components : {
