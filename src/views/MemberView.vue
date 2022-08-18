@@ -48,9 +48,25 @@
                             color="success"
                             label="สร้างลูกแชร์"
                             icon="accountPlusOutline"
-                            
+                            @click="createMember()"
                         />
                     </BaseButtons>
+                    <NotificationBar
+                      v-if="createError"
+                      color="warning"
+                      icon="alertCircleOutline"
+                    >
+                      {{ createError }}
+                      <template #right>
+                        <BaseButton
+                          icon="close"
+                          label=""
+                          color="danger"
+                          small
+                          @click="createError = ''"
+                        />
+                      </template>
+                    </NotificationBar>
                 </div>
                 <div v-else >
                     <span
@@ -69,7 +85,7 @@
                     
                         color="danger"
                         label="ลบลูกแชร์ทั้งหมด"
-                        icon="close"
+                        icon="trashCanOutline"
                         small
                         @click="isModalActive = true"
                         />
@@ -104,15 +120,16 @@
                     <td class="border-b-0 lg:w-6 before:hidden">
                         <UserAvatar
                         :username="member.id"
-                        class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+                        class="w-18 h-18 mx-auto lg:w-12 lg:h-12"
                         />
                     </td>
                     <td data-label="ลูกแชร์">
                         <FormControl
                             v-if="member.edit"
-                            v-model="member.name"
+                            v-model="member.nameEdit"
                             icon="pencilOutline"
                             class="shadow-lg w-48"
+                            :placeholder="member.name"
                         />
                         <span v-else>{{ member.name }}</span>
                     </td>
@@ -162,7 +179,7 @@
                                 label="บันทึก"
                                 icon="contentSave"
                                 small
-                                @click="saveEdit(member)"
+                                @click="update(member)"
                             />
                             <BaseButton
                                 color="danger"
@@ -213,6 +230,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import FormControl from '@/components/FormControl.vue'
+import NotificationBar from '@/components/NotificationBar.vue'
 
 import MemberService from '@/services/member'
 
@@ -229,7 +247,8 @@ export default {
             checkedRows : [],
             items : [],
             searchMember : "",
-            addMember : ""
+            addMember : "",
+            createError : ""
         }
     },
     watch : {
@@ -273,6 +292,44 @@ export default {
               this.idConfirm = null
               this.getMembers()
           }
+      },
+      createMember(){
+        this.createError = ""
+        this.items.map((item) => {
+          if(item.name === this.addMember){
+            this.createError = "มีชื่อลูกแชร์นี้อยู่แล้ว กรุณาใช้ชื่ออื่น"
+          }
+        })
+        if(this.createError === ""){
+          MemberService.create({name:this.addMember}).then(
+            (resp) => {
+              if(resp.data){
+                this.getMembers()
+                this.addMember = ""
+                MemberService.all()
+              }
+            }
+          );
+        }
+      },
+      update(member){
+        this.createError = ""
+        this.items.map((item) => {
+          if(item.name === member.nameEdit){
+            this.createError = "มีชื่อลูกแชร์นี้อยู่แล้ว กรุณาใช้ชื่ออื่น"
+          }
+        })
+        if(this.createError === ""){
+          MemberService.update(member.id,member.nameEdit).then(
+            (resp) => {
+              if(resp.data){
+                this.getMembers()
+                member.edit = false
+              }
+            }
+          )
+          
+        }
       },
       edit(memberId){
         this.items.map((item) => {
@@ -335,7 +392,8 @@ export default {
         UserAvatar,
         CardBox,
         FormControl,
-        BaseIcon
+        BaseIcon,
+        NotificationBar
     }
 }
 </script>

@@ -2,7 +2,7 @@
   "name": "admin-one-vue-tailwind",
   "version": "3.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --mode dev",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"

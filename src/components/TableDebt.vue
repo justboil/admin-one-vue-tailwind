@@ -89,7 +89,7 @@
           <td class="border-b-0 lg:w-6 before:hidden">
             <UserAvatar
               :username="member.memberId"
-              class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+              class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
             />
           </td>
           <td data-label="ลูกแชร์">
@@ -200,7 +200,7 @@ export default {
           modalConfirm : false,
           funcConfirm : Function,
           idConfirm : null,
-          perPage :5,
+          perPage :10,
           currentPage : 0,
           checkedRows : [],
           items : [],
