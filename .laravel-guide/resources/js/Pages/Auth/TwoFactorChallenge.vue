@@ -11,7 +11,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import FormValidationErrors from '@/components/FormValidationErrors.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 
-const recovery = ref(false);
+const recovery = ref(false)
 
 const form = useForm({
   code: '',
