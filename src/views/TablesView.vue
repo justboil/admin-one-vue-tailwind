@@ -7,6 +7,7 @@ import CardBox from '@/components/CardBox.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
 </script>
 
 <template>
@@ -74,7 +75,9 @@ import BaseButton from '@/components/BaseButton.vue'
         <b>Empty table.</b> When there's nothing to show
       </NotificationBar>
 
-      <CardBox empty />
+      <CardBox>
+        <CardBoxComponentEmpty />
+      </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
 </template>
