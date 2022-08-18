@@ -16,7 +16,7 @@ const styleStore = useStyleStore()
 
 const isDropdownActive = ref(false)
 
-const toggleDropdownIcon = computed(() => isDropdownActive.value ? mdiChevronUp : mdiChevronDown)
+const toggleDropdownIcon = computed(() => isDropdownActive.value ? 'chevronUp' : 'chevronDown')
 
 const toggle = () => {
   isDropdownActive.value = !isDropdownActive.value

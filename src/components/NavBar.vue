@@ -206,7 +206,7 @@ const logout = () => {
           @click.prevent="toggleLightDark"
         >
           <NavBarItemLabel
-            :icon="mdiThemeLightDark"
+            icon="themeLightDark"
             label="Light/Dark"
             is-desktop-icon-only
           />
