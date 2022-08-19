@@ -9,7 +9,8 @@ import {
   mdiAlert,
   mdiAlertCircle,
   mdiOpenInNew,
-  mdiClose
+  mdiClose,
+  mdiTrendingUp
 } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -25,6 +26,7 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
+import PillTag from '@/components/PillTag.vue'
 
 const modalOneActive = ref(false)
 
@@ -45,6 +47,14 @@ const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') >
 const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
 
 const buttonsRounded = computed(() => buttonSettingsModel.value.indexOf('rounded') > -1)
+
+const pillsSettingsModel = ref(['icon'])
+
+const pillsOutline = computed(() => pillsSettingsModel.value.indexOf('outline') > -1)
+
+const pillsSmall = computed(() => pillsSettingsModel.value.indexOf('small') > -1)
+
+const pillsIcon = computed(() => pillsSettingsModel.value.indexOf('icon') > -1 ? mdiTrendingUp : null)
 
 const styleStore = useStyleStore()
 </script>
@@ -160,7 +170,7 @@ const styleStore = useStyleStore()
           @click="modalThreeActive = true"
         >
           <CardBoxComponentTitle title="Success" />
-          
+
           <div class="space-y-3">
             <p>Click to see in action</p>
           </div>
@@ -442,6 +452,66 @@ const styleStore = useStyleStore()
             :outline="buttonsOutline"
             :disabled="buttonsDisabled"
             :rounded-full="buttonsRounded"
+          />
+        </BaseButtons>
+      </CardBox>
+    </SectionMain>
+
+    <SectionTitle>Pills</SectionTitle>
+
+    <SectionMain>
+      <CardBox>
+        <FormField label="Settings">
+          <FormCheckRadioGroup
+            v-model="pillsSettingsModel"
+            name="buttons-switch"
+            type="switch"
+            :options="{ outline: 'Outline', small: 'Small', icon: 'Icon' }"
+          />
+        </FormField>
+
+        <BaseDivider />
+
+        <BaseButtons>
+          <PillTag
+            type="contrast"
+            text="Contrast"
+            :small="pillsSmall"
+            :outline="pillsOutline"
+            :icon="pillsIcon"
+            wrapped
+          />
+          <PillTag
+            type="info"
+            text="Info"
+            :small="pillsSmall"
+            :outline="pillsOutline"
+            :icon="pillsIcon"
+            wrapped
+          />
+          <PillTag
+            type="success"
+            text="Success"
+            :small="pillsSmall"
+            :outline="pillsOutline"
+            :icon="pillsIcon"
+            wrapped
+          />
+          <PillTag
+            type="warning"
+            text="Warning"
+            :small="pillsSmall"
+            :outline="pillsOutline"
+            :icon="pillsIcon"
+            wrapped
+          />
+          <PillTag
+            type="danger"
+            text="Danger"
+            :small="pillsSmall"
+            :outline="pillsOutline"
+            :icon="pillsIcon"
+            wrapped
           />
         </BaseButtons>
       </CardBox>
