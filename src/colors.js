@@ -36,10 +36,10 @@ export const colorsOutline = {
 export const getButtonColor = (color, isOutlined, hasHover, isActive = false) => {
   const colors = {
     ring: {
-      white: 'ring-black',
-      whiteDark: 'ring-black',
-      lightDark: 'ring-black',
-      contrast: 'ring-gray-300 dark:ring-gray-100',
+      white: 'ring-gray-200 dark:ring-gray-500',
+      whiteDark: 'ring-gray-200 dark:ring-gray-500',
+      lightDark: 'ring-gray-200 dark:ring-gray-500',
+      contrast: 'ring-gray-300 dark:ring-gray-400',
       success: 'ring-emerald-300 dark:ring-emerald-700',
       danger: 'ring-red-300 dark:ring-red-700',
       warning: 'ring-yellow-300 dark:ring-yellow-700',
