@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useMainStore } from '@/stores/main'
-import { useStyleStore } from '@/stores/style'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
@@ -13,8 +12,6 @@ import UserAvatar from '@/components/UserAvatar.vue'
 defineProps({
   checkable: Boolean
 })
-
-const styleStore = useStyleStore()
 
 const mainStore = useMainStore()
 
@@ -80,7 +77,7 @@ const checked = (isChecked, client) => {
 
   <CardBoxModal
     v-model="isModalDangerActive"
-    large-title="Please confirm"
+    title="Please confirm"
     button="danger"
     has-cancel
   >
@@ -191,8 +188,8 @@ const checked = (isChecked, client) => {
           :key="page"
           :active="page === currentPage"
           :label="page + 1"
+          color="lightDark"
           small
-          :outline="styleStore.darkMode"
           @click="currentPage = page"
         />
       </BaseButtons>

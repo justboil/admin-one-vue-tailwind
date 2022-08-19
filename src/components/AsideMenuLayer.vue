@@ -39,7 +39,7 @@ const menuClick = (event, item) => {
   >
     <div
       :class="styleStore.asideStyle"
-      class="lg:rounded-xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
+      class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
     >
       <div
         :class="styleStore.asideBrandStyle"

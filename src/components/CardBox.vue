@@ -7,7 +7,7 @@ import CardBoxComponentHeader from '@/components/CardBoxComponentHeader.vue'
 const props = defineProps({
   rounded: {
     type: String,
-    default: 'rounded-xl'
+    default: 'rounded-2xl'
   },
   flex: {
     type: String,

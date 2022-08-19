@@ -83,11 +83,12 @@ const componentClass = computed(() => {
     'duration-150',
     'border',
     props.roundedFull ? 'rounded-full' : 'rounded',
-    props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
-    getButtonColor(props.color, props.outline, !props.disabled)
+    getButtonColor(props.color, props.outline, !props.disabled, props.active)
   ]
 
-  if (props.small) {
+  if (!props.label && props.icon) {
+    base.push('p-1')
+  } else if (props.small) {
     base.push(
       'text-sm',
       props.roundedFull ? 'px-3 py-1' : 'p-1'
@@ -98,7 +99,6 @@ const componentClass = computed(() => {
       props.roundedFull ? 'px-6' : 'px-3'
     )
   }
-
 
   if (props.disabled) {
     base.push('cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')

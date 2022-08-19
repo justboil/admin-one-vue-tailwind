@@ -3,12 +3,11 @@ import { ref, computed } from 'vue'
 import { useStyleStore } from '@/stores/style.js'
 import {
   mdiMonitorCellphone,
-  mdiSelectColor,
   mdiContrastCircle,
-  mdiInformationOutline,
-  mdiCheckCircleOutline,
+  mdiInformation,
+  mdiCheckCircle,
+  mdiAlert,
   mdiAlertCircle,
-  mdiAlertCircleOutline,
   mdiOpenInNew,
   mdiClose
 } from '@mdi/js'
@@ -25,6 +24,7 @@ import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
+import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 
 const modalOneActive = ref(false)
 
@@ -58,23 +58,25 @@ const styleStore = useStyleStore()
       has-cancel
     >
       <p>This is sample modal</p>
+      <p>Lorem ipsum dolor</p>
     </CardBoxModal>
 
     <CardBoxModal
       v-model="modalTwoActive"
-      large-title="Unhandled exception"
+      title="Unhandled exception"
       button="danger"
-      shake
     >
       <p>This is sample modal</p>
+      <p>Lorem ipsum dolor</p>
     </CardBoxModal>
 
     <CardBoxModal
       v-model="modalThreeActive"
-      large-title="Success"
+      title="Success"
       button="success"
     >
       <p>This is sample modal</p>
+      <p>Lorem ipsum dolor</p>
     </CardBoxModal>
 
     <SectionTitle first>
@@ -100,12 +102,18 @@ const styleStore = useStyleStore()
     <SectionMain>
       <div class="space-y-12">
         <CardBox
-          title="Confirm modal"
-          :header-button-icon="mdiClose"
           class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
           is-hoverable
           @click="modalOneActive = true"
         >
+          <CardBoxComponentTitle title="Please confirm action">
+            <BaseButton
+              :icon="mdiClose"
+              color="whiteDark"
+              small
+              rounded-full
+            />
+          </CardBoxComponentTitle>
           <div class="space-y-3">
             <p>Click to see in action</p>
           </div>
@@ -130,10 +138,9 @@ const styleStore = useStyleStore()
           is-hoverable
           @click="modalTwoActive = true"
         >
+          <CardBoxComponentTitle title="Unhandled exception" />
+          
           <div class="space-y-3">
-            <h1 class="text-2xl">
-              Unhandled exception
-            </h1>
             <p>Click to see in action</p>
           </div>
 
@@ -152,10 +159,9 @@ const styleStore = useStyleStore()
           is-hoverable
           @click="modalThreeActive = true"
         >
+          <CardBoxComponentTitle title="Success" />
+          
           <div class="space-y-3">
-            <h1 class="text-2xl">
-              Success
-            </h1>
             <p>Click to see in action</p>
           </div>
 
@@ -186,16 +192,16 @@ const styleStore = useStyleStore()
     <SectionMain>
       <NotificationBar
         color="info"
-        :icon="mdiInformationOutline"
+        :icon="mdiInformation"
         :outline="notificationsOutline"
       >
         <b>Info state</b>. NotificationBar
         <template #right>
           <BaseButton
-            :icon="mdiOpenInNew"
             label="Button"
-            color="info"
+            :color="notificationsOutline ? 'info' : 'white'"
             :outline="notificationsOutline"
+            rounded-full
             small
           />
         </template>
@@ -203,16 +209,16 @@ const styleStore = useStyleStore()
 
       <NotificationBar
         color="success"
-        :icon="mdiCheckCircleOutline"
+        :icon="mdiCheckCircle"
         :outline="notificationsOutline"
       >
         <b>Success state</b>. NotificationBar
         <template #right>
           <BaseButton
-            :icon="mdiOpenInNew"
             label="Button"
-            color="success"
+            :color="notificationsOutline ? 'success' : 'white'"
             :outline="notificationsOutline"
+            rounded-full
             small
           />
         </template>
@@ -220,16 +226,16 @@ const styleStore = useStyleStore()
 
       <NotificationBar
         color="warning"
-        :icon="mdiAlertCircleOutline"
+        :icon="mdiAlert"
         :outline="notificationsOutline"
       >
         <b>Warning state</b>. NotificationBar
         <template #right>
           <BaseButton
-            :icon="mdiOpenInNew"
             label="Button"
-            color="warning"
+            :color="notificationsOutline ? 'warning' : 'white'"
             :outline="notificationsOutline"
+            rounded-full
             small
           />
         </template>
@@ -243,10 +249,10 @@ const styleStore = useStyleStore()
         <b>Danger state</b>. NotificationBar
         <template #right>
           <BaseButton
-            :icon="mdiOpenInNew"
             label="Button"
-            color="danger"
+            :color="notificationsOutline ? 'danger' : 'white'"
             :outline="notificationsOutline"
+            rounded-full
             small
           />
         </template>
@@ -258,14 +264,6 @@ const styleStore = useStyleStore()
         :outline="notificationsOutline"
       >
         <b>Contrast</b>. NotificationBar
-      </NotificationBar>
-
-      <NotificationBar
-        color="white"
-        :icon="mdiSelectColor"
-        :outline="notificationsOutline"
-      >
-        <b>White</b>. NotificationBar
       </NotificationBar>
     </SectionMain>
 
@@ -286,7 +284,7 @@ const styleStore = useStyleStore()
 
         <BaseButtons>
           <BaseButton
-            color="white"
+            color="lightDark"
             label="Button"
             :small="buttonsSmall"
             :outline="buttonsOutline"
@@ -339,7 +337,7 @@ const styleStore = useStyleStore()
 
         <BaseButtons>
           <BaseButton
-            color="white"
+            color="lightDark"
             label="Button"
             :icon="mdiOpenInNew"
             :small="buttonsSmall"
@@ -398,7 +396,7 @@ const styleStore = useStyleStore()
 
         <BaseButtons>
           <BaseButton
-            color="white"
+            color="lightDark"
             :icon="mdiOpenInNew"
             :small="buttonsSmall"
             :outline="buttonsOutline"

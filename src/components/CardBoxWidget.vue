@@ -59,7 +59,7 @@ defineProps({
         :icon="mdiCog"
         icon-w="w-4"
         icon-h="h-4"
-        color="white"
+        color="lightDark"
         small
       />
     </BaseLevel>

@@ -5,15 +5,12 @@ import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
+import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 
 const props = defineProps({
   title: {
     type: String,
-    default: null
-  },
-  largeTitle: {
-    type: String,
-    default: null
+    required: true
   },
   button: {
     type: String,
@@ -45,6 +42,12 @@ const confirmCancel = mode => {
 const confirm = () => confirmCancel('confirm')
 
 const cancel = () => confirmCancel('cancel')
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && value.value) {
+    cancel()
+  }
+})
 </script>
 
 <template>
@@ -54,19 +57,21 @@ const cancel = () => confirmCancel('cancel')
   >
     <CardBox
       v-show="value"
-      :title="title"
       class="shadow-lg max-h-modal w-11/12 md:w-3/5 lg:w-2/5 xl:w-4/12 z-50"
-      :header-button-icon="mdiClose"
       modal
-      @header-button-click="cancel"
     >
+      <CardBoxComponentTitle :title="title">
+        <BaseButton
+          v-if="hasCancel"
+          :icon="mdiClose"
+          color="whiteDark"
+          small
+          rounded-full
+          @click.prevent="cancel"
+        />
+      </CardBoxComponentTitle>
+      
       <div class="space-y-3">
-        <h1
-          v-if="largeTitle"
-          class="text-2xl"
-        >
-          {{ largeTitle }}
-        </h1>
         <slot />
       </div>
 
