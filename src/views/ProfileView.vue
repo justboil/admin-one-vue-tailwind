@@ -1,49 +1,53 @@
 <script setup>
-import { reactive } from 'vue'
-import { useMainStore } from '@/stores/main'
-import { mdiAccount, mdiAccountCircle, mdiLock, mdiMail, mdiAsterisk, mdiFormTextboxPassword, mdiGithub } from '@mdi/js'
-import SectionMain from '@/components/SectionMain.vue'
-import CardBox from '@/components/CardBox.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import FormFilePicker from '@/components/FormFilePicker.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import UserCard from '@/components/UserCard.vue'
-import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import { reactive } from "vue";
+import { useMainStore } from "@/stores/main";
+import {
+  mdiAccount,
+  mdiAccountCircle,
+  mdiLock,
+  mdiMail,
+  mdiAsterisk,
+  mdiFormTextboxPassword,
+  mdiGithub,
+} from "@mdi/js";
+import SectionMain from "@/components/SectionMain.vue";
+import CardBox from "@/components/CardBox.vue";
+import BaseDivider from "@/components/BaseDivider.vue";
+import FormField from "@/components/FormField.vue";
+import FormControl from "@/components/FormControl.vue";
+import FormFilePicker from "@/components/FormFilePicker.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import BaseButtons from "@/components/BaseButtons.vue";
+import UserCard from "@/components/UserCard.vue";
+import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 
-const mainStore = useMainStore()
+const mainStore = useMainStore();
 
 const profileForm = reactive({
   name: mainStore.userName,
-  email: mainStore.userEmail
-})
+  email: mainStore.userEmail,
+});
 
 const passwordForm = reactive({
-  password_current: '',
-  password: '',
-  password_confirmation: ''
-})
+  password_current: "",
+  password: "",
+  password_confirmation: "",
+});
 
 const submitProfile = () => {
-  mainStore.setUser(profileForm)
-}
+  mainStore.setUser(profileForm);
+};
 
 const submitPass = () => {
   //
-}
+};
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton
-        :icon="mdiAccount"
-        title="Profile"
-        main
-      >
+      <SectionTitleLineWithButton :icon="mdiAccount" title="Profile" main>
         <BaseButton
           href="https://github.com/justboil/admin-one-vue-tailwind"
           target="_blank"
@@ -64,17 +68,11 @@ const submitPass = () => {
           form
           @submit.prevent="submitProfile"
         >
-          <FormField
-            label="Avatar"
-            help="Max 500kb"
-          >
+          <FormField label="Avatar" help="Max 500kb">
             <FormFilePicker />
           </FormField>
 
-          <FormField
-            label="Name"
-            help="Required. Your name"
-          >
+          <FormField label="Name" help="Required. Your name">
             <FormControl
               v-model="profileForm.name"
               :icon="mdiAccount"
@@ -83,10 +81,7 @@ const submitPass = () => {
               autocomplete="username"
             />
           </FormField>
-          <FormField
-            label="E-mail"
-            help="Required. Your e-mail"
-          >
+          <FormField label="E-mail" help="Required. Your e-mail">
             <FormControl
               v-model="profileForm.email"
               :icon="mdiMail"
@@ -99,16 +94,8 @@ const submitPass = () => {
 
           <template #footer>
             <BaseButtons>
-              <BaseButton
-                color="info"
-                type="submit"
-                label="Submit"
-              />
-              <BaseButton
-                color="info"
-                label="Options"
-                outline
-              />
+              <BaseButton color="info" type="submit" label="Submit" />
+              <BaseButton color="info" label="Options" outline />
             </BaseButtons>
           </template>
         </CardBox>
@@ -135,10 +122,7 @@ const submitPass = () => {
 
           <BaseDivider />
 
-          <FormField
-            label="New password"
-            help="Required. New password"
-          >
+          <FormField label="New password" help="Required. New password">
             <FormControl
               v-model="passwordForm.password"
               :icon="mdiFormTextboxPassword"
@@ -165,16 +149,8 @@ const submitPass = () => {
 
           <template #footer>
             <BaseButtons>
-              <BaseButton
-                type="submit"
-                color="info"
-                label="Submit"
-              />
-              <BaseButton
-                color="info"
-                label="Options"
-                outline
-              />
+              <BaseButton type="submit" color="info" label="Submit" />
+              <BaseButton color="info" label="Options" outline />
             </BaseButtons>
           </template>
         </CardBox>

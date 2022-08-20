@@ -1,18 +1,18 @@
 <script setup>
-import NavBarItem from '@/components/NavBarItem.vue'
+import NavBarItem from "@/components/NavBarItem.vue";
 
 defineProps({
   menu: {
     type: Array,
-    default: () => []
-  }
-})
+    default: () => [],
+  },
+});
 
-const emit = defineEmits(['menu-click'])
+const emit = defineEmits(["menu-click"]);
 
 const menuClick = (event, item) => {
-  emit('menu-click', event, item)
-}
+  emit("menu-click", event, item);
+};
 </script>
 
 <template>

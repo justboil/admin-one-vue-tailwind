@@ -1,32 +1,26 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch } from "vue";
 
 defineProps({
   type: {
     type: String,
-    default: 'td'
-  }
-})
+    default: "td",
+  },
+});
 
-const emit = defineEmits(['checked'])
+const emit = defineEmits(["checked"]);
 
-const checked = ref(false)
+const checked = ref(false);
 
-watch(checked, newVal => {
-  emit('checked', newVal)
-})
+watch(checked, (newVal) => {
+  emit("checked", newVal);
+});
 </script>
 
 <template>
-  <component
-    :is="type"
-    class="lg:w-1"
-  >
+  <component :is="type" class="lg:w-1">
     <label class="checkbox">
-      <input
-        v-model="checked"
-        type="checkbox"
-      >
+      <input v-model="checked" type="checkbox" />
       <span class="check" />
     </label>
   </component>

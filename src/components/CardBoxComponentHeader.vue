@@ -1,39 +1,37 @@
 <script setup>
-import BaseIcon from '@/components/BaseIcon.vue'
+import BaseIcon from "@/components/BaseIcon.vue";
 
 defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   buttonIcon: {
     type: String,
-    default: null
-  }
-})
+    default: null,
+  },
+});
 
-const emit = defineEmits(['button-click'])
+const emit = defineEmits(["button-click"]);
 
-const buttonClick = event => {
-  emit('button-click', event)
-}
+const buttonClick = (event) => {
+  emit("button-click", event);
+};
 </script>
 
 <template>
-  <header class="flex items-stretch border-b border-gray-100 dark:border-slate-800">
+  <header
+    class="flex items-stretch border-b border-gray-100 dark:border-slate-800"
+  >
     <div
       class="flex items-center py-3 grow font-bold"
-      :class="[ icon ? 'px-4' : 'px-6' ]"
+      :class="[icon ? 'px-4' : 'px-6']"
     >
-      <BaseIcon
-        v-if="icon"
-        :path="icon"
-        class="mr-3"
-      />
+      <BaseIcon v-if="icon" :path="icon" class="mr-3" />
       {{ title }}
     </div>
     <button

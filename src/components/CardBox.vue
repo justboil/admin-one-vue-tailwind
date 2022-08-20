@@ -1,64 +1,64 @@
 <script setup>
-import { computed, useSlots } from 'vue'
-import CardBoxComponentBody from '@/components/CardBoxComponentBody.vue'
-import CardBoxComponentFooter from '@/components/CardBoxComponentFooter.vue'
-import CardBoxComponentHeader from '@/components/CardBoxComponentHeader.vue'
+import { computed, useSlots } from "vue";
+import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
+import CardBoxComponentFooter from "@/components/CardBoxComponentFooter.vue";
+import CardBoxComponentHeader from "@/components/CardBoxComponentHeader.vue";
 
 const props = defineProps({
   rounded: {
     type: String,
-    default: 'rounded-2xl'
+    default: "rounded-2xl",
   },
   flex: {
     type: String,
-    default: 'flex-col'
+    default: "flex-col",
   },
   title: {
     type: String,
-    default: null
+    default: null,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   headerButtonIcon: {
     type: String,
-    default: null
+    default: null,
   },
   hasComponentLayout: Boolean,
   hasTable: Boolean,
   form: Boolean,
   isHoverable: Boolean,
-  modal: Boolean
-})
+  modal: Boolean,
+});
 
-const emit = defineEmits(['submit', 'header-button-click'])
+const emit = defineEmits(["submit", "header-button-click"]);
 
-const slots = useSlots()
+const slots = useSlots();
 
-const hasFooterSlot = computed(() => slots.footer && !!slots.footer())
+const hasFooterSlot = computed(() => slots.footer && !!slots.footer());
 
 const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.modal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70'
-  ]
+    props.modal ? "dark:bg-slate-900" : "dark:bg-slate-900/70",
+  ];
 
   if (props.isHoverable) {
-    base.push('hover:shadow-lg transition-shadow duration-500')
+    base.push("hover:shadow-lg transition-shadow duration-500");
   }
 
-  return base
-})
+  return base;
+});
 
-const submit = event => {
-  emit('submit', event)
-}
+const submit = (event) => {
+  emit("submit", event);
+};
 
-const headerButtonClick = event => {
-  emit('header-button-click', event)
-}
+const headerButtonClick = (event) => {
+  emit("header-button-click", event);
+};
 </script>
 
 <template>

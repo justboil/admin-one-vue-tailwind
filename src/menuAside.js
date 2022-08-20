@@ -9,71 +9,71 @@ import {
   mdiViewList,
   mdiTelevisionGuide,
   mdiResponsive,
-  mdiPalette
-} from '@mdi/js'
+  mdiPalette,
+} from "@mdi/js";
 
 export default [
   {
-    to: '/dashboard',
+    to: "/dashboard",
     icon: mdiMonitor,
-    label: 'Dashboard'
+    label: "Dashboard",
   },
   {
-    to: '/tables',
-    label: 'Tables',
-    icon: mdiTable
+    to: "/tables",
+    label: "Tables",
+    icon: mdiTable,
   },
   {
-    to: '/forms',
-    label: 'Forms',
-    icon: mdiSquareEditOutline
+    to: "/forms",
+    label: "Forms",
+    icon: mdiSquareEditOutline,
   },
   {
-    to: '/ui',
-    label: 'UI',
-    icon: mdiTelevisionGuide
+    to: "/ui",
+    label: "UI",
+    icon: mdiTelevisionGuide,
   },
   {
-    to: '/responsive',
-    label: 'Responsive',
-    icon: mdiResponsive
+    to: "/responsive",
+    label: "Responsive",
+    icon: mdiResponsive,
   },
   {
-    to: '/',
-    label: 'Styles',
-    icon: mdiPalette
+    to: "/",
+    label: "Styles",
+    icon: mdiPalette,
   },
   {
-    to: '/profile',
-    label: 'Profile',
-    icon: mdiAccountCircle
+    to: "/profile",
+    label: "Profile",
+    icon: mdiAccountCircle,
   },
   {
-    to: '/login',
-    label: 'Login',
-    icon: mdiLock
+    to: "/login",
+    label: "Login",
+    icon: mdiLock,
   },
   {
-    to: '/error',
-    label: 'Error',
-    icon: mdiAlertCircle
+    to: "/error",
+    label: "Error",
+    icon: mdiAlertCircle,
   },
   {
-    label: 'Dropdown',
+    label: "Dropdown",
     icon: mdiViewList,
     menu: [
       {
-        label: 'Item One'
+        label: "Item One",
       },
       {
-        label: 'Item Two'
-      }
-    ]
+        label: "Item Two",
+      },
+    ],
   },
   {
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
-    label: 'GitHub',
+    href: "https://github.com/justboil/admin-one-vue-tailwind",
+    label: "GitHub",
     icon: mdiGithub,
-    target: '_blank'
-  }
-]
+    target: "_blank",
+  },
+];

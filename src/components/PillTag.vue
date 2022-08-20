@@ -1,48 +1,47 @@
 <script setup>
-import { computed } from 'vue'
-import { colorsBgLight, colorsOutline } from '@/colors.js'
-import BaseIcon from '@/components/BaseIcon.vue'
+import { computed } from "vue";
+import { colorsBgLight, colorsOutline } from "@/colors.js";
+import BaseIcon from "@/components/BaseIcon.vue";
 
 const props = defineProps({
   text: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   small: Boolean,
   outline: Boolean,
-  wrapped: Boolean
-})
+  wrapped: Boolean,
+});
 
 const componentClass = computed(() => {
-  const baseColor = props.outline ? colorsOutline[props.type] : colorsBgLight[props.type]
+  const baseColor = props.outline
+    ? colorsOutline[props.type]
+    : colorsBgLight[props.type];
 
   const base = [
-    'border',
-    props.small ? 'py-1 px-4 text-xs rounded-full' : 'py-2 px-6 rounded-full',
-    baseColor
-  ]
+    "border",
+    props.small ? "py-1 px-4 text-xs rounded-full" : "py-2 px-6 rounded-full",
+    baseColor,
+  ];
 
   if (!props.wrapped) {
-    base.push(props.small ? 'mr-1.5' : 'mr-3', 'last:mr-0')
+    base.push(props.small ? "mr-1.5" : "mr-3", "last:mr-0");
   }
 
-  return base
-})
+  return base;
+});
 </script>
 
 <template>
-  <div
-    class="inline-flex items-center capitalize"
-    :class="componentClass"
-  >
+  <div class="inline-flex items-center capitalize" :class="componentClass">
     <BaseIcon
       v-if="icon"
       :path="icon"

@@ -1,15 +1,15 @@
 <script setup>
-import { colorsBgLight } from '@/colors.js'
+import { colorsBgLight } from "@/colors.js";
 
 defineProps({
   color: {
     type: String,
-    required: true
+    required: true,
   },
   isPlacedWithHeader: {
-    type: Boolean
-  }
-})
+    type: Boolean,
+  },
+});
 </script>
 
 <template>

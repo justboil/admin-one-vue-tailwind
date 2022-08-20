@@ -1,8 +1,7 @@
 <script setup>
-import { mdiGithub } from '@mdi/js'
-import BaseButton from '@/components/BaseButton.vue'
-import SectionBanner from '@/components/SectionBanner.vue'
-
+import { mdiGithub } from "@mdi/js";
+import BaseButton from "@/components/BaseButton.vue";
+import SectionBanner from "@/components/SectionBanner.vue";
 </script>
 <template>
   <SectionBanner bg="pinkRed">
@@ -18,5 +17,5 @@ import SectionBanner from '@/components/SectionBanner.vue'
         rounded-full
       />
     </div>
-  </SectionBanner>  
+  </SectionBanner>
 </template>

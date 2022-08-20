@@ -1,53 +1,52 @@
 <script setup>
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    default: 'checkbox',
-    validator: value => ['checkbox', 'radio', 'switch'].includes(value)
+    default: "checkbox",
+    validator: (value) => ["checkbox", "radio", "switch"].includes(value),
   },
   label: {
     type: String,
-    default: null
+    default: null,
   },
   modelValue: {
     type: [Array, String, Number, Boolean],
-    default: null
+    default: null,
   },
   inputValue: {
     type: [String, Number, Boolean],
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(["update:modelValue"]);
 
 const computedValue = computed({
   get: () => props.modelValue,
-  set: value => {
-    emit('update:modelValue', value)
-  }
-})
+  set: (value) => {
+    emit("update:modelValue", value);
+  },
+});
 
-const inputType = computed(() => props.type === 'radio' ? 'radio' : 'checkbox')
+const inputType = computed(() =>
+  props.type === "radio" ? "radio" : "checkbox"
+);
 </script>
 
 <template>
-  <label
-    :class="type"
-    class="mr-6 mb-3 last:mr-0"
-  >
+  <label :class="type" class="mr-6 mb-3 last:mr-0">
     <input
       v-model="computedValue"
       :type="inputType"
       :name="name"
       :value="inputValue"
-    >
+    />
     <span class="check" />
     <span class="pl-2">{{ label }}</span>
   </label>

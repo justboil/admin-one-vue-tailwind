@@ -1,28 +1,31 @@
 <script setup>
-import { useLayoutStore } from '@/stores/layout.js'
-import AsideMenuLayer from '@/components/AsideMenuLayer.vue'
-import OverlayLayer from '@/components/OverlayLayer.vue'
+import { useLayoutStore } from "@/stores/layout.js";
+import AsideMenuLayer from "@/components/AsideMenuLayer.vue";
+import OverlayLayer from "@/components/OverlayLayer.vue";
 
 defineProps({
   menu: {
     type: Array,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const emit = defineEmits(['menu-click'])
+const emit = defineEmits(["menu-click"]);
 
 const menuClick = (event, item) => {
-  emit('menu-click', event, item)
-}
+  emit("menu-click", event, item);
+};
 
-const layoutStore = useLayoutStore()
+const layoutStore = useLayoutStore();
 </script>
 
 <template>
   <AsideMenuLayer
     :menu="menu"
-    :class="[layoutStore.isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0', {'lg:hidden xl:flex': !layoutStore.isAsideLgActive}]"
+    :class="[
+      layoutStore.isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0',
+      { 'lg:hidden xl:flex': !layoutStore.isAsideLgActive },
+    ]"
     @menu-click="menuClick"
   />
   <OverlayLayer
