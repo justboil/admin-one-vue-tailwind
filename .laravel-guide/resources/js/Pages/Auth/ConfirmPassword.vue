@@ -37,7 +37,7 @@ const submit = () => {
     >
       <CardBox
         :class="cardClass"
-        form
+        is-form
         @submit.prevent="submit"
       >
         <FormValidationErrors />

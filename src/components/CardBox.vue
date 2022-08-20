@@ -14,9 +14,9 @@ const props = defineProps({
   },
   hasComponentLayout: Boolean,
   hasTable: Boolean,
-  form: Boolean,
+  isForm: Boolean,
   isHoverable: Boolean,
-  modal: Boolean,
+  isModal: Boolean,
 });
 
 const emit = defineEmits(["submit"]);
@@ -29,7 +29,7 @@ const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.modal ? "dark:bg-slate-900" : "dark:bg-slate-900/70",
+    props.isModal ? "dark:bg-slate-900" : "dark:bg-slate-900/70",
   ];
 
   if (props.isHoverable) {
@@ -46,7 +46,7 @@ const submit = (event) => {
 
 <template>
   <component
-    :is="form ? 'form' : 'div'"
+    :is="isForm ? 'form' : 'div'"
     :class="componentClass"
     class="bg-white flex"
     @submit="submit"

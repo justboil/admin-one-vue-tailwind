@@ -60,7 +60,7 @@ const submitPass = () => {
       <UserCard class="mb-6" />
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CardBox form @submit.prevent="submitProfile">
+        <CardBox is-form @submit.prevent="submitProfile">
           <FormField label="Avatar" help="Max 500kb">
             <FormFilePicker />
           </FormField>
@@ -93,7 +93,7 @@ const submitPass = () => {
           </template>
         </CardBox>
 
-        <CardBox form @submit.prevent="submitPass">
+        <CardBox is-form @submit.prevent="submitPass">
           <FormField
             label="Current password"
             help="Required. Your current password"

@@ -151,7 +151,7 @@ const formStatusSubmit = () => {
 
       <CardBox
         class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-        form
+        is-form
         is-hoverable
         @submit.prevent="formStatusSubmit"
       >
