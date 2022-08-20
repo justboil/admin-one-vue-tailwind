@@ -2,7 +2,6 @@
 import { ref, computed } from "vue";
 import { useStyleStore } from "@/stores/style.js";
 import {
-  mdiMonitorCellphone,
   mdiContrastCircle,
   mdiInformation,
   mdiCheckCircle,
@@ -10,6 +9,7 @@ import {
   mdiAlertCircle,
   mdiOpenInNew,
   mdiClose,
+  mdiReload,
   mdiTrendingUp,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
@@ -516,23 +516,25 @@ const styleStore = useStyleStore();
 
     <SectionMain>
       <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
-        <CardBox title="With Title" mb="">
-          <div
-            class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400"
-          >
-            With title
+        <CardBox>
+          <CardBoxComponentTitle title="With title & icon">
+            <BaseButton :icon="mdiReload" color="whiteDark" rounded-full />
+          </CardBoxComponentTitle>
+          <div class="space-y-3">
+            <p>Card with title, icon & footer</p>
           </div>
+
+          <template #footer>
+            <BaseButtons>
+              <BaseButton label="Confirm" color="info" />
+              <BaseButton label="Cancel" color="info" outline />
+            </BaseButtons>
+          </template>
         </CardBox>
 
-        <CardBox
-          title="Title, Icons & Footer"
-          :icon="mdiMonitorCellphone"
-          :header-button-icon="mdiClose"
-        >
-          <div
-            class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400"
-          >
-            With title, icons & footer
+        <CardBox>
+          <div class="py-24 lg:py-12 text-gray-500 dark:text-slate-400">
+            Just body & footer
           </div>
 
           <template #footer>

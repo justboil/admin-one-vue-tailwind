@@ -2,7 +2,6 @@
 import { computed, useSlots } from "vue";
 import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
 import CardBoxComponentFooter from "@/components/CardBoxComponentFooter.vue";
-import CardBoxComponentHeader from "@/components/CardBoxComponentHeader.vue";
 
 const props = defineProps({
   rounded: {
@@ -13,18 +12,6 @@ const props = defineProps({
     type: String,
     default: "flex-col",
   },
-  title: {
-    type: String,
-    default: null,
-  },
-  icon: {
-    type: String,
-    default: null,
-  },
-  headerButtonIcon: {
-    type: String,
-    default: null,
-  },
   hasComponentLayout: Boolean,
   hasTable: Boolean,
   form: Boolean,
@@ -32,7 +19,7 @@ const props = defineProps({
   modal: Boolean,
 });
 
-const emit = defineEmits(["submit", "header-button-click"]);
+const emit = defineEmits(["submit"]);
 
 const slots = useSlots();
 
@@ -55,10 +42,6 @@ const componentClass = computed(() => {
 const submit = (event) => {
   emit("submit", event);
 };
-
-const headerButtonClick = (event) => {
-  emit("header-button-click", event);
-};
 </script>
 
 <template>
@@ -70,13 +53,6 @@ const headerButtonClick = (event) => {
   >
     <slot v-if="hasComponentLayout" />
     <template v-else>
-      <CardBoxComponentHeader
-        v-if="title"
-        :title="title"
-        :icon="icon"
-        :button-icon="headerButtonIcon"
-        @button-click="headerButtonClick"
-      />
       <CardBoxComponentBody :no-padding="hasTable">
         <slot />
       </CardBoxComponentBody>

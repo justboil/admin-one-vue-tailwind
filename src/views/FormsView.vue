@@ -1,12 +1,6 @@
 <script setup>
 import { reactive, ref } from "vue";
-import {
-  mdiBallot,
-  mdiBallotOutline,
-  mdiAccount,
-  mdiMail,
-  mdiGithub,
-} from "@mdi/js";
+import { mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
@@ -20,7 +14,6 @@ import SectionTitle from "@/components/SectionTitle.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import NotificationBarInCard from "@/components/NotificationBarInCard.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
 
 const selectOptions = [
   { id: 1, label: "Business development" },
@@ -52,7 +45,7 @@ const formStatusWithHeader = ref(true);
 
 const formStatusCurrent = ref(0);
 
-const formStatusOptions = [null, "success", "danger", "warning", "info"];
+const formStatusOptions = ["info", "success", "danger", "warning"];
 
 const formStatusSubmit = () => {
   formStatusCurrent.value = formStatusOptions[formStatusCurrent.value + 1]
@@ -79,7 +72,7 @@ const formStatusSubmit = () => {
           small
         />
       </SectionTitleLineWithButton>
-      <CardBox title="Forms" :icon="mdiBallot" form @submit.prevent="submit">
+      <CardBox form @submit.prevent="submit">
         <FormField label="Grouped with icons">
           <FormControl v-model="form.name" :icon="mdiAccount" />
           <FormControl v-model="form.email" type="email" :icon="mdiMail" />
@@ -118,7 +111,7 @@ const formStatusSubmit = () => {
     <SectionTitle>Custom elements</SectionTitle>
 
     <SectionMain>
-      <CardBox title="Custom elements" :icon="mdiBallotOutline">
+      <CardBox>
         <FormField label="Checkbox" wrap-body>
           <FormCheckRadioGroup
             v-model="customElementsForm.checkbox"
@@ -157,13 +150,12 @@ const formStatusSubmit = () => {
       <SectionTitle>Form with status example</SectionTitle>
 
       <CardBox
-        :title="formStatusWithHeader ? 'Form with status' : null"
         class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
         form
+        is-hoverable
         @submit.prevent="formStatusSubmit"
       >
         <NotificationBarInCard
-          v-if="formStatusCurrent"
           :color="formStatusOptions[formStatusCurrent]"
           :is-placed-with-header="formStatusWithHeader"
         >
@@ -180,16 +172,6 @@ const formStatusSubmit = () => {
             :icon-left="mdiAccount"
             help="Your full name"
             placeholder="Name"
-          />
-        </FormField>
-
-        <FormField>
-          <FormCheckRadio
-            v-model="formStatusWithHeader"
-            name="header-switch"
-            type="switch"
-            label="Card with header"
-            :input-value="true"
           />
         </FormField>
 

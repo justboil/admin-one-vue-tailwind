@@ -3,8 +3,6 @@ import { reactive } from "vue";
 import { useMainStore } from "@/stores/main";
 import {
   mdiAccount,
-  mdiAccountCircle,
-  mdiLock,
   mdiMail,
   mdiAsterisk,
   mdiFormTextboxPassword,
@@ -62,12 +60,7 @@ const submitPass = () => {
       <UserCard class="mb-6" />
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CardBox
-          title="Edit Profile"
-          :icon="mdiAccountCircle"
-          form
-          @submit.prevent="submitProfile"
-        >
+        <CardBox form @submit.prevent="submitProfile">
           <FormField label="Avatar" help="Max 500kb">
             <FormFilePicker />
           </FormField>
@@ -100,12 +93,7 @@ const submitPass = () => {
           </template>
         </CardBox>
 
-        <CardBox
-          title="Change Password"
-          :icon="mdiLock"
-          form
-          @submit.prevent="submitPass"
-        >
+        <CardBox form @submit.prevent="submitPass">
           <FormField
             label="Current password"
             help="Required. Your current password"

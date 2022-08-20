@@ -5,7 +5,6 @@ import {
   mdiAccountMultiple,
   mdiCartOutline,
   mdiChartTimelineVariant,
-  mdiFinance,
   mdiMonitorCellphone,
   mdiReload,
   mdiGithub,
@@ -117,15 +116,15 @@ const transactionBarItems = computed(() => mainStore.history);
 
       <SectionBannerStarOnGitHub />
 
-      <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview" />
+      <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
+        <BaseButton
+          :icon="mdiReload"
+          color="whiteDark"
+          @click="fillChartData"
+        />
+      </SectionTitleLineWithButton>
 
-      <CardBox
-        title="Performance"
-        :icon="mdiFinance"
-        :header-button-icon="mdiReload"
-        class="mb-6"
-        @header-button-click="fillChartData"
-      >
+      <CardBox class="mb-6">
         <div v-if="chartData">
           <line-chart :data="chartData" class="h-96" />
         </div>

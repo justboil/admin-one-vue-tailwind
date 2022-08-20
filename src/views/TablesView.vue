@@ -1,7 +1,6 @@
 <script setup>
 import {
   mdiMonitorCellphone,
-  mdiAccountMultiple,
   mdiTableBorder,
   mdiTableOff,
   mdiGithub,
@@ -32,24 +31,6 @@ import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
       </SectionTitleLineWithButton>
       <NotificationBar color="info" :icon="mdiMonitorCellphone">
         <b>Responsive table.</b> Collapses on mobile
-      </NotificationBar>
-
-      <CardBox
-        class="mb-6"
-        title="Clients"
-        :icon="mdiAccountMultiple"
-        has-table
-      >
-        <TableSampleClients checkable />
-      </CardBox>
-
-      <SectionTitleLineWithButton
-        :icon="mdiTableBorder"
-        title="Wrapped variation"
-      />
-
-      <NotificationBar color="success" :icon="mdiTableBorder">
-        <b>Tightly wrapped</b> &mdash; table header becomes card header
       </NotificationBar>
 
       <CardBox class="mb-6" has-table>
