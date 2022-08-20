@@ -1,7 +1,7 @@
 @layer base {
-  body {
+  html {
     scrollbar-width: thin;
-    scrollbar-color: #9ca3af #e5e7eb;
+    scrollbar-color: rgb(156, 163, 175) rgb(249, 250, 251);
   }
   
   body::-webkit-scrollbar {
@@ -10,7 +10,7 @@
   }
   
   body::-webkit-scrollbar-track {
-    @apply bg-gray-200;
+    @apply bg-gray-50;
   }
   
   body::-webkit-scrollbar-thumb {
@@ -23,19 +23,19 @@
 }
 
 @layer utilities {
-  .dark-scrollbars {
-    scrollbar-color: #374151 #111827;
+  .dark-scrollbars-compat {
+    scrollbar-color: rgb(71, 85, 105) rgb(30, 41, 59);
   }
   
   .dark-scrollbars::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+    @apply bg-slate-800;
   }
   
   .dark-scrollbars::-webkit-scrollbar-thumb {
-    @apply bg-gray-700;
+    @apply bg-slate-600;
   }
   
   .dark-scrollbars::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-600;
+    @apply bg-slate-500;
   }
 }
