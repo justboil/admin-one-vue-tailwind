@@ -122,7 +122,7 @@ const styleStore = useStyleStore();
     <SectionMain>
       <div class="space-y-12">
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
           is-hoverable
           @click="modalOneActive = true"
         >
@@ -142,7 +142,7 @@ const styleStore = useStyleStore();
         </CardBox>
 
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
           is-hoverable
           @click="modalTwoActive = true"
         >
@@ -160,7 +160,7 @@ const styleStore = useStyleStore();
         </CardBox>
 
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
           is-hoverable
           @click="modalThreeActive = true"
         >
