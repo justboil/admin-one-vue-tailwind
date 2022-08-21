@@ -31,7 +31,7 @@ const componentClass = computed(() => [
   props.isDropdownList ? "py-3 px-6 text-sm" : "py-3",
   hasColor.value
     ? getButtonColor(props.item.color, false, true)
-    : styleStore.asideMenuItemStyle,
+    : `${styleStore.asideMenuItemStyle} dark:text-slate-300 dark:hover:text-white`,
 ]);
 
 const hasDropdown = computed(() => !!props.item.menu);
@@ -53,7 +53,7 @@ const menuClick = (event) => {
       :to="item.to ?? null"
       :href="item.href ?? null"
       :target="item.target ?? null"
-      class="flex cursor-pointer dark:text-slate-300 dark:hover:text-white"
+      class="flex cursor-pointer"
       :class="componentClass"
       @click="menuClick"
     >
