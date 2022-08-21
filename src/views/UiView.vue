@@ -533,9 +533,7 @@ const styleStore = useStyleStore();
         </CardBox>
 
         <CardBox>
-          <div class="py-24 lg:py-12 text-gray-500 dark:text-slate-400">
-            Just body & footer
-          </div>
+          Just body & footer
 
           <template #footer>
             <BaseButtons>
