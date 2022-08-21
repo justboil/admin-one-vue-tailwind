@@ -2,13 +2,22 @@
   <LayoutAuthenticated>
     
     <SectionMain>
-      <SectionTitleBarSub
-        icon="homeOutline"
-        title="วงแชร์"
-        iconBtn="homePlusOutline"
-        textBtn="สร้างวงแชร์"
-        colorBtn="success"
-      />
+      <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
+        <div class="flex items-center justify-start">
+          <h1 class="text-2xl">
+            วงแชร์
+          </h1>
+        </div>
+        <BaseButton
+          icon="homePlusOutline"
+          label="สร้างวงแชร์"
+          color="success"
+          small
+          @click="modalCreate = true"
+
+        />
+      </section>
+      
         <CardBoxModal
             v-model="modalConfirm"
             title="ยืนยันอีกครั้ง"
@@ -18,6 +27,12 @@
             >
             <p>{{ textConfirm }}</p>
         </CardBoxModal>
+        <CreateGroupModal
+          v-model="modalCreate"
+          button-label="ยืนยันสร้างวงแชร์"
+          has-cancel
+          @confirm="getGroups"
+        />
         <CardBox
           title="ค้นหาวงแชร์"
           icon="homeSearchOutline"
@@ -95,21 +110,21 @@
             has-table
         >
         <div class="overflow-x-auto">
-          <table>
+          <table class="text-sm">
             <thead>
                 <tr >
                     <th />
                     <th />
-                    <th class="text-center">วงแชร์</th>
-                    <th class="text-center">ประเภทวง</th>
-                    <th class="text-center">เงินต้น</th>
-                    <th class="text-center">จำนวนมือ</th>
-                    <th class="text-center">วันที่เริ่มวง</th>
-                    <th class="text-center">วันที่จบวง</th>
-                    <th class="text-center">รอบการส่งเงิน</th>
-                    <th class="text-center">งวดปัจจุบัน</th>
-                    <th class="text-center">วันที่ปัจจุบัน/งวดถัดไป</th>
-                    <th class="text-center">สถานะ</th>
+                    <th >วงแชร์</th>
+                    <th >ประเภทวง</th>
+                    <th >เงินต้น</th>
+                    <th >จำนวนมือ</th>
+                    <th >วันที่เริ่มวง</th>
+                    <th >วันที่จบวง</th>
+                    <th >รอบการส่งเงิน</th>
+                    <th >งวดปัจจุบัน</th>
+                    <th >วันที่ปัจจุบัน/งวดถัดไป</th>
+                    <th >สถานะ</th>
                     <th />
                 </tr>
             </thead>
@@ -132,8 +147,8 @@
                         class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
                         />
                     </td>
-                    <td data-label="วงแชร์">
-                        <span>{{ group.name }}</span>
+                    <td data-label="วงแชร์" >
+                        {{ group.name }}
                     </td>
                     <td data-label="ประเภทวง">
                         <span>{{ getType(group.type) }}</span>
@@ -168,18 +183,27 @@
                         no-wrap
                         >
                             <BaseButton
-                                :disabled="group.status !== 'N'"
+                                v-if="group.status == 'N'"
                                 color="danger"
                                 label="ลบ"
                                 icon="trashCanOutline"
                                 small
                                 @click="confirm(
-                                    'ยืนยันลบลูกแชร์ '+group.name+' ใช่หรือไม่ ?',
+                                    'ยืนยันลบวงแชร์ '+group.name+' ใช่หรือไม่ ?',
                                     group.id,
-                                    deleteMember
+                                    deleteGroup
                                 )"
                             />
                             <BaseButton
+                                v-if="group.status == 'N'"
+                                color="success"
+                                label="เลือกลูกแชร์"
+                                icon="accountMultipleCheck"
+                                small
+                                @click="addMember(group.id)"
+                            />
+                            <BaseButton
+                                v-if="group.status == 'P'"
                                 color="warning"
                                 label="แก้ไข"
                                 icon="pencilOutline"
@@ -187,6 +211,7 @@
                                 @click="edit(group.id)"
                             />
                             <BaseButton
+                                v-if="group.status == 'P'"
                                 color="info"
                                 label="รายละเอียด"
                                 icon="accountDetailsOutline"
@@ -240,6 +265,7 @@ import NotificationBar from '@/components/NotificationBar.vue'
 import FormField from '@/components/FormField.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
 import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
+import CreateGroupModal from '@/components/CreateGroupModal.vue'
 
 import GroupService from '@/services/group'
 import {getGroupType} from '@/constants/group'
@@ -253,6 +279,8 @@ export default {
             titleStack : ['วงแชร์'],
             textConfirm : "",
             modalConfirm : false,
+            modalCreate : false,
+            modalSelectMember : false,
             funcConfirm : Function,
             idConfirm : null,
             perPage :10,
@@ -275,7 +303,8 @@ export default {
               { id: "P", label: 'วงกำลังเล่น' },
               { id: "N", label: 'วงใหม่' },
               { id: "S", label: 'วงจบแล้ว' }
-            ]
+            ],
+            groupIdAddMember : "",
         }
     },
     watch : {
@@ -313,60 +342,16 @@ export default {
           this.items = resp.data.data
         }
       },
-      async deleteMember(){
-          const resp = await MemberService.delete(this.idConfirm);
+      async deleteGroup(){
+          const resp = await GroupService.deleteGroup(this.idConfirm);
           if(resp.data){
               this.idConfirm = null
-              this.getMembers()
+              this.getGroups()
           }
       },
-      createMember(){
-        this.createError = ""
-        this.items.map((item) => {
-          if(item.name === this.addMember){
-            this.createError = "มีชื่อลูกแชร์นี้อยู่แล้ว กรุณาใช้ชื่ออื่น"
-          }
-        })
-        if(this.createError === ""){
-          MemberService.create({name:this.addMember}).then(
-            (resp) => {
-              if(resp.data){
-                this.getMembers()
-                this.addMember = ""
-                MemberService.all()
-              }
-            }
-          );
-        }
-      },
-      update(member){
-        this.createError = ""
-        this.items.map((item) => {
-          if(item.name === member.nameEdit){
-            this.createError = "มีชื่อลูกแชร์นี้อยู่แล้ว กรุณาใช้ชื่ออื่น"
-          }
-        })
-        if(this.createError === ""){
-          MemberService.update(member.id,member.nameEdit).then(
-            (resp) => {
-              if(resp.data){
-                this.getMembers()
-                member.edit = false
-              }
-            }
-          )
-          
-        }
-      },
-      edit(memberId){
-        this.items.map((item) => {
-            if(item.id === memberId){
-                item.edit = true
-            }
-        })
-      },
-      cancelEdit(member){
-        member.edit = false
+      addMember(groupId){
+        this.modalSelectMember = true
+        this.groupIdAddMember = groupId
       },
       detail(memberId){
         this.$router.push({
@@ -432,7 +417,8 @@ export default {
         NotificationBar,
         FormField,
         BaseDivider,
-        SectionTitleBarSub
+        SectionTitleBarSub,
+        CreateGroupModal
     }
 }
 </script>
