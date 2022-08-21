@@ -175,7 +175,7 @@ const checked = (isChecked, client) => {
           :key="page"
           :active="page === currentPage"
           :label="page + 1"
-          color="lightDark"
+          :color="page === currentPage ? 'lightDark' : 'whiteDark'"
           small
           @click="currentPage = page"
         />
