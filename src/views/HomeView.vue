@@ -136,7 +136,7 @@ const transactionBarItems = computed(() => mainStore.history);
         <b>Responsive table.</b> Collapses on mobile
       </NotificationBar>
 
-      <CardBox :icon="mdiMonitorCellphone" title="Responsive table" has-table>
+      <CardBox has-table>
         <TableSampleClients />
       </CardBox>
     </SectionMain>
