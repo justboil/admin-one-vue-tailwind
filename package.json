@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/js": "^7.0.96",
+    "@vuepic/vue-datepicker": "^3.4.6",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
     "mdi-vue": "^3.0.13",

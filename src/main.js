@@ -12,7 +12,9 @@ import { useStyleStore } from '@/stores/style.js'
 import { useLayoutStore } from '@/stores/layout.js'
 import { darkModeKey, styleKey } from '@/config.js'
 import vSelect from "vue-select";
+import Datepicker from '@vuepic/vue-datepicker';
 
+import '@vuepic/vue-datepicker/dist/main.css'
 import './css/main.css'
 import "vue-select/dist/vue-select.css";
 
@@ -20,7 +22,13 @@ import "vue-select/dist/vue-select.css";
 const pinia = createPinia()
 
 /* Create Vue app */
-createApp(App).use(router).use(pinia).use(mdiVue,{icons:mdijs}).component("v-select", vSelect).mount('#app')
+createApp(App)
+.use(router)
+.use(pinia)
+.use(mdiVue,{icons:mdijs})
+.component("v-select", vSelect)
+.component('Datepicker', Datepicker)
+.mount('#app')
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia)

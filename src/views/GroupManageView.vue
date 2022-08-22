@@ -160,13 +160,38 @@
                             @click="cancelAdd()"
                           />
                         </div>
-                                              
+
                     </td>
                   </tr>
               </tbody>
-            </table>
-                            
+            </table>         
           </div>
+          <div class="p-3 bg-gray-100/50 dark:bg-gray-800" v-else>
+            <BaseLevel
+                type="justify-start"
+            >
+                <Datepicker v-model="startDate" format="dd/MM/yyyy" dark class="shadow rounded dark:bg-gray-900"></Datepicker>
+                <BaseButton
+                  :disabled="!startDate"
+                  color="success"
+                  icon="calendarCheckOutline"
+                  label="เริ่มวง"
+                  small
+                  class="ml-2"
+                  @click="start()"
+                />
+                <BaseButton
+                  color="info"
+                  icon="contentSave"
+                  label="บันทึก"
+                  small
+                  class="ml-2"
+                  @click="save()"
+                />
+            </BaseLevel>
+            
+          </div>
+          
           <div class="overflow-x-auto">
             <table >
               <thead>
@@ -233,22 +258,11 @@
               </tbody>
               </table>
           </div>
-          <div class="p-3 lg:px-6  border-t border-gray-100 dark:border-gray-800 grid grid-flow-col gap-5">
-              <div class="col-2">รวมยอดส่ง</div>
-              <div class="col-2"><b class="text-green-500 text-xl">{{ formatCurrency(totalAmount) }}</b></div>
-              <BaseButtons
-                type="justify-end"
-              >
-                <BaseButton
-                  color="info"
-                  icon="contentSave"
-                  label="บันทึก"
-                  small
-                  class="ml-2"
-                  @click="save()"
-                />
-              </BaseButtons>
-              
+          <div class="p-3 lg:px-6  border-t border-gray-100 dark:border-gray-800 ">
+            <BaseLevel>
+                รวมยอดส่ง
+                <b class="text-green-500 text-xl">{{ formatCurrency(totalAmount) }}</b>
+            </BaseLevel>
           </div>
         </CardBox>
     </SectionMain>
@@ -293,6 +307,7 @@ export default {
             members : [],
             memberSelected : "",
             memberList : [],
+            startDate : new Date()
         }
     },
     created() {
@@ -354,6 +369,13 @@ export default {
             }
         );
       },
+      async save() {
+        const payload = {
+          id : this.group.id,
+          details : this.members
+        }
+        await GroupService.updateDetails(payload);
+      },
       addMember(){
         for(let checked of this.checkedRows){
           let index = this.members.findIndex(e => e.handNo === checked.handNo);
@@ -377,6 +399,18 @@ export default {
           this.members[index].checked = false
         })
         this.checkedRows = []
+      },
+      start() {
+        const payload = {
+          id : this.group.id,
+          details : this.members
+        }
+        GroupService.updateDetails(payload).then(
+          () => {
+            GroupService.startGroup({ id : this.group.id, startDate : this.startDate});
+            // this.$router.push({ path: `/groups/detail/${this.groupId}` });
+          }
+        )
       },
       getFreeHand(){
         const freeHand = this.members.filter(
@@ -453,7 +487,7 @@ export default {
     BaseIcon,
     NotificationBar,
     FormField,
-    BaseDivider,
+    BaseDivider
 }
 }
 </script>

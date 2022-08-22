@@ -37,6 +37,7 @@
           icon="homeSearchOutline"
           form
           class="mb-3"
+          header-icon=""
           @submit.prevent="submit"
         >
 
@@ -107,6 +108,7 @@
             title="รายการวงแชร์"
             class="shadow-lg"
             has-table
+            header-icon=""
         >
         <div class="overflow-x-auto">
           <table class="text-sm">
