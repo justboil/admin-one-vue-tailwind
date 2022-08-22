@@ -80,7 +80,7 @@ const icon = computed(() => {
           {{ name }}
         </p>
         <div>
-          <PillTag :type="icon.type" :text="type" small />
+          <PillTag :color="icon.type" :label="type" small />
         </div>
       </div>
     </BaseLevel>

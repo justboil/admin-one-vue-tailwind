@@ -78,7 +78,7 @@ const pillText = computed(() => props.text ?? `${props.progress}%`);
           </p>
         </div>
       </BaseLevel>
-      <PillTag :type="pillType" :text="pillText" :icon="pillIcon" />
+      <PillTag :color="pillType" :label="pillText" :icon="pillIcon" />
     </BaseLevel>
   </CardBox>
 </template>

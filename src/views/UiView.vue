@@ -469,40 +469,40 @@ const styleStore = useStyleStore();
 
         <BaseButtons>
           <PillTag
-            type="contrast"
-            text="Contrast"
+            color="contrast"
+            label="Contrast"
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
             wrapped
           />
           <PillTag
-            type="info"
-            text="Info"
+            color="info"
+            label="Info"
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
             wrapped
           />
           <PillTag
-            type="success"
-            text="Success"
+            color="success"
+            label="Success"
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
             wrapped
           />
           <PillTag
-            type="warning"
-            text="Warning"
+            color="warning"
+            label="Warning"
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
             wrapped
           />
           <PillTag
-            type="danger"
-            text="Danger"
+            color="danger"
+            label="Danger"
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"

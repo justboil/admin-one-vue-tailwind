@@ -4,11 +4,11 @@ import { colorsBgLight, colorsOutline } from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 
 const props = defineProps({
-  text: {
+  label: {
     type: String,
     required: true,
   },
-  type: {
+  color: {
     type: String,
     required: true,
   },
@@ -23,8 +23,8 @@ const props = defineProps({
 
 const componentClass = computed(() => {
   const baseColor = props.outline
-    ? colorsOutline[props.type]
-    : colorsBgLight[props.type];
+    ? colorsOutline[props.color]
+    : colorsBgLight[props.color];
 
   const base = [
     "border",
@@ -50,6 +50,6 @@ const componentClass = computed(() => {
       :class="small ? 'mr-1' : 'mr-2'"
       :size="small ? 14 : 16"
     />
-    <span>{{ text }}</span>
+    <span>{{ label }}</span>
   </div>
 </template>

@@ -45,8 +45,8 @@ const trendStyle = computed(() => {
 
 <template>
   <PillTag
-    :text="trend"
-    :type="trendStyle.style"
+    :label="trend"
+    :color="trendStyle.style"
     :icon="trendStyle.icon"
     :small="small"
   />
