@@ -29,7 +29,7 @@ const hasSlot = computed(() => useSlots().default);
       <IconRounded
         v-if="icon && main"
         :icon="icon"
-        type="light"
+        color="light"
         class="mr-3"
         bg
       />

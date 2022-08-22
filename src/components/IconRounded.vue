@@ -7,7 +7,7 @@ defineProps({
     type: String,
     required: true,
   },
-  type: {
+  color: {
     type: String,
     default: null,
   },
@@ -32,8 +32,8 @@ defineProps({
     class="rounded-full"
     :class="
       bg
-        ? colorsBgLight[type]
-        : [colorsText[type], 'bg-gray-50 dark:bg-slate-800']
+        ? colorsBgLight[color]
+        : [colorsText[color], 'bg-gray-50 dark:bg-slate-800']
     "
   />
 </template>
