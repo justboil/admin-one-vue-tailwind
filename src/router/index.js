@@ -71,6 +71,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'จัดการวงแชร์',
+      loginRequired : true
+    },
+    path: '/group-manage/:id',
+    name: 'group-manage',
+    component: () => import('@/views/GroupManageView.vue')
+  },
+  {
+    meta: {
       title: 'Tables',
       loginRequired : true
     },

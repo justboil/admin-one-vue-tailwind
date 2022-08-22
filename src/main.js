@@ -11,14 +11,16 @@ import { useDashboardStore } from '@/stores/dashboard.js'
 import { useStyleStore } from '@/stores/style.js'
 import { useLayoutStore } from '@/stores/layout.js'
 import { darkModeKey, styleKey } from '@/config.js'
+import vSelect from "vue-select";
 
 import './css/main.css'
+import "vue-select/dist/vue-select.css";
 
 /* Init Pinia */
 const pinia = createPinia()
 
 /* Create Vue app */
-createApp(App).use(router).use(pinia).use(mdiVue,{icons:mdijs}).mount('#app')
+createApp(App).use(router).use(pinia).use(mdiVue,{icons:mdijs}).component("v-select", vSelect).mount('#app')
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia)

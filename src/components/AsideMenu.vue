@@ -40,7 +40,7 @@ const menuClick = () => {
         @click="layoutStore.asideLgToggle(false)"
       >
         <BaseIcon
-          :path="mdiMenu"
+          path="menu"
           class="cursor-pointer"
           size="24"
         />

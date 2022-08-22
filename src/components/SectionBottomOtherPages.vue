@@ -31,7 +31,7 @@ for (const routeIndex in routes) {
         target="_blank"
       >
         <BaseIcon
-          :path="mdiGithub"
+          path="github"
           size="36"
           class="mr-1"
         />

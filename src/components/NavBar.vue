@@ -91,7 +91,7 @@ const logout = () => {
         @click.prevent="menuOpenLg"
       >
         <BaseIcon
-          :path="mdiMenu"
+          path="menu"
           size="24"
         />
       </NavBarItem>

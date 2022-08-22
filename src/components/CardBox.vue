@@ -34,7 +34,7 @@ const is = computed(() => props.form ? 'form' : 'div')
 const componentClass = computed(() => {
   const base = [
     props.rounded,
-    props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900/70'
+    props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900'
   ]
 
   if (props.hoverable) {
@@ -59,7 +59,7 @@ const submit = e => {
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border border-gray-100 dark:border-gray-800"
+    class="bg-white border border-gray-100 dark:border-gray-900"
     @submit="submit"
   >
     <header

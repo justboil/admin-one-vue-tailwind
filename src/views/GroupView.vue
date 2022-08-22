@@ -14,7 +14,6 @@
           color="success"
           small
           @click="modalCreate = true"
-
         />
       </section>
       
@@ -114,7 +113,6 @@
             <thead>
                 <tr >
                     <th />
-                    <th />
                     <th >วงแชร์</th>
                     <th >ประเภทวง</th>
                     <th >เงินต้น</th>
@@ -133,13 +131,6 @@
                 v-for="group in itemsPaginated"
                 :key="group.id"
                 >
-                    <TableCheckboxCell
-                        v-if="group.status === 'N'"
-                        :isChecked="group.checked"
-                        class="text-center border-b-0 lg:w-6 before:hidden"
-                        @checked="checked($event, group)"
-                    />
-                    <td v-else/>
                     <td class="border-b-0 lg:w-6 before:hidden">
                         <UserAvatar
                         :username="group.id"
@@ -200,7 +191,7 @@
                                 label="เลือกลูกแชร์"
                                 icon="accountMultipleCheck"
                                 small
-                                @click="addMember(group.id)"
+                                @click="manage(group.id)"
                             />
                             <BaseButton
                                 v-if="group.status == 'P'"
@@ -280,14 +271,12 @@ export default {
             textConfirm : "",
             modalConfirm : false,
             modalCreate : false,
-            modalSelectMember : false,
             funcConfirm : Function,
             idConfirm : null,
             perPage :10,
             currentPage : 0,
             checkedRows : [],
             items : [],
-            searchMember : "",
             createError : "",
             search : {
               name : ""
@@ -304,13 +293,7 @@ export default {
               { id: "N", label: 'วงใหม่' },
               { id: "S", label: 'วงจบแล้ว' }
             ],
-            groupIdAddMember : "",
         }
-    },
-    watch : {
-      searchMember (value) {
-        this.getMembers(value)
-      }
     },
     created() {
       this.getGroups()
@@ -349,15 +332,19 @@ export default {
               this.getGroups()
           }
       },
-      addMember(groupId){
-        this.modalSelectMember = true
-        this.groupIdAddMember = groupId
-      },
-      detail(memberId){
+      manage(groupId){
         this.$router.push({
-                name :"member-detail",
+                name :"group-manage",
                 params: {
-                    id: memberId
+                    id: groupId
+                }
+              })
+      },
+      detail(groupId){
+        this.$router.push({
+                name :"group-detail",
+                params: {
+                    id: groupId
                 }
               })
       },
