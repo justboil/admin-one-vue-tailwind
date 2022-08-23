@@ -48,13 +48,13 @@ const layoutStore = useLayoutStore()
 
 const isAsideMobileExpanded = computed(() => layoutStore.isAsideMobileExpanded)
 
-const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
+const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? 'backburger' : 'forwardburger')
 
 const menuToggleMobile = () => layoutStore.asideMobileToggle()
 
 const isMenuNavBarActive = ref(false)
 
-const menuNavBarToggleIcon = computed(() => isMenuNavBarActive.value ? mdiClose : mdiDotsVertical)
+const menuNavBarToggleIcon = computed(() => isMenuNavBarActive.value ? 'close' : 'dotsVertical')
 
 const menuNavBarToggle = () => {
   isMenuNavBarActive.value = !isMenuNavBarActive.value

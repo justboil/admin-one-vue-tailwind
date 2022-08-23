@@ -87,7 +87,7 @@
                               <BaseButton
                                   color="danger"
                                   label="ลบ"
-                                  icon="trashCanOutline"
+                                  icon="homeRemoveOutline"
                                   small
                                   @click="confirm(
                                       'ยืนยันลบวงแชร์ '+group.name+' ใช่หรือไม่ ?',
@@ -98,7 +98,7 @@
                               <BaseButton
                                   color="warning"
                                   label="แก้ไข"
-                                  icon="pencilOutline"
+                                  icon="homeEditOutline"
                                   small
                                   @click="edit(group.id)"
                               />
@@ -408,7 +408,7 @@ export default {
         GroupService.updateDetails(payload).then(
           () => {
             GroupService.startGroup({ id : this.group.id, startDate : this.startDate});
-            // this.$router.push({ path: `/groups/detail/${this.groupId}` });
+            this.$router.push({ path: '/groups', replace: true })
           }
         )
       },

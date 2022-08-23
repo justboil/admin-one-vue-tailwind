@@ -59,7 +59,7 @@ const inputElClass = computed(() => {
   const base = [
     'px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full',
     'dark:placeholder-gray-400',
-    computedType.value === 'textarea' ? 'h-24' : 'h-12',
+    computedType.value === 'textarea' ? 'h-24' : 'h-10',
     props.borderless ? 'border-0' : 'border',
     props.transparent ? 'bg-transparent' : 'bg-white dark:bg-gray-800'
   ]
@@ -73,7 +73,7 @@ const inputElClass = computed(() => {
 
 const computedType = computed(() => props.options ? 'select' : props.type)
 
-const controlIconH = computed(() => props.type === 'textarea' ? 'h-full' : 'h-12')
+const controlIconH = computed(() => props.type === 'textarea' ? 'h-full' : 'h-10')
 
 const mainStore = useMainStore()
 

@@ -34,14 +34,14 @@
         />
         <CardBox
           title="ค้นหาวงแชร์"
-          icon="homeSearchOutline"
+          icon=""
           form
           class="mb-3"
           header-icon=""
           @submit.prevent="submit"
         >
 
-          <div class="grid lg:grid-cols-5 gap-5">
+          <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-5">
             <FormField label="วงแชร์">
               <FormControl
                 v-model="search.name"
@@ -53,8 +53,7 @@
               <FormControl
                 v-model="search.type"
                 :options="types"
-                icon=""
-                
+                icon="homeAccount"
               />
             </FormField>
             <FormField label="เงินต้น">
@@ -75,6 +74,7 @@
               <FormControl
                 v-model="search.status"
                 :options="status"
+                icon="homeLightbulb"
               />
             </FormField>
           </div>
@@ -118,12 +118,11 @@
                     <th >วงแชร์</th>
                     <th >ประเภทวง</th>
                     <th >เงินต้น</th>
-                    <th >จำนวนมือ</th>
+                    <th class="text-center">จำนวนมือ</th>
                     <th >วันที่เริ่มวง</th>
                     <th >วันที่จบวง</th>
-                    <th >รอบการส่งเงิน</th>
-                    <th >งวดปัจจุบัน</th>
-                    <th >วันที่ปัจจุบัน/งวดถัดไป</th>
+                    <th class="text-center">รอบการส่งเงิน</th>
+                    <th class="text-center">งวดปัจจุบัน</th>
                     <th >สถานะ</th>
                     <th />
                 </tr>
@@ -137,7 +136,7 @@
                         <UserAvatar
                         :username="group.id"
                         api="bottts"
-                        class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
+                        class="w-12 h-12 mx-auto lg:w-12 lg:h-12"
                         />
                     </td>
                     <td data-label="วงแชร์" >
@@ -149,7 +148,7 @@
                     <td data-label="เงินต้น">
                         <span> {{ formatCurrency(group.amount) }} </span>
                     </td>
-                    <td data-label="จำนวนมือ">
+                    <td data-label="จำนวนมือ" class="text-center">
                         <span>{{ group.numOfPlayer }}</span>
                     </td>
                     <td data-label="วันที่เริ่มวง">
@@ -158,19 +157,18 @@
                     <td data-label="วันที่จบวง">
                         <span>{{ formatDate(group.endDate) }}</span>
                     </td>
-                    <td data-label="รอบการส่งเงิน">
-                        <span>{{ group.payRound }}</span>
+                    <td data-label="รอบการส่งเงิน" class="text-center">
+                        <!-- <span>{{ (group.payType === '2' ? ' ทุกวันที่ ' : '') + group.payRound  + (group.payType === '1' ? ' วัน ' : '') }}</span> -->
+                        <span>{{  group.payRound  + ' วัน ' }}</span>
                     </td>
-                    <td data-label="งวดปัจจุบัน">
+                    <td data-label="งวดปัจจุบัน" class="text-center">
                         <span>{{ group.period }}</span>
                     </td>
-                    <td data-label="วันที่ปัจจุบัน/งวดถัดไป">
-                        <span>{{ formatDate(group.actionDate) }}</span>
-                    </td>
+
                     <td data-label="สถานะ">
-                        <span>{{ group.status }}</span>
+                        <span>{{ getStatus(group.status,group.actionDate) }}</span>
                     </td>
-                    <td class="before:hidden lg:w-6 whitespace-nowrap">
+                    <td class="lg:before:hidden lg:w-6 whitespace-nowrap">
                         <BaseButtons
                         type="justify-start lg:justify-end"
                         no-wrap
@@ -199,7 +197,7 @@
                                 v-if="group.status == 'P'"
                                 color="warning"
                                 label="แก้ไข"
-                                icon="pencilOutline"
+                                icon="homeEditOutline"
                                 small
                                 @click="edit(group.id)"
                             />
@@ -207,7 +205,7 @@
                                 v-if="group.status == 'P'"
                                 color="info"
                                 label="รายละเอียด"
-                                icon="accountDetailsOutline"
+                                icon="homeSearchOutline"
                                 small
                                 @click="detail(group.id)"
                             />
@@ -261,7 +259,7 @@ import SectionTitleBarSub from '@/components/SectionTitleBarSub.vue'
 import CreateGroupModal from '@/components/CreateGroupModal.vue'
 
 import GroupService from '@/services/group'
-import {getGroupType} from '@/constants/group'
+import {getGroupType,getGroupStatus} from '@/constants/group'
 
 import numeral from 'numeral'
 import moment from 'moment'
@@ -388,6 +386,14 @@ export default {
       },
       getType(type){
         return getGroupType(type);
+      },
+      getStatus(type,actionDate){
+        let today = new Date().setUTCHours(0,0,0,0);
+        let actDate = new Date(actionDate).setUTCHours(0,0,0,0);
+        if(type === 'P' && (today === actDate)){
+          return 'วงวันนี้'
+        }
+        return getGroupStatus(type);
       }
     },
     components : {

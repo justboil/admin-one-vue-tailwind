@@ -8,3 +8,23 @@ export const getGroupType = (type) => {
             return "เรทดอกตาม";  
     }
 }
+
+export const getGroupStatus = (type) => {
+    switch (type) {
+        case "P":
+            return "วงกำลังเล่น";     
+        case "N":
+            return "วงสร้างใหม่";
+        case "S":
+            return "วงจบแล้ว";  
+    }
+}
+
+export const getCareFeeType = (type) => {
+    switch (type) {
+        case "1":
+            return "งวดแรก";     
+        case "2":
+            return "เมื่อได้รับเงิน";
+    }
+}
