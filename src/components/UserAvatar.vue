@@ -35,5 +35,6 @@ const username = computed(() => props.username);
       :alt="username"
       class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"
     />
+    <slot />
   </div>
 </template>
