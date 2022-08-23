@@ -144,7 +144,7 @@ const formStatusSubmit = () => {
 
         <BaseDivider />
 
-        <FormFilePicker v-model="customElementsForm.file" />
+        <FormFilePicker v-model="customElementsForm.file" label="Upload" />
       </CardBox>
 
       <SectionTitle>Form with status example</SectionTitle>
