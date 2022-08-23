@@ -474,7 +474,6 @@ const styleStore = useStyleStore();
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
-            wrapped
           />
           <PillTag
             color="info"
@@ -482,7 +481,6 @@ const styleStore = useStyleStore();
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
-            wrapped
           />
           <PillTag
             color="success"
@@ -490,7 +488,6 @@ const styleStore = useStyleStore();
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
-            wrapped
           />
           <PillTag
             color="warning"
@@ -498,7 +495,6 @@ const styleStore = useStyleStore();
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
-            wrapped
           />
           <PillTag
             color="danger"
@@ -506,7 +502,6 @@ const styleStore = useStyleStore();
             :small="pillsSmall"
             :outline="pillsOutline"
             :icon="pillsIcon"
-            wrapped
           />
         </BaseButtons>
       </CardBox>

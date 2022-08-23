@@ -18,7 +18,6 @@ const props = defineProps({
   },
   small: Boolean,
   outline: Boolean,
-  wrapped: Boolean,
 });
 
 const componentClass = computed(() => {
@@ -31,10 +30,6 @@ const componentClass = computed(() => {
     props.small ? "py-1 px-4 text-xs rounded-full" : "py-2 px-6 rounded-full",
     baseColor,
   ];
-
-  if (!props.wrapped) {
-    base.push(props.small ? "mr-1.5" : "mr-3", "last:mr-0");
-  }
 
   return base;
 });
