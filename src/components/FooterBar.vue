@@ -8,7 +8,7 @@ const year = computed(() => new Date().getFullYear())
 
 <template>
   <footer
-    class="bg-white py-2 px-6 dark:bg-gray-900/70"
+    class="bg-white py-2 px-6 dark:bg-gray-900/70 "
   >
     <BaseLevel>
       <div class="text-center md:text-left">

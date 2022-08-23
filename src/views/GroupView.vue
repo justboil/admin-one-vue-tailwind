@@ -282,10 +282,10 @@ export default {
               name : ""
             },
             types : [
-              { id: null, label: 'ทั้งหมด' },
-              { id: 1, label: 'ขั้นบันได' },
-              { id: 2, label: 'บิทดอกตาม' },
-              { id: 3, label: 'เรทดอกตาม' }
+              { id: "", label: 'ทั้งหมด' },
+              { id: "1", label: 'ขั้นบันได' },
+              { id: "2", label: 'บิทดอกตาม' },
+              { id: "3", label: 'เรทดอกตาม' }
             ],
             status : [
               { id: "", label: 'ทั้งหมด' },
@@ -413,7 +413,7 @@ export default {
         FormField,
         BaseDivider,
         SectionTitleBarSub,
-        CreateGroupModal
+        CreateGroupModal,
     }
 }
 </script>

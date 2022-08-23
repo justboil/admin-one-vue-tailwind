@@ -1,20 +1,18 @@
 <template>
   <OverlayLayer
     v-show="value"
-    @overlay-click="cancel"
   >
     <CardBox
       v-show="value"
       title="สร้าวงแชร์"
-      class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-1/1 z-50"
+      class="shadow-lg w-full  overflow-y-auto md:w-3/5 lg:w-1/1 z-50"
       header-icon="close"
       modal
       form
       @submit.prevent="createGroup"
       @header-icon-click="cancel"
     >
-
-      <div class="grid lg:grid-cols-4 gap-5">
+      <div class="grid lg:grid-cols-4 grid-cols-2 gap-5">
         <FormField label="ชื่อวง">
           <FormControl
             v-model="create.name"
@@ -48,7 +46,7 @@
         </FormField>
       </div>
 
-      <div v-if="create.type == 2" class="grid lg:grid-cols-4 gap-5">
+      <div v-if="create.type == 2" class="grid lg:grid-cols-4 grid-cols-2  gap-5">
         <FormField label="ยอดส่งต่องวด" >
           <FormControl
             v-model="create.baseAmountSend"
@@ -75,7 +73,7 @@
         </FormField>
       </div>
 
-      <div class="grid lg:grid-cols-4 gap-5">
+      <div class="grid lg:grid-cols-4 grid-cols-2 gap-5">
         <FormField label="ค่าดูแล" >
           <FormControl
             v-model="create.careFee"
@@ -105,7 +103,7 @@
         </FormField>
       </div>
 
-      <div class="grid lg:grid-cols-4 gap-5">
+      <div class="grid lg:grid-cols-4 grid-cols-2 gap-5">
         <FormField label="ค่าปรับส่งช้า/วัน" >
           <FormControl
             v-model="create.finePerDay"
@@ -151,13 +149,15 @@
       >
         <BaseButton
           :label="buttonLabel"
-          :color="button"
+          color="success"
           type="submit"
+          icon="checkCircleOutline"
         />
         <BaseButton
           v-if="hasCancel"
           label="ยกเลิก"
           color="danger"
+          icon="close"
           @click="cancel"
         />
       </BaseButtons>
