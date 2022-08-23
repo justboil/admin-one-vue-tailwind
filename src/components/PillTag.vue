@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import { colorsBgLight, colorsOutline } from "@/colors.js";
-import BaseIcon from "@/components/BaseIcon.vue";
+import PillTagPlain from "@/components/PillTagPlain.vue";
 
 const props = defineProps({
   label: {
@@ -20,31 +20,18 @@ const props = defineProps({
   outline: Boolean,
 });
 
-const componentClass = computed(() => {
-  const baseColor = props.outline
-    ? colorsOutline[props.color]
-    : colorsBgLight[props.color];
-
-  const base = [
-    "border",
-    props.small ? "py-1 px-4 text-xs rounded-full" : "py-2 px-6 rounded-full",
-    baseColor,
-  ];
-
-  return base;
-});
+const componentClass = computed(() => [
+  props.small ? "py-1 px-3" : "py-1.5 px-4",
+  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color],
+]);
 </script>
 
 <template>
-  <div class="inline-flex items-center capitalize" :class="componentClass">
-    <BaseIcon
-      v-if="icon"
-      :path="icon"
-      h="h-4"
-      w="w-4"
-      :class="small ? 'mr-1' : 'mr-2'"
-      :size="small ? 14 : 16"
-    />
-    <span>{{ label }}</span>
-  </div>
+  <PillTagPlain
+    class="border rounded-full"
+    :class="componentClass"
+    :icon="icon"
+    :label="label"
+    :small="small"
+  />
 </template>
