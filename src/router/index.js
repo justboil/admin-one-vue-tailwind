@@ -80,6 +80,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'รายละเอียดวงแชร์',
+      loginRequired : true
+    },
+    path: '/group-detail/:id',
+    name: 'group-detail',
+    component: () => import('@/views/GroupDetailView.vue')
+  },
+  {
+    meta: {
       title: 'Tables',
       loginRequired : true
     },

@@ -1,7 +1,19 @@
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
     <SectionMain>
+        <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
+        <div class="flex items-center justify-start">
+          <h1 class="text-2xl">
+            ยอดส่งวันนี้
+          </h1>
+        </div>
+        <FormControl
+                v-model="searchMember"
+                icon="accountSearchOutline"
+                class="shadow"
+                placeholder="ค้นหาลูกแชร์"
+            />
+      </section>
         <CardBoxModal
             v-model="isModalActive"
             title="Sample modal"
@@ -10,20 +22,49 @@
             <p>This is sample modal</p>
         </CardBoxModal>
 
-        <div class="grid lg:grid-cols-3">
-            <FormControl
-                v-model="searchMember"
-                icon="accountSearchOutline"
-                class="mb-3 shadow-lg"
-                placeholder="ค้นหาลูกแชร์"
-            />
-            
-        </div>
-
         <CardBox
+            header-icon=""
+            :title="'รายการยอดส่ง ' + countChecked()"
             v-if="itemsPaginated.length > 0"
             has-table
         >
+            <div
+            class="p-3 bg-gray-100/50 dark:bg-gray-800"
+            v-if="checkedRows.length > 0"
+            >
+            <span
+                v-for="checkedRow in checkedRows"
+                :key="checkedRow.memberId"
+                class="inline-block px-2 py-1 rounded-sm mr-2 text-sm bg-gray-100 dark:bg-gray-700 mb-1"
+            >
+                {{ checkedRow.memberName }}
+            </span>
+            <table>
+                <tbody>
+                <tr
+                >
+                    <td >
+                    <span class="justify-start">ยอดส่งรวม : </span>
+                    <b class="text-red-500 " ><u>{{ formatCurrency(checkedSum().sumBalance) }}</u></b>
+                    </td>
+                    <td class="before:hidden lg:w-6 whitespace-nowrap">
+                    <BaseButtons
+                        type="justify-start lg:justify-end"
+                        no-wrap
+                    >
+                        <BaseButton
+                        color="success"
+                        label="จ่ายยอดส่งทั้งหมด"
+                        icon="cashCheck"
+                        small
+                        @click="isModalActive = true"
+                        />
+                    </BaseButtons>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
             <table>
             <thead>
                 <tr>
@@ -50,20 +91,20 @@
                 <td class="border-b-0 lg:w-6 before:hidden">
                     <UserAvatar
                     :username="member.memberId"
-                    class="w-24 h-24 mx-auto lg:w-12 lg:h-12"
+                    class="w-12 h-12 mx-auto lg:w-12 lg:h-12"
                     />
                 </td>
                 <td data-label="ลูกแชร์">
                     {{ member.memberName }}
                 </td>
                 <td data-label="ยอดส่ง">
-                    {{ member.sumAmountSend }}
+                    <b class="text-blue-500 "><u>{{ formatCurrency(member.sumAmountSend) }}</u></b>
                 </td>
                 <td data-label="ส่งแล้ว">
-                    {{ member.sumAmountSend - member.balance }}
+                    <b class="text-emerald-500 "><u>{{ formatCurrency(member.sumAmountSend - member.balance) }}</u></b>
                 </td>
                 <td data-label="เหลือส่ง">
-                    {{ member.balance }}
+                    <b class="text-red-500 " ><u>{{ formatCurrency(member.balance) }}</u></b>
                 </td>
                 <td data-label="จำนวนวง">
                     {{ member.numGroup }}
@@ -82,7 +123,7 @@
                         />
                         <BaseButton
                             color="info"
-                            icon="eye"
+                            icon="accountSearchOutline"
                             label="รายละเอียด"
                             small
                             @click="isModalActive = true"
@@ -129,6 +170,8 @@ import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import FormControl from '@/components/FormControl.vue'
 import DashboardService from '@/services/dashboard'
+import numeral from 'numeral'
+
 
 export default {
     data(){
@@ -171,6 +214,43 @@ export default {
         if(resp.data){
           this.items = resp.data.data
         }
+      },
+      countChecked(){
+        return (this.checkedRows.length > 0 ? '(เลือก ' + this.checkedRows.length + ' รายการ)':'')
+      },
+      checkedSum(){
+        let sumAmountSend = 0,sumBalance = 0,sumPaid = 0;
+        this.checkedRows.map((row) => {
+            sumAmountSend += row.sumAmountSend;
+            sumPaid += (row.sumAmountSend-row.balance);
+            sumBalance += row.balance;
+        })
+        return {
+          sumAmountSend,
+          sumPaid,
+          sumBalance
+        }
+      },
+      checked(isChecked, member){
+        if (isChecked) {
+          member.checked = true
+          this.checkedRows.push(member)
+        } else {
+           member.checked = false
+          this.checkedRows = this.remove(this.checkedRows, row => row.memberId === member.memberId)
+        }
+      },
+      remove(arr,cb){
+        const newArr = []
+        arr.forEach(item => {
+          if (!cb(item)) {
+            newArr.push(item)
+          }
+        })
+        return newArr
+      },
+      formatCurrency(amt){
+        return numeral(amt).format(0,0)
       }
     },
     components : {

@@ -162,7 +162,7 @@
                         <span>{{  group.payRound  + ' วัน ' }}</span>
                     </td>
                     <td data-label="งวดปัจจุบัน" class="text-center">
-                        <span>{{ group.period }}</span>
+                        <span>{{ !group.period  ? 'เกินวันที่จบวงแล้ว' : group.period }}</span>
                     </td>
 
                     <td data-label="สถานะ">
@@ -170,7 +170,7 @@
                     </td>
                     <td class="lg:before:hidden lg:w-6 whitespace-nowrap">
                         <BaseButtons
-                        type="justify-start lg:justify-end"
+                        type="justify-start"
                         no-wrap
                         >
                             <BaseButton
@@ -192,6 +192,14 @@
                                 icon="accountMultipleCheck"
                                 small
                                 @click="manage(group.id)"
+                            />
+                            <BaseButton
+                                v-if="!group.period"
+                                color="danger"
+                                label="จบวง"
+                                icon="homeMinusOutline"
+                                small
+                                @click="end(group.id)"
                             />
                             <BaseButton
                                 v-if="group.status == 'P'"
@@ -387,13 +395,13 @@ export default {
       getType(type){
         return getGroupType(type);
       },
-      getStatus(type,actionDate){
-        let today = new Date().setUTCHours(0,0,0,0);
-        let actDate = new Date(actionDate).setUTCHours(0,0,0,0);
-        if(type === 'P' && (today === actDate)){
-          return 'วงวันนี้'
-        }
-        return getGroupStatus(type);
+      getStatus(status,actionDate){
+            let today = new Date().setHours(0,0,0,0);
+            let actDate = new Date(actionDate).setHours(0,0,0,0);
+            if(status === 'P' && (today === actDate)){
+                return 'วงวันนี้'
+            }
+            return getGroupStatus(status);
       }
     },
     components : {
