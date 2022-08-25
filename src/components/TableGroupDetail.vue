@@ -31,7 +31,6 @@
                     <th >รอบการส่งเงิน</th>
                     <th >ค่าดูแล</th>
                     <th >ค่าปรับส่งช้า/วัน</th>
-                    <th >งวดปัจจุบัน</th>
                     <th >สถานะ</th>
                     <th />
                 </tr>
@@ -71,9 +70,6 @@
                     </td>
                     <td data-label="ค่าปรับส่งช้า/วัน">
                         <span>{{ group.finePerDay }}</span>
-                    </td>
-                    <td data-label="งวดปัจจุบัน" class="text-center">
-                        <span>{{ !group.period  ? 'เกินวันที่จบวงแล้ว' : group.period }}</span>
                     </td>
                     <td data-label="สถานะ">
                         <span>{{ getStatus(group.status,group.actionDate) }}</span>

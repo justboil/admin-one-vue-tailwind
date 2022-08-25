@@ -29,29 +29,29 @@
                   </td>
               </tr>
               <tr v-if="hasCareFee">
-                  <td >
+                  <td data-label="รายการ" >
                       <label class="checkbox">
+                        <span class="mr-1">ค่าดูแล</span>
                         <input
                           v-if="!completed"
                           v-model="careFeeChecked"
-                          :checked="careFeeChecked"
                           type="checkbox"
                         >
-                        <span class="check">ค่าดูแล</span>
+                        <span class="check"/>
                       </label>
                   </td>
-                  <td>
+                  <td data-label="จำนวนเงิน">
                     <span class="me-2"><b><u>{{ getCareFee(group) }}</u></b></span>
                   </td>
               </tr>
               <tr v-if="fine > 0 ">
-                  <td>
+                  <td data-label="รายการ">
                       ค่าปรับ
                   </td>
-                  <td v-if="completed">
-                      <b><u>{{ $options.filters.currency(fine) }}</u></b>
+                  <td data-label="จำนวนเงิน" v-if="completed">
+                      <b><u>{{ formatCurrency(fine) }}</u></b>
                   </td>
-                  <td v-else>
+                  <td data-label="จำนวนเงิน" v-else>
                       <FormControl
                         class="w-32"
                         v-model="fine"
@@ -59,30 +59,38 @@
                       />
                   </td>
               </tr>
+              <tr >
+                  <td data-label="รายการ">
+                      ยอดส่งรวม
+                  </td>
+                  <td data-label="จำนวนเงิน" >
+                      <b><u>{{ formatCurrency(amountSend + getCareFee(group) + fine) }}</u></b>
+                  </td>
+              </tr>
+              <tr >
+                  <td data-label="รายการ">
+                      ส่งแล้ว
+                  </td>
+                  <td data-label="จำนวนเงิน" class="border-b-0 lg:w-6">
+                    <FormControl
+                      type="number"
+                      class="w-48"
+                      v-model="paid"
+                      icon="cashMultiple"
+                    />                  
+                  </td>
+              </tr>
+              <tr >
+                  <td data-label="รายการ">
+                      เหลือส่ง
+                  </td>
+                  <td data-label="จำนวนเงิน" >
+                    <b><u>{{ formatCurrency(getBalance(group)) }} </u></b>                 
+                  </td>
+              </tr>
           </tbody>
         </table>
       </div>  
-      <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-gray-800">
-        <BaseLevel>
-          ยอดส่งรวม
-          <b><u>{{ formatCurrency(amountSend + getCareFee(group) + fine) }} </u></b>
-        </BaseLevel>
-        <BaseDivider />
-        <BaseLevel>
-          ส่งแล้ว
-          <FormControl
-            type="number"
-            class="w-32"
-            v-model="paid"
-            icon="cashMultiple"
-          />        
-          </BaseLevel>
-        <BaseDivider />
-        <BaseLevel>
-          เหลือส่ง
-          <b><u>{{ formatCurrency(getBalance(group)) }} </u></b>
-        </BaseLevel>
-      </div>
 
       <BaseDivider />
 
@@ -125,7 +133,7 @@ export default {
   data () {
     return {
       group : null,
-      careFeeChecked : null,
+      careFeeChecked : false,
       hasCareFee : false,
       isReceive : false,
       completed : false,
@@ -173,7 +181,7 @@ export default {
         )
         if(response.data){
             this.group = response.data.data
-            this.careFeeChecked = this.group.groupDetails[0].careFeeFlag == 'Y'
+            this.careFeeChecked = this.group.groupDetails[0].careFeeFlag === 'Y'
             this.completed = this.group.groupDetails[0].groupSubDetails[0].completed == 'Y'
             this.isReceive = this.group.groupDetails[0].periodReceive == this.group.groupDetails[0].groupSubDetails[0].periodSend
             this.memberName = this.group.groupDetails[0].member.name

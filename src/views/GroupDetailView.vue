@@ -18,7 +18,13 @@
       </section>
       
         <TableGroupDetail :group="group"/>
-        <GroupDetailAmountModal v-model="modalGroupDetailAmount" :groupId="group.id" :groupDetailId="groupDetailId" :groupSubDetailId="groupSubDetailId"/>
+        <GroupDetailAmountModal 
+          v-model="modalGroupDetailAmount" 
+          :groupId="group.id" 
+          :groupDetailId="groupDetailId" 
+          :groupSubDetailId="groupSubDetailId"
+          has-cancel
+        />
 
         <CardBox
             title="อธิบายสัญลักษ์"
@@ -131,7 +137,15 @@
                       </td>
                       <td class="text-center" v-for="(subDetail,index) in detail.groupSubDetails" :key="subDetail.id" :data-label="getPeriod(index)">
                           <span>
-                            <mdicon v-for="symbol in getIcon(index,detail,subDetail)" :key="symbol.code" :name="symbol.icon" width="16" height="16" class="inline-block mr-1" :class="[symbol.color]"/> 
+                            <mdicon 
+                              v-for="symbol in getIcon(index,detail,subDetail)" 
+                              :key="symbol.code" 
+                              :name="symbol.icon" 
+                              width="16" 
+                              height="16" 
+                              class="inline-block mr-1" 
+                              :class="[symbol.color]"
+                            /> 
                             <u @click="detailGroupAmount(detail.id,subDetail.id)">
                               {{ formatCurrency(calculateAmt(index,detail,subDetail).amt) }}
                             </u>
