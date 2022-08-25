@@ -37,11 +37,13 @@ const submit = () => {
       <CardBox
         :class="cardClass"
         form
+        title="ยินดีต้อนรับ"
+        header-icon=""
         @submit.prevent="submit"
       >
         <FormField
-          label="Login"
-          help="Please enter your login"
+          label="ชื่อผู้ใช้"
+          help="กรุณากรอกชื่อผู้ใช้"
         >
           <FormControl
             v-model="form.login"
@@ -52,8 +54,8 @@ const submit = () => {
         </FormField>
 
         <FormField
-          label="Password"
-          help="Please enter your password"
+          label="รหัสผ่าน"
+          help="กรุณากรอกรหัสผ่าน"
         >
           <FormControl
             v-model="form.pass"
@@ -67,16 +69,18 @@ const submit = () => {
         <FormCheckRadioPicker
           v-model="form.remember"
           name="remember"
-          :options="{ remember: 'Remember' }"
+          :options="{ remember: 'จดจำการเข้าใช้งาน' }"
         />
 
         <BaseDivider />
 
-        <BaseButtons>
+        <BaseButtons
+          type="justify-center"
+        >
           <BaseButton
             type="submit"
             color="info"
-            label="Login"
+            label="เข้าสู่ระบบ"
           />
           <!-- <BaseButton
             to="/dashboard"

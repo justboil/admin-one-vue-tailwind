@@ -28,7 +28,7 @@
             <UserAvatar
               api="bottts"
               :username="group.id"
-              class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+              class="w-10 h-10 mx-auto lg:w-10 lg:h-10"
             />
           </td>
           <td data-label="วงแชร์">
@@ -75,9 +75,10 @@
             >
               <BaseButton
                 color="info"
-                icon="eye"
+                icon="homeSearchOutline"
+                label="รายละเอียด"
                 small
-                @click="isModalActive = true"
+                @click="$router.push({name:'group-detail',params:{id:group.id}})"
               />
 
             </BaseButtons>
@@ -107,10 +108,6 @@
 </template>
 
 <script>
-import { useDashboardStore } from '@/stores/dashboard'
-import { mdiEye } from '@mdi/js'
-import CardBoxModal from '@/components/CardBoxModal.vue'
-import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -121,17 +118,17 @@ import CardBox from './CardBox.vue'
 export default {
     data() {
         return {
-          isModalActive : false,
-          isModalDangerActive : false,
           perPage : 10,
-          currentPage : 0,
-          checkedRows : []
+          currentPage : 0
         }
     },
+    props : {
+      items : {
+        type : Array,
+        default : []
+      }
+    },
     computed : {
-      items() {
-        return useDashboardStore().dashboard.groupsToday;
-      },
       itemsPaginated() {
         return this.items ? this.items.slice(this.perPage * this.currentPage, this.perPage * (this.currentPage + 1)) : []
       },
@@ -157,14 +154,11 @@ export default {
       }
     },
     components : {
-    mdiEye,
-    CardBoxModal,
-    TableCheckboxCell,
-    BaseLevel,
-    BaseButtons,
-    BaseButton,
-    UserAvatar,
-    CardBox
-}
+      BaseLevel,
+      BaseButtons,
+      BaseButton,
+      UserAvatar,
+      CardBox
+    }
 }
 </script>
