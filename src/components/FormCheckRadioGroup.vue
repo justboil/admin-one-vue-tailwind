@@ -51,6 +51,7 @@ const computedValue = computed({
       :input-value="key"
       :label="value"
       :class="componentClass"
+      class="mr-6 mb-3 last:mr-0"
     />
   </div>
 </template>

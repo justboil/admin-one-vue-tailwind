@@ -40,7 +40,7 @@ const inputType = computed(() =>
 </script>
 
 <template>
-  <label :class="type" class="mr-6 mb-3 last:mr-0">
+  <label :class="type">
     <input
       v-model="computedValue"
       :type="inputType"
