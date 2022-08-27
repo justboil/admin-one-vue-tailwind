@@ -54,8 +54,9 @@ defineProps({
         :trend-type="trendType"
       />
       <BaseButton
-        color="info"
+        color="white"
         icon="eye"
+        class="shadow"
         small
         @click="detail()"
       />
@@ -76,7 +77,7 @@ defineProps({
       <BaseIcon
         v-if="icon"
         :path="icon"
-        size="48"
+        size="44"
         w=""
         h="h-16"
         :class="color"

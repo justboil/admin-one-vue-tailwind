@@ -8,18 +8,6 @@ defineProps({
     type: String,
     default: null
   },
-  iconBtn: {
-    type: String,
-    default: "cog"
-  },
-  textBtn: {
-    type: String,
-    default: ""
-  },
-  colorBtn: {
-    type: String,
-    default: ""
-  },
   title: {
     type: String,
     required: true
@@ -33,17 +21,12 @@ defineProps({
       <BaseIcon
         v-if="icon"
         :path="icon"
+        size="28"
         class="mr-3"
       />
       <h1 class="text-2xl">
         {{ title }}
       </h1>
     </div>
-    <BaseButton
-      :icon="iconBtn"
-      :label="textBtn"
-      :color="colorBtn"
-      small
-    />
   </section>
 </template>

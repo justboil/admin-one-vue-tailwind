@@ -5,6 +5,7 @@ import CardBox from '@/components/CardBox.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import PillTag from '@/components/PillTag.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
+import NumberDynamic from '@/components/NumberDynamic.vue'
 import numeral from 'numeral'
 
 const props = defineProps({
@@ -12,7 +13,7 @@ const props = defineProps({
     type: String,
     required: true
   },
-  login: {
+  subText: {
     type: String,
     required: true
   },
@@ -53,16 +54,8 @@ const pillType = computed(() => {
   return 'info'
 })
 
-const pillIcon = computed(() => {
-  return {
-    success: mdiTrendingUp,
-    warning: mdiTrendingNeutral,
-    danger: null,
-    info: null
-  }[pillType.value]
-})
 
-const pillText = computed(() => props.text ?? `$${numeral(props.amt).format('0,0')}`)
+
 </script>
 
 <template>
@@ -78,18 +71,20 @@ const pillText = computed(() => props.text ?? `$${numeral(props.amt).format('0,0
         />
         <div class="text-center md:text-left">
           <h4 class="text-xl">
-            {{ name }} <span class="text-gray-500 dark:text-gray-400"> - {{ login }}</span>
+            {{ name }} 
           </h4>
-          <p class="text-gray-500 dark:text-gray-400">
-            {{ date }}
+          <p class="text-gray-500 dark:text-gray-400 text-sm">
+            {{ subText }}
           </p>
         </div>
       </BaseLevel>
-      <PillTag
-        :type="pillType"
-        :text="pillText"
-        :icon="pillIcon"
-      />
+      <h1 class="text-3xl leading-tight font-semibold text-red-500">
+        <NumberDynamic
+          :value="amt"
+          prefix="$"
+          :suffix="suffix"
+        />
+      </h1>
     </BaseLevel>
   </CardBox>
 </template>

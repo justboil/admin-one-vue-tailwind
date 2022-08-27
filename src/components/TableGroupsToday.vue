@@ -35,10 +35,10 @@
             {{ group.name }}
           </td>
           <td data-label="ประเภท">
-            {{ group.type }}
+            {{ getType(group.type) }}
           </td>
           <td data-label="เงินต้น">
-            {{ group.amount }}
+            {{ formatCurrency(group.amount) }}
           </td>
           <td data-label="งวดปัจจุบัน">
             {{ group.period }}
@@ -114,6 +114,8 @@ import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import moment from 'moment'
 import CardBox from './CardBox.vue'
+import numeral from 'numeral'
+import {getGroupType,getGroupStatus} from '@/constants/group'
 
 export default {
     data() {
@@ -149,8 +151,25 @@ export default {
       }
     },
     methods: {
+      formatCurrency(amt){
+        return numeral(amt).format(0,0)
+      },
       formatDate(date){
+        if(!date){
+          return ""
+        }
         return moment(new Date(date)).format('DD/MM/YYYY');
+      },
+      getType(type){
+        return getGroupType(type);
+      },
+      getStatus(status,actionDate){
+            let today = new Date().setHours(0,0,0,0);
+            let actDate = new Date(actionDate).setHours(0,0,0,0);
+            if(status === 'P' && (today === actDate)){
+                return 'วงวันนี้'
+            }
+            return getGroupStatus(status);
       }
     },
     components : {

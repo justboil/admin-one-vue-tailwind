@@ -37,40 +37,70 @@
       </div>
 
       <SectionTitleBarSub
-        icon="homeSearchOutline"
-        title="ภาพรวมบ้านแชร์"
+        icon="homeAnalytics"
+        title="ภาพรวมวงแชร์"
       />
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 mb-6 ">
         <CardBoxWidget
           color="text-blue-600"
-          icon="homeHeart"
-          :number="dashboard?.countGroup"
-          label="วงแชร์ทั้งหมด"
+          icon="homeClockOutline"
+          :number="dashboard?.countGroupToday"
+          label="วงแชร์วันนี้"
         />
         <CardBoxWidget
-          color="text-red-500"
-          icon="homeRemove"
+          color="text-green-500"
+          icon="homeCircleOutline"
+          :number="dashboard?.countGroupPlaying"
+          label="วงแชร์กำลังเล่น"
+        />
+        <CardBoxWidget
+          color="text-yellow-500"
+          icon="homeAlertOutline"
           :number="dashboard?.countGroupExpired"
           label="วงแชร์ที่เกินวันที่จบวงแล้ว"
         />
         <CardBoxWidget
-          color="text-yellow-500"
-          icon="accountMultiple"
+          color="text-red-500"
+          icon="homeRemoveOutline"
+          :number="dashboard?.countGroupFinish"
+          label="วงแชร์จบแล้ว"
+        />
+
+      </div>
+
+      <SectionTitleBarSub
+        icon="cardAccountDetails"
+        title="ภาพรวมลูกแชร์"
+      />
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 mb-6 ">
+        <CardBoxWidget
+          color="text-blue-500"
+          icon="accountMultipleOutline"
           :number="dashboard?.countMember"
           label="ลูกแชร์ทั้งหมด"
         />
         <CardBoxWidget
           color="text-emerald-500"
-          icon="accountMultipleCheck"
+          icon="accountMultipleCheckOutline"
           :number="dashboard?.countMemberEmpty"
           label="ลูกแชร์ที่ว่าง"
         />
+        <div class="col-span-2 ">
+          <CardBoxClient
+            type="danger"
+            :name="dashboard?.sumDebtMax ? dashboard?.sumDebtMax.memberName : ''"
+            subText="ลูกแชร์ที่มียอดค้างมากที่สุด"
+            :amt="dashboard?.sumDebtMax ? dashboard?.sumDebtMax.sumDebt : 0"
+          />
+        </div>
       </div>
+
+
 
       <div class="mb-6">
         <SectionTitleBarSub
-          icon="homeCircleOutline"
-          title="วงแชร์วันนี้"
+          icon="homeClockOutline"
+          title="รายการวงแชร์วันนี้"
         />
           <TableGroupsToday :items="dashboard?.groupsToday"/>
       </div>
@@ -88,14 +118,7 @@
             :account="transaction.account"
           />
         </div>
-        <div class="flex flex-col justify-between">
-          <CardBoxClient
-            type="danger"
-            :name="dashboard?.sumDebtMax ? dashboard?.sumDebtMax.memberName : ''"
-            login="ลูกแชร์ที่มียอดค้างมากที่สุด"
-            :amt="dashboard?.sumDebtMax ? dashboard?.sumDebtMax.sumDebt : 0"
-          />
-        </div>
+        
       </div>
 
       <SectionTitleBarSub
