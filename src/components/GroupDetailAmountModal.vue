@@ -174,6 +174,7 @@ export default {
       this.confirmCancel('cancel')
     },
     async getGroupDetailAmount(){
+        let loader = this.$loading.show();
         const response = await GroupService.getGroupDetailAmount(
           this.groupId,
           this.groupDetailId,
@@ -189,7 +190,8 @@ export default {
             this.handNo = this.group.groupDetails[0].handNo
             this.amountSend = this.group.groupDetails[0].groupSubDetails[0].amountSend
             this.fine = this.group.groupDetails[0].groupSubDetails[0].fine 
-            this.paid = this.group.groupDetails[0].groupSubDetails[0].paid 
+            this.paid = this.group.groupDetails[0].groupSubDetails[0].paid
+            loader.hide() 
         }
     },
     getBalance(group){
