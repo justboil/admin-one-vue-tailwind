@@ -39,6 +39,7 @@
           class="mb-3"
           header-icon=""
           @submit.prevent="submit"
+          @reset.prevent="reset"
         >
 
           <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-5">
@@ -76,6 +77,14 @@
                 :options="status"
                 icon="homeLightbulb"
               />
+            </FormField>
+          </div>
+          <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-5">
+            <FormField label="วันที่เริ่มวง">
+              <Datepicker v-model="search.startDate" format="dd/MM/yyyy" dark class="shadow rounded dark:bg-gray-900"></Datepicker>
+            </FormField>
+            <FormField label="วันที่จบวง">
+              <Datepicker v-model="search.endDate" format="dd/MM/yyyy" dark class="shadow rounded dark:bg-gray-900"></Datepicker>
             </FormField>
           </div>
 
@@ -287,7 +296,13 @@ export default {
             items : [],
             createError : "",
             search : {
-              name : ""
+              name : "",
+              type : "",
+              amount : null,
+              numOfPlayer : null,
+              status : "",
+              startDate : null,
+              endDate : null  
             },
             types : [
               { id: "", label: 'ทั้งหมด' },
@@ -327,10 +342,24 @@ export default {
       }
     },
     methods: {
-      async getGroups(searchGroup = ""){
-        const resp = await GroupService.listGroup();
+      reset(){
+        this.search.name = ""
+        this.search.type = ""
+        this.search.amount = null
+        this.search.numOfPlayer = null
+        this.search.status = ""
+        this.search.startDate = null
+        this.search.endDate = null
+      },
+      async submit(){
+        this.getGroups(this.search)
+      },
+      async getGroups(search = this.search){
+        let loader = this.$loading.show();
+        const resp = await GroupService.listGroup(search);
         if(resp.data){
           this.items = resp.data.data
+          loader.hide()
         }
       },
       async deleteGroup(){

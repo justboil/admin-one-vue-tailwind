@@ -233,23 +233,27 @@ export default {
     },
     methods: {
       async getGroups(){
+        let loader = this.$loading.show();
         const resp = await GroupService.loadGroup(this.$route.params.id);
         if(resp.data){
           this.group = resp.data.data
           this.group.groupDetails = _.orderBy(this.group.groupDetails,'handNo');
+          loader.hide()
         }
       },
       getGroupDetailSummary(groupId){
-            GroupService.getGroupDetailSummary(groupId)
-            .then(
-                (response) => {
-                    this.summaries = response.data.data;
-                    this.listGroupByMember = this.groupByMember() 
-                },
-                (error) =>{
-                    console.log(error)
-                }
-            );
+        let loader = this.$loading.show();
+        GroupService.getGroupDetailSummary(groupId)
+        .then(
+            (response) => {
+                this.summaries = response.data.data;
+                this.listGroupByMember = this.groupByMember()
+                loader.hide() 
+            },
+            (error) =>{
+                console.log(error)
+            }
+        );
       },
       groupByMember() {
           let listResults = [];

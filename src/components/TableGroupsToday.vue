@@ -11,11 +11,11 @@
           <th>วงแชร์</th>
           <th>ประเภท</th>
           <th>เงินต้น</th>
-          <th>งวดปัจจุบัน</th>
-          <th>รายกี่วัน</th>
+          <th>รอบการส่งเงิน</th>
           <th>จำนวนมือ</th>
           <th>วันที่เริ่มวง</th>
           <th>วันที่จบวง</th>
+          <th>งวดปัจจุบัน</th>
           <th />
         </tr>
       </thead>
@@ -40,11 +40,9 @@
           <td data-label="เงินต้น">
             {{ formatCurrency(group.amount) }}
           </td>
-          <td data-label="งวดปัจจุบัน">
-            {{ group.period }}
-          </td>
-          <td data-label="รายกี่วัน">
-            {{ group.payRound }}
+          
+          <td data-label="รอบการส่งเงิน">
+            {{ group.payRound }} วัน
           </td>
           <td data-label="จำนวนมือ">
             {{ group.numOfPlayer }}
@@ -53,21 +51,17 @@
             data-label="วันที่เริ่มวง"
             class="lg:w-1 whitespace-nowrap"
           >
-            <small
-              class="text-gray-500 dark:text-gray-400"
-              :title="new Date(group.startDate)"
-            >{{ formatDate(group.startDate) }}</small>
+            {{ formatDate(group.startDate) }}
           </td>
           <td 
             data-label="วันที่จบวง"
             class="lg:w-1 whitespace-nowrap"
           >
-            <small
-              class="text-gray-500 dark:text-gray-400"
-              :title="new Date(group.endDate)"
-            >{{ formatDate(group.endDate) }}</small>
+            {{ formatDate(group.endDate) }}
           </td>
-        
+          <td data-label="งวดปัจจุบัน">
+            {{ group.period }}
+          </td>
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons
               type="justify-start lg:justify-end"

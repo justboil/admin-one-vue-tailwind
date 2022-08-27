@@ -281,17 +281,21 @@ export default {
     },
     methods: {
       async getMembers(searchMember = ""){
+        let loader = this.$loading.show();
         const resp = await MemberService.getAll(searchMember);
         if(resp.data){
           this.items = resp.data.data
+          loader.hide()
         }
       },
       async deleteMember(){
-          const resp = await MemberService.delete(this.idConfirm);
-          if(resp.data){
-              this.idConfirm = null
-              this.getMembers()
-          }
+        let loader = this.$loading.show();
+        const resp = await MemberService.delete(this.idConfirm);
+        if(resp.data){
+            this.idConfirm = null
+            this.getMembers()
+            loader.hide()
+        }
       },
       createMember(){
         this.createError = ""
@@ -301,12 +305,14 @@ export default {
           }
         })
         if(this.createError === ""){
+          let loader = this.$loading.show();
           MemberService.create({name:this.addMember}).then(
             (resp) => {
               if(resp.data){
                 this.getMembers()
                 this.addMember = ""
                 MemberService.all()
+                loader.hide()
               }
             }
           );
@@ -320,11 +326,13 @@ export default {
           }
         })
         if(this.createError === ""){
+          let loader = this.$loading.show();
           MemberService.update(member.id,member.nameEdit).then(
             (resp) => {
               if(resp.data){
                 this.getMembers()
                 member.edit = false
+                loader.hide()
               }
             }
           )

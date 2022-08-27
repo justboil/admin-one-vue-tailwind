@@ -249,9 +249,11 @@ export default {
     },
     methods: {
       async getDebts(searchMember = "",order = "DESC",sort = "sumDebt"){
+        let loader = this.$loading.show();
         const resp = await DebtService.getDebts({search:searchMember,order:order,sort:sort});
         if(resp.data){
           this.items = resp.data.data
+          loader.hide()
         }
       },
       async paid(){

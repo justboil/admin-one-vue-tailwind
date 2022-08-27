@@ -20,8 +20,8 @@ class GroupService{
     loadGroup(id){
         return http.get(`/group/${id}`,{ headers : authHeader()});
     }
-    listGroup(){
-        return http.get('/group/list',{ headers : authHeader()})
+    listGroup(search){
+        return http.post('/group/list',search,{ headers : authHeader()})
                 .then(response => {
                     return response;
                 })

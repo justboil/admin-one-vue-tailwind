@@ -198,10 +198,12 @@ export default {
       this.chartData = chartConfig.sampleChartData()
     },
     async getDashboard(){
-        const resp = await DashboardService.getDashboard();
-        if(resp){
-          this.dashboard = resp.data
-        }
+      let loader = this.$loading.show();
+      const resp = await DashboardService.getDashboard();
+      if(resp){
+        this.dashboard = resp.data
+        loader.hide()
+      }
     }
   }
 }

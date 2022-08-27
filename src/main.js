@@ -12,7 +12,9 @@ import { useLayoutStore } from '@/stores/layout.js'
 import { darkModeKey, styleKey } from '@/config.js'
 import vSelect from "vue-select";
 import Datepicker from '@vuepic/vue-datepicker';
+import Loading from 'vue-loading-overlay';
 
+import 'vue-loading-overlay/dist/vue-loading.css';
 import '@vuepic/vue-datepicker/dist/main.css'
 import './css/main.css'
 import "vue-select/dist/vue-select.css";
@@ -25,6 +27,13 @@ createApp(App)
 .use(router)
 .use(pinia)
 .use(mdiVue,{icons:mdijs})
+.use(Loading,{
+  loader: 'dots',
+  color: '#FFFFFF',
+  backgroundColor : '#0A1128',
+  opacity: 0.96,
+  zIndex : 100}
+)
 .component("v-select", vSelect)
 .component('Datepicker', Datepicker)
 .mount('#app')

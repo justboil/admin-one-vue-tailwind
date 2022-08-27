@@ -295,30 +295,38 @@ export default {
     },
     methods: {
       async getDebtDetail(searchGroup = ""){
+        let loader = this.$loading.show();
         const resp = await DebtService.getDebtDetail({memberId:this.$route.params.id,search:searchGroup});
         if(resp.data){
           this.items = resp.data.data
+          loader.hide()
         }
       },
       async paid(){
+          let loader = this.$loading.show();
           const resp = await DebtService.paidGroup(this.$route.params.id,this.idConfirm,this.paidConfirm);
           if(resp.data){
               this.idConfirm = null
               this.paidConfirm = null
               this.getDebtDetail()
+              loader.hide()
           }
       },
       async complete(){
-          const resp = await DebtService.complete(this.idConfirm);
-          if(resp.data){
-              this.idConfirm = null
-              this.getDebts()
-          }
+        let loader = this.$loading.show();
+        const resp = await DebtService.complete(this.idConfirm);
+        if(resp.data){
+            this.idConfirm = null
+            this.getDebts()
+            loader.hide()
+        }
       },
       async getMember(){
+        let loader = this.$loading.show();
         const resp = await MemberService.get(this.$route.params.id);
         if(resp.data){
             this.member = resp.data.data
+            loader.hide()
         }
       },
       limitPaid(group){
