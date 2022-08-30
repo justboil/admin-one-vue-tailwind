@@ -32,7 +32,7 @@ onMounted(() => {
       maintainAspectRatio: false,
       scales: {
         y: {
-          display: false
+          display: true
         },
         x: {
           display: true
@@ -40,7 +40,7 @@ onMounted(() => {
       },
       plugins: {
         legend: {
-          display: false
+          display: true
         }
       }
     }

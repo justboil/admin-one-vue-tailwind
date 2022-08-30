@@ -6,35 +6,35 @@ export const sectionBgErrorDark = `${sectionBgBase} from-pink-900 via-red-900 to
 
 export const colorsBg = {
   white: 'bg-white text-black',
-  light: 'bg-gray-100 text-black',
-  success: 'bg-emerald-500 text-black',
-  danger: 'bg-red-500 text-black',
-  warning: 'bg-yellow-500 text-black',
-  info: 'bg-blue-500 text-black'
+  light: 'bg-gray-200 text-black',
+  success: 'bg-teal-500 text-black',
+  danger: 'bg-rose-500 text-black',
+  warning: 'bg-amber-500 text-black',
+  info: 'bg-blue-600 text-black'
 }
 
 export const colorsBgHover = {
   white: 'hover:bg-gray-50',
-  light: 'hover:bg-gray-200',
-  success: 'hover:bg-emerald-700',
-  danger: 'hover:bg-red-600',
-  warning: 'hover:bg-yellow-700',
-  info: 'hover:bg-blue-600'
+  light: 'hover:bg-gray-300',
+  success: 'hover:bg-teal-400',
+  danger: 'hover:bg-rose-400',
+  warning: 'hover:bg-amber-400',
+  info: 'hover:bg-blue-500'
 }
 
 export const colorsBorders = {
   white: 'border-gray-300',
   light: 'border-gray-200 dark:border-gray-400',
   success: 'border-emerald-700',
-  danger: 'border-red-700',
-  warning: 'border-yellow-700',
+  danger: 'border-rose-700',
+  warning: 'border-amber-700',
   info: 'border-blue-700'
 }
 
 export const colorsText = {
   white: 'text-black dark:text-gray-100',
   light: 'text-gray-700 dark:text-gray-400',
-  success: 'text-emerald-600',
+  success: 'text-teal-600',
   danger: 'text-red-600',
   warning: 'text-yellow-600',
   info: 'text-blue-600'

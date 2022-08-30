@@ -46,7 +46,7 @@ const menuClick = () => {
         />
       </NavBarItem>
       <div class="flex-1 px-3">
-        <span>Thao Share</span> <b class="font-black">House</b>
+        <span>ระบบจัดการบ้านแชร์</span>
       </div>
     </div>
     <div>

@@ -6,7 +6,7 @@ import AuthGuard from '@/utils/auth-guard'
 const routes = [
   {
     meta: {
-      title: 'Welcome'
+      title: 'เข้าสู่ระบบ'
     },
     path: '/',
     name: 'welcome',
@@ -17,7 +17,7 @@ const routes = [
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
-      title: 'Dashboard',
+      title: 'ภาพรวมบ้านแชร์',
       loginRequired : true
     },
     path: '/dashboard',

@@ -1,27 +1,3 @@
-import {
-  mdiAccountCircle,
-  mdiMonitor,
-  mdiGithub,
-  mdiLock,
-  mdiAlertCircle,
-  mdiMonitorShimmer,
-  mdiSquareEditOutline,
-  mdiTable,
-  mdiViewList,
-  mdiTelevisionGuide,
-  mdiResponsive,
-  mdiPalette,
-  mdiCashPlus,
-  mdiCashMinus,
-  mdiCashLock,
-  mdiHomeLightningBoltOutline,
-  mdiHomePlusOutline,
-  mdiHomeEditOutline,
-  mdiHomeRemoveOutline,
-  mdiHomeClockOutline,
-  mdiHomeVariantOutline
-} from '@mdi/js'
-
 
 export default [
   'รายการวันนี้',
@@ -31,21 +7,18 @@ export default [
       icon: 'cashPlus',
       label: 'ยอดส่งวันนี้',
       countData : 'countSendToday',
-      countColor : 'success'
     },
     {
       to: '/today-receives',
       icon: 'cashMinus',
       label: 'ยอดรับวันนี้',
       countData : 'countReceiveToday',
-      countColor : 'danger'
     },
     {
       to: '/today-bit',
       icon: 'cashCheck',
       label: 'บิท/เปียร์วันนี้',
       countData : 'countBitToday',
-      countColor : 'warning'
     }
   ],
   'ทั่วไป',
@@ -60,7 +33,6 @@ export default [
       icon: 'cashMultiple',
       label: 'ยอดค้างจ่าย',
       countData : 'countDebt',
-      countColor : 'warning'
     },
     {
       to: '/debt',
@@ -69,10 +41,9 @@ export default [
     },
     {
       to: '/members',
-      icon: 'accountMultiple',
+      icon: 'accountMultipleOutline',
       label: 'ลูกแชร์',
       countData : 'countMember',
-      countColor : 'info'
     },
     {
       to: '/groups',

@@ -63,7 +63,7 @@ const menuClick = event => {
       <PillTag
         v-if="item.countData && mainStore[item.countData] > 0"
         :text="mainStore[item.countData]"
-        :type="item.countColor"
+        type="light"
         small="true"
       />
 

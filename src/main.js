@@ -31,7 +31,7 @@ createApp(App)
   loader: 'dots',
   color: '#FFFFFF',
   backgroundColor : '#0A1128',
-  opacity: 0.96,
+  opacity: 0.9,
   zIndex : 100}
 )
 .component("v-select", vSelect)

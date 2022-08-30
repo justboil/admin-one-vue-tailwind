@@ -11,7 +11,7 @@
         <BaseButton
           icon="chevronLeft"
           label="ย้อนกลับ"
-          color="info"
+          color="light"
           small
           @click="$router.push({ path: '/groups', replace: true })"
         />

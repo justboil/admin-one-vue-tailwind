@@ -90,6 +90,7 @@
             title="รายการวงแชร์ที่มียอดค้างส่ง"
             class="shadow-lg "
             has-table
+            header-icon=""
         >
             <div class="overflow-x-auto relative">
 
@@ -127,7 +128,7 @@
                     <UserAvatar
                     api="bottts"
                     :username="group.groupId"
-                    class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
+                    class="w-10 h-10 mx-auto lg:w-10 lg:h-10"
                     />
                 </td>
                 <td data-label="วงแชร์">

@@ -1,7 +1,19 @@
 <template>
   <LayoutAuthenticated>
-    <SectionTitleBar :title-stack="titleStack" />
-    <SectionMain>
+      <SectionMain>
+        <section class="px-6 sm:px-0 mb-6 flex items-center justify-between">
+          <div class="flex items-center justify-start">
+            <h1 class="text-2xl">
+              ลูกแชร์
+            </h1>
+          </div>
+          <FormControl
+              v-model="searchMember"
+              icon="accountSearchOutline"
+              class="shadow"
+              placeholder="ค้นหาลูกแชร์"
+          />
+        </section>
         <CardBoxModal
             v-model="modalConfirm"
             title="ยืนยันอีกครั้ง"
@@ -12,16 +24,6 @@
             <p>{{ textConfirm }}</p>
         </CardBoxModal>
 
-        <div class="grid lg:grid-cols-3">
-            <FormControl
-                v-model="searchMember"
-                icon="accountSearchOutline"
-                class="mb-3 shadow-lg"
-                placeholder="ค้นหาลูกแชร์"
-            />
-            
-        </div>
-        
         <CardBox
             v-if="itemsPaginated.length > 0"
             :title="'รายการลูกแชร์ ' + countChecked()"
@@ -47,6 +49,7 @@
                             :disabled="addMember === ''"
                             color="success"
                             label="สร้างลูกแชร์"
+                            small
                             icon="accountPlusOutline"
                             @click="createMember()"
                         />
@@ -116,7 +119,7 @@
                         class="text-center border-b-0 lg:w-6 before:hidden"
                         @checked="checked($event, member)"
                     />
-                    <td v-else/>
+                    <td class="border-b-0 lg:w-6 before:hidden"/>
                     <td class="border-b-0 lg:w-6 before:hidden">
                         <UserAvatar
                         :username="member.id"

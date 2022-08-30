@@ -31,6 +31,7 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import NavBarSearch from '@/components/NavBarSearch.vue'
 
 import AuthService from '@/services/auth'
+import moment from 'moment'
 
 const mainStore = useMainStore()
 
@@ -95,9 +96,12 @@ const logout = () => {
           size="24"
         />
       </NavBarItem>
-      <!-- <NavBarItem>
-        <NavBarSearch />
-      </NavBarItem> -->
+      <NavBarItem>
+        <BaseIcon
+          path="calendarOutline"
+        />
+        {{ moment(new Date()).format('DD/MM/YYYY') }}
+      </NavBarItem>
     </div>
     <div class="flex-none items-stretch flex h-14 lg:hidden">
       <NavBarItem @click.prevent="menuNavBarToggle">

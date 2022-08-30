@@ -14,7 +14,7 @@ export default {
   },
   props : {
     username : {
-      default : "999",
+      default : "123456",
       type : String
     },
     avatar : {

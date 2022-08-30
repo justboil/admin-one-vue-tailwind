@@ -391,7 +391,6 @@ export default {
     components : {
       LayoutAuthenticated,
       SectionMain,
-      SectionTitleBar,
       CardBoxModal,
       TableCheckboxCell,
       BaseLevel,
