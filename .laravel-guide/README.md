@@ -280,10 +280,10 @@ const is = computed(() => {
   }
 
   if (props.item.route) {
-    return RouterLink
+    return Link
   }
 
-  return 'Link'
+  return 'div'
 })
 </script>
 ```
