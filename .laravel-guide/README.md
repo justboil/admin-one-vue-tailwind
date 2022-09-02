@@ -49,7 +49,7 @@ php artisan migrate
 ### Install dependencies
 
 ```bash
-npm i pinia @mdi/js chart.js numeral -D
+npm i pinia @tailwindcss/line-clamp @mdi/js chart.js numeral -D
 ```
 
 ## Copy styles, components and scripts
