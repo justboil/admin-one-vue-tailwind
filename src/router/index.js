@@ -26,6 +26,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'ยอดรับวันนี้',
+      loginRequired : true
+    },
+    path: '/today-receives',
+    name: 'today-receives',
+    component: () => import('@/views/todays/ReceivesView.vue')
+  },
+  {
+    meta: {
       title: 'ยอดส่งวันนี้',
       loginRequired : true
     },
