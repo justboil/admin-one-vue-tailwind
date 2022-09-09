@@ -1,7 +1,6 @@
 <script setup>
 import { mdiLogout, mdiClose } from "@mdi/js";
 import { computed } from "vue";
-import { useLayoutStore } from "@/stores/layout.js";
 import { useStyleStore } from "@/stores/style.js";
 import AsideMenuList from "@/components/AsideMenuList.vue";
 import AsideMenuItem from "@/components/AsideMenuItem.vue";
@@ -14,9 +13,7 @@ defineProps({
   },
 });
 
-const emit = defineEmits(["menu-click"]);
-
-const layoutStore = useLayoutStore();
+const emit = defineEmits(["menu-click", "aside-lg-close-click"]);
 
 const styleStore = useStyleStore();
 
@@ -29,6 +26,10 @@ const logoutItem = computed(() => ({
 
 const menuClick = (event, item) => {
   emit("menu-click", event, item);
+};
+
+const asideLgCloseClick = (event) => {
+  emit("aside-lg-close-click", event);
 };
 </script>
 
@@ -52,7 +53,7 @@ const menuClick = (event, item) => {
         </div>
         <button
           class="hidden lg:inline-block xl:hidden p-3"
-          @click.prevent="layoutStore.isAsideLgActive = false"
+          @click.prevent="asideLgCloseClick"
         >
           <BaseIcon :path="mdiClose" />
         </button>

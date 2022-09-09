@@ -351,8 +351,8 @@ const itemLabel = computed(() => props.item.isCurrentUser ? usePage().props.valu
 // const router = useRouter()
 
 // router.beforeEach(() => {
-//   layoutStore.isAsideMobileExpanded = false
-//   layoutStore.isAsideLgActive = false
+//   isAsideMobileExpanded.value = false
+//   isAsideLgActive.value = false
 // })
 
 // Add:
@@ -360,8 +360,8 @@ const itemLabel = computed(() => props.item.isCurrentUser ? usePage().props.valu
 import { Inertia } from '@inertiajs/inertia'
 
 Inertia.on('navigate', () => {
-  layoutStore.isAsideMobileExpanded = false
-  layoutStore.isAsideLgActive = false
+  isAsideMobileExpanded.value = false
+  isAsideLgActive.value = false
 })
 
 // Replace `isLogout` logic:
