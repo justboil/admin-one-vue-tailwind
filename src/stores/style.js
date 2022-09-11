@@ -6,6 +6,7 @@ export const useStyleStore = defineStore("style", {
   state: () => ({
     /* Styles */
     asideStyle: "",
+    asideScrollbarsStyle: "",
     asideBrandStyle: "",
     asideMenuItemStyle: "",
     asideMenuItemActiveStyle: "",
