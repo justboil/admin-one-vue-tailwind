@@ -79,7 +79,6 @@ const labelClass = computed(() =>
 const componentClass = computed(() => {
   const base = [
     "inline-flex",
-    "cursor-pointer",
     "justify-center",
     "items-center",
     "whitespace-nowrap",
@@ -88,6 +87,7 @@ const componentClass = computed(() => {
     "focus:ring",
     "duration-150",
     "border",
+    props.disabled ? "cursor-not-allowed" : "cursor-pointer",
     props.roundedFull ? "rounded-full" : "rounded",
     getButtonColor(props.color, props.outline, !props.disabled, props.active),
   ];
@@ -101,10 +101,7 @@ const componentClass = computed(() => {
   }
 
   if (props.disabled) {
-    base.push(
-      "cursor-not-allowed",
-      props.outline ? "opacity-50" : "opacity-70"
-    );
+    base.push(props.outline ? "opacity-50" : "opacity-70");
   }
 
   return base;
