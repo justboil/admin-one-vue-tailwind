@@ -28,6 +28,7 @@
 
 ## Table of Contents
 
+* [React TypeScript version](#react-typescript-version)
 * [Responsive layout](#responsive-layout)
   * [Mobile & tablet](#mobile--tablet)
   * [Small laptops](#small-laptops-1024px)
@@ -46,6 +47,12 @@
 * [Reporting Issues](#reporting-issues)
 * [Licensing](#licensing)
 * [Useful Links](#useful-links)
+
+## React TypeScript version
+
+This is **Tailwind Vue dashboard** version
+
+Check [Admin One - React TypeScript Tailwind dashboard](https://github.com/justboil/admin-one-react-tailwind) version
 
 ## Responsive layout
 
