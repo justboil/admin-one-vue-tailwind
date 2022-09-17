@@ -112,7 +112,7 @@ const formStatusSubmit = () => {
 
     <SectionMain>
       <CardBox>
-        <FormField label="Checkbox" wrap-body>
+        <FormField label="Checkbox">
           <FormCheckRadioGroup
             v-model="customElementsForm.checkbox"
             name="sample-checkbox"
@@ -122,7 +122,7 @@ const formStatusSubmit = () => {
 
         <BaseDivider />
 
-        <FormField label="Radio" wrap-body>
+        <FormField label="Radio">
           <FormCheckRadioGroup
             v-model="customElementsForm.radio"
             name="sample-radio"
