@@ -96,6 +96,7 @@ onBeforeUnmount(() => {
     :class="componentClass"
     :to="item.to ?? null"
     :href="item.href ?? null"
+    :target="item.target ?? null"
     @click="menuClick"
   >
     <div
