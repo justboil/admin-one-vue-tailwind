@@ -1,0 +1,1 @@
+import{p as e,o as t,q as o,i as s}from"./index.4ea654b0.js";const c={},n={class:"text-center py-24 text-gray-500 dark:text-slate-400"},r=s("p",null,"Nothing's here\u2026",-1),a=[r];function _(d,i){return t(),o("div",n,a)}const l=e(c,[["render",_]]);export{l as C};
