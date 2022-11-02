@@ -2,20 +2,20 @@
 import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import menuAside from "@/menuAside.js";
-import menuNavBar from "@/menuNavBar.js";
-import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import BaseIcon from "@/components/BaseIcon.vue";
-import FormControl from "@/components/FormControl.vue";
-import NavBar from "@/components/NavBar.vue";
-import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
-import AsideMenu from "@/components/AsideMenu.vue";
-import FooterBar from "@/components/FooterBar.vue";
+import menuAside from "/src/menuAside.js";
+import menuNavBar from "/src/menuNavBar.js";
+import { useMainStore } from "/src/stores/main.js";
+import { useStyleStore } from "/src/stores/style.js";
+import BaseIcon from "/src/components/BaseIcon.vue";
+import FormControl from "/src/components/FormControl.vue";
+import NavBar from "/src/components/NavBar.vue";
+import NavBarItemPlain from "/src/components/NavBarItemPlain.vue";
+import AsideMenu from "/src/components/AsideMenu.vue";
+import FooterBar from "/src/components/FooterBar.vue";
 
 useMainStore().setUser({
-  name: "John Doe",
-  email: "john@example.com",
+  name: "Wonyeong Choi",
+  email: "vng598@konkuk.ac.kr",
   avatar:
     "https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93",
 });
@@ -96,15 +96,7 @@ const menuClick = (event, item) => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
-      <FooterBar>
-        Get more with
-        <a
-          href="https://tailwind-vue.justboil.me/"
-          target="_blank"
-          class="text-blue-600"
-          >Premium version</a
-        >
-      </FooterBar>
+      <FooterBar/>
     </div>
   </div>
 </template>

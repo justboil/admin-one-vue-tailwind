@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, onMounted } from "vue";
-import { useMainStore } from "@/stores/main";
+import { useMainStore } from "/src/stores/main";
 import {
   mdiAccountMultiple,
   mdiCartOutline,
@@ -10,19 +10,19 @@ import {
   mdiGithub,
   mdiChartPie,
 } from "@mdi/js";
-import * as chartConfig from "@/components/Charts/chart.config.js";
-import LineChart from "@/components/Charts/LineChart.vue";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBoxWidget from "@/components/CardBoxWidget.vue";
-import CardBox from "@/components/CardBox.vue";
-import TableSampleClients from "@/components/TableSampleClients.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import CardBoxTransaction from "@/components/CardBoxTransaction.vue";
-import CardBoxClient from "@/components/CardBoxClient.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import SectionBannerStarOnGitHub from "@/components/SectionBannerStarOnGitHub.vue";
+import * as chartConfig from "/src/components/Charts/chart.config.js";
+import LineChart from "/src/components/Charts/LineChart.vue";
+import SectionMain from "/src/components/SectionMain.vue";
+import CardBoxWidget from "/src/components/CardBoxWidget.vue";
+import CardBox from "/src/components/CardBox.vue";
+import TableSampleClients from "/src/components/TableSampleClients.vue";
+import NotificationBar from "/src/components/NotificationBar.vue";
+import BaseButton from "/src/components/BaseButton.vue";
+import CardBoxTransaction from "/src/components/CardBoxTransaction.vue";
+import CardBoxClient from "/src/components/CardBoxClient.vue";
+import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
+import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
+import SectionBannerStarOnGitHub from "/src/components/SectionBannerStarOnGitHub.vue";
 
 const chartData = ref(null);
 

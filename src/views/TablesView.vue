@@ -5,14 +5,14 @@ import {
   mdiTableOff,
   mdiGithub,
 } from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
-import TableSampleClients from "@/components/TableSampleClients.vue";
-import CardBox from "@/components/CardBox.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import SectionMain from "/src/components/SectionMain.vue";
+import NotificationBar from "/src/components/NotificationBar.vue";
+import TableSampleClients from "/src/components/TableSampleClients.vue";
+import CardBox from "/src/components/CardBox.vue";
+import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
+import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
+import BaseButton from "/src/components/BaseButton.vue";
+import CardBoxComponentEmpty from "/src/components/CardBoxComponentEmpty.vue";
 </script>
 
 <template>

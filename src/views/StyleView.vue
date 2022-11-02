@@ -1,10 +1,10 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { useStyleStore } from "@/stores/style.js";
-import { gradientBgPurplePink } from "@/colors.js";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import { useStyleStore } from "/src/stores/style.js";
+import { gradientBgPurplePink } from "/src/colors.js";
+import SectionMain from "/src/components/SectionMain.vue";
+import CardBox from "/src/components/CardBox.vue";
+import LayoutGuest from "/src/layouts/LayoutGuest.vue";
 
 const styles = ["white", "basic"];
 

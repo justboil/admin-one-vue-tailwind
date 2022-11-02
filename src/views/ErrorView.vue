@@ -1,9 +1,9 @@
 <script setup>
-import SectionFullScreen from "@/components/SectionFullScreen.vue";
-import CardBox from "@/components/CardBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import SectionFullScreen from "/src/components/SectionFullScreen.vue";
+import CardBox from "/src/components/CardBox.vue";
+import BaseButton from "/src/components/BaseButton.vue";
+import BaseButtons from "/src/components/BaseButtons.vue";
+import LayoutGuest from "/src/layouts/LayoutGuest.vue";
 </script>
 
 <template>

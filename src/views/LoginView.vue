@@ -2,14 +2,14 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { mdiAccount, mdiAsterisk } from "@mdi/js";
-import SectionFullScreen from "@/components/SectionFullScreen.vue";
-import CardBox from "@/components/CardBox.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
-import FormField from "@/components/FormField.vue";
-import FormControl from "@/components/FormControl.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import SectionFullScreen from "/src/components/SectionFullScreen.vue";
+import CardBox from "/src/components/CardBox.vue";
+import FormCheckRadio from "/src/components/FormCheckRadio.vue";
+import FormField from "/src/components/FormField.vue";
+import FormControl from "/src/components/FormControl.vue";
+import BaseButton from "/src/components/BaseButton.vue";
+import BaseButtons from "/src/components/BaseButtons.vue";
+import LayoutGuest from "/src/layouts/LayoutGuest.vue";
 
 const form = reactive({
   login: "john.doe",

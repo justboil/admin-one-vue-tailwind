@@ -8,17 +8,17 @@ import {
   mdiFormTextboxPassword,
   mdiGithub,
 } from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import BaseDivider from "@/components/BaseDivider.vue";
-import FormField from "@/components/FormField.vue";
-import FormControl from "@/components/FormControl.vue";
-import FormFilePicker from "@/components/FormFilePicker.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import UserCard from "@/components/UserCard.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+import SectionMain from "/src/components/SectionMain.vue";
+import CardBox from "/src/components/CardBox.vue";
+import BaseDivider from "/src/components/BaseDivider.vue";
+import FormField from "/src/components/FormField.vue";
+import FormControl from "/src/components/FormControl.vue";
+import FormFilePicker from "/src/components/FormFilePicker.vue";
+import BaseButton from "/src/components/BaseButton.vue";
+import BaseButtons from "/src/components/BaseButtons.vue";
+import UserCard from "/src/components/UserCard.vue";
+import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
+import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
 
 const mainStore = useMainStore();
 
@@ -47,7 +47,7 @@ const submitPass = () => {
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiAccount" title="Profile" main>
         <BaseButton
-          href="https://github.com/justboil/admin-one-vue-tailwind"
+          href="https://github.com/wildDoubt/scone-frontend"
           target="_blank"
           :icon="mdiGithub"
           label="Star on GitHub"
