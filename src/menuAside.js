@@ -8,7 +8,7 @@ import {
   mdiViewList,
   mdiTelevisionGuide,
   mdiResponsive,
-  mdiPalette,
+  mdiPalette
 } from "@mdi/js";
 
 export default [
@@ -22,10 +22,12 @@ export default [
     icon: mdiViewList,
     menu: [
       {
-        label: "Item One"
+        label: "스터디 그룹 생성",
+        to: "/studygroup/create"
       },
       {
-        label: "Item Two"
+        label: "스터디 그룹 리스트",
+        to: "/studygroup"
       }
     ]
   },
@@ -79,6 +81,6 @@ export default [
   {
     to: "/error",
     label: "Error",
-    icon: mdiAlertCircle,
-  },
+    icon: mdiAlertCircle
+  }
 ];

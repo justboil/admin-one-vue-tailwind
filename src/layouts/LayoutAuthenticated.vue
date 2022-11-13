@@ -12,13 +12,14 @@ import NavBar from "/src/components/NavBar.vue";
 import NavBarItemPlain from "/src/components/NavBarItemPlain.vue";
 import AsideMenu from "/src/components/AsideMenu.vue";
 import FooterBar from "/src/components/FooterBar.vue";
+import { useUserStore } from "../stores/user";
 
-useMainStore().setUser({
-  name: "Wonyeong Choi",
-  email: "vng598@konkuk.ac.kr",
-  avatar:
-    "https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93",
-});
+// useMainStore().setUser({
+//   name: "Wonyeong Choi",
+//   email: "vng598@konkuk.ac.kr",
+//   avatar:
+//     "https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93",
+// });
 
 const layoutAsidePadding = "xl:pl-60";
 
@@ -28,6 +29,8 @@ const router = useRouter();
 
 const isAsideMobileExpanded = ref(false);
 const isAsideLgActive = ref(false);
+
+menuNavBar[1].isCurrentUser = !!useUserStore().userInfo.id;
 
 router.beforeEach(() => {
   isAsideMobileExpanded.value = false;
@@ -40,7 +43,8 @@ const menuClick = (event, item) => {
   }
 
   if (item.isLogout) {
-    //
+    // LogOut
+    useUserStore().userInfo = {};
   }
 };
 </script>

@@ -35,7 +35,7 @@ export default [
     ],
   },
   {
-    isCurrentUser: true,
+    isCurrentUser: false,
     menu: [
       {
         icon: mdiAccount,

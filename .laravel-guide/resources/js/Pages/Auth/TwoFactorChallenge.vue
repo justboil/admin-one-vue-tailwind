@@ -1,15 +1,15 @@
 <script setup>
-import { useForm, Head } from '@inertiajs/inertia-vue3'
+import { useForm, Head } from '/src/inertiajs/inertia-vue3'
 import { nextTick, ref } from 'vue'
-import LayoutGuest from '@/layouts/LayoutGuest.vue'
-import SectionFullScreen from '@/components/SectionFullScreen.vue'
-import CardBox from '@/components/CardBox.vue'
-import FormControl from '@/components/FormControl.vue'
-import FormField from '@/components/FormField.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import FormValidationErrors from '@/components/FormValidationErrors.vue'
-import BaseLevel from '@/components/BaseLevel.vue'
+import LayoutGuest from '/src/layouts/LayoutGuest.vue'
+import SectionFullScreen from '/src/components/SectionFullScreen.vue'
+import CardBox from '/src/components/CardBox.vue'
+import FormControl from '/src/components/FormControl.vue'
+import FormField from '/src/components/FormField.vue'
+import BaseDivider from '/src/components/BaseDivider.vue'
+import BaseButton from '/src/components/BaseButton.vue'
+import FormValidationErrors from '/src/components/FormValidationErrors.vue'
+import BaseLevel from '/src/components/BaseLevel.vue'
 
 const recovery = ref(false)
 
@@ -51,7 +51,7 @@ const submit = () => {
       <CardBox
         :class="cardClass"
         is-form
-        @submit.prevent="submit"
+        /srcsubmit.prevent="submit"
       >
         <FormValidationErrors />
 
@@ -75,7 +75,7 @@ const submit = () => {
         >
           <FormControl
             id="code"
-            @set-ref="codeInput = $event"
+            /srcset-ref="codeInput = $event"
             v-model="form.code"
             type="text"
             inputmode="numeric"
@@ -92,7 +92,7 @@ const submit = () => {
         >
           <FormControl
             id="recovery_code"
-            @set-ref="recoveryCodeInput = $event"
+            /srcset-ref="recoveryCodeInput = $event"
             v-model="form.recovery_code"
             type="text"
             class="mt-1 block w-full"
@@ -110,7 +110,7 @@ const submit = () => {
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           />
-          <button @click.prevent="toggleRecovery">
+          <button /srcclick.prevent="toggleRecovery">
             <template v-if="!recovery">
               Use a recovery code
             </template>

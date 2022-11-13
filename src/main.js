@@ -1,22 +1,26 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 import App from "./App.vue";
 import router from "./router";
-import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import { darkModeKey, styleKey } from "@/config.js";
+import { useMainStore } from "/src/stores/main.js";
+import { useUserStore } from "/src/stores/user.js";
+import { useStyleStore } from "/src/stores/style.js";
+import { darkModeKey, styleKey } from "/src/config.js";
 
 import "./css/main.css";
 
 /* Init Pinia */
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 /* Create Vue app */
 createApp(App).use(router).use(pinia).mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
+const userStore = useUserStore(pinia);
 const styleStore = useStyleStore(pinia);
 
 /* Fetch sample data */

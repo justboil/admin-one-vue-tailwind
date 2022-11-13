@@ -7,10 +7,11 @@ import UserAvatarCurrentUser from "/src/components/UserAvatarCurrentUser.vue";
 import CardBox from "/src/components/CardBox.vue";
 import FormCheckRadio from "/src/components/FormCheckRadio.vue";
 import PillTag from "/src/components/PillTag.vue";
+import { useUserStore } from "../stores/user";
 
-const mainStore = useMainStore();
+const userStore = useUserStore();
 
-const userName = computed(() => mainStore.userName);
+const userName = computed(() => userStore.userInfo.nickname);
 
 const userSwitchVal = ref(false);
 </script>

@@ -10,7 +10,6 @@ import FormControl from "/src/components/FormControl.vue";
 import BaseButton from "/src/components/BaseButton.vue";
 import BaseButtons from "/src/components/BaseButtons.vue";
 import LayoutGuest from "/src/layouts/LayoutGuest.vue";
-import { useUserStore } from "../stores/user";
 
 const form = reactive({
   email: "",
@@ -19,28 +18,12 @@ const form = reactive({
 
 const router = useRouter();
 
-const userStore = useUserStore();
-
 const submit = () => {
   axios.post("http://54.180.3.122:8080/members/signin", {
     email: form.email,
     password: form.pass
-  }
-  , {
-    withCredentials: true
-  }
-  )
-    .then(response => {
-        if (response.status === 200) {
-          console.log("cookie", response.headers["set-cookie"]);
-          userStore.setUser(response.data);
-          router.push("/dashboard");
-        }
-      }
-    )
-    .catch(() => {
-      alert("로그인 실패");
-    });
+  })
+    .then(response => console.log(response));
   // router.push("/dashboard");
 };
 </script>
@@ -67,7 +50,6 @@ const submit = () => {
             autocomplete="current-password"
           />
         </FormField>
-        <BaseButton label="회원가입" to="/sign-up"></BaseButton>
         <template #footer>
           <BaseButtons>
             <BaseButton type="submit" color="info" label="Login" />

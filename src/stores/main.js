@@ -27,7 +27,6 @@ export const useMainStore = defineStore("main", {
         this.userAvatar = payload.avatar;
       }
     },
-
     fetch(sampleDataKey) {
       axios
         .get(`data-sources/${sampleDataKey}.json`)

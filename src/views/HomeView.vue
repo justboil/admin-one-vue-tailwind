@@ -23,6 +23,7 @@ import CardBoxClient from "/src/components/CardBoxClient.vue";
 import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
 import SectionBannerStarOnGitHub from "/src/components/SectionBannerStarOnGitHub.vue";
+import { useUserStore } from "../stores/user";
 
 const chartData = ref(null);
 
@@ -35,10 +36,11 @@ onMounted(() => {
 });
 
 const mainStore = useMainStore();
-
+const userStore = useUserStore();
 const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
 
 const transactionBarItems = computed(() => mainStore.history);
+
 </script>
 
 <template>
