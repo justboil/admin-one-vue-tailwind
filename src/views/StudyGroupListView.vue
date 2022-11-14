@@ -26,6 +26,7 @@ const fetchStudyGroupList = () => {
   axios.get("/study/studyRooms")
     .then(response => {
         if (response.status === 200) {
+          userStore.studyList = response.data
           console.log(response.data);
         }
       }
@@ -58,7 +59,7 @@ onMounted(() => {
 
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CardBox v-for="studyGroup in mockStudyGroupList">
+        <CardBox v-for="studyGroup in userStore.studyList">
           <div class="text-center md:text-left overflow-hidden">
             <h4 class="text-xl text-ellipsis">
               스터디 이름: {{ studyGroup.studyName }}

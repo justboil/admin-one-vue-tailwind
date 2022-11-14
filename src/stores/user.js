@@ -4,7 +4,8 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     userInfo: {},
     recommendations: [],
-    studyMembers: []
+    studyMembers: [],
+    studyList:[],
   }),
   persist: {
     storage: localStorage
