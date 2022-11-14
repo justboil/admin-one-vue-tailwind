@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import {
   mdiAccount,
   mdiGithub
@@ -68,8 +68,8 @@ onMounted(() => {
   userStore.fetch("mockRecommend", []);
   axios.get(`/study/studyRoom/${router.currentRoute.value.params.studyId}/members`)
     .then(response => {
-      userStore.fetch("currentMembers", response.data)
-    })
+      userStore.fetch("currentMembers", response.data);
+    });
 });
 
 const submit = () => {
@@ -87,6 +87,11 @@ const onClickInviteButton = (index) => {
       console.log(response);
     })
     .catch(err => console.log(err));
+};
+const roomName = ref();
+const onClickEnterButton = () => {
+  const username = userStore.userInfo.nickname;
+  axios.get("https://222.236.32.26:8080/meeting", { params: { "userName": username, "roomName": roomName } });
 };
 
 </script>
@@ -107,9 +112,12 @@ const onClickInviteButton = (index) => {
       </SectionTitleLineWithButton>
       <div>현재 멤버</div>
       <CardBox v-for="(member, index) in userStore.studyMembers">
-        <p>{{index + 1}}. {{member.username}}</p>
+        <p>{{ index + 1 }}. {{ member.username }}</p>
       </CardBox>
-
+      <input
+        v-model="roomName"
+      />
+      <BaseButton label="화상 채팅 입장" @click.prevent="onClickEnterButton"></BaseButton>
       <BaseButton label="멤버 추천" @click.prevent="submit"></BaseButton>
       <CardBox is-hoverable v-for="(member, index) in userStore.recommendations" :index="index">
         <p>{{ index + 1 }}. {{ member.username }}</p>
