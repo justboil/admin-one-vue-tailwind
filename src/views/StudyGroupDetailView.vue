@@ -66,14 +66,13 @@ const router = useRouter();
 
 onMounted(() => {
   userStore.fetch("mockRecommend", []);
-  userStore.fetch("currentMembers", []);
+  axios.get(`/study/studyRoom/${router.currentRoute.value.params.studyId}/members`)
+    .then(response => {
+      userStore.fetch("currentMembers", response.data)
+    })
 });
 
 const submit = () => {
-  axios.get(`/study/studyRoom/${router.currentRoute.value.params.studyId}/members`)
-  .then(response => {
-    userStore.fetch("currentMembers", response.data)
-  })
   axios.post(`/study/studyRoom/${router.currentRoute.value.params.studyId}/recommend`)
     .then(response => {
       userStore.fetch("mockRecommend", response.data.recommendations);
