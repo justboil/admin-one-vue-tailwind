@@ -23,7 +23,7 @@ const mockStudyGroupList = [
   }
 ];
 const fetchStudyGroupList = () => {
-  axios.get("http://54.180.3.122:8080/study/studyRooms")
+  axios.get("/study/studyRooms")
     .then(response => {
         if (response.status === 200) {
           console.log(response.data);

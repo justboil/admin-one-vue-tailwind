@@ -3,7 +3,8 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore("user", {
   state: () => ({
     userInfo: {},
-    recommendations: []
+    recommendations: [],
+    studyMembers: []
   }),
   persist: {
     storage: localStorage
@@ -15,6 +16,9 @@ export const useUserStore = defineStore("user", {
     fetch(type, payload) {
       if (type === "mockRecommend") {
         this.recommendations = payload;
+      }
+      if (type === "currentMembers") {
+        this.studyMembers = payload;
       }
     }
   }

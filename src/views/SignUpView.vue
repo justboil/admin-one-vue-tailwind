@@ -19,7 +19,7 @@ const form = reactive({
 const router = useRouter();
 
 const submit = () => {
-  axios.post("http://54.180.3.122:8080/members/signin", {
+  axios.post("/members/signin", {
     email: form.email,
     password: form.pass
   })
