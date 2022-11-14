@@ -73,7 +73,7 @@ onMounted(() => {
 });
 
 const submit = () => {
-  axios.post(`/study/studyRoom/${router.currentRoute.value.params.studyId}/recommend`)
+  axios.get(`/study/studyRoom/${router.currentRoute.value.params.studyId}/recommend`)
     .then(response => {
       userStore.fetch("mockRecommend", response.data.recommendations);
     });
