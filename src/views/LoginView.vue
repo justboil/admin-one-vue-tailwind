@@ -32,7 +32,7 @@ const submit = () => {
   )
     .then(response => {
         if (response.status === 200) {
-          console.log("cookie", response.headers["set-cookie"]);
+          console.log("cookie", response.headers);
           userStore.setUser(response.data);
           router.push("/dashboard");
         }
