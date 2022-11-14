@@ -15,13 +15,7 @@ import BaseLevel from "/src/components/BaseLevel.vue";
 import UserAvatar from "/src/components/UserAvatar.vue";
 
 const userStore = useUserStore();
-const mockStudyGroupList = [
-  {
-    "studyId": 51,
-    "studyName": "스프링 정복",
-    "topic": "SPRING"
-  }
-];
+
 const fetchStudyGroupList = () => {
   axios.get("/study/studyRooms")
     .then(response => {
@@ -39,6 +33,62 @@ const fetchStudyGroupList = () => {
 onMounted(() => {
   fetchStudyGroupList();
 });
+
+const onClickCreateButton = () => {
+  var data = JSON.stringify({
+    "studyName": "스프링 정복",
+    "topic": {
+      "stack": "SPRING"
+    },
+    "size": 2,
+    "codingLevel": "S",
+    "studyType": "Public",
+    "gender": "F",
+    "location": "Seoul",
+    "ageRange": "Ten",
+    "passionTemperature": 20,
+    "description": "열심히 하실 분들 같이 해요",
+    "availableTimes": [
+      {
+        "yoil": "MON",
+        "startTime": "_1",
+        "endTime": "_3"
+      },
+      {
+        "yoil": "MON",
+        "startTime": "_8",
+        "endTime": "_11"
+      },
+      {
+        "yoil": "WED",
+        "startTime": "_1",
+        "endTime": "_3"
+      },
+      {
+        "yoil": "FRI",
+        "startTime": "_2",
+        "endTime": "_8"
+      }
+    ]
+  });
+
+  var config = {
+    method: 'post',
+    url: 'https://54.180.3.122:8080/study/studyRoom',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 
 </script>
 
@@ -59,6 +109,7 @@ onMounted(() => {
 
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <BaseButton label="스터디 생성" @click.prevent="onClickCreateButton"></BaseButton>
         <CardBox v-for="studyGroup in userStore.studyList">
           <div class="text-center md:text-left overflow-hidden">
             <h4 class="text-xl text-ellipsis">
