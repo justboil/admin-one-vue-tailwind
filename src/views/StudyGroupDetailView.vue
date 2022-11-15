@@ -91,7 +91,7 @@ const onClickInviteButton = (index) => {
 const roomName = ref();
 const onClickEnterButton = () => {
   const username = userStore.userInfo.nickname;
-  axios.get("https://222.236.32.26:8080/meeting", { params: { "userName": username, "roomName": roomName } });
+  axios.get("https://222.236.32.26:8080", { params: { "userName": username, "roomName": roomName } });
 };
 
 </script>
