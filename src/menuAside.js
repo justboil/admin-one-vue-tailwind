@@ -48,39 +48,39 @@ export default [
     label: "프로필",
     icon: mdiAccountCircle
   },
-  {
-    to: "/tables",
-    label: "Tables",
-    icon: mdiTable
-  },
-  {
-    to: "/forms",
-    label: "Forms",
-    icon: mdiSquareEditOutline
-  },
-  {
-    to: "/ui",
-    label: "UI",
-    icon: mdiTelevisionGuide
-  },
-  {
-    to: "/responsive",
-    label: "Responsive",
-    icon: mdiResponsive
-  },
-  {
-    to: "/",
-    label: "Styles",
-    icon: mdiPalette
-  },
+  // {
+  //   to: "/tables",
+  //   label: "Tables",
+  //   icon: mdiTable
+  // },
+  // {
+  //   to: "/forms",
+  //   label: "Forms",
+  //   icon: mdiSquareEditOutline
+  // },
+  // {
+  //   to: "/ui",
+  //   label: "UI",
+  //   icon: mdiTelevisionGuide
+  // },
+  // {
+  //   to: "/responsive",
+  //   label: "Responsive",
+  //   icon: mdiResponsive
+  // },
+  // {
+  //   to: "/",
+  //   label: "Styles",
+  //   icon: mdiPalette
+  // },
   {
     to: "/login",
-    label: "Login",
+    label: "로그인",
     icon: mdiLock
   },
-  {
-    to: "/error",
-    label: "Error",
-    icon: mdiAlertCircle
-  }
+  // {
+  //   to: "/error",
+  //   label: "Error",
+  //   icon: mdiAlertCircle
+  // }
 ];

@@ -19,12 +19,68 @@ const form = reactive({
 const router = useRouter();
 
 const submit = () => {
-  axios.post("/members/signin", {
-    email: form.email,
-    password: form.pass
-  })
-    .then(response => console.log(response));
-  // router.push("/dashboard");
+  var data = JSON.stringify({
+    "availableTimes": [
+      {
+        "yoil": "MON",
+        "startTime": "_1",
+        "endTime": "_3"
+      },
+      {
+        "yoil": "MON",
+        "startTime": "_8",
+        "endTime": "_11"
+      },
+      {
+        "yoil": "WED",
+        "startTime": "_1",
+        "endTime": "_3"
+      },
+      {
+        "yoil": "FRI",
+        "startTime": "_2",
+        "endTime": "_8"
+      }
+    ],
+    "address": "서울시 송파구 가락1동",
+    "name": "강아지",
+    "birth": "2022-07-03",
+    "email": "test2@naver.com",
+    "password": "Test123!",
+    "passwordCheck": "Test123!",
+    "nickname": "test2",
+    "gender": "M",
+    "technologyStacks": [
+      {
+        "stack": "SPRING"
+      },
+      {
+        "stack": "REACT"
+      }
+    ],
+    "phoneNumber": "010-6301-2268",
+    "job": "학생",
+    "preferLocation": "Seoul",
+    "ageRange": "Ten",
+    "preferSize": 20
+  });
+
+  var config = {
+    method: "post",
+    url: "https://localhost:8080/members/signup",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function(response) {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 };
 </script>
 
@@ -32,7 +88,7 @@ const submit = () => {
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="Email" help="Please enter your email">
+        <FormField label="이메일">
           <FormControl
             v-model="form.email"
             :icon="mdiAccount"
@@ -41,7 +97,7 @@ const submit = () => {
           />
         </FormField>
 
-        <FormField label="Password" help="Please enter your password">
+        <FormField label="비밀번호">
           <FormControl
             v-model="form.pass"
             :icon="mdiAsterisk"
@@ -52,7 +108,7 @@ const submit = () => {
         </FormField>
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
+            <BaseButton type="submit" color="info" label="회원가입" />
             <BaseButton to="/dashboard" color="info" outline label="Back" />
           </BaseButtons>
         </template>
