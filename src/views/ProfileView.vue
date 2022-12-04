@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { onBeforeMount, reactive } from "vue";
 import {
   mdiAccount,
   mdiMail,
@@ -19,6 +19,9 @@ import UserCard from "/src/components/UserCard.vue";
 import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
 import { useUserStore } from "../stores/user";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const userStore = useUserStore();
 
@@ -40,6 +43,15 @@ const submitProfile = () => {
 const submitPass = () => {
   //
 };
+
+onBeforeMount(()=>{
+  console.log(userStore.userInfo.email)
+  if(!userStore.userInfo.email){
+    alert('유저 정보가 없습니다.')
+    router.push('/dashboard')
+  }
+})
+
 </script>
 
 <template>

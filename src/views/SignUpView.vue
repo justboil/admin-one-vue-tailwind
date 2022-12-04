@@ -10,64 +10,103 @@ import FormControl from "/src/components/FormControl.vue";
 import BaseButton from "/src/components/BaseButton.vue";
 import BaseButtons from "/src/components/BaseButtons.vue";
 import LayoutGuest from "/src/layouts/LayoutGuest.vue";
+import FormCheckRadioGroup from "/src/components/FormCheckRadioGroup.vue";
 
 const form = reactive({
   email: "",
-  pass: ""
+  pass: "",
+  passCheck: "",
+  name:"",
+  birth:"",
+  nickname: "",
+  gender: "",
+  phone: "",
+  job: "",
+  study: {
+    preferStack: [],
+    preferLocation: "",
+    ageRange: "",
+    availableTimes: [],
+    preferSize: ""
+  }
 });
 
 const router = useRouter();
 
+const jobOptions = [
+  "학생",
+  "직장인",
+  "기타"
+];
+
+const regionOptions = [
+  {
+    id:"Seoul",
+    label:"서울"
+  },
+  {
+    id:"Busan",
+    label:"부산"
+  },
+  {
+    id:"Incheon",
+    label:"인천"
+  },
+  {
+    id:"Daegu",
+    label:"대구"
+  },
+]
+
+const ageOptions = [
+  {
+    id:"Ten",
+    label:"10대"
+  },
+  {
+    id:"Twenty",
+    label:"20대"
+  },
+  {
+    id:"Thirty",
+    label:"30대"
+  },
+  {
+    id:"Forty",
+    label:"40대"
+  },
+  {
+    id:"Fifty",
+    label:"기타"
+  }
+]
+
 const submit = () => {
+  console.log(form);
+
   var data = JSON.stringify({
-    "availableTimes": [
-      {
-        "yoil": "MON",
-        "startTime": "_1",
-        "endTime": "_3"
-      },
-      {
-        "yoil": "MON",
-        "startTime": "_8",
-        "endTime": "_11"
-      },
-      {
-        "yoil": "WED",
-        "startTime": "_1",
-        "endTime": "_3"
-      },
-      {
-        "yoil": "FRI",
-        "startTime": "_2",
-        "endTime": "_8"
-      }
-    ],
-    "address": "서울시 송파구 가락1동",
-    "name": "강아지",
-    "birth": "2022-07-03",
-    "email": "test2@naver.com",
-    "password": "Test123!",
-    "passwordCheck": "Test123!",
-    "nickname": "test2",
-    "gender": "M",
+    "name": form.name,
+    "birth": form.birth,
+    "email": form.email,
+    "password": form.pass,
+    "passwordCheck": form.passCheck,
+    "nickname": form.nickname,
+    "gender": form.gender,
     "technologyStacks": [
       {
-        "stack": "SPRING"
+        "stack": form.study.preferStack
       },
-      {
-        "stack": "REACT"
-      }
     ],
-    "phoneNumber": "010-6301-2268",
-    "job": "학생",
-    "preferLocation": "Seoul",
-    "ageRange": "Ten",
-    "preferSize": 20
+    "phoneNumber": form.phone,
+    "job": form.job,
+    "preferLocation": form.study.preferLocation,
+    "ageRange": form.study.ageRange,
+    "preferSize": form.study.preferSize
   });
 
   var config = {
     method: "post",
-    url: "https://localhost:8080/members/signup",
+    url: "/members/signup",
     headers: {
       "Content-Type": "application/json"
     },
@@ -77,9 +116,10 @@ const submit = () => {
   axios(config)
     .then(function(response) {
       console.log(JSON.stringify(response.data));
+      router.push("/login")
     })
     .catch(function(error) {
-      console.log(error);
+      alert(error)
     });
 };
 </script>
@@ -96,7 +136,6 @@ const submit = () => {
             autocomplete="username"
           />
         </FormField>
-
         <FormField label="비밀번호">
           <FormControl
             v-model="form.pass"
@@ -104,6 +143,77 @@ const submit = () => {
             type="password"
             name="password"
             autocomplete="current-password"
+          />
+        </FormField>
+        <FormField label="비밀번호 확인">
+          <FormControl
+            v-model="form.passCheck"
+            :icon="mdiAsterisk"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+          />
+        </FormField>
+        <FormField label="이름">
+          <FormControl
+            v-model="form.name"
+            name="name"
+          />
+        </FormField>
+        <FormField label="생년월일">
+          <FormControl
+            v-model="form.birth"
+            name="birth"
+          />
+        </FormField>
+        <FormField label="닉네임">
+          <FormControl
+            v-model="form.nickname"
+            name="nickname"
+          />
+        </FormField>
+        <FormCheckRadioGroup
+          v-model="form.gender"
+          name="remember"
+          type="radio"
+          :options="{ M:'Man', W:'Woman' }"
+        />
+        <FormField label="휴대폰 번호">
+          <FormControl
+            v-model="form.phone"
+            autocomplete="current-password"
+          />
+        </FormField>
+        <FormField label="직업">
+          <FormControl
+            v-model="form.job"
+            type="select"
+            :options=jobOptions
+          />
+        </FormField>
+        <FormField label="선호 스택">
+          <FormControl
+            v-model="form.study.preferStack"
+          />
+        </FormField>
+        <FormField label="선호 지역">
+          <FormControl
+            v-model="form.study.preferLocation"
+            type="select"
+            :options=regionOptions
+          />
+        </FormField>
+        <FormField label="선호 나이대">
+          <FormControl
+            v-model="form.study.ageRange"
+            type="select"
+            :options=ageOptions
+          />
+        </FormField>
+        <FormField label="스터디 사이즈">
+          <FormControl
+            v-model="form.study.preferSize"
+            type="number"
           />
         </FormField>
         <template #footer>
