@@ -24,7 +24,7 @@ import { useUserStore } from "../stores/user";
 const layoutAsidePadding = "xl:pl-60";
 
 const styleStore = useStyleStore();
-
+const userStore = useUserStore();
 const router = useRouter();
 
 const isAsideMobileExpanded = ref(false);
@@ -95,12 +95,17 @@ const menuClick = (event, item) => {
       <AsideMenu
         :is-aside-mobile-expanded="isAsideMobileExpanded"
         :is-aside-lg-active="isAsideLgActive"
-        :menu="menuAside"
+        :menu="menuAside.filter((obj)=>{
+          if(obj.label==='로그인' && userStore.userInfo.email ){
+            return false
+          }
+          return true
+        })"
         @menu-click="menuClick"
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
-      <FooterBar/>
+      <FooterBar />
     </div>
   </div>
 </template>
