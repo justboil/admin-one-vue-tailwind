@@ -119,7 +119,7 @@ const submit = () => {
       router.push("/login")
     })
     .catch(function(error) {
-      alert(error)
+      alert(error.response.data.message)
     });
 };
 </script>
