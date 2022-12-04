@@ -99,8 +99,8 @@ const submit = () => {
     ],
     "phoneNumber": form.phone,
     "job": form.job,
-    "preferLocation": form.study.preferLocation.label,
-    "ageRange": form.study.ageRange.label,
+    "preferLocation": form.study.preferLocation.id,
+    "ageRange": form.study.ageRange.id,
     "preferSize": form.study.preferSize
   });
 
