@@ -47,26 +47,26 @@ const submitPass = () => {
 };
 
 onBeforeMount(() => {
-  userStore.setUser({
-    "createdDate": "2022-12-04T12:46:09.923007",
-    "lastModifiedDate": "2022-12-04T12:46:09.923007",
-    "id": 1,
-    "address": "서울시 송파구 가락1동",
-    "passionTemperature": null,
-    "codingLevel": null,
-    "name": "강아지",
-    "birth": "2022-07-03",
-    "email": "test2@naver.com",
-    "password": "Test123!",
-    "nickname": "test2",
-    "gender": "M",
-    "phoneNumber": "010-6301-2268",
-    "job": "학생",
-    "profileUrl": null,
-    "ageRange": "Ten",
-    "preferSize": 20,
-    "preferLocation": "Seoul"
-  });
+  // userStore.setUser({
+  //   "createdDate": "2022-12-04T12:46:09.923007",
+  //   "lastModifiedDate": "2022-12-04T12:46:09.923007",
+  //   "id": 1,
+  //   "address": "서울시 송파구 가락1동",
+  //   "passionTemperature": null,
+  //   "codingLevel": null,
+  //   "name": "강아지",
+  //   "birth": "2022-07-03",
+  //   "email": "test2@naver.com",
+  //   "password": "Test123!",
+  //   "nickname": "test2",
+  //   "gender": "M",
+  //   "phoneNumber": "010-6301-2268",
+  //   "job": "학생",
+  //   "profileUrl": null,
+  //   "ageRange": "Ten",
+  //   "preferSize": 20,
+  //   "preferLocation": "Seoul"
+  // });
 
   if (!userStore.userInfo.email) {
     alert("유저 정보가 없습니다.");
