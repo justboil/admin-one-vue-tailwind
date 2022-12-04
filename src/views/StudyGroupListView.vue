@@ -74,7 +74,7 @@ const onClickCreateButton = () => {
 
   var config = {
     method: 'post',
-    url: 'https://54.180.3.122:8080/study/studyRoom',
+    url: '/study/studyRoom',
     headers: {
       'Content-Type': 'application/json'
     },
