@@ -11,7 +11,7 @@ import { darkModeKey, styleKey } from "/src/config.js";
 
 import "./css/main.css";
 import axios from "axios";
-axios.defaults.baseURL = "https://scone.o-r.kr:8080"
+axios.defaults.baseURL = "https://scone.o-r.kr"
 axios.defaults.withCredentials = true
 /* Init Pinia */
 const pinia = createPinia();
