@@ -5,7 +5,7 @@ import {
   mdiMail,
   mdiAsterisk,
   mdiFormTextboxPassword,
-  mdiGithub,
+  mdiGithub
 } from "@mdi/js";
 import SectionMain from "/src/components/SectionMain.vue";
 import CardBox from "/src/components/CardBox.vue";
@@ -27,14 +27,16 @@ const userStore = useUserStore();
 
 const profileForm = reactive({
   name: userStore.userInfo.nickName,
-  email: userStore.userInfo.email,
+  email: userStore.userInfo.email
 });
 
 const passwordForm = reactive({
   password_current: "",
   password: "",
-  password_confirmation: "",
+  password_confirmation: ""
 });
+
+const profile = reactive({});
 
 const submitProfile = () => {
   // mainStore.setUser(profileForm);
@@ -44,13 +46,44 @@ const submitPass = () => {
   //
 };
 
-onBeforeMount(()=>{
-  console.log(userStore.userInfo.email)
-  if(!userStore.userInfo.email){
-    alert('유저 정보가 없습니다.')
-    router.push('/dashboard')
+onBeforeMount(() => {
+  userStore.setUser({
+    "createdDate": "2022-12-04T12:46:09.923007",
+    "lastModifiedDate": "2022-12-04T12:46:09.923007",
+    "id": 1,
+    "address": "서울시 송파구 가락1동",
+    "passionTemperature": null,
+    "codingLevel": null,
+    "name": "강아지",
+    "birth": "2022-07-03",
+    "email": "test2@naver.com",
+    "password": "Test123!",
+    "nickname": "test2",
+    "gender": "M",
+    "phoneNumber": "010-6301-2268",
+    "job": "학생",
+    "profileUrl": null,
+    "ageRange": "Ten",
+    "preferSize": 20,
+    "preferLocation": "Seoul"
+  });
+
+  if (!userStore.userInfo.email) {
+    alert("유저 정보가 없습니다.");
+    router.push("/dashboard");
   }
-})
+});
+
+function filterList(targetKeys, originObj) {
+  let result = {};
+  Object.entries(originObj).forEach(([key, value]) => {
+    if(!targetKeys.includes(key)){
+      result[key] = value;
+    }
+  });
+  return result;
+}
+
 
 </script>
 
@@ -73,86 +106,12 @@ onBeforeMount(()=>{
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <CardBox is-form @submit.prevent="submitProfile">
-          <FormField label="Avatar" help="Max 500kb">
-            <FormFilePicker label="Upload" />
-          </FormField>
-
-          <FormField label="Name" help="Required. Your name">
-            <FormControl
-              v-model="profileForm.name"
-              :icon="mdiAccount"
-              name="username"
-              required
-              autocomplete="username"
-            />
-          </FormField>
-          <FormField label="E-mail" help="Required. Your e-mail">
-            <FormControl
-              v-model="profileForm.email"
-              :icon="mdiMail"
-              type="email"
-              name="email"
-              required
-              autocomplete="email"
-            />
-          </FormField>
-
-          <template #footer>
-            <BaseButtons>
-              <BaseButton color="info" type="submit" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
-            </BaseButtons>
-          </template>
+          <div v-for="(value, key) in filterList(['lastModifiedDate', 'createdDate', 'password', 'profileUrl', 'id', 'passionTemperature', 'codingLevel'], userStore.userInfo)" :key="key">{{ key }}: {{ value }}</div>
         </CardBox>
 
         <CardBox is-form @submit.prevent="submitPass">
-          <FormField
-            label="Current password"
-            help="Required. Your current password"
-          >
-            <FormControl
-              v-model="passwordForm.password_current"
-              :icon="mdiAsterisk"
-              name="password_current"
-              type="password"
-              required
-              autocomplete="current-password"
-            />
-          </FormField>
 
-          <BaseDivider />
 
-          <FormField label="New password" help="Required. New password">
-            <FormControl
-              v-model="passwordForm.password"
-              :icon="mdiFormTextboxPassword"
-              name="password"
-              type="password"
-              required
-              autocomplete="new-password"
-            />
-          </FormField>
-
-          <FormField
-            label="Confirm password"
-            help="Required. New password one more time"
-          >
-            <FormControl
-              v-model="passwordForm.password_confirmation"
-              :icon="mdiFormTextboxPassword"
-              name="password_confirmation"
-              type="password"
-              required
-              autocomplete="new-password"
-            />
-          </FormField>
-
-          <template #footer>
-            <BaseButtons>
-              <BaseButton type="submit" color="info" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
-            </BaseButtons>
-          </template>
         </CardBox>
       </div>
     </SectionMain>

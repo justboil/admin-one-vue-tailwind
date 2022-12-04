@@ -18,28 +18,12 @@ export default [
     label: "메인"
   },
   {
-    label: "스터디 그룹 관리",
+    label: "스터디 관리",
     icon: mdiViewList,
     menu: [
       {
-        label: "스터디 그룹 생성",
-        to: "/studygroup/create"
-      },
-      {
-        label: "스터디 그룹 리스트",
+        label: "스터디 리스트",
         to: "/studygroup"
-      }
-    ]
-  },
-  {
-    label: "스터디 그룹 생성",
-    icon: mdiViewList,
-    menu: [
-      {
-        label: "Item One"
-      },
-      {
-        label: "Item Two"
       }
     ]
   },
