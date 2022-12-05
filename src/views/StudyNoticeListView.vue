@@ -21,7 +21,8 @@ const userStore = useUserStore();
 
 const form = reactive({
   title: "",
-  contents: ""
+  contents: "",
+  comment:""
 });
 
 const router = useRouter();
@@ -49,8 +50,11 @@ const submit = () => {
     .catch(error => alert(error.message));
 };
 
-const submitComment = () => {
-  axios.post()
+const submitComment = (noticeId) => {
+  axios.post(`/study/${router.currentRoute.value.params.studyId}/${noticeId}/comment`,
+    {
+      contents:form.comment
+    })
 }
 
 onMounted(() => {
@@ -110,7 +114,7 @@ onMounted(() => {
             name="comment"
           />
         </FormField>
-<!--        <BaseButton @click.prevent="submitComment(notice.id)" color="info" label="댓글 작성"/>-->
+        <BaseButton @click.prevent="submitComment(notice.id)" color="info" label="댓글 작성"/>
       </CardBox>
 
     </SectionMain>
