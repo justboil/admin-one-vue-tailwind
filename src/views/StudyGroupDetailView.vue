@@ -126,6 +126,9 @@ const onClickEnterButton = () => {
           :disabled="member.username in userStore.recommendations.map(data=>data.username)"
           @click="onClickInviteButton(index)"></BaseButton>
       </CardBox>
+      <div>
+        <BaseButton label="게시판 가기" :to="'/studygroup/'+router.currentRoute.value.params.studyId+'/notices'"/>
+      </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       </div>
     </SectionMain>

@@ -105,6 +105,13 @@ const routes = [
     },
     path: "/studygroup/:studyId",
     component: () => import("/src/views/StudyGroupDetailView.vue")
+  },
+  {
+    meta: {
+      title: "스터디 그룹 게시판"
+    },
+    path: "/studygroup/:studyId/notices",
+    component: () => import("/src/views/StudyNoticeListView.vue")
   }
 ];
 
