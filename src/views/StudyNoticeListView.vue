@@ -15,8 +15,15 @@ import BaseLevel from "/src/components/BaseLevel.vue";
 import UserAvatar from "/src/components/UserAvatar.vue";
 import { useRouter } from "vue-router";
 import BaseDivider from "../components/BaseDivider";
+import FormField from "/src/components/FormField.vue";
+import FormControl from "/src/components/FormControl.vue";
 
 const userStore = useUserStore();
+
+const form = reactive({
+  title:"",
+  contents:""
+});
 
 const router = useRouter();
 
@@ -33,6 +40,15 @@ const fetchStudyNoticeList = () => {
       alert("스터디 공지사항 가져오기 실패");
     });
 };
+
+const submit = () => {
+  axios.post(`/study/${router.currentRoute.value.params.studyId}/notice`,
+    {
+      title: form.title,
+      contents: form.contents
+    })
+  .catch(error => alert(error.message))
+}
 
 onMounted(() => {
   fetchStudyNoticeList();
@@ -54,6 +70,27 @@ onMounted(() => {
           small
         />
       </SectionTitleLineWithButton>
+
+      <CardBox :class="cardClass" is-form @submit.prevent="submit">
+        <FormField label="제목">
+          <FormControl
+            v-model="form.title"
+            name="title"
+          />
+        </FormField>
+        <FormField label="내용">
+          <FormControl
+            v-model="form.contents"
+            name="contents"
+          />
+        </FormField>
+        <template #footer>
+          <BaseButtons>
+            <BaseButton type="submit" color="info" label="스터디 생성" />
+            <BaseButton to="/dashboard" color="info" outline label="Back" />
+          </BaseButtons>
+        </template>
+      </CardBox>
 
       <CardBox v-for="notice in userStore.studyNoticeList">
         <div>글 제목: {{notice.title}}</div>
