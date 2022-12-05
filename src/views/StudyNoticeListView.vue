@@ -114,7 +114,7 @@ onMounted(() => {
             name="comment"
           />
         </FormField>
-        <BaseButton @click.prevent="submitComment(notice.id)" color="info" label="댓글 작성"/>
+        <BaseButton @click.prevent="submitComment(notice.noticeId)" color="info" label="댓글 작성"/>
       </CardBox>
 
     </SectionMain>
