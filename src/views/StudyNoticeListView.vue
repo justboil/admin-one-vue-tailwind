@@ -49,6 +49,10 @@ const submit = () => {
     .catch(error => alert(error.message));
 };
 
+const submitComment = () => {
+  axios.post()
+}
+
 onMounted(() => {
   fetchStudyNoticeList();
 });
@@ -85,7 +89,7 @@ onMounted(() => {
         </FormField>
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="스터디 생성" />
+            <BaseButton type="submit" color="info" label="글 작성" />
             <BaseButton to="/dashboard" color="info" outline label="Back" />
           </BaseButtons>
         </template>
@@ -100,6 +104,13 @@ onMounted(() => {
           <div>댓글 작성자: {{ comment.writer }}</div>
           <div>댓글 내용: {{ comment.contents }}</div>
         </div>
+        <FormField label="댓글">
+          <FormControl
+            v-model="form.comment"
+            name="comment"
+          />
+        </FormField>
+<!--        <BaseButton @click.prevent="submitComment(notice.id)" color="info" label="댓글 작성"/>-->
       </CardBox>
 
     </SectionMain>
