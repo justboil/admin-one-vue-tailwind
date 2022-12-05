@@ -110,7 +110,7 @@ const submit = () => {
     "codingLevel": form.study.codingLevel,
     "studyType": form.study.type,
     "gender": form.gender,
-    "location": form.study.preferLocation.label,
+    "location": form.study.preferLocation.id,
     "ageRange": form.study.ageRange.id,
     "description": form.study.description,
     "passionTemperature":form.temp,
