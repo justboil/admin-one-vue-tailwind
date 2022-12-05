@@ -152,7 +152,7 @@ const submit = () => {
       console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
-      console.log(error);
+      alert(error.response.data.message)
     });
 };
 
