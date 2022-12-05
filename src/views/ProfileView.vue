@@ -37,8 +37,9 @@ const passwordForm = reactive({
   password_confirmation: ""
 });
 
-const profile = reactive({});
-let invitations = reactive([])
+const profile = reactive({
+  invitations:[]
+});
 
 const submitProfile = () => {
   // mainStore.setUser(profileForm);
@@ -89,7 +90,7 @@ function filterList(targetKeys, originObj) {
 const onClickInvitations = () => {
   axios.get("/study/invitations")
   .then(response=>{
-    invitations = response.data
+    profile.invitations = response.data
   })
 }
 
@@ -130,7 +131,7 @@ const onClickDecline = (memberStudyId) => {
 
         <CardBox is-form @submit.prevent="submitPass">
           <BaseButton label="받은 초대 보기" @click.prevent="onClickInvitations"/>
-          <div v-for="invitation in invitations">
+          <div v-for="invitation in profile.invitations">
             <li>스터디 이름: {{invitation.studyName}}</li>
             <li>스터디 설명: {{invitation.description}}</li>
             <BaseButton label="수락" @click.prevent="onClickAccept(invitation.id)"/>
