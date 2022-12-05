@@ -20,6 +20,7 @@ import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
 import { useUserStore } from "../stores/user";
 import { useRouter } from "vue-router";
+import axios from "axios"
 
 const router = useRouter();
 
@@ -37,6 +38,7 @@ const passwordForm = reactive({
 });
 
 const profile = reactive({});
+let invitations = reactive([])
 
 const submitProfile = () => {
   // mainStore.setUser(profileForm);
@@ -84,6 +86,24 @@ function filterList(targetKeys, originObj) {
   return result;
 }
 
+const onClickInvitations = () => {
+  axios.get("/study/invitations")
+  .then(response=>{
+    invitations = response.data
+  })
+}
+
+const onClickAccept = (memberStudyId) => {
+  axios.post(`/study/invitations/acceptance/${memberStudyId}`)
+    .then(response=>console.log(response))
+  .catch(error => alert(error.response))
+}
+
+const onClickDecline = (memberStudyId) => {
+  axios.post(`/study/invitations/acceptance/${memberStudyId}`)
+  .then(response=>console.log(response))
+    .catch(error => alert(error.response))
+}
 
 </script>
 
@@ -103,15 +123,19 @@ function filterList(targetKeys, originObj) {
       </SectionTitleLineWithButton>
 
       <UserCard class="mb-6" />
-
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <CardBox is-form @submit.prevent="submitProfile">
           <div v-for="(value, key) in filterList(['lastModifiedDate', 'createdDate', 'password', 'profileUrl', 'id', 'passionTemperature', 'codingLevel'], userStore.userInfo)" :key="key">{{ key }}: {{ value }}</div>
         </CardBox>
 
         <CardBox is-form @submit.prevent="submitPass">
-
-
+          <BaseButton label="받은 초대 보기" @click.prevent="onClickInvitations"/>
+          <div v-for="invitation in invitations">
+            <li>스터디 이름: {{invitation.studyName}}</li>
+            <li>스터디 설명: {{invitation.description}}</li>
+            <BaseButton label="수락" @click.prevent="onClickAccept(invitation.id)"/>
+            <BaseButton label="거절" @click.prevent="onClickDecline(invitation.id)"/>
+          </div>
         </CardBox>
       </div>
     </SectionMain>
