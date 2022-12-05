@@ -11,18 +11,17 @@ import LayoutAuthenticated from "/src/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "/src/components/SectionTitleLineWithButton.vue";
 import { useUserStore } from "../stores/user";
 import axios from "axios";
-import BaseLevel from "/src/components/BaseLevel.vue";
-import UserAvatar from "/src/components/UserAvatar.vue";
+import BaseDivider from "/src/components/BaseDivider.vue";
 import { useRouter } from "vue-router";
-import BaseDivider from "../components/BaseDivider";
 import FormField from "/src/components/FormField.vue";
 import FormControl from "/src/components/FormControl.vue";
+import BaseButtons from "/src/components/BaseButtons.vue";
 
 const userStore = useUserStore();
 
 const form = reactive({
-  title:"",
-  contents:""
+  title: "",
+  contents: ""
 });
 
 const router = useRouter();
@@ -31,7 +30,7 @@ const fetchStudyNoticeList = () => {
   axios.get(`/study/${router.currentRoute.value.params.studyId}/notices`)
     .then(response => {
         if (response.status === 200) {
-          userStore.studyNoticeList = response.data
+          userStore.studyNoticeList = response.data;
           console.log(response.data);
         }
       }
@@ -47,8 +46,8 @@ const submit = () => {
       title: form.title,
       contents: form.contents
     })
-  .catch(error => alert(error.message))
-}
+    .catch(error => alert(error.message));
+};
 
 onMounted(() => {
   fetchStudyNoticeList();
@@ -93,13 +92,13 @@ onMounted(() => {
       </CardBox>
 
       <CardBox v-for="notice in userStore.studyNoticeList">
-        <div>글 제목: {{notice.title}}</div>
-        <div>글 작성자: {{notice.writer}}</div>
-        <div>글 내용: {{notice.contents}}</div>
-        <BaseDivider/>
+        <div>글 제목: {{ notice.title }}</div>
+        <div>글 작성자: {{ notice.writer }}</div>
+        <div>글 내용: {{ notice.contents }}</div>
+        <BaseDivider />
         <div v-for="comment in userStore.studyNoticeList.comments">
-          <div>댓글 작성자: {{comment.writer}}</div>
-          <div>댓글 내용: {{comment.contents}}</div>
+          <div>댓글 작성자: {{ comment.writer }}</div>
+          <div>댓글 내용: {{ comment.contents }}</div>
         </div>
       </CardBox>
 
