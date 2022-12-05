@@ -166,6 +166,12 @@ const submit = () => {
             name="name"
           />
         </FormField>
+        <FormField label="선호 성별">
+          <FormControl
+            v-model="form.gender"
+            name="gender"
+          />
+        </FormField>
         <FormField label="설명">
           <FormControl
             v-model="form.study.description"
