@@ -23,6 +23,7 @@ const form = reactive({
   gender: "",
   phone: "",
   job: "",
+  temp:0,
   study: {
     preferStack: [],
     preferLocation: "",
@@ -112,6 +113,7 @@ const submit = () => {
     "location": form.study.preferLocation.label,
     "ageRange": form.study.ageRange.id,
     "description": form.study.description,
+    "passionTemperature":form.temp,
     "availableTimes": [
       {
         "yoil": "MON",
@@ -214,6 +216,12 @@ const submit = () => {
         <FormField label="스터디 사이즈">
           <FormControl
             v-model="form.study.preferSize"
+            type="number"
+          />
+        </FormField>
+        <FormField label="열정 온도">
+          <FormControl
+            v-model="form.temp"
             type="number"
           />
         </FormField>
