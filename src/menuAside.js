@@ -24,6 +24,10 @@ export default [
       {
         label: "스터디 리스트",
         to: "/studygroup"
+      },
+      {
+        label: "스터디 생성",
+        to: "/studygroup/create"
       }
     ]
   },
