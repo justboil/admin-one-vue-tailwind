@@ -104,7 +104,7 @@ onMounted(() => {
         <div>글 작성자: {{ notice.writer }}</div>
         <div>글 내용: {{ notice.contents }}</div>
         <BaseDivider />
-        <div v-for="comment in userStore.studyNoticeList.comments">
+        <div v-for="comment in notice.comments">
           <div>댓글 작성자: {{ comment.writer }}</div>
           <div>댓글 내용: {{ comment.contents }}</div>
         </div>
