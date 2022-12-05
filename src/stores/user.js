@@ -6,6 +6,7 @@ export const useUserStore = defineStore("user", {
     recommendations: [],
     studyMembers: [],
     studyList:[],
+    studyNoticeList:[]
   }),
   persist: {
     storage: localStorage
