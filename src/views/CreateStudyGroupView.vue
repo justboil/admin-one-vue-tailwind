@@ -28,7 +28,10 @@ const form = reactive({
     preferLocation: "",
     ageRange: "",
     availableTimes: [],
-    preferSize: ""
+    preferSize: "",
+    description:"",
+    codingLevel:"",
+    type: ""
   }
 });
 
@@ -38,6 +41,15 @@ const jobOptions = [
   "학생",
   "직장인",
   "기타"
+];
+
+const codingLevelOptions = [
+  "S",
+  "A",
+  "B",
+  "C",
+  "D",
+  "F",
 ];
 
 const regionOptions = [
@@ -57,6 +69,10 @@ const regionOptions = [
     id:"Daegu",
     label:"대구"
   },
+]
+
+const publicOptions = [
+  "Public", "Private"
 ]
 
 const ageOptions = [
@@ -85,18 +101,17 @@ const ageOptions = [
 
 const submit = () => {
   var data = JSON.stringify({
-    "studyName": "스프링 정복",
+    "studyName": form.name,
     "topic": {
       "stack": form.study.preferStack
     },
     "size": form.study.preferSize,
-    "codingLevel": "S",
-    "studyType": "Public",
-    "gender": "F",
-    "location": "Seoul",
-    "ageRange": "Ten",
-    "passionTemperature": 20,
-    "description": "열심히 하실 분들 같이 해요",
+    "codingLevel": form.study.codingLevel,
+    "studyType": form.study.type,
+    "gender": form.gender,
+    "location": form.study.preferLocation,
+    "ageRange": form.study.ageRange,
+    "description": form.study.description,
     "availableTimes": [
       {
         "yoil": "MON",
@@ -120,7 +135,7 @@ const submit = () => {
       }
     ]
   });
-
+  console.log(JSON.parse(data))
   var config = {
     method: 'post',
     url: '/study/studyRoom',
@@ -145,15 +160,28 @@ const submit = () => {
   <LayoutAuthenticated>
     <SectionMain>
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="이름">
+        <FormField label="제목">
           <FormControl
             v-model="form.name"
             name="name"
           />
         </FormField>
+        <FormField label="설명">
+          <FormControl
+            v-model="form.study.description"
+            name="description"
+          />
+        </FormField>
         <FormField label="선호 스택">
           <FormControl
             v-model="form.study.preferStack"
+          />
+        </FormField>
+        <FormField label="코딩 수준">
+          <FormControl
+            v-model="form.study.codingLevel"
+            type="select"
+            :options=codingLevelOptions
           />
         </FormField>
         <FormField label="선호 지역">
@@ -168,6 +196,13 @@ const submit = () => {
             v-model="form.study.ageRange"
             type="select"
             :options=ageOptions
+          />
+        </FormField>
+        <FormField label="스터디 공개여부">
+          <FormControl
+            v-model="form.study.type"
+            type="select"
+            :options=publicOptions
           />
         </FormField>
         <FormField label="스터디 사이즈">
