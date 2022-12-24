@@ -3,7 +3,16 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    './composables/**/*.{js,vue,ts}',
+    './components/**/*.{js,vue,ts}',
+    './configs/**/*.{js,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './stores/**/*.{js,ts}',
+    'app.vue'
+  ],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     asideScrollbars: {
@@ -45,32 +54,32 @@ module.exports = {
     require("@tailwindcss/forms"),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
-        {
-          "aside-scrollbars": (value) => {
-            const track = value === "light" ? "100" : "900";
-            const thumb = value === "light" ? "300" : "600";
-            const color = value === "light" ? "gray" : value;
+          {
+            "aside-scrollbars": (value) => {
+              const track = value === "light" ? "100" : "900";
+              const thumb = value === "light" ? "300" : "600";
+              const color = value === "light" ? "gray" : value;
 
-            return {
-              scrollbarWidth: "thin",
-              scrollbarColor: `${theme(`colors.${color}.${thumb}`)} ${theme(
-                `colors.${color}.${track}`
-              )}`,
-              "&::-webkit-scrollbar": {
-                width: "8px",
-                height: "8px",
-              },
-              "&::-webkit-scrollbar-track": {
-                backgroundColor: theme(`colors.${color}.${track}`),
-              },
-              "&::-webkit-scrollbar-thumb": {
-                borderRadius: "0.25rem",
-                backgroundColor: theme(`colors.${color}.${thumb}`),
-              },
-            };
+              return {
+                scrollbarWidth: "thin",
+                scrollbarColor: `${theme(`colors.${color}.${thumb}`)} ${theme(
+                    `colors.${color}.${track}`
+                )}`,
+                "&::-webkit-scrollbar": {
+                  width: "8px",
+                  height: "8px",
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor: theme(`colors.${color}.${track}`),
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  borderRadius: "0.25rem",
+                  backgroundColor: theme(`colors.${color}.${thumb}`),
+                },
+              };
+            },
           },
-        },
-        { values: theme("asideScrollbars") }
+          { values: theme("asideScrollbars") }
       );
     }),
     require("@tailwindcss/line-clamp"),

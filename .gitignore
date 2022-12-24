@@ -14,10 +14,14 @@ dist-ssr
 coverage
 *.local
 
-/cypress/videos/
-/cypress/screenshots/
+.nuxt
+.nitro
+.cache
+.output
+.env
 
 # Editor directories and files
+.vs
 .vscode/*
 !.vscode/extensions.json
 .idea
