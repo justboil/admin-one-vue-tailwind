@@ -63,31 +63,29 @@ const styleStore = useStyleStore();
 <template>
   <div>
     <NuxtLayout name="authenticated">
-      <ClientOnly>
-        <CardBoxModal
-          v-model="modalOneActive"
-          title="Please confirm action"
-          button-label="Confirm"
-          has-cancel
-        >
-          <p>This is sample modal</p>
-          <p>Lorem ipsum dolor</p>
-        </CardBoxModal>
+      <CardBoxModal
+        v-model="modalOneActive"
+        title="Please confirm action"
+        button-label="Confirm"
+        has-cancel
+      >
+        <p>This is sample modal</p>
+        <p>Lorem ipsum dolor</p>
+      </CardBoxModal>
 
-        <CardBoxModal
-          v-model="modalTwoActive"
-          title="Unhandled exception"
-          button="danger"
-        >
-          <p>This is sample modal</p>
-          <p>Lorem ipsum dolor</p>
-        </CardBoxModal>
+      <CardBoxModal
+        v-model="modalTwoActive"
+        title="Unhandled exception"
+        button="danger"
+      >
+        <p>This is sample modal</p>
+        <p>Lorem ipsum dolor</p>
+      </CardBoxModal>
 
-        <CardBoxModal v-model="modalThreeActive" title="Success" button="success">
-          <p>This is sample modal</p>
-          <p>Lorem ipsum dolor</p>
-        </CardBoxModal>
-      </ClientOnly>
+      <CardBoxModal v-model="modalThreeActive" title="Success" button="success">
+        <p>This is sample modal</p>
+        <p>Lorem ipsum dolor</p>
+      </CardBoxModal>
 
       <SectionTitle first>Dark mode</SectionTitle>
 
