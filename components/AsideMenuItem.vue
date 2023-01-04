@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from "vue";
-// import { RouterLink } from "vue-router";
 import { NuxtLink } from '#components'
 import { useStyleStore } from "@/stores/style.js";
 import { mdiMinus, mdiPlus } from "@mdi/js";

@@ -1,5 +1,4 @@
 <script setup>
-import { useRouter } from "vue-router";
 import { useStyleStore } from "@/stores/style.js";
 import { gradientBgPurplePink } from "@/configs/colors.js";
 

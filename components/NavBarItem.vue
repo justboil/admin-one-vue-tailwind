@@ -1,6 +1,5 @@
 <script setup>
 import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
-// import { RouterLink } from "vue-router";
 import { NuxtLink } from '#components'
 import { computed, ref, onMounted, onBeforeUnmount } from "vue";
 import { useStyleStore } from "@/stores/style.js";

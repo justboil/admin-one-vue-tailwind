@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from "vue";
-// import { RouterLink } from "vue-router";
 import { NuxtLink } from '#components'
 import { getButtonColor } from "@/configs/colors";
 
