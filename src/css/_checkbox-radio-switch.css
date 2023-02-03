@@ -4,7 +4,7 @@
   }
 
   .checkbox input[type=checkbox], .radio input[type=radio], .switch input[type=checkbox] {
-    @apply absolute left-0 opacity-0 -z-1;
+    @apply absolute left-0 opacity-0;
   }
 
   .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check, .switch input[type=checkbox]+.check {
