@@ -77,7 +77,7 @@ Fresh Laravel install with Breeze provides **Capitalized** folder names such as 
 
 ### In tailwind.config.js
 
-Replace `content`, to reflect Laravel's structure:
+Please make sure, you've copied template's `tailwind.config.js`. Then replace `content`, to reflect Laravel's structure:
 
 ```js
 module.exports = {
