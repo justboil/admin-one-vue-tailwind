@@ -465,6 +465,10 @@ const menuClick = (event, item) => {
 </script>
 ```
 
+### Use premium login and signup layouts
+
+Optionally, you may update layouts of login and signup, located at `resources/js/Pages/Auth` with Premium version layouts from `src/views/Premium/LoginView.vue` and `src/views/Premium/SignupView.vue`
+
 ## Optional steps
 
 ### Default style
