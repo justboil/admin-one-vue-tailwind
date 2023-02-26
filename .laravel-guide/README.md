@@ -24,8 +24,9 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 - [Add pages](#add-pages)
 - [Fix router links](#fix-router-links)
 - [Add Inertia-related stuff](#add-inertia-related-stuff)
+- [Upgrading to Premium version](#upgrading-to-premium-version)
 - [Optional steps](#optional-steps)
-- [More information](#more-information)
+- [Laravel & Inertia docs](#laravel--inertia-docs)
 
 ## Install
 
@@ -379,6 +380,91 @@ const itemLabel = computed(() =>
 </script>
 ```
 
+## Upgrading to Premium version
+
+Please make sure you have completed all previous steps in this guide, so you have everything up and running. Then download and uzip the Premium version files. Next, follow steps described below.
+
+### Add deps
+
+```bash
+npm i @headlessui/vue -D
+```
+
+### Copy files
+
+Copy files to your Laravel project (overwrite free version ones or merge if you have changed something):
+
+- Copy `src/components/Premium` to `resources/js/components/Premium`
+- Copy `src/stores` to `resources/js/stores`
+- Copy `src/config.js` to `resources/js/config.js`
+- Copy `src/styles.js` to `resources/js/styles.js`
+- Copy `src/sampleButtonMenuOptions.js` to `resources/js/sampleButtonMenuOptions.js`
+- Copy `src/colorsPremium.js` to `resources/js/colorsPremium.js`
+
+### Update tailwind.config.js
+
+Replace `tailwind.config.js` in your Laravel project with the Premium one. Make sure to preserve `module.exports.content`:
+
+```js
+module.exports = {
+  content: [
+    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+    "./storage/framework/views/*.php",
+    "./resources/views/**/*.blade.php",
+    "./resources/js/**/*.vue",
+    "./resources/js/**/*.js",
+  ],
+  // ...
+};
+```
+
+### Update resources/js/app.js
+
+Add layout store to `resources/js/app.js`:
+
+```js
+// Add layout store
+import { useLayoutStore } from "@/stores/layout.js";
+
+const layoutStore = useLayoutStore(pinia);
+
+layoutStore.responsiveLayoutControl();
+window.onresize = () => layoutStore.responsiveLayoutControl();
+```
+
+### Update resources/js/layouts/LayoutAuthenticated.vue
+
+Replace contents of `resources/js/layouts/LayoutAuthenticated.vue` with contents of `src/js/layouts/LayoutAuthenticated.vue` (from the Premium version)
+
+```vue
+<script setup>
+// Replace router use:
+
+// import { useRouter } from "vue-router";
+import { router } from "@inertiajs/vue3";
+
+// const router = useRouter();
+
+// router.beforeEach(() => {
+//   layoutStore.isAsideMobileExpanded = false;
+// });
+
+router.on("navigate", () => {
+  layoutStore.isAsideMobileExpanded = false;
+});
+
+// Add logout:
+
+const menuClick = (event, item) => {
+  // ...
+
+  if (item.isLogout) {
+    router.post(route("logout"));
+  }
+};
+</script>
+```
+
 ## Optional steps
 
 ### Default style
@@ -398,7 +484,7 @@ indent_size = 2
 
 Global `lodash` and `axios` aren't needed, as we import them directly when needed. Most likely, you'd not need `axios` at all, as Laravel pushes all data via Inertia.
 
-## More information
+## Laravel & Inertia docs
 
 - [Laravel Docs](https://laravel.com/docs)
 - [Inertia](https://inertiajs.com/)
