@@ -36,6 +36,14 @@ const props = defineProps({
     type: Array,
     default: null,
   },
+	optionLabel: {
+		type: String,
+		default: 'label',
+	},
+	optionValue: {
+		type: String,
+		default: 'id',
+	},
   type: {
     type: String,
     default: "text",
@@ -137,9 +145,9 @@ if (props.ctrlKFocus) {
       <option
         v-for="option in options"
         :key="option.id ?? option"
-        :value="option"
+        :value="option[optionValue] ?? option"
       >
-        {{ option.label ?? option }}
+        {{ option[optionLabel] ?? option }}
       </option>
     </select>
     <textarea
