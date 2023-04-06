@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from "vue";
+import { computed, ref, onMounted, onBeforeUnmount, useAttrs } from "vue";
 import { useMainStore } from "@/stores/main";
 import FormControlIcon from "@/components/FormControlIcon.vue";
 
@@ -36,6 +36,14 @@ const props = defineProps({
     type: Array,
     default: null,
   },
+	optionLabel: {
+		type: String,
+		default: 'label',
+	},
+	optionValue: {
+		type: String,
+		default: 'id',
+	},
   type: {
     type: String,
     default: "text",
@@ -49,6 +57,8 @@ const props = defineProps({
   transparent: Boolean,
   ctrlKFocus: Boolean,
 });
+
+const attrs = useAttrs();
 
 const emit = defineEmits(["update:modelValue", "setRef"]);
 
@@ -133,13 +143,14 @@ if (props.ctrlKFocus) {
       v-model="computedValue"
       :name="name"
       :class="inputElClass"
+      v-bind="attrs"
     >
       <option
         v-for="option in options"
         :key="option.id ?? option"
-        :value="option"
+        :value="option[optionValue] ?? option"
       >
-        {{ option.label ?? option }}
+        {{ option[optionLabel] ?? option }}
       </option>
     </select>
     <textarea
@@ -151,6 +162,7 @@ if (props.ctrlKFocus) {
       :maxlength="maxlength"
       :placeholder="placeholder"
       :required="required"
+      v-bind="attrs"
     />
     <input
       v-else
@@ -165,6 +177,7 @@ if (props.ctrlKFocus) {
       :placeholder="placeholder"
       :type="computedType"
       :class="inputElClass"
+      v-bind="attrs"
     />
     <FormControlIcon v-if="icon" :icon="icon" :h="controlIconH" />
   </div>
