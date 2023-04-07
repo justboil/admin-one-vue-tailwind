@@ -52,7 +52,7 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  buildModules: [
+  modules: [
     '@pinia/nuxt',
   ],
   postcss: {
@@ -85,12 +85,14 @@ module.exports = {
 }
 ```
 
+Remove `require("@tailwindcss/line-clamp")`.
+
 #### In App.vue
 
 ```vue
 <script setup>
 import { useStyleStore } from '@/stores/style.js'
-import { darkModeKey, styleKey } from '@/config.js'
+import { darkModeKey, styleKey } from '@/configs/config.js'
 
 useHead({
   titleTemplate: (titleChunk) => {
@@ -224,9 +226,19 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 
 ## Replace `<RouterLink>` with `<NuxtLink>`
 
-Details are coming soon...
+Replace `RouterLink` with `NuxtLink` and put import from components:
+
+```js
+import { NuxtLink } from '#components'
+
+//...
+        return NuxtLink;
+//...
+```
 
 ## Remove/update imports
+
+Move `components/Charts/chart.config.js` to `configs/` directory. And update import as `import * as chartConfig from "~/configs/chart.config";`.
 
 Nuxt automatically imports any components in your `components/` directory. So, you may safely remove that imports from `<script setup>`. The only exception is for `components/Charts`, so charts import should be left as is.
 
