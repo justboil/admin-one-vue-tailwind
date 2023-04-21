@@ -184,14 +184,23 @@ import { Link } from "@inertiajs/vue3";
 // import { RouterLink } from "vue-router";
 // ...
 
+// Define route and params
+let routeName, routeParams;
+if (props.item.route && typeof (props.item.route) === "object") {
+  routeName = props.item.route[0];
+  routeParams = props.item.route[1];
+} else if (props.item.route) {
+  routeName = props.item.route;
+}
+
 // Add itemHref
 const itemHref = computed(() =>
-  props.item.route ? route(props.item.route) : props.item.href
+  props.item.route ? route(routeName, routeParams) : props.item.href
 );
 
 // Add activeInactiveStyle
 const activeInactiveStyle = computed(() =>
-  props.item.route && route().current(props.item.route)
+  props.item.route && route().current(routeName)
     ? styleStore.asideMenuItemActiveStyle
     : ""
 );
@@ -227,6 +236,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  routeParams: {
+    type: Object,
+    default: null,
+  },
   // ...
 });
 ```
@@ -258,7 +271,7 @@ Remove `:to` and replace `:href` in `<component>` with `:href="routeName ? route
   <component
     :is="is"
     :class="componentClass"
-    :href="routeName ? route(routeName) : href"
+    :href="routeName ? route(routeName, routeParams) : href"
     :type="computedType"
     :target="target"
     :disabled="disabled"
@@ -278,9 +291,19 @@ import { Link } from "@inertiajs/vue3";
 // import { RouterLink } from "vue-router";
 // ...
 
+// Define route and params
+let routeName, routeParams;
+
+if (props.item.route && typeof (props.item.route) === "object") {
+  routeName = props.item.route[0];
+  routeParams = props.item.route[1];
+} else if (props.item.route) {
+  routeName = props.item.route;
+}
+
 // Add itemHref
 const itemHref = computed(() =>
-  props.item.route ? route(props.item.route) : props.item.href
+  props.item.route ? route(routeName, routeParams) : props.item.href
 );
 
 // Update `const is` to return `Link` when `props.routeName` is set:
