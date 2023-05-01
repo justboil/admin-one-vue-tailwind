@@ -1,5 +1,6 @@
 {
-  "private": true,
+  "name": "admin-one-nuxt-tailwind",
+  "version": "3.2.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -7,17 +8,16 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.1.2",
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/line-clamp": "^0.4.2"
-  },
   "dependencies": {
-    "@mdi/js": "^7.0.96",
-    "@pinia/nuxt": "^0.4.3",
-    "chart.js": "^4.1.1",
+    "@mdi/js": "^7.2.96",
+    "@pinia/nuxt": "^0.4.9",
+    "chart.js": "^4.3.0",
     "numeral": "^2.0.6",
-    "nuxt": "^3.0.0",
-    "tailwindcss": "^3.2.1"
+    "nuxt": "^3.4.3",
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.6.7",
+    "@tailwindcss/forms": "^0.5.3"
   }
 }
