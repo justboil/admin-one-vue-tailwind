@@ -65,7 +65,7 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
 </script>
 
 <template>
-  <CardBox class="mb-6 last:mb-0" is-hoverable>
+  <CardBox class="mb-6 last:mb-0">
     <BaseLevel>
       <BaseLevel type="justify-start">
         <UserAvatar class="w-12 h-12 mr-6" :username="name" />
