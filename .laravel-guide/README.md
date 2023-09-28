@@ -63,7 +63,7 @@ Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-on
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
 - Copy `tailwind.config.js` to `/`
-- Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `resources/js/`
+- Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` to `resources/js/`
 - Copy `.laravel-guide/resources/js/` to `resources/js/`
 - Delete `resources/css/app.css`
 - Copy `src/css` to `resources/css`
@@ -393,7 +393,6 @@ Copy files to your Laravel project (overwrite free version ones or merge if you 
 - Copy `src/components/Premium` to `resources/js/components/Premium`
 - Copy `src/stores` to `resources/js/stores`
 - Copy `src/config.js` to `resources/js/config.js`
-- Copy `src/styles.js` to `resources/js/styles.js`
 - Copy `src/sampleButtonMenuOptions.js` to `resources/js/sampleButtonMenuOptions.js`
 - Copy `src/colorsPremium.js` to `resources/js/colorsPremium.js`
 
@@ -469,7 +468,7 @@ Optionally, you may update layouts of login and signup, located at `resources/js
 
 ### Default style
 
-It's likely, you'll use only one app style, either `basic` or one of listed in `src/styles.js`. Follow [this guide](https://justboil.github.io/docs/customization/#default-style) to set one of choice.
+It's likely, you'll use only one app style. Follow [this guide](https://justboil.github.io/docs/customization/#default-style) to set one of choice.
 
 ### Fix .editorconfig
 

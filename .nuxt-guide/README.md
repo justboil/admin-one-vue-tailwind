@@ -39,7 +39,7 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 - Copy `src/components` to `components/`
 - Copy `src/layouts` to `layouts/`
 - Copy `src/stores` to `stores/`
-- Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `configs/`
+- Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` to `configs/`
 - Copy `src/css` to `assets/css/`
 - Copy `public/favicon.png` to `public/`
 
