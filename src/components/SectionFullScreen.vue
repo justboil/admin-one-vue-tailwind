@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const colorClass = computed(() => {
-  if (useDarkModeStore().darkMode) {
+  if (useDarkModeStore().isEnabled) {
     return gradientBgDark
   }
 
