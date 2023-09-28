@@ -2,7 +2,6 @@
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import { RouterLink } from 'vue-router'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import { useStyleStore } from '@/stores/style.js'
 import { useMainStore } from '@/stores/main.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
@@ -30,13 +29,11 @@ const is = computed(() => {
   return 'div'
 })
 
-const styleStore = useStyleStore()
-
 const componentClass = computed(() => {
   const base = [
     isDropdownActive.value
-      ? `${styleStore.navBarItemLabelActiveColorStyle} dark:text-slate-400`
-      : `${styleStore.navBarItemLabelStyle} dark:text-white dark:hover:text-slate-400 ${styleStore.navBarItemLabelHoverStyle}`,
+      ? `navbar-item-label-active dark:text-slate-400`
+      : `navbar-item-label dark:text-white dark:hover:text-slate-400`,
     props.item.menu ? 'lg:py-2 lg:px-3' : 'py-2 px-3'
   ]
 

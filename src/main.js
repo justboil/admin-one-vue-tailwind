@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import { useMainStore } from '@/stores/main.js'
 import { useStyleStore } from '@/stores/style.js'
-import { darkModeKey, styleKey } from '@/config.js'
+import { darkModeKey } from '@/config.js'
 
 import './css/main.css'
 
@@ -22,9 +22,6 @@ const styleStore = useStyleStore(pinia)
 /* Fetch sample data */
 mainStore.fetchSampleClients()
 mainStore.fetchSampleHistory()
-
-/* App style */
-styleStore.setStyle(localStorage[styleKey] ?? 'basic')
 
 /* Dark mode */
 if (

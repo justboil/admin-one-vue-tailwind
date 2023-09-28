@@ -6,3 +6,6 @@
 @import '_progress.css';
 @import '_scrollbars.css';
 @import '_table.css';
+
+@import 'styles/_basic.css';
+@import 'styles/_white.css';

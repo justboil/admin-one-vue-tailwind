@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useStyleStore } from '@/stores/style.js'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -17,13 +16,9 @@ const props = defineProps({
 
 const emit = defineEmits(['menu-click'])
 
-const styleStore = useStyleStore()
-
 const hasColor = computed(() => props.item && props.item.color)
 
-const asideMenuItemActiveStyle = computed(() =>
-  hasColor.value ? '' : styleStore.asideMenuItemActiveStyle
-)
+const asideMenuItemActiveStyle = computed(() => (hasColor.value ? '' : 'aside-menu-item-active'))
 
 const isDropdownActive = ref(false)
 
@@ -31,7 +26,7 @@ const componentClass = computed(() => [
   props.isDropdownList ? 'py-3 px-6 text-sm' : 'py-3',
   hasColor.value
     ? getButtonColor(props.item.color, false, true)
-    : `${styleStore.asideMenuItemStyle} dark:text-slate-300 dark:hover:text-white`
+    : `aside-menu-item dark:text-slate-300 dark:hover:text-white`
 ])
 
 const hasDropdown = computed(() => !!props.item.menu)
@@ -84,10 +79,7 @@ const menuClick = (event) => {
     <AsideMenuList
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="[
-        styleStore.asideMenuDropdownStyle,
-        isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden'
-      ]"
+      :class="['aside-menu-dropdown', isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden']"
       is-dropdown-list
     />
   </li>

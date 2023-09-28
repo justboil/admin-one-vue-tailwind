@@ -14,8 +14,13 @@ styleStore.setDarkMode(false)
 
 const router = useRouter()
 
-const click = (slug) => {
-  styleStore.setStyle(slug)
+const handleStyleChange = (slug) => {
+  document.documentElement.classList.forEach((token) => {
+    if (token.indexOf('style') === 0) {
+      document.documentElement.classList.replace(token, `style-${slug}`)
+    }
+  })
+
   router.push('/dashboard')
 }
 </script>
@@ -37,7 +42,7 @@ const click = (slug) => {
             :key="style"
             class="cursor-pointer bg-gray-50"
             is-hoverable
-            @click="click(style)"
+            @click="handleStyleChange(style)"
           >
             <div class="mb-3 md:mb-6">
               <img
