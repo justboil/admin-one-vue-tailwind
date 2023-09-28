@@ -13,7 +13,7 @@
       @apply text-gray-300 hover:text-white;
     }
     .aside-menu-item-active {
-      @apply font-bold text-white;
+      @apply text-white;
     }
     .aside-menu-dropdown {
       @apply bg-gray-700/50;

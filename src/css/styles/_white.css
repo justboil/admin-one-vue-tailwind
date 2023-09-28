@@ -10,7 +10,7 @@
       @apply text-blue-600 hover:text-black;
     }
     .aside-menu-item-active {
-      @apply font-bold text-black;
+      @apply text-black;
     }
     .aside-menu-dropdown {
       @apply bg-gray-100/75;
