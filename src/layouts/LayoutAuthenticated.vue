@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import menuAside from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
-import { useStyleStore } from '@/stores/style.js'
+import { useDarkModeStore } from '@/stores/darkMode.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import FormControl from '@/components/FormControl.vue'
 import NavBar from '@/components/NavBar.vue'
@@ -14,7 +14,7 @@ import FooterBar from '@/components/FooterBar.vue'
 
 const layoutAsidePadding = 'xl:pl-60'
 
-const styleStore = useStyleStore()
+const darkModeStore = useDarkModeStore()
 
 const router = useRouter()
 
@@ -28,7 +28,7 @@ router.beforeEach(() => {
 
 const menuClick = (event, item) => {
   if (item.isToggleLightDark) {
-    styleStore.setDarkMode()
+    darkModeStore.set()
   }
 
   if (item.isLogout) {
@@ -40,7 +40,6 @@ const menuClick = (event, item) => {
 <template>
   <div
     :class="{
-      dark: styleStore.darkMode,
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded
     }"
   >

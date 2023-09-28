@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useStyleStore } from '@/stores/style.js'
+import { useDarkModeStore } from '@/stores/darkMode.js'
 import {
   mdiContrastCircle,
   mdiInformation,
@@ -58,7 +58,7 @@ const pillsIcon = computed(() =>
   pillsSettingsModel.value.indexOf('icon') > -1 ? mdiTrendingUp : null
 )
 
-const styleStore = useStyleStore()
+const darkModeStore = useDarkModeStore()
 </script>
 
 <template>
@@ -88,7 +88,7 @@ const styleStore = useStyleStore()
     <SectionMain>
       <CardBox class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
         <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
-          <BaseButton label="Toggle" color="contrast" @click="styleStore.setDarkMode()" />
+          <BaseButton label="Toggle" color="contrast" @click="darkModeStore.set()" />
         </div>
       </CardBox>
     </SectionMain>

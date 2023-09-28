@@ -83,14 +83,14 @@ Please make sure, you've copied template's `tailwind.config.js`. Then replace `c
 ```js
 module.exports = {
   content: [
-    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-    "./storage/framework/views/*.php",
-    "./resources/views/**/*.blade.php",
-    "./resources/js/**/*.vue",
-    "./resources/js/**/*.js",
-  ],
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    './storage/framework/views/*.php',
+    './resources/views/**/*.blade.php',
+    './resources/js/**/*.vue',
+    './resources/js/**/*.js'
+  ]
   // ...
-};
+}
 ```
 
 ### In resources/views/app.blade.php
@@ -107,7 +107,7 @@ Then, open `resources/js/Pages/HomeView.vue` and add `<Head>`:
 
 ```vue
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head } from '@inertiajs/vue3'
 // ...
 </script>
 
@@ -139,12 +139,12 @@ Optionally, you can pass menu via Inertia shared props, so you'll be able to con
 
 ```javascript
 export default [
-  "General",
+  'General',
   [
     {
-      route: "dashboard",
+      route: 'dashboard',
       icon: mdiMonitor,
-      label: "Dashboard",
+      label: 'Dashboard'
     },
     // {
     //   route: "another-route-name",
@@ -152,12 +152,12 @@ export default [
     //   label: "Dashboard 2",
     // },
     {
-      href: "https://example.com/",
+      href: 'https://example.com/',
       icon: mdiMonitor,
-      label: "Example.com",
-    },
-  ],
-];
+      label: 'Example.com'
+    }
+  ]
+]
 ```
 
 Route names reflect ones defined in `routes/web.php`:
@@ -180,21 +180,19 @@ Replace `RouterLink` imported from `vue-router` with `Link` import in `<script s
 
 ```vue
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 // import { RouterLink } from "vue-router";
 // ...
 
 // Add itemHref
-const itemHref = computed(() =>
-  props.item.route ? route(props.item.route) : props.item.href
-);
+const itemHref = computed(() => (props.item.route ? route(props.item.route) : props.item.href))
 
 // Add activeInactiveStyle
 const activeInactiveStyle = computed(() =>
   props.item.route && route().current(props.item.route)
-    ? styleStore.asideMenuItemActiveStyle
-    : ""
-);
+    ? darkModeStore.asideMenuItemActiveStyle
+    : ''
+)
 
 // ...
 </script>
@@ -212,7 +210,7 @@ Replace `RouterLink` imported from `vue-router` with `Link` import in `<script s
 
 ```vue
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 // import { RouterLink } from "vue-router";
 // ...
 </script>
@@ -225,10 +223,10 @@ const props = defineProps({
   // ...
   routeName: {
     type: String,
-    default: null,
-  },
+    default: null
+  }
   // ...
-});
+})
 ```
 
 Fix `const is` declaration, so it returns the `Link` component when `props.routeName` is set:
@@ -236,19 +234,19 @@ Fix `const is` declaration, so it returns the `Link` component when `props.route
 ```javascript
 const is = computed(() => {
   if (props.as) {
-    return props.as;
+    return props.as
   }
 
   if (props.routeName) {
-    return Link;
+    return Link
   }
 
   if (props.href) {
-    return "a";
+    return 'a'
   }
 
-  return "button";
-});
+  return 'button'
+})
 ```
 
 Remove `:to` and replace `:href` in `<component>` with `:href="routeName ? route(routeName) : href"`:
@@ -274,27 +272,25 @@ Replace `RouterLink` imported from `vue-router` with `Link` import in `<script s
 
 ```vue
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3'
 // import { RouterLink } from "vue-router";
 // ...
 
 // Add itemHref
-const itemHref = computed(() =>
-  props.item.route ? route(props.item.route) : props.item.href
-);
+const itemHref = computed(() => (props.item.route ? route(props.item.route) : props.item.href))
 
 // Update `const is` to return `Link` when `props.routeName` is set:
 const is = computed(() => {
   if (props.item.href) {
-    return "a";
+    return 'a'
   }
 
   if (props.item.route) {
-    return Link;
+    return Link
   }
 
-  return "div";
-});
+  return 'div'
+})
 </script>
 ```
 
@@ -319,12 +315,12 @@ Then, remove `:to` attribute and set `:href` attribute to `:href="itemHref"` in 
 
 // Add:
 
-import { router } from "@inertiajs/vue3";
+import { router } from '@inertiajs/vue3'
 
-router.on("navigate", () => {
-  isAsideMobileExpanded.value = false;
-  isAsideLgActive.value = false;
-});
+router.on('navigate', () => {
+  isAsideMobileExpanded.value = false
+  isAsideLgActive.value = false
+})
 
 // Replace `isLogout` logic:
 
@@ -333,9 +329,9 @@ const menuClick = (event, item) => {
 
   if (item.isLogout) {
     // Add:
-    router.post(route("logout"));
+    router.post(route('logout'))
   }
-};
+}
 
 // ...
 </script>
@@ -347,11 +343,11 @@ Let's fetch user avatar initials based on username stored in database.
 
 ```vue
 <script setup>
-import { computed } from "vue";
-import { usePage } from "@inertiajs/vue3";
-import UserAvatar from "@/components/UserAvatar.vue";
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import UserAvatar from '@/components/UserAvatar.vue'
 
-const userName = computed(() => usePage().props.auth.user.name);
+const userName = computed(() => usePage().props.auth.user.name)
 </script>
 
 <template>
@@ -366,7 +362,7 @@ const userName = computed(() => usePage().props.auth.user.name);
 ```vue
 <script setup>
 // Add usePage:
-import { usePage } from "@inertiajs/vue3";
+import { usePage } from '@inertiajs/vue3'
 // Remove unused useMainStore:
 // import { useMainStore } from '@/stores/main.js'
 // ...
@@ -374,7 +370,7 @@ import { usePage } from "@inertiajs/vue3";
 // Update itemLabel:
 const itemLabel = computed(() =>
   props.item.isCurrentUser ? usePage().props.auth.user.name : props.item.label
-);
+)
 
 // ...
 </script>
@@ -408,14 +404,14 @@ Replace `tailwind.config.js` in your Laravel project with the Premium one. Make 
 ```js
 module.exports = {
   content: [
-    "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-    "./storage/framework/views/*.php",
-    "./resources/views/**/*.blade.php",
-    "./resources/js/**/*.vue",
-    "./resources/js/**/*.js",
-  ],
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    './storage/framework/views/*.php',
+    './resources/views/**/*.blade.php',
+    './resources/js/**/*.vue',
+    './resources/js/**/*.js'
+  ]
   // ...
-};
+}
 ```
 
 ### Update resources/js/app.js
@@ -424,12 +420,12 @@ Add layout store to `resources/js/app.js`:
 
 ```js
 // Add layout store
-import { useLayoutStore } from "@/stores/layout.js";
+import { useLayoutStore } from '@/stores/layout.js'
 
-const layoutStore = useLayoutStore(pinia);
+const layoutStore = useLayoutStore(pinia)
 
-layoutStore.responsiveLayoutControl();
-window.onresize = () => layoutStore.responsiveLayoutControl();
+layoutStore.responsiveLayoutControl()
+window.onresize = () => layoutStore.responsiveLayoutControl()
 ```
 
 ### Update resources/js/layouts/LayoutAuthenticated.vue
@@ -441,7 +437,7 @@ Replace contents of `resources/js/layouts/LayoutAuthenticated.vue` with contents
 // Replace router use:
 
 // import { useRouter } from "vue-router";
-import { router } from "@inertiajs/vue3";
+import { router } from '@inertiajs/vue3'
 
 // const router = useRouter();
 
@@ -449,9 +445,9 @@ import { router } from "@inertiajs/vue3";
 //   layoutStore.isAsideMobileExpanded = false;
 // });
 
-router.on("navigate", () => {
-  layoutStore.isAsideMobileExpanded = false;
-});
+router.on('navigate', () => {
+  layoutStore.isAsideMobileExpanded = false
+})
 
 // Add logout:
 
@@ -459,9 +455,9 @@ const menuClick = (event, item) => {
   // ...
 
   if (item.isLogout) {
-    router.post(route("logout"));
+    router.post(route('logout'))
   }
-};
+}
 </script>
 ```
 

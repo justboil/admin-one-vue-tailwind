@@ -1,5 +1,5 @@
 @layer components {
-  .style-white {
+  .style-white:not(.dark) {
     .aside {
       @apply bg-white;
     }
@@ -7,10 +7,10 @@
       @apply aside-scrollbars-light;
     }
     .aside-menu-item {
-      @apply text-blue-600 hover:text-black dark:text-white;
+      @apply text-blue-600 hover:text-black;
     }
     .aside-menu-item-active {
-      @apply font-bold text-black dark:text-white;
+      @apply font-bold text-black;
     }
     .aside-menu-dropdown {
       @apply bg-gray-100/75;

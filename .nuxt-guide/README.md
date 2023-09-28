@@ -12,15 +12,15 @@ This guide will help you integrate your Nuxt.js 3.x application with [Admin One 
 
 Check [Nuxt installation guide](https://v3.nuxtjs.org/getting-started/quick-start) for more information.
 
-* Run `npx nuxi init sample-app`
-* then `cd sample-app`
-* and `npm install`
+- Run `npx nuxi init sample-app`
+- then `cd sample-app`
+- and `npm install`
 
 Then, let's install TailwindCSS. Check [Tailwind Nuxt installation guide](https://tailwindcss.com/docs/guides/nuxtjs) for more information.
 
 ```sh
 # Install tailwind
-npm install -D @nuxtjs/tailwindcss @tailwindcss/forms 
+npm install -D @nuxtjs/tailwindcss @tailwindcss/forms
 
 # Install other required packages
 npm i @mdi/js chart.js numeral
@@ -35,13 +35,13 @@ Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-on
 
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to nuxt project** directory:
 
-* Copy `tailwind.config.js` to `/`
-* Copy `src/components` to `components/`
-* Copy `src/layouts` to `layouts/`
-* Copy `src/stores` to `stores/`
-* Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `configs/`
-* Copy `src/css` to `assets/css/`
-* Copy `public/favicon.png` to `public/`
+- Copy `tailwind.config.js` to `/`
+- Copy `src/components` to `components/`
+- Copy `src/layouts` to `layouts/`
+- Copy `src/stores` to `stores/`
+- Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `configs/`
+- Copy `src/css` to `assets/css/`
+- Copy `public/favicon.png` to `public/`
 
 ### Prepare items
 
@@ -52,18 +52,14 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  buildModules: [
-    '@pinia/nuxt',
-  ],
+  buildModules: ['@pinia/nuxt'],
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {},
-    },
+      autoprefixer: {}
+    }
   },
-  css: [
-    '@/assets/css/main.css',
-  ]
+  css: ['@/assets/css/main.css']
 })
 ```
 
@@ -80,7 +76,7 @@ module.exports = {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     'app.vue'
-  ],
+  ]
   // ...
 }
 ```
@@ -89,30 +85,36 @@ module.exports = {
 
 ```vue
 <script setup>
-import { useStyleStore } from '@/stores/style.js'
+import { useDarkModeStore } from '@/stores/darkMode.js'
 import { darkModeKey } from '@/config.js'
 
 useHead({
   titleTemplate: (titleChunk) => {
     const titleBase = 'Admin One Vue 3 Tailwind'
-    
+
     return titleChunk ? `${titleChunk} - ${titleBase}` : titleBase
   }
 })
 
-const styleStore = useStyleStore()
+const darkModeStore = useDarkModeStore()
 
-const currentStoredDarkMode = typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
+const currentStoredDarkMode =
+  typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
 
-if ((!currentStoredDarkMode && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) || currentStoredDarkMode) {
-  styleStore.setDarkMode(true)
+if (
+  (!currentStoredDarkMode &&
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+  currentStoredDarkMode
+) {
+  darkModeStore.set(true)
 }
 </script>
 
 <template>
   <div>
     <NuxtLayout>
-      <NuxtPage/>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
@@ -130,22 +132,82 @@ export const useMainStore = defineStore('main', {
     // ...
 
     clients: [
-      { id: 19, avatar: "https://avatars.dicebear.com/v2/gridy/Howell-Hand.svg", login: "percy64", name: "Howell Hand", company: "Kiehn-Green", city: "Emelyside", progress: 70, created: "Mar 3, 2021" },
-      { id: 11, avatar: "https://avatars.dicebear.com/v2/gridy/Hope-Howe.svg", login: "dare.concepcion", name: "Hope Howe", company: "Nolan Inc", city: "Paristown", progress: 68, created: "Dec 1, 2021" }, 
-      { id: 32, avatar: "https://avatars.dicebear.com/v2/gridy/Nelson-Jerde.svg", login: "geovanni.kessler", name: "Nelson Jerde", company: "Nitzsche LLC", city: "Jailynbury", progress: 49, created: "May 18, 2021"},
-      { id: 22, avatar: "https://avatars.dicebear.com/v2/gridy/Kim-Weimann.svg", login: "macejkovic.dashawn", name: "Kim Weimann", company: "Brown-Lueilwitz", city: "New Emie", progress: 38, created: "May 4, 2021" }
+      {
+        id: 19,
+        avatar: 'https://avatars.dicebear.com/v2/gridy/Howell-Hand.svg',
+        login: 'percy64',
+        name: 'Howell Hand',
+        company: 'Kiehn-Green',
+        city: 'Emelyside',
+        progress: 70,
+        created: 'Mar 3, 2021'
+      },
+      {
+        id: 11,
+        avatar: 'https://avatars.dicebear.com/v2/gridy/Hope-Howe.svg',
+        login: 'dare.concepcion',
+        name: 'Hope Howe',
+        company: 'Nolan Inc',
+        city: 'Paristown',
+        progress: 68,
+        created: 'Dec 1, 2021'
+      },
+      {
+        id: 32,
+        avatar: 'https://avatars.dicebear.com/v2/gridy/Nelson-Jerde.svg',
+        login: 'geovanni.kessler',
+        name: 'Nelson Jerde',
+        company: 'Nitzsche LLC',
+        city: 'Jailynbury',
+        progress: 49,
+        created: 'May 18, 2021'
+      },
+      {
+        id: 22,
+        avatar: 'https://avatars.dicebear.com/v2/gridy/Kim-Weimann.svg',
+        login: 'macejkovic.dashawn',
+        name: 'Kim Weimann',
+        company: 'Brown-Lueilwitz',
+        city: 'New Emie',
+        progress: 38,
+        created: 'May 4, 2021'
+      }
     ],
     history: [
-      { amount: 375.53, name: "Home Loan Account", date: "3 days ago", type: "deposit", business: "Turcotte" },
-      { amount: 470.26, name: "Savings Account", date: "3 days ago", type: "payment", business: "Murazik - Graham" }, 
-      { amount: 971.34, name: "Checking Account", date: "5 days ago", type: "invoice", business: "Fahey - Keebler" }, 
-      { amount: 374.63, name: "Auto Loan Account", date: "7 days ago", type: "withdrawal", business: "Collier - Hintz" }
+      {
+        amount: 375.53,
+        name: 'Home Loan Account',
+        date: '3 days ago',
+        type: 'deposit',
+        business: 'Turcotte'
+      },
+      {
+        amount: 470.26,
+        name: 'Savings Account',
+        date: '3 days ago',
+        type: 'payment',
+        business: 'Murazik - Graham'
+      },
+      {
+        amount: 971.34,
+        name: 'Checking Account',
+        date: '5 days ago',
+        type: 'invoice',
+        business: 'Fahey - Keebler'
+      },
+      {
+        amount: 374.63,
+        name: 'Auto Loan Account',
+        date: '7 days ago',
+        type: 'withdrawal',
+        business: 'Collier - Hintz'
+      }
     ]
   }),
   actions: {
     // ...
 
-    fetch (sampleDataKey) {
+    fetch(sampleDataKey) {
       // axios
       //   .get(`data-sources/${sampleDataKey}.json`)
       //   .then(r => {
@@ -163,8 +225,8 @@ export const useMainStore = defineStore('main', {
 
 ## Rename layouts
 
-* Rename `layouts/LayoutGuest.vue` to `default.vue`
-* Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
+- Rename `layouts/LayoutGuest.vue` to `default.vue`
+- Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
 
 ## Copy pages
 
@@ -176,7 +238,7 @@ These pages will then be available under `/` and `/dashboard` url paths.
 
 Copy `views/LoginView.vue` to `pages/index.vue`
 
-Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` 
+Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>`
 
 **Why we need a div wrapper?** If you use `<NuxtLayout>` within your pages, make sure it is not the root element (or disable layout/page transitions) &mdash; [Info](https://v3.nuxtjs.org/guide/directory-structure/layouts#overriding-a-layout-on-a-per-page-basis)
 
@@ -199,7 +261,7 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 
 Copy `views/HomeView.vue` to `pages/dashboard.vue`
 
-Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` with a `name` prop. 
+Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` with a `name` prop.
 
 ```vue
 <script setup>

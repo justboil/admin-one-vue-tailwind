@@ -18,7 +18,9 @@ const emit = defineEmits(['menu-click'])
 
 const hasColor = computed(() => props.item && props.item.color)
 
-const asideMenuItemActiveStyle = computed(() => (hasColor.value ? '' : 'aside-menu-item-active'))
+const asideMenuItemActiveStyle = computed(() =>
+  hasColor.value ? '' : 'aside-menu-item-active font-bold'
+)
 
 const isDropdownActive = ref(false)
 
