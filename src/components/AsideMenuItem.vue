@@ -1,48 +1,48 @@
 <script setup>
-import { ref, computed } from "vue";
-import { RouterLink } from "vue-router";
-import { useStyleStore } from "@/stores/style.js";
-import { mdiMinus, mdiPlus } from "@mdi/js";
-import { getButtonColor } from "@/colors.js";
-import BaseIcon from "@/components/BaseIcon.vue";
-import AsideMenuList from "@/components/AsideMenuList.vue";
+import { ref, computed } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useStyleStore } from '@/stores/style.js'
+import { mdiMinus, mdiPlus } from '@mdi/js'
+import { getButtonColor } from '@/colors.js'
+import BaseIcon from '@/components/BaseIcon.vue'
+import AsideMenuList from '@/components/AsideMenuList.vue'
 
 const props = defineProps({
   item: {
     type: Object,
-    required: true,
+    required: true
   },
-  isDropdownList: Boolean,
-});
+  isDropdownList: Boolean
+})
 
-const emit = defineEmits(["menu-click"]);
+const emit = defineEmits(['menu-click'])
 
-const styleStore = useStyleStore();
+const styleStore = useStyleStore()
 
-const hasColor = computed(() => props.item && props.item.color);
+const hasColor = computed(() => props.item && props.item.color)
 
 const asideMenuItemActiveStyle = computed(() =>
-  hasColor.value ? "" : styleStore.asideMenuItemActiveStyle
-);
+  hasColor.value ? '' : styleStore.asideMenuItemActiveStyle
+)
 
-const isDropdownActive = ref(false);
+const isDropdownActive = ref(false)
 
 const componentClass = computed(() => [
-  props.isDropdownList ? "py-3 px-6 text-sm" : "py-3",
+  props.isDropdownList ? 'py-3 px-6 text-sm' : 'py-3',
   hasColor.value
     ? getButtonColor(props.item.color, false, true)
-    : `${styleStore.asideMenuItemStyle} dark:text-slate-300 dark:hover:text-white`,
-]);
+    : `${styleStore.asideMenuItemStyle} dark:text-slate-300 dark:hover:text-white`
+])
 
-const hasDropdown = computed(() => !!props.item.menu);
+const hasDropdown = computed(() => !!props.item.menu)
 
 const menuClick = (event) => {
-  emit("menu-click", event, props.item);
+  emit('menu-click', event, props.item)
 
   if (hasDropdown.value) {
-    isDropdownActive.value = !isDropdownActive.value;
+    isDropdownActive.value = !isDropdownActive.value
   }
-};
+}
 </script>
 
 <template>
@@ -69,7 +69,7 @@ const menuClick = (event) => {
         class="grow text-ellipsis line-clamp-1"
         :class="[
           { 'pr-12': !hasDropdown },
-          vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
+          vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : ''
         ]"
         >{{ item.label }}</span
       >
@@ -86,7 +86,7 @@ const menuClick = (event) => {
       :menu="item.menu"
       :class="[
         styleStore.asideMenuDropdownStyle,
-        isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden',
+        isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden'
       ]"
       is-dropdown-list
     />

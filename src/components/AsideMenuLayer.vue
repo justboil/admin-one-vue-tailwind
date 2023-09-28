@@ -1,36 +1,36 @@
 <script setup>
-import { mdiLogout, mdiClose } from "@mdi/js";
-import { computed } from "vue";
-import { useStyleStore } from "@/stores/style.js";
-import AsideMenuList from "@/components/AsideMenuList.vue";
-import AsideMenuItem from "@/components/AsideMenuItem.vue";
-import BaseIcon from "@/components/BaseIcon.vue";
+import { mdiLogout, mdiClose } from '@mdi/js'
+import { computed } from 'vue'
+import { useStyleStore } from '@/stores/style.js'
+import AsideMenuList from '@/components/AsideMenuList.vue'
+import AsideMenuItem from '@/components/AsideMenuItem.vue'
+import BaseIcon from '@/components/BaseIcon.vue'
 
 defineProps({
   menu: {
     type: Array,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const emit = defineEmits(["menu-click", "aside-lg-close-click"]);
+const emit = defineEmits(['menu-click', 'aside-lg-close-click'])
 
-const styleStore = useStyleStore();
+const styleStore = useStyleStore()
 
 const logoutItem = computed(() => ({
-  label: "Logout",
+  label: 'Logout',
   icon: mdiLogout,
-  color: "info",
-  isLogout: true,
-}));
+  color: 'info',
+  isLogout: true
+}))
 
 const menuClick = (event, item) => {
-  emit("menu-click", event, item);
-};
+  emit('menu-click', event, item)
+}
 
 const asideLgCloseClick = (event) => {
-  emit("aside-lg-close-click", event);
-};
+  emit('aside-lg-close-click', event)
+}
 </script>
 
 <template>
@@ -46,24 +46,15 @@ const asideLgCloseClick = (event) => {
         :class="styleStore.asideBrandStyle"
         class="flex flex-row h-14 items-center justify-between dark:bg-slate-900"
       >
-        <div
-          class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"
-        >
+        <div class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
           <b class="font-black">One</b>
         </div>
-        <button
-          class="hidden lg:inline-block xl:hidden p-3"
-          @click.prevent="asideLgCloseClick"
-        >
+        <button class="hidden lg:inline-block xl:hidden p-3" @click.prevent="asideLgCloseClick">
           <BaseIcon :path="mdiClose" />
         </button>
       </div>
       <div
-        :class="
-          styleStore.darkMode
-            ? 'aside-scrollbars-[slate]'
-            : styleStore.asideScrollbarsStyle
-        "
+        :class="styleStore.darkMode ? 'aside-scrollbars-[slate]' : styleStore.asideScrollbarsStyle"
         class="flex-1 overflow-y-auto overflow-x-hidden"
       >
         <AsideMenuList :menu="menu" @menu-click="menuClick" />

@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from "vue";
-import { useStyleStore } from "@/stores/style.js";
+import { ref, computed } from 'vue'
+import { useStyleStore } from '@/stores/style.js'
 import {
   mdiContrastCircle,
   mdiInformation,
@@ -10,69 +10,55 @@ import {
   mdiOpenInNew,
   mdiClose,
   mdiReload,
-  mdiTrendingUp,
-} from "@mdi/js";
-import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
-import BaseDivider from "@/components/BaseDivider.vue";
-import CardBoxModal from "@/components/CardBoxModal.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
-import FormField from "@/components/FormField.vue";
-import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
-import CardBoxComponentTitle from "@/components/CardBoxComponentTitle.vue";
-import PillTag from "@/components/PillTag.vue";
+  mdiTrendingUp
+} from '@mdi/js'
+import SectionMain from '@/components/SectionMain.vue'
+import CardBox from '@/components/CardBox.vue'
+import BaseButtons from '@/components/BaseButtons.vue'
+import BaseButton from '@/components/BaseButton.vue'
+import NotificationBar from '@/components/NotificationBar.vue'
+import BaseDivider from '@/components/BaseDivider.vue'
+import CardBoxModal from '@/components/CardBoxModal.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
+import FormField from '@/components/FormField.vue'
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
+import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
+import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
+import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
+import PillTag from '@/components/PillTag.vue'
 
-const modalOneActive = ref(false);
+const modalOneActive = ref(false)
 
-const modalTwoActive = ref(false);
+const modalTwoActive = ref(false)
 
-const modalThreeActive = ref(false);
+const modalThreeActive = ref(false)
 
-const notificationSettingsModel = ref([]);
+const notificationSettingsModel = ref([])
 
-const notificationsOutline = computed(
-  () => notificationSettingsModel.value.indexOf("outline") > -1
-);
+const notificationsOutline = computed(() => notificationSettingsModel.value.indexOf('outline') > -1)
 
-const buttonSettingsModel = ref([]);
+const buttonSettingsModel = ref([])
 
-const buttonsOutline = computed(
-  () => buttonSettingsModel.value.indexOf("outline") > -1
-);
+const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline') > -1)
 
-const buttonsSmall = computed(
-  () => buttonSettingsModel.value.indexOf("small") > -1
-);
+const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
 
-const buttonsDisabled = computed(
-  () => buttonSettingsModel.value.indexOf("disabled") > -1
-);
+const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
 
-const buttonsRounded = computed(
-  () => buttonSettingsModel.value.indexOf("rounded") > -1
-);
+const buttonsRounded = computed(() => buttonSettingsModel.value.indexOf('rounded') > -1)
 
-const pillsSettingsModel = ref(["icon"]);
+const pillsSettingsModel = ref(['icon'])
 
-const pillsOutline = computed(
-  () => pillsSettingsModel.value.indexOf("outline") > -1
-);
+const pillsOutline = computed(() => pillsSettingsModel.value.indexOf('outline') > -1)
 
-const pillsSmall = computed(
-  () => pillsSettingsModel.value.indexOf("small") > -1
-);
+const pillsSmall = computed(() => pillsSettingsModel.value.indexOf('small') > -1)
 
 const pillsIcon = computed(() =>
-  pillsSettingsModel.value.indexOf("icon") > -1 ? mdiTrendingUp : null
-);
+  pillsSettingsModel.value.indexOf('icon') > -1 ? mdiTrendingUp : null
+)
 
-const styleStore = useStyleStore();
+const styleStore = useStyleStore()
 </script>
 
 <template>
@@ -87,11 +73,7 @@ const styleStore = useStyleStore();
       <p>Lorem ipsum dolor</p>
     </CardBoxModal>
 
-    <CardBoxModal
-      v-model="modalTwoActive"
-      title="Unhandled exception"
-      button="danger"
-    >
+    <CardBoxModal v-model="modalTwoActive" title="Unhandled exception" button="danger">
       <p>This is sample modal</p>
       <p>Lorem ipsum dolor</p>
     </CardBoxModal>
@@ -105,14 +87,8 @@ const styleStore = useStyleStore();
 
     <SectionMain>
       <CardBox class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
-        <div
-          class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400"
-        >
-          <BaseButton
-            label="Toggle"
-            color="contrast"
-            @click="styleStore.setDarkMode()"
-          />
+        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
+          <BaseButton label="Toggle" color="contrast" @click="styleStore.setDarkMode()" />
         </div>
       </CardBox>
     </SectionMain>
@@ -190,11 +166,7 @@ const styleStore = useStyleStore();
     </SectionTitle>
 
     <SectionMain>
-      <NotificationBar
-        color="info"
-        :icon="mdiInformation"
-        :outline="notificationsOutline"
-      >
+      <NotificationBar color="info" :icon="mdiInformation" :outline="notificationsOutline">
         <b>Info state</b>. NotificationBar
         <template #right>
           <BaseButton
@@ -207,11 +179,7 @@ const styleStore = useStyleStore();
         </template>
       </NotificationBar>
 
-      <NotificationBar
-        color="success"
-        :icon="mdiCheckCircle"
-        :outline="notificationsOutline"
-      >
+      <NotificationBar color="success" :icon="mdiCheckCircle" :outline="notificationsOutline">
         <b>Success state</b>. NotificationBar
         <template #right>
           <BaseButton
@@ -224,11 +192,7 @@ const styleStore = useStyleStore();
         </template>
       </NotificationBar>
 
-      <NotificationBar
-        color="warning"
-        :icon="mdiAlert"
-        :outline="notificationsOutline"
-      >
+      <NotificationBar color="warning" :icon="mdiAlert" :outline="notificationsOutline">
         <b>Warning state</b>. NotificationBar
         <template #right>
           <BaseButton
@@ -241,11 +205,7 @@ const styleStore = useStyleStore();
         </template>
       </NotificationBar>
 
-      <NotificationBar
-        color="danger"
-        :icon="mdiAlertCircle"
-        :outline="notificationsOutline"
-      >
+      <NotificationBar color="danger" :icon="mdiAlertCircle" :outline="notificationsOutline">
         <b>Danger state</b>. NotificationBar
         <template #right>
           <BaseButton
@@ -258,11 +218,7 @@ const styleStore = useStyleStore();
         </template>
       </NotificationBar>
 
-      <NotificationBar
-        color="contrast"
-        :icon="mdiContrastCircle"
-        :outline="notificationsOutline"
-      >
+      <NotificationBar color="contrast" :icon="mdiContrastCircle" :outline="notificationsOutline">
         <b>Contrast</b>. NotificationBar
       </NotificationBar>
     </SectionMain>
@@ -280,7 +236,7 @@ const styleStore = useStyleStore();
               outline: 'Outline',
               small: 'Small',
               rounded: 'Rounded',
-              disabled: 'Disabled',
+              disabled: 'Disabled'
             }"
           />
         </FormField>
@@ -539,10 +495,7 @@ const styleStore = useStyleStore();
         </CardBox>
       </div>
 
-      <SectionTitleLineWithButton
-        :icon="mdiAlertCircle"
-        title="Empty variation"
-      />
+      <SectionTitleLineWithButton :icon="mdiAlertCircle" title="Empty variation" />
 
       <CardBox>
         <CardBoxComponentEmpty />

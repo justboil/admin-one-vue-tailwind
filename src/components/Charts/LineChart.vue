@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed, onMounted } from "vue";
+import { ref, watch, computed, onMounted } from 'vue'
 import {
   Chart,
   LineElement,
@@ -7,61 +7,54 @@ import {
   LineController,
   LinearScale,
   CategoryScale,
-  Tooltip,
-} from "chart.js";
+  Tooltip
+} from 'chart.js'
 
 const props = defineProps({
   data: {
     type: Object,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const root = ref(null);
+const root = ref(null)
 
-let chart;
+let chart
 
-Chart.register(
-  LineElement,
-  PointElement,
-  LineController,
-  LinearScale,
-  CategoryScale,
-  Tooltip
-);
+Chart.register(LineElement, PointElement, LineController, LinearScale, CategoryScale, Tooltip)
 
 onMounted(() => {
   chart = new Chart(root.value, {
-    type: "line",
+    type: 'line',
     data: props.data,
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
         y: {
-          display: false,
+          display: false
         },
         x: {
-          display: true,
-        },
+          display: true
+        }
       },
       plugins: {
         legend: {
-          display: false,
-        },
-      },
-    },
-  });
-});
+          display: false
+        }
+      }
+    }
+  })
+})
 
-const chartData = computed(() => props.data);
+const chartData = computed(() => props.data)
 
 watch(chartData, (data) => {
   if (chart) {
-    chart.data = data;
-    chart.update();
+    chart.data = data
+    chart.update()
   }
-});
+})
 </script>
 
 <template>
