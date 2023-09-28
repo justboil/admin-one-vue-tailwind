@@ -34,7 +34,7 @@ const handleStyleChange = (slug) => {
         </h1>
         <h2 class="text-xl md:text-xl text-center text-white mb-12">
           Style switching with a single
-          <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">action()</code>
+          <code class="px-1.5 py-0.5 rounded bg-white bg-opacity-20">modifier</code>
         </h2>
         <div class="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
           <CardBox
