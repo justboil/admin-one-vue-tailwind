@@ -1,44 +1,69 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 import axios from 'axios'
 
-export const useMainStore = defineStore('main', {
-  state: () => ({
-    /* User */
-    userName: null,
-    userEmail: null,
-    userAvatar: null,
+export const useMainStore = defineStore('main', () => {
+  const userName = ref('john doe')
+  const userEmail = ref('john@example.com')
+  const userAvatar = ref('https://avatars.dicebear.com/api/avataaars/example.svg')
 
-    /* Field focus with ctrl+k (to register only once) */
-    isFieldFocusRegistered: false,
+  // ... or you can use computed:
+  // const userAvatar = computed(
+  //   () =>
+  //     `https://avatars.dicebear.com/api/avataaars/${userName.value.replace(
+  //       /[^a-z0-9]+/i,
+  //       ''
+  //     )}.svg`
+  // )
 
-    /* Sample data (commonly used) */
-    clients: [],
-    history: []
-  }),
-  actions: {
-    setUser(payload) {
-      if (payload.name) {
-        this.userName = payload.name
-      }
-      if (payload.email) {
-        this.userEmail = payload.email
-      }
-      if (payload.avatar) {
-        this.userAvatar = payload.avatar
-      }
-    },
+  const isFieldFocusRegistered = ref(false)
 
-    fetch(sampleDataKey) {
-      axios
-        .get(`data-sources/${sampleDataKey}.json`)
-        .then((r) => {
-          if (r.data && r.data.data) {
-            this[sampleDataKey] = r.data.data
-          }
-        })
-        .catch((error) => {
-          alert(error.message)
-        })
+  const clients = ref([])
+  const history = ref([])
+
+  function setUser(payload) {
+    if (payload.name) {
+      userName.value = payload.name
     }
+    if (payload.email) {
+      userEmail.value = payload.email
+    }
+    if (payload.avatar) {
+      userAvatar.value = payload.avatar
+    }
+  }
+
+  function fetchSampleClients() {
+    axios
+      .get(`data-sources/clients.json`)
+      .then((result) => {
+        clients.value = result?.data?.data
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
+  function fetchSampleHistory() {
+    axios
+      .get(`data-sources/history.json`)
+      .then((result) => {
+        history.value = result?.data?.data
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
+  return {
+    userName,
+    userEmail,
+    userAvatar,
+    isFieldFocusRegistered,
+    clients,
+    history,
+    setUser,
+    fetchSampleClients,
+    fetchSampleHistory
   }
 })
