@@ -8,10 +8,10 @@ export const useMainStore = defineStore('main', () => {
 
   const userAvatar = computed(
     () =>
-      `https://avatars.dicebear.com/api/avataaars/${userEmail.value.replace(
+      `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
         /[^a-z0-9]+/gi,
         '-'
-      )}.svg`
+      )}`
   )
 
   const isFieldFocusRegistered = ref(false)
@@ -30,7 +30,7 @@ export const useMainStore = defineStore('main', () => {
 
   function fetchSampleClients() {
     axios
-      .get(`data-sources/clients.json`)
+      .get(`data-sources/clients.json?v=3`)
       .then((result) => {
         clients.value = result?.data?.data
       })
