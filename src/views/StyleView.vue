@@ -1,18 +1,22 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { useStyleStore } from "@/stores/style.js";
+import { styles } from "@/commons/constant.js";
 import { gradientBgPurplePink } from "@/colors.js";
+import { darkModeKey, styleKey } from "@/config.js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
-const styles = ["white", "basic"];
-
 const styleStore = useStyleStore();
 
-styleStore.setDarkMode(false);
+if (!localStorage[darkModeKey]) {
+  styleStore.setDarkMode(false);
+}
 
 const router = useRouter();
+
+router.push("/dashboard");
 
 const click = (slug) => {
   styleStore.setStyle(slug);
@@ -20,7 +24,7 @@ const click = (slug) => {
 };
 </script>
 
-<template>
+<!-- <template>
   <LayoutGuest>
     <div
       :class="gradientBgPurplePink"
@@ -65,4 +69,4 @@ const click = (slug) => {
       </SectionMain>
     </div>
   </LayoutGuest>
-</template>
+</template> -->

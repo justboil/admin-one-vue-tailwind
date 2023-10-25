@@ -11,6 +11,7 @@ defineProps({
     default: null,
   },
   small: Boolean,
+  number: Number,
 });
 </script>
 
@@ -27,6 +28,6 @@ defineProps({
       :class="small ? 'mr-1' : 'mr-2'"
       :size="small ? 14 : null"
     />
-    <span>{{ label }}</span>
+    <span>{{ label }} <span>/ {{ number !== undefined ? number : 0 }}</span></span>
   </div>
 </template>

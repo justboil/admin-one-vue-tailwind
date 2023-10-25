@@ -18,6 +18,7 @@ const props = defineProps({
   },
   small: Boolean,
   outline: Boolean,
+  number: Number,
 });
 
 const componentClass = computed(() => [
@@ -33,5 +34,6 @@ const componentClass = computed(() => [
     :icon="icon"
     :label="label"
     :small="small"
+    :number="number"
   />
 </template>

@@ -34,8 +34,6 @@ createInertiaApp({
 
 const styleStore = useStyleStore(pinia);
 
-/* App style */
-styleStore.setStyle(localStorage[styleKey] ?? "basic");
 
 /* Dark mode */
 if (
@@ -44,4 +42,6 @@ if (
   localStorage[darkModeKey] === "1"
 ) {
   styleStore.setDarkMode(true);
+} else {
+  styleStore.setDarkMode(false);
 }

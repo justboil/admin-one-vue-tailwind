@@ -11,6 +11,10 @@ import {
   mdiResponsive,
   mdiPalette,
   mdiReact,
+  mdiPlus,
+  mdiEye,
+  mdiBriefcase,
+  mdiClipboard,
 } from "@mdi/js";
 
 export default [
@@ -20,13 +24,29 @@ export default [
     label: "Dashboard",
   },
   {
-    to: "/tables",
-    label: "Tables",
-    icon: mdiTable,
+    label: "Projects",
+    icon: mdiBriefcase,
+    menu: [
+      {
+        to: "/projects",
+        label: "View All",
+        icon: mdiEye,
+      },
+      {
+        to: "/project/create",
+        label: "Add",
+        icon: mdiPlus,
+      },
+    ],
   },
+  // {
+  //   to: "/tables",
+  //   label: "Projects",
+  //   icon: mdiTable,
+  // },
   {
     to: "/forms",
-    label: "Forms",
+    label: "Tasks",
     icon: mdiSquareEditOutline,
   },
   {
