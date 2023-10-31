@@ -1,8 +1,7 @@
 import '../css/main.css'
 
 import { createPinia } from 'pinia'
-import { useDarkModeStore } from '@/stores/darkMode.js'
-import { darkModeKey, styleKey } from '@/config.js'
+// import { useDarkModeStore } from '@/stores/darkMode.js'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
@@ -28,12 +27,11 @@ createInertiaApp({
   }
 })
 
-const darkModeStore = useDarkModeStore(pinia)
+// const darkModeStore = useDarkModeStore(pinia)
 
-/* Dark mode */
-if (
-  (!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-  localStorage[darkModeKey] === '1'
-) {
-  darkModeStore.set(true)
-}
+// if (
+//   (!localStorage['darkMode'] && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+//   localStorage['darkMode'] === '1'
+// ) {
+//   darkModeStore.set(true)
+// }

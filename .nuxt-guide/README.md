@@ -85,8 +85,8 @@ module.exports = {
 
 ```vue
 <script setup>
-import { useDarkModeStore } from '@/stores/darkMode.js'
-import { darkModeKey } from '@/config.js'
+// import { useDarkModeStore } from '@/stores/darkMode.js'
+// import { darkModeKey } from '@/config.js'
 
 useHead({
   titleTemplate: (titleChunk) => {
@@ -96,19 +96,19 @@ useHead({
   }
 })
 
-const darkModeStore = useDarkModeStore()
+// const darkModeStore = useDarkModeStore()
 
-const currentStoredDarkMode =
-  typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
+// const currentStoredDarkMode =
+//   typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
 
-if (
-  (!currentStoredDarkMode &&
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-  currentStoredDarkMode
-) {
-  darkModeStore.set(true)
-}
+// if (
+//   (!currentStoredDarkMode &&
+//     typeof window !== 'undefined' &&
+//     window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+//   currentStoredDarkMode
+// ) {
+//   darkModeStore.set(true)
+// }
 </script>
 
 <template>
