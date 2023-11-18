@@ -261,7 +261,7 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 
 Copy `views/HomeView.vue` to `pages/dashboard.vue`
 
-Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` with a `name` prop.
+Then, wrap the entire template with `<div>` and replace `<LayoutAuthenticated>` with `<NuxtLayout>` with a `name` prop.
 
 ```vue
 <script setup>
