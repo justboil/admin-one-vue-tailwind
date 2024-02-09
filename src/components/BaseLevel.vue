@@ -1,40 +1,38 @@
 <script>
-import { h, defineComponent } from "vue";
+import { h, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "BaseLevel",
+  name: 'BaseLevel',
   props: {
     mobile: Boolean,
     type: {
       type: String,
-      default: "justify-between",
-    },
+      default: 'justify-between'
+    }
   },
   render() {
-    const parentClass = [this.type, "items-center"];
+    const parentClass = [this.type, 'items-center']
 
-    const parentMobileClass = ["flex"];
+    const parentMobileClass = ['flex']
 
-    const parentBaseClass = ["block", "md:flex"];
+    const parentBaseClass = ['block', 'md:flex']
 
-    const childBaseClass = ["flex", "items-center", "justify-center"];
+    const childBaseClass = ['flex', 'items-center', 'justify-center']
 
     return h(
-      "div",
+      'div',
       {
-        class: parentClass.concat(
-          this.mobile ? parentMobileClass : parentBaseClass
-        ),
+        class: parentClass.concat(this.mobile ? parentMobileClass : parentBaseClass)
       },
       this.$slots.default().map((element, index) => {
         const childClass =
           !this.mobile && this.$slots.default().length > index + 1
-            ? childBaseClass.concat(["mb-6", "md:mb-0"])
-            : childBaseClass;
+            ? childBaseClass.concat(['mb-6', 'md:mb-0'])
+            : childBaseClass
 
-        return h("div", { class: childClass }, [element]);
+        return h('div', { class: childClass }, [element])
       })
-    );
-  },
-});
+    )
+  }
+})
 </script>

@@ -1,46 +1,44 @@
-import { createApp } from "vue";
-import { createPinia } from "pinia";
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
-import App from "./App.vue";
-import router from "./router";
-import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import { darkModeKey, styleKey } from "@/config.js";
+import App from './App.vue'
+import router from './router'
+import { useMainStore } from '@/stores/main.js'
 
-import "./css/main.css";
+import './css/main.css'
 
-/* Init Pinia */
-const pinia = createPinia();
+// Init Pinia
+const pinia = createPinia()
 
-/* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+// Create Vue app
+createApp(App).use(router).use(pinia).mount('#app')
 
-/* Init Pinia stores */
-const mainStore = useMainStore(pinia);
-const styleStore = useStyleStore(pinia);
+// Init main store
+const mainStore = useMainStore(pinia)
 
-/* Fetch sample data */
-mainStore.fetch("clients");
-mainStore.fetch("history");
+// Fetch sample data
+mainStore.fetchSampleClients()
+mainStore.fetchSampleHistory()
 
-/* App style */
-styleStore.setStyle(localStorage[styleKey] ?? "basic");
+// Dark mode
+// Uncomment, if you'd like to restore persisted darkMode setting, or use `prefers-color-scheme: dark`. Make sure to uncomment localStorage block in src/stores/darkMode.js
+// import { useDarkModeStore } from './stores/darkMode'
 
-/* Dark mode */
-if (
-  (!localStorage[darkModeKey] &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches) ||
-  localStorage[darkModeKey] === "1"
-) {
-  styleStore.setDarkMode(true);
-}
+// const darkModeStore = useDarkModeStore(pinia)
 
-/* Default title tag */
-const defaultDocumentTitle = "Admin One Vue 3 Tailwind";
+// if (
+//   (!localStorage['darkMode'] && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+//   localStorage['darkMode'] === '1'
+// ) {
+//   darkModeStore.set(true)
+// }
 
-/* Set document title from route meta */
+// Default title tag
+const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+
+// Set document title from route meta
 router.afterEach((to) => {
   document.title = to.meta?.title
     ? `${to.meta.title} — ${defaultDocumentTitle}`
-    : defaultDocumentTitle;
-});
+    : defaultDocumentTitle
+})

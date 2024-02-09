@@ -19,7 +19,7 @@ Then, let's install TailwindCSS. Check [Tailwind Nuxt installation guide](https:
 
 ```sh
 # Install tailwind
-npm install -D @nuxtjs/tailwindcss @tailwindcss/forms 
+npm install -D @nuxtjs/tailwindcss @tailwindcss/forms
 
 # Install other required packages
 npm i @mdi/js chart.js numeral
@@ -34,13 +34,13 @@ Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-on
 
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to nuxt project** directory:
 
-* Copy `tailwind.config.js` to `/`
-* Copy `src/components` to `components/`
-* Copy `src/layouts` to `layouts/`
-* Copy `src/stores` to `stores/`
-* Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` `src/styles.js` to `configs/`
-* Copy `src/css` to `assets/css/`
-* Copy `public/favicon.png` to `public/`
+- Copy `tailwind.config.js` to `/`
+- Copy `src/components` to `components/`
+- Copy `src/layouts` to `layouts/`
+- Copy `src/stores` to `stores/`
+- Copy `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` to `configs/`
+- Copy `src/css` to `assets/css/`
+- Copy `public/favicon.png` to `public/`
 
 ### Prepare items
 
@@ -56,12 +56,10 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       tailwindcss: {},
-      autoprefixer: {},
-    },
+      autoprefixer: {}
+    }
   },
-  css: [
-    '@/assets/css/main.css',
-  ]
+  css: ['@/assets/css/main.css']
 })
 ```
 
@@ -80,7 +78,7 @@ module.exports = {
     './plugins/**/*.{js,ts}',
     './stores/**/*.{js,ts}',
     'app.vue'
-  ],
+  ]
   // ...
 }
 ```
@@ -89,36 +87,36 @@ module.exports = {
 
 ```vue
 <script setup>
-import { useStyleStore } from '@/stores/style.js'
-import { darkModeKey, styleKey } from '@/config.js'
+// import { useDarkModeStore } from '@/stores/darkMode.js'
+// import { darkModeKey } from '@/config.js'
 
 useHead({
   titleTemplate: (titleChunk) => {
     const titleBase = 'Admin One Vue 3 Tailwind'
-    
+
     return titleChunk ? `${titleChunk} - ${titleBase}` : titleBase
   }
 })
 
-const styleStore = useStyleStore()
+// const darkModeStore = useDarkModeStore()
 
-const currentStyle = typeof localStorage !== 'undefined' && localStorage[styleKey] 
-  ? localStorage[styleKey]
-  : 'basic'
+// const currentStoredDarkMode =
+//   typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
 
-styleStore.setStyle(currentStyle)
-
-const currentStoredDarkMode = typeof localStorage !== 'undefined' && localStorage[darkModeKey] === '1'
-
-if ((!currentStoredDarkMode && typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) || currentStoredDarkMode) {
-  styleStore.setDarkMode(true)
-}
+// if (
+//   (!currentStoredDarkMode &&
+//     typeof window !== 'undefined' &&
+//     window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+//   currentStoredDarkMode
+// ) {
+//   darkModeStore.set(true)
+// }
 </script>
 
 <template>
   <div>
     <NuxtLayout>
-      <NuxtPage/>
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
@@ -250,8 +248,8 @@ export const useMainStore = defineStore('main', () => {
 
 ## Rename layouts
 
-* Rename `layouts/LayoutGuest.vue` to `default.vue`
-* Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
+- Rename `layouts/LayoutGuest.vue` to `default.vue`
+- Rename `layouts/LayoutAuthenticated.vue` to `authenticated.vue`
 
 ## Copy pages
 
@@ -263,7 +261,7 @@ These pages will then be available under `/` and `/HomeView` url paths.
 
 Copy `src/views/LoginView.vue` and rename to `pages/index.vue`
 
-Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>` 
+Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<NuxtLayout>`
 
 **Why we need a div wrapper?** If you use `<NuxtLayout>` within your pages, make sure it is not the root element (or disable layout/page transitions) &mdash; [Info](https://v3.nuxtjs.org/guide/directory-structure/layouts#overriding-a-layout-on-a-per-page-basis)
 
