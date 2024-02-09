@@ -19,6 +19,11 @@ export const useMainStore = defineStore('main', () => {
   const clients = ref([])
   const history = ref([])
 
+  const sampleProjectes = ref([
+    {id: 1, nom: "Projecte 1", responsable: "Judit"},
+    {id: 2, nom: "Projecte 2", responsable: "Iris"}
+])
+
   function setUser(payload) {
     if (payload.name) {
       userName.value = payload.name
@@ -56,6 +61,7 @@ export const useMainStore = defineStore('main', () => {
     userAvatar,
     isFieldFocusRegistered,
     clients,
+    sampleProjectes,
     history,
     setUser,
     fetchSampleClients,
