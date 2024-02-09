@@ -1,47 +1,47 @@
 <script setup>
-import { computed, useSlots } from "vue";
-import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
-import CardBoxComponentFooter from "@/components/CardBoxComponentFooter.vue";
+import { computed, useSlots } from 'vue'
+import CardBoxComponentBody from '@/components/CardBoxComponentBody.vue'
+import CardBoxComponentFooter from '@/components/CardBoxComponentFooter.vue'
 
 const props = defineProps({
   rounded: {
     type: String,
-    default: "rounded-2xl",
+    default: 'rounded-2xl'
   },
   flex: {
     type: String,
-    default: "flex-col",
+    default: 'flex-col'
   },
   hasComponentLayout: Boolean,
   hasTable: Boolean,
   isForm: Boolean,
   isHoverable: Boolean,
-  isModal: Boolean,
-});
+  isModal: Boolean
+})
 
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(['submit'])
 
-const slots = useSlots();
+const slots = useSlots()
 
-const hasFooterSlot = computed(() => slots.footer && !!slots.footer());
+const hasFooterSlot = computed(() => slots.footer && !!slots.footer())
 
 const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.isModal ? "dark:bg-slate-900" : "dark:bg-slate-900/70",
-  ];
+    props.isModal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70'
+  ]
 
   if (props.isHoverable) {
-    base.push("hover:shadow-lg transition-shadow duration-500");
+    base.push('hover:shadow-lg transition-shadow duration-500')
   }
 
-  return base;
-});
+  return base
+})
 
 const submit = (event) => {
-  emit("submit", event);
-};
+  emit('submit', event)
+}
 </script>
 
 <template>

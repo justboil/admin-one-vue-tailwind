@@ -1,20 +1,20 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch } from 'vue'
 
 defineProps({
   type: {
     type: String,
-    default: "td",
-  },
-});
+    default: 'td'
+  }
+})
 
-const emit = defineEmits(["checked"]);
+const emit = defineEmits(['checked'])
 
-const checked = ref(false);
+const checked = ref(false)
 
 watch(checked, (newVal) => {
-  emit("checked", newVal);
-});
+  emit('checked', newVal)
+})
 </script>
 
 <template>

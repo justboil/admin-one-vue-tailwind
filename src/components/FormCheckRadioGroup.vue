@@ -1,47 +1,44 @@
 <script setup>
-import { computed } from "vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
+import { computed } from 'vue'
+import FormCheckRadio from '@/components/FormCheckRadio.vue'
 
 const props = defineProps({
   options: {
     type: Object,
-    default: () => {},
+    default: () => {}
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   type: {
     type: String,
-    default: "checkbox",
-    validator: (value) => ["checkbox", "radio", "switch"].includes(value),
+    default: 'checkbox',
+    validator: (value) => ['checkbox', 'radio', 'switch'].includes(value)
   },
   componentClass: {
     type: String,
-    default: null,
+    default: null
   },
   isColumn: Boolean,
   modelValue: {
     type: [Array, String, Number, Boolean],
-    default: null,
-  },
-});
+    default: null
+  }
+})
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 const computedValue = computed({
   get: () => props.modelValue,
   set: (value) => {
-    emit("update:modelValue", value);
-  },
-});
+    emit('update:modelValue', value)
+  }
+})
 </script>
 
 <template>
-  <div
-    class="flex justify-start flex-wrap -mb-3"
-    :class="{ 'flex-col': isColumn }"
-  >
+  <div class="flex justify-start flex-wrap -mb-3" :class="{ 'flex-col': isColumn }">
     <FormCheckRadio
       v-for="(value, key) in options"
       :key="key"

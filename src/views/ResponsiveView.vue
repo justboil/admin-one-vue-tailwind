@@ -1,7 +1,7 @@
 <script setup>
-import SectionTitle from "@/components/SectionTitle.vue";
-import SectionMain from "@/components/SectionMain.vue";
-import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+import SectionTitle from '@/components/SectionTitle.vue'
+import SectionMain from '@/components/SectionMain.vue'
+import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 </script>
 
 <template>
