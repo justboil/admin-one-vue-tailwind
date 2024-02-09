@@ -23,19 +23,19 @@ const routes = [
   },
   {
     meta: {
-      title: 'Tables'
+      title: 'Xarxa'
     },
-    path: '/tables',
-    name: 'tables',
-    component: () => import('@/views/TablesView.vue')
+    path: '/xarxa',
+    name: 'Xarxa',
+    component: () => import('@/views/XarxaView.vue')
   },
   {
     meta: {
-      title: 'Forms'
+      title: 'Projectes'
     },
-    path: '/forms',
-    name: 'forms',
-    component: () => import('@/views/FormsView.vue')
+    path: '/projectes',
+    name: 'Projectes',
+    component: () => import('@/views/ProjectesView.vue')
   },
   {
     meta: {
