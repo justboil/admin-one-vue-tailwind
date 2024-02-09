@@ -2,8 +2,7 @@
 
 This guide will help you integrate your Nuxt.js 3.x application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
-**Important**
-For a working version (so you don't need to apply all the steps below) please check [This Fork](https://github.com/leogargioni/admin-one-nuxt-tailwind-template). Please note the fork may not be up to date with the latest version.
+> **Important**: For a working version (so you don't need to go though all the steps below) please check [This Forked Repository](https://github.com/leogargioni/admin-one-nuxt-tailwind-template). Please note it may not be up to date with the latest version.
 
 ## Table of contents
 
