@@ -78,7 +78,7 @@ const remove = (arr, cb) => {
         <th />
         <th>Nom</th>
         <th>Responsable</th>
-
+        <th>Client</th>
         <th>Progress</th>
         <th>Created</th>
         <th />
@@ -96,7 +96,9 @@ const remove = (arr, cb) => {
         <td data-label="Company">
           {{ projecte.responsable }}
         </td>
-
+        <td data-label="Client">
+          {{ projecte.client }}
+        </td>
         <td data-label="Progress" class="lg:w-32">
           <progress class="flex w-2/5 self-center lg:w-full" max="100" :value="projecte.progress">
             {{ projecte.progress }}

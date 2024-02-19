@@ -19,9 +19,14 @@ export const useMainStore = defineStore('main', () => {
   const clients = ref([])
   const history = ref([])
 
-  const sampleProjectes = ref([
-    {id: 1, nom: "Projecte 1", responsable: "Judit"},
-    {id: 2, nom: "Projecte 2", responsable: "Iris"}
+//   const sampleProjectes = ref([
+//     {id: 1, nom: "Disseny de logo", responsable: "Elena", client: "Ateneus Cooperatius"},
+//     {id: 2, nom: "Web estàtica per campanya Aigua", responsable: "Laura", client: "Ajuntament de Terrassa"}
+// ])
+
+const sampleProjectes = ref([
+  {id: 1, nom: "Projecte 1", responsable: "Usuària 4", client: "La Natural"},
+  {id: 2, nom: "Projecte 2", responsable: "Usuària 4", client: "Ajuntament de Terrassa"}
 ])
 
   function setUser(payload) {

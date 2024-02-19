@@ -15,16 +15,52 @@ import {
 
 export default [
   {
-    to: '/dashboard',
+    to: '/landingview',            
     icon: mdiMonitor,
-    label: 'Dashboard'
+    label: 'Espai Global',
+    menu: [
+      {
+        to: '/dades',
+        label: 'Visualització de dades'
+      },
+      {
+        to: '/social',
+        label: 'Balanç Social'
+      }
+    ]
   },
   {
-    to: '/xarxa',
+    to: '/landingview',            
+    icon: mdiMonitor,
+    label: 'Espai Usuària',
+    menu: [
+      {
+        to: '/profile',
+        label: 'El meu perfil'
+      },
+      {
+        to: '/missatges',
+        label: 'Els meus missatges'
+      }
+    ]
+  },
+  {
+    to: '/landingview',            
+    icon: mdiMonitor,
     label: 'Xarxa',
-    icon: mdiTable
+    menu: [
+      {
+        to: '/xarxa_dashboard',
+        label: 'Veure-ho tot'
+      },
+      {
+        to: '/afegir_membre_xarxa',
+        label: 'Afegir membre'
+      }
+    ]
   },
   {
+    to: '/landingview',
     label: 'Projectes',
     icon: mdiViewList,
     menu: [
