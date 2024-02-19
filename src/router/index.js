@@ -25,7 +25,7 @@ const routes = [
     meta: {
       title: 'Landing Hub'
     },
-    path: '/landingview',
+    path: '/:asideMenuCategoria/landingview',
     name: 'Landing Hub',
     component: () => import('@/views/LandingView.vue')
   },
@@ -33,7 +33,7 @@ const routes = [
     meta: {
       title: 'Xarxa'
     },
-    path: '/landingview',
+    path: '/xarxa',
     name: 'Xarxa',
     component: () => import('@/views/XarxaView.vue')
   },
@@ -41,9 +41,17 @@ const routes = [
     meta: {
       title: 'Projectes'
     },
-    path: '/projectes',
+    path: '/projectes/',
     name: 'Projectes',
     component: () => import('@/views/ProjectesView.vue')
+  },
+  {
+    meta: {
+      title: 'Reunions'
+    },
+    path: '/reunions/',
+    name: 'Reunions',
+    component: () => import('@/views/ReunionsView.vue')
   },
   {
     meta: {
@@ -58,7 +66,7 @@ const routes = [
       title: 'Visualització de Dades'
     },
     path: '/dades',
-    name: 'ui',
+    name: 'Visualització de Dades',
     component: () => import('@/views/DadesView.vue')
   },
   {

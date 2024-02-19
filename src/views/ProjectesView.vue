@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
@@ -8,9 +9,7 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 import CardBox from '@/components/CardBox.vue'
 import TableSampleProjectes from '@/components/TableSampleProjectes.vue'
 
-
-
-
+const route = useRoute();
 
 </script>
 
@@ -29,7 +28,7 @@ import TableSampleProjectes from '@/components/TableSampleProjectes.vue'
       </CardBox>
     <SectionMain>
 
-      <SectionTitle>Form with status example</SectionTitle>
+      <SectionTitle>The user Id in the frontend nooooo: {{ route.params.asideMenuCategoria }}</SectionTitle>
 
     </SectionMain>
   </LayoutAuthenticated>

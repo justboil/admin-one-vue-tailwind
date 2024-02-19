@@ -15,7 +15,7 @@ import {
 
 export default [
   {
-    to: '/landingview',            
+    to: '/global/landingview',            
     icon: mdiMonitor,
     label: 'Espai Global',
     menu: [
@@ -30,7 +30,7 @@ export default [
     ]
   },
   {
-    to: '/landingview',            
+    to: '/user/landingview',            
     icon: mdiMonitor,
     label: 'Espai Usuària',
     menu: [
@@ -45,12 +45,12 @@ export default [
     ]
   },
   {
-    to: '/landingview',            
+    to: '/xarxa/landingview',            
     icon: mdiMonitor,
     label: 'Xarxa',
     menu: [
       {
-        to: '/xarxa_dashboard',
+        to: '/xarxa',
         label: 'Veure-ho tot'
       },
       {
@@ -60,7 +60,7 @@ export default [
     ]
   },
   {
-    to: '/landingview',
+    to: '/projectes/landingview',
     label: 'Projectes',
     icon: mdiViewList,
     menu: [
@@ -69,7 +69,23 @@ export default [
         label: 'Tots els projectes'
       },
       {
+        to: '/projectes/1',
         label: 'Els teus projectes'
+      }
+    ]
+  },
+  {
+    to: '/reunions/landingview',
+    label: 'Reunions',
+    icon: mdiViewList,
+    menu: [
+      {
+        to: '/reunions',
+        label: 'Totes les reunions'
+      },
+      {
+        to: '/reunions',
+        label: 'propera Natural Focus'
       }
     ]
   },
