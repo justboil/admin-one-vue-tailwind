@@ -39,7 +39,7 @@ export default [
         label: 'El meu perfil'
       },
       {
-        to: '/missatges',
+        // to: '/missatges',
         label: 'Els meus missatges'
       }
     ]
@@ -54,7 +54,7 @@ export default [
         label: 'Veure-ho tot'
       },
       {
-        to: '/afegir_membre_xarxa',
+        // to: '/afegir_membre_xarxa',
         label: 'Afegir membre'
       }
     ]
@@ -69,7 +69,7 @@ export default [
         label: 'Tots els projectes'
       },
       {
-        to: '/projectes/1',
+        // to: '/projectes/1',
         label: 'Els teus projectes'
       }
     ]

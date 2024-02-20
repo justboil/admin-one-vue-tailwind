@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { mdiMinus, mdiPlus } from '@mdi/js'
+import { mdiConsoleNetworkOutline, mdiMinus, mdiPlus } from '@mdi/js'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
@@ -11,7 +11,8 @@ const props = defineProps({
     type: Object,
     required: true
   },
-  isDropdownList: Boolean
+  isDropdownList: Boolean,
+
 })
 
 const emit = defineEmits(['menu-click'])
@@ -31,12 +32,16 @@ const componentClass = computed(() => [
     : `aside-menu-item dark:text-slate-300 dark:hover:text-white`
 ])
 
-const hasDropdown = computed(() => !!props.item.menu)
+const hasDropdown = computed(() => !!props.item.menu) // if it has dropdown, hasDropdown === true. Otherwise, === false
 
+const itemItself = ref(props.item)
+
+// extra stuff because testing of prop passing and event emitting:
 const menuClick = (event) => {
-  emit('menu-click', event, props.item)
+  emit('menu-click', event, isDropdownActive, itemItself)
 
   if (hasDropdown.value) {
+
     isDropdownActive.value = !isDropdownActive.value
   }
 }
@@ -52,7 +57,10 @@ const menuClick = (event) => {
       :target="item.target ?? null"
       class="flex cursor-pointer"
       :class="componentClass"
+      :menu-click="menuClick"
       @click="menuClick"
+
+
     >
       <BaseIcon
         v-if="item.icon"

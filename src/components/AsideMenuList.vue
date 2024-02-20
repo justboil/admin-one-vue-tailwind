@@ -1,19 +1,25 @@
 <script setup>
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
+import { onMounted, ref } from 'vue';
 
-defineProps({
+const props = defineProps({
   isDropdownList: Boolean,
   menu: {
     type: Array,
     required: true
-  }
+  },
 })
 
-const emit = defineEmits(['menu-click'])
+const activeDropdownObject = ref({})
 
-const menuClick = (event, item) => {
-  emit('menu-click', event, item)
+// testing of props passing and emiting:
+function leaveOnlyTheActiveDropdownOpen(event, itemItself){
+ 
+  console.log(itemItself.value)
+  activeDropdownObject.value = itemItself.value
+
 }
+
 </script>
 
 <template>
@@ -23,7 +29,8 @@ const menuClick = (event, item) => {
       :key="index"
       :item="item"
       :is-dropdown-list="isDropdownList"
-      @menu-click="menuClick"
+      @menu-click="leaveOnlyTheActiveDropdownOpen"
+
     />
   </ul>
 </template>
