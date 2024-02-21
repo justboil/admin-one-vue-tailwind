@@ -1,21 +1,95 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import { mdiBallotOutline, mdiAccount, mdiMail, mdiGithub } from '@mdi/js'
+
+import { ref, onMounted } from 'vue'
 import SectionMain from '@/components/SectionMain.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import CardBox from '@/components/CardBox.vue'
-import TableSampleProjectes from '@/components/TableSampleProjectes.vue'
+import * as chartConfig from '@/components/Charts/chart.config.js'
+import LineChart from '@/components/Charts/LineChart.vue'
+import ModalForTechnicalNotes from '@/components/ModalForTechnicalNotes.vue'
+
+const chartData = ref(null)
+const modalIsVisible = ref(false)
+const modalContent = ref("")
+
+const fillChartData = () => {
+  chartData.value = chartConfig.sampleChartData()
+}
+
+onMounted(() => {
+  fillChartData()
+})
+
+function showModal(event){
+
+  // this function recieves an EMIT from the child Modal. If the click comes from the CLOSE button in the modal,
+  // the event is not read (we don't need to read the event.target.name if we're closing the modal, it's only
+  // used to set the modalContent value.)
+  if(event){
+    modalContent.value = event.target.name
+  }
+  
+  console.log(modalContent.value)
+  modalIsVisible.value = !modalIsVisible.value
+  console.log(modalIsVisible.value)
+}
+
 </script>
 
 <template>
   <LayoutAuthenticated>
+
+      <SectionMain class="h-fit">
+        <ModalForTechnicalNotes :modal-is-visible="modalIsVisible" :modal-content="modalContent" @show-modal="showModal"/>
+        <h3 class="text-center">VISUALITZACIÓ DE DADES</h3>
+        
+      <CardBox class="mb-6">
+        <div v-if="chartData">
+          <line-chart :data="chartData" class="h-96" />
+        </div>
     
-    <SectionMain>
+      <button name="global_graph" 
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              @click="showModal" >Technical Notes</button>
+      </CardBox>
 
-      <SectionTitle>DADES VIEW</SectionTitle>
+        <div class="grid grid-cols-2 gap-4 h-1/3">
 
-    </SectionMain>
+          <CardBox>
+            <br><br><br>Widget amb desglós ingressos.<br><br><br>
+            <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+          </CardBox>
+          
+          <CardBox>
+            <br><br><br>Widget amb desglós despeses.<br><br><br>
+            <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+          </CardBox>
+          
+
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 h-1/3">
+
+  <CardBox>
+    <br><br><br>Widget amb dada X del mes actual.<br><br><br>
+    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+  </CardBox>
+  
+  <CardBox>
+    <br><br><br>Widget amb dada Y del mes actual.<br><br><br>
+    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+  </CardBox>
+  
+  <CardBox>
+    <br><br><br>Widget amb dada Z del mes actual.<br><br><br>
+    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+  </CardBox>
+
+  </div>
+
+
+      </SectionMain>
+
+
   </LayoutAuthenticated>
 </template>
