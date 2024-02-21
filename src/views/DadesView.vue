@@ -10,7 +10,7 @@ import ModalForTechnicalNotes from '@/components/ModalForTechnicalNotes.vue'
 
 const chartData = ref(null)
 const modalIsVisible = ref(false)
-const modalContent = ref("")
+const modalButtonName = ref("")
 
 const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData()
@@ -26,10 +26,10 @@ function showModal(event){
   // the event is not read (we don't need to read the event.target.name if we're closing the modal, it's only
   // used to set the modalContent value.)
   if(event){
-    modalContent.value = event.target.name
+    modalButtonName.value = event.target.name
   }
   
-  console.log(modalContent.value)
+  console.log(modalButtonName.value)
   modalIsVisible.value = !modalIsVisible.value
   console.log(modalIsVisible.value)
 }
@@ -40,7 +40,7 @@ function showModal(event){
   <LayoutAuthenticated>
 
       <SectionMain class="h-fit">
-        <ModalForTechnicalNotes :modal-is-visible="modalIsVisible" :modal-content="modalContent" @show-modal="showModal"/>
+        <ModalForTechnicalNotes :modal-is-visible="modalIsVisible" :modal-button-name="modalButtonName" @show-modal="showModal"/>
         <h3 class="text-center">VISUALITZACIÓ DE DADES</h3>
         
       <CardBox class="mb-6">
@@ -48,16 +48,21 @@ function showModal(event){
           <line-chart :data="chartData" class="h-96" />
         </div>
     
-      <button name="global_graph" 
-              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              @click="showModal" >Technical Notes</button>
+        <button name="global_graph" 
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                @click="showModal" >Technical Notes
+        </button>
       </CardBox>
 
         <div class="grid grid-cols-2 gap-4 h-1/3">
 
           <CardBox>
             <br><br><br>Widget amb desglós ingressos.<br><br><br>
-            <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+            
+            <button name="global_earnings" 
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              @click="showModal" >Technical Notes
+            </button>
           </CardBox>
           
           <CardBox>
