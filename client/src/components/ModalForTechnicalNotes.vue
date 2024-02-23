@@ -3,13 +3,12 @@
 import { ref, defineProps, defineEmits, computed } from 'vue';
 import modalContent from '@/modalTechnicalContents.js'
 
-
 const props = defineProps({ modalIsVisible: Boolean, modalButtonName: String })
 
-const modalBodyToDisplay = computed(() => {
+const modalDataToDisplay = computed(() => {
     for(let thing of modalContent){
         if (thing.name === props.modalButtonName){
-            return thing.content
+            return {body: thing.content, title: thing.title}
         }
     }
 })
@@ -19,11 +18,9 @@ const modalVisibleClass = "overflow-y-auto overflow-x-hidden fixed top-0 right-0
 
 const emit = defineEmits(["showModal"])
 
-
-
 function closeModalClick(){
     emit("showModal")
-    console.log(modalBodyToDisplay.value)
+    console.log(modalDataToDisplay.value)
 }
 
 </script>
@@ -44,7 +41,7 @@ function closeModalClick(){
               <!-- Modal header -->
               <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                   <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                      {{ props.modalButtonName }}
+                      {{ modalDataToDisplay?.title }}
                   </h3>
                   <button @click="closeModalClick" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
                       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -56,7 +53,7 @@ function closeModalClick(){
               <!-- Modal body -->
               <div class="p-4 md:p-5 space-y-4">
                   <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                      <div v-html="modalBodyToDisplay"></div>
+                      <div v-html="modalDataToDisplay?.body"></div>
                   </p>
                   
               </div>
