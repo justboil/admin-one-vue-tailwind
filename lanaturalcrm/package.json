@@ -13,6 +13,10 @@
     "express": "~4.16.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
   }
 }
