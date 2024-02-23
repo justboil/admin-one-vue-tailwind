@@ -38,9 +38,9 @@ function showModal(event){
 
 <template>
   <LayoutAuthenticated>
-
+    <ModalForTechnicalNotes :modal-is-visible="modalIsVisible" :modal-button-name="modalButtonName" @show-modal="showModal"/>
       <SectionMain class="h-fit">
-        <ModalForTechnicalNotes :modal-is-visible="modalIsVisible" :modal-button-name="modalButtonName" @show-modal="showModal"/>
+        
         <h3 class="text-center">VISUALITZACIÓ DE DADES</h3>
         
       <CardBox class="mb-6">
@@ -67,7 +67,9 @@ function showModal(event){
           
           <CardBox>
             <br><br><br>Widget amb desglós despeses.<br><br><br>
-            <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+            <button name="global_expenses"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              @click="showModal" >Technical Notes</button>
           </CardBox>
           
 
@@ -77,17 +79,22 @@ function showModal(event){
 
   <CardBox>
     <br><br><br>Widget amb dada X del mes actual.<br><br><br>
-    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+    <button name="global_extrawidget_left"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      @click="showModal" >Technical Notes</button>
   </CardBox>
   
   <CardBox>
     <br><br><br>Widget amb dada Y del mes actual.<br><br><br>
-    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+    <button name="global_extrawidget_center"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      @click="showModal" >Technical Notes</button>  
   </CardBox>
-  
   <CardBox>
     <br><br><br>Widget amb dada Z del mes actual.<br><br><br>
-    <router-link class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" to="/">Technical Notes</router-link>
+    <button name="global_extrawidget_right"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+      @click="showModal" >Technical Notes</button>
   </CardBox>
 
   </div>
