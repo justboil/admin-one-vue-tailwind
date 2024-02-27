@@ -10,16 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Worker.hasMany(models.Member, {
-        foreignKey: 'memberTypeId',
-        constraints: false,
-        scope: {
-          memberType: 'worker'
-        }
-      })
+      // define association here
     }
   }
   Worker.init({
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    firstname: DataTypes.STRING,
+    lastname2: DataTypes.STRING,
+    lastname1: DataTypes.STRING,
     pronouns: DataTypes.STRING,
     role: DataTypes.STRING,
     officialId: DataTypes.STRING,

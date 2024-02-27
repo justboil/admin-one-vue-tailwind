@@ -14,20 +14,19 @@ module.exports = {
     */
    
 
-    await queryInterface.bulkInsert('Members', [
+    await queryInterface.bulkInsert('Workers', [
       {
-        name: 'Iris',
-        surname: 'Balboa',
+        firstname: 'Iris',
+        lastname1: 'Balboa',
         email: 'it@lanaturalcoopmunicacio.org',
-        memberType: 'worker',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       { 
-        name: 'Judit',
-        surname: 'LaRanota',
+        firstname: 'Judit',
+        lastname1: 'LaRanota',
+        lastname2: 'Calida',
         email: 'it@lanaturalcoopmunicacio.org',
-        memberType: 'worker',
         createdAt: new Date(),
         updatedAt: new Date()
       }])
@@ -40,6 +39,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Members', null, {});
+    await queryInterface.bulkDelete('Workers', null, {});
   }
 };

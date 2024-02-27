@@ -1,18 +1,36 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Members', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        defaultValue: Sequelize.UUIDV4,
       },
-      name: {
+      firstname: {
         type: Sequelize.STRING
       },
-      surname: {
+      lastname1: {
+        type: Sequelize.STRING
+      },
+      lastname2: {
+        type: Sequelize.STRING
+      },
+      commercialName1: {
+        type: Sequelize.STRING
+      },
+      commercialName2: {
+        type: Sequelize.STRING
+      },
+      pronouns: {
+        type: Sequelize.STRING
+      },
+      role: {
+        type: Sequelize.STRING
+      },
+      officialId: {
         type: Sequelize.STRING
       },
       email: {
@@ -21,33 +39,23 @@ module.exports = {
       address: {
         type: Sequelize.STRING
       },
-      postcode: {
-        type: Sequelize.INTEGER
-      },
       city: {
         type: Sequelize.STRING
       },
-      telephone: {
+      postcode: {
         type: Sequelize.INTEGER
       },
-      autorization_img: {
+      country: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+        type: Sequelize.INTEGER
+      },
+      authorizationImg: {
         type: Sequelize.BOOLEAN
       },
       memberType: {
-        type: Sequelize.ENUM('worker', 'entity', 'contact'),
-      },
-      memberTypeId: {
-        type: Sequelize.INTEGER
-      },
-      parentMemberId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Members",
-          key: "id"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
-        allowNull: true,
+        type: Sequelize.ENUM('contact', 'entity')
       },
       createdAt: {
         allowNull: false,
