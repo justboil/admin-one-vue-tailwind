@@ -1,5 +1,7 @@
 'use strict';
 
+const { v4: uuidv4 } = require('uuid');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -16,6 +18,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Workers', [
       {
+        id: uuidv4(),
         firstname: 'Iris',
         lastname1: 'Balboa',
         email: 'it@lanaturalcoopmunicacio.org',
@@ -23,6 +26,7 @@ module.exports = {
         updatedAt: new Date()
       },
       { 
+        id: uuidv4(),
         firstname: 'Judit',
         lastname1: 'LaRanota',
         lastname2: 'Calida',
