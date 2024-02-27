@@ -16,7 +16,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
     "nodemon": "^3.0.3",
-    "sequelize": "^6.37.1"
+    "sequelize": "^6.37.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.2"
