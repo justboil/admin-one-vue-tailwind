@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Member.belongsTo(models.Member, {as: "Parent", foreignKey: "parentId", allowNull: true});
+      Member.belongsTo(models.Member, {as: "Parent", foreignKey: "memberId", allowNull: true});
       Member.hasMany(models.Member, {as: "LinkedMembers", foreignKey: "parentId"})
     }
   }
