@@ -10,12 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Project.belongsTo(models.Member, {foreignKey: "parentId", allowNull: true});
+      Project.belongsTo(models.Member, {foreignKey: "memberId", allowNull: true});
+      Project.belongsTo(models.ProjectType);
     }
   }
   Project.init({
     id: {
-      type: DataTypes.UUID.V4,
+      type: DataTypes.UUID,
       defaultValue: DataTypes.UUID.V4,
       primaryKey: true,
     },

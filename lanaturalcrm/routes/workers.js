@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
 router.get('/all', async (req, res, next) => {
   try {
     const allWorkers = await models.Worker.findAll({
-      attributes: []
+      // attributes: []
     })
     res.status(200).send(allWorkers)
     // decide what to include

@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Member.belongsTo(models.Member, {as: "Parent", foreignKey: "memberId", allowNull: true});
+      Member.belongsTo(models.Member, {as: "Parent", foreignKey: "parentId", allowNull: true});
       Member.hasMany(models.Member, {as: "LinkedMembers", foreignKey: "parentId"})
     }
   }
   Member.init({
     id: {
-      type: DataTypes.UUID.V4,
+      type: DataTypes.UUID,
       defaultValue: DataTypes.UUID.V4,
       primaryKey: true,
     },
@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
-    postcode: DataTypes.INTEGER,
+    postcode: DataTypes.STRING,
     country: DataTypes.STRING,
     phoneNumber: DataTypes.INTEGER,
     authorizationImg: DataTypes.BOOLEAN,
-    memberType: DataTypes.ENUM
+    memberType: DataTypes.ENUM('contact', 'entity')
   }, {
     sequelize,
     modelName: 'Member',
