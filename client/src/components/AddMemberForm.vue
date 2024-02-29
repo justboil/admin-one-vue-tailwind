@@ -14,7 +14,7 @@ import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
-
+import axios from 'axios'
 let message = "hello"
 
 const selectOptions = [
@@ -52,17 +52,13 @@ const customElementsForm = reactive({
 
 async function submit() {
     const data = form.value;
+
     try {
-      const response = await fetch('/api/members', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post("api/members", data)
 
       if (response.ok) {
         message = "ha funcionat?"
+        console.log("yes!" + response)
       } else {
         console.log(response)
       }
@@ -142,7 +138,6 @@ function addMember() {
           <!-- add option to add one more name -->
             <FormField label="nif">
                 <FormControl v-model="form.officialId"/>
-    
                 </FormField>
         </FormField>
         
@@ -173,7 +168,7 @@ function addMember() {
           <FormCheckRadioGroup
             v-model="form.authorizationImg"
             name="sample-checkbox"
-            :options="{ 0: 'no', 1: 'sí'}"
+            :options="{ false: 'no', true: 'sí'}"
           />
         </FormField>
 

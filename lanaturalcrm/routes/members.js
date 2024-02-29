@@ -31,6 +31,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { data } = req.body
+  console.log(data)
   try {
       const newMember = await models.Member.create({
         id: uuidv4(),
@@ -51,10 +52,9 @@ router.post('/', async (req, res, next) => {
         memberType: data.memberType.label || null
       })
       // do we need to add fields ?
-      newMember = models.Member
       res.status(200).send(newMember)
   } catch (err) {
-    res.status(500).send({message: "algo ha anat malament, no s'ha pogut crear el membro"})
+    res.status(500).send(err.message)
   }
 })
 
