@@ -48,7 +48,7 @@ router.post('/', async (req, res, next) => {
         postcode: data.postcode || null,
         phoneNumber: data.phoneNumber || null,
         authorizationImg: data.authorizationImg || null,
-        memberType: data.memberType || null
+        memberType: data.memberType.label || null
       })
       // do we need to add fields ?
       newMember = models.Member
