@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     country: DataTypes.STRING,
     phoneNumber: DataTypes.INTEGER,
     authorizationImg: DataTypes.BOOLEAN,
-    memberType: DataTypes.ENUM('contact', 'entity')
+    memberType: DataTypes.ENUM('entity', 'contact')
+
   }, {
     sequelize,
     modelName: 'Member',

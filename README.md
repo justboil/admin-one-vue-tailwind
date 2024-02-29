@@ -2,8 +2,8 @@
 -- in root folder:
 `cd lanaturalcrm`
 `npm install`
-`npm install sequelize`
-`npm install --save-dev sequelize-cli`
+`npm run migrate`
+`npx sequelize-cli db:seed:all`
 
 
 
