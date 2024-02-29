@@ -31,11 +31,12 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
-    postcode: DataTypes.INTEGER,
+    postcode: DataTypes.STRING,
     country: DataTypes.STRING,
     phoneNumber: DataTypes.INTEGER,
     authorizationImg: DataTypes.BOOLEAN,
     memberType: DataTypes.ENUM('entity', 'contact')
+
   }, {
     sequelize,
     modelName: 'Member',
