@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
         }
       })
       : null
-      res.status(200).send(workerInfo)
+      res.status(200).send('hello, we here')
   } catch (err) {
     res.status(500).send({message: "no s'ha trobat el membre que busques, revisa les dades oi"})
   }
