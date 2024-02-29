@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Transaction.belongsTo(models.Transaction_Category, {foreignKey: "categoryId", allowNull: true});
+      Transaction.belongsTo(models.Transaction_TipusIVA, {foreignKey: "tipusIVAId", allowNull: true});
+      Transaction.belongsTo(models.Project, {foreignKey: "projectId", allowNull: true});
     }
   }
   Transaction.init({
