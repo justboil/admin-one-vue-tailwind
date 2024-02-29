@@ -47,21 +47,21 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 #### In nuxt.config.ts
 
-```javascript
-import { defineNuxtConfig } from 'nuxt'
+<!-- ```javascript
+import { defineNuxtConfig } from 'nuxt' -->
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
-export default defineNuxtConfig({
-  buildModules: ['@pinia/nuxt'],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {}
-    }
-  },
-  css: ['@/assets/css/main.css']
-})
-```
+// export default defineNuxtConfig({
+//   buildModules: ['@pinia/nuxt'],
+//   postcss: {
+//     plugins: {
+//       tailwindcss: {},
+//       autoprefixer: {}
+//     }
+//   },
+//   css: ['@/assets/css/main.css']
+// })
+// ```
 
 #### In tailwind.config.js
 

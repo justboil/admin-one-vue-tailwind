@@ -10,13 +10,18 @@ import {
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiReact
+  mdiReact,
+  mdiDatabaseCogOutline,
+  mdiAccountStar,
+  mdiAccountGroup,
+  mdiCardMultiple,
+  mdiClockStarFourPoints
 } from '@mdi/js'
 
 export default [
   {
     to: '/global/landingview',            
-    icon: mdiMonitor,
+    icon: mdiDatabaseCogOutline,
     label: 'Espai Global',
     menu: [
       {
@@ -31,7 +36,7 @@ export default [
   },
   {
     to: '/user/landingview',            
-    icon: mdiMonitor,
+    icon: mdiAccountStar,
     label: 'Espai Usuària',
     menu: [
       {
@@ -46,7 +51,7 @@ export default [
   },
   {
     to: '/xarxa/landingview',            
-    icon: mdiMonitor,
+    icon: mdiAccountGroup,
     label: 'Xarxa',
     menu: [
       {
@@ -62,7 +67,7 @@ export default [
   {
     to: '/projectes/landingview',
     label: 'Projectes',
-    icon: mdiViewList,
+    icon: mdiCardMultiple,
     menu: [
       {
         to: '/projectes',
@@ -77,7 +82,7 @@ export default [
   {
     to: '/reunions/landingview',
     label: 'Reunions',
-    icon: mdiViewList,
+    icon: mdiClockStarFourPoints,
     menu: [
       {
         to: '/reunions',
