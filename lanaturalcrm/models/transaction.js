@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     base: DataTypes.INTEGER,
     iva: DataTypes.INTEGER,
     irpf: DataTypes.INTEGER,
-    status: DataTypes.ENUM,
-    transactionType: DataTypes.ENUM
+    status: DataTypes.ENUM("en curs", "tancada"),
+    transactionType: DataTypes.ENUM("factura", "nòmina", "subvenció")
   }, {
     sequelize,
     modelName: 'Transaction',

@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/members', membersRouter);
-app.use('/workers', workersRouter);
+app.use('/api', indexRouter);
+app.use('/api/members', membersRouter);
+app.use('/api/workers', workersRouter);
 module.exports = app;
