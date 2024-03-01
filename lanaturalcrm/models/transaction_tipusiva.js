@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Transaction.hasMany(models.Transaction);
     }
   }
   Transaction_TipusIVA.init({
