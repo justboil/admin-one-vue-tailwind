@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Project.belongsTo(models.Member, {foreignKey: "memberId", allowNull: true});
       Project.belongsTo(models.ProjectType);
+      Project.hasMany(models.Transaction, {foreignKey: "projectId", allowNull: true});
     }
   }
   Project.init({

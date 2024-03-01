@@ -8,7 +8,7 @@ module.exports = {
 
      await queryInterface.bulkInsert('Projects', [
       {
-        id: uuidv4(),
+        id: "837c6321-e1f3-4c25-86fe-de028bfe3149",
         name: "Whack-a-Mole design for Ateneu Candela",
         start_date: "2024-03-01 12:00:00",
         end_date: "2024-04-01 12:00:00",

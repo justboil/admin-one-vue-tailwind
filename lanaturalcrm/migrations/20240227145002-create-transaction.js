@@ -21,9 +21,6 @@ module.exports = {
       base: {
         type: Sequelize.INTEGER
       },
-      iva: {
-        type: Sequelize.INTEGER
-      },
       irpf: {
         type: Sequelize.INTEGER
       },
