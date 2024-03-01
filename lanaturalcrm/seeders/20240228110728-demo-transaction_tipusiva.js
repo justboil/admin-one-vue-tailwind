@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-     await queryInterface.bulkInsert('Transactions_TipusIVA', [
+     await queryInterface.bulkInsert('Transaction_TipusIVAs', [
       {
         tipusIVA: 21,
         createdAt: new Date(),
