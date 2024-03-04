@@ -23,6 +23,7 @@ module.exports = {
         firstname: 'Iris',
         lastname1: 'Balboa',
         email: 'it@lanaturalcoopmunicacio.org',
+        hourlyRate: 20,
         createdAt: new Date(),
         updatedAt: new Date()
       },

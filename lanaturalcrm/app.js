@@ -19,7 +19,7 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/members', membersRouter);
+app.use('/api/xarxa', membersRouter);
 app.use('/api/workers', workersRouter);
 app.use('/api/transactions', transactionsRouter);
 module.exports = app;
