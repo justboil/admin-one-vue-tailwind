@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       ProjectType.hasMany(models.Project);
+      ProjectType.belongsToMany(models.Task, {through: "Tasks_By_ProjectType"})
     }
   }
   ProjectType.init({

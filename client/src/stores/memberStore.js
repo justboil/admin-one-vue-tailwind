@@ -26,6 +26,7 @@ const sampleProjectes = ref([
     try {
       const results = await axios('api/members/totis')
       members.value = await results?.data?.data
+
     } catch(error) {
         alert(error.message)
     }
