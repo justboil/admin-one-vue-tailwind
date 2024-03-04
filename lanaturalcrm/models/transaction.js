@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     description: DataTypes.STRING,
     base: DataTypes.INTEGER,
-    iva: DataTypes.INTEGER,
     irpf: DataTypes.INTEGER,
     status: DataTypes.ENUM("en curs", "tancada"),
     transactionType: DataTypes.ENUM("factura", "nòmina", "subvenció")

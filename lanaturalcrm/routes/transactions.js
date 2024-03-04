@@ -8,7 +8,7 @@ const uppercaseFirst = str => `${str[0].toUpperCase()}${str.substr(1)}`
 
 
 router.get('/', async (req, res, next) => {
-  const {firstname, lastname1, lastname2, memberType} = req.body
+  const {transactionRef, date, description, base } = req.body
   try {
   
       const workerInfo = memberType === "contact" ? await models.Member.findAll({
@@ -29,25 +29,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/totis', async (req, res, next) => {
-
-  try {
-  
-      const workerInfo = await models.Member.findAll(
-       { attributes: ['firstname', 'lastname1', 'commercialName1']}
-        // include:{ models.Tag, models.Notes}.... etc
-    )
-  
-      res.status(200).send(workerInfo)
-  } catch (err) {
-    res.status(500).send({message: "no s'ha trobat el membre que busques, revisa les dades oi"})
-  }
-})
-
 router.post('/', async (req, res, next) => {
   const { data } = req.body
-  console.log(data.authorizationImg)
-  console.log(data.memberType.label)
+  console.log(data)
 
   try {
       const newMember = await models.Member.create({
@@ -66,7 +50,7 @@ router.post('/', async (req, res, next) => {
         postcode: data.postcode || null,
         phoneNumber: data.phoneNumber || null,
         authorizationImg: data.authorizationImg || null,
-        memberType: data.memberType || null // ojo que estem hardcoding the enum values al frontend
+        // memberType: data.memberType.label || null
       })
       // do we need to add fields ?
       res.status(200).send(newMember)
