@@ -29,9 +29,25 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/totis', async (req, res, next) => {
+
+  try {
+  
+      const workerInfo = await models.Member.findAll(
+       { attributes: ['firstname', 'lastname1', 'commercialName1']}
+        // include:{ models.Tag, models.Notes}.... etc
+    )
+  
+      res.status(200).send(workerInfo)
+  } catch (err) {
+    res.status(500).send({message: "no s'ha trobat el membre que busques, revisa les dades oi"})
+  }
+})
+
 router.post('/', async (req, res, next) => {
   const { data } = req.body
-  console.log(data)
+  console.log(data.authorizationImg)
+  console.log(data.memberType.label)
 
   try {
       const newMember = await models.Member.create({
