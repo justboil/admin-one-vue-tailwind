@@ -17,22 +17,32 @@ module.exports = {
     */
    
 
-    await queryInterface.bulkInsert('Workers', [
+    await queryInterface.bulkInsert('Transactions', [
       {
         id: "58a7331f-ec3c-4a43-9bc1-472706575828",
-        firstname: 'Iris',
-        lastname1: 'Balboa',
-        email: 'it@lanaturalcoopmunicacio.org',
-        hourlyRate: 20,
+        transactionRef: 'FACT_001',
+        date: '2024-03-01 10:53:25',
+        base: 300,
+        irpf: 19,
+        status: "tancada",
+        transactionType: "factura",
+        categoryId: 2,
+        tipusIVAId: 1,
+        projectId: "837c6321-e1f3-4c25-86fe-de028bfe3149",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       { 
         id: "db3bdc18-ae29-4a7d-b48d-1a3b891985ab",
-        firstname: 'Judit',
-        lastname1: 'LaRanota',
-        lastname2: 'Calida',
-        email: 'it@lanaturalcoopmunicacio.org',
+        transactionRef: 'LANATURAL3331',
+        date: '2024-02-01 10:53:25',
+        base: 135,
+        irpf: 19,
+        status: "tancada",
+        transactionType: "factura",
+        categoryId: 2,
+        tipusIVAId: 1,
+        projectId: "837c6321-e1f3-4c25-86fe-de028bfe3149",
         createdAt: new Date(),
         updatedAt: new Date()
       }])
@@ -45,6 +55,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Workers', null, {});
+    await queryInterface.bulkDelete('Transactions', null, {});
   }
 };

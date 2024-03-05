@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Transaction.hasMany(models.Transaction);
+      Transaction_TipusIVA.hasMany(models.Transaction, {foreignKey: "tipusIVAId", allowNull: true});
     }
   }
   Transaction_TipusIVA.init({
