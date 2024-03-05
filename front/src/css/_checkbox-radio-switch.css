@@ -1,0 +1,73 @@
+@layer components {
+  .checkbox,
+  .radio,
+  .switch {
+    @apply inline-flex items-center cursor-pointer relative;
+  }
+
+  .checkbox input[type='checkbox'],
+  .radio input[type='radio'],
+  .switch input[type='checkbox'] {
+    @apply absolute left-0 opacity-0 -z-1;
+  }
+
+  .checkbox input[type='checkbox'] + .check,
+  .radio input[type='radio'] + .check,
+  .switch input[type='checkbox'] + .check {
+    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+  }
+
+  .checkbox input[type='checkbox']:focus + .check,
+  .radio input[type='radio']:focus + .check,
+  .switch input[type='checkbox']:focus + .check {
+    @apply ring ring-blue-700;
+  }
+
+  .checkbox input[type='checkbox'] + .check,
+  .radio input[type='radio'] + .check {
+    @apply block w-5 h-5;
+  }
+
+  .checkbox input[type='checkbox'] + .check {
+    @apply rounded;
+  }
+
+  .switch input[type='checkbox'] + .check {
+    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+  }
+
+  .radio input[type='radio'] + .check,
+  .switch input[type='checkbox'] + .check,
+  .switch input[type='checkbox'] + .check:before {
+    @apply rounded-full;
+  }
+
+  .checkbox input[type='checkbox']:checked + .check,
+  .radio input[type='radio']:checked + .check {
+    @apply bg-no-repeat bg-center border-4;
+  }
+
+  .checkbox input[type='checkbox']:checked + .check {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath style='fill:%23fff' d='M 0.04038059,0.6267767 0.14644661,0.52071068 0.42928932,0.80355339 0.3232233,0.90961941 z M 0.21715729,0.80355339 0.85355339,0.16715729 0.95961941,0.2732233 0.3232233,0.90961941 z'%3E%3C/path%3E%3C/svg%3E");
+  }
+
+  .radio input[type='radio']:checked + .check {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' /%3E%3C/svg%3E");
+  }
+
+  .switch input[type='checkbox']:checked + .check,
+  .checkbox input[type='checkbox']:checked + .check,
+  .radio input[type='radio']:checked + .check {
+    @apply bg-blue-600 border-blue-600;
+  }
+
+  .switch input[type='checkbox'] + .check:before {
+    content: '';
+    @apply block w-5 h-5 bg-white border border-gray-700;
+  }
+
+  .switch input[type='checkbox']:checked + .check:before {
+    transform: translate3d(110%, 0, 0);
+    @apply border-blue-600;
+  }
+}
