@@ -7,8 +7,9 @@ import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import CardBox from '@/components/CardBox.vue'
-import TableSampleProjectes from '@/components/TableSampleProjectes.vue'
+import TableLanding from '@/components/TableLanding.vue'
 import ModalForTechnicalNotes from '@/components/ModalForTechnicalNotes.vue'
+
 
 const route = useRoute();
 
@@ -39,6 +40,7 @@ function showModal(event){
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                 @click="showModal" >Technical Notes
         </button>
+        <TableLanding />
       </CardBox>
 
       <div class="grid grid-cols-2 gap-4 h-1/3">
