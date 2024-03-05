@@ -34,7 +34,7 @@ const form = ref({
   postcode: '',
   authorizationImg: false,
   phoneNumber: '',
-  memberType: 'entity', 
+  memberType: '', 
 })
 
 
@@ -49,7 +49,8 @@ const customElementsForm = reactive({
 
 async function submit() {
     // const data = form.value;
-
+  console.log(form.value)
+  console.log(form.authorizationImg)
     try {
       const response = await axios.post("api/members", {data: form.value})
 
@@ -78,7 +79,7 @@ const formStatusSubmit = () => {
 }
 function addMember() {
 
-// firstname : data.firstname || null, 
+//     firstname : data.firstname || null, 
 //     lastname1: data.lastname1 || null,
 //     lastname2: data.lastname2 || null,
 //     commercialName1: data.commercialName1 || null,
@@ -156,8 +157,8 @@ function addMember() {
 
         <BaseDivider />
 
-        <FormField label="Notes" help="aixó no está fet encara. no passa res">
-          <FormControl type="textarea" placeholder="que l'hi passa a aquest membre? tothom s'ho pregunta!" />
+        <FormField label="Notes" help="que l'hi passa a aquest membre? tothom s'ho pregunta!">
+          <FormControl type="textarea" placeholder="no posis res aquí. això es un agüanta places" />
         </FormField>
 
         <BaseDivider />
@@ -218,35 +219,7 @@ function addMember() {
         <FormFilePicker v-model="customElementsForm.file" label="Upload" />
       </CardBox>
 
-      <SectionTitle>Form with status example</SectionTitle>
-
-      <CardBox
-        class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-        is-form
-        is-hoverable
-        @submit.prevent="formStatusSubmit"
-      >
-        <NotificationBarInCard
-          :color="formStatusOptions[formStatusCurrent]"
-          :is-placed-with-header="formStatusWithHeader"
-        >
-          <span
-            ><b class="capitalize">{{ formStatusOptions[formStatusCurrent] }}</b> state</span
-          >
-        </NotificationBarInCard>
-        <FormField label="Fields">
-          <FormControl
-            v-model="form.name"
-            :icon-left="mdiAccount"
-            help="Your full name"
-            placeholder="Name"
-          />
-        </FormField>
-
-        <template #footer>
-          <BaseButton label="Trigger" type="submit" color="info" />
-        </template>
-      </CardBox>
+     
     </SectionMain>
   </LayoutAuthenticated>
 </template>

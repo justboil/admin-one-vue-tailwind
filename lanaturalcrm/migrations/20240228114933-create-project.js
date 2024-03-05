@@ -17,6 +17,9 @@ module.exports = {
       end_date: {
         type: Sequelize.DATE
       },
+      data_entrega: {
+        type: Sequelize.DATE
+      },
       description: {
         type: Sequelize.STRING
       },

@@ -2,33 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Transactions', {
+    await queryInterface.createTable('Tasks', {
       id: {
-        type: Sequelize.UUID,
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        defaultValue: Sequelize.UUIDV4,
-      },
-      transactionRef: {
-        type: Sequelize.STRING
-      },
-      description: {
-        type: Sequelize.STRING,
-        defaultValue: "en curs"
-      },
-      date: {
-        type: Sequelize.DATE
-      },
-      base: {
         type: Sequelize.INTEGER
       },
-      irpf: {
+      title: {
+        type: Sequelize.STRING
+      },
+      deadline: {
+        type: Sequelize.DATE
+      },
+      descripcion: {
+        type: Sequelize.STRING
+      },
+      defaultPrice: {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.ENUM("en curs", "tancada")
-      },
-      transactionType: {
-        type: Sequelize.ENUM("factura", "nòmina", "subvenció")
+        type: Sequelize.ENUM('futur', 'pendent', 'en curs', 'tancat', 'tard')
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Transactions');
+    await queryInterface.dropTable('Tasks');
   }
 };

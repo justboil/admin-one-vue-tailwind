@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Project.belongsTo(models.Member, {foreignKey: "memberId", allowNull: true});
       Project.belongsTo(models.ProjectType);
+
+      Project.hasMany(models.Transaction, {foreignKey: "projectId", allowNull: true});
+      Project.hasMany(models.Task)
+
     }
   }
   Project.init({
@@ -23,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     start_date: DataTypes.DATE,
     end_date: DataTypes.DATE,
+    data_entrega: DataTypes.DATE,
     description: DataTypes.STRING
   }, {
     sequelize,
