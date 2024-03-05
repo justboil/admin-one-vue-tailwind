@@ -17,10 +17,7 @@ import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import axios from 'axios'
 let message = "hello"
 
-const selectOptions = [
-  { id: 1, label: 'entitat' },
-  { id: 2, label: 'contact' },
-]
+const selectOptions = ["entity", "contact"]
 
 const form = ref({
   firstname: '',
@@ -37,7 +34,7 @@ const form = ref({
   postcode: '',
   authorizationImg: false,
   phoneNumber: '',
-  memberType: selectOptions[0], 
+  memberType: 'entity', 
 })
 
 
@@ -167,7 +164,8 @@ function addMember() {
         <FormField label="Autorizatció de compartir imatges? ">
           <FormCheckRadioGroup
             v-model="form.authorizationImg"
-            name="sample-checkbox"
+            name="sample-radio"
+            type="radio"
             :options="{ false: 'no', true: 'sí'}"
           />
         </FormField>
