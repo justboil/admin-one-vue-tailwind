@@ -18,7 +18,7 @@ export const useDarkModeStore = defineStore('darkMode', () => {
 
     // You can persist dark mode setting
     // if (typeof localStorage !== 'undefined') {
-    //   localStorage.setItem('darkMode', this.darkMode ? '1' : '0')
+    //   localStorage.setItem('darkMode', isEnabled.value ? '1' : '0')
     // }
   }
 
