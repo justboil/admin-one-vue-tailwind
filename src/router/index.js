@@ -1,15 +1,16 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Style from '@/views/StyleView.vue'
 import Home from '@/views/HomeView.vue'
+import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 
 const routes = [
   {
     meta: {
-      title: 'Select style'
+      title: 'Aqlara Home'
     },
     path: '/',
-    name: 'style',
-    component: Style
+    name: 'sinaq',
+    component: ExcelUploaderView
   },
   {
     // Document title tag
@@ -76,6 +77,22 @@ const routes = [
     path: '/error',
     name: 'error',
     component: () => import('@/views/ErrorView.vue')
+  },
+  {
+    meta: {
+      title: 'Sinaq'
+    },
+    path: '/sinaq',
+    name: 'sinaq',
+    component: () => import('@/views/ExcelUploaderView.vue')
+  },
+  {
+    meta: {
+      title: 'Style selector'
+    },
+    path: '/style',
+    name: 'style',
+    component: () => import('@/views/StyleView.vue')
   }
 ]
 

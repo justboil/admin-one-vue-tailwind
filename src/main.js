@@ -34,7 +34,7 @@ mainStore.fetchSampleHistory()
 // }
 
 // Default title tag
-const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+const defaultDocumentTitle = 'AQLARA Admin Panel'
 
 // Set document title from route meta
 router.afterEach((to) => {

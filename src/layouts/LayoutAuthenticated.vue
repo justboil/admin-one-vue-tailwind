@@ -74,10 +74,11 @@ const menuClick = (event, item) => {
       />
       <slot />
       <FooterBar>
-        Get more with
-        <a href="https://tailwind-vue.justboil.me/" target="_blank" class="text-blue-600"
-          >Premium version</a
+       
+        <a href="https://aqlara.com" target="_blank" class="text-blue-600"
+          > AQLARA</a
         >
+        Ciclo Integral de Agua
       </FooterBar>
     </div>
   </div>
