@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Style from '@/views/StyleView.vue'
 import Home from '@/views/HomeView.vue'
+// import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 
 const routes = [
@@ -9,7 +10,7 @@ const routes = [
       title: 'Aqlara Home'
     },
     path: '/',
-    name: 'sinaq',
+    name: 'home',
     component: ExcelUploaderView
   },
   {

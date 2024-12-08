@@ -27,14 +27,17 @@ const form = reactive({
   phone: '',
   department: selectOptions[0],
   subject: '',
-  question: ''
+  question: '',
+  olor: ['sabor'],
+  tipo:['rutina','operacional'],
 })
 
 const customElementsForm = reactive({
   checkbox: ['lorem'],
   radio: 'one',
   switch: ['one'],
-  file: null
+  file: null,
+  olor: ['sabor']
 })
 
 const submit = () => {
@@ -69,34 +72,97 @@ const formStatusSubmit = () => {
         />
       </SectionTitleLineWithButton>
       <CardBox form @submit.prevent="submit">
+        <FormField>
+          <FormField label="Zona de la Muestra" help="Zona de la muestra">
+            <FormControl
+              v-model="form.zonaMuestra"
+              type="text"
+              :options="['Primero', 'segundo', 'tercero', 'cuarto']"
+              placeholder="Zona de muestra"
+            />
+          </FormField>
+          <FormField label="Punto de la Muestra">
+            <FormControl
+              v-model="form.puntoMuestra"
+              type="select"
+              :options="selectOptions"
+              placeholder="Punto de muestra"
+              help="Punto de la muestra"
+            />
+          </FormField>
+        </FormField>
+
         <FormField label="Nombre Operario">
           <FormControl v-model="form.name" :icon="mdiAccount" />
           <FormControl v-model="form.email" type="email" :icon="mdiMail" />
         </FormField>
         <div>
-          <BaseDivider />
-          <FormField label="Tipo de Analítica">
-          <FormCheckRadioGroup
-            v-model="customElementsForm.radio"
-            name="sample-radio"
-            type="radio"
-            :options="{ one: 'Rutina', two: 'Operacional' }"
-          />
-        </FormField>
-          <FormField label="Punto de la muestra" help="Zona de la muestra">
-            <FormControl v-model="form.phone" type="tel" :options="['Primero', 'segundo', 'tercero', 'cuarto']" placeholder="Zona de muestra" />
-            <FormControl v-model="form.department" :options="selectOptions" placeholder="Punto de muestra"/>
-            <FormControl v-model="form.type" :options="['Rutina','Operacional']" placeholder="Tipo Analitica"/>
-          </FormField>  
+          <!-- <BaseDivider /> -->
 
-          <BaseDivider />
-          
+          <FormField>
+            <FormField label="Fecha de la muestra" help="Fecha de la toma de la muestra">
+              <FormControl
+                v-model="form.phone"
+                type="date"
+                placeholder="Fecha de la toma de la muestra"
+              />
+            </FormField>
 
-        <BaseDivider />
+            <FormField label="Tipo de Analítica">
+              <FormCheckRadioGroup
+                v-model="form.tipo"
+                name="sample-radio"
+                type="radio"
+                :options="{ rutina: 'Rutina', operacional: 'Operacional' }"
+              />
+            </FormField>
+          </FormField>
 
-          
+          <SectionTitle>Analítica</SectionTitle>
+          <FormField v-if="form.tipo==='rutina'">
+            <div class="flex justify-start items-center space-x-4">
+              <FormField label="Caracteristicas Organolepticas">
+                <div class="flex items-center space-x-4 justify-start">
+                  <FormCheckRadioGroup
+                    v-model="form.olor"
+                    name="Olor"
+                    type="switch"
+                    :options="{ sabor: 'Sabor', olor: 'Olor' }"
+                  />
+                  <FormField>
+                    <FormControl v-model="form.color" type="number" placeholder="Color" />
+                  </FormField>
+                </div>
+              </FormField>
+            </div>
+          </FormField>
 
-         
+          <FormField label="Características Físicas">
+            <div class="flex items-center space-x-2">
+
+              <div class="flex items-center pr-8">
+                <FormControl
+                  v-model="form.cloro"
+                  type="number"
+                  placeholder="Cloro Residual"
+                  class="mr-1"
+                />mg/l
+              </div>
+              <div class="flex items-center pr-8">
+                <FormControl v-model="form.ph" type="number" placeholder="pH" class="mr-1" />
+                ud
+              </div>
+              <div class="flex items-center">
+                <FormControl
+                  v-model="form.turbidez"
+                  type="number"
+                  placeholder="Turbidez"
+                  class="mr-1"
+                />
+                UNF
+              </div>
+            </div>
+          </FormField>
         </div>
 
         <BaseDivider />

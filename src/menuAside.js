@@ -20,21 +20,37 @@ export default [
   //   icon: mdiMonitor,
   //   label: 'Dashboardd'
   // },
+  // {
+  //   to: '/sinaq',
+  //   icon: mdiWaterCircle,
+  //   label: 'SinAQ'
+  // },
   {
-    to: '/sinaq',
+    label: 'SinAQ',
     icon: mdiWaterCircle,
-    label: 'SinAQ'
+    menu: [
+      {
+        label: 'Excel uploader',
+        to: '/sinaq',
+        icon: mdiWaterCircle
+      },
+      {
+        label: 'Formulario Analitica',
+        to: '/forms',
+        icon: mdiSquareEditOutline
+      }
+    ]
   },
   // {
   //   to: '/tables',
   //   label: 'Tables',
   //   icon: mdiTable
   // },
-  {
-    to: '/forms',
-    label: 'Forms',
-    icon: mdiSquareEditOutline
-  },
+  // {
+  //   to: '/forms',
+  //   label: 'Formulario',
+  //   icon: mdiSquareEditOutline
+  // }
   // {
   //   to: '/ui',
   //   label: 'UI',
