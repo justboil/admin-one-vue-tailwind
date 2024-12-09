@@ -3,7 +3,9 @@ import { ref } from "vue";
 
 export const useStore = defineStore("dataStore", () => {
 
-    const dataSamples = ref([]);
+  const dataSamples = ref([]);
+  
+  
 
 
 

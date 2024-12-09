@@ -1,5 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Style from '@/views/StyleView.vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
 // import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'

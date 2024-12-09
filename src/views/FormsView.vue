@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -14,12 +14,39 @@ import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
+import {supabase} from '../helpers/supabase'
+import { usePlantasStore } from '@/stores/plantas'
 
-const selectOptions = [
-  { id: 1, label: 'Guissona 17012' },
-  { id: 2, label: 'Sot de chera 40210' },
-  { id: 3, label: 'Chulilla 20201' }
-]
+
+const plantasStore = usePlantasStore();
+const todos = ref([]);
+
+plantasStore.getPlantas();
+plantasStore.getOperarios();
+
+async function getData() {
+  const { data } = await supabase.from('operarios').select('*')
+  todos.value = data;
+  return todos.value;
+  // console.log(data);
+}
+
+onMounted(() => {
+  getData();
+})
+
+const selectOptions = plantasStore.operarios.map((operario) => {
+  return {
+    id: operario.id,
+    label: operario.nombre
+  }
+});
+
+// const selectOptions = [
+//   { id: 1, label: 'Guissona 17012' },
+//   { id: 2, label: 'Sot de chera 40210' },
+//   { id: 3, label: 'Chulilla 20201' }
+// ]
 
 const form = reactive({
   name: 'Alejandro',

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@mdi/js": "^7.0.96",
+    "@supabase/supabase-js": "^2.47.2",
     "axios": "^1.5.0",
     "chart.js": "^4.4.0",
     "date-fns": "^4.1.0",
