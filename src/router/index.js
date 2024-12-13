@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
-// import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 
 const routes = [
@@ -21,6 +20,22 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: Home
+  },
+  {
+    // Document title tag
+    // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+    meta: {
+      title: 'Panel de Control'
+    },
+    path: '/settings',
+    name: 'settings',
+    component: ()=>import('@/views/SettingsView.vue')
+  },
+  {
+    title: 'Operarios',
+  path: '/operarios',
+  name: 'operarios',
+  component: () => import('@/views/OperariosView.vue')  
   },
   {
     meta: {

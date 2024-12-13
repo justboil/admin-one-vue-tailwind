@@ -11,7 +11,9 @@ import {
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiReact
+  mdiReact,
+  mdiCogOutline,
+  mdiCog
 } from '@mdi/js'
 
 export default [
@@ -41,6 +43,12 @@ export default [
       }
     ]
   },
+  {
+    label: 'Panel de control',
+    to: {name:'settings'},
+    icon: mdiCog,
+
+  }
   // {
   //   to: '/tables',
   //   label: 'Tables',

@@ -1,13 +1,13 @@
 import {
   mdiMenu,
-  mdiClockOutline,
-  mdiCloud,
-  mdiCrop,
   mdiAccount,
   mdiCogOutline,
   mdiEmail,
   mdiLogout,
   mdiThemeLightDark,
+  mdiAccountCog,
+  mdiMapClock,
+  mdiTestTube,
   
 } from '@mdi/js'
 
@@ -17,19 +17,20 @@ export default [
     label: 'Menu',
     menu: [
       {
-        icon: mdiClockOutline,
-        label: 'Menu primero'
+        icon:  mdiAccountCog,
+        label: 'Operarios',
+        to: '/operarios'
       },
       {
-        icon: mdiCloud,
-        label: 'Segundo plato'
+        icon: mdiMapClock,
+        label: 'Zonas'
       },
       {
         isDivider: true
       },
       {
-        icon: mdiCrop,
-        label: 'Ultima llamada'
+        icon: mdiTestTube,
+        label: 'analiticas'
       }
     ]
   },

@@ -1,5 +1,9 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { plugin,defaultConfig } from '@formkit/vue'
+import config from '../formkit.config'
+import  Vueform  from '@vueform/vueform'
+import vueformConfig  from '../vueform.config'
 
 import App from './App.vue'
 import router from './router'
@@ -11,7 +15,7 @@ import './css/main.css'
 const pinia = createPinia()
 
 // Create Vue app
-createApp(App).use(router).use(pinia).mount('#app')
+createApp(App).use(router).use(pinia).use(plugin, defaultConfig(config)).use(Vueform, vueformConfig).mount('#app')
 
 // Init main store
 const mainStore = useMainStore(pinia)

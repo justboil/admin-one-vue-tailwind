@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { computed, reactive} from 'vue'
 import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
-import FormFilePicker from '@/components/FormFilePicker.vue'
+// import FormFilePicker from '@/components/FormFilePicker.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
@@ -13,79 +13,80 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
-import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
-import {supabase} from '../helpers/supabase'
+// import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 
-
-const plantasStore = usePlantasStore();
-const todos = ref([]);
-
-plantasStore.getPlantas();
-plantasStore.getOperarios();
-
-async function getData() {
-  const { data } = await supabase.from('operarios').select('*')
-  todos.value = data;
-  return todos.value;
-  // console.log(data);
-}
-
-onMounted(() => {
-  getData();
-})
-
-const selectOptions = plantasStore.operarios.map((operario) => {
-  return {
-    id: operario.id,
-    label: operario.nombre
-  }
-});
-
-// const selectOptions = [
-//   { id: 1, label: 'Guissona 17012' },
-//   { id: 2, label: 'Sot de chera 40210' },
-//   { id: 3, label: 'Chulilla 20201' }
-// ]
+const plantasStore = usePlantasStore()
 
 const form = reactive({
   name: 'Alejandro',
   email: 'alejandro@example.com',
   phone: '',
-  department: selectOptions[0],
-  subject: '',
-  question: '',
-  olor: ['sabor'],
-  tipo:['rutina','operacional'],
+  zonaMuestra: null,
+  puntoMuestra: null,
+  fecha: '',
+  color: '',
+  olor: [],
+  sabor: '',
+  cloro:'',
+  tipo: ''
 })
 
-const customElementsForm = reactive({
-  checkbox: ['lorem'],
-  radio: 'one',
-  switch: ['one'],
-  file: null,
-  olor: ['sabor']
+const selectZona = computed(() => {
+  return plantasStore.getZonas.map((zona) => {
+    return { id: zona.id, label: zona.nombre }
+  })
 })
+
+const selectPunto = computed(() => {
+  if (!form.zonaMuestra) return []
+  return plantasStore.getPuntosMuestreo
+    .filter((punto) => punto.id_planta === form.zonaMuestra.id)
+    .map((punto) => {
+      return { id: punto.id, label: punto.nombre }
+    })
+})
+
+// onMounted(() => {
+//   getData();
+// })
+// const a=computed
+
+// const selectOptions = computed(() => {
+//   return plantasStore.plantas.map((planta) => {
+//     return { id: planta.id, label: planta.nombre };
+//   });
+// });
+
+// const customElementsForm = reactive({
+//   checkbox: ['lorem'],
+//   radio: 'one',
+//   switch: ['one'],
+//   file: null,
+//   olor: ['sabor']
+// })
 
 const submit = () => {
   //
 }
 
-const formStatusWithHeader = ref(true)
+// const formStatusWithHeader = ref(true)
 
-const formStatusCurrent = ref(0)
+// const formStatusCurrent = ref(0)
 
-const formStatusOptions = ['info', 'success', 'danger', 'warning']
+// const formStatusOptions = ['info', 'success', 'danger', 'warning']
 
-const formStatusSubmit = () => {
-  formStatusCurrent.value = formStatusOptions[formStatusCurrent.value + 1]
-    ? formStatusCurrent.value + 1
-    : 0
-}
+// const formStatusSubmit = () => {
+//   formStatusCurrent.value = formStatusOptions[formStatusCurrent.value + 1]
+//     ? formStatusCurrent.value + 1
+//     : 0
+// }
 </script>
 
 <template>
+
   <LayoutAuthenticated>
+
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiBallotOutline" title="Formulario de Analítica" main>
         <BaseButton
@@ -104,15 +105,16 @@ const formStatusSubmit = () => {
             <FormControl
               v-model="form.zonaMuestra"
               type="text"
-              :options="['Primero', 'segundo', 'tercero', 'cuarto']"
+              :options="selectZona"
               placeholder="Zona de muestra"
             />
           </FormField>
-          <FormField label="Punto de la Muestra">
+          <FormField v-if="form.zonaMuestra" label="Punto de la Muestra">
             <FormControl
+            
               v-model="form.puntoMuestra"
               type="select"
-              :options="selectOptions"
+              :options="selectPunto"
               placeholder="Punto de muestra"
               help="Punto de la muestra"
             />
@@ -145,60 +147,63 @@ const formStatusSubmit = () => {
             </FormField>
           </FormField>
 
-          <SectionTitle>Analítica</SectionTitle>
-          <FormField v-if="form.tipo==='rutina'">
-            <div class="flex justify-start items-center space-x-4">
-              <FormField label="Caracteristicas Organolepticas">
-                <div class="flex items-center space-x-4 justify-start">
-                  <FormCheckRadioGroup
-                    v-model="form.olor"
-                    name="Olor"
-                    type="switch"
-                    :options="{ sabor: 'Sabor', olor: 'Olor' }"
-                  />
-                  <FormField>
-                    <FormControl v-model="form.color" type="number" placeholder="Color" />
-                  </FormField>
+          <!-- //*****  Analítica ******// -->
+          <div v-if="form.tipo">
+            <SectionTitle
+              >Analítica {{ form.tipo === 'rutina' ? ' de Rutina' : ' Operacional' }}</SectionTitle
+            >
+            <FormField v-if="form.tipo === 'rutina'">
+              <div class="flex justify-start items-center space-x-4">
+                <FormField label="Caracteristicas Organolepticas">
+                  <div class="flex items-center space-x-4 justify-start">
+                    <FormCheckRadioGroup
+                      v-model="form.olor"
+                      name="Olor"
+                      type="switch"
+                      :options="{ sabor: 'Sabor', olor: 'Olor' }"
+                    />
+                    <FormField>
+                      <FormControl v-model="form.color" type="number" placeholder="Color" />
+                    </FormField>
+                  </div>
+                </FormField>
+              </div>
+            </FormField>
+
+            <FormField label="Características Físicas">
+              <div class="flex items-center space-x-2">
+                <div class="flex items-center pr-8">
+                  <FormControl
+                    v-model="form.cloro"
+                    type="number"
+                    placeholder="Cloro Residual"
+                    class="mr-1"
+                  />mg/l
                 </div>
-              </FormField>
-            </div>
-          </FormField>
+                <div class="flex items-center pr-8">
+                  <FormControl v-model="form.ph" type="number" placeholder="pH" class="mr-1" />
+                  ud
+                </div>
+                <div class="flex items-center">
+                  <FormControl
+                    v-model="form.turbidez"
+                    type="number"
+                    placeholder="Turbidez"
+                    class="mr-1"
+                  />
+                  UNF
+                </div>
+              </div>
+            </FormField>
 
-          <FormField label="Características Físicas">
-            <div class="flex items-center space-x-2">
+            <BaseDivider />
 
-              <div class="flex items-center pr-8">
-                <FormControl
-                  v-model="form.cloro"
-                  type="number"
-                  placeholder="Cloro Residual"
-                  class="mr-1"
-                />mg/l
-              </div>
-              <div class="flex items-center pr-8">
-                <FormControl v-model="form.ph" type="number" placeholder="pH" class="mr-1" />
-                ud
-              </div>
-              <div class="flex items-center">
-                <FormControl
-                  v-model="form.turbidez"
-                  type="number"
-                  placeholder="Turbidez"
-                  class="mr-1"
-                />
-                UNF
-              </div>
-            </div>
-          </FormField>
+            <FormField label="Observaciones" help="Observaciones. Max 255 carácteres">
+              <FormControl type="textarea" placeholder="Introduce cualquier tipo de incidencia" />
+            </FormField>
+          </div>
         </div>
-
-        <BaseDivider />
-
-        <FormField label="Observaciones" help="Observaciones. Max 255 carácteres">
-          <FormControl type="textarea" placeholder="Introduce cualquier tipo de incidencia" />
-        </FormField>
-
-        <template #footer>
+        <template v-if="form.tipo" #footer >
           <BaseButtons>
             <BaseButton type="submit" color="info" label="Enviar" />
             <BaseButton type="reset" color="info" outline label="Borrar" />
@@ -206,8 +211,9 @@ const formStatusSubmit = () => {
         </template>
       </CardBox>
     </SectionMain>
+  </LayoutAuthenticated>
 
-    <SectionTitle>A probar</SectionTitle>
+    <!-- <SectionTitle>A probar</SectionTitle>
 
     <SectionMain>
       <CardBox>
@@ -276,5 +282,5 @@ const formStatusSubmit = () => {
         </template>
       </CardBox>
     </SectionMain>
-  </LayoutAuthenticated>
+  </LayoutAuthenticated> -->
 </template>

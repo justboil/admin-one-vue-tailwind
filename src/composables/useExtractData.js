@@ -54,7 +54,7 @@ export default function useExtractdata() {
             codPuntoExtraccion2,
             formatDatos(row.__EMPTY_7),
             row.__EMPTY_8 === 0 && row.__EMPTY_8 === 1 ? row.__EMPTY_8 : 1,
-            row.__EMPTY_9 == 0 && row.__EMPTY_9 === 1 ? row.__EMPTY_9 : 5,
+            row.__EMPTY_9 === 0 && row.__EMPTY_9 === 1 ? row.__EMPTY_9 : 1,
             row.__EMPTY_10 === 0 && row.__EMPTY_10 === 1 ? row.__EMPTY_10 : 1,
             formatDatos(row.__EMPTY_11),
             formatDatos(row.__EMPTY_12),
