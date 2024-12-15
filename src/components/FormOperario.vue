@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, toValue, watch } from 'vue'
+import { computed, reactive, ref, toValue, watch } from 'vue'
 import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -16,6 +16,8 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 
+// const zonasUoOperario = ref([]);
+
 const plantasStore = usePlantasStore()
 
 const props = defineProps({
@@ -25,6 +27,7 @@ const props = defineProps({
     default: () => ({})
   }
 })
+console.log('client: ',props.client);
 
 const form = reactive({
   name: props.client?.name || 'Nombre',
@@ -32,12 +35,15 @@ const form = reactive({
   email: props.client?.email || 'email@example.com',
   phone: props.client?.phone,
   id_zona: props.client?.id_zona,
+  ud_operativa_fk: props.client?.ud_operativa_fk,
   color: '',
   olor: [],
   sabor: '',
   tipo: '',
   prueba: '5'
 })
+
+console.log('form: ', form);
 
 watch(
   () => props.client,
@@ -48,8 +54,11 @@ watch(
     form.phone = newClient.phone
     form.id_zona = newClient.id_zona
     form.type = newClient.type
+    form.ud_operativa_fk = newClient.ud_operativa_fk
   }
 )
+
+
 
 const selectZona = computed(() => {
   return plantasStore.getZonas.map((zona) => {
@@ -64,11 +73,28 @@ const selectUO = computed(() => {
 })
 
 const zonasOperario = computed(() => {
-  return plantasStore.getZonas.filter(( zona ) => zona.id_unidad_operativa === form.unidad_operativa)
-}
-)
+  return plantasStore.getZonas.filter(
+    (zona) => zona.id_unidades_operativas_fk === form.unidad_operativa
+  )
+})
 
-console.log(form.zona)
+const buscaZonasUO = (uo) =>
+   {
+    console.log('UnidadOperativa: ', uo)
+    // zonasUoOperario = plantasStore.getZonas.filter((zona) => zona.id_unidades_operativas_fk === uo)
+    if (!uo) {
+      console.warn('El valor de unidad operativa es undefined o null')
+      return []
+    }
+    return plantasStore.getZonas
+      .filter((zona) => zona.unidades_operativas_fk === uo)
+      .map((zona) => {
+        console.log(zona.id, zona.name)
+        return { id: zona.id, name: zona.name }
+      })
+  }
+
+console.log('buscaZonasUO: ', buscaZonasUO(form.ud_operativa_fk))
 
 const submit = () => {
   //
@@ -115,7 +141,7 @@ const submit = () => {
 
       <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <FormKit
-          v-model="form.unidad_operativa"
+          v-model="form.ud_operativa_fk"
           type="select"
           label="Unidad Operativa"
           validation="required"
@@ -136,7 +162,6 @@ const submit = () => {
           label="Tipo"
           validation="required"
           class="w-full"
-          
         />
       </div>
 
@@ -157,13 +182,34 @@ const submit = () => {
         />
       </div>
 
-      <div>
-        <!-- <FormKit
-        
-    />
-    <pre wrap>{{ value }}</pre>
-  </FormKit> -->
+      <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        <FormKit
+          v-for="zone in buscaZonasUO(form.ud_operativa_fk)"
+          :key="zone.id"
+          type="checkbox"
+          :label="zone.name"
+          :help="zone.id"
+          name="terms"
+          :value="false"
+          validation="accepted"
+          validation-visibility="dirty"
+        />
+        <pre wrap>Zonas</pre>
       </div>
+      <!-- <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        <FormKit
+          v-for="zona in plantasStore.getZonas"
+          :key="zona.id"
+          type="checkbox"
+          :label="zona.name"
+          :help="zona.id"
+          name="terms"
+          :value="false"
+          validation="accepted"
+          validation-visibility="dirty"
+        />
+        <pre wrap>Zonas</pre>
+      </div> -->
 
       <FormField label="Nombre Operario">
         <FormControl v-model="form.name" :icon="mdiAccount" />

@@ -81,7 +81,8 @@ const checked = (isChecked, client) => {
 }
 
 const nombreUO = (id) => computed(() => {
-  return plantaStore.getUnidadesOperativas.find((uo) => uo.id === id).name
+  const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id).name
+  return uo?.name ?? 'N/A';
 })
 
 

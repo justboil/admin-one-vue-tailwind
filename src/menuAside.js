@@ -1,19 +1,19 @@
 import {
-  mdiAccountCircle,
-  mdiMonitor,
   mdiWaterCircle,
-  mdiGithub,
-  mdiLock,
-  mdiAlertCircle,
   mdiSquareEditOutline,
-  mdiTable,
-  mdiViewList,
-  mdiTelevisionGuide,
-  mdiResponsive,
-  mdiPalette,
-  mdiReact,
-  mdiCogOutline,
-  mdiCog
+  mdiCog,
+  // mdiAccountCircle,
+  // mdiMonitor,
+  // mdiGithub,
+  // mdiLock,
+  // mdiAlertCircle,
+  // mdiTable,
+  // mdiViewList,
+  // mdiTelevisionGuide,
+  // mdiResponsive,
+  // mdiPalette,
+  // mdiReact,
+  // mdiCogOutline,
 } from '@mdi/js'
 
 export default [
@@ -38,7 +38,7 @@ export default [
       },
       {
         label: 'Formulario Analitica',
-        to: '/forms',
+        to: {name: "forms"},
         icon: mdiSquareEditOutline
       }
     ]
