@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
@@ -10,6 +10,7 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import CardBoxModalOperario from './CardBoxModalOperario.vue'
 import FormOperario from './FormOperario.vue'
 import CardBoxModal from './CardBoxModal.vue'
+import { searchOperarios } from '../services/supabase'
 
 defineProps({
   checkable: Boolean
@@ -35,6 +36,10 @@ const perPage = ref(5)
 const currentPage = ref(0)
 
 const checkedRows = ref([])
+
+// onMounted(() => {
+//   const operarios = searchOperarios();
+// })
 
 const operariosPaginated = computed(() =>
   operarios.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
@@ -81,7 +86,7 @@ const checked = (isChecked, client) => {
 }
 
 const nombreUO = (id) => computed(() => {
-  const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id).name
+  const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)
   return uo?.name ?? 'N/A';
 })
 

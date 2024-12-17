@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, onMounted, ref } from 'vue'
-import { supabase } from '@/helpers/supabase'
+import { supabase } from '@/services/supabase'
 
 export const usePlantasStore = defineStore('plantasStore', () => {
   const zonas = ref([])
@@ -9,6 +9,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const puntosMuestreo = ref([])
   const unidadesOperativas = ref([])
   const comunidadesAutonomas = ref([])
+  const formZonas = ref([])
 
   onMounted(() => {
     loadZonas()
@@ -18,6 +19,8 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadUnidadesOperativas()
     loadComunidadesAutonomas()
   })
+
+  
 
   const loadZonas = async () => {
     const { data } = await supabase.from('zonas_abastecimiento').select('*')
@@ -79,6 +82,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     analiticas,
     puntosMuestreo,
     unidadesOperativas,
-    comunidadesAutonomas
+    comunidadesAutonomas,
+    formZonas
   }
 })

@@ -34,7 +34,7 @@ const form = reactive({
 
 const selectZona = computed(() => {
   return plantasStore.getZonas.map((zona) => {
-    return { id: zona.id, label: zona.nombre }
+    return { id: zona.id, label: zona.name }
   })
 })
 
@@ -149,9 +149,9 @@ const submit = () => {
 
           <!-- //*****  Analítica ******// -->
           <div v-if="form.tipo">
-            <SectionTitle
+            <SectionTitle class='mb-2 mt-2'
               >Analítica {{ form.tipo === 'rutina' ? ' de Rutina' : ' Operacional' }}</SectionTitle
-            >
+              >
             <FormField v-if="form.tipo === 'rutina'">
               <div class="flex justify-start items-center space-x-4">
                 <FormField label="Caracteristicas Organolepticas">
@@ -201,14 +201,17 @@ const submit = () => {
             <FormField label="Observaciones" help="Observaciones. Max 255 carácteres">
               <FormControl type="textarea" placeholder="Introduce cualquier tipo de incidencia" />
             </FormField>
+            
           </div>
         </div>
-        <template v-if="form.tipo" #footer >
+        <BaseDivider/>
+        <template v-if="form.tipo" >
           <BaseButtons>
             <BaseButton type="submit" color="info" label="Enviar" />
             <BaseButton type="reset" color="info" outline label="Borrar" />
           </BaseButtons>
         </template>
+        
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
@@ -283,4 +286,5 @@ const submit = () => {
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated> -->
+  
 </template>

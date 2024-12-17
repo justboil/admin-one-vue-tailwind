@@ -15,6 +15,7 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
+import { searchZonasOperarios } from '@/services/supabase'
 
 // const zonasUoOperario = ref([]);
 
@@ -27,7 +28,7 @@ const props = defineProps({
     default: () => ({})
   }
 })
-console.log('client: ',props.client);
+console.log('client: ', props.client)
 
 const form = reactive({
   name: props.client?.name || 'Nombre',
@@ -36,6 +37,9 @@ const form = reactive({
   phone: props.client?.phone,
   id_zona: props.client?.id_zona,
   ud_operativa_fk: props.client?.ud_operativa_fk,
+  type: props.client?.type || 'operario',
+  id:'',
+  zonas:[],
   color: '',
   olor: [],
   sabor: '',
@@ -43,7 +47,7 @@ const form = reactive({
   prueba: '5'
 })
 
-console.log('form: ', form);
+console.log('form: ', form)
 
 watch(
   () => props.client,
@@ -55,10 +59,10 @@ watch(
     form.id_zona = newClient.id_zona
     form.type = newClient.type
     form.ud_operativa_fk = newClient.ud_operativa_fk
-  }
+    zonasOperarioSeleccionadas(newClient.name)
+
+  },{inmediate:true}
 )
-
-
 
 const selectZona = computed(() => {
   return plantasStore.getZonas.map((zona) => {
@@ -77,24 +81,41 @@ const zonasOperario = computed(() => {
     (zona) => zona.id_unidades_operativas_fk === form.unidad_operativa
   )
 })
+const isChecked = (zonaId) => {
+  return form.zonas.some(z => z.id === zonaId)
+}
 
-const buscaZonasUO = (uo) =>
-   {
-    console.log('UnidadOperativa: ', uo)
-    // zonasUoOperario = plantasStore.getZonas.filter((zona) => zona.id_unidades_operativas_fk === uo)
-    if (!uo) {
-      console.warn('El valor de unidad operativa es undefined o null')
-      return []
-    }
-    return plantasStore.getZonas
-      .filter((zona) => zona.unidades_operativas_fk === uo)
-      .map((zona) => {
-        console.log(zona.id, zona.name)
-        return { id: zona.id, name: zona.name }
-      })
+const buscaZonasUO = (uo) => {
+  // zonasUoOperario = plantasStore.getZonas.filter((zona) => zona.id_unidades_operativas_fk === uo)
+  if (!uo) {
+    console.warn('El valor de unidad operativa es undefined o null')
+    return []
   }
+  return plantasStore.getZonas
+    .filter((zona) => zona.unidades_operativas_fk === uo)
+    .map((zona) => {
+      // return { id: zona.id, name: zona.name }
+      return { value: zona.id, label: zona.name }
+    })
+}
 
-console.log('buscaZonasUO: ', buscaZonasUO(form.ud_operativa_fk))
+const zonasOperarioSeleccionadas = async (nombre) => {
+  // console.log('zonasOperario: ', data)
+  const zonas = await searchZonasOperarios(nombre)
+  console.log('zonas: ',zonas);
+  // form.zonas= zonas.flatMap(zona => zona.zonas_personal.map(zone => ({
+    form.zonas = zonas.flatMap(zona => zona.zonas_personal.map(zone => zone.zonas_abastecimiento.id))
+   
+    // return{id:id,name:name}
+   
+   
+  console.log('Form.zonas ',form.zonas);
+  //  return zones
+  
+  
+  // return searchZonasOperarios(nombre).map((zona) => { return { id: zona.zonas_personal.zonas_abastecimiento.id, name: zona.zonas_personal.zonas_abastecimiento.name } })
+}
+zonasOperarioSeleccionadas(form.name)
 
 const submit = () => {
   //
@@ -183,7 +204,7 @@ const submit = () => {
       </div>
 
       <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-        <FormKit
+        <!-- <FormKit
           v-for="zone in buscaZonasUO(form.ud_operativa_fk)"
           :key="zone.id"
           type="checkbox"
@@ -195,9 +216,52 @@ const submit = () => {
           validation-visibility="dirty"
         />
         <pre wrap>Zonas</pre>
-      </div>
-      <!-- <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <FormKit
+          v-for="zona in zonasOperarioSeleccionadas(form.name)"
+          :key="zona.id"
+          type="checkbox"
+          :label="zona.name"
+          :help="zona.id"
+          name="terms"
+          :value="true"
+          validation="accepted"
+          validation-visibility="dirty"
+        /> -->
+
+        <!-- <FormKit
+          v-for="zona in buscaZonasUO(form.ud_operativa_fk)"
+          :key="zona.id"
+          v-model="form.zonas"
+          type="checkbox"
+          :label="zona.label"
+          :help="zona.id"
+          name="zonas"
+        /> -->
+        <div class='w-full'>
+
+          <FormKit
+          v-model="form.zonas"
+            :options="buscaZonasUO(form.ud_operativa_fk)"      
+            type="checkbox"
+            name="zonas"
+            options-class="mb-4 flex jutify-between items-center space-x-2 p-10 rounded-md w-full"
+            option-class="w-full"
+            
+          />
+        </div>
+            </div>
+            <!-- <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        <FormKit
+          v-for="zona in buscaZonasUO(form.ud_operativa_fk)"
+          :key="zona.id"
+          type="checkbox"
+          :label="zona.name"
+          :help="zona.id"
+          name="terms"
+          :value="zonasOperarioSeleccionadas(form.name).some(selectedZona => selectedZona.id === zona.id)"
+          validation="accepted"
+          validation-visibility="dirty"
+        />
           v-for="zona in plantasStore.getZonas"
           :key="zona.id"
           type="checkbox"
@@ -211,12 +275,12 @@ const submit = () => {
         <pre wrap>Zonas</pre>
       </div> -->
 
-      <FormField label="Nombre Operario">
+      <!-- <FormField label="Nombre Operario">
         <FormControl v-model="form.name" :icon="mdiAccount" />
         <FormControl v-model="form.email" type="email" :icon="mdiMail" />
       </FormField>
       <div>
-        <!-- <BaseDivider /> -->
+        <!
 
         <FormField>
           <FormField label="Fecha" help="Fecha">
@@ -287,12 +351,12 @@ const submit = () => {
             { label: 'Azul', value: 'blue' }
           ]"
           label="Color"
-        />
+        /> -->
 
-        <div>
+        <!-- <div>
           <BaseDivider />
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <template #footer>
         <BaseButtons>
           <BaseButton type="submit" color="info" label="Guardar" />
