@@ -51,7 +51,7 @@ const routes = [
     },
     path: '/forms',
     name: 'forms',
-    component: () => import('@/views/FormsView.vue')
+    component: () => import('@/views/FormAnaliticaView.vue')
   },
   {
     meta: {
