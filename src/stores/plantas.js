@@ -10,6 +10,8 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const unidadesOperativas = ref([])
   const comunidadesAutonomas = ref([])
   const formZonas = ref([])
+  const infraestructuras = ref([])
+  const zonas_infraestructuras = ref([])
 
   onMounted(() => {
     loadZonas()
@@ -18,9 +20,9 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadPuntosMuestreo()
     loadUnidadesOperativas()
     loadComunidadesAutonomas()
+    loadInfraestructuras()
+    loadZonasInfraestructuras()
   })
-
-  
 
   const loadZonas = async () => {
     const { data } = await supabase.from('zonas_abastecimiento').select('*')
@@ -41,11 +43,21 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   }
   const loadUnidadesOperativas = async () => {
     const { data } = await supabase.from('unidades_operativas').select('*')
-      unidadesOperativas.value = data
-    }
-    const loadComunidadesAutonomas = async () => {
+    unidadesOperativas.value = data
+  }
+  const loadComunidadesAutonomas = async () => {
     const { data } = await supabase.from('comunidades_autonomas').select('*')
     comunidadesAutonomas.value = data
+  }
+
+  const loadZonasInfraestructuras = async () => {
+    const { data } = await supabase.from('zonas_infraestructuras').select('*')
+    zonas_infraestructuras.value = data
+  }
+
+  const loadInfraestructuras = async () => {
+    const { data } = await supabase.from('infraestructuras').select('*')
+    infraestructuras.value = data
   }
 
   const getZonas = computed(() => {
@@ -70,6 +82,13 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     return comunidadesAutonomas.value
   })
 
+  const getInfraestructuras = computed(() => {
+    return infraestructuras.value
+  })
+  const getZonasInfraestructuras = computed(() => {
+    return zonas_infraestructuras.value
+  })
+
   return {
     getZonas,
     getOperarios,
@@ -77,12 +96,16 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     getPuntosMuestreo,
     getUnidadesOperativas,
     getComunidadesAutonomas,
+    getInfraestructuras,
+    getZonasInfraestructuras,
     zonas,
     operarios,
     analiticas,
     puntosMuestreo,
     unidadesOperativas,
     comunidadesAutonomas,
-    formZonas
+    formZonas,
+    infraestructuras,
+    zonas_infraestructuras,
   }
 })

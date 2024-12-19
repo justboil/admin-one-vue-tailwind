@@ -23,7 +23,7 @@ const plantasStore = usePlantasStore()
 
 const form = reactive({
   uo: null,
-  zonaMuestra: null,
+  zona: null,
   punto_muestreo_fk: null,
   fecha: '',
   color: '',
@@ -34,7 +34,8 @@ const form = reactive({
   observaciones: '',
   ph: null,
   turbidez: null,
-  operario: null
+  operario: null,
+  infraestructura: null,
 })
 
 const selectUO = computed(() => {
@@ -51,17 +52,30 @@ const selectZona = computed(() => {
     })
 })
 
+const selectInfraestructura=computed(()=>{
+  if (!form.zona) return []
+  const infraestructuras= plantasStore.getZonasInfraestructuras
+    .filter((infraestructura) => infraestructura.zonas_fk === form.zona)
+    .map((infraestructura) => return{}
+      // return { value: infraestructura.id, label: infraestructura.name }
+
+    })
+    console.log(infraestructuras);
+    return infraestructuras
+})
+
+
 const selectPunto = computed(() => {
-  if (!form.zonaMuestra) return []
+  if (!form.zona) return []
   return plantasStore.getPuntosMuestreo
-    .filter((punto) => punto.zonas_abastecimiento_fk === form.zonaMuestra)
+    .filter((punto) => punto.zonas_abastecimiento_fk === form.zona)
     .map((punto) => {
       return { value: punto.id, label: punto.name }
     })
 })
 
 const operarioPorZona = computed(() => {
-  if (!form.zonaMuestra) return []
+  if (!form.zona) return []
   return plantasStore.getOperarios
     .filter((operario) => operario.ud_operativa_fk === form.uo)
     .map((operario) => {
@@ -153,7 +167,7 @@ const submitHandler = async () => {
       </SectionTitleLineWithButton>
       <CardBox>
         <FormKit type="form" submit-label="Enviar"  @submit="submitHandler">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <FormKit
               v-model="form.uo"
               type="select"
@@ -162,11 +176,18 @@ const submitHandler = async () => {
               label="Unidad Operativa"
             />
             <FormKit
-              v-model="form.zonaMuestra"
+              v-model="form.zona"
               type="select"
               :options="selectZona"
-              placeholder="Zona de muestra"
-              label="Zona de Muestra"
+              placeholder="Zona de Muestra"
+              label="Zona"
+            />
+            <FormKit
+              v-model="form.infraestructura"
+              type="select"
+              :options="selectInfraestructura"
+              placeholder="Infraestructura"
+              label="Infraestructura"
             />
             <FormKit
               v-model="form.punto_muestreo_fk"
