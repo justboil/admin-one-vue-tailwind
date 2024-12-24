@@ -16,7 +16,7 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { FormKit } from '@formkit/vue'
-import {setAnaliticas} from '../services/analiticas.js'
+import { setAnaliticas } from '../services/analiticas.js'
 import { supabase } from '../services/supabase'
 
 const plantasStore = usePlantasStore()
@@ -35,7 +35,7 @@ const form = reactive({
   ph: null,
   turbidez: null,
   operario: null,
-  infraestructura: null,
+  infraestructura: null
 })
 
 const selectUO = computed(() => {
@@ -52,27 +52,48 @@ const selectZona = computed(() => {
     })
 })
 
-const selectInfraestructura=computed(()=>{
+const selectInfraestructura = computed(() => {
   if (!form.zona) return []
-  const infraestructuras= plantasStore.getZonasInfraestructuras
+  const infraestructuras = plantasStore.getZonasInfraestructuras
     .filter((infraestructura) => infraestructura.zonas_fk === form.zona)
-    .map((infraestructura) => return{}
-      // return { value: infraestructura.id, label: infraestructura.name }
-
+    .map((infraestructura) => {
+      // console.log(':Infraestructura: ',infraestructura)
+      return {
+        value: infraestructura.infraestructuras_fk,
+        label: buscaInfraestructuraPorId(infraestructura.infraestructuras_fk)
+      }
     })
-    console.log(infraestructuras);
-    return infraestructuras
+  return infraestructuras
 })
 
+const buscaInfraestructuraPorId = (id) => {
+  const infraestructura = plantasStore.getInfraestructuras.find(
+    (infraestructura) => infraestructura.id === id
+  )
+  if (infraestructura) {
+    return infraestructura.name
+  } else {
+    return ''
+  }
+}
 
-const selectPunto = computed(() => {
-  if (!form.zona) return []
+const selectPuntosMuestra = computed(() => {
+  if (!form.infraestructura) return []
   return plantasStore.getPuntosMuestreo
-    .filter((punto) => punto.zonas_abastecimiento_fk === form.zona)
+    .filter((punto) => punto.infraestructura_fk === form.infraestructura)
     .map((punto) => {
       return { value: punto.id, label: punto.name }
     })
 })
+
+// const selectPunto = computed(() => {
+//   if (!form.zona) return []
+//   return plantasStore.getPuntosMuestreo
+//     .filter((punto) => punto.zonas_abastecimiento_fk === form.zona)
+//     .map((punto) => {
+//       return { value: punto.id, label: punto.name }
+//     })
+// })
 
 const operarioPorZona = computed(() => {
   if (!form.zona) return []
@@ -82,9 +103,6 @@ const operarioPorZona = computed(() => {
       return { value: operario.id, label: operario.name }
     })
 })
-
-
-
 
 // onMounted(() => {
 //   getData();
@@ -105,13 +123,10 @@ const operarioPorZona = computed(() => {
 //   olor: ['sabor']
 // })
 
-
-
 const submitHandler = async () => {
   try {
-    const { data, error } = await supabase
-      .from('analiticas')
-      .insert([{
+    const { data, error } = await supabase.from('analiticas').insert([
+      {
         punto_muestreo_fk: form.punto_muestreo_fk,
         fecha: form.fecha,
         color: form.color ? Number(form.color) : null,
@@ -123,7 +138,8 @@ const submitHandler = async () => {
         personal_fk: form.operario,
         ph: form.ph ? Number(form.ph) : null,
         turbidez: form.turbidez ? Number(form.turbidez) : null
-      }])
+      }
+    ])
 
     if (error) {
       console.error('Error al insertar datos:', error)
@@ -166,7 +182,7 @@ const submitHandler = async () => {
         />
       </SectionTitleLineWithButton>
       <CardBox>
-        <FormKit type="form" submit-label="Enviar"  @submit="submitHandler">
+        <FormKit type="form" submit-label="Enviar" @submit="submitHandler">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <FormKit
               v-model="form.uo"
@@ -192,7 +208,7 @@ const submitHandler = async () => {
             <FormKit
               v-model="form.punto_muestreo_fk"
               type="select"
-              :options="selectPunto"
+              :options="selectPuntosMuestra"
               placeholder="Punto de muestra"
               label="Punto de Muestra"
             />
@@ -230,20 +246,18 @@ const submitHandler = async () => {
                     v-model="form.olor"
                     type="checkbox"
                     label="Olor"
-                    help="Marca si el agua tiene olor"
+                    help="Marca si el agua tiene mal olor"
                     name="terms"
                     :value="false"
-                    validation="accepted"
                     validation-visibility="dirty"
                   />
                   <FormKit
                     v-model="form.color"
                     type="checkbox"
                     label="Color"
-                    help="Marca si el agua no tiene buen color"
+                    help="Marca si el agua tiene mal color"
                     name="terms"
                     :value="false"
-                    validation="accepted"
                     validation-visibility="dirty"
                   />
                   <FormKit
@@ -253,42 +267,41 @@ const submitHandler = async () => {
                     help="Marca si el agua tiene mal sabor"
                     name="terms"
                     :value="false"
-                    validation="accepted"
                     validation-visibility="dirty"
                   />
                 </div>
               </div>
             </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <FormKit
-              v-model.number="form.cloro"
-              type="number"
-              placeholder="Cloro Residual"
-              label="Cloro Residual"
-              help="mg/l"
-            ></FormKit>
-            <FormKit v-model="form.ph" type="number" placeholder="pH" label="pH" help="ud" />
-            <FormKit
-              v-model.number="form.turbidez"
-              type="number"
-              placeholder="Turbidez"
-              label="Turbidez"
-              help="UNF"
-            />
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <FormKit
+                v-model.number="form.cloro"
+                type="number"
+                placeholder="Cloro Residual"
+                label="Cloro Residual"
+                help="mg/l"
+              ></FormKit>
+              <FormKit v-model="form.ph" type="number" placeholder="pH" label="pH" help="ud" />
+              <FormKit
+                v-model.number="form.turbidez"
+                type="number"
+                placeholder="Turbidez"
+                label="Turbidez"
+                help="UNF"
+              />
+            </div>
+            <div>
+              <FormKit
+                v-model="form.observaciones"
+                type="textarea"
+                placeholder="Introduce cualquier tipo de incidencia"
+                inner-class="w-full"
+                wrapper-class="w-full"
+              />
+            </div>
           </div>
-          <div>
-            <FormKit
-              type="textarea"
-              placeholder="Introduce cualquier tipo de incidencia"
-              inner-class="w-full"
-              wrapper-class="w-full"
-            />
-          </div>
-        </div>
         </FormKit>
 
-
-          <!-- <BaseButtons>
+        <!-- <BaseButtons>
           <BaseButton type="submit" color="info" label="Enviar" />
           <BaseButtons type="reset" color="info" outline label="Borrar" />
         </BaseButtons> -->

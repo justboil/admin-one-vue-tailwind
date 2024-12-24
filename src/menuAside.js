@@ -40,7 +40,12 @@ export default [
         label: 'Formulario Analitica',
         to: {name: "forms"},
         icon: mdiSquareEditOutline
-      }
+      },
+      {
+        label: 'Analiticas',
+        to: {name: "tablaAnaliticas"},
+        icon: mdiSquareEditOutline
+      },
     ]
   },
   {

@@ -55,6 +55,14 @@ const routes = [
   },
   {
     meta: {
+      title: 'Tabla de Analiticas'
+    },
+    path: '/tablaAnaliticas',
+    name: 'tablaAnaliticas',
+    component: () => import('@/views/AnaliticsTableView.vue')
+  },
+  {
+    meta: {
       title: 'Profile'
     },
     path: '/profile',

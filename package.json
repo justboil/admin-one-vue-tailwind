@@ -11,6 +11,7 @@
   "dependencies": {
     "@formkit/vue": "^1.6.9",
     "@mdi/js": "^7.0.96",
+    "@primevue/themes": "^4.2.5",
     "@supabase/supabase-js": "^2.47.2",
     "@vueform/vueform": "^1.11.1",
     "axios": "^1.5.0",
@@ -18,6 +19,8 @@
     "date-fns": "^4.1.0",
     "numeral": "^2.0.6",
     "pinia": "^2.1.6",
+    "primevue": "^4.2.5",
+    "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
     "xlsx": "^0.18.5"

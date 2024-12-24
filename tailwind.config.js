@@ -42,7 +42,7 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/forms"),
+    require("@tailwindcss/forms"),('tailwindcss-primeui'),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {

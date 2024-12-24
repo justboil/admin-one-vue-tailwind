@@ -13,6 +13,6 @@ export const searchOperarios = async () => {
 export const searchZonasOperarios = async (nombre) => {
   const { data } = await supabase.from('personal').select(`name,zonas_personal(zonas_abastecimiento(*))`).eq('name',nombre)
   // const { data } = await supabase.from('zonas_abastecimiento').select(`name,zonas_personal(personal_fk,personal(name))`)
-  console.log('SearchZonasOperarios: ',data);
+  // console.log('SearchZonasOperarios: ',data);
   return data
 }
