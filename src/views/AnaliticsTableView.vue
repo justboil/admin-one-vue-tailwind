@@ -1,5 +1,5 @@
 <script setup>
-import { mdiMonitorCellphone, mdiTableBorder, mdiTableOff, mdiFlaskEmptyOutline, mdiGithub } from '@mdi/js'
+import {  mdiFlaskEmptyOutline, mdiFilter } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 // import NotificationBar from '@/components/NotificationBar.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -8,6 +8,8 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 import BaseButton from '@/components/BaseButton.vue'
 // import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
 import AnaliticsTable from '@/components/AnaliticsTable.vue'
+
+defineEmits(['clean-filters']);
 </script>
 
 <template>
@@ -15,13 +17,13 @@ import AnaliticsTable from '@/components/AnaliticsTable.vue'
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiFlaskEmptyOutline" title="Analíticas" main>
         <BaseButton
-          href="https://github.com/justboil/admin-one-vue-tailwind"
-          target="_blank"
-          :icon="mdiGithub"
-          label="Star on GitHub"
-          color="contrast"
-          rounded-full
-          small
+        target="_blank"
+        :icon="mdiFilter"
+        label="Limpiar filtros"
+        color="contrast"
+        rounded-full
+        small
+        @click='$emit("clean-filters")'
         />
       </SectionTitleLineWithButton>
       <!-- <NotificationBar color="info" :icon="mdiMonitorCellphone">
@@ -31,6 +33,11 @@ import AnaliticsTable from '@/components/AnaliticsTable.vue'
       <CardBox class="mb-6" has-table>
         <AnaliticsTable checkable />
       </CardBox>
+
+      
+      <!-- <CardBox class="mb-6" has-table>
+        <AnaliticsTablePrimeVue checkable />
+      </CardBox> -->
 
       <!-- <SectionTitleLineWithButton :icon="mdiTableOff" title="Empty variation" /> -->
 

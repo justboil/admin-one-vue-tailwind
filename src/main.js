@@ -4,35 +4,41 @@ import { plugin, defaultConfig } from '@formkit/vue'
 import config from '../formkit.config'
 import Vueform from '@vueform/vueform'
 import vueformConfig from '../vueform.config'
-import PrimeVue from 'primevue/config'
-import Aura from '@primevue/themes/aura'
+// import PrimeVue from 'primevue/config'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+// import Aura from '@primevue/themes/aura'
+// import 'primevue/resources/themes/lara-light-indigo/theme.css'
+// import 'primevue/resources/primevue.min.css'
+// import 'primeicons/primeicons.css'
 
 import App from './App.vue'
 import router from './router'
 import { useMainStore } from '@/stores/main.js'
+// import "./assets/base.css"
 
 import './css/main.css'
-import { definePreset } from '@primevue/themes'
+// import { definePreset } from '@primevue/themes'
 
 // Init Pinia
 const pinia = createPinia()
-const MyPreset = definePreset(Aura, {
-  semantic: {
-      primary: {
-          50: '{blue.50}',
-          100: '{blue.100}',
-          200: '{blue.200}',
-          300: '{blue.300}',
-          400: '{blue.400}',
-          500: '{blue.500}',
-          600: '{blue.600}',
-          700: '{blue.700}',
-          800: '{blue.800}',
-          900: '{blue.900}',
-          950: '{blue.950}'
-      }
-  }
-});
+// const MyPreset = definePreset(Aura, {
+//   semantic: {
+//       primary: {
+//           50: '{blue.50}',
+//           100: '{blue.100}',
+//           200: '{blue.200}',
+//           300: '{blue.300}',
+//           400: '{blue.400}',
+//           500: '{blue.500}',
+//           600: '{blue.600}',
+//           700: '{blue.700}',
+//           800: '{blue.800}',
+//           900: '{blue.900}',
+//           950: '{blue.950}'
+//       }
+//   }
+// });
 
 // Create Vue app
 createApp(App)
@@ -40,8 +46,11 @@ createApp(App)
   .use(pinia)
   .use(plugin, defaultConfig(config))
   .use(Vueform, vueformConfig)
-  .use(PrimeVue, { unstyled: true })
   .mount('#app')
+
+  
+  // .use(PrimeVue, { unstyled:true })
+  // .use(PrimeVue, { unstyled: true })
 
 // Init main store
 const mainStore = useMainStore(pinia)

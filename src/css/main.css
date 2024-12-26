@@ -1,5 +1,6 @@
 @import 'tailwind/_base.css';
 @import 'tailwind/_components.css';
+/* @import '../assets/primevue/tailwind.css'; */
 @import 'tailwind/_utilities.css';
 
 @import '_checkbox-radio-switch.css';
