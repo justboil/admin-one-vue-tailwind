@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 // import { useMainStore } from '@/stores/main'
-import { mdiChevronDown, mdiChevronLeft, mdiEye, mdiTrashCan } from '@mdi/js'
+import { mdiChevronDown, mdiChevronLeft, mdiTrashCan } from '@mdi/js'
 // import CardBoxModal from '@/components/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
@@ -10,8 +10,6 @@ import BaseButton from '@/components/BaseButton.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
 import { usePlantasStore } from '../stores/plantas'
 // import { getAnaliticas } from '@/services/analiticas'
-import FormField from './FormField.vue'
-import FormControl from './FormControl.vue'
 import useFormSelectData from '../composables/useFormSelectData'
 import { FormKit } from '@formkit/vue'
 
@@ -31,7 +29,7 @@ defineProps({
 
 defineExpose({ resetForm })
 
-const selectedAnaliticas = ref([])
+// const selectedAnaliticas = ref([])
 // const headerChecked = ref(false)
 // const checkboxRefs = ref([])
 
@@ -52,15 +50,11 @@ const plantasStore = usePlantasStore()
 
 const analitics = computed(() => plantasStore.getAnaliticas)
 
-const isModalActive = ref(false)
-
 const isModalDangerActive = ref(false)
 
 const perPage = ref(20)
 
 const currentPage = ref(0)
-
-const allChecked = ref(false)
 
 const checkedRows = ref([])
 
@@ -96,20 +90,6 @@ const pagesList = computed(() => {
   return pagesList
 })
 
-const remove = (arr, cb) => {
-  const newArr = []
-
-  arr.forEach((item) => {
-    if (!cb(item)) {
-      newArr.push(item)
-    }
-  })
-
-  return newArr
-}
-
-
-
 const getNameOperario = (id) => {
   const operario = plantasStore.getOperarios.find((operario) => operario.id === id)
   return operario ? operario.name : 'No asignado'
@@ -127,10 +107,12 @@ const getTipoAnalitica = (id) => {
 }
 
 const allRowsChecked = computed(() => {
-  return analiticsFiltered.value.length > 0 && 
-         analiticsFiltered.value.every(analitica => 
-           checkedRows.value.some(row => row.id === analitica.id)
-         )
+  return (
+    analiticsFiltered.value.length > 0 &&
+    analiticsFiltered.value.every((analitica) =>
+      checkedRows.value.some((row) => row.id === analitica.id)
+    )
+  )
 })
 
 // const toggleAllRows = (isChecked) => {
@@ -147,102 +129,38 @@ const allRowsChecked = computed(() => {
 //     checkedRows.value = Array.from(uniqueRows)
 //   } else {
 //     // Filtrar solo las filas que no están en analiticsFiltered
-//     checkedRows.value = checkedRows.value.filter(row => 
+//     checkedRows.value = checkedRows.value.filter(row =>
 //       !analiticsFiltered.value.some(analitica => analitica.id === row.id)
 //     )
 //   }
 // }
 const toggleAllRows = (isChecked) => {
   if (isChecked) {
-    analiticsFiltered.value.forEach(analitica => {
-      if (!checkedRows.value.some(row => row.id === analitica.id)) {
+    analiticsFiltered.value.forEach((analitica) => {
+      if (!checkedRows.value.some((row) => row.id === analitica.id)) {
         checkedRows.value.push(analitica)
       }
     })
   } else {
-    checkedRows.value = checkedRows.value.filter(row => 
-      !analiticsFiltered.value.some(analitica => analitica.id === row.id)
+    checkedRows.value = checkedRows.value.filter(
+      (row) => !analiticsFiltered.value.some((analitica) => analitica.id === row.id)
     )
   }
-  
 }
-
-
-
-
-
-
-const returnRow = (id) => {
-  console.log(id)
-  return checkedRows.value.find((row) => row.id === id)
-}
-
 
 const addAnalitica = (analitica, isChecked) => {
   if (isChecked) {
     // Verificar si ya existe antes de añadir
-    if (!checkedRows.value.some(row => row.id === analitica.id)) {
+    if (!checkedRows.value.some((row) => row.id === analitica.id)) {
       checkedRows.value.push(analitica)
     }
   } else {
-    checkedRows.value = checkedRows.value.filter(item => item.id !== analitica.id)
+    checkedRows.value = checkedRows.value.filter((item) => item.id !== analitica.id)
   }
 }
-
 </script>
 
 <template>
-  <!-- <CardBoxModal v-model="isModalActive" title="Sample modal">
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </CardBoxModal>
-
-  <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
-  </CardBoxModal> -->
-
-  <!-- <div class="filters flex space-x-4">
-    <FormField class="flex-1" label="Fecha Inicio">
-      <FormControl v-model="filters.fecha_inicio" type="date" placeholder="Fecha Inicio" />
-    </FormField>
-    <FormField class="flex-1" label="Fecha Final">
-      <FormControl v-model="filters.fecha_final" type="date" placeholder="Zona de muestra" />
-    </FormField>
-   
-  </div>
-  <div class="filters flex space-x-4">
-    <FormField class="flex-1">
-      <FormControl
-        v-model="filters.uo"
-        type="select"
-        placeholder="Unidad Operativa"
-        :options="selectUO"
-      />
-    </FormField>
-    <FormField class="flex-1">
-      <FormControl
-        v-model="filters.zona"
-        type="select"
-        placeholder="Zona de muestra"
-        :options="selectZona"
-      />
-    </FormField>
-    <FormField class="flex-1">
-      <FormControl
-        v-model="filters.infraestructura"
-        type="select"
-        placeholder="Infraestructura"
-        :options="selectInfraestructura"
-      />
-    </FormField>
-    <FormField class="flex-1">
-      <FormControl v-model="filters.puntoMuestreo" type="select" placeholder="PuntoMuestreo" />
-    </FormField>
-    <FormField class="flex-1">
-      <FormControl v-model="filters.persona" type="select" placeholder="Operario" />
-    </FormField>
-  </div> -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <FormKit
       v-model="filters.fecha_inicio"
@@ -301,10 +219,7 @@ const addAnalitica = (analitica, isChecked) => {
     <thead>
       <tr>
         <th v-if="checkable">
-          <TableCheckboxCell
-            :model-value="allRowsChecked"
-            @update:model-value="toggleAllRows"
-          />
+          <TableCheckboxCell :model-value="allRowsChecked" @update:model-value="toggleAllRows" />
           <!-- <TableCheckboxCell :model-value="checkedRows.value.some(row => row.id === analitica.id)" @update:model-value="(isChecked) => checked(isChecked, analitica)" /> -->
           <!-- <TableCheckboxCell 
           v-if="checkable" 
@@ -316,32 +231,15 @@ const addAnalitica = (analitica, isChecked) => {
         <th>Punto Muestreo</th>
         <th>Operario</th>
         <th>Tipo Analítica</th>
-        <!-- <th>Cloro</th>
-        <th>Olor</th>
-        <th>Color</th>
-        <th>Sabor</th>
-        <th>pH</th>
-        <th>Turbidez</th>
-        <th>Observaciones</th> -->
         <th />
       </tr>
     </thead>
     <tbody>
       <template v-for="analitica in analiticsFiltered" :key="analitica.id">
         <tr>
-          <!-- <TableCheckboxCell
-          
-          :model-value="returnRow(analitica.id)"
-          @checked="(isChecked) => addAnalitica(analitica, isChecked)"
-        /> -->
-          <!-- <TableCheckboxCell
-          :model-value="!!checkedRows.value.find(row => row.id === analitica.id)"
-          @update:model-value="(isChecked) => addAnalitica(analitica, isChecked)"
-        /> -->
           <TableCheckboxCell
             v-if="checkable"
             :model-value="checkedRows.includes(analitica)"
-            
             @update:model-value="(isChecked) => addAnalitica(analitica, isChecked)"
           />
 
@@ -357,27 +255,7 @@ const addAnalitica = (analitica, isChecked) => {
           <td data-label="Tipo Analitica" class="lg:w-32">
             {{ getTipoAnalitica(analitica.type) }}
           </td>
-          <!-- <td data-label="Cloro" class="lg:w-32">
-          {{ analitica.cloro }}
-        </td>
-        <td data-label="Olor" class="lg:w-32">
-          {{ analitica.olor }}
-        </td>
-        <td data-label="Color" class="lg:w-32">
-          {{ analitica.color }}
-        </td>
-        <td data-label="Sabor" class="lg:w-32">
-          {{ analitica.sabor }}
-        </td>
-        <td data-label="pH" class="lg:w-32">
-          {{ analitica.ph }}
-        </td>
-        <td data-label="Turbidez" class="lg:w-32">
-          {{ analitica.turbidez }}
-        </td>
-        <td data-label="Observaciones" class="lg:w-32">
-          {{ analitica.observaciones }}
-        </td> -->
+
           <td>
             <BaseButton
               :icon="expandedRows.includes(analitica.id) ? mdiChevronDown : mdiChevronLeft"
