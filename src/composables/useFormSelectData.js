@@ -23,6 +23,12 @@ export default function useFormSelectData() {
     fecha_final:null,
 
   })
+
+  const resetForm=()=>{
+    Object.keys(form).forEach((key) => {
+      form[key] = null
+    })
+  }
   const selectUO = computed(() => {
     return plantasStore.getUnidadesOperativas.map((uo) => {
       return { value: uo.id, label: uo.name }
@@ -90,6 +96,7 @@ export default function useFormSelectData() {
   })
 
   return {
+    resetForm,
     form,
     selectUO,
     selectZona,

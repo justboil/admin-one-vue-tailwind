@@ -21,14 +21,17 @@ const {
   selectPuntosMuestra,
   selectInfraestructura,
   selectUO,
-  operarioPorZona
+  operarioPorZona,
+  resetForm
 } = useFormSelectData()
 
 defineProps({
   checkable: Boolean
 })
 
-// const selectedAnaliticas = ref([])
+defineExpose({ resetForm })
+
+const selectedAnaliticas = ref([])
 // const headerChecked = ref(false)
 // const checkboxRefs = ref([])
 
@@ -67,7 +70,8 @@ const checkedRows = ref([])
 // const analiticsPaginated = computed(() =>
 //   analitics.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
 // )
-const analiticsPaginated = computed(() =>
+
+const analiticsFiltered = computed(() =>
   analitics.value.filter((analitica) => {
     return (
       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
@@ -104,13 +108,7 @@ const remove = (arr, cb) => {
   return newArr
 }
 
-// const checked = (isChecked, analitica) => {
-//   if (isChecked) {
-//     checkedRows.value.push(analitica)
-//   } else {
-//     checkedRows.value = remove(checkedRows.value, (row) => row.id === analitica.id)
-//   }
-// }
+
 
 const getNameOperario = (id) => {
   const operario = plantasStore.getOperarios.find((operario) => operario.id === id)
@@ -128,61 +126,69 @@ const getTipoAnalitica = (id) => {
   return id === 28 ? 'Operacional' : 'Rutina'
 }
 
-const allRowsChecked = (isChecked) => {
-  if (isChecked) {
-    checkedRows.value = [...analiticsPaginated.value]
-  } else {
-    checkedRows.value = []
-  }
-  // headerChecked.value = event.target.checked
-  // const isChecked = event.target.checked
+const allRowsChecked = computed(() => {
+  return analiticsFiltered.value.length > 0 && 
+         analiticsFiltered.value.every(analitica => 
+           checkedRows.value.some(row => row.id === analitica.id)
+         )
+})
 
-  // // Update all checkboxes
-  // analiticsPaginated.value.forEach((analitica, index) => {
-  //   if (checkboxRefs.value[index]) {
-  //     checkboxRefs.value[index].checked = isChecked
-  //   }
-  // })
-
-  // // Update checkedRows
-  // if (isChecked) {
-  //   checkedRows.value = [...analiticsPaginated.value]
-  // } else {
-  //   checkedRows.value = []
-  // }
-  // console.log($event);
-}
-
-//     const toggleAll = (event) => {
-//   if (event.target.checked) {
-//     selectedAnaliticas.value = analiticsPaginated.value.map(analitica => analitica.id)
+// const toggleAllRows = (isChecked) => {
+//   if (isChecked) {
+//     checkedRows.value = [...analiticsFiltered.value]
 //   } else {
-//     selectedAnaliticas.value = []
+//     checkedRows.value = []
 //   }
 // }
-
-const toggleAll = (isChecked) => {
+// const toggleAllRows = (isChecked) => {
+//   if (isChecked) {
+//     // Usar Set para evitar duplicados
+//     const uniqueRows = new Set([...checkedRows.value, ...analiticsFiltered.value])
+//     checkedRows.value = Array.from(uniqueRows)
+//   } else {
+//     // Filtrar solo las filas que no están en analiticsFiltered
+//     checkedRows.value = checkedRows.value.filter(row => 
+//       !analiticsFiltered.value.some(analitica => analitica.id === row.id)
+//     )
+//   }
+// }
+const toggleAllRows = (isChecked) => {
   if (isChecked) {
-    checkedRows.value = [...analiticsPaginated.value.map((analitica) => analitica.id)]
+    analiticsFiltered.value.forEach(analitica => {
+      if (!checkedRows.value.some(row => row.id === analitica.id)) {
+        checkedRows.value.push(analitica)
+      }
+    })
   } else {
-    checkedRows.value = []
+    checkedRows.value = checkedRows.value.filter(row => 
+      !analiticsFiltered.value.some(analitica => analitica.id === row.id)
+    )
   }
+  
 }
+
+
+
+
+
 
 const returnRow = (id) => {
   console.log(id)
   return checkedRows.value.find((row) => row.id === id)
 }
 
-const addAnalitica = (analitica, isChecked) => {
-  console.log(analitica, isChecked)
 
+const addAnalitica = (analitica, isChecked) => {
   if (isChecked) {
-    checkedRows.value.push(analitica)
+    // Verificar si ya existe antes de añadir
+    if (!checkedRows.value.some(row => row.id === analitica.id)) {
+      checkedRows.value.push(analitica)
+    }
   } else {
-    checkedRows.value = remove(checkedRows.value, (row) => row.id === analitica.id)
+    checkedRows.value = checkedRows.value.filter(item => item.id !== analitica.id)
   }
 }
+
 </script>
 
 <template>
@@ -261,7 +267,6 @@ const addAnalitica = (analitica, isChecked) => {
     />
   </div>
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-    
     <FormKit
       v-model="filters.zona"
       type="select"
@@ -284,12 +289,12 @@ const addAnalitica = (analitica, isChecked) => {
       label="Punto de Muestra"
     />
     <FormKit
-              v-model.number="filters.operario"
-              type="select"
-              :options="operarioPorZona"
-              placeholder="Operario"
-              label="Operario"
-            />
+      v-model.number="filters.operario"
+      type="select"
+      :options="operarioPorZona"
+      placeholder="Operario"
+      label="Operario"
+    />
   </div>
 
   <table>
@@ -297,9 +302,8 @@ const addAnalitica = (analitica, isChecked) => {
       <tr>
         <th v-if="checkable">
           <TableCheckboxCell
-            v-model="allChecked"
             :model-value="allRowsChecked"
-            @checked="toggleAll"
+            @update:model-value="toggleAllRows"
           />
           <!-- <TableCheckboxCell :model-value="checkedRows.value.some(row => row.id === analitica.id)" @update:model-value="(isChecked) => checked(isChecked, analitica)" /> -->
           <!-- <TableCheckboxCell 
@@ -310,8 +314,8 @@ const addAnalitica = (analitica, isChecked) => {
         </th>
         <th>Fecha</th>
         <th>Punto Muestreo</th>
-        <th>Persona</th>
-        <th>Tipo Analitica</th>
+        <th>Operario</th>
+        <th>Tipo Analítica</th>
         <!-- <th>Cloro</th>
         <th>Olor</th>
         <th>Color</th>
@@ -323,7 +327,7 @@ const addAnalitica = (analitica, isChecked) => {
       </tr>
     </thead>
     <tbody>
-      <template v-for="analitica in analiticsPaginated" :key="analitica.id">
+      <template v-for="analitica in analiticsFiltered" :key="analitica.id">
         <tr>
           <!-- <TableCheckboxCell
           
@@ -334,7 +338,12 @@ const addAnalitica = (analitica, isChecked) => {
           :model-value="!!checkedRows.value.find(row => row.id === analitica.id)"
           @update:model-value="(isChecked) => addAnalitica(analitica, isChecked)"
         /> -->
-          <TableCheckboxCell v-if="checkable" @checked="checked($event, analitica)" />
+          <TableCheckboxCell
+            v-if="checkable"
+            :model-value="checkedRows.includes(analitica)"
+            
+            @update:model-value="(isChecked) => addAnalitica(analitica, isChecked)"
+          />
 
           <td data-label="Fecha">
             {{ analitica.fecha }}
@@ -378,18 +387,43 @@ const addAnalitica = (analitica, isChecked) => {
           </td>
         </tr>
         <tr v-if="expandedRows.includes(analitica.id)" :key="`expanded-${analitica.id}`">
-          <td colspan="5">
+          <td colspan="5" class="lg:w-1">
+            <p><strong>Información adicional:</strong></p>
+
             <!-- Información adicional aquí -->
-            <div>
-              <p><strong>Información adicional:</strong></p>
-              <p>Cloro: {{ analitica.cloro }}</p>
-              <p>Olor: {{ analitica.olor }}</p>
-              <p>Color: {{ analitica.color }}</p>
-              <p>Sabor: {{ analitica.sabor }}</p>
-              <p>pH: {{ analitica.ph }}</p>
-              <p>Turbidez: {{ analitica.turbidez }}</p>
-              <p>Observaciones: {{ analitica.observaciones }}</p>
+            <div class="flex justify-center gap-40">
+              <div>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">Cloro:</span>
+                  {{ analitica.cloro }} mg/l
+                </li>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">pH:</span> {{ analitica.ph }} ud
+                </li>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">Turbidez:</span>
+                  {{ analitica.turbidez }}
+                </li>
+              </div>
+              <div>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">Olor:</span>
+                  {{ analitica.olor ? analitica.olor : 'N/S' }}
+                </li>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">Color:</span>
+                  {{ analitica.color ? analitica.color : 'N/S' }}
+                </li>
+                <li class="text-gray-600">
+                  <span class="font-semibold text-lg text-gray-700">Sabor:</span>
+                  {{ analitica.sabor ? analitica.sabor : 'N/S' }}
+                </li>
+              </div>
             </div>
+            <li class="ml-4">
+              <span class="text-gray-800 font-semibold">Observaciones: </span>
+              {{ analitica.observaciones }}
+            </li>
           </td>
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons>
