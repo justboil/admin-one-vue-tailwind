@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
+import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
 
 const routes = [
   {
@@ -10,6 +11,14 @@ const routes = [
     path: '/',
     name: 'home',
     component: ExcelUploaderView
+  },
+  {
+    meta: {
+      title: 'Aqlara Login'
+    },
+    path: '/login',
+    name: 'login',
+    component: import('@/views/LoginAqlaraView.vue')
   },
   {
     // Document title tag
@@ -89,8 +98,8 @@ const routes = [
     meta: {
       title: 'Login'
     },
-    path: '/login',
-    name: 'login',
+    path: '/login_original',
+    name: 'login_original',
     component: () => import('@/views/LoginView.vue')
   },
   {
