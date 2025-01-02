@@ -1,17 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
-import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
+import useLoginStore from '@/stores/login';
+// import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
+
+// const loginStore = useLoginStore();
 
 const routes = [
-  {
-    meta: {
-      title: 'Aqlara Home'
-    },
-    path: '/',
-    name: 'home',
-    component: ExcelUploaderView
-  },
   {
     meta: {
       title: 'Aqlara Login'
@@ -19,6 +14,32 @@ const routes = [
     path: '/login',
     name: 'login',
     component: import('@/views/LoginAqlaraView.vue')
+  },
+  {
+    meta: {
+      title: 'Aqlara Login',
+      requiresAuth: true
+    },
+    path: '/admin',
+    name: 'admin',
+    children: [
+      {
+        title: 'Operarios',
+      path: '/admin/operarios',
+      name: 'operarios',
+      component: () => import('@/views/OperariosView.vue')  
+      },
+
+
+    ],
+  },
+  {
+    meta: {
+      title: 'Aqlara Home'
+    },
+    path: '/',
+    name: 'home',
+    component: ExcelUploaderView
   },
   {
     // Document title tag
@@ -40,12 +61,7 @@ const routes = [
     name: 'settings',
     component: ()=>import('@/views/SettingsView.vue')
   },
-  {
-    title: 'Operarios',
-  path: '/operarios',
-  name: 'operarios',
-  component: () => import('@/views/OperariosView.vue')  
-  },
+  
   {
     meta: {
       title: 'Tables'
@@ -134,6 +150,25 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 }
   }
+})
+
+
+
+// Guard de navegacion
+
+router.beforeEach((to, from, next) => {
+  // const { useLoginStore } = require('@/stores/login')
+  const loginStore = useLoginStore();
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  // if (requiresAuth && !localStorage.getItem('token')) {
+  if (requiresAuth && !loginStore.isAuthenticated) {
+    
+    next({name:'login'});
+  } else {
+    next();
+  }
+  // to and from are both route objects. must call `next`.
 })
 
 export default router

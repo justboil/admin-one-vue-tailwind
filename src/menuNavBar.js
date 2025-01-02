@@ -19,7 +19,7 @@ export default [
       {
         icon:  mdiAccountCog,
         label: 'Operarios',
-        to: '/operarios'
+        to: {name:'operarios'}
       },
       {
         icon: mdiMapClock,

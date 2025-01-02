@@ -34,17 +34,17 @@ export default [
       {
         label: 'Excel uploader',
         to: '/sinaq',
-        icon: mdiWaterCircle
+        // icon: mdiWaterCircle
       },
       {
         label: 'Formulario Analitica',
         to: {name: "forms"},
-        icon: mdiSquareEditOutline
+        // icon: mdiSquareEditOutline
       },
       {
         label: 'Analiticas',
         to: {name: "tablaAnaliticas"},
-        icon: mdiSquareEditOutline
+        // icon: mdiSquareEditOutline
       },
     ]
   },

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
@@ -16,6 +16,8 @@ import { FACTORIAL_CLIENT_ID, FACTORIAL_REDIRECT_URI, FACTORIAL_AUTH_URL, FACTOR
 
 const loginStore = useLoginStore()
 
+const isAuthenticating = ref(false)
+const errorMessage = ref('')
 
 const form = reactive({
   login: 'john.doe',
@@ -23,18 +25,26 @@ const form = reactive({
   remember: true
 })
 
+
 const router = useRouter()
 
 const submit = () => {
   router.push('/')
 }
 
+
 const loginWithMicrosoft = async () => {
+  if (isAuthenticating.value) {
+    return
+  }
+  isAuthenticating.value = true
+  errorMessage.value = ''
   try {
     const loginResponse = await msalInstance.loginPopup({
       scopes: ['user.read'],
     });
     console.log('Login successful:', loginResponse);
+    loginStore.login(loginResponse.account);
     loginStore.setIsAuthenticated(true);
     loginStore.setAccount(loginResponse.account);
     loginStore.setUser(loginResponse.account);
@@ -42,6 +52,9 @@ const loginWithMicrosoft = async () => {
     
   } catch (error) {
     console.error('Login failed:', error);
+    errorMessage.value = `LOGIN FAILED ${error.message}`
+  } finally {
+    isAuthenticating.value = false
   }
 };
 
@@ -82,6 +95,7 @@ onMounted(() => {
   msalInstance.initialize().then(() => {
     console.log('MSAL initialized');
   }).catch((error) => {
+
     console.error('MSAL initialization failed:', error);
   });
 });
@@ -119,9 +133,9 @@ onMounted(() => {
 
         <template #footer>
           <BaseButtons>
-            <BaseButton label="Login with Microsoft" @click="loginWithMicrosoft" />
-            <BaseButton label="Login with Factorial RH" @click="loginWithFactorial"  />
-            <BaseButton type="submit" color="info" label="Login" />
+            <BaseButton :disabled="isAuthenticating" color="info" label="Login with Microsoft" @click="loginWithMicrosoft" />
+            <BaseButton label="Login with Factorial RH" color="danger" @click="loginWithFactorial"  />
+            <BaseButton disabled type="submit" color="info" label="Login" />
             <BaseButton to="/dashboard" color="info" outline label="Back" />
           </BaseButtons>
         </template>

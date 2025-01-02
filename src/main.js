@@ -42,8 +42,8 @@ const pinia = createPinia()
 
 // Create Vue app
 createApp(App)
-  .use(router)
-  .use(pinia)
+.use(pinia)
+.use(router)
   .use(plugin, defaultConfig(config))
   .use(Vueform, vueformConfig)
   .mount('#app')
