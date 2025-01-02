@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { mdiEye, mdiTrashCan } from '@mdi/js'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
@@ -10,7 +10,6 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import CardBoxModalOperario from './CardBoxModalOperario.vue'
 import FormOperario from './FormOperario.vue'
 import CardBoxModal from './CardBoxModal.vue'
-import { searchOperarios } from '../services/supabase'
 
 defineProps({
   checkable: Boolean

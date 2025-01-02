@@ -37,6 +37,7 @@ const loginWithMicrosoft = async () => {
     console.log('Login successful:', loginResponse);
     loginStore.setIsAuthenticated(true);
     loginStore.setAccount(loginResponse.account);
+    loginStore.setUser(loginResponse.account);
     router.push('/');
     
   } catch (error) {
