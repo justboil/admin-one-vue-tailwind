@@ -108,7 +108,7 @@ onMounted(() => {
         <template #footer>
           <BaseButtons class="flex  justify-center gap-4">
             <BaseButton :disabled="isAuthenticating" :icon="mdiMicrosoftWindows" color="info" label="Login with Microsoft" @click="loginWithMicrosoft" />
-            <BaseButton label="Login with Factorial RH" :icon="mdiAccount" color="danger" @click="loginWithFactorial"  />
+            <BaseButton label="Login with Factorial HR" :icon="mdiAccount" color="danger" @click="loginWithFactorial"  />
             <!-- <BaseButton disabled type="submit" color="info" label="Login" /> -->
             <!-- <BaseButton to="/dashboard" color="info" outline label="Back" /> -->
           </BaseButtons>
