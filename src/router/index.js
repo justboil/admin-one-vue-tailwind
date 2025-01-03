@@ -35,7 +35,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Aqlara Home'
+      title: 'Aqlara Home',
+      requiresAuth: true
     },
     path: '/',
     name: 'home',
@@ -45,7 +46,8 @@ const routes = [
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
-      title: 'Dashboard'
+      title: 'Dashboard',
+      requiresAuth: true
     },
     path: '/dashboard',
     name: 'dashboard',
@@ -55,7 +57,8 @@ const routes = [
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
-      title: 'Panel de Control'
+      title: 'Panel de Control',
+      requiresAuth: true
     },
     path: '/settings',
     name: 'settings',

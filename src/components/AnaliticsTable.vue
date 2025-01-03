@@ -12,6 +12,7 @@ import { usePlantasStore } from '../stores/plantas'
 // import { getAnaliticas } from '@/services/analiticas'
 import useFormSelectData from '../composables/useFormSelectData'
 import { FormKit } from '@formkit/vue'
+const checkedRows = ref([])
 
 const {
   form: filters,
@@ -27,7 +28,7 @@ defineProps({
   checkable: Boolean
 })
 
-defineExpose({ resetForm })
+defineExpose({ resetForm, checkedRows })
 
 // const selectedAnaliticas = ref([])
 // const headerChecked = ref(false)
@@ -55,8 +56,6 @@ const isModalDangerActive = ref(false)
 const perPage = ref(20)
 
 const currentPage = ref(0)
-
-const checkedRows = ref([])
 
 // const itemsPaginated = computed(() =>
 //   items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))

@@ -1,14 +1,11 @@
-import { set } from 'date-fns'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 export const useLoginStore = defineStore('loginStore', () => {
-  const user = ref(null)
-  const isAuthenticated = ref(localStorage.getItem('isAuthenticated') || false)
-
-  const userName = ref('')
-  const userEmail = ref('')
+  const user = ref(JSON.parse(localStorage.getItem('user')) || null)
+  const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
+  const userName = ref(localStorage.getItem('userName') || '')
+  const userEmail = ref(localStorage.getItem('userEmail') || '')
 
   const userAvatar = computed(
     () =>
@@ -31,12 +28,14 @@ export const useLoginStore = defineStore('loginStore', () => {
     localStorage.removeItem('user')
   }
 
-  function setUser(payload) {
+  const  setUser=(payload)=> {
     if (payload.name) {
       userName.value = payload.name
+      localStorage.setItem('userName', payload.name)
     }
     if (payload.username) {
       userEmail.value = payload.username
+      localStorage.setItem('userEmail', payload.username)
     }
   }
 

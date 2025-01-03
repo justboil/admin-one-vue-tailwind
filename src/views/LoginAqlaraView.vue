@@ -1,29 +1,22 @@
 <script setup>
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { mdiAccount, mdiAsterisk } from '@mdi/js'
+import { mdiAccount, mdiMicrosoftWindows } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadio from '@/components/FormCheckRadio.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
 import msalInstance from '@/services/msalConfig'
 import useLoginStore from '@/stores/login'
 import { FACTORIAL_CLIENT_ID, FACTORIAL_REDIRECT_URI, FACTORIAL_AUTH_URL, FACTORIAL_TOKEN_URL } from '@/services/factorialConfig';
+import AqlaraLogo from '@/components/AqlaraLogo.vue'
 
 const loginStore = useLoginStore()
 
 const isAuthenticating = ref(false)
 const errorMessage = ref('')
 
-const form = reactive({
-  login: 'john.doe',
-  pass: 'highly-secure-password-fYjUw-',
-  remember: true
-})
 
 
 const router = useRouter()
@@ -102,41 +95,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <LayoutGuest>
-    <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
+  <LayoutGuest >
+    <SectionFullScreen v-slot="{ cardClass }" bg="blueDarkSoft">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="Login" help="Please enter your login">
-          <FormControl
-            v-model="form.login"
-            :icon="mdiAccount"
-            name="login"
-            autocomplete="username"
-          />
-        </FormField>
 
-        <FormField label="Password" help="Please enter your password">
-          <FormControl
-            v-model="form.pass"
-            :icon="mdiAsterisk"
-            type="password"
-            name="password"
-            autocomplete="current-password"
-          />
-        </FormField>
+        <!-- <img src="" alt="Aqlara" class="w-32 mx-auto" /> -->
+         <div class="flex justify-center">
+            <AqlaraLogo />
 
-        <FormCheckRadio
-          v-model="form.remember"
-          name="remember"
-          label="Remember"
-          :input-value="true"
-        />
+          </div>
 
         <template #footer>
-          <BaseButtons>
-            <BaseButton :disabled="isAuthenticating" color="info" label="Login with Microsoft" @click="loginWithMicrosoft" />
-            <BaseButton label="Login with Factorial RH" color="danger" @click="loginWithFactorial"  />
-            <BaseButton disabled type="submit" color="info" label="Login" />
-            <BaseButton to="/dashboard" color="info" outline label="Back" />
+          <BaseButtons class="flex  justify-center gap-4">
+            <BaseButton :disabled="isAuthenticating" :icon="mdiMicrosoftWindows" color="info" label="Login with Microsoft" @click="loginWithMicrosoft" />
+            <BaseButton label="Login with Factorial RH" :icon="mdiAccount" color="danger" @click="loginWithFactorial"  />
+            <!-- <BaseButton disabled type="submit" color="info" label="Login" /> -->
+            <!-- <BaseButton to="/dashboard" color="info" outline label="Back" /> -->
           </BaseButtons>
         </template>
       </CardBox>

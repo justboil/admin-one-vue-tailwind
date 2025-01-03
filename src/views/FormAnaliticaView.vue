@@ -16,116 +16,42 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { FormKit } from '@formkit/vue'
-import { setAnaliticas } from '../services/analiticas.js'
 import { supabase } from '../services/supabase'
 
 import useFormSelectData from '../composables/useFormSelectData'
 
 const { form, selectZona, selectPuntosMuestra, selectInfraestructura, selectUO, operarioPorZona } = useFormSelectData()
 
-// const plantasStore = usePlantasStore()
+const plantaStore = usePlantasStore();
+const resetForm = () => {
+  form.punto_muestreo_fk = ''
+  form.fecha = ''
+  form.color = 1
+  form.olor = 1
+  form.sabor = 1
+  form.cloro = ''
+  form.type = ''
+  form.observaciones = ''
+  form.operario = ''
+  form.ph = ''
+  form.turbidez = ''
+}
 
-// const form = reactive({
-//   uo: null,
-//   zona: null,
-//   punto_muestreo_fk: null,
-//   fecha: '',
-//   color: '',
-//   olor: '',
-//   sabor: '',
-//   cloro: '',
-//   type: '',
-//   observaciones: '',
-//   ph: null,
-//   turbidez: null,
-//   operario: null,
-//   infraestructura: null
-// })
+// Computed properties para valores organolépticos
+const olorValue = computed({
+  get: () => form.olor === 0,
+  set: (checked) => form.olor = checked ? 0 : 1
+})
 
-// const selectUO = computed(() => {
-//   return plantasStore.getUnidadesOperativas.map((uo) => {
-//     return { value: uo.id, label: uo.name }
-//   })
-// })
-// const selectZona = computed(() => {
-//   if (!form.uo) return []
-//   return plantasStore.getZonas
-//     .filter((zona) => zona.unidades_operativas_fk === form.uo)
-//     .map((zona) => {
-//       return { value: zona.id, label: zona.name }
-//     })
-// })
+const colorValue = computed({
+  get: () => form.color === 0,
+  set: (checked) => form.color = checked ? 0 : 1
+})
 
-// const selectInfraestructura = computed(() => {
-//   if (!form.zona) return []
-//   const infraestructuras = plantasStore.getZonasInfraestructuras
-//     .filter((infraestructura) => infraestructura.zonas_fk === form.zona)
-//     .map((infraestructura) => {
-//       // console.log(':Infraestructura: ',infraestructura)
-//       return {
-//         value: infraestructura.infraestructuras_fk,
-//         label: buscaInfraestructuraPorId(infraestructura.infraestructuras_fk)
-//       }
-//     })
-//   return infraestructuras
-// })
-
-// const buscaInfraestructuraPorId = (id) => {
-//   const infraestructura = plantasStore.getInfraestructuras.find(
-//     (infraestructura) => infraestructura.id === id
-//   )
-//   if (infraestructura) {
-//     return infraestructura.name
-//   } else {
-//     return ''
-//   }
-// }
-
-// const selectPuntosMuestra = computed(() => {
-//   if (!form.infraestructura) return []
-//   return plantasStore.getPuntosMuestreo
-//     .filter((punto) => punto.infraestructura_fk === form.infraestructura)
-//     .map((punto) => {
-//       return { value: punto.id, label: punto.name }
-//     })
-// })
-
-// // const selectPunto = computed(() => {
-// //   if (!form.zona) return []
-// //   return plantasStore.getPuntosMuestreo
-// //     .filter((punto) => punto.zonas_abastecimiento_fk === form.zona)
-// //     .map((punto) => {
-// //       return { value: punto.id, label: punto.name }
-// //     })
-// // })
-
-// const operarioPorZona = computed(() => {
-//   if (!form.zona) return []
-//   return plantasStore.getOperarios
-//     .filter((operario) => operario.ud_operativa_fk === form.uo)
-//     .map((operario) => {
-//       return { value: operario.id, label: operario.name }
-//     })
-// })
-
-// onMounted(() => {
-//   getData();
-// })
-// const a=computed
-
-// const selectOptions = computed(() => {
-//   return plantasStore.plantas.map((planta) => {
-//     return { id: planta.id, label: planta.nombre };
-//   });
-// });
-
-// const customElementsForm = reactive({
-//   checkbox: ['lorem'],
-//   radio: 'one',
-//   switch: ['one'],
-//   file: null,
-//   olor: ['sabor']
-// })
+const saborValue = computed({
+  get: () => form.sabor === 0,
+  set: (checked) => form.sabor = checked ? 0 : 1
+})
 
 const submitHandler = async () => {
   try {
@@ -149,8 +75,10 @@ const submitHandler = async () => {
       console.error('Error al insertar datos:', error)
       alert('Error al insertar datos: ' + error.message)
     } else {
+    plantaStore.loadAnaliticas()
       console.log('Datos insertados:', data)
       alert('Datos insertados correctamente')
+      resetForm()
     }
   } catch (error) {
     console.error('Error en la solicitud:', error)
@@ -158,17 +86,7 @@ const submitHandler = async () => {
   }
 }
 
-// const formStatusWithHeader = ref(true)
 
-// const formStatusCurrent = ref(0)
-
-// const formStatusOptions = ['info', 'success', 'danger', 'warning']
-
-// const formStatusSubmit = () => {
-//   formStatusCurrent.value = formStatusOptions[formStatusCurrent.value + 1]
-//     ? formStatusCurrent.value + 1
-//     : 0
-// }
 </script>
 
 <template>
@@ -247,30 +165,27 @@ const submitHandler = async () => {
               <div class="border border-gray-300 p-4 rounded-md mb-6 flex flex-col items-center">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <FormKit
-                    v-model="form.olor"
+                    v-model="olorValue"
                     type="checkbox"
                     label="Olor"
                     help="Marca si el agua tiene mal olor"
-                    name="terms"
-                    :value="false"
+                    name="olor"
                     validation-visibility="dirty"
                   />
                   <FormKit
-                    v-model="form.color"
+                    v-model="colorValue"
                     type="checkbox"
                     label="Color"
                     help="Marca si el agua tiene mal color"
-                    name="terms"
-                    :value="false"
+                    name="color"
                     validation-visibility="dirty"
                   />
                   <FormKit
-                    v-model="form.sabor"
+                    v-model="saborValue"
                     type="checkbox"
                     label="Sabor"
                     help="Marca si el agua tiene mal sabor"
-                    name="terms"
-                    :value="false"
+                    name="sabor"
                     validation-visibility="dirty"
                   />
                 </div>
@@ -315,74 +230,3 @@ const submitHandler = async () => {
   </LayoutAuthenticated>
 </template>
 
-<!-- <SectionTitle>A probar</SectionTitle>
-
-    <SectionMain>
-      <CardBox>
-        <FormField label="Checkbox">
-          <FormCheckRadioGroup
-            v-model="customElementsForm.checkbox"
-            name="sample-checkbox"
-            :options="{ lorem: 'Lorem', ipsum: 'Ipsum', dolore: 'Dolore' }"
-          />
-        </FormField>
-
-        <BaseDivider />
-
-        <FormField label="Radio">
-          <FormCheckRadioGroup
-            v-model="customElementsForm.radio"
-            name="sample-radio"
-            type="radio"
-            :options="{ one: 'One', two: 'Two' }"
-          />
-        </FormField>
-
-        <BaseDivider />
-
-        <FormField label="Switch">
-          <FormCheckRadioGroup
-            v-model="customElementsForm.switch"
-            name="sample-switch"
-            type="switch"
-            :options="{ one: 'One', two: 'Two' }"
-          />
-        </FormField>
-
-        <BaseDivider />
-
-        <FormFilePicker v-model="customElementsForm.file" label="Upload" />
-      </CardBox>
-
-      <SectionTitle>Form with status example</SectionTitle>
-
-      <CardBox
-        class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto"
-        is-form
-        is-hoverable
-        @submit.prevent="formStatusSubmit"
-      >
-        <NotificationBarInCard
-          :color="formStatusOptions[formStatusCurrent]"
-          :is-placed-with-header="formStatusWithHeader"
-        >
-          <span
-            ><b class="capitalize">{{ formStatusOptions[formStatusCurrent] }}</b> state</span
-          >
-        </NotificationBarInCard>
-        <FormField label="Fields">
-          <FormControl
-            v-model="form.name"
-            :icon-left="mdiAccount"
-            help="Your full name"
-            placeholder="Name"
-          />
-        </FormField>
-
-        <template #footer>
-          <BaseButton label="Trigger" type="submit" color="info" />
-        </template>
-      </CardBox>
-    </SectionMain>
-  </LayoutAuthenticated> -->
-<!-- </template> -->

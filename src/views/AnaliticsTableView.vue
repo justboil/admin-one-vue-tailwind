@@ -9,11 +9,47 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 import BaseButton from '@/components/BaseButton.vue'
 // import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
 import AnaliticsTable from '@/components/AnaliticsTable.vue'
+import useExtractdata from '@/composables/useUploadFormData'
 
-const tablaAnaliticas=ref();
+const tablaAnaliticas = ref();
+const { exportXMLData } = useExtractdata()
 
 const limpiarFiltros=()=>{
   tablaAnaliticas.value?.resetForm();
+}
+
+const downloadXML = () => {
+  console.log('TablaAnaliticas:', tablaAnaliticas.value)
+  console.log('CheckedRows:', tablaAnaliticas.value?.checkedRows)
+  // Obtener analíticas seleccionadas
+  const analiticasSeleccionadas = tablaAnaliticas.value?.checkedRows || []
+
+  console.log('Analíticas seleccionadas:', analiticasSeleccionadas)
+  
+  if (analiticasSeleccionadas.length === 0) {
+    alert('Por favor, seleccione al menos una analítica')
+    return
+  }
+
+  // Generar XML
+  const xmlContent = exportXMLData(analiticasSeleccionadas)
+  
+  // Crear Blob
+  const blob = new Blob([xmlContent], { type: 'application/xml' })
+  
+  // Crear URL y link para descarga
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', `analiticas_${new Date().toISOString().split('T')[0]}.xml`)
+  
+  // Trigger descarga
+  document.body.appendChild(link)
+  link.click()
+  
+  // Limpieza
+  document.body.removeChild(link)
+  window.URL.revokeObjectURL(url)
 }
 
 defineEmits(['clean-filters']);

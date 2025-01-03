@@ -107,5 +107,6 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     formZonas,
     infraestructuras,
     zonas_infraestructuras,
+    loadAnaliticas,
   }
 })
