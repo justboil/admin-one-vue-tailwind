@@ -8,7 +8,8 @@ const msalConfig = {
   auth: {
     clientId: MICROSOFT_CLIENT_ID, // Reemplaza con tu Client ID de Azure AD
     authority: `https://login.microsoftonline.com/${MICROSOFT_TENANT_ID}`, // Reemplaza con tu Tenant ID de Azure AD
-    redirectUri: '/', // Reemplaza con tu URI de redirección
+    redirectUri: 'http://localhost:1000/aqlarapps/',
+    postLogoutRedirectUri: 'http://localhost:1000/aqlarapps/login' // Reemplaza con tu URI de redirección
   },
 };
 
