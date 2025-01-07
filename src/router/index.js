@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
 import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 import useLoginStore from '@/stores/login';
-// import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
+import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
 
 // const loginStore = useLoginStore();
 
@@ -13,7 +13,7 @@ const routes = [
     },
     path: '/login',
     name: 'login',
-    component: import('@/views/LoginAqlaraView.vue')
+    component: LoginAqlaraView
   },
   {
     meta: {
@@ -40,7 +40,7 @@ const routes = [
     },
     path: '/',
     name: 'home',
-    component: ExcelUploaderView
+    component:  () => import('@/views/ExcelUploaderView.vue')
   },
   {
     // Document title tag

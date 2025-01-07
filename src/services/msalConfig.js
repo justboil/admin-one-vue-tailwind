@@ -8,7 +8,7 @@ const msalConfig = {
   auth: {
     clientId: MICROSOFT_CLIENT_ID, // Reemplaza con tu Client ID de Azure AD
     authority: `https://login.microsoftonline.com/${MICROSOFT_TENANT_ID}`, // Reemplaza con tu Tenant ID de Azure AD
-    redirectUri: 'http://localhost:5173/admin-one-vue-tailwind/', // Reemplaza con tu URI de redirección
+    redirectUri: '/', // Reemplaza con tu URI de redirección
   },
 };
 
