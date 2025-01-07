@@ -1,11 +1,22 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export const useLoginStore = defineStore('loginStore', () => {
   const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
   const userName = ref(localStorage.getItem('userName') || '')
   const userEmail = ref(localStorage.getItem('userEmail') || '')
+
+  // Watchers para persistencia automática
+  watch(isAuthenticated, (newValue) => {
+    localStorage.setItem('isAuthenticated', newValue)
+  })
+
+  watch(user, (newValue) => {
+    if (newValue) {
+      localStorage.setItem('user', JSON.stringify(newValue))
+    }
+  })
 
   const userAvatar = computed(
     () =>
