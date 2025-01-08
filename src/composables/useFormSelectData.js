@@ -1,14 +1,51 @@
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
+import { useLoginStore } from '@/stores/login'
 
 export default function useFormSelectData() {
+  const loginStore = useLoginStore()
   const plantasStore = usePlantasStore()
 
+
+  const findOperarioByUser = (usuarioMail) => {
+    console.log(usuarioMail);
+    // Verificar que existe el store y los datos
+    if (!plantasStore?.getOperarios) return 'HOLA'
+
+    const operario = plantasStore.getOperarios.find(
+      (user) => user.email === usuarioMail
+    )
+    console.log('Operario:', operario);
+    
+    return operario ? operario.id : null
+  }
+
+  const operarioLogueado = computed(() => {
+    const operario = plantasStore.getOperarios.find(
+      op => op.email.toLowerCase() === loginStore.userEmail.toLowerCase()
+    )
+    return operario ? operario : null
+  })
+
+  // Obtener fecha actual en formato AAAA-MM-DD
+  const today = new Date().toISOString().split('T')[0]
+
+  watch(
+    () => plantasStore.getOperarios,
+    () => {
+      if (operarioLogueado.value) {
+        form.operario = operarioLogueado.value.id
+        form.uo = operarioLogueado.value.ud_operativa_fk
+      }
+    },
+    { immediate: true }
+  )
+
   const form = reactive({
-    uo: null,
+    uo: operarioLogueado.value?.ud_operativa_fk,
     zona: null,
     punto_muestreo_fk: null,
-    fecha: '',
+    fecha:today,
     color: 1,
     olor: 1,
     sabor: 1,
@@ -17,7 +54,7 @@ export default function useFormSelectData() {
     observaciones: '',
     ph: null,
     turbidez: null,
-    operario: null,
+    operario: operarioLogueado.value?.id,
       infraestructura: null,
       fecha_inicio: null,
     fecha_final:null,
@@ -35,7 +72,9 @@ export default function useFormSelectData() {
     })
   })
   const selectZona = computed(() => {
-    if (!form.uo) return []
+    if (!form.uo) return plantasStore.getZonas.map((zona) => {
+      return { value: zona.id, label: zona.name }
+    })
     return plantasStore.getZonas
       .filter((zona) => zona.unidades_operativas_fk === form.uo)
       .map((zona) => {
@@ -44,7 +83,7 @@ export default function useFormSelectData() {
   })
 
   const selectInfraestructura = computed(() => {
-    if (!form.zona) return []
+    if (!form.zona) return plantasStore.getInfraestructuras.map((infraestructura) => { return { value: infraestructura.id, label: infraestructura.name } })
     const infraestructuras = plantasStore.getZonasInfraestructuras
       .filter((infraestructura) => infraestructura.zonas_fk === form.zona)
       .map((infraestructura) => {
@@ -69,7 +108,7 @@ export default function useFormSelectData() {
   }
 
   const selectPuntosMuestra = computed(() => {
-    if (!form.infraestructura) return []
+    if (!form.infraestructura) return plantasStore.getPuntosMuestreo.map((punto) => {return { value: punto.id, label: punto.name }})
     return plantasStore.getPuntosMuestreo
       .filter((punto) => punto.infraestructura_fk === form.infraestructura)
       .map((punto) => {
@@ -87,13 +126,15 @@ export default function useFormSelectData() {
   // })
 
   const operarioPorZona = computed(() => {
-    if (!form.zona) return []
+    if (!form.uo) return plantasStore.getOperarios.map((operario) => {return { value: operario.id, label: operario.name }})
     return plantasStore.getOperarios
       .filter((operario) => operario.ud_operativa_fk === form.uo)
       .map((operario) => {
         return { value: operario.id, label: operario.name }
       })
   })
+
+
 
   return {
     resetForm,
@@ -102,6 +143,7 @@ export default function useFormSelectData() {
     selectZona,
     selectInfraestructura,
     selectPuntosMuestra,
-    operarioPorZona
+    operarioPorZona, 
+    findOperarioByUser
   }
 }

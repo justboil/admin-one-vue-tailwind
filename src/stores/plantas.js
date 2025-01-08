@@ -89,6 +89,45 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     return zonas_infraestructuras.value
   })
 
+  const getPuntosMuestreoTotal = computed(() => {
+    //quiero qeu devuelva todos los puntos de muestreo con su zona de abastecimiento y su zona de infraestructura
+    return puntosMuestreo.value.map((punto) => {
+      const zonaAbastecimiento = zonas.value.find((zona) => zona.id === punto.zona_fk)
+      const zonaInfraestructura = infraestructuras.value.find(
+        (infraestructura) => infraestructura.id === punto.infraestructura_fk
+      )
+      return {
+        ...punto,
+        zonaAbastecimiento,
+        zonaInfraestructura
+      }
+    })
+  })
+
+  const getAnaliticasTotal = computed(() => {
+    //quiero qeu devuelva todos los puntos de muestreo con su zona de abastecimiento y su zona de infraestructura
+
+    return analiticas.value.map((analitica) => {
+      const puntoMuestreo = puntosMuestreo.value.find(
+        (punto) => punto.id === analitica.punto_muestreo_fk
+      )
+
+      if (puntoMuestreo) {
+        
+        const zona_fk = puntoMuestreo.zona_fk
+        const infraestructura_fk = puntoMuestreo.infraestructura_fk
+
+        
+        
+        return {
+          ...analitica,
+          zona_fk,
+          infraestructura_fk,
+        }
+      }
+    })
+  })
+
   return {
     getZonas,
     getOperarios,
@@ -108,5 +147,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     infraestructuras,
     zonas_infraestructuras,
     loadAnaliticas,
+    getPuntosMuestreoTotal,
+    getAnaliticasTotal
   }
 })

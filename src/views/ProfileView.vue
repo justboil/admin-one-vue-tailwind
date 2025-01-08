@@ -13,8 +13,12 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import UserCard from '@/components/UserCard.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import { useLoginStore } from '@/stores/login'
+
 
 const mainStore = useMainStore()
+
+const loginStore = useLoginStore()
 
 const profileForm = reactive({
   name: mainStore.userName,
@@ -59,9 +63,9 @@ const submitPass = () => {
             <FormFilePicker label="Upload" />
           </FormField>
 
-          <FormField label="Name" help="Required. Your name">
+          <FormField label="Nombre" help="Required. Your name">
             <FormControl
-              v-model="profileForm.name"
+              v-model="loginStore.userName"
               :icon="mdiAccount"
               name="username"
               required
@@ -70,7 +74,7 @@ const submitPass = () => {
           </FormField>
           <FormField label="E-mail" help="Required. Your e-mail">
             <FormControl
-              v-model="profileForm.email"
+              v-model="loginStore.userEmail"
               :icon="mdiMail"
               type="email"
               name="email"

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -13,6 +13,7 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
+import useLoginStore from '@/stores/login'
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { FormKit } from '@formkit/vue'
@@ -20,9 +21,18 @@ import { supabase } from '../services/supabase'
 
 import useFormSelectData from '../composables/useFormSelectData'
 
-const { form, selectZona, selectPuntosMuestra, selectInfraestructura, selectUO, operarioPorZona } = useFormSelectData()
+const {
+  form,
+  selectZona,
+  selectPuntosMuestra,
+  selectInfraestructura,
+  selectUO,
+  operarioPorZona,
+  findOperarioByUser
+} = useFormSelectData()
 
-const plantaStore = usePlantasStore();
+const loginStore = useLoginStore()
+const plantaStore = usePlantasStore()
 const resetForm = () => {
   form.punto_muestreo_fk = ''
   form.fecha = ''
@@ -35,22 +45,26 @@ const resetForm = () => {
   form.operario = ''
   form.ph = ''
   form.turbidez = ''
+  form.zona = ''
+  form.infraestructura = ''
+  form.uo = ''
+  form.type = ''
 }
 
 // Computed properties para valores organolépticos
 const olorValue = computed({
   get: () => form.olor === 0,
-  set: (checked) => form.olor = checked ? 0 : 1
+  set: (checked) => (form.olor = checked ? 0 : 1)
 })
 
 const colorValue = computed({
   get: () => form.color === 0,
-  set: (checked) => form.color = checked ? 0 : 1
+  set: (checked) => (form.color = checked ? 0 : 1)
 })
 
 const saborValue = computed({
   get: () => form.sabor === 0,
-  set: (checked) => form.sabor = checked ? 0 : 1
+  set: (checked) => (form.sabor = checked ? 0 : 1)
 })
 
 const submitHandler = async () => {
@@ -67,7 +81,8 @@ const submitHandler = async () => {
         observaciones: form.observaciones,
         personal_fk: form.operario,
         ph: form.ph ? Number(form.ph) : null,
-        turbidez: form.turbidez ? Number(form.turbidez) : null
+        turbidez: form.turbidez ? Number(form.turbidez) : null,
+        zona_fk: form.zona
       }
     ])
 
@@ -75,7 +90,7 @@ const submitHandler = async () => {
       console.error('Error al insertar datos:', error)
       alert('Error al insertar datos: ' + error.message)
     } else {
-    plantaStore.loadAnaliticas()
+      plantaStore.loadAnaliticas()
       console.log('Datos insertados:', data)
       alert('Datos insertados correctamente')
       resetForm()
@@ -86,7 +101,9 @@ const submitHandler = async () => {
   }
 }
 
-
+onMounted(() => {
+  findOperarioByUser(loginStore.userEmail)
+})
 </script>
 
 <template>
@@ -105,6 +122,20 @@ const submitHandler = async () => {
       </SectionTitleLineWithButton>
       <CardBox>
         <FormKit type="form" submit-label="Enviar" @submit="submitHandler">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <FormKit
+              v-model.number="form.operario"
+              type="select"
+              :options="operarioPorZona"
+              placeholder="Operario"
+              disabled="loginStore.userLogged?true:false"
+            />
+            <FormKit
+              v-model="form.fecha"
+              type="date"
+              placeholder="Fecha de la toma de la muestra"
+            />
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
             <FormKit
               v-model="form.uo"
@@ -116,14 +147,14 @@ const submitHandler = async () => {
             <FormKit
               v-model="form.zona"
               type="select"
-              :options="selectZona"
+              :options="form.uo ? selectZona : []"
               placeholder="Zona de Muestra"
               label="Zona"
             />
             <FormKit
               v-model="form.infraestructura"
               type="select"
-              :options="selectInfraestructura"
+              :options="form.zona ? selectInfraestructura : []"
               placeholder="Infraestructura"
               label="Infraestructura"
             />
@@ -135,19 +166,7 @@ const submitHandler = async () => {
               label="Punto de Muestra"
             />
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <FormKit
-              v-model.number="form.operario"
-              type="select"
-              :options="operarioPorZona"
-              placeholder="Operario"
-            />
-            <FormKit
-              v-model="form.fecha"
-              type="date"
-              placeholder="Fecha de la toma de la muestra"
-            />
-          </div>
+         
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FormKit
@@ -198,14 +217,23 @@ const submitHandler = async () => {
                 placeholder="Cloro Residual"
                 label="Cloro Residual"
                 help="mg/l"
+                validation="number|min:0|max:99"
               ></FormKit>
-              <FormKit v-model="form.ph" type="number" placeholder="pH" label="pH" help="ud" />
+              <FormKit
+                v-model="form.ph"
+                type="number"
+                placeholder="pH"
+                label="pH"
+                help="ud"
+                validation="number|min:0|max:14"
+              />
               <FormKit
                 v-model.number="form.turbidez"
                 type="number"
                 placeholder="Turbidez"
                 label="Turbidez"
                 help="UNF"
+                validation="number|min:0|max:999"
               />
             </div>
             <div>
@@ -229,4 +257,3 @@ const submitHandler = async () => {
     </SectionMain>
   </LayoutAuthenticated>
 </template>
-

@@ -70,7 +70,11 @@ const analiticsFiltered = computed(() =>
       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
-      (!filters.persona || analitica.personal_fk === filters.persona)
+      (!filters.persona || analitica.personal_fk === filters.persona) &&
+      (!filters.zona || analitica.zona_fk === filters.zona) &&
+      (!filters.operario || analitica.personal_fk === filters.operario) &&
+      (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
+      (!filters.type || analitica.type === filters.type)
     )
   })
 )

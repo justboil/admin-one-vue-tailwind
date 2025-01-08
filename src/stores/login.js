@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
+import { getUserPhoto } from '@/services/msalConfig'
 
 export const useLoginStore = defineStore('loginStore', () => {
   const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
   const userName = ref(localStorage.getItem('userName') || '')
   const userEmail = ref(localStorage.getItem('userEmail') || '')
+  const userAvatar = ref(localStorage.getItem('userAvatar') || '')
 
   // Watchers para persistencia automática
   watch(isAuthenticated, (newValue) => {
@@ -18,18 +20,25 @@ export const useLoginStore = defineStore('loginStore', () => {
     }
   })
 
-  const userAvatar = computed(
-    () =>
-      `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
-        /[^a-z0-9]+/gi,
-        '-'
-      )}`
-  )
+getUserPhoto().then((photo) => {
+  userAvatar.value = photo
+  localStorage.setItem('userAvatar', photo)
+})
+
+  // const userAvatar = computed(
+  //   () =>
+  //     `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
+  //       /[^a-z0-9]+/gi,
+  //       '-'
+  //     )}`
+  // )
   const login = (userData) => {
     isAuthenticated.value = true
     user.value = userData
     localStorage.setItem('user', JSON.stringify(userData))
+    
   }
+  
   const logout = async () => {
     user.value = null
     isAuthenticated.value = false
