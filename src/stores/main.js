@@ -4,16 +4,23 @@ import axios from 'axios'
 
 export const useMainStore = defineStore('main', () => {
 
-  const userName = ref('Alejandro Minguez')
-  const userEmail = ref('alejandro.minguez@aqlara.com')
+  const userName = ref('Usuario')
+  const userEmail = ref('usuario@aqlara.com')
 
   const userAvatar = computed(
     () =>
-      `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
+      `https://ui-avatars.com/api/?name=${userEmail.value.replace(
         /[^a-z0-9]+/gi,
         '-'
       )}`
   )
+  // const userAvatar = computed(
+  //   () =>
+  //     `https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=${userEmail.value.replace(
+  //       /[^a-z0-9]+/gi,
+  //       '-'
+  //     )}`
+  // )
 
   const isFieldFocusRegistered = ref(false)
 

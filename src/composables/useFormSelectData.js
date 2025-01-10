@@ -30,19 +30,10 @@ export default function useFormSelectData() {
   // Obtener fecha actual en formato AAAA-MM-DD
   const today = new Date().toISOString().split('T')[0]
 
-  watch(
-    () => plantasStore.getOperarios,
-    () => {
-      if (operarioLogueado.value) {
-        form.operario = operarioLogueado.value.id
-        form.uo = operarioLogueado.value.ud_operativa_fk
-      }
-    },
-    { immediate: true }
-  )
+  
 
   const form = reactive({
-    uo: operarioLogueado.value?.ud_operativa_fk,
+    uo: '',
     zona: null,
     punto_muestreo_fk: null,
     fecha:today,
@@ -54,12 +45,25 @@ export default function useFormSelectData() {
     observaciones: '',
     ph: null,
     turbidez: null,
-    operario: operarioLogueado.value?.id,
+    operario: '',
       infraestructura: null,
       fecha_inicio: null,
     fecha_final:null,
 
   })
+
+  watch(
+    () => plantasStore.getOperarios,
+    () => {
+      if (operarioLogueado.value) {
+        // form.operario = operarioLogueado.value.id
+        // form.uo = operarioLogueado.value.ud_operativa_fk
+      }
+    },
+    { immediate: true }
+  )
+
+  
 
   const resetForm=()=>{
     Object.keys(form).forEach((key) => {
@@ -144,6 +148,7 @@ export default function useFormSelectData() {
     selectInfraestructura,
     selectPuntosMuestra,
     operarioPorZona, 
-    findOperarioByUser
+    findOperarioByUser,
+    operarioLogueado
   }
 }

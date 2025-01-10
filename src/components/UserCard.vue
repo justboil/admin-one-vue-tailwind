@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useMainStore } from '@/stores/main'
+// import { useMainStore } from '@/stores/main'
 import { mdiCheckDecagram } from '@mdi/js'
 import BaseLevel from '@/components/BaseLevel.vue'
 import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
@@ -11,9 +11,10 @@ import {useLoginStore} from '@/stores/login'
 
 const loginStore = useLoginStore()
 
-const mainStore = useMainStore()
+// const mainStore = useMainStore()
 
-const userName = computed(() => mainStore.userName)
+// const userName = computed(() => mainStore.userName)
+// const userName = computed(() => loginStore.userName)
 
 const userSwitchVal = ref(false)
 </script>
@@ -28,7 +29,7 @@ const userSwitchVal = ref(false)
             v-model="userSwitchVal"
             name="notifications-switch"
             type="switch"
-            label="Notifications"
+            label="Activo"
             :input-value="true"
           />
         </div>

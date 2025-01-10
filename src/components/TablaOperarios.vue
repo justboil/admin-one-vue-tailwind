@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
-import { mdiEye, mdiTrashCan } from '@mdi/js'
+import { mdiAccountHardHat, mdiAccountSearch, mdiEye, mdiShieldAccount, mdiTrashCan, mdiWrench } from '@mdi/js'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
@@ -18,11 +18,11 @@ defineProps({
 const isModalActive = ref(false)
 const selectedClient = ref(null)
 
-const plantaStore = usePlantasStore();
+const plantaStore = usePlantasStore()
 
 // const mainStore = useMainStore()
 
-const operarios =computed(() => plantaStore.getOperarios)
+const operarios = computed(() => plantaStore.getOperarios)
 
 // const items = computed(() => mainStore.clients)
 
@@ -58,11 +58,33 @@ const pagesList = computed(() => {
   return pagesList
 })
 
-const openmModal = (client) => {
-  selectedClient.value = client;
-  isModalActive.value = true;
-}
+// const getTipoPersonal = (id) =>
+//   computed(() => {
+//     const tipo = plantaStore.getTipoPersonal.find((tipo) => tipo.id === id)
+//     return tipo.tipo
+//   })
 
+  // console.log(getTipoPersonal(1));
+
+const getTypeIcon = (type) => {
+  console.log(type);
+            switch (type) {
+              case 'OPERARIO/A SERVICIO\n':
+                return mdiWrench; // Replace with the appropriate icon for 'admin'
+              case 'RESPONSABLE SERVICIO\n':
+                return mdiShieldAccount; // Replace with the appropriate icon for 'user'
+              case 'TÉCNICO/A SERVICIO\n':
+                return mdiAccountHardHat; // Replace with the appropriate icon for 'user'
+              case 'ADMINISTRATIVO/A SERVICIO\n':
+                return mdiAccountSearch; // Replace with the appropriate icon for 'user'
+              default:
+                return mdiEye; // Default icon
+            }
+          }
+const openmModal = (client) => {
+  selectedClient.value = client
+  isModalActive.value = true
+}
 
 const remove = (arr, cb) => {
   const newArr = []
@@ -84,19 +106,22 @@ const checked = (isChecked, client) => {
   }
 }
 
-const nombreUO = (id) => computed(() => {
-  const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)
-  return uo?.name ?? 'N/A';
-})
-
+const nombreUO = (id) =>
+  computed(() => {
+    const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)
+    return uo?.name ?? 'N/A'
+  })
 
 </script>
 
 <template>
-  <CardBoxModalOperario v-if="selectedClient !== null" v-model="isModalActive" :client="selectedClient" :title="`Editar Operario`">
-    <FormOperario :client="selectedClient" /> 
-   
-    
+  <CardBoxModalOperario
+    v-if="selectedClient !== null"
+    v-model="isModalActive"
+    :client="selectedClient"
+    :title="`Editar Operario`"
+  >
+    <FormOperario :client="selectedClient" />
   </CardBoxModalOperario>
 
   <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
@@ -114,7 +139,7 @@ const nombreUO = (id) => computed(() => {
         <th>e-mail</th>
         <th>UO</th>
         <!-- <th>Progress</th> -->
-       
+
         <th />
       </tr>
     </thead>
@@ -128,10 +153,13 @@ const nombreUO = (id) => computed(() => {
           {{ client.name }}
         </td>
         <td data-label="Tipo">
-          {{ client.type }}
+          <BaseButton color="info" :icon="getTypeIcon(client.type_bak)" small class="mr-2" />
+          
+
+          {{ client.type_bak }}
         </td>
-        <td data-label="email">
-          {{ client.email }}
+        <td data-label="email" >
+            {{ client.email }}
         </td>
         <td data-label="Unidad Operativa">
           {{ nombreUO(client.ud_operativa_fk) }}

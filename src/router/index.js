@@ -43,6 +43,15 @@ const routes = [
     component:  () => import('@/views/ExcelUploaderView.vue')
   },
   {
+    meta: {
+      title: 'Mapa de Puntos de Muestreo',
+      requiresAuth: true
+    },
+    path: '/mapa',
+    name: 'mapa',
+    component:  () => import('@/views/MapaPuntoMuestrasView.vue')
+  },
+  {
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
@@ -75,7 +84,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Forms'
+      title: 'Forms',
+      requiresAuth: true
     },
     path: '/forms',
     name: 'forms',
@@ -83,7 +93,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Tabla de Analiticas'
+      title: 'Tabla de Analiticas',
+      requiresAuth: true
     },
     path: '/tablaAnaliticas',
     name: 'tablaAnaliticas',

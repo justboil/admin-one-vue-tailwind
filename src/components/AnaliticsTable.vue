@@ -1,18 +1,39 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 // import { useMainStore } from '@/stores/main'
-import { mdiChevronDown, mdiChevronLeft, mdiTrashCan } from '@mdi/js'
+import { mdiChevronDown, mdiChevronLeft, mdiPencil, mdiTrashCan } from '@mdi/js'
 // import CardBoxModal from '@/components/CardBoxModal.vue'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import AnaliticsEdit from './AnaliticsEdit.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
 import { usePlantasStore } from '../stores/plantas'
 // import { getAnaliticas } from '@/services/analiticas'
 import useFormSelectData from '../composables/useFormSelectData'
 import { FormKit } from '@formkit/vue'
 const checkedRows = ref([])
+import { deleteAnalitica, updateAnaliticabyId } from '@/services/supabase'
+import CardBoxModal from './CardBoxModal.vue'
+
+const plantaStore = usePlantasStore()
+
+const turbidezValues = {
+  min: 0,
+  max: 4
+}
+const phValues = {
+  min: 6.5,
+  max: 9.5
+}
+const cloroValues = {
+  min: 0.4,
+  max: 1
+}
+
+const analiticaToDelete = ref(null)
+const analiticaToEdit = ref(null)
 
 const {
   form: filters,
@@ -36,6 +57,7 @@ defineExpose({ resetForm, checkedRows })
 
 // const filters = ref([])
 const expandedRows = ref([])
+const showOnlyWrongValues = ref(false)
 
 const toggleExpand = (id) => {
   if (expandedRows.value.includes(id)) {
@@ -50,8 +72,10 @@ const plantasStore = usePlantasStore()
 // const mainStore = useMainStore()
 
 const analitics = computed(() => plantasStore.getAnaliticas)
+const analiticaToUpdate = ref(null)
 
-const isModalDangerActive = ref(false)
+const isModalDeleteAnaliticsActive = ref(false)
+const isModalActive = ref(false)
 
 const perPage = ref(20)
 
@@ -65,8 +89,10 @@ const currentPage = ref(0)
 // )
 
 const analiticsFiltered = computed(() =>
-  analitics.value.filter((analitica) => {
+  plantaStore.getAnaliticas.filter((analitica) => {
+    const wrongValuesFilter = !showOnlyWrongValues.value || isWrongValues(analitica)
     return (
+      wrongValuesFilter &&
       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
@@ -78,6 +104,20 @@ const analiticsFiltered = computed(() =>
     )
   })
 )
+// const analiticsFiltered = computed(() =>
+//   analitics.value.filter((analitica) => {
+//     return (
+//       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
+//       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
+//       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
+//       (!filters.persona || analitica.personal_fk === filters.persona) &&
+//       (!filters.zona || analitica.zona_fk === filters.zona) &&
+//       (!filters.operario || analitica.personal_fk === filters.operario) &&
+//       (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
+//       (!filters.type || analitica.type === filters.type)
+//     )
+//   })
+// )
 
 const numPages = computed(() => Math.ceil(analitics.value.length / perPage.value))
 
@@ -117,6 +157,36 @@ const allRowsChecked = computed(() => {
     )
   )
 })
+
+const isCloroWrong = (analitica) => {
+  return analitica.cloro < cloroValues.min || analitica.cloro > cloroValues.max
+}
+const isPhWrong = (analitica) => {
+  return analitica.ph < phValues.min || analitica.ph > phValues.max
+}
+const isTurbidezWrong = (analitica) => {
+  return analitica.turbidez < turbidezValues.min || analitica.turbidez > turbidezValues.max
+}
+const isOrganolepticWrong = (organolepticValue) => {
+  return +organolepticValue === 0
+}
+
+const isWrongValues = (analitica) => {
+  if (
+    isCloroWrong(analitica) ||
+    isPhWrong(analitica) ||
+    isTurbidezWrong(analitica) ||
+    isOrganolepticWrong(analitica.olor) ||
+    isOrganolepticWrong(analitica.color) ||
+    isOrganolepticWrong(analitica.sabor)
+  ) {
+    {
+      return true
+    }
+  }
+}
+
+
 
 // const toggleAllRows = (isChecked) => {
 //   if (isChecked) {
@@ -161,9 +231,79 @@ const addAnalitica = (analitica, isChecked) => {
     checkedRows.value = checkedRows.value.filter((item) => item.id !== analitica.id)
   }
 }
+
+const handleConfirmDelete = async () => {
+  try {
+    await deleteAnalitica(analiticaToDelete.value.id)
+    await plantasStore.loadAnaliticas()
+    isModalDeleteAnaliticsActive.value = false
+    analiticaToDelete.value = null
+  } catch (error) {
+    console.error('Error al eliminar:', error)
+    alert('Error al eliminar la analítica')
+  }
+}
+
+const handleConfirmUpdate = async () => {
+  try {
+    await updateAnaliticabyId(analiticaToUpdate.value.id, analiticaToUpdate.value)
+    await plantasStore.loadAnaliticas()
+    isModalActive.value = false
+    analiticaToEdit.value = null
+  } catch (error) {
+    console.error('Error al eliminar:', error)
+    alert('Error al actualizar la analítica')
+  }
+}
+
+
+
+const deleteAnaliticaSeleccionada = async (analitica) => {
+  analiticaToDelete.value = analitica
+  isModalDeleteAnaliticsActive.value = true
+}
+
+const updateAnaliticaSeleccionada = async (analitica) => {
+  analiticaToEdit.value = { ...analitica }
+  await nextTick()
+  isModalActive.value = true
+}
+
+const storeAnaliticsToUpdate = (analitica) => {
+  analiticaToUpdate.value = analitica
+}
+
+
+
+// Computed para forzar actualización
+// const analiticas = computed(() => plantasStore.getAnaliticas)
+
+onMounted(() => {
+  resetForm()
+})
 </script>
 
 <template>
+  <CardBoxModal
+    v-model="isModalDeleteAnaliticsActive"
+    title="Desea Borrar la Analítica?"
+    button="danger"
+    has-cancel
+    @confirm="handleConfirmDelete"
+  >
+    <p>Si confirma la analitica se borrara <b>definitivamente</b></p>
+    <p>Esta seguro de ejecutar esta acción?</p>
+    <!-- <BaseButton label="Borrar" color="danger" :icon="mdiTrashCan" /> -->
+  </CardBoxModal>
+
+  <CardBoxModal v-model="isModalActive" title="Actualizar analítica" has-cancel @confirm="handleConfirmUpdate" >
+    <AnaliticsEdit v-if='analiticaToEdit' :analitic="analiticaToEdit" @update="storeAnaliticsToUpdate"/>
+    <p class="text-red-600 font-bold"> ATENCIÓN:</p>
+    <p>La modificacion de esta analítica será <b>definitiva</b> y se realizará bajo su propia responsabilidad</p>
+    <!-- <p>This is sample modal</p> -->
+    
+  </CardBoxModal>
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     <FormKit
       v-model="filters.fecha_inicio"
@@ -221,7 +361,7 @@ const addAnalitica = (analitica, isChecked) => {
   <table>
     <thead>
       <tr>
-        <th v-if="checkable">
+        <th v-if="checkable" class="text-center">
           <TableCheckboxCell :model-value="allRowsChecked" @update:model-value="toggleAllRows" />
           <!-- <TableCheckboxCell :model-value="checkedRows.value.some(row => row.id === analitica.id)" @update:model-value="(isChecked) => checked(isChecked, analitica)" /> -->
           <!-- <TableCheckboxCell 
@@ -234,7 +374,18 @@ const addAnalitica = (analitica, isChecked) => {
         <th>Punto Muestreo</th>
         <th>Operario</th>
         <th>Tipo Analítica</th>
-        <th />
+        <th class="text-center">
+          
+            
+            <TableCheckboxCell 
+            :model-value="showOnlyWrongValues"
+            label="Solo valores incorrectos"
+            @update:model-value="showOnlyWrongValues = $event"
+            />
+          
+
+        </th>
+        <!-- <th /> -->
       </tr>
     </thead>
     <tbody>
@@ -247,6 +398,7 @@ const addAnalitica = (analitica, isChecked) => {
           />
 
           <td data-label="Fecha">
+            <!-- <td data-label="Fecha" :class="{'bg-red-400': isWrongValues(analitica)}"> -->
             {{ analitica.fecha }}
           </td>
           <td data-label="Punto de Muestreo">
@@ -262,7 +414,7 @@ const addAnalitica = (analitica, isChecked) => {
           <td>
             <BaseButton
               :icon="expandedRows.includes(analitica.id) ? mdiChevronDown : mdiChevronLeft"
-              color="info"
+              :color="isWrongValues(analitica) ? 'danger' : 'info'"
               @click="toggleExpand(analitica.id)"
             />
           </td>
@@ -275,28 +427,53 @@ const addAnalitica = (analitica, isChecked) => {
             <div class="flex justify-center gap-40">
               <div>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">Cloro:</span>
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isCloroWrong(analitica) }"
+                    >Cloro:</span
+                  >
                   {{ analitica.cloro }} mg/l
                 </li>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">pH:</span> {{ analitica.ph }} ud
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isPhWrong(analitica) }"
+                    >pH:</span
+                  >
+                  {{ analitica.ph }} ud
                 </li>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">Turbidez:</span>
-                  {{ analitica.turbidez }}
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isTurbidezWrong(analitica) }"
+                    >Turbidez:</span
+                  >
+                  {{ analitica.turbidez }} UNT
                 </li>
               </div>
               <div>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">Olor:</span>
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.olor) }"
+                    >Olor:</span
+                  >
                   {{ analitica.olor ? analitica.olor : 'N/S' }}
                 </li>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">Color:</span>
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.color) }"
+                    >Color:</span
+                  >
                   {{ analitica.color ? analitica.color : 'N/S' }}
                 </li>
                 <li class="text-gray-600">
-                  <span class="font-semibold text-lg text-gray-700">Sabor:</span>
+                  <span
+                    class="font-semibold text-lg text-gray-700"
+                    :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.sabor) }"
+                    >Sabor:</span
+                  >
                   {{ analitica.sabor ? analitica.sabor : 'N/S' }}
                 </li>
               </div>
@@ -309,12 +486,12 @@ const addAnalitica = (analitica, isChecked) => {
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons>
               <!-- <BaseButtons type="justify-start lg:justify-end" no-wrap> -->
-              <!-- <BaseButton color="info" :icon="mdiEye" small @click="isModalActive = true" /> -->
+              <BaseButton color="info" :icon="mdiPencil" small @click="updateAnaliticaSeleccionada(analitica)" />
               <BaseButton
                 color="danger"
                 :icon="mdiTrashCan"
                 small
-                @click="isModalDangerActive = true"
+                @click="deleteAnaliticaSeleccionada(analitica)"
               />
             </BaseButtons>
           </td>
@@ -335,6 +512,7 @@ const addAnalitica = (analitica, isChecked) => {
           @click="currentPage = page"
         />
       </BaseButtons>
+      <small>Total Analíticas {{ analiticsFiltered.length }}</small>
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
     </BaseLevel>
   </div>

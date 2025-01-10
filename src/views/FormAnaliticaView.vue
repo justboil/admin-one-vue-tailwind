@@ -1,16 +1,16 @@
 <script setup>
-import { computed, onMounted, reactive } from 'vue'
-import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
+import { computed, onMounted } from 'vue'
+import { mdiBallotOutline, mdiMail } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
+// import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
 // import FormFilePicker from '@/components/FormFilePicker.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
+// import FormField from '@/components/FormField.vue'
+// import FormControl from '@/components/FormControl.vue'
+// import BaseDivider from '@/components/BaseDivider.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
+// import BaseButtons from '@/components/BaseButtons.vue'
+// import SectionTitle from '@/components/SectionTitle.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import useLoginStore from '@/stores/login'
@@ -28,7 +28,8 @@ const {
   selectInfraestructura,
   selectUO,
   operarioPorZona,
-  findOperarioByUser
+  findOperarioByUser,
+  operarioLogueado
 } = useFormSelectData()
 
 const loginStore = useLoginStore()
@@ -67,6 +68,11 @@ const saborValue = computed({
   set: (checked) => (form.sabor = checked ? 0 : 1)
 })
 
+const recargaFormulario = () => {
+  form.operario = loginStore.isAuthenticated ? operarioLogueado.value?.id : null
+  form.uo = loginStore.isAuthenticated ? operarioLogueado.value?.ud_operativa_fk : null
+}
+
 const submitHandler = async () => {
   try {
     const { data, error } = await supabase.from('analiticas').insert([
@@ -83,7 +89,7 @@ const submitHandler = async () => {
         ph: form.ph ? Number(form.ph) : null,
         turbidez: form.turbidez ? Number(form.turbidez) : null,
         zona_fk: form.zona
-      }
+      }      
     ])
 
     if (error) {
@@ -98,11 +104,18 @@ const submitHandler = async () => {
   } catch (error) {
     console.error('Error en la solicitud:', error)
     alert('Error en la solicitud: ' + error.message)
+  } finally {
+  recargaFormulario()
   }
 }
 
-onMounted(() => {
+
+//
+onMounted(async() => {
+  await plantaStore.loadOperarios()
   findOperarioByUser(loginStore.userEmail)
+  form.operario = loginStore.isAuthenticated ? operarioLogueado.value?.id : null
+  form.uo = loginStore.isAuthenticated ? operarioLogueado.value?.ud_operativa_fk : null
 })
 </script>
 

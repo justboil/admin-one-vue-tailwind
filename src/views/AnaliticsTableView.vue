@@ -1,7 +1,7 @@
 <script setup>
 import {  mdiFlaskEmptyOutline, mdiFilter, mdiDownload } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 // import NotificationBar from '@/components/NotificationBar.vue'
 import CardBox from '@/components/CardBox.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
@@ -52,10 +52,16 @@ const downloadXML = () => {
   window.URL.revokeObjectURL(url)
 }
 
+
+
 defineEmits(['clean-filters']);
 </script>
 
+
+
 <template>
+
+
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiFlaskEmptyOutline" title="Analíticas" main>

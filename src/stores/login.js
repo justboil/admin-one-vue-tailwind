@@ -1,42 +1,50 @@
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
-import { getUserPhoto } from '@/services/msalConfig'
+import { getUserProfile } from '@/services/msalConfig'
 
 export const useLoginStore = defineStore('loginStore', () => {
   const user = ref(JSON.parse(localStorage.getItem('user')) || null)
   const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
   const userName = ref(localStorage.getItem('userName') || '')
   const userEmail = ref(localStorage.getItem('userEmail') || '')
-  const userAvatar = ref(localStorage.getItem('userAvatar') || '')
+  // const userAvatar = ref(localStorage.getItem('userAvatar') || '')
+  const userLogged = ref(localStorage.getItem('userLogged') || '')
 
-  // Watchers para persistencia automática
-  watch(isAuthenticated, (newValue) => {
-    localStorage.setItem('isAuthenticated', newValue)
+  const userAvatar = computed(
+    () =>      
+    `https://ui-avatars.com/api/?name=${userName.value}&background=random&font-size=0.75&bold=true&color=fff`
+  )
+   // Watchers para persistencia
+   watch([isAuthenticated, user, userName, userEmail, userAvatar, userLogged], ([newAuth, newUser, newName, newEmail, newAvatar,newUserLogged]) => {
+    localStorage.setItem('isAuthenticated', newAuth)
+    if (newUser) localStorage.setItem('user', JSON.stringify(newUser))
+    if (newName) localStorage.setItem('userName', newName)
+    if (newEmail) localStorage.setItem('userEmail', newEmail)
+    if (newAvatar) localStorage.setItem('userAvatar', newAvatar)
+    if (newUserLogged) localStorage.setItem('userLogged', newUserLogged)
   })
 
-  watch(user, (newValue) => {
-    if (newValue) {
-      localStorage.setItem('user', JSON.stringify(newValue))
+
+
+
+  const login = async (userData) => {
+    try {
+      isAuthenticated.value = true
+      user.value = userData
+      
+      // Obtener perfil completo
+      const userProfile = await getUserProfile()
+      if (userProfile) {
+        console.log('USERPROFILE:', userProfile);
+        userName.value = userProfile.displayName
+        userEmail.value = userProfile.email
+        // userAvatar.value = userProfile.photoUrl
+        userLogged.value=userProfile
+      }
+    } catch (error) {
+      console.error('Error en login:', error)
+      throw error
     }
-  })
-
-getUserPhoto().then((photo) => {
-  userAvatar.value = photo
-  localStorage.setItem('userAvatar', photo)
-})
-
-  // const userAvatar = computed(
-  //   () =>
-  //     `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
-  //       /[^a-z0-9]+/gi,
-  //       '-'
-  //     )}`
-  // )
-  const login = (userData) => {
-    isAuthenticated.value = true
-    user.value = userData
-    localStorage.setItem('user', JSON.stringify(userData))
-    
   }
   
   const logout = async () => {
@@ -44,8 +52,9 @@ getUserPhoto().then((photo) => {
     isAuthenticated.value = false
     userName.value = ''
     userEmail.value = ''
-    localStorage.removeItem('isAuthenticated')
-    localStorage.removeItem('user')
+    // localStorage.removeItem('isAuthenticated')
+    // localStorage.removeItem('user')
+    localStorage.clear()
   }
 
   const  setUser=(payload)=> {
@@ -77,7 +86,9 @@ getUserPhoto().then((photo) => {
     userName,
     userEmail,
     logout,
-    login
+    login,
+    userLogged,
+    
   }
 })
 

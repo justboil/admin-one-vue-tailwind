@@ -12,6 +12,8 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const formZonas = ref([])
   const infraestructuras = ref([])
   const zonas_infraestructuras = ref([])
+  const analiticaToUpdate = ref(null)
+  const tipoPersonal = ref([])
 
   onMounted(() => {
     loadZonas()
@@ -22,6 +24,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadComunidadesAutonomas()
     loadInfraestructuras()
     loadZonasInfraestructuras()
+    loadTipoPersonal()
   })
 
   const loadZonas = async () => {
@@ -35,6 +38,11 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const loadAnaliticas = async () => {
     const { data } = await supabase.from('analiticas').select('*')
     analiticas.value = data
+  }
+
+  const loadTipoPersonal = async () => {
+    const { data } = await supabase.from('tipo_personal').select('*')
+    tipoPersonal.value = data
   }
 
   const loadPuntosMuestreo = async () => {
@@ -89,6 +97,10 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     return zonas_infraestructuras.value
   })
 
+  const getTipoPersonal = computed(() => {
+    return tipoPersonal.value
+  })
+
   const getPuntosMuestreoTotal = computed(() => {
     //quiero qeu devuelva todos los puntos de muestreo con su zona de abastecimiento y su zona de infraestructura
     return puntosMuestreo.value.map((punto) => {
@@ -128,6 +140,15 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     })
   })
 
+  // getTipoOperario = (id) => {
+  //   const operario = operarios.value.find((operario) => operario.id === id)
+  //   if (operario) {
+  //     return operario.tipo
+  //   } else {
+  //     return ''
+  //   }
+  // }
+
   return {
     getZonas,
     getOperarios,
@@ -137,6 +158,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     getComunidadesAutonomas,
     getInfraestructuras,
     getZonasInfraestructuras,
+    getTipoPersonal,
     zonas,
     operarios,
     analiticas,
@@ -146,8 +168,18 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     formZonas,
     infraestructuras,
     zonas_infraestructuras,
+    tipoPersonal,
     loadAnaliticas,
     getPuntosMuestreoTotal,
-    getAnaliticasTotal
+    getAnaliticasTotal,
+    loadOperarios,
+    loadZonas,
+    loadPuntosMuestreo,
+    loadUnidadesOperativas,
+    loadComunidadesAutonomas,
+    loadInfraestructuras,
+    loadZonasInfraestructuras,
+    loadTipoPersonal,
+    analiticaToUpdate
   }
 })
