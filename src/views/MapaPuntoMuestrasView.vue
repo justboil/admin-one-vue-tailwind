@@ -103,8 +103,10 @@ const zoom=ref(13);
                     </div>
                     </l-map>
 
-                    <FormAnaliticaView>
-                        
+                    <FormAnaliticaView v-model="isModalActive"
+    :punto-muestreo-id="selectedPuntoId"
+    @close="isModalActive = false">
+
                     </FormAnaliticaView>
             </div>
         </div>
