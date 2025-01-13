@@ -20,12 +20,33 @@ export default function useFormSelectData() {
     return operario ? operario.id : null
   }
 
+//   const operarioLogueado = computed(() => {
+//     if (loginStore.userEmail) { // Check if userEmail is not null or undefined
+//       const operario = plantasStore.getOperarios.find(
+//         op => op.email.toLowerCase() === loginStore.userEmail.toLowerCase()
+//       )
+//       return operario ? operario : null
+//     }
+// else {
+//   return null
+// }
+  // })
   const operarioLogueado = computed(() => {
-    const operario = plantasStore.getOperarios.find(
-      op => op.email.toLowerCase() === loginStore.userEmail.toLowerCase()
-    )
-    return operario ? operario : null
+    // Verificar si existe userEmail y plantasStore
+    if (!loginStore?.userEmail || !plantasStore?.getOperarios) {
+      console.warn('No hay email de usuario o no hay operarios')
+      return null
+    }
+  
+    const operario = plantasStore.getOperarios.find(op => {
+      // Validar que op.email existe
+      if (!op?.email) return false
+      return op.email.toLowerCase() === loginStore.userEmail.toLowerCase()
+    })
+  
+    return operario || null
   })
+
 
   // Obtener fecha actual en formato AAAA-MM-DD
   const today = new Date().toISOString().split('T')[0]
