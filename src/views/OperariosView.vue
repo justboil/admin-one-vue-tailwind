@@ -6,7 +6,7 @@ import SectionMain from '@/components/SectionMain.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import TablaOperarios from '@/components/TablaOperarios.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import { mdiGithub, mdiAccountHardHat, mdiTableBorder, mdiWater } from '@mdi/js'
+import { mdiAccountHardHat, mdiWater } from '@mdi/js'
 </script>
 
 <template>
