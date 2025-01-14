@@ -1,5 +1,4 @@
 import { createClient } from "@supabase/supabase-js";
-import { ref } from "vue";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY; 
@@ -38,6 +37,8 @@ export const deleteAnalitica = async (id) => {
 }
 
 export const updateAnaliticabyId = async (id, data) => {
+  console.log(id);
+  console.log(data);
   const { error } = await supabase
       .from('analiticas')
       .update(data)

@@ -46,6 +46,10 @@ export default [
         to: {name: "tablaAnaliticas"},
         // icon: mdiSquareEditOutline
       },
+      {
+        label: 'Mapa',
+        to: {name: "mapa"},
+      },
     ]
   },
   {

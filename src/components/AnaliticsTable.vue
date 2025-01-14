@@ -10,6 +10,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import AnaliticsEdit from './AnaliticsEdit.vue'
 // import UserAvatar from '@/components/UserAvatar.vue'
 import { usePlantasStore } from '../stores/plantas'
+import { useLoginStore } from '../stores/login'
 // import { getAnaliticas } from '@/services/analiticas'
 import useFormSelectData from '../composables/useFormSelectData'
 import { FormKit } from '@formkit/vue'
@@ -18,6 +19,7 @@ import { deleteAnalitica, updateAnaliticabyId } from '@/services/supabase'
 import CardBoxModal from './CardBoxModal.vue'
 
 const plantaStore = usePlantasStore()
+const loginStore = useLoginStore()
 
 const turbidezValues = {
   min: 0,
@@ -186,8 +188,6 @@ const isWrongValues = (analitica) => {
   }
 }
 
-
-
 // const toggleAllRows = (isChecked) => {
 //   if (isChecked) {
 //     checkedRows.value = [...analiticsFiltered.value]
@@ -246,34 +246,61 @@ const handleConfirmDelete = async () => {
 
 const handleConfirmUpdate = async () => {
   try {
+    if (!analiticaToUpdate.value) {
+      throw new Error('No hay analítica para actualizar')
+    }
     await updateAnaliticabyId(analiticaToUpdate.value.id, analiticaToUpdate.value)
+
     await plantasStore.loadAnaliticas()
     isModalActive.value = false
     analiticaToEdit.value = null
+    analiticaToUpdate.value = null
   } catch (error) {
     console.error('Error al eliminar:', error)
     alert('Error al actualizar la analítica')
   }
 }
 
-
+const closeModal = () => {
+  isModalActive.value = false
+  analiticaToEdit.value = null
+  analiticaToUpdate.value = null
+}
 
 const deleteAnaliticaSeleccionada = async (analitica) => {
   analiticaToDelete.value = analitica
   isModalDeleteAnaliticsActive.value = true
 }
 
+// const updateAnaliticaSeleccionada = async (analitica) => {
+//   analiticaToEdit.value = { ...analitica }
+//   const today = new Date().toLocaleDateString()
+//   if (analitica.observaciones) {
+//     analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}\n${analitica.observaciones}`
+//   } else {
+//     analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}`
+//   }
+//   await nextTick()
+//   isModalActive.value = true
+// }
+
 const updateAnaliticaSeleccionada = async (analitica) => {
-  analiticaToEdit.value = { ...analitica }
+  // Crear copia profunda para evitar referencias
+  analiticaToEdit.value = JSON.parse(JSON.stringify(analitica))
+
+  const today = new Date().toLocaleDateString()
+  if (analiticaToEdit.value.observaciones) {
+    analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}\n${analiticaToEdit.value.observaciones}`
+  } else {
+    analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}`
+  }
   await nextTick()
   isModalActive.value = true
 }
 
-const storeAnaliticsToUpdate = (analitica) => {
-  analiticaToUpdate.value = analitica
-}
-
-
+// const storeAnaliticsToUpdate = (analitica) => {
+//   analiticaToUpdate.value = analitica
+// }
 
 // Computed para forzar actualización
 // const analiticas = computed(() => plantasStore.getAnaliticas)
@@ -296,12 +323,24 @@ onMounted(() => {
     <!-- <BaseButton label="Borrar" color="danger" :icon="mdiTrashCan" /> -->
   </CardBoxModal>
 
-  <CardBoxModal v-model="isModalActive" title="Actualizar analítica" has-cancel @confirm="handleConfirmUpdate" >
-    <AnaliticsEdit v-if='analiticaToEdit' :analitic="analiticaToEdit" @update="storeAnaliticsToUpdate"/>
-    <p class="text-red-600 font-bold"> ATENCIÓN:</p>
-    <p>La modificacion de esta analítica será <b>definitiva</b> y se realizará bajo su propia responsabilidad</p>
+  <CardBoxModal
+    v-model="isModalActive"
+    title="Actualizar analítica"
+    has-cancel
+    @confirm="handleConfirmUpdate"
+    @cancel="closeModal"
+  >
+    <AnaliticsEdit
+      v-if="analiticaToEdit"
+      :analitic="analiticaToEdit"
+      @update="analiticaToUpdate = $event"
+    />
+    <p class="text-red-600 font-bold">ATENCIÓN:</p>
+    <p>
+      La modificacion de esta analítica será <b>definitiva</b> y se realizará bajo su propia
+      responsabilidad
+    </p>
     <!-- <p>This is sample modal</p> -->
-    
   </CardBoxModal>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -375,15 +414,11 @@ onMounted(() => {
         <th>Operario</th>
         <th>Tipo Analítica</th>
         <th class="text-center">
-          
-            
-            <TableCheckboxCell 
+          <TableCheckboxCell
             :model-value="showOnlyWrongValues"
             label="Solo valores incorrectos"
             @update:model-value="showOnlyWrongValues = $event"
-            />
-          
-
+          />
         </th>
         <!-- <th /> -->
       </tr>
@@ -451,7 +486,7 @@ onMounted(() => {
                   {{ analitica.turbidez }} UNT
                 </li>
               </div>
-              <div>
+              <div v-if="analitica.type === 29">
                 <li class="text-gray-600">
                   <span
                     class="font-semibold text-lg text-gray-700"
@@ -486,7 +521,12 @@ onMounted(() => {
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons>
               <!-- <BaseButtons type="justify-start lg:justify-end" no-wrap> -->
-              <BaseButton color="info" :icon="mdiPencil" small @click="updateAnaliticaSeleccionada(analitica)" />
+              <BaseButton
+                color="info"
+                :icon="mdiPencil"
+                small
+                @click="updateAnaliticaSeleccionada(analitica)"
+              />
               <BaseButton
                 color="danger"
                 :icon="mdiTrashCan"

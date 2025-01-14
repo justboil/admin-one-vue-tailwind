@@ -49,6 +49,11 @@ const form = reactive({
 
 console.log('form: ', form)
 
+const returnTipoOperario = (tipoId) => {
+  return plantasStore.getTipoPersonal.find((tipo) => tipo.id === tipoId)
+  
+}
+
 watch(
   () => props.client,
   (newClient) => {
@@ -59,6 +64,7 @@ watch(
     form.id_zona = newClient.id_zona
     form.type = newClient.type
     form.ud_operativa_fk = newClient.ud_operativa_fk
+    form.type_bak = newClient.type_bak
     zonasOperarioSeleccionadas(newClient.name)
 
   },{inmediate:true}
@@ -166,6 +172,7 @@ const submit = () => {
           type="select"
           label="Unidad Operativa"
           validation="required"
+          disabled
           class="w-full"
           :options="selectUO"
         />
@@ -179,14 +186,17 @@ const submit = () => {
         /> -->
         <FormKit
           v-model="form.type"
-          type="text"
+          :value="returnTipoOperario(form.type)"
+          :options="plantasStore.getTipoPersonal.map(tipo => ({ value: tipo.id, label: tipo.tipo }))"
+          type="select"
           label="Tipo"
           validation="required"
+          disabled
           class="w-full"
         />
       </div>
 
-      <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <FormKit
           v-model="form.comunidad"
           type="select"
@@ -201,7 +211,7 @@ const submit = () => {
           validation="required"
           class="w-full"
         />
-      </div>
+      </div> -->
 
       <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
         <!-- <FormKit
@@ -360,7 +370,7 @@ const submit = () => {
       <template #footer>
         <BaseButtons>
           <BaseButton type="submit" color="info" label="Guardar" />
-          <BaseButton type="reset" color="danger" outline label="Borrar" />
+          <BaseButton type="reset" color="danger" outline label="Cancelar" />
         </BaseButtons>
       </template>
     </CardBox>

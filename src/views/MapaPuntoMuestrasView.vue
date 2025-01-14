@@ -1,5 +1,4 @@
 <script setup>
-import AnaliticsTable from '@/components/AnaliticsTable.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import CardBox from '@/components/CardBox.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
@@ -11,19 +10,24 @@ import { usePlantasStore } from '@/stores/plantas'
 import 'leaflet/dist/leaflet.css'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
 import { ref } from 'vue'
-import FormAnaliticaView from './FormAnaliticaView.vue'
 import CardBoxModal from '@/components/CardBoxModal.vue'
+import FormAnalitica from '@/components/FormAnalitica.vue'
+import SectionMain from '@/components/SectionMain.vue'
 
 const plantasStore = usePlantasStore()
 const isModalActive = ref(false)
-const selectedPuntoId = ref(null)
+const selectedPunto = ref(null)
 
 const zoom = ref(13)
 
 const crearAnalitica = (puntoId) => {
   isModalActive.value = true
-  selectedPuntoId.value = puntoId
+  selectedPunto.value = puntoId
 }
+// const crearAnalitica = (puntoId) => {
+//   isModalActive.value = true
+//   selectedPuntoId.value = puntoId.id
+// }
 
 const onDragEnd = (event) => {
   console.log(event.target.getLatLng())
@@ -31,30 +35,34 @@ const onDragEnd = (event) => {
 </script>
 
 <template>
-  <CardBoxModal v-model="isModalActive" title="Please confirm" button="danger" has-cancel class="modal-overlay">
-              <FormAnaliticaView
-                
-                v-model="isModalActive"
-                :punto-muestreo-id="selectedPuntoId"
-                @close="isModalActive = false"
-                class="modal-content"
-              >
-              </FormAnaliticaView>
-              <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-              <p>This is sample modal</p>
-            </CardBoxModal>
-            
-  <LayoutAuthenticated>
-    <SectionMain>
-      <SectionTitleLineWithButton :icon="mdiMap" title="Mapa Puntos Muestreo" main>
-        <div class="flex gap-2">
-          <BaseButton
-            target="_blank"
-            :icon="mdiDownload"
-            label="Download XML"
-            color="info"
-            rounded-full
-            small
+<CardBoxModal v-model="isModalActive" :title="'Nueva analitica en '+ selectedPunto?.name" no-button class="modal-overlay" @confirm="isModalActive = false" :modal-size="'xl'">
+  
+    <FormAnalitica
+      v-model="isModalActive"
+      :initial-position="selectedPunto?.id"
+      class="h-full"
+      @close="isModalActive = false"
+    />
+    <!-- <FormAnalitica
+      v-model="isModalActive"
+      :initial-position="selectedPunto?.id"
+      class="modal-content"
+      @close="isModalActive = false"
+    /> -->
+     
+</CardBoxModal>
+
+<LayoutAuthenticated>
+  <SectionMain>
+    <SectionTitleLineWithButton :icon="mdiMap" title="Mapa Puntos Muestreo" main>
+      <div class="flex gap-2">
+        <!-- <BaseButton
+        target="_blank"
+        :icon="mdiDownload"
+        label="Download XML"
+        color="info"
+        rounded-full
+        small
           />
           <BaseButton
             target="_blank"
@@ -64,7 +72,7 @@ const onDragEnd = (event) => {
             rounded-full
             small
             @click="limpiarFiltros"
-          />
+          /> -->
         </div>
       </SectionTitleLineWithButton>
       <!-- <NotificationBar color="info" :icon="mdiMonitorCellphone">
@@ -88,11 +96,11 @@ const onDragEnd = (event) => {
               <l-marker :lat-lng="[39.54982998070428, -0.4656852311920545]">
                 <l-tooltip>
                   <div class="text-center">
-                    <h1 class="text-lg font-bold">Punto 1</h1>
-                    <p class="text-sm">Muestra 1</p>
+                    <h1 class="text-lg font-bold">AQLARA Headquarters</h1>
+                    <p class="text-sm">Oficinas Centrales</p>
                   </div>
                 </l-tooltip>
-
+                
                 <l-popup>
                   <div class="text-center">
                     <h1 class="text-lg font-bold">Punto 1</h1>
@@ -105,13 +113,13 @@ const onDragEnd = (event) => {
               </l-marker>
               <div v-for="punto in plantasStore.getPuntosMuestreo" :key="punto.id">
                 <l-marker
-                  v-if="punto.posicion"
-                  :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
-                  draggable
-                  @dragend="onDragEnd"
+                v-if="punto.posicion"
+                :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
+                draggable
+                @dragend="onDragEnd"
                 >
-                  <l-tooltip>
-                    <div class="text-center">
+                <l-tooltip>
+                  <div class="text-center">
                       <h1 class="text-lg font-bold">{{ punto.name }}</h1>
                       <p class="text-sm">id: {{ punto.id }}</p>
                     </div>
@@ -121,11 +129,11 @@ const onDragEnd = (event) => {
                     <div class="text-center">
                       <h1 class="text-lg font-bold">{{ punto.name }}</h1>
                       <!-- <a href="http://google.com" target="_blank" class="text-sm">Ver en Google Maps</a> -->
-                      <p class="text-sm">id: {{ punto.id }}</p>
+                      <p class="text-sm">SINAC Id: {{ punto.id }}</p>
                       <BaseButton
-                        label="Añadir analítica"
+                      label="Añadir analítica"
                         color="info"
-                        @click="crearAnalitica(punto.id)"
+                        @click="crearAnalitica(punto)"
                       ></BaseButton>
                     </div>
                   </l-popup>

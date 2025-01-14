@@ -58,6 +58,7 @@ const pagesList = computed(() => {
   return pagesList
 })
 
+
 // const getTipoPersonal = (id) =>
 //   computed(() => {
 //     const tipo = plantaStore.getTipoPersonal.find((tipo) => tipo.id === id)
