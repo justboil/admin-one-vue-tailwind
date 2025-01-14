@@ -172,13 +172,13 @@ const submit = () => {
           type="select"
           label="Unidad Operativa"
           validation="required"
-          disabled
+          
           class="w-full"
           :options="selectUO"
         />
         <!-- <FormKit
           v-model="form.id_zona"
-          type="select"
+          type="select"https://www.udemy.com/course/curso-full-stack-nodejs-react-typescript-nestjs-nextjs/learn/lecture/46804283?start=5#overview
           label="Zona"
           validation="required"
           class="w-full"
@@ -191,7 +191,7 @@ const submit = () => {
           type="select"
           label="Tipo"
           validation="required"
-          disabled
+          
           class="w-full"
         />
       </div>
