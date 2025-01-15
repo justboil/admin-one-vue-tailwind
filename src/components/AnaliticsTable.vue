@@ -21,6 +21,9 @@ import CardBoxModal from './CardBoxModal.vue'
 const plantaStore = usePlantasStore()
 const loginStore = useLoginStore()
 
+const ORGANOLEPTIC_CORRECT = 1
+const ORGANOLEPTIC_WRONG = 0
+
 const turbidezValues = {
   min: 0,
   max: 4
@@ -101,7 +104,7 @@ const analiticsFiltered = computed(() =>
       (!filters.persona || analitica.personal_fk === filters.persona) &&
       (!filters.zona || analitica.zona_fk === filters.zona) &&
       (!filters.operario || analitica.personal_fk === filters.operario) &&
-      (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
+      // (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
       (!filters.type || analitica.type === filters.type)
     )
   })
@@ -493,7 +496,7 @@ onMounted(() => {
                     :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.olor) }"
                     >Olor:</span
                   >
-                  {{ analitica.olor ? analitica.olor : 'N/S' }}
+                  {{ analitica.olor ===ORGANOLEPTIC_CORRECT ? 'Correcto' : 'Incorrecto' }}
                 </li>
                 <li class="text-gray-600">
                   <span
@@ -501,7 +504,7 @@ onMounted(() => {
                     :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.color) }"
                     >Color:</span
                   >
-                  {{ analitica.color ? analitica.color : 'N/S' }}
+                  {{ analitica.color ===ORGANOLEPTIC_CORRECT ? 'Correcto' : 'Incorrecto' }}
                 </li>
                 <li class="text-gray-600">
                   <span
@@ -509,7 +512,7 @@ onMounted(() => {
                     :class="{ 'text-red-500 underline': isOrganolepticWrong(analitica.sabor) }"
                     >Sabor:</span
                   >
-                  {{ analitica.sabor ? analitica.sabor : 'N/S' }}
+                  {{ analitica.sabor ===ORGANOLEPTIC_CORRECT ? 'Correcto' : 'Incorrecto' }}
                 </li>
               </div>
             </div>
