@@ -52,14 +52,40 @@ export const deleteAnalitica = async (id) => {
 }
 
 export const updateAnaliticabyId = async (id, data) => {
-  console.log(id);
-  console.log(data);
-  const { error } = await supabase
+  try {
+    console.log('updateAnaliticabyId: ',id, data);
+    // Limpiar datos antes de actualizar
+    const cleanData = {
+      id: data.id,
+      fecha: data.fecha,
+      personal_fk: data.personal_fk,
+      punto_muestreo_fk: data.punto_muestreo_fk,
+      type: data.type,
+      cloro: data.cloro,
+      color: data.color,
+      olor: data.olor,
+      sabor: data.sabor,
+      ph: data.ph,
+      turbidez: data.turbidez,
+      observaciones: data.observaciones,
+      registro: data.registro,
+      zona_fk: data.zona_fk
+    }
+    const { data: updateData, error } = await supabase
       .from('analiticas')
-      .update(data)
+      .update(cleanData)
       .eq('id', id)
+      .select()
 
-     if (error) throw error
+    if (error) throw error
+
+    return updateData
+  } catch (error) {
+    console.error('Error en updateAnaliticabyId:', error)
+    throw error
+  }
+
+ 
 }
 // export const deleteAnalitica = async (id) => {
 //   const { data, error } = await supabase
