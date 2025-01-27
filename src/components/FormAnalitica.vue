@@ -139,7 +139,7 @@ watch(
           />
           <FormKit v-model="form.fecha" type="date" placeholder="Fecha de la toma de la muestra" />
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4" v-if="!props.initialPosition">
+        <div v-if="!props.initialPosition" class="grid grid-cols-1 md:grid-cols-4 gap-4" >
           <FormKit
             v-model="form.uo"
             type="select"

@@ -35,9 +35,54 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     const { data } = await supabase.from('personal').select('*')
     operarios.value = data
   }
+  // const loadAnaliticas = async () => {
+  //   const { data } = await supabase.from('analiticas').select('*')
+  //   analiticas.value = data
+  // }
+
   const loadAnaliticas = async () => {
-    const { data } = await supabase.from('analiticas').select('*')
-    analiticas.value = data
+    try {
+      const { data, error } = await supabase
+        .from('analiticas')
+        .select(`
+          *,
+          punto_muestreo_id:punto_muestreo_fk,
+          punto_muestreo_name:puntos_muestreo(name),
+          punto_muestreo_infraestructura_fk:puntos_muestreo(infraestructura_fk),
+          infraestructura_id:puntos_muestreo(infraestructuras(id)),
+          infraestructura_name:puntos_muestreo(infraestructuras(name)),
+          zona_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(id))),
+          zona_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(name))),
+          comunidad_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(comunidades_autonomas(id)))),
+          comunidad_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(comunidades_autonomas(name)))),
+          unidad_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(unidades_operativas(id)))),
+          unidad_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(unidades_operativas(name))))
+        `)
+  
+      if (error) throw error
+  
+      if (data) {
+        const mappedData = data.map(item => ({
+          ...item,
+          pmuestreo_name: item.punto_muestreo_name.name,
+              infraestructura_id: item.infraestructura_id.infraestructuras.id,
+              infraestructura_name:item.infraestructura_name.name,
+              zona_id: item.zona_id.infraestructuras.zonas_abastecimiento,
+              zona_name: item.zona_name.infraestructuras.zonas_abastecimiento,
+              comunidad_id: item.comunidad_id.infraestructuras.zonas_abastecimiento,
+              comunidad_name: item.comunidad_name.infraestructuras.zonas_abastecimiento,
+              unidad_id: item.unidad_id.infraestructuras.zonas_abastecimiento[0].unidades_operativas.id,
+              unidad_name: item.unidad_name.infraestructuras.zonas_abastecimiento[0].unidades_operativas.id
+        }))
+        
+        analiticas.value = mappedData
+        return mappedData
+      }
+  
+    } catch (error) {
+      console.error('Error al cargar analíticas:', error.message)
+      throw error
+    }
   }
 
   const loadTipoPersonal = async () => {

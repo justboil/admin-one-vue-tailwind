@@ -10,6 +10,7 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import CardBoxModalOperario from './CardBoxModalOperario.vue'
 import FormOperario from './FormOperario.vue'
 import CardBoxModal from './CardBoxModal.vue'
+import { Button } from 'primevue'
 
 defineProps({
   checkable: Boolean
@@ -189,6 +190,7 @@ const nombreUO = (id) =>
       </tr>
     </tbody>
   </table>
+  <Button>Hola</Button>
   <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
     <BaseLevel>
       <BaseButtons>

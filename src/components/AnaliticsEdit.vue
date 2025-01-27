@@ -106,8 +106,11 @@ watch(
         label="Cloro Residual"
         help="mg/l"
         validation="number|min:0|max:99"
-        :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 99' }"
-
+        :validation-messages="{
+          number: 'Introduce un número',
+          min: 'El valor mínimo es 0',
+          max: 'El valor máximo es 99'
+        }"
       ></FormKit>
       <FormKit
         v-model="localAnalitic.ph"
@@ -116,8 +119,11 @@ watch(
         label="pH"
         help="ud"
         validation="number|min:0|max:14"
-        :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 14' }"
-
+        :validation-messages="{
+          number: 'Introduce un número',
+          min: 'El valor mínimo es 0',
+          max: 'El valor máximo es 14'
+        }"
       />
       <FormKit
         v-model.number="localAnalitic.turbidez"
@@ -126,13 +132,26 @@ watch(
         label="Turbidez"
         help="UNF"
         validation="number|min:0|max:999"
-        :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 999' }"
-
+        :validation-messages="{
+          number: 'Introduce un número',
+          min: 'El valor mínimo es 0',
+          max: 'El valor máximo es 999'
+        }"
       />
     </div>
-    <div>
+    <div class="grid grid-cols-2 justify-between mt-6">
       <FormKit
         v-model="localAnalitic.observaciones"
+        label="Observaciones"
+        type="textarea"
+        placeholder="Introduce cualquier tipo de incidencia"
+        inner-class="w-full"
+        wrapper-class="w-full"
+      />
+      <FormKit
+        v-model="localAnalitic.registro"
+        label="Registro"
+        disabled
         type="textarea"
         placeholder="Introduce cualquier tipo de incidencia"
         inner-class="w-full"

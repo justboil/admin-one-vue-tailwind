@@ -5,7 +5,22 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 // const isModalDeleteActive = ref(false)
 // const analiticaToDelete = ref(null)
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseKey,{
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true
+  },
+  global: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'X-Client-Info, X-Client-Proto, X-Client-Version, X-Requested-With, Content-Type, Accept, Authorization',
+    'Content-Type': 'application/json'
+    }
+  }
+
+});
 
 
 export const searchOperarios = async () => {

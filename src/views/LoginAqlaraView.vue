@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { mdiAccount, mdiMicrosoftWindows } from '@mdi/js'
+import {  mdiMicrosoftWindows } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -25,6 +25,7 @@ const submit = () => {
 }
 
 
+
 const loginWithMicrosoft = async () => {
   if (isAuthenticating.value) {
     return
@@ -45,8 +46,19 @@ const loginWithMicrosoft = async () => {
   } catch (error) {
     console.error('Login failed:', error);
     errorMessage.value = `LOGIN FAILED ${error.message}`
+
+    if (error.name === 'BrowserAuthError' && 
+        error.message.includes('interaction_in_progress')) {
+      // Intentar limpiar el estado de interacción pendiente
+      msalInstance.handleRedirectPromise().then(() => {
+        errorMessage.value = 'Sesión en progreso, por favor intente nuevamente'
+      })
+    } else {
+      errorMessage.value = 'Error al iniciar sesión con Microsoft'
+    }
   } finally {
     isAuthenticating.value = false
+    
   }
 };
 
@@ -76,11 +88,15 @@ onMounted(() => {
 
         <template #footer>
           <BaseButtons class="flex  justify-center gap-4">
-            <BaseButton :disabled="isAuthenticating" :icon="mdiMicrosoftWindows" color="info" label="Login with Microsoft" @click="loginWithMicrosoft" />
+            <BaseButton :disabled="isAuthenticating" type="submit" :icon="mdiMicrosoftWindows" color="info" label="Login with Microsoft" @click="loginWithMicrosoft"  />
             <!-- <BaseButton label="Login with Factorial HR" :icon="mdiAccount" color="danger" @click="loginWithFactorial"  /> -->
-            <!-- <BaseButton disabled type="submit" color="info" label="Login" /> -->
-            <!-- <BaseButton to="/dashboard" color="info" outline label="Back" /> -->
+           
           </BaseButtons>
+   
+
+          <div v-if="errorMessage" class="text-red-500 text-sm text-center">
+            {{ errorMessage }}
+          </div>
         </template>
       </CardBox>
     </SectionFullScreen>

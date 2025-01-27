@@ -109,6 +109,8 @@ const analiticsFiltered = computed(() =>
     )
   })
 )
+
+
 // const analiticsFiltered = computed(() =>
 //   analitics.value.filter((analitica) => {
 //     return (
@@ -275,38 +277,23 @@ const deleteAnaliticaSeleccionada = async (analitica) => {
   isModalDeleteAnaliticsActive.value = true
 }
 
-// const updateAnaliticaSeleccionada = async (analitica) => {
-//   analiticaToEdit.value = { ...analitica }
-//   const today = new Date().toLocaleDateString()
-//   if (analitica.observaciones) {
-//     analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}\n${analitica.observaciones}`
-//   } else {
-//     analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}`
-//   }
-//   await nextTick()
-//   isModalActive.value = true
-// }
+
 
 const updateAnaliticaSeleccionada = async (analitica) => {
   // Crear copia profunda para evitar referencias
   analiticaToEdit.value = JSON.parse(JSON.stringify(analitica))
 
   const today = new Date().toLocaleDateString()
-  if (analiticaToEdit.value.observaciones) {
-    analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}\n${analiticaToEdit.value.observaciones}`
+  if (analiticaToEdit.value.registro) {
+    analiticaToEdit.value.registro = `${today} - Modificado por: ${loginStore.userName}\n${analiticaToEdit.value.observaciones}`
   } else {
-    analiticaToEdit.value.observaciones = `${today} - Modificado por: ${loginStore.userName}`
+    analiticaToEdit.value.registro = `${today} - Modificado por: ${loginStore.userName}`
   }
   await nextTick()
   isModalActive.value = true
 }
 
-// const storeAnaliticsToUpdate = (analitica) => {
-//   analiticaToUpdate.value = analitica
-// }
 
-// Computed para forzar actualización
-// const analiticas = computed(() => plantasStore.getAnaliticas)
 
 onMounted(() => {
   resetForm()

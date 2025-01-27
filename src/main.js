@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { plugin, defaultConfig } from '@formkit/vue'
+import PrimeVue from 'primevue/config'
+
 import config from '../formkit.config'
 import Vueform from '@vueform/vueform'
 import vueformConfig from '../vueform.config'
@@ -19,7 +21,8 @@ const pinia = createPinia()
 // Create Vue app
 createApp(App)
 .use(pinia)
-.use(router)
+  .use(router)
+  .use(PrimeVue, { theme: 'none'})
   .use(plugin, defaultConfig(config))
   .use(Vueform, vueformConfig)
   .mount('#app')
