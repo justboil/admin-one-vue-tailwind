@@ -39,6 +39,8 @@ const cloroValues = {
 
 const analiticaToDelete = ref(null)
 const analiticaToEdit = ref(null)
+const sortKey = ref('')
+const sortDir = ref('asc')
 
 const {
   form: filters,
@@ -110,21 +112,33 @@ const analiticsFiltered = computed(() =>
   })
 )
 
+const sortedAnalitics = computed(() => {
+  const analiticsToSort = analiticsFiltered.value
 
-// const analiticsFiltered = computed(() =>
-//   analitics.value.filter((analitica) => {
-//     return (
-//       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
-//       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
-//       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
-//       (!filters.persona || analitica.personal_fk === filters.persona) &&
-//       (!filters.zona || analitica.zona_fk === filters.zona) &&
-//       (!filters.operario || analitica.personal_fk === filters.operario) &&
-//       (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
-//       (!filters.type || analitica.type === filters.type)
-//     )
-//   })
-// )
+  if (!sortKey.value) return analiticsToSort
+
+  return [...analiticsToSort].sort((a, b) => {
+    const aValue = a[sortKey.value]
+    const bValue = b[sortKey.value]
+    
+    if (sortDir.value === 'asc') {
+      return aValue > bValue ? 1 : -1
+    }
+    return aValue < bValue ? 1 : -1
+  })
+})
+
+const handleSort = (key) => {
+  if (sortKey.value === key) {
+    sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+  } else {
+    sortKey.value = key
+    sortDir.value = 'asc'
+  }
+}
+
+
+
 
 const numPages = computed(() => Math.ceil(analitics.value.length / perPage.value))
 
@@ -193,25 +207,7 @@ const isWrongValues = (analitica) => {
   }
 }
 
-// const toggleAllRows = (isChecked) => {
-//   if (isChecked) {
-//     checkedRows.value = [...analiticsFiltered.value]
-//   } else {
-//     checkedRows.value = []
-//   }
-// }
-// const toggleAllRows = (isChecked) => {
-//   if (isChecked) {
-//     // Usar Set para evitar duplicados
-//     const uniqueRows = new Set([...checkedRows.value, ...analiticsFiltered.value])
-//     checkedRows.value = Array.from(uniqueRows)
-//   } else {
-//     // Filtrar solo las filas que no están en analiticsFiltered
-//     checkedRows.value = checkedRows.value.filter(row =>
-//       !analiticsFiltered.value.some(analitica => analitica.id === row.id)
-//     )
-//   }
-// }
+
 const toggleAllRows = (isChecked) => {
   if (isChecked) {
     analiticsFiltered.value.forEach((analitica) => {
@@ -399,10 +395,10 @@ onMounted(() => {
         /> -->
           <!-- <input type="checkbox" class="rounded"   @change="allRowsChecked($event)" /> -->
         </th>
-        <th>Fecha</th>
-        <th>Punto Muestreo</th>
-        <th>Operario</th>
-        <th>Tipo Analítica</th>
+        <th class="cursor-pointer" @click="handleSort('fecha')" >Fecha <span v-if="sortKey === 'fecha'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span></th>
+        <th class="cursor-pointer" @click="handleSort('punto_muestreo_fk')">Punto Muestreo <span v-if="sortKey === 'punto_muestreo_fk'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span></th>
+        <th class="cursor-pointer" @click="handleSort('personal_fk')">Operario<span v-if="sortKey === 'personal_fk'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span></th>
+        <th class="cursor-pointer" @click="handleSort('type')">Tipo<span v-if="sortKey === 'type'">{{ sortDir === 'asc' ? '↑' : '↓' }}</span></th>
         <th class="text-center">
           <TableCheckboxCell
             :model-value="showOnlyWrongValues"
@@ -414,7 +410,7 @@ onMounted(() => {
       </tr>
     </thead>
     <tbody>
-      <template v-for="analitica in analiticsFiltered" :key="analitica.id">
+      <template v-for="analitica in sortedAnalitics" :key="analitica.id">
         <tr>
           <TableCheckboxCell
             v-if="checkable"
