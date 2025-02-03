@@ -1,12 +1,13 @@
 {
   "name": "admin-one-vue-tailwind",
-  "version": "3.3.0",
+  "version": "3.3.0", 
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "start": "node app.js"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.28.0",

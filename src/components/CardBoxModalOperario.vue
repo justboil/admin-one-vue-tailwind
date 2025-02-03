@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
@@ -7,6 +7,7 @@ import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 import FormOperario from './FormOperario.vue'
+import { setOperarios } from '@/services/operarios'
 
 const props = defineProps({
   title: {
@@ -28,13 +29,12 @@ const props = defineProps({
   },
   client: {
     type: Object,
-    required:true,
-    default: () => ({
-      
-      
-    })
+    required: true,
+    default: () => ({})
   }
 })
+
+const formRef = ref(null)
 
 const modalTitle = computed(() => {
   return props.client ? `${props.title} ${props.client.name}` : props.title
@@ -52,7 +52,34 @@ const confirmCancel = (mode) => {
   emit(mode)
 }
 
-const confirm = () => confirmCancel('confirm')
+// const confirm = () => {
+//   if (formRef.value) {
+//     console.log('FORMREF',formRef.value);
+//     const formData = formRef.value?.submitHandler()
+//     console.log('FORMDATA',formData);
+//     if (formData) {
+//       emit('confirm', formData)
+//       confirmCancel('confirm')
+//       value.value = false
+//     } else {
+//       console.log('Form data is null')
+//     }
+//   }
+// }
+const confirm = async() => {
+  const formData = formRef.value?.submitHandler()
+  try {
+    await setOperarios(formData);
+    alert('Accion realizada con éxito');
+    confirmCancel('confirm')
+    
+  } catch (error) {
+    alert('Error al crear el operario');
+    console.log('error',error);
+  }
+  
+  // console.log(formRef.value?.submitHandler())
+}
 
 const cancel = () => confirmCancel('cancel')
 
@@ -82,13 +109,14 @@ window.addEventListener('keydown', (e) => {
       </CardBoxComponentTitle>
 
       <div class="space-y-3">
-        <slot />
+        <!-- <slot @close-modal="cancel"/> -->
+         <FormOperario ref="formRef" :client="client"/>
       </div>
 
       <template #footer>
         <BaseButtons>
-          <!-- <BaseButton :label="buttonLabel" :color="button" @click="confirm" /> -->
-          <!-- <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" /> -->
+          <BaseButton :label="buttonLabel" :color="button" @click="confirm" />
+          <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
         </BaseButtons>
       </template>
     </CardBox>

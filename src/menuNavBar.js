@@ -8,6 +8,7 @@ import {
   mdiAccountCog,
   mdiMapClock,
   mdiTestTube,
+  mdiSetCenter,
   
 } from '@mdi/js'
 
@@ -20,6 +21,11 @@ export default [
         icon:  mdiAccountCog,
         label: 'Operarios',
         to: {name:'operarios'}
+      },
+      {
+        icon: mdiSetCenter,
+        label: 'Unidades Operativas',
+        to: {name:'unidadesOperativas'}
       },
       {
         icon: mdiMapClock,

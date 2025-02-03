@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import {corsHeaders} from '../helpers/cors'
+// import {corsHeaders} from '../helpers/cors'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY; 
@@ -28,10 +28,8 @@ export const searchOperarios = async () => {
   const { data } = await supabase.from('personal').select('*')
   return data
 }
-export const searchZonasOperarios = async (nombre) => {
-  const { data } = await supabase.from('personal').select(`name,zonas_personal(zonas_abastecimiento(*))`).eq('name',nombre)
-  // const { data } = await supabase.from('zonas_abastecimiento').select(`name,zonas_personal(personal_fk,personal(name))`)
-  // console.log('SearchZonasOperarios: ',data);
+export const searchZonasOperarios = async (id) => {
+  const { data } = await supabase.from('personal').select(`id,zonas_personal(zonas_abastecimiento(*))`).eq('id',id)
   return data
 }
 

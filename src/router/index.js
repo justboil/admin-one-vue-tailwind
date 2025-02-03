@@ -1,6 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
-import ExcelUploaderView from '@/views/ExcelUploaderView.vue'
 import useLoginStore from '@/stores/login';
 import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
 
@@ -28,6 +27,12 @@ const routes = [
       path: '/admin/operarios',
       name: 'operarios',
       component: () => import('@/views/OperariosView.vue')  
+      },
+      {
+        title: 'Unidades Operativas',
+      path: '/admin/unidades_operativas',
+      name: 'unidadesOperativas',
+      component: () => import('@/views/UOTableView.vue')  
       },
 
 
@@ -155,6 +160,15 @@ const routes = [
     path: '/style',
     name: 'style',
     component: () => import('@/views/StyleView.vue')
+  },
+  {
+    meta: {
+      title: 'PrimeVue Table Example',
+      requiresAuth: true
+    },
+    path: '/prime-table',
+    name: 'prime-table',
+    component: () => import('@/views/PrimeTableExampleView.vue')
   }
 ]
 

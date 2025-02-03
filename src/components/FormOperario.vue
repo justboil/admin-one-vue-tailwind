@@ -16,8 +16,12 @@ import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.
 // import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { searchZonasOperarios } from '@/services/supabase'
+import { setOperarios } from '@/services/operarios'
+import OperariosView from '@/views/OperariosView.vue'
 
 // const zonasUoOperario = ref([]);
+
+// const emits = defineEmits(['cancelModal', 'closeModal'])
 
 const plantasStore = usePlantasStore()
 
@@ -28,18 +32,19 @@ const props = defineProps({
     default: () => ({})
   }
 })
-console.log('client: ', props.client)
+
+// console.log('client: ', props.client)
 
 const form = reactive({
-  name: props.client?.name || 'Nombre',
-  surname: props.client?.surname || 'Apellidos',
-  email: props.client?.email || 'email@example.com',
+  name: props.client?.name,
+  // surname: props.client?.surname,
+  email: props.client?.email,
   phone: props.client?.phone,
   id_zona: props.client?.id_zona,
-  ud_operativa_fk: props.client?.ud_operativa_fk,
-  type: props.client?.type || 'operario',
-  id:'',
-  zonas:[],
+  ud_operativa_fk: props.client?.ud_operativa_fk || 1,
+  type: props.client?.type || 4,
+  id: props.client?.id,
+  zonas: [],
   color: '',
   olor: [],
   sabor: '',
@@ -47,34 +52,68 @@ const form = reactive({
   prueba: '5'
 })
 
-console.log('form: ', form)
+// console.log('form: ', form)
 
 const returnTipoOperario = (tipoId) => {
   return plantasStore.getTipoPersonal.find((tipo) => tipo.id === tipoId)
-  
 }
+
+const submitHandler = () => {
+  // Validar formulario
+  if (!form.name || !form.email || !form.ud_operativa_fk || !form.type) {
+    console.error('Faltan campos requeridos')
+    return false
+  }
+
+  const operarioData = {
+    name: form.name,
+    email: form.email,
+    ud_operativa_fk: form.ud_operativa_fk,
+    type: form.type,
+    zonas: form.zonas,
+    phone: form.phone
+  }
+  return operarioData
+}
+
+defineExpose({
+  submitHandler
+})
 
 watch(
   () => props.client,
   (newClient) => {
-    form.name = newClient.name
-    form.surname = newClient.surname
-    form.email = newClient.email
-    form.phone = newClient.phone
-    form.id_zona = newClient.id_zona
-    form.type = newClient.type
-    form.ud_operativa_fk = newClient.ud_operativa_fk
-    form.type_bak = newClient.type_bak
-    zonasOperarioSeleccionadas(newClient.name)
-
-  },{inmediate:true}
+    form.name = newClient?.name
+    // form.surname = newClient.surname
+    form.email = newClient?.email
+    form.phone = newClient?.phone
+    form.id_zona = newClient?.id_zona
+    form.type = newClient?.type
+    form.ud_operativa_fk = newClient?.ud_operativa_fk
+    // form.type_bak = newClient.type_bak
+    zonasOperarioSeleccionadas(newClient?.id)
+  },
+  { inmediate: true }
 )
+// const cancelModal = () => {
+//   form.name = ''
+//   form.surname = ''
+//   form.email = ''
+//   form.phone = ''
+//   form.id_zona = ''
+//   form.type = ''
+//   form.ud_operativa_fk = ''
+//   form.zonas = []
+//   // form.type_bak = ''
+//   zonasOperarioSeleccionadas(form.name)
+//   emits('cancelModal')
+// }
 
-const selectZona = computed(() => {
-  return plantasStore.getZonas.map((zona) => {
-    return { value: zona.id, label: zona.name }
-  })
-})
+// const selectZona = computed(() => {
+//   return plantasStore.getZonas.map((zona) => {
+//     return { value: zona.id, label: zona.name }
+//   })
+// })
 
 const selectUO = computed(() => {
   return plantasStore.getUnidadesOperativas.map((uo) => {
@@ -82,14 +121,14 @@ const selectUO = computed(() => {
   })
 })
 
-const zonasOperario = computed(() => {
-  return plantasStore.getZonas.filter(
-    (zona) => zona.id_unidades_operativas_fk === form.unidad_operativa
-  )
-})
-const isChecked = (zonaId) => {
-  return form.zonas.some(z => z.id === zonaId)
-}
+// const zonasOperario = computed(() => {
+//   return plantasStore.getZonas.filter(
+//     (zona) => zona.id_unidades_operativas_fk === form.unidad_operativa
+//   )
+// })
+// const isChecked = (zonaId) => {
+//   return form.zonas.some(z => z.id === zonaId)
+// }
 
 const buscaZonasUO = (uo) => {
   // zonasUoOperario = plantasStore.getZonas.filter((zona) => zona.id_unidades_operativas_fk === uo)
@@ -105,273 +144,105 @@ const buscaZonasUO = (uo) => {
     })
 }
 
-const zonasOperarioSeleccionadas = async (nombre) => {
-  // console.log('zonasOperario: ', data)
-  const zonas = await searchZonasOperarios(nombre)
-  console.log('zonas: ',zonas);
-  // form.zonas= zonas.flatMap(zona => zona.zonas_personal.map(zone => ({
-    form.zonas = zonas.flatMap(zona => zona.zonas_personal.map(zone => zone.zonas_abastecimiento.id))
-   
-    // return{id:id,name:name}
-   
-   
-  console.log('Form.zonas ',form.zonas);
+const zonasOperarioSeleccionadas = async (id) => {
+
+  if(!id) {
+    console.warn('El valor de id es undefined o null')
+    return []
+  }
+  const zonas = await searchZonasOperarios(id)
+  // console.log('zonas: ', zonas)
+  form.zonas = zonas.flatMap((zona) =>
+    zona.zonas_personal.map((zone) => zone.zonas_abastecimiento.id)
+  )
+
+  // return{id:id,name:name}
+
+  // console.log('Form.zonas ', form.zonas)
   //  return zones
-  
-  
+
   // return searchZonasOperarios(nombre).map((zona) => { return { id: zona.zonas_personal.zonas_abastecimiento.id, name: zona.zonas_personal.zonas_abastecimiento.name } })
 }
-zonasOperarioSeleccionadas(form.name)
-
-const submit = () => {
-  //
-}
+zonasOperarioSeleccionadas(form.id)
 </script>
 
 <template>
   <SectionMain>
-    <!-- <SectionTitleLineWithButton :icon="mdiBallotOutline" title="Formulario de Analítica" main>
-        <BaseButton
-          href="https://www.aqlara.com"
-          target="_blank"
-          :icon="mdiMail"
-          label="Aqlara"
-          color="contrast"
-          rounded-full
-          small
-        />
-      </SectionTitleLineWithButton> -->
-    <CardBox form @submit.prevent="submit">
-      <div class="grid md-grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <FormKit
-          v-model="form.name"
-          type="text"
-          label="Nombre"
-          validation="required"
-          class="w-full"
-        />
-        <!-- <FormKit
-          v-model="form.surname"
-          type="text"
-          label="Apellidos"
-          validation="required"
-          class="w-full"
-        /> -->
-        <FormKit
-          v-model="form.email"
-          type="email"
-          label="e-mail"
-          validation="required"
-          class="w-full"
-        />
-      </div>
-
-      <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <FormKit
-          v-model="form.ud_operativa_fk"
-          type="select"
-          label="Unidad Operativa"
-          validation="required"
-          
-          class="w-full"
-          :options="selectUO"
-        />
-        <!-- <FormKit
-          v-model="form.id_zona"
-          type="select"https://www.udemy.com/course/curso-full-stack-nodejs-react-typescript-nestjs-nextjs/learn/lecture/46804283?start=5#overview
-          label="Zona"
-          validation="required"
-          class="w-full"
-          :options="selectZona"
-        /> -->
-        <FormKit
-          v-model="form.type"
-          :value="returnTipoOperario(form.type)"
-          :options="plantasStore.getTipoPersonal.map(tipo => ({ value: tipo.id, label: tipo.tipo }))"
-          type="select"
-          label="Tipo"
-          validation="required"
-          
-          class="w-full"
-        />
-      </div>
-
-      <!-- <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <FormKit
-          v-model="form.comunidad"
-          type="select"
-          label="Unidad Operativa"
-          validation="required"
-          class="w-full"
-        />
-        <FormKit
-          v-model="form.comunidad"
-          type="select"
-          label="Comunidad Autónoma"
-          validation="required"
-          class="w-full"
-        />
-      </div> -->
-
-      <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-        <!-- <FormKit
-          v-for="zone in buscaZonasUO(form.ud_operativa_fk)"
-          :key="zone.id"
-          type="checkbox"
-          :label="zone.name"
-          :help="zone.id"
-          name="terms"
-          :value="false"
-          validation="accepted"
-          validation-visibility="dirty"
-        />
-        <pre wrap>Zonas</pre>
-        <FormKit
-          v-for="zona in zonasOperarioSeleccionadas(form.name)"
-          :key="zona.id"
-          type="checkbox"
-          :label="zona.name"
-          :help="zona.id"
-          name="terms"
-          :value="true"
-          validation="accepted"
-          validation-visibility="dirty"
-        /> -->
-
-        <!-- <FormKit
-          v-for="zona in buscaZonasUO(form.ud_operativa_fk)"
-          :key="zona.id"
-          v-model="form.zonas"
-          type="checkbox"
-          :label="zona.label"
-          :help="zona.id"
-          name="zonas"
-        /> -->
-        <div class='w-full'>
-
+    <!-- <CardBox form @submit.prevent="submit"> -->
+    <CardBox>
+      <form @submit.prevent="submitHandler">
+        <div class="grid md-grid-cols-1 md:grid-cols-1 w-full mb-6">
           <FormKit
-          v-model="form.zonas"
-            :options="buscaZonasUO(form.ud_operativa_fk)"      
-            type="checkbox"
-            name="zonas"
-            options-class="mb-4 flex jutify-between items-center space-x-2 p-10 rounded-md w-full"
-            option-class="w-full"
-            
+            v-model="form.name"
+            type="text"
+            label="Nombre"
+            placeholder="Nombre"
+            validation="required"
+            class="w-full"
           />
         </div>
-            </div>
-            <!-- <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-        <FormKit
-          v-for="zona in buscaZonasUO(form.ud_operativa_fk)"
-          :key="zona.id"
-          type="checkbox"
-          :label="zona.name"
-          :help="zona.id"
-          name="terms"
-          :value="zonasOperarioSeleccionadas(form.name).some(selectedZona => selectedZona.id === zona.id)"
-          validation="accepted"
-          validation-visibility="dirty"
-        />
-          v-for="zona in plantasStore.getZonas"
-          :key="zona.id"
-          type="checkbox"
-          :label="zona.name"
-          :help="zona.id"
-          name="terms"
-          :value="false"
-          validation="accepted"
-          validation-visibility="dirty"
-        />
-        <pre wrap>Zonas</pre>
-      </div> -->
 
-      <!-- <FormField label="Nombre Operario">
-        <FormControl v-model="form.name" :icon="mdiAccount" />
-        <FormControl v-model="form.email" type="email" :icon="mdiMail" />
-      </FormField>
-      <div>
-        <!
+        <div class="grid md-grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <FormKit
+            v-model="form.email"
+            type="email"
+            label="e-mail"
+            placeholder="e-mail"
+            validation="required"
+            class="w-full"
+          />
+          <FormKit
+            v-model="form.phone"
+            type="number"
+            label="phone"
+            placeholder="phone"
+            validation="required"
+            class="w-full"
+          />
+        </div>
 
-        <FormField>
-          <FormField label="Fecha" help="Fecha">
-            <FormControl v-model="form.phone" type="date" placeholder="Fecha" />
-          </FormField>
-          <FormField label="Zona" help="Fecha">
-            <FormControl
-              v-model="form.zona"
-              type="select"
-              :options="
-                plantasStore.getZonas.map((zona) => ({
-                  label: zona.nombre,
-                  value: zona.id,
-                  selected: zona.id === props.client.zona
-                }))
-              "
-            />
-          </FormField>
-        </FormField>
-        <FormField>
-          <FormField label="Telefono">
-            <FormControl v-model="form.phone" type="input"></FormControl>
-          </FormField>
-          <FormField label="Cargo">
-            <FormControl
-              v-model="form.type"
-              type="select"
-              :options="[
-                { label: 'Operario', value: 5 },
-                { label: 'Administrativo', value: 4 },
-                { label: 'Técnico', value: 3 },
-                { label: 'Responsable de UO', value: 2 }
-              ]"
-            ></FormControl>
-            <FormControl type="input" label="Hola"></FormControl>
-            <FormControl
-              v-model="form.permision"
-              type="select[multiple]"
-              :options="[
-                { label: 'Administrador', value: 5 },
-                { label: 'Editor', value: 4 },
-                { label: 'Creador', value: 3 },
-                { label: 'Consulta', value: 2 }
-              ]"
-            ></FormControl>
-          </FormField>
-        </FormField>
-
-        <FormField label="Contraseña">
-          <FormControl
-            v-model="form.prueba"
+        <div class="grid md-grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <FormKit
+            v-model="form.ud_operativa_fk"
             type="select"
-            :options="[
-              { label: 'Administrador', value: 5 },
-              { label: 'Editor', value: 4 },
-              { label: 'Creador', value: 3 },
-              { label: 'Consulta', value: 2 }
-            ]"
-          ></FormControl>
-        </FormField>
+            label="Unidad Operativa"
+            validation="required"
+            class="w-full"
+            :options="selectUO"
+          />
 
-        <FormKit
-          v-model="form.color"
-          type="select"
-          :options="[
-            { label: 'Rojo', value: 'red' },
-            { label: 'Verde', value: 'green' },
-            { label: 'Azul', value: 'blue' }
-          ]"
-          label="Color"
-        /> -->
+          <FormKit
+            v-model="form.type"
+            :value="returnTipoOperario(form.type)"
+            :options="
+              plantasStore.getTipoPersonal.map((tipo) => ({ value: tipo.id, label: tipo.tipo }))
+            "
+            type="select"
+            label="Tipo"
+            validation="required"
+            class="w-full"
+          />
+        </div>
 
-        <!-- <div>
-          <BaseDivider />
-        </div> -->
-      <!-- </div> -->
+        <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+          <div class="w-full">
+            <FormKit
+              v-model="form.zonas"
+              :options="buscaZonasUO(form.ud_operativa_fk)"
+              type="checkbox"
+              name="zonas"
+              options-class="mb-4 flex jutify-between items-center space-x-2 p-10 rounded-md w-full"
+              option-class="w-full"
+            />
+          </div>
+        </div>
+      </form>
+
       <template #footer>
-        <BaseButtons>
-          <BaseButton type="submit" color="info" label="Guardar" />
-          <BaseButton type="reset" color="danger" outline label="Cancelar" />
-        </BaseButtons>
+        <!-- <BaseButtons>
+                <BaseButton type="submit" color="info" label="Guardarrrr" @click="submitHandler" />
+                <BaseButton type="reset" color="danger" outline label="Cancelar" @click="closeModal"/>
+              </BaseButtons> -->
       </template>
     </CardBox>
   </SectionMain>

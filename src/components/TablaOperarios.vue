@@ -1,25 +1,34 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
-import { mdiAccountHardHat, mdiAccountSearch, mdiEye, mdiShieldAccount, mdiTrashCan, mdiWrench } from '@mdi/js'
+import {
+  mdiAccountHardHat,
+  mdiAccountSearch,
+  mdiEye,
+  mdiPencil,
+  mdiShieldAccount,
+  mdiTrashCan,
+  mdiWrench
+} from '@mdi/js'
 import TableCheckboxCell from '@/components/TableCheckboxCell.vue'
 import BaseLevel from '@/components/BaseLevel.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 import CardBoxModalOperario from './CardBoxModalOperario.vue'
-import FormOperario from './FormOperario.vue'
 import CardBoxModal from './CardBoxModal.vue'
-import { Button } from 'primevue'
+import { deleteOperario } from '@/services/operarios'
 
 defineProps({
   checkable: Boolean
 })
 
+const plantaStore = usePlantasStore()
+
 const isModalActive = ref(false)
 const selectedClient = ref(null)
 
-const plantaStore = usePlantasStore()
+const operarioSeleccionado = ref(null)
 
 // const mainStore = useMainStore()
 
@@ -31,7 +40,7 @@ const operarios = computed(() => plantaStore.getOperarios)
 
 const isModalDangerActive = ref(false)
 
-const perPage = ref(5)
+const perPage = ref(10)
 
 const currentPage = ref(0)
 
@@ -59,6 +68,29 @@ const pagesList = computed(() => {
   return pagesList
 })
 
+const muestraTipoOperario = (tipo) => {
+  const tipoPersonal = plantaStore.getTipoPersonal.find((type) => type.id === tipo)
+  return tipoPersonal?.tipo ?? 'N/A'
+}
+
+const deleteOperarioSeleccionado = (operario) => {
+  operarioSeleccionado.value = operario
+  isModalDangerActive.value = true
+}
+
+const handleDeleteOperario = async () => {
+  try {
+    const id = operarioSeleccionado.value.id
+    await deleteOperario(id)
+    await plantaStore.loadOperarios()
+    isModalDangerActive.value = false
+    operarioSeleccionado.value = null
+    alert('Operario eliminado correctamente')
+  } catch (error) {
+    alert('Error al borrar operario')
+    console.log('error al borrar operario: ', error)
+  }
+}
 
 // const getTipoPersonal = (id) =>
 //   computed(() => {
@@ -66,24 +98,24 @@ const pagesList = computed(() => {
 //     return tipo.tipo
 //   })
 
-  // console.log(getTipoPersonal(1));
+// console.log(getTipoPersonal(1));
 
 const getTypeIcon = (type) => {
-  console.log(type);
-            switch (type) {
-              case 'OPERARIO/A SERVICIO\n':
-                return mdiWrench; // Replace with the appropriate icon for 'admin'
-              case 'RESPONSABLE SERVICIO\n':
-                return mdiShieldAccount; // Replace with the appropriate icon for 'user'
-              case 'TÉCNICO/A SERVICIO\n':
-                return mdiAccountHardHat; // Replace with the appropriate icon for 'user'
-              case 'ADMINISTRATIVO/A SERVICIO\n':
-                return mdiAccountSearch; // Replace with the appropriate icon for 'user'
-              default:
-                return mdiEye; // Default icon
-            }
-          }
-const openmModal = (client) => {
+  // console.log(type)
+  switch (type) {
+    case 4:
+      return mdiWrench // Replace with the appropriate icon for 'admin'
+    case 1:
+      return mdiShieldAccount // Replace with the appropriate icon for 'user'
+    case 2:
+      return mdiAccountHardHat // Replace with the appropriate icon for 'user'
+    case 3:
+      return mdiAccountSearch // Replace with the appropriate icon for 'user'
+    default:
+      return mdiEye // Default icon
+  }
+}
+const openModal = (client) => {
   selectedClient.value = client
   isModalActive.value = true
 }
@@ -113,7 +145,6 @@ const nombreUO = (id) =>
     const uo = plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)
     return uo?.name ?? 'N/A'
   })
-
 </script>
 
 <template>
@@ -122,13 +153,23 @@ const nombreUO = (id) =>
     v-model="isModalActive"
     :client="selectedClient"
     :title="`Editar Operario`"
+    has-cancel
   >
-    <FormOperario :client="selectedClient" />
+    <!-- <FormOperario :client="selectedClient" /> -->
   </CardBoxModalOperario>
 
-  <CardBoxModal v-model="isModalDangerActive" title="Please confirm" button="danger" has-cancel>
-    <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-    <p>This is sample modal</p>
+  <CardBoxModal
+    v-model="isModalDangerActive"
+    title="Eliminar Operario"
+    button="danger"
+    has-cancel
+    @confirm="handleDeleteOperario"
+  >
+    <p>
+      Esta seguro que desea eliminar el operario <b>{{ operarioSeleccionado?.name }}</b
+      >?
+    </p>
+    <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
 
   <table>
@@ -155,13 +196,13 @@ const nombreUO = (id) =>
           {{ client.name }}
         </td>
         <td data-label="Tipo">
-          <BaseButton color="info" :icon="getTypeIcon(client.type_bak)" small class="mr-2" />
-          
+          <BaseButton color="info" :icon="getTypeIcon(client.type)" small class="mr-2" />
 
-          {{ client.type_bak }}
+          <!-- {{ client.type_bak }} -->
+          {{ muestraTipoOperario(client.type) }}
         </td>
-        <td data-label="email" >
-            {{ client.email }}
+        <td data-label="email">
+          {{ client.email }}
         </td>
         <td data-label="Unidad Operativa">
           {{ nombreUO(client.ud_operativa_fk) }}
@@ -178,19 +219,19 @@ const nombreUO = (id) =>
         </td> -->
         <td class="before:hidden lg:w-1 whitespace-nowrap">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton color="info" :icon="mdiEye" small @click="openmModal(client)" />
+            <BaseButton color="info" :icon="mdiPencil" small @click="openModal(client)" />
             <BaseButton
               color="danger"
               :icon="mdiTrashCan"
               small
-              @click="isModalDangerActive = true"
+              @click="deleteOperarioSeleccionado(client)"
             />
+            <BaseButton />
           </BaseButtons>
         </td>
       </tr>
     </tbody>
   </table>
-  <Button>Hola</Button>
   <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
     <BaseLevel>
       <BaseButtons>

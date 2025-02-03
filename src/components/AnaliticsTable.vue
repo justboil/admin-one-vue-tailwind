@@ -106,7 +106,7 @@ const analiticsFiltered = computed(() =>
       (!filters.persona || analitica.personal_fk === filters.persona) &&
       (!filters.zona || analitica.zona_fk === filters.zona) &&
       (!filters.operario || analitica.personal_fk === filters.operario) &&
-      // (!filters.infraestructura || analitica.infraestructura_fk === filters.infraestructura) &&
+      (!filters.infraestructura || analitica.infraestructura_id === filters.infraestructura) &&
       (!filters.type || analitica.type === filters.type)
     )
   })
