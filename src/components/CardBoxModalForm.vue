@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
@@ -35,6 +34,10 @@ const props = defineProps({
   }
 })
 
+const cancela = () => {
+  console.log('cancela')
+}
+
 const emit = defineEmits(['update:modelValue'])
 
 const value = computed({
@@ -61,7 +64,7 @@ window.addEventListener('keydown', (e) => {
 
 defineExpose({
   confirm,
-  cancel
+  cancela
 })
 </script>
 
@@ -84,15 +87,15 @@ defineExpose({
       </CardBoxComponentTitle>
 
       <div class="space-y-3">
-        <slot @submitHandler="confirma"/>
+        <slot />
       </div>
 
-      <template #footer>
+      <!-- <template #footer>
         <BaseButtons>
           <BaseButton v-if="!noButton" :label="buttonLabel" :color="button" @click="confirm" />
           <BaseButton v-if="hasCancel" label="Cancelar" :color="button" outline @click="cancel" />
         </BaseButtons>
-      </template>
+      </template> -->
     </CardBox>
   </OverlayLayer>
 </template>

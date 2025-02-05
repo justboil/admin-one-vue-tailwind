@@ -28,7 +28,7 @@ const props = defineProps({
 
 const avatar = computed(
     () =>props.avatar ??
-      `https://ui-avatars.com/api/?name=${props.username}&background=random&font-size=0.75&bold=true&color=fff&rounded=true&size=512`
+      `https://ui-avatars.com/api/?name=${props.username}&background=random&font-size=0.75&bold=true&color=fff&rounded=false&size=512`
   )
 const username = computed(() => props.username)
 </script>
@@ -38,7 +38,7 @@ const username = computed(() => props.username)
     <img
       :src="avatar"
       :alt="username"
-      class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"
+      class="rounded block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800"
     />
     <slot />
   </div>

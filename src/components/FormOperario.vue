@@ -33,7 +33,7 @@ const props = defineProps({
   }
 })
 
-// console.log('client: ', props.client)
+
 
 const form = reactive({
   name: props.client?.name,
@@ -76,9 +76,6 @@ const submitHandler = () => {
   return operarioData
 }
 
-defineExpose({
-  submitHandler
-})
 
 watch(
   () => props.client,
@@ -156,14 +153,13 @@ const zonasOperarioSeleccionadas = async (id) => {
     zona.zonas_personal.map((zone) => zone.zonas_abastecimiento.id)
   )
 
-  // return{id:id,name:name}
-
-  // console.log('Form.zonas ', form.zonas)
-  //  return zones
-
-  // return searchZonasOperarios(nombre).map((zona) => { return { id: zona.zonas_personal.zonas_abastecimiento.id, name: zona.zonas_personal.zonas_abastecimiento.name } })
 }
+
 zonasOperarioSeleccionadas(form.id)
+
+defineExpose({
+  submitHandler
+})
 </script>
 
 <template>

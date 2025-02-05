@@ -1,55 +1,18 @@
 <script setup>
-import {  mdiFlaskEmptyOutline, mdiFilter, mdiDownload } from '@mdi/js'
+import {  mdiFlaskEmptyOutline, mdiFilter, mdiDownload, mdiSetCenter } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import {ref} from 'vue'
 import CardBox from '@/components/CardBox.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import BaseButton from '@/components/BaseButton.vue'
-import useExtractdata from '@/composables/useUploadFormData'
 import UOTable from '@/components/UOTable.vue'
 
 const tablaAnaliticas = ref();
-const { exportXMLData } = useExtractdata()
 
 const limpiarFiltros=()=>{
   tablaAnaliticas.value?.resetForm();
 }
-
-const downloadXML = () => {
-  console.log('TablaAnaliticas:', tablaAnaliticas.value)
-  console.log('CheckedRows:', tablaAnaliticas.value?.checkedRows)
-  // Obtener analíticas seleccionadas
-  const analiticasSeleccionadas = tablaAnaliticas.value?.checkedRows || []
-
-  console.log('Analíticas seleccionadas:', analiticasSeleccionadas)
-  
-  if (analiticasSeleccionadas.length === 0) {
-    alert('Por favor, seleccione al menos una analítica')
-    return
-  }
-
-  // Generar XML
-  const xmlContent = exportXMLData(analiticasSeleccionadas)
-  
-  // Crear Blob
-  const blob = new Blob([xmlContent], { type: 'application/xml' })
-  
-  // Crear URL y link para descarga
-  const url = window.URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.setAttribute('download', `analiticas_${new Date().toISOString().split('T')[0]}.xml`)
-  
-  // Trigger descarga
-  document.body.appendChild(link)
-  link.click()
-  
-  // Limpieza
-  document.body.removeChild(link)
-  window.URL.revokeObjectURL(url)
-}
-
 
 
 defineEmits(['clean-filters']);
@@ -62,7 +25,7 @@ defineEmits(['clean-filters']);
 
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton :icon="mdiFlaskEmptyOutline" title="Unidades Operativas" main>
+      <SectionTitleLineWithButton :icon="mdiSetCenter" title="Unidades Operativas" main>
         <div class="flex gap-2">
           <BaseButton
           target="_blank"

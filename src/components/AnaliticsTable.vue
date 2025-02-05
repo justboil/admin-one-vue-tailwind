@@ -63,8 +63,8 @@ defineExpose({ resetForm, checkedRows })
 // const checkboxRefs = ref([])
 
 // const filters = ref([])
-const expandedRows = ref([])
 const showOnlyWrongValues = ref(false)
+const expandedRows = ref([])
 
 const toggleExpand = (id) => {
   if (expandedRows.value.includes(id)) {
