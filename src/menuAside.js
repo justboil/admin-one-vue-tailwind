@@ -40,11 +40,11 @@ export default [
         label: 'Mapa',
         to: {name: "mapa"},
       },
-      {
-        label: 'Prime Table Example',
-        to: {name: "prime-table"},
-        icon: mdiSquareEditOutline
-      }
+      // {
+      //   label: 'Prime Table Example',
+      //   to: {name: "prime-table"},
+      //   icon: mdiSquareEditOutline
+      // }
     ]
   },
   {

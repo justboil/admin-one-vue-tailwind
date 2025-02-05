@@ -57,7 +57,6 @@ export const anularUO = async (id) => {
       .from('unidades_operativas')
       .update({ activo: false })
       .eq('id', id)
-      .select()
     if (errorUO) throw errorUO
   } catch (error) {
     console.error('Error en anularUO:', error)
