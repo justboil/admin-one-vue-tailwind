@@ -161,15 +161,15 @@ const routes = [
     name: 'style',
     component: () => import('@/views/StyleView.vue')
   },
-  {
-    meta: {
-      title: 'PrimeVue Table Example',
-      requiresAuth: true
-    },
-    path: '/prime-table',
-    name: 'prime-table',
-    component: () => import('@/views/PrimeTableExampleView.vue')
-  }
+  // {
+  //   meta: {
+  //     title: 'PrimeVue Table Example',
+  //     requiresAuth: true
+  //   },
+  //   path: '/prime-table',
+  //   name: 'prime-table',
+  //   component: () => import('@/views/PrimeTableExampleView.vue')
+  // }
 ]
 
 const router = createRouter({
