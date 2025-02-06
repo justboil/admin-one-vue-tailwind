@@ -19,3 +19,22 @@ export const createZona = async (zona) => {
     throw error
   }
 }
+
+export const anularZona = async (id) => {
+    console.log('ID: ',id)
+    try {
+      const { data, error: errorUO } = await supabase
+        .from('zonas_abastecimiento')
+        .upsert({ id: id, activa: false }, { onConflict: ['id'] })
+        .select()
+  
+      if (errorUO) {
+        console.error('Error SQL:', errorUO)
+        throw errorUO
+      }
+      return data
+    } catch (error) {
+      console.error('Error en anularUO:', error)
+      throw error
+    }
+  }

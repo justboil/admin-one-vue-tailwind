@@ -118,7 +118,7 @@ const zonasUOSeleccionadas = async (id) => {
     .map((zona) => {
       return zona.id
     })
-  console.log('ZONAS SELECCIONADAS: ', zonas)
+  // console.log('ZONAS SELECCIONADAS: ', zonas)
   form.zonas = zonas
 }
 

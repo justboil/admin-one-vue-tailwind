@@ -14,9 +14,9 @@ import {
 import BaseIcon from './BaseIcon.vue'
 import CardBoxModal from './CardBoxModal.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
-import { anularUO, createUO, updateUO } from '@/services/uo'
+// import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
-import { createZona } from '@/services/zonas'
+import { createZona, anularZona } from '@/services/zonas'
 
 defineProps({
   checkable: {
@@ -80,17 +80,17 @@ const anularZonaSeleccionada = (zona) => {
   isModalDangerActive.value = true
 }
 
-const handleDeleteUO = async () => {
+const handleDeleteZona = async () => {
   try {
     const id = dataToEdit.value.id
-    await anularUO(id)
-    await plantaStore.loadUnidadesOperativas()
+    await anularZona(id)
+    await plantaStore.loadZonas()
     isModalDangerActive.value = false
     dataToEdit.value = null
-    alert('Unidad Operativa eliminada correctamente')
+    alert('Zona de Abastecimiento eliminada correctamente')
   } catch (error) {
-    console.log('error al borrar UO: ', error)
-    alert('error al borrar UO: ')
+    console.log('error al borrar Zona de Abastecimiento: ', error)
+    alert('error al borrar Zona de Abastecimiento: ')
   }
 }
 
@@ -133,14 +133,14 @@ defineExpose({
 
   <CardBoxModal
     v-model="isModalDangerActive"
-    title="Eliminar Unidad Operativa"
+    title="Eliminar Zona de Abastecimiento"
     button="danger"
     has-cancel
-    @confirm="handleDeleteUO"
+    @confirm="handleDeleteZona"
   >
     <p>
-      Esta seguro que desea eliminar la Unidad Operativa
-      <b>{{ dataToEdit?.name }} ({{ dataToEdit?.description }})</b>?
+      Esta seguro que desea eliminar la Zona de Abastecimiento
+      <b>{{ dataToEdit?.name }}</b>?
     </p>
     <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
