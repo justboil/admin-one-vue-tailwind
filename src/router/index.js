@@ -34,6 +34,12 @@ const routes = [
       name: 'unidadesOperativas',
       component: () => import('@/views/UOTableView.vue')  
       },
+      {
+        title: 'Zonas',
+      path: '/admin/zonas',
+      name: 'zonas',
+      component: () => import('@/views/ZonasAdminView.vue') 
+      },
 
 
     ],

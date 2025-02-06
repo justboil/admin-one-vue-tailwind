@@ -29,7 +29,16 @@ export default [
       },
       {
         icon: mdiMapClock,
-        label: 'Zonas'
+        label: 'Zonas',
+        to: {name:'zonas'}
+      },
+      {
+        icon: mdiMapClock,
+        label: 'Instalaciones',
+      },
+      {
+        icon: mdiMapClock,
+        label: 'Puntos de Muestreo',
       },
       {
         isDivider: true
