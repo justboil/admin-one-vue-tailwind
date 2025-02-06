@@ -8,6 +8,9 @@ import OverlayLayer from '@/components/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 import FormOperario from './FormOperario.vue'
 import { setOperarios, updateOperariobyId } from '@/services/operarios'
+import { usePlantasStore } from '@/stores/plantas'
+
+const plantaStore= usePlantasStore()
 
 const props = defineProps({
   title: {
@@ -29,8 +32,16 @@ const props = defineProps({
   },
   client: {
     type: Object,
-    required: true,
-    default: () => ({})
+    required: false,
+    default: () => ({
+      id: null,
+      name: '',
+      email: '',
+      phone: '',
+      ud_operativa_fk: null,
+      type: null,
+      zonas: []
+    })
   }
 })
 
@@ -52,20 +63,6 @@ const confirmCancel = (mode) => {
   emit(mode)
 }
 
-// const confirm = () => {
-//   if (formRef.value) {
-//     console.log('FORMREF',formRef.value);
-//     const formData = formRef.value?.submitHandler()
-//     console.log('FORMDATA',formData);
-//     if (formData) {
-//       emit('confirm', formData)
-//       confirmCancel('confirm')
-//       value.value = false
-//     } else {
-//       console.log('Form data is null')
-//     }
-//   }
-// }
 const confirm = async () => {
   try {
     const formData = formRef.value?.submitHandler()
@@ -81,7 +78,7 @@ const confirm = async () => {
       // Actualizar operario existente
       await updateOperariobyId(formData)
     }
-
+plantaStore.loadOperarios()
     alert('Operación realizada con éxito')
     confirmCancel('confirm')
 

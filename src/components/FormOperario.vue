@@ -1,27 +1,10 @@
 <script setup>
-import { computed, reactive, ref, toValue, watch } from 'vue'
-import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
+import { computed, reactive, watch } from 'vue'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
-// import FormFilePicker from '@/components/FormFilePicker.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
-// import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { searchZonasOperarios } from '@/services/supabase'
-import { setOperarios } from '@/services/operarios'
-import OperariosView from '@/views/OperariosView.vue'
 
-// const zonasUoOperario = ref([]);
-
-// const emits = defineEmits(['cancelModal', 'closeModal'])
 
 const plantasStore = usePlantasStore()
 
@@ -37,7 +20,6 @@ const props = defineProps({
 
 const form = reactive({
   name: props.client?.name,
-  // surname: props.client?.surname,
   email: props.client?.email,
   phone: props.client?.phone,
   id_zona: props.client?.id_zona,
@@ -52,7 +34,6 @@ const form = reactive({
   prueba: '5'
 })
 
-// console.log('form: ', form)
 
 const returnTipoOperario = (tipoId) => {
   return plantasStore.getTipoPersonal.find((tipo) => tipo.id === tipoId)
@@ -94,25 +75,7 @@ watch(
   },
   { inmediate: true }
 )
-// const cancelModal = () => {
-//   form.name = ''
-//   form.surname = ''
-//   form.email = ''
-//   form.phone = ''
-//   form.id_zona = ''
-//   form.type = ''
-//   form.ud_operativa_fk = ''
-//   form.zonas = []
-//   // form.type_bak = ''
-//   zonasOperarioSeleccionadas(form.name)
-//   emits('cancelModal')
-// }
 
-// const selectZona = computed(() => {
-//   return plantasStore.getZonas.map((zona) => {
-//     return { value: zona.id, label: zona.name }
-//   })
-// })
 
 const selectUO = computed(() => {
   return plantasStore.getUnidadesOperativas.map((uo) => {
@@ -120,17 +83,9 @@ const selectUO = computed(() => {
   })
 })
 
-// const zonasOperario = computed(() => {
-//   return plantasStore.getZonas.filter(
-//     (zona) => zona.id_unidades_operativas_fk === form.unidad_operativa
-//   )
-// })
-// const isChecked = (zonaId) => {
-//   return form.zonas.some(z => z.id === zonaId)
-// }
+
 
 const buscaZonasUO = (uo) => {
-  // zonasUoOperario = plantasStore.getZonas.filter((zona) => zona.id_unidades_operativas_fk === uo)
   if (!uo) {
     console.warn('El valor de unidad operativa es undefined o null')
     return []
@@ -138,7 +93,6 @@ const buscaZonasUO = (uo) => {
   return plantasStore.getZonas
     .filter((zona) => zona.unidades_operativas_fk === uo)
     .map((zona) => {
-      // return { id: zona.id, name: zona.name }
       return { value: zona.id, label: zona.name }
     })
 }
@@ -150,7 +104,6 @@ const zonasOperarioSeleccionadas = async (id) => {
     return []
   }
   const zonas = await searchZonasOperarios(id)
-  // console.log('zonas: ', zonas)
   form.zonas = zonas.flatMap((zona) =>
     zona.zonas_personal.map((zone) => zone.zonas_abastecimiento.id)
   )

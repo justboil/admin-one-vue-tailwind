@@ -103,10 +103,10 @@ export const updateOperariobyId = async (data) => {
       .update(cleanDataOperario)
       .eq('id', data.id)
       .select()
+    
 
     if (errorOperario) throw errorOperario
 
-    console.log('UpdateDataOperario: ', updateDataOperario)
 
     // 3. Limpiar datos de las zonas del operario
     const { error: errorDelete } = await supabase

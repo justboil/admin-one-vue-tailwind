@@ -78,10 +78,14 @@ const handleDeleteUO = async () => {
 const saveForm = (form) => {
   //  console.log("ESCRITO Y HECHO", form);
   if (!form.id) {
+    console.log('Formulario Nuevo:', form.id);
     createUO(form)
+  
   } else {
+    console.log('Formulario Editado:', form);
     updateUO(form)
   }
+  plantaStore.loadUnidadesOperativas()
 }
 
 watch(unidadesOperativas, (newValue) => {

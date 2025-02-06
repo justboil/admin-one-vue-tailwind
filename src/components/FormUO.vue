@@ -38,7 +38,7 @@ const props = defineProps({
 
 
 const form = reactive({
-  id: props.uo?.id,
+  id: props.uo?.id || null,
   name: props.uo?.name,
   description: props.uo?.description,
   zonas: []

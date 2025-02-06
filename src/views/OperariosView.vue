@@ -39,9 +39,9 @@ const nuevoOperarioModal = () => {
       <CardBoxModalOperario
       v-model="isModalActive"
       :title="`Editar Operario`"
-      :client="null"
       has-cancel      
       >
+      <!-- :client="null" -->
       <!-- v-if="selectedClient !== null" -->
         <FormOperario @cancel-modal="isModalActive=false" />
       </CardBoxModalOperario>
