@@ -90,7 +90,7 @@ export const updateOperariobyId = async (data) => {
     // console.log('updateOperariobyId: ',id, data);
     // 1. Limpiar datos del operario
     const cleanDataOperario = {
-      id: data.id,
+      // id: data.id,
       name: data.name,
       email: data.email,
       phone: data.phone,
@@ -119,7 +119,7 @@ export const updateOperariobyId = async (data) => {
     // 4. Preparar nuevas zonas
     const zonasToInsert = data.zonas.map((zona_fk) => ({
       personal_fk: data.id,
-      zona_fk: zona_fk
+      zonas_fk: zona_fk
     }))
 
     // 5. Insertar nuevas zonas

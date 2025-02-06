@@ -78,7 +78,7 @@ const zonasPorComunidadAutonoma = (ca) => {
     .map((zona) => {
       return { value: zona.id, label: zona.name }
     })
-  console.log('comAut: ', comAut)
+  // console.log('comAut: ', comAut)
   return comAut
 }
 

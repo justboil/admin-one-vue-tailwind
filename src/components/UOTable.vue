@@ -16,10 +16,9 @@ import BaseIcon from './BaseIcon.vue'
 import CardBoxModal from './CardBoxModal.vue'
 import FormUO from './FormUO.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
-import { anularUO } from '@/services/uo'
+import { anularUO, createUO, updateUO } from '@/services/uo'
 
-
- defineProps({
+defineProps({
   checkable: {
     type: Boolean,
     default: false
@@ -27,9 +26,7 @@ import { anularUO } from '@/services/uo'
 })
 
 const plantaStore = usePlantasStore()
-const unidadesOperativas = computed(() => plantaStore.unidadesOperativas.filter(uo => uo.activo))
-
-
+const unidadesOperativas = computed(() => plantaStore.unidadesOperativas.filter((uo) => uo.activo))
 
 const isModalDangerActive = ref(false)
 const uoToEdit = ref(null)
@@ -50,13 +47,13 @@ const toggleExpand = (id) => {
 }
 
 const openModal = (uo) => {
-    uoToEdit.value = uo;
-    isModalOpen.value = true;
+  uoToEdit.value = uo
+  isModalOpen.value = true
 }
 
 const closeModal = () => {
-    isModalOpen.value = false;
-    uoToEdit.value = null;
+  isModalOpen.value = false
+  uoToEdit.value = null
 }
 
 const anularUOSeleccionada = (uo) => {
@@ -65,52 +62,49 @@ const anularUOSeleccionada = (uo) => {
 }
 
 const handleDeleteUO = async () => {
-
-    try {
-        const id = uoToEdit.value.id
-        anularUO(id)
-        isModalDangerActive.value = false
-        uoToEdit.value = null
-        alert('Unidad Operativa eliminada correctamente')
-        
-    }catch(error){
-        alert('error al borrar UO: ', error)
-    }
-//   try {
-//     const id = operarioSeleccionado.value.id
-//     await deleteOperario(id)
-//     await plantaStore.loadOperarios()
-//     isModalDangerActive.value = false
-//     operarioSeleccionado.value = null
-//     alert('Operario eliminado correctamente')
-//   } catch (error) {
-//     alert('Error al borrar operario')
-//     console.log('error al borrar operario: ', error)
-//   }
+  try {
+    const id = uoToEdit.value.id
+    await anularUO(id)
+    await plantaStore.loadUnidadesOperativas()
+    isModalDangerActive.value = false
+    uoToEdit.value = null
+    alert('Unidad Operativa eliminada correctamente')
+  } catch (error) {
+    console.log('error al borrar UO: ', error)
+    alert('error al borrar UO: ')
+  }
 }
 
 const saveForm = (form) => {
- console.log("ESCRITO Y HECHO", form);
+  //  console.log("ESCRITO Y HECHO", form);
+  if (!form.id) {
+    createUO(form)
+  } else {
+    updateUO(form)
+  }
 }
 
 watch(unidadesOperativas, (newValue) => {
   console.log('Unidades Operativas:', newValue)
 })
+
+defineExpose({
+  openModal
+})
 </script>
 
 <template>
-
-<CardBoxModalForm 
+  <CardBoxModalForm
     v-if="uoToEdit !== null"
     v-model="isModalOpen"
     :uo="uoToEdit"
-    :title="`Editar Unidad Operativa ${uoToEdit?.description}`"
+    :title="
+      uoToEdit ? `Editar Unidad Operativa ${uoToEdit?.description}` : 'Crear Nueva Unidad Operativa'
+    "
     has-cancel
-    >
-  <FormUO :uo="uoToEdit" @submit="saveForm" @close-modal="closeModal"/>
+  >
+    <FormUO :uo="uoToEdit" @submit="saveForm" @close-modal="closeModal" />
   </CardBoxModalForm>
-
-  
 
   <CardBoxModal
     v-model="isModalDangerActive"
@@ -120,14 +114,11 @@ watch(unidadesOperativas, (newValue) => {
     @confirm="handleDeleteUO"
   >
     <p>
-      Esta seguro que desea eliminar la Unidad Operativa <b>{{ uoToEdit?.name }} ({{ uoToEdit?.description }})</b
-      >?
+      Esta seguro que desea eliminar la Unidad Operativa
+      <b>{{ uoToEdit?.name }} ({{ uoToEdit?.description }})</b>?
     </p>
     <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
-
-
-
 
   <div>
     <table>
@@ -146,7 +137,8 @@ watch(unidadesOperativas, (newValue) => {
           <tr>
             <!-- <TableCheckboxCell  /> -->
             <td class="border-b-0 lg:w-6 before:hidden">
-             <UserAvatar :username="uo.name.slice(-2)" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" /> <!-- debe enviar un string para escribir el avatar -->
+              <UserAvatar :username="uo.name.slice(-2)" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
+              <!-- debe enviar un string para escribir el avatar -->
             </td>
             <td data-label="Code">
               {{ uo.name }}
@@ -193,9 +185,13 @@ watch(unidadesOperativas, (newValue) => {
             <td class="w-1">
               <div class="flex flex-col items-center space-y-2">
                 <BaseButtons class="pl-8">
-                  <BaseButton :icon="mdiPencil" color="info" @click="openModal(uo)" />           
-                
-                  <BaseButton :icon="mdiTrashCan" color="danger" @click="anularUOSeleccionada(uo)" />
+                  <BaseButton :icon="mdiPencil" color="info" @click="openModal(uo)" />
+
+                  <BaseButton
+                    :icon="mdiTrashCan"
+                    color="danger"
+                    @click="anularUOSeleccionada(uo)"
+                  />
                 </BaseButtons>
               </div>
             </td>

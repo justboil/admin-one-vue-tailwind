@@ -66,6 +66,7 @@ const submitHandler = () => {
   }
 
   const operarioData = {
+    id: form.id || null,
     name: form.name,
     email: form.email,
     ud_operativa_fk: form.ud_operativa_fk,
@@ -80,6 +81,7 @@ const submitHandler = () => {
 watch(
   () => props.client,
   (newClient) => {
+    form.id = newClient?.id || null
     form.name = newClient?.name
     // form.surname = newClient.surname
     form.email = newClient?.email

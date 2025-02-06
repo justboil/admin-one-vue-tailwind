@@ -3,12 +3,11 @@ import BaseButton from '@/components/BaseButton.vue'
 import CardBox from '@/components/CardBox.vue'
 import CardBoxModalOperario from '@/components/CardBoxModalOperario.vue'
 import FormOperario from '@/components/FormOperario.vue'
-import NotificationBar from '@/components/NotificationBar.vue'
 import SectionMain from '@/components/SectionMain.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import TablaOperarios from '@/components/TablaOperarios.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import { mdiAccountHardHat, mdiWater } from '@mdi/js'
+import { mdiAccountHardHat } from '@mdi/js'
 import { ref } from 'vue'
 
 

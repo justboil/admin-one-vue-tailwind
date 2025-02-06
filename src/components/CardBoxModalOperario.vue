@@ -7,7 +7,7 @@ import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 import FormOperario from './FormOperario.vue'
-import { setOperarios } from '@/services/operarios'
+import { setOperarios, updateOperariobyId } from '@/services/operarios'
 
 const props = defineProps({
   title: {
@@ -66,20 +66,33 @@ const confirmCancel = (mode) => {
 //     }
 //   }
 // }
-const confirm = async() => {
-  const formData = formRef.value?.submitHandler()
+const confirm = async () => {
   try {
-    await setOperarios(formData);
-    alert('Accion realizada con éxito');
-    confirmCancel('confirm')
+    const formData = formRef.value?.submitHandler()
     
+    if (!formData) {
+      throw new Error('Datos del formulario no válidos')
+    }
+
+    if (!formData.id) {
+      // Crear nuevo operario
+      await setOperarios(formData)
+    } else {
+      // Actualizar operario existente
+      await updateOperariobyId(formData)
+    }
+
+    alert('Operación realizada con éxito')
+    confirmCancel('confirm')
+
   } catch (error) {
-    alert('Error al crear el operario');
-    console.log('error',error);
+    console.error('Error en operación:', error)
+    alert(`Error: ${error.message || 'Error desconocido'}`)
   }
-  
-  // console.log(formRef.value?.submitHandler())
 }
+
+
+
 
 const cancel = () => confirmCancel('cancel')
 

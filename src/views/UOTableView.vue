@@ -1,5 +1,5 @@
 <script setup>
-import {  mdiFlaskEmptyOutline, mdiFilter, mdiDownload, mdiSetCenter } from '@mdi/js'
+import {  mdiFlaskEmptyOutline, mdiFilter, mdiDownload, mdiSetCenter, mdiPlusBox } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import {ref} from 'vue'
 import CardBox from '@/components/CardBox.vue'
@@ -7,15 +7,20 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import UOTable from '@/components/UOTable.vue'
+import CardBoxModalForm from '@/components/CardBoxModalForm.vue'
+import FormUO from '@/components/FormUO.vue'
 
-const tablaAnaliticas = ref();
 
-const limpiarFiltros=()=>{
-  tablaAnaliticas.value?.resetForm();
+const isModalActive = ref(false)
+const table=ref(null)
+
+
+const createUO = () => {
+  // isModalActive.value = true;
+  table.value.openModal()
 }
 
 
-defineEmits(['clean-filters']);
 </script>
 
 
@@ -29,12 +34,13 @@ defineEmits(['clean-filters']);
         <div class="flex gap-2">
           <BaseButton
           target="_blank"
-          :icon="mdiFilter"
-          label="Limpiar filtros"
-          color="contrast"
+          :icon="mdiPlusBox"
+          label="Nueva Unidad Operativa"
+          color="info"
+          outline          
           rounded-full
           small
-          @click='limpiarFiltros'
+          @click='createUO'
           />
         </div>
       </SectionTitleLineWithButton>
@@ -43,8 +49,12 @@ defineEmits(['clean-filters']);
       </NotificationBar> -->
 
       <CardBox class="mb-6" has-table>
-        <UOTable ref="tablaAnaliticas" checkable />
+        <UOTable ref="table"/>
       </CardBox>
+
+      <!-- <CardBoxModalForm v-model="isModalActive" :title="`Crear Unidad Operativa`" has-cancel>
+        <FormUO />
+      </CardBoxModalForm> -->
 
       
       <!-- <CardBox class="mb-6" has-table>

@@ -53,13 +53,56 @@ export const getUO = async () => {
 export const anularUO = async (id) => {
   console.log(id)
   try {
-    const { error: errorUO } = await supabase
+    const { data,error: errorUO } = await supabase
       .from('unidades_operativas')
-      .update({ activo: false })
-      .eq('id', id)
-    if (errorUO) throw errorUO
+      .upsert({ id: id, activo: false }, { onConflict: ['id'] })
+      .select()
+    
+   if (errorUO){
+      console.error('Error SQL:', errorUO)
+      throw errorUO
+    }
+    return data 
   } catch (error) {
     console.error('Error en anularUO:', error)
     throw error
+  }  
+}
+
+export const createUO = async (uo) => {
+  try {
+    
+    const { data } = await supabase.from('unidades_operativas').insert({
+      name: uo.name,
+      description: uo.description,
+    }).select()
+    return data
+  }catch (error) {
+    console.error('Error en createUO:', error)
+    throw error
   }
 }
+
+export const setAnaliticas = async(analitica) => {
+  const { data } = await supabase.from('analiticas').insert(analitica)
+  return data
+}
+
+
+export const updateUO = () => {
+
+
+}
+// export const anularUO = async (id) => {
+//   console.log(id)
+//   try {
+//     const { error: errorUO } = await supabase
+//       .from('unidades_operativas')
+//       .update({ activo: false })
+//       .eq('id', id)
+//     if (errorUO) throw errorUO
+//   } catch (error) {
+//     console.error('Error en anularUO:', error)
+//     throw error
+//   }
+// }
