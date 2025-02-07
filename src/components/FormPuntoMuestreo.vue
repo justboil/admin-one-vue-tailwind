@@ -31,12 +31,13 @@ const emit = defineEmits(['submit', 'closeModal'])
 const plantasStore = usePlantasStore()
 
 const zoom = ref(13)
+const posicionEditable = ref(false)
 
 const props = defineProps({
   uo: {
     type: Object,
     required: true,
-    default: () => ({esNuevo: true})
+    default: () => ({ esNuevo: true })
   }
 })
 
@@ -46,7 +47,7 @@ const form = reactive({
   name: props.uo?.name,
   infraestructura_fk: props.uo?.infraestructura_fk,
   zona_fk: props.uo?.zona_fk,
-  posicion: props.uo?.posicion,
+  posicion: props.uo?.posicion
 })
 
 const submitHandler = () => {
@@ -81,6 +82,10 @@ const selectZona = computed(() => {
   })
 })
 
+const toggleEditarPosicion = () => {
+  posicionEditable.value = !posicionEditable.value
+}
+
 const zonasPorComunidadAutonoma = (ca) => {
   const comAut = plantasStore.getZonas
     .filter((zona) => zona.com_autonoma_fk === ca)
@@ -106,8 +111,7 @@ watch(
     form.id = newUO?.id
     form.name = newUO?.name
     form.infraestructura_fk = newUO?.infraestructura_fk
-    form.zona_fk = newUO?.zona_fk,
-    form.posicion = newUO?.posicion
+    ;(form.zona_fk = newUO?.zona_fk), (form.posicion = newUO?.posicion)
   },
   { inmediate: true }
 )
@@ -148,7 +152,7 @@ defineExpose({
               placeholder="Nº SINAC"
               validation="required"
               class="col-span-1 w-full"
-              :disabled="form.esNuevo?false:true"
+              :disabled="form.esNuevo ? false : true"
             />
           </div>
           <div class="col-span-5 w-full">
@@ -181,49 +185,61 @@ defineExpose({
             class="w-full"
             option-class="w-full"
           />
-          
         </div>
-        <div style="height: 300px; width: 95%">
-            <l-map
-              ref="map"
-              v-model:zoom="zoom"
-              :center="form.posicion?[form.posicion.lat, form.posicion.lon]:[39.54982998070428, -0.4656852311920545]"
-              :use-global-leaflet="false"
-            >
-              <l-tile-layer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                layer-type="base"
-                name="OpenStreetMap"
-              ></l-tile-layer>
-                <l-marker 
-                :lat-lng="form.posicion?[form.posicion.lat, form.posicion.lon]:[39.54982998070428, -0.4656852311920545]"
-                draggable 
-                @dragend="(e) => { 
+        <div style="height: 300px; width: 100%">
+          <l-map
+            ref="map"
+            v-model:zoom="zoom"
+            :center="
+              form.posicion
+                ? [form.posicion.lat, form.posicion.lon]
+                : [39.54982998070428, -0.4656852311920545]
+            "
+            :use-global-leaflet="false"
+          >
+            <l-tile-layer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              layer-type="base"
+              name="OpenStreetMap"
+            ></l-tile-layer>
+            <l-marker
+              :lat-lng="
+                form.posicion
+                  ? [form.posicion.lat, form.posicion.lon]
+                  : [39.54982998070428, -0.4656852311920545]
+              "
+              :draggable="posicionEditable"
+              @dragend="
+                (e) => {
                   form.posicion = {
-                  lat: e.target.getLatLng().lat, 
-                  lon: e.target.getLatLng().lng
+                    lat: e.target.getLatLng().lat,
+                    lon: e.target.getLatLng().lng
                   }
                   console.log('New position:', form.posicion)
-                }"
-                >
-                <l-tooltip>
-                  <div class="text-center">
-                  <h1 class="text-lg font-bold">AQLARA Headquarters</h1>
-                  <p class="text-sm">Oficinas Centrales</p>
-                  </div>
-                </l-tooltip>
-                
-                <l-popup>
-                  <div class="text-center">
+                }
+              "
+            >
+            <l-icon
+          :icon-size="32"
+          :icon-anchor="dynamicAnchor"
+          :icon="mdiAccount" >
+</l-icon>
+              <l-tooltip>
+                <div class="text-center">
+                  <h1 class="text-lg font-bold">{{ form.name }}</h1>
+                  <p class="text-sm">{{ form.id }}</p>
+                </div>
+              </l-tooltip>
+
+              <l-popup>
+                <div class="text-center">
                   <h1 class="text-lg font-bold">Punto 1</h1>
-                  <a href="http://google.com" target="_blank" class="text-sm"
-                    >Ver en Google Maps</a
-                  >
+                  <a href="http://google.com" target="_blank" class="text-sm">Ver en Google Maps</a>
                   <p class="text-sm">Muestra 1</p>
-                  </div>
-                </l-popup>
-                </l-marker>
-              <!-- <div v-for="punto in plantasStore.getPuntosMuestreo" :key="punto.id">
+                </div>
+              </l-popup>
+            </l-marker>
+            <!-- <div v-for="punto in plantasStore.getPuntosMuestreo" :key="punto.id">
                 <l-marker
                 v-if="punto.posicion"
                 :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
@@ -250,14 +266,20 @@ defineExpose({
                   </l-popup>
                 </l-marker>
               </div> -->
-            </l-map>
-            
-          </div>
+          </l-map>
+        </div>
+        <div class="items-center justify-center flex w-full">
+          <BaseButton
+            :label="posicionEditable ? 'Fijar Posición' : 'Editar Posición'"
+            color="info"
+            class="w-full"
+            @click="toggleEditarPosicion"
+          />
+        </div>
 
         <!-- <div v-if="form.comunidadAutonoma" class="grid md-grid-cols-1 md:grid-cols-4 gap-4 mb-6"> -->
         <!-- <div class="w-full" v-for="zona in zonasPorComunidadAutonoma(form.comunidadAutonoma)" :key="zona.id"> -->
 
-        
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->
