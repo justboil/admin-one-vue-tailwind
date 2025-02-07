@@ -19,6 +19,8 @@ import { searchZonasOperarios } from '@/services/supabase'
 import { setOperarios } from '@/services/operarios'
 import OperariosView from '@/views/OperariosView.vue'
 import { FormKit } from '@formkit/vue'
+import 'leaflet/dist/leaflet.css'
+import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
 
 // const zonasUoOperario = ref([]);
 
@@ -27,6 +29,8 @@ import { FormKit } from '@formkit/vue'
 const emit = defineEmits(['submit', 'closeModal'])
 
 const plantasStore = usePlantasStore()
+
+const zoom = ref(13)
 
 const props = defineProps({
   uo: {
@@ -179,6 +183,76 @@ defineExpose({
           />
           
         </div>
+        <div style="height: 300px; width: 95%">
+            <l-map
+              ref="map"
+              v-model:zoom="zoom"
+              :center="form.posicion?[form.posicion.lat, form.posicion.lon]:[39.54982998070428, -0.4656852311920545]"
+              :use-global-leaflet="false"
+            >
+              <l-tile-layer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                layer-type="base"
+                name="OpenStreetMap"
+              ></l-tile-layer>
+                <l-marker 
+                :lat-lng="form.posicion?[form.posicion.lat, form.posicion.lon]:[39.54982998070428, -0.4656852311920545]"
+                draggable 
+                @dragend="(e) => { 
+                  form.posicion = {
+                  lat: e.target.getLatLng().lat, 
+                  lon: e.target.getLatLng().lng
+                  }
+                  console.log('New position:', form.posicion)
+                }"
+                >
+                <l-tooltip>
+                  <div class="text-center">
+                  <h1 class="text-lg font-bold">AQLARA Headquarters</h1>
+                  <p class="text-sm">Oficinas Centrales</p>
+                  </div>
+                </l-tooltip>
+                
+                <l-popup>
+                  <div class="text-center">
+                  <h1 class="text-lg font-bold">Punto 1</h1>
+                  <a href="http://google.com" target="_blank" class="text-sm"
+                    >Ver en Google Maps</a
+                  >
+                  <p class="text-sm">Muestra 1</p>
+                  </div>
+                </l-popup>
+                </l-marker>
+              <!-- <div v-for="punto in plantasStore.getPuntosMuestreo" :key="punto.id">
+                <l-marker
+                v-if="punto.posicion"
+                :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
+                draggable
+                @dragend="onDragEnd"
+                >
+                <l-tooltip>
+                  <div class="text-center">
+                      <h1 class="text-lg font-bold">{{ punto.name }}</h1>
+                      <p class="text-sm">id: {{ punto.id }}</p>
+                    </div>
+                  </l-tooltip>
+
+                  <l-popup>
+                    <div class="text-center">
+                      <h1 class="text-lg font-bold">{{ punto.name }}</h1>
+                      <p class="text-sm">SINAC Id: {{ punto.id }}</p>
+                      <BaseButton
+                      label="Añadir analítica"
+                        color="info"
+                        @click="crearAnalitica(punto)"
+                      ></BaseButton>
+                    </div>
+                  </l-popup>
+                </l-marker>
+              </div> -->
+            </l-map>
+            
+          </div>
 
         <!-- <div v-if="form.comunidadAutonoma" class="grid md-grid-cols-1 md:grid-cols-4 gap-4 mb-6"> -->
         <!-- <div class="w-full" v-for="zona in zonasPorComunidadAutonoma(form.comunidadAutonoma)" :key="zona.id"> -->

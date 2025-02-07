@@ -47,9 +47,9 @@ export default [
       // }
     ]
   },
-  {
-    label: 'Panel de control',
-    to: {name:'settings'},
-    icon: mdiCog,
-  }
+  // {
+  //   label: 'Panel de control',
+  //   to: {name:'settings'},
+  //   icon: mdiCog,
+  // }
 ]
