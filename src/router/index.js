@@ -40,6 +40,18 @@ const routes = [
       name: 'zonas',
       component: () => import('@/views/ZonasAdminView.vue') 
       },
+      {
+        title: 'Infraestructuras',
+      path: '/admin/infraestructuras',
+      name: 'infraestructuras',
+      component: () => import('@/views/InfraestructurasAdminView.vue') 
+      },
+      {
+        title: 'Puntos de Muestreo',
+      path: '/admin/puntos_muestreo',
+      name: 'puntosMuestreo',
+      component: () => import('@/views/PuntosMuestreoAdminView.vue') 
+      },
 
 
     ],

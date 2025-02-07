@@ -40,8 +40,8 @@ const form = reactive({
   esNuevo: props.uo?.esNuevo ?? true,
   id: props.uo?.id || null,
   name: props.uo?.name,
-  com_autonoma_fk: props.uo?.com_autonoma_fk,
-  unidades_operativas_fk: props.uo?.unidades_operativas_fk,
+  type: props.uo?.type,
+  operador: props.uo?.operador,
   zonas: []
 })
 
@@ -56,25 +56,19 @@ const submitHandler = () => {
   const uoData = {
     id: form.id,
     name: form.name,
-    com_autonoma_fk: form.com_autonoma_fk,
-    unidades_operativas_fk: form.com_autonoma_fk,
-    zonas: form.zonas
+    type: form.type,
+    operador: form.operador,
   }
   emit('submit', uoData)
   // return uoData
 }
 
-const selectComunidadAutonoma = computed(() => {
-  return plantasStore.getComunidadesAutonomas.map((ca) => {
-    return { value: ca.id, label: ca.name }
+const selectTipoInfraestructura = computed(() => {
+  return plantasStore.getTipoInfraestructura.map((tipo) => {
+    return { value: tipo.id, label: tipo.name }
   })
 })
 
-const selectUnidadOperativa = computed(() => {
-  return plantasStore.getUnidadesOperativas.map((uo) => {
-    return { value: uo.id, label: uo.name }
-  })
-})
 
 const zonasPorComunidadAutonoma = (ca) => {
   const comAut = plantasStore.getZonas
@@ -100,9 +94,9 @@ watch(
     form.esNuevo = newUO?.esNuevo
     form.id = newUO?.id
     form.name = newUO?.name
-    form.com_autonoma_fk = newUO?.com_autonoma_fk
-    form.unidades_operativas_fk = newUO?.unidades_operativas_fk
-    zonasUOSeleccionadas(newUO?.id)
+    form.type = newUO?.type
+    form.operador = newUO?.operador
+    // zonasUOSeleccionadas(newUO?.id)
   },
   { inmediate: true }
 )
@@ -159,15 +153,23 @@ defineExpose({
         </div>
         <div class="flex flex-col w-full md:flex-row md:space-x-4 md:space-y-0 space-y-4 mb-6">
           <FormKit
-            v-model="form.com_autonoma_fk"
-            :options="selectComunidadAutonoma"
+            v-model="form.type"
+            :options="selectTipoInfraestructura"
             type="select"
-            label="Comunidad Autonoma"
-            placeholder="Comunidad Autonoma"
+            label="Tipo de Infraestructura"
+            placeholder="Tipo de Infraestructura"
             class="w-full"
             option-class="w-full"
           />
           <FormKit
+              v-model="form.operador"
+              type="text"
+              label="Operador"
+              placeholder="Operador"
+              validation="required"
+              class="col-span-3 w-full"
+            />
+          <!-- <FormKit
             v-model="form.unidades_operativas_fk"
             :options="selectUnidadOperativa"
             type="select"
@@ -175,7 +177,7 @@ defineExpose({
             placeholder="Comunidad Autonoma"
             class="w-full"
             option-class="w-full"
-          />
+          /> -->
         </div>
 
         <!-- <div v-if="form.comunidadAutonoma" class="grid md-grid-cols-1 md:grid-cols-4 gap-4 mb-6"> -->

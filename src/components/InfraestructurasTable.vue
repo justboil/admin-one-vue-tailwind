@@ -17,6 +17,8 @@ import CardBoxModalForm from './CardBoxModalForm.vue'
 // import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
 import { createZona, anularZona, updateZona } from '@/services/zonas'
+import { createInfraestructura, anularInfraestructura, updateInfraestructura } from '@/services/infraestructuras'
+import FormInfraestructura from './FormInfraestructura.vue'
 
 defineProps({
   checkable: {
@@ -26,7 +28,7 @@ defineProps({
 })
 
 const plantaStore = usePlantasStore()
-const zonasAbastecimiento = computed(() => plantaStore.getZonas.filter((zona) => zona.activa))
+const infraestructuras = computed(() => plantaStore.getPuntosMuestreo.filter((infraestructura) => infraestructura.activo))
 
 const isModalDangerActive = ref(false)
 const dataToEdit = ref(null)
@@ -35,18 +37,15 @@ const isModalOpen = ref(false)
 const expandedRows = ref([])
 
 
-const comunidadPorId = (id) => {
-  return plantaStore.getComunidadesAutonomas.find((comunidad) => comunidad.id === id)?.name ?? 'Sin Comunidad Asignada'
-}
-
-const unidadOperativaPorId = (id) => {
-  return plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)?.name ?? 'Sin Unidad Operativa Asignada'
-  
+const getTypeById = (typeId) => {
+  return plantaStore.getTipoInfraestructura.find((tipo) => tipo.id === typeId)?.name?? '-'
 }
 
 
-const puntosMuestreoPorZona = (idZona) => {
-  return plantaStore.getPuntosMuestreo.filter((pMuestreo) => pMuestreo.zona_fk === idZona).map((punto) => {
+
+
+const puntosMuestreoPorInfraestructura = (idInfraestructura) => {
+  return plantaStore.getPuntosMuestreo.filter((pMuestreo) => pMuestreo.infraestructura_fk === idInfraestructura).map((punto) => {
     return {
 
       name:punto.name,id: punto.id
@@ -75,22 +74,22 @@ const closeModal = () => {
   dataToEdit.value = null
 }
 
-const anularZonaSeleccionada = (zona) => {
+const anularInfraestructuraSeleccionada = (zona) => {
   dataToEdit.value = zona
   isModalDangerActive.value = true
 }
 
-const handleDeleteZona = async () => {
+const handleDeleteData = async () => {
   try {
     const id = dataToEdit.value.id
-    await anularZona(id)
-    await plantaStore.loadZonas()
+    await anularInfraestructura(id)
+    await plantaStore.loadInfraestructuras()
     isModalDangerActive.value = false
     dataToEdit.value = null
-    alert('Zona de Abastecimiento eliminada correctamente')
+    alert('Infraestructura eliminada correctamente')
   } catch (error) {
-    console.log('error al borrar Zona de Abastecimiento: ', error)
-    alert('error al borrar Zona de Abastecimiento: ')
+    console.log('error al borrar la Infraestructura: ', error)
+    alert('error al borrar la Infraestructura: ')
   }
 }
 
@@ -98,18 +97,19 @@ const saveForm = async (form) => {
   //  console.log("ESCRITO Y HECHO", form);
   if (form.esNuevo) {
     console.log('Formulario Nuevo:', form.id);
-    await createZona(form)
+    await createInfraestructura(form)
     // form.value=null
   
   } else {
     console.log('Formulario Editado:', form);
-   await updateZona(form)
+   await updateInfraestructura(form)
   }
-  await plantaStore.loadZonas()
+  await plantaStore.loadInfraestructuras()
   closeModal()
+  alert('Infraestructura guardada correctamente')
 }
 
-watch(zonasAbastecimiento, (newValue) => {
+watch(infraestructuras, (newValue) => {
   console.log('Zonas de Abastecimiento:', newValue)
 })
 
@@ -124,22 +124,22 @@ defineExpose({
     v-model="isModalOpen"
     :uo="dataToEdit"
     :title="
-      dataToEdit?.id ? `Editar Zona de Abastecimiento ${dataToEdit?.name}` : 'Crear Nueva Zona de Abastecimiento'
+      dataToEdit?.id ? `Editar Infraestructura ${dataToEdit?.name}` : 'Crear Nueva Infraestructura'
     "
     has-cancel
   >
-    <FormZona :uo="dataToEdit" @submit="saveForm" @close-modal="closeModal" />
+    <FormInfraestructura :uo="dataToEdit" @submit="saveForm" @close-modal="closeModal" />
   </CardBoxModalForm>
 
   <CardBoxModal
     v-model="isModalDangerActive"
-    title="Eliminar Zona de Abastecimiento"
+    title="Eliminar Infraestructura"
     button="danger"
     has-cancel
-    @confirm="handleDeleteZona"
+    @confirm="handleDeleteData"
   >
     <p>
-      Esta seguro que desea eliminar la Zona de Abastecimiento
+      Esta seguro que desea eliminar la Infraestructura
       <b>{{ dataToEdit?.name }}</b>?
     </p>
     <p>Esta operación no se puede deshacer.</p>
@@ -152,14 +152,14 @@ defineExpose({
           <th  />
           <th>ID</th>
           <th>Nombre</th>
-          <th>Comunidad Autonoma</th>
-          <th>Unidad Operativa</th>
+          <th>Tipo</th>
+          <th>Operador</th>
 
           <th />
         </tr>
       </thead>
       <tbody>
-        <template v-for="zona in zonasAbastecimiento" :key="zona.id">
+        <template v-for="infraestructura in infraestructuras" :key="infraestructura.id">
           <tr>
             <!-- <TableCheckboxCell  /> -->
             <td class="border-b-0 lg:w-6 before:hidden">
@@ -167,35 +167,35 @@ defineExpose({
               <!-- debe enviar un string para escribir el avatar -->
             </td>
             <td data-label="ID">
-              {{ zona.id }}
+              {{ infraestructura.id }}
             </td>
             <td data-label="Name">
-              {{ zona.name }}
+              {{ infraestructura.name }}
             </td>
-            <td data-label="Comunidad Autonoma">
-              {{ comunidadPorId(zona.com_autonoma_fk) }}
+            <td data-label="Tipo">
+              {{ getTypeById(infraestructura.type) }}
             </td>
-            <td data-label="Unidad Operativa">
-              {{ unidadOperativaPorId(zona.unidades_operativas_fk) }}
+            <td data-label="Operador">
+              {{ infraestructura.operador }}
             </td>
 
             <td>
               <BaseButton
-                :icon="expandedRows.includes(zona.id) ? mdiChevronDown : mdiChevronLeft"
+                :icon="expandedRows.includes(infraestructura.id) ? mdiChevronDown : mdiChevronLeft"
                 color="info"
-                @click="toggleExpand(zona.id)"
+                @click="toggleExpand(infraestructura.id)"
               />
             </td>
           </tr>
 
-          <tr v-if="expandedRows.includes(zona.id)" :key="`expanded-${zona.id}`">
+          <tr v-if="expandedRows.includes(infraestructura.id)" :key="`expanded-${infraestructura.id}`">
             <td />
             <td colspan="3">
               <p class="font-bold">Puntos de Muestreo</p>
               <!-- <template> -->
               <div class="px-4">
                 <div
-                  v-if="puntosMuestreoPorZona(zona.id).length === 0"
+                  v-if="puntosMuestreoPorInfraestructura(infraestructura.id).length === 0"
                   class="flex items-center text-gray-500 py-2"
                 >
                   <BaseIcon :path="mdiAlertCircleOutline" class="w-5 h-5 mr-2" />
@@ -204,7 +204,7 @@ defineExpose({
 
                 <ul v-else class="space-y-2">
                   <li
-                    v-for="puntoMuestreo in puntosMuestreoPorZona(zona.id)"
+                    v-for="puntoMuestreo in puntosMuestreoPorInfraestructura(infraestructura.id)"
                     :key="puntoMuestreo.id"
                     class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
                   >
@@ -219,12 +219,12 @@ defineExpose({
             <td class="w-1">
               <div class="flex flex-col items-center space-y-2">
                 <BaseButtons class="pl-8">
-                  <BaseButton :icon="mdiPencil" color="info" @click="openModal({ ...zona, esNuevo:false })" />
+                  <BaseButton :icon="mdiPencil" color="info" @click="openModal({ ...infraestructura, esNuevo:false })" />
 
                   <BaseButton
                     :icon="mdiTrashCan"
                     color="danger"
-                    @click="anularZonaSeleccionada(zona)"
+                    @click="anularInfraestructuraSeleccionada(infraestructura)"
                   />
                 </BaseButtons>
               </div>

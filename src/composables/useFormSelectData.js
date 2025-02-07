@@ -108,7 +108,7 @@ export default function useFormSelectData() {
   })
 
   const selectInfraestructura = computed(() => {
-    if (!form.zona) return plantasStore.getInfraestructuras.map((infraestructura) => { return { value: infraestructura.id, label: infraestructura.name } })
+    if (!form.zona) return plantasStore.getPuntosMuestreo.map((infraestructura) => { return { value: infraestructura.id, label: infraestructura.name } })
     const infraestructuras = plantasStore.getZonasInfraestructuras
       .filter((infraestructura) => infraestructura.zonas_fk === form.zona)
       .map((infraestructura) => {
@@ -122,7 +122,7 @@ export default function useFormSelectData() {
   })
 
   const buscaInfraestructuraPorId = (id) => {
-    const infraestructura = plantasStore.getInfraestructuras.find(
+    const infraestructura = plantasStore.getPuntosMuestreo.find(
       (infraestructura) => infraestructura.id === id
     )
     if (infraestructura) {

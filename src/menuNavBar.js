@@ -9,13 +9,14 @@ import {
   mdiMapClock,
   mdiTestTube,
   mdiSetCenter,
+  mdiPipeDisconnected,
   
 } from '@mdi/js'
 
 export default [
   {
     icon: mdiMenu,
-    label: 'Menu',
+    label: 'Administración',
     menu: [
       {
         icon:  mdiAccountCog,
@@ -33,20 +34,22 @@ export default [
         to: {name:'zonas'}
       },
       {
-        icon: mdiMapClock,
-        label: 'Instalaciones',
+        icon: mdiPipeDisconnected,
+        label: 'Infraestructuras',
+        to: {name:'infraestructuras'}
       },
       {
-        icon: mdiMapClock,
+        icon: mdiTestTube,
         label: 'Puntos de Muestreo',
+        to: {name:'puntosMuestreo'}
       },
       {
         isDivider: true
       },
-      {
-        icon: mdiTestTube,
-        label: 'analiticas'
-      }
+      // {
+      //   icon: mdiTestTube,
+      //   label: 'analiticas'
+      // }
     ]
   },
   {

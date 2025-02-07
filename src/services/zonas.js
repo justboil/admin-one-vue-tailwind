@@ -23,18 +23,42 @@ export const createZona = async (zona) => {
 export const anularZona = async (id) => {
     console.log('ID: ',id)
     try {
-      const { data, error: errorUO } = await supabase
+      const { data, error: errorZona } = await supabase
         .from('zonas_abastecimiento')
         .upsert({ id: id, activa: false }, { onConflict: ['id'] })
         .select()
   
-      if (errorUO) {
-        console.error('Error SQL:', errorUO)
-        throw errorUO
+      if (errorZona) {
+        console.error('Error SQL:', errorZona)
+        throw errorZona
       }
       return data
     } catch (error) {
       console.error('Error en anularUO:', error)
       throw error
     }
-  }
+}
+  
+export const updateZona = async (data) => {
+    try {
+        const { data: updatedData, error: errorZona } = await supabase
+        .from('zonas_abastecimiento')
+            .update({
+            // id:data.id,
+            name: data.name,
+            com_autonoma_fk: data.com_autonoma_fk,
+            unidades_operativas_fk: data.unidades_operativas_fk
+        })
+        .eq('id', data.id)
+        .select()
+            .single()
+        
+        if (errorZona) {
+            console.error('Error SQL:', errorZona)
+            throw errorZona
+        }
+        return updatedData
+    } catch(error) {
+        console.log('Error en updateZona:', error)
+    }
+}

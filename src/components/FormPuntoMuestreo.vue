@@ -40,15 +40,15 @@ const form = reactive({
   esNuevo: props.uo?.esNuevo ?? true,
   id: props.uo?.id || null,
   name: props.uo?.name,
-  com_autonoma_fk: props.uo?.com_autonoma_fk,
-  unidades_operativas_fk: props.uo?.unidades_operativas_fk,
-  zonas: []
+  infraestructura_fk: props.uo?.infraestructura_fk,
+  zona_fk: props.uo?.zona_fk,
+  posicion: props.uo?.posicion,
 })
 
 const submitHandler = () => {
   console.log('submitHandler')
   // Validar formulario
-  if (!form.name || !form.com_autonoma_fk || !form.unidades_operativas_fk) {
+  if (!form.name || !form.infraestructura_fk || !form.zona_fk) {
     console.error('Faltan campos requeridos')
     return false
   }
@@ -56,23 +56,24 @@ const submitHandler = () => {
   const uoData = {
     id: form.id,
     name: form.name,
-    com_autonoma_fk: form.com_autonoma_fk,
-    unidades_operativas_fk: form.com_autonoma_fk,
-    zonas: form.zonas
+    infraestructura_fk: form.infraestructura_fk,
+    zona_fk: form.zona_fk,
+    posicion: form.posicion,
+    esNuevo: form.esNuevo
   }
   emit('submit', uoData)
   // return uoData
 }
 
-const selectComunidadAutonoma = computed(() => {
-  return plantasStore.getComunidadesAutonomas.map((ca) => {
-    return { value: ca.id, label: ca.name }
+const selectInfraestructura = computed(() => {
+  return plantasStore.getInfraestructuras.map((inf) => {
+    return { value: inf.id, label: inf.name }
   })
 })
 
-const selectUnidadOperativa = computed(() => {
-  return plantasStore.getUnidadesOperativas.map((uo) => {
-    return { value: uo.id, label: uo.name }
+const selectZona = computed(() => {
+  return plantasStore.getZonas.map((zona) => {
+    return { value: zona.id, label: zona.name }
   })
 })
 
@@ -100,9 +101,9 @@ watch(
     form.esNuevo = newUO?.esNuevo
     form.id = newUO?.id
     form.name = newUO?.name
-    form.com_autonoma_fk = newUO?.com_autonoma_fk
-    form.unidades_operativas_fk = newUO?.unidades_operativas_fk
-    zonasUOSeleccionadas(newUO?.id)
+    form.infraestructura_fk = newUO?.infraestructura_fk
+    form.zona_fk = newUO?.zona_fk,
+    form.posicion = newUO?.posicion
   },
   { inmediate: true }
 )
@@ -159,41 +160,30 @@ defineExpose({
         </div>
         <div class="flex flex-col w-full md:flex-row md:space-x-4 md:space-y-0 space-y-4 mb-6">
           <FormKit
-            v-model="form.com_autonoma_fk"
-            :options="selectComunidadAutonoma"
+            v-model="form.infraestructura_fk"
+            :options="selectInfraestructura"
             type="select"
-            label="Comunidad Autonoma"
-            placeholder="Comunidad Autonoma"
+            label="Infraestructura"
+            placeholder="Infraestructura"
             class="w-full"
             option-class="w-full"
           />
           <FormKit
-            v-model="form.unidades_operativas_fk"
-            :options="selectUnidadOperativa"
+            v-model="form.zona_fk"
+            :options="selectZona"
             type="select"
-            label="Unidad Operativa"
-            placeholder="Comunidad Autonoma"
+            label="Zona"
+            placeholder="Zona"
             class="w-full"
             option-class="w-full"
           />
+          
         </div>
 
         <!-- <div v-if="form.comunidadAutonoma" class="grid md-grid-cols-1 md:grid-cols-4 gap-4 mb-6"> -->
         <!-- <div class="w-full" v-for="zona in zonasPorComunidadAutonoma(form.comunidadAutonoma)" :key="zona.id"> -->
 
-        <div v-if="form.comunidadAutonoma" class="grid md-grid-cols-1 md:grid-cols-1 gap-4 mb-6">
-          <FormKit
-            v-model="form.zonas"
-            :options="
-              form.comunidadAutonoma ? zonasPorComunidadAutonoma(form.comunidadAutonoma) : getZonas
-            "
-            label="Zonas"
-            type="checkbox"
-            name="zonas"
-            options-class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 space-y-2 p-4 rounded-md"
-            option-class="flex items-center"
-          />
-        </div>
+        
         <!-- </div> -->
         <!-- </div> -->
         <!-- </div> -->

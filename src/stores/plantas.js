@@ -11,6 +11,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const comunidadesAutonomas = ref([])
   const formZonas = ref([])
   const infraestructuras = ref([])
+  const tipo_infraestructura = ref([])
   const zonas_infraestructuras = ref([])
   const analiticaToUpdate = ref(null)
   const tipoPersonal = ref([])
@@ -23,6 +24,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadUnidadesOperativas()
     loadComunidadesAutonomas()
     loadInfraestructuras()
+    loadTipoInfraestructura()
     loadZonasInfraestructuras()
     loadTipoPersonal()
   })
@@ -107,6 +109,10 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     const { data } = await supabase.from('zonas_infraestructuras').select('*')
     zonas_infraestructuras.value = data
   }
+  const loadTipoInfraestructura = async () => {
+    const { data } = await supabase.from('tipo_infraestructura').select('*')
+    tipo_infraestructura.value = data
+  }
 
   const loadInfraestructuras = async () => {
     const { data } = await supabase.from('infraestructuras').select('*')
@@ -140,6 +146,9 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   })
   const getZonasInfraestructuras = computed(() => {
     return zonas_infraestructuras.value
+  })
+  const getTipoInfraestructura = computed(() => {
+    return tipo_infraestructura.value
   })
 
   const getTipoPersonal = computed(() => {
@@ -203,7 +212,9 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     getComunidadesAutonomas,
     getInfraestructuras,
     getZonasInfraestructuras,
+    getTipoInfraestructura,
     getTipoPersonal,
+    tipo_infraestructura,
     zonas,
     operarios,
     analiticas,
