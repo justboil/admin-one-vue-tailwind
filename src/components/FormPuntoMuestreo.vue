@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, ref, toValue, watch } from 'vue'
-import { mdiBallotOutline, mdiAccount, mdiMail } from '@mdi/js'
+import { mdiBallotOutline, mdiAccount, mdiMail, mdiWaterAlert, mdiStopCircle, mdiSignal, mdiChartBellCurve, mdiLogin } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
@@ -20,6 +20,7 @@ import { setOperarios } from '@/services/operarios'
 import OperariosView from '@/views/OperariosView.vue'
 import { FormKit } from '@formkit/vue'
 import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
 
 // const zonasUoOperario = ref([]);
@@ -82,6 +83,30 @@ const selectZona = computed(() => {
   })
 })
 
+const getTipoInfrastructuraByPunto = (infraId) => {
+  const infraestructura = plantasStore.getInfraestructuras.find((infra) => infra.id === infraId)?.type
+  console.log(infraestructura);
+  return infraestructura
+}
+
+
+
+const getIconByInfraestructura = (infId) => {
+  switch (getTipoInfrastructuraByPunto(infId)) {
+    case 1:
+      return mdiSignal
+    case 2:
+      return mdiChartBellCurve
+    case 3:
+      return mdiLogin
+    case 4:
+      return mdiStopCircle
+      default:
+      return mdiWaterAlert
+  }
+}
+
+
 const toggleEditarPosicion = () => {
   posicionEditable.value = !posicionEditable.value
 }
@@ -95,6 +120,10 @@ const zonasPorComunidadAutonoma = (ca) => {
   // console.log('comAut: ', comAut)
   return comAut
 }
+
+
+
+
 
 const getZonas = computed(() => {
   const zonas = plantasStore.getZonas.map((zona) => {
@@ -130,6 +159,23 @@ const zonasUOSeleccionadas = async (id) => {
   // console.log('ZONAS SELECCIONADAS: ', zonas)
   form.zonas = zonas
 }
+
+const customIcon =(icon)=> L.divIcon({
+  html: `
+    <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;">
+      <path fill="#2196f3" d="${icon}" />
+    </svg>`,
+  className: 'custom-div-icon',
+  iconSize: [24, 24],
+  iconAnchor: [12, 24]
+})
+
+// const customIcon = (icon) => L.AwesomeMarkers.icon({
+//   icon: icon, // nombre del icono de Font Awesome sin el prefijo 'fa-'
+//   prefix: 'fa', // 'fa' para Font Awesome
+//   markerColor: 'blue', // color del marcador
+//   iconColor: 'white' // color del icono
+// })
 
 zonasUOSeleccionadas(form.id)
 
@@ -209,6 +255,8 @@ defineExpose({
                   : [39.54982998070428, -0.4656852311920545]
               "
               :draggable="posicionEditable"
+              :color="red"
+              :icon="customIcon(getIconByInfraestructura(form.infraestructura_fk))"
               @dragend="
                 (e) => {
                   form.posicion = {
@@ -219,11 +267,7 @@ defineExpose({
                 }
               "
             >
-            <l-icon
-          :icon-size="32"
-          :icon-anchor="dynamicAnchor"
-          :icon="mdiAccount" >
-</l-icon>
+            
               <l-tooltip>
                 <div class="text-center">
                   <h1 class="text-lg font-bold">{{ form.name }}</h1>
