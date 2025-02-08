@@ -1,0 +1,5 @@
+{
+  "github.copilot.enable": true,
+  "github.copilot.showInPanel": true,
+  "workbench.sideBar.location": "left" // Cambia "left" a "right" si quieres moverlo al lado derecho
+}
