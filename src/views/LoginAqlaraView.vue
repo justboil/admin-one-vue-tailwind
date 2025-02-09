@@ -10,6 +10,7 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
 import msalInstance from '@/services/msalConfig'
 import useLoginStore from '@/stores/login'
 import AqlaraLogo from '@/components/AqlaraLogo.vue'
+import  { supabase } from '@/services/supabase'
 
 const loginStore = useLoginStore()
 
@@ -18,59 +19,104 @@ const errorMessage = ref('')
 
 const router = useRouter()
 
+const isLoading = ref(false)
+
 const submit = () => {
   router.push('/')
 }
 
 const loginWithMicrosoft = async () => {
-  if (isAuthenticating.value) {
-    return
-  }
-  isAuthenticating.value = true
-  errorMessage.value = ''
-
   try {
-    const loginResponse = await msalInstance.loginPopup({
-      scopes: ['user.read']
-    })
+    //1.Iniciar estado de carga
+    isLoading.value = true
+    errorMessage.value = ''
 
-    // // Intercambiar AccessToken por un JWT propio en tu backend
-    // const backendResponse = await fetch('https://tu-backend.com/api/auth/microsoft', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ microsoftAccessToken: loginResponse.accessToken })
-    // }).then((res) => res.json())
+    //2. Configurar opciones de login
 
-    // if (!backendResponse.token) {
-    //   throw new Error('No se recibió token válido')
-    // }
-
-    // // Guardar JWT en localStorage
-    // localStorage.setItem('jwt', backendResponse.token)
-
-    // Guardar datos básicos en el store
-    console.log('Login successful:', loginResponse)
-    loginStore.login(loginResponse.account)
-    loginStore.setIsAuthenticated(true)
-    loginStore.setAccount(loginResponse.account)
-    loginStore.setUser(loginResponse.account)
-    router.push('/')
-  } catch (error) {
-    console.error('Login failed:', error)
-    errorMessage.value = `LOGIN FAILED ${error.message}`
-
-    if (error.name === 'BrowserAuthError' && error.message.includes('interaction_in_progress')) {
-      // Intentar limpiar el estado de interacción pendiente
-      msalInstance.handleRedirectPromise().then(() => {
-        errorMessage.value = 'Sesión en progreso, por favor intente nuevamente'
-      })
-    } else {
-      errorMessage.value = 'Error al iniciar sesión con Microsoft'
+    const msalOptions = {
+      scopes: ['user.read', 'offline_access'],
+      prompt: 'select_account'
     }
+
+    //3. Intentar login con Microsoft
+    const msResponse = await msalInstance.loginPopup(msalOptions)
+
+    //4. Validar respuesta de Microsoft
+    if (!msResponse || !msResponse.account) {
+      throw new Error('Login Incompleto: No se recibió respuesta válida de Microsoft')
+    }
+    //5. Obtener Tokens 
+    const tokenData = {
+      accessToken: msResponse.accessToken,
+      refreshToken: msResponse.account.refreshToken,
+      expiresAt: new Date().getTime() + msResponse.expiresOn * 1000
+    }
+
+    //6. Sincronizar con Supabase
+    await syncWithSupabase(msResponse.account, tokenData)
+
+    //7. Iniciar sesion en el store
+    await loginStore.login({ user: msResponse.account, tokens: tokenData })
+
+  } catch (error) {
+    handleLoginError(error)
   } finally {
-    isAuthenticating.value = false
+    isLoading.value = false
   }
 }
+
+const handleLoginError = (error) => {
+  console.error('Error durante el login:', error)
+  errorMessage.value = error.message || 'Error desconocido durante el login'
+}
+
+  const syncWithSupabase = async (msUser, tokenData) => {
+  try {
+    // 1. Buscar usuario existente
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', msUser.email)
+      .single()
+
+    if (existingUser) {
+      // 2a. Actualizar usuario existente
+      await supabase.from('users').update({
+        name: msUser.name,
+        last_login: new Date()
+      }).eq('id', existingUser.id)
+
+    } else {
+      // 2b. Crear nuevo usuario
+      const { data: newUser } = await supabase.from('users').insert({
+        email: msUser.email,
+        name: msUser.name,
+        role_id: await determineInitialRole(msUser)
+      }).select().single()
+    }
+
+    // 3. Registrar sesión
+    await supabase.from('user_sessions').insert({
+      user_id: existingUser?.id,
+      ms_access_token: tokenData.accessToken,
+      ms_refresh_token: tokenData.refreshToken,
+      expires_at: new Date(tokenData.expiresAt)
+    })
+
+    // 4. Registrar intento exitoso
+    await logLoginAttempt({
+      email: msUser.email,
+      success: true
+    })
+
+  } catch (error) {
+    console.error('Error sincronizando con Supabase:', error)
+    throw error
+  }
+}
+
+
+
 
 onMounted(() => {
   msalInstance
