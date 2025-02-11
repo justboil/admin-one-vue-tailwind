@@ -122,7 +122,7 @@ export default function useFormSelectData() {
   })
 
   const buscaInfraestructuraPorId = (id) => {
-    const infraestructura = plantasStore.getPuntosMuestreo.find(
+    const infraestructura = plantasStore.getInfraestructuras.find(
       (infraestructura) => infraestructura.id === id
     )
     if (infraestructura) {

@@ -1,6 +1,6 @@
 {
   "name": "admin-one-vue-tailwind",
-  "version": "3.3.0", 
+  "version": "3.3.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -16,6 +16,7 @@
     "@mdi/js": "^7.0.96",
     "@primevue/themes": "^4.2.5",
     "@supabase/supabase-js": "^2.47.2",
+    "@tsparticles/confetti": "^3.8.1",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "@vueform/vueform": "^1.11.1",
     "axios": "^1.5.0",

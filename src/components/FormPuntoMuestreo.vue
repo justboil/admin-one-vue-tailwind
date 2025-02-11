@@ -22,6 +22,7 @@ import { FormKit } from '@formkit/vue'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
+import { confetti } from '@tsparticles/confetti'
 
 // const zonasUoOperario = ref([]);
 
@@ -205,6 +206,11 @@ const getGoogleMapsUrl = (lat, lng) => {
   return `https://www.google.com/maps?q=${lat},${lng}`
 }
 
+const imprime =  () => {
+  
+  console.log(form)
+}
+
 zonasUOSeleccionadas(form.id)
 
 defineExpose({
@@ -359,7 +365,7 @@ defineExpose({
       <template #footer>
         <BaseButtons>
           <BaseButton type="submit" color="info" label="Guardar" @click="emit('submit', form)" />
-          <BaseButton type="submit" color="info" label="imprime" @click="console.log(form)" />
+          <BaseButton type="submit" color="info" label="imprime" @click="imprime" />
           <BaseButton
             type="reset"
             color="danger"

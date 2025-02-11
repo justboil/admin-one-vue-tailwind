@@ -6,6 +6,7 @@ import { useLoginStore } from '@/stores/login'
 import useFormSelectData from '@/composables/useFormSelectData'
 import { supabase } from '@/services/supabase'
 import CardBox from './CardBox.vue'
+import { confetti } from '@tsparticles/confetti'
 
 const plantaStore = usePlantasStore()
 const loginStore = useLoginStore()
@@ -94,6 +95,7 @@ const submitHandler = async () => {
       console.log('Datos insertados:', data)
       alert('Datos insertados correctamente')
       resetForm()
+      fiestaConfetti()
     }
   } catch (error) {
     console.error('Error en la solicitud:', error)
@@ -102,6 +104,44 @@ const submitHandler = async () => {
     recargaFormulario()
   }
 }
+
+const fiestaConfetti=async ()=>{
+
+  
+  await confetti("tsparticles", {
+  /**
+   * @deprecated use count property instead
+   */
+  particleCount: 50,
+  /**
+   * @deprecated use position property instead
+   */
+  origin: {
+    x: 0.5,
+    y: 0.5,
+  },
+  //------------------------------------------
+  angle: 90,
+  count: 500,
+  position: {
+    x: 50,
+    y: 50,
+  },
+  spread: 45,
+  startVelocity: 45,
+  decay: 0.9,
+  gravity: 1,
+  drift: 0,
+  ticks: 200,
+  colors: ["#ffffff", "#ff0000"],
+  shapes: ["square", "circle"],
+  scalar: 1,
+  zIndex: 100,
+  disableForReducedMotion: true,
+});
+  
+}
+
 
 onMounted(async () => {
   await plantaStore.loadOperarios()

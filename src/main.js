@@ -20,14 +20,12 @@ const pinia = createPinia()
 
 // Create Vue app
 createApp(App)
-.use(pinia)
+  .use(pinia)
   .use(router)
-  .use(PrimeVue, { theme: 'none'})
+  .use(PrimeVue, { theme: 'none' })
   .use(plugin, defaultConfig(config))
   .use(Vueform, vueformConfig)
   .mount('#app')
-
-  
 
 // Init main store
 const mainStore = useMainStore(pinia)
