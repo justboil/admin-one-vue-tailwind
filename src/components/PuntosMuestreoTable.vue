@@ -78,7 +78,7 @@ const openModal = (zona) => {
   isModalOpen.value = true
 }
 
-const closeModal = () => {
+const closeModal = () => {  
   isModalOpen.value = false
   dataToEdit.value = null
 }

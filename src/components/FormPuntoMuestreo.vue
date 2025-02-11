@@ -160,7 +160,8 @@ watch(
     form.id = newUO?.id
     form.name = newUO?.name
     form.infraestructura_fk = newUO?.infraestructura_fk
-    ;(form.zona_fk = newUO?.zona_fk), (form.posicion = newUO?.posicion)
+      ; (form.zona_fk = newUO?.zona_fk), (form.posicion = newUO?.posicion)
+      posicionEditable.value = false //resetear al abrir el modal
   },
   { inmediate: true }
 )
