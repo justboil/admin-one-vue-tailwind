@@ -28,7 +28,7 @@ defineProps({
 })
 
 const plantaStore = usePlantasStore()
-const infraestructuras = computed(() => plantaStore.getPuntosMuestreo.filter((infraestructura) => infraestructura.activo))
+const infraestructuras = computed(() => plantaStore.getInfraestructuras.filter((infraestructura) => infraestructura.activo))
 
 const isModalDangerActive = ref(false)
 const dataToEdit = ref(null)
@@ -38,7 +38,8 @@ const expandedRows = ref([])
 
 
 const getTypeById = (typeId) => {
-  return plantaStore.getTipoInfraestructura.find((tipo) => tipo.id === typeId)?.name?? '-'
+  const tipoPlanta= plantaStore.getTipoInfraestructura.find((tipo) => tipo.id === typeId)?.name?? '-'
+  return tipoPlanta
 }
 
 

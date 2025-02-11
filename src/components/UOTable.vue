@@ -17,6 +17,7 @@ import CardBoxModal from './CardBoxModal.vue'
 import FormUO from './FormUO.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
 import { anularUO, createUO, updateUO } from '@/services/uo'
+import FlagIcons from './FlagIcons.vue'
 
 defineProps({
   checkable: {
@@ -181,7 +182,9 @@ defineExpose({
                     :key="zona.id"
                     class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200"
                   >
-                    <BaseIcon :path="mdiMapMarker" class="w-5 h-5 mr-2 text-blue-500" />
+                  <FlagIcons :comunidad="zona.com_autonoma_fk"/>
+                    <!-- <BaseIcon :path="'@/assets/icons/aragon.svg'" class="w-5 h-5 mr-2 text-blue-500" /> -->
+                    <!-- <BaseIcon :path="mdiMapMarker" class="w-5 h-5 mr-2 text-blue-500" /> -->
                     <span class="text-sm">{{ zona.name }}</span>
                   </li>
                 </ul>

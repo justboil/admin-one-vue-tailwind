@@ -31,6 +31,8 @@ const emit = defineEmits(['submit', 'closeModal'])
 
 const plantasStore = usePlantasStore()
 
+
+const API_KEY_ICONS=import.meta.env.VITE_ICONS_API_KEY
 const zoom = ref(13)
 const posicionEditable = ref(false)
 
@@ -94,15 +96,15 @@ const getTipoInfrastructuraByPunto = (infraId) => {
 const getIconByInfraestructura = (infId) => {
   switch (getTipoInfrastructuraByPunto(infId)) {
     case 1:
-      return mdiSignal
+      return 'faucet'
     case 2:
-      return mdiChartBellCurve
+      return 'ring'
     case 3:
-      return mdiLogin
+      return 'flask'
     case 4:
-      return mdiStopCircle
+      return 'route'
       default:
-      return mdiWaterAlert
+      return 'water'
   }
 }
 
@@ -133,6 +135,24 @@ const getZonas = computed(() => {
   return zonas
 })
 
+
+const icon=L.divIcon({
+  html: `
+  <div class="marker-pin">
+    <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;">
+      <path fill="#2196f3" d="${mdiSignal}" />
+    </svg>
+    </div>
+    `,
+  className: 'custom-div-icon',
+  iconSize: [24, 24],
+  iconAnchor: [12, 24]
+})
+
+
+
+
+
 watch(
   () => props.uo,
   (newUO) => {
@@ -161,21 +181,28 @@ const zonasUOSeleccionadas = async (id) => {
 }
 
 const customIcon =(icon)=> L.divIcon({
-  html: `
-    <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;">
+  html: `  
+    <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;" class="marker-pin">
       <path fill="#2196f3" d="${icon}" />
-    </svg>`,
+      </svg>
+      `,
   className: 'custom-div-icon',
   iconSize: [24, 24],
   iconAnchor: [12, 24]
 })
 
-// const customIcon = (icon) => L.AwesomeMarkers.icon({
-//   icon: icon, // nombre del icono de Font Awesome sin el prefijo 'fa-'
-//   prefix: 'fa', // 'fa' para Font Awesome
-//   markerColor: 'blue', // color del marcador
-//   iconColor: 'white' // color del icono
-// })
+
+
+const markerIcon = (icon)=>L.icon({
+  iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
+  iconSize: [31, 46], // size of the icon
+  iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
+  popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
+})
+
+const getGoogleMapsUrl = (lat, lng) => {
+  return `https://www.google.com/maps?q=${lat},${lng}`
+}
 
 zonasUOSeleccionadas(form.id)
 
@@ -255,8 +282,7 @@ defineExpose({
                   : [39.54982998070428, -0.4656852311920545]
               "
               :draggable="posicionEditable"
-              :color="red"
-              :icon="customIcon(getIconByInfraestructura(form.infraestructura_fk))"
+              :icon="markerIcon(getIconByInfraestructura(form.infraestructura_fk))"
               @dragend="
                 (e) => {
                   form.posicion = {
@@ -265,8 +291,9 @@ defineExpose({
                   }
                   console.log('New position:', form.posicion)
                 }
-              "
+                "
             >
+            <!-- :icon="markerIcon(getIconByInfraestructura(form.infraestructura_fk))" -->
             
               <l-tooltip>
                 <div class="text-center">
@@ -277,9 +304,9 @@ defineExpose({
 
               <l-popup>
                 <div class="text-center">
-                  <h1 class="text-lg font-bold">Punto 1</h1>
-                  <a href="http://google.com" target="_blank" class="text-sm">Ver en Google Maps</a>
-                  <p class="text-sm">Muestra 1</p>
+                  <h1 class="text-lg font-bold">{{ form.name }}</h1>
+                  <a :href="getGoogleMapsUrl(form.posicion?.lat || 33.84984041752422, form.posicion?.lon || -111.42066937394506 )" target="_blank" class="text-sm">Ver en Google Maps</a>
+                  <p class="text-sm">{{form.id}}</p>
                 </div>
               </l-popup>
             </l-marker>
@@ -344,3 +371,40 @@ defineExpose({
     </CardBox>
   </SectionMain>
 </template>
+<!-- <style scoped>
+
+.marker-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: #c30b82;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -15px 0 0 -15px;
+}
+
+.marker-pin::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0 3px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+ }
+
+.custom-div-icon i {
+   position: absolute;
+   width: 22px;
+   font-size: 22px;
+   left: 0;
+   right: 0;
+   margin: 10px auto;
+   text-align: center;
+}
+
+
+
+</style> -->

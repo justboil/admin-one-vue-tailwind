@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="300"
+   height="200"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   version="1.0"
+   sodipodi:docbase="C:\Documents and Settings\Raúl\Escritorio"
+   sodipodi:docname="Andalucía.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.885"
+     inkscape:cx="150"
+     inkscape:cy="100"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="300px"
+     height="200px"
+     showgrid="true"
+     gridspacingx="20px"
+     gridspacingy="13.33px"
+     gridtolerance="10000"
+     inkscape:grid-points="true"
+     guidetolerance="50"
+     objecttolerance="50"
+     inkscape:grid-bbox="false"
+     inkscape:window-width="809"
+     inkscape:window-height="573"
+     inkscape:window-x="107"
+     inkscape:window-y="173"
+     inkscape:object-nodes="true"
+     inkscape:object-points="true" />
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Capa 1">
+    <rect
+       style="opacity:1;fill:#006633;fill-opacity:1;stroke:#eef3f3;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2163"
+       width="300"
+       height="66.650002"
+       x="0"
+       y="0.050000001" />
+    <rect
+       style="opacity:1;fill:#006633;fill-opacity:1;stroke:#eef3f3;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2165"
+       width="300"
+       height="66.650002"
+       x="0"
+       y="133.35001" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#eef3f3;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2159"
+       width="299.46948"
+       height="66.987"
+       x="0.53050399"
+       y="66.700005" />
+  </g>
+</svg>

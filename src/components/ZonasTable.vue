@@ -17,6 +17,7 @@ import CardBoxModalForm from './CardBoxModalForm.vue'
 // import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
 import { createZona, anularZona, updateZona } from '@/services/zonas'
+import FlagIcons from './FlagIcons.vue'
 
 defineProps({
   checkable: {
@@ -34,24 +35,29 @@ const isModalOpen = ref(false)
 
 const expandedRows = ref([])
 
-
 const comunidadPorId = (id) => {
-  return plantaStore.getComunidadesAutonomas.find((comunidad) => comunidad.id === id)?.name ?? 'Sin Comunidad Asignada'
+  return (
+    plantaStore.getComunidadesAutonomas.find((comunidad) => comunidad.id === id)?.name ??
+    'Sin Comunidad Asignada'
+  )
 }
 
 const unidadOperativaPorId = (id) => {
-  return plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)?.name ?? 'Sin Unidad Operativa Asignada'
-  
+  return (
+    plantaStore.getUnidadesOperativas.find((uo) => uo.id === id)?.name ??
+    'Sin Unidad Operativa Asignada'
+  )
 }
 
-
 const puntosMuestreoPorZona = (idZona) => {
-  return plantaStore.getPuntosMuestreo.filter((pMuestreo) => pMuestreo.zona_fk === idZona).map((punto) => {
-    return {
-
-      name:punto.name,id: punto.id
-    }
-  })
+  return plantaStore.getPuntosMuestreo
+    .filter((pMuestreo) => pMuestreo.zona_fk === idZona)
+    .map((punto) => {
+      return {
+        name: punto.name,
+        id: punto.id
+      }
+    })
 }
 
 const toggleExpand = (id) => {
@@ -62,10 +68,8 @@ const toggleExpand = (id) => {
   }
 }
 
- 
-
 const openModal = (zona) => {
-  dataToEdit.value=zona
+  dataToEdit.value = zona
   console.log('openModal:', dataToEdit.value)
   isModalOpen.value = true
 }
@@ -97,13 +101,12 @@ const handleDeleteZona = async () => {
 const saveForm = async (form) => {
   //  console.log("ESCRITO Y HECHO", form);
   if (form.esNuevo) {
-    console.log('Formulario Nuevo:', form.id);
+    console.log('Formulario Nuevo:', form.id)
     await createZona(form)
     // form.value=null
-  
   } else {
-    console.log('Formulario Editado:', form);
-   await updateZona(form)
+    console.log('Formulario Editado:', form)
+    await updateZona(form)
   }
   await plantaStore.loadZonas()
   closeModal()
@@ -124,7 +127,9 @@ defineExpose({
     v-model="isModalOpen"
     :uo="dataToEdit"
     :title="
-      dataToEdit?.id ? `Editar Zona de Abastecimiento ${dataToEdit?.name}` : 'Crear Nueva Zona de Abastecimiento'
+      dataToEdit?.id
+        ? `Editar Zona de Abastecimiento ${dataToEdit?.name}`
+        : 'Crear Nueva Zona de Abastecimiento'
     "
     has-cancel
   >
@@ -140,7 +145,8 @@ defineExpose({
   >
     <p>
       Esta seguro que desea eliminar la Zona de Abastecimiento
-      <b>{{ dataToEdit?.name }}</b>?
+      <b>{{ dataToEdit?.name }}</b
+      >?
     </p>
     <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
@@ -149,8 +155,9 @@ defineExpose({
     <table>
       <thead>
         <tr>
-          <th  />
+          <th />
           <th>ID</th>
+          <th>Nombre</th>
           <th>Nombre</th>
           <th>Comunidad Autonoma</th>
           <th>Unidad Operativa</th>
@@ -173,7 +180,10 @@ defineExpose({
               {{ zona.name }}
             </td>
             <td data-label="Comunidad Autonoma">
-              {{ comunidadPorId(zona.com_autonoma_fk) }}
+              <div class="flex items-center space-x-2">
+                <FlagIcons :comunidad="zona.com_autonoma_fk" class="rounded" />
+                {{ comunidadPorId(zona.com_autonoma_fk) }}
+              </div>
             </td>
             <td data-label="Unidad Operativa">
               {{ unidadOperativaPorId(zona.unidades_operativas_fk) }}
@@ -219,7 +229,11 @@ defineExpose({
             <td class="w-1">
               <div class="flex flex-col items-center space-y-2">
                 <BaseButtons class="pl-8">
-                  <BaseButton :icon="mdiPencil" color="info" @click="openModal({ ...zona, esNuevo:false })" />
+                  <BaseButton
+                    :icon="mdiPencil"
+                    color="info"
+                    @click="openModal({ ...zona, esNuevo: false })"
+                  />
 
                   <BaseButton
                     :icon="mdiTrashCan"
