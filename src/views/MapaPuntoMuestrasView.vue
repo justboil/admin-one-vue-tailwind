@@ -13,12 +13,24 @@ import { ref } from 'vue'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import FormAnalitica from '@/components/FormAnalitica.vue'
 import SectionMain from '@/components/SectionMain.vue'
+import { getIconByInfraestructura } from '@/helpers/maps'
+import L from 'leaflet'
+
 
 const plantasStore = usePlantasStore()
 const isModalActive = ref(false)
 const selectedPunto = ref(null)
 
 const zoom = ref(13)
+const API_KEY_ICONS = import.meta.env.VITE_ICONS_API_KEY
+ const markerIcon = (icon) =>
+    L.icon({
+      iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
+      iconSize: [31, 46], // size of the icon
+      iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
+      popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
+    })
+  
 
 const crearAnalitica = (puntoId) => {
   isModalActive.value = true
@@ -30,6 +42,14 @@ const crearAnalitica = (puntoId) => {
 // }
 
 const onDragEnd = (event) => {
+
+  
+                  const posicion = {
+                    lat: event.target.getLatLng().lat,
+                    lon: event.target.getLatLng().lng
+                  }
+                  console.log('New position:', posicion)
+                
   console.log(event.target.getLatLng())
 }
 </script>
@@ -116,8 +136,10 @@ const onDragEnd = (event) => {
                 v-if="punto.posicion"
                 :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
                 draggable
+                :icon="markerIcon(getIconByInfraestructura(punto.infraestructura_fk))"
                 @dragend="onDragEnd"
                 >
+                <!-- @dragend="onDragEnd" -->
                 <l-tooltip>
                   <div class="text-center">
                       <h1 class="text-lg font-bold">{{ punto.name }}</h1>

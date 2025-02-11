@@ -122,7 +122,7 @@ const fiestaConfetti=async ()=>{
   },
   //------------------------------------------
   angle: 90,
-  count: 500,
+  count: 700,
   position: {
     x: 50,
     y: 50,

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { usePlantasStore } from '@/stores/plantas'
 import BaseButtons from './BaseButtons.vue'
 import BaseButton from './BaseButton.vue'
@@ -35,6 +35,7 @@ defineProps({
 
 const plantaStore = usePlantasStore()
 const puntosMuestreo = computed(() => plantaStore.getPuntosMuestreo.filter((punto) => punto.activo))
+const isLoading = ref(true)
 
 const isModalDangerActive = ref(false)
 const dataToEdit = ref(null)
@@ -117,6 +118,16 @@ const saveForm = async (form) => {
   alert('Punto de Muestreo guardado correctamente')
 }
 
+// Cargar datos iniciales
+onMounted(async () => {
+  try {
+    await plantaStore.loadPuntosMuestreo()
+    isLoading.value = false
+  } catch (error) {
+    console.error('Error al cargar puntos de muestreo:', error)
+  }
+})
+
 watch(puntosMuestreo, (newValue) => {
   console.log('Puntos de Muestreo WATCH:', newValue)
 })
@@ -127,6 +138,10 @@ defineExpose({
 </script>
 
 <template>
+  <div v-if="isLoading" class="flex justify-center items-center p-4">
+    <span class="text-gray-500">Cargando datos...</span>
+  </div>
+  <div v-else>
   <CardBoxModalForm
     v-if="dataToEdit !== null"
     v-model="isModalOpen"
@@ -208,6 +223,7 @@ defineExpose({
       </tbody>
     </table>
   </div>
+</div>
 </template>
 
 <style scoped></style>

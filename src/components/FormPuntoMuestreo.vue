@@ -1,6 +1,15 @@
 <script setup>
 import { computed, reactive, ref, toValue, watch } from 'vue'
-import { mdiBallotOutline, mdiAccount, mdiMail, mdiWaterAlert, mdiStopCircle, mdiSignal, mdiChartBellCurve, mdiLogin } from '@mdi/js'
+import {
+  mdiBallotOutline,
+  mdiAccount,
+  mdiMail,
+  mdiWaterAlert,
+  mdiStopCircle,
+  mdiSignal,
+  mdiChartBellCurve,
+  mdiLogin
+} from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
@@ -22,8 +31,7 @@ import { FormKit } from '@formkit/vue'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
-import { confetti } from '@tsparticles/confetti'
-
+import { getIconByInfraestructura } from '@/helpers/maps'
 // const zonasUoOperario = ref([]);
 
 // const emits = defineEmits(['cancelModal', 'closeModal'])
@@ -32,8 +40,7 @@ const emit = defineEmits(['submit', 'closeModal'])
 
 const plantasStore = usePlantasStore()
 
-
-const API_KEY_ICONS=import.meta.env.VITE_ICONS_API_KEY
+const API_KEY_ICONS = import.meta.env.VITE_ICONS_API_KEY
 const zoom = ref(13)
 const posicionEditable = ref(false)
 
@@ -86,30 +93,6 @@ const selectZona = computed(() => {
   })
 })
 
-const getTipoInfrastructuraByPunto = (infraId) => {
-  const infraestructura = plantasStore.getInfraestructuras.find((infra) => infra.id === infraId)?.type
-  console.log(infraestructura);
-  return infraestructura
-}
-
-
-
-const getIconByInfraestructura = (infId) => {
-  switch (getTipoInfrastructuraByPunto(infId)) {
-    case 1:
-      return 'faucet'
-    case 2:
-      return 'ring'
-    case 3:
-      return 'flask'
-    case 4:
-      return 'route'
-      default:
-      return 'water'
-  }
-}
-
-
 const toggleEditarPosicion = () => {
   posicionEditable.value = !posicionEditable.value
 }
@@ -124,10 +107,6 @@ const zonasPorComunidadAutonoma = (ca) => {
   return comAut
 }
 
-
-
-
-
 const getZonas = computed(() => {
   const zonas = plantasStore.getZonas.map((zona) => {
     return { value: zona.id, label: zona.name }
@@ -136,8 +115,7 @@ const getZonas = computed(() => {
   return zonas
 })
 
-
-const icon=L.divIcon({
+const icon = L.divIcon({
   html: `
   <div class="marker-pin">
     <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;">
@@ -150,10 +128,6 @@ const icon=L.divIcon({
   iconAnchor: [12, 24]
 })
 
-
-
-
-
 watch(
   () => props.uo,
   (newUO) => {
@@ -161,8 +135,8 @@ watch(
     form.id = newUO?.id
     form.name = newUO?.name
     form.infraestructura_fk = newUO?.infraestructura_fk
-      ; (form.zona_fk = newUO?.zona_fk), (form.posicion = newUO?.posicion)
-      posicionEditable.value = false //resetear al abrir el modal
+    ;(form.zona_fk = newUO?.zona_fk), (form.posicion = newUO?.posicion)
+    posicionEditable.value = false //resetear al abrir el modal
   },
   { inmediate: true }
 )
@@ -182,32 +156,31 @@ const zonasUOSeleccionadas = async (id) => {
   form.zonas = zonas
 }
 
-const customIcon =(icon)=> L.divIcon({
-  html: `  
+const customIcon = (icon) =>
+  L.divIcon({
+    html: `  
     <svg viewBox="0 0 24 24" style="width: 60px; height: 60px;" class="marker-pin">
       <path fill="#2196f3" d="${icon}" />
       </svg>
       `,
-  className: 'custom-div-icon',
-  iconSize: [24, 24],
-  iconAnchor: [12, 24]
-})
+    className: 'custom-div-icon',
+    iconSize: [24, 24],
+    iconAnchor: [12, 24]
+  })
 
-
-
-const markerIcon = (icon)=>L.icon({
-  iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
-  iconSize: [31, 46], // size of the icon
-  iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
-  popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
-})
+const markerIcon = (icon) =>
+  L.icon({
+    iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
+    iconSize: [31, 46], // size of the icon
+    iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
+  })
 
 const getGoogleMapsUrl = (lat, lng) => {
   return `https://www.google.com/maps?q=${lat},${lng}`
 }
 
-const imprime =  () => {
-  
+const imprime = () => {
   console.log(form)
 }
 
@@ -298,10 +271,10 @@ defineExpose({
                   }
                   console.log('New position:', form.posicion)
                 }
-                "
+              "
             >
-            <!-- :icon="markerIcon(getIconByInfraestructura(form.infraestructura_fk))" -->
-            
+              <!-- :icon="markerIcon(getIconByInfraestructura(form.infraestructura_fk))" -->
+
               <l-tooltip>
                 <div class="text-center">
                   <h1 class="text-lg font-bold">{{ form.name }}</h1>
@@ -312,8 +285,18 @@ defineExpose({
               <l-popup>
                 <div class="text-center">
                   <h1 class="text-lg font-bold">{{ form.name }}</h1>
-                  <a :href="getGoogleMapsUrl(form.posicion?.lat || 33.84984041752422, form.posicion?.lon || -111.42066937394506 )" target="_blank" class="text-sm">Ver en Google Maps</a>
-                  <p class="text-sm">{{form.id}}</p>
+                  <a
+                    :href="
+                      getGoogleMapsUrl(
+                        form.posicion?.lat || 33.84984041752422,
+                        form.posicion?.lon || -111.42066937394506
+                      )
+                    "
+                    target="_blank"
+                    class="text-sm"
+                    >Ver en Google Maps</a
+                  >
+                  <p class="text-sm">{{ form.id }}</p>
                 </div>
               </l-popup>
             </l-marker>

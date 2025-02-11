@@ -16,18 +16,38 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const analiticaToUpdate = ref(null)
   const tipoPersonal = ref([])
 
-  onMounted(() => {
-    loadZonas()
-    loadOperarios()
-    loadAnaliticas()
-    loadPuntosMuestreo()
-    loadUnidadesOperativas()
-    loadComunidadesAutonomas()
-    loadInfraestructuras()
-    loadTipoInfraestructura()
-    loadZonasInfraestructuras()
-    loadTipoPersonal()
-  })
+  // onMounted(() => {
+  //   loadZonas()
+  //   loadOperarios()
+  //   loadAnaliticas()
+  //   loadPuntosMuestreo()
+  //   loadUnidadesOperativas()
+  //   loadComunidadesAutonomas()
+  //   loadInfraestructuras()
+  //   loadTipoInfraestructura()
+  //   loadZonasInfraestructuras()
+  //   loadTipoPersonal()
+  // })
+
+  // Función para inicializar todos los datos
+  const initializeStore = async () => {
+    try {
+      await Promise.all([
+        loadZonas(),
+        loadOperarios(),
+        loadAnaliticas(),
+        loadPuntosMuestreo(),
+        loadUnidadesOperativas(),
+        loadComunidadesAutonomas(),
+        loadInfraestructuras(),
+        loadTipoInfraestructura(),
+        loadZonasInfraestructuras(),
+        loadTipoPersonal()
+      ])
+    } catch (error) {
+      console.error('Error inicializando store:', error)
+    }
+  }
 
   const loadZonas = async () => {
     const { data } = await supabase.from('zonas_abastecimiento').select('*')
@@ -236,6 +256,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadInfraestructuras,
     loadZonasInfraestructuras,
     loadTipoPersonal,
-    analiticaToUpdate
+    analiticaToUpdate,
+    initializeStore
   }
 })
