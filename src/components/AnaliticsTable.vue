@@ -167,7 +167,16 @@ const getPuntoMuestreo = (id) => {
 }
 
 const getTipoAnalitica = (id) => {
-  return id === 28 ? 'Operacional' : 'Rutina'
+  switch (id) {
+    case 28:
+      return 'Operacional'
+    case 29:
+      return 'Rutina'
+    case 99:
+      return 'Seguimiento'
+    default:
+      return 'Desconocido'
+  }
 }
 
 const allRowsChecked = computed(() => {

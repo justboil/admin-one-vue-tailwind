@@ -105,43 +105,39 @@ const submitHandler = async () => {
   }
 }
 
-const fiestaConfetti=async ()=>{
-
-  
-  await confetti("tsparticles", {
-  /**
-   * @deprecated use count property instead
-   */
-  particleCount: 50,
-  /**
-   * @deprecated use position property instead
-   */
-  origin: {
-    x: 0.5,
-    y: 0.5,
-  },
-  //------------------------------------------
-  angle: 90,
-  count: 700,
-  position: {
-    x: 50,
-    y: 50,
-  },
-  spread: 45,
-  startVelocity: 45,
-  decay: 0.9,
-  gravity: 1,
-  drift: 0,
-  ticks: 200,
-  colors: ["#ffffff", "#ff0000"],
-  shapes: ["square", "circle"],
-  scalar: 1,
-  zIndex: 100,
-  disableForReducedMotion: true,
-});
-  
+const fiestaConfetti = async () => {
+  await confetti('tsparticles', {
+    /**
+     * @deprecated use count property instead
+     */
+    particleCount: 50,
+    /**
+     * @deprecated use position property instead
+     */
+    origin: {
+      x: 0.5,
+      y: 0.5
+    },
+    //------------------------------------------
+    angle: 90,
+    count: 700,
+    position: {
+      x: 50,
+      y: 50
+    },
+    spread: 45,
+    startVelocity: 45,
+    decay: 0.9,
+    gravity: 1,
+    drift: 0,
+    ticks: 200,
+    colors: ['#ffffff', '#ff0000'],
+    shapes: ['square', 'circle'],
+    scalar: 1,
+    zIndex: 100,
+    disableForReducedMotion: true
+  })
 }
-
 
 onMounted(async () => {
   await plantaStore.loadOperarios()
@@ -149,15 +145,15 @@ onMounted(async () => {
   form.operario = loginStore.isAuthenticated ? operarioLogueado.value?.id : null
   form.uo = loginStore.isAuthenticated ? operarioLogueado.value?.ud_operativa_fk : null
   if (props.initialPosition) {
-      form.punto_muestreo_fk = props.initialPosition
-    console.log('Punto de muestreo:', props.initialPosition)}
+    form.punto_muestreo_fk = props.initialPosition
+    console.log('Punto de muestreo:', props.initialPosition)
+  }
 })
 
 watch(
   () => props.initialPosition,
   async (newPosition) => {
     if (newPosition) {
-      
       form.punto_muestreo_fk = newPosition
     }
   },
@@ -179,7 +175,7 @@ watch(
           />
           <FormKit v-model="form.fecha" type="date" placeholder="Fecha de la toma de la muestra" />
         </div>
-        <div v-if="!props.initialPosition" class="grid grid-cols-1 md:grid-cols-4 gap-4" >
+        <div v-if="!props.initialPosition" class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <FormKit
             v-model="form.uo"
             type="select"
@@ -214,7 +210,7 @@ watch(
           <FormKit
             v-model.number="form.type"
             type="radio"
-            :options="{ 29: 'Rutina', 28: 'Operacional' }"
+            :options="{ 29: 'Rutina', 28: 'Operacional', 99: 'Seguimiento' }"
             label="Tipo de Analitica"
           />
         </div>
@@ -259,8 +255,17 @@ watch(
               placeholder="Cloro Residual"
               label="Cloro Residual"
               help="mg/l"
-              validation="number|min:0|max:99"
-              :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 99' }"
+              :validation="
+                form.type === 29 || form.type === 28
+                  ? 'required|number|min:0|max:99'
+                  : 'number|min:0|max:99'
+              "
+              :validation-messages="{
+                required: 'Este campo es obligatorio',
+                number: 'Introduce un número',
+                min: 'El valor mínimo es 0',
+                max: 'El valor máximo es 99'
+              }"
             ></FormKit>
             <FormKit
               v-model="form.ph"
@@ -268,8 +273,17 @@ watch(
               placeholder="pH"
               label="pH"
               help="ud"
-              validation="number|min:0|max:14"
-              :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 14' }"
+              :validation="
+                form.type === 29 || form.type === 28
+                  ? 'required|number|min:0|max:14'
+                  : 'number|min:0|max:14'
+              "
+              :validation-messages="{
+                required: 'Este campo es obligatorio',
+                number: 'Introduce un número',
+                min: 'El valor mínimo es 0',
+                max: 'El valor máximo es 14'
+              }"
             />
             <FormKit
               v-model.number="form.turbidez"
@@ -277,8 +291,17 @@ watch(
               placeholder="Turbidez"
               label="Turbidez"
               help="UNF"
-              validation="number|min:0|max:999"
-              :validation-messages="{ number: 'Introduce un número', min: 'El valor mínimo es 0', max: 'El valor máximo es 999' }"
+              :validation="
+                form.type === 29 || form.type === 28
+                  ? 'required|number|min:0|max:999'
+                  : 'number|min:0|max:999'
+              "
+              :validation-messages="{
+                required: 'Este campo es obligatorio',
+                number: 'Introduce un número',
+                min: 'El valor mínimo es 0',
+                max: 'El valor máximo es 999'
+              }"
             />
           </div>
           <div>
