@@ -12,7 +12,8 @@ export const getTipoInfrastructuraByPunto = (infraId) => {
 export const getIconByInfraestructura = (infId) => {
     switch (getTipoInfrastructuraByPunto(infId)) {
       case 1:
-        return 'faucet'
+        return 'water'
+        // return 'faucet'
       case 2:
         return 'ring'
       case 3:
@@ -20,7 +21,7 @@ export const getIconByInfraestructura = (infId) => {
       case 4:
         return 'route'
         default:
-        return 'water'
+        return 'faucet'
     }
 }
 

@@ -1,19 +1,5 @@
 import {
   mdiWaterCircle,
-  mdiSquareEditOutline,
-  mdiCog,
-  // mdiAccountCircle,
-  // mdiMonitor,
-  // mdiGithub,
-  // mdiLock,
-  // mdiAlertCircle,
-  // mdiTable,
-  // mdiViewList,
-  // mdiTelevisionGuide,
-  // mdiResponsive,
-  // mdiPalette,
-  // mdiReact,
-  // mdiCogOutline,
 } from '@mdi/js'
 
 export default [
@@ -33,7 +19,8 @@ export default [
       },
       {
         label: 'Analiticas',
-        to: {name: "tablaAnaliticas"},
+        to: { name: "tablaAnaliticas" },
+        maxRole:1
         // icon: mdiSquareEditOutline
       },
       {

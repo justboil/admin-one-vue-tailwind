@@ -17,6 +17,7 @@ export default [
   {
     icon: mdiMenu,
     label: 'Administración',
+    maxRole:0,
     menu: [
       {
         icon:  mdiAccountCog,

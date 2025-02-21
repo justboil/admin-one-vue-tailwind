@@ -29,6 +29,21 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
 });
 
 
+// Interceptor para manejar cambios en la autenticación
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN') {
+    console.log('Usuario autenticado:', session.user)
+  }
+  if (event === 'SIGNED_OUT') {
+    console.log('Usuario desconectado')
+  }
+  if (event === 'TOKEN_REFRESHED') {
+    console.log('Token actualizado')
+  }
+})
+
+
+
 export const searchOperarios = async () => {
   const { data } = await supabase.from('personal').select('*')
   return data

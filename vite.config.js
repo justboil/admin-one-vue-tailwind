@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: "/sinaq/",
   plugins: [vue()],
   build: {
     target: 'ES2022' // Asegura que esbuild soporta Top-level await

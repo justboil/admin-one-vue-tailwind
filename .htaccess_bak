@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /sinaq/
+  
+  # Proxy para manejar CORS
+  <!-- RewriteRule ^api/lecturas/(.*)$ http://localhost:3000/api/lecturas/$1 [P,L] -->
+  <!-- RewriteRule ^api/(.*)$ https://app.chj.es/ContadoresWebApiTest/api/$1 [P,L] -->
+</IfModule>
+
+# Habilitar CORS
+<IfModule mod_headers.c>
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+  Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>

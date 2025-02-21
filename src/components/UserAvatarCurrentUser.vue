@@ -8,7 +8,8 @@ const loginStore = useLoginStore()
 </script>
 
 <template>
-  <UserAvatar :username="loginStore.userName" :avatar="loginStore.userAvatar">
+  <UserAvatar :username="loginStore.userName" :avatar="loginStore.userPhoto" >
+  <!-- <UserAvatar :username="loginStore.userName" :avatar="loginStore.profilePhoto??loginStore.userPhoto" > -->
     <slot />
   </UserAvatar>
 </template>

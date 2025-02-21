@@ -9,6 +9,8 @@ import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import NavBarMenuList from '@/components/NavBarMenuList.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
 
+
+
 const props = defineProps({
   item: {
     type: Object,
@@ -17,6 +19,18 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['menu-click'])
+
+const loginStore = useLoginStore()
+
+// Computed que determina si se muestra el ítem basado en la propiedad maxRole
+const isVisible = computed(() => {
+  // Si el ítem tiene propiedad maxRole, se verifica que el role del usuario sea menor
+  if (props.item.maxRole !== undefined) {
+    const currentRole = Number(loginStore.userLogged.role)
+    return currentRole <= props.item.maxRole
+  }
+  return true
+})
 
 const is = computed(() => {
   if (props.item.href) {
@@ -88,7 +102,7 @@ onBeforeUnmount(() => {
   <BaseDivider v-if="item.isDivider" nav-bar />
   <component
     :is="is"
-    v-else
+    v-else-if="isVisible"
     ref="root"
     class="block lg:flex items-center relative cursor-pointer"
     :class="componentClass"
@@ -104,9 +118,10 @@ onBeforeUnmount(() => {
           item.menu
       }"
     >
-      <UserAvatarCurrentUser v-if="item.isCurrentUser" class="w-6 h-6 mr-3 inline-flex" />
+      <UserAvatarCurrentUser v-if="item.isCurrentUser" class="w-10 h-10  inline-flex" />
       <BaseIcon v-if="item.icon" :path="item.icon" class="transition-colors" />
-      <span
+      <span 
+      
         class="px-2 transition-colors"
         :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
         >{{ itemLabel }}</span

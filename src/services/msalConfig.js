@@ -42,6 +42,10 @@ const msalConfig = {
 // Función para obtener foto de perfil
 
 const msalInstance = new PublicClientApplication(msalConfig);
+
+// Crear proveedor de criptografía para PKCE
+// export const cryptoProvider = new cryptoProvider()
+
 await msalInstance.initialize();
 
 export const loginWithMicrosoft = async () => {
@@ -66,66 +70,9 @@ export const loginWithMicrosoft = async () => {
   }
 };
 
-//*************************************getUserProfile permisos Administrador*************************************** */
-// export const getUserProfile = async () => {
-//   try {
-//     const account = msalInstance.getAllAccounts()[0];
-//     let tokenResponse;
 
-//     try {
-//       tokenResponse = await msalInstance.acquireTokenSilent({
-//         ...graphScopes,
-//         account: account
-//       });
-//     } catch (error) {
-//       if (error instanceof InteractionRequiredAuthError) {
-//         // Solicitar token de forma interactiva si es necesario
-//         tokenResponse = await msalInstance.acquireTokenPopup({
-//           ...graphScopes,
-//           account: account
-//         });
-//       } else {
-//         throw error;
-//       }
-//     }
 
-//     const response = await fetch('https://graph.microsoft.com/v1.0/me', {
-//       headers: {
-//         'Authorization': `Bearer ${tokenResponse.accessToken}`
-//       }
-//     });
 
-//     if (response.ok) {
-//       const userData = await response.json();
-      
-//       // Obtener foto de perfil
-//       const photoResponse = await fetch('https://graph.microsoft.com/v1.0/me/photo/$value', {
-//         headers: {
-//           'Authorization': `Bearer ${tokenResponse.accessToken}`
-//         }
-//       });
-
-//       let photoUrl = null;
-//       if (photoResponse.ok) {
-//         const blob = await photoResponse.blob();
-//         photoUrl = URL.createObjectURL(blob);
-//       }
-
-//       return {
-//         ...userData,
-//         photoUrl,
-//         displayName: userData.displayName,
-//         email: userData.mail || userData.userPrincipalName
-//       };
-//     }
-//     return null;
-//   } catch (error) {
-//     console.error('Error getting user profile:', error);
-//     return null;
-//   }
-// };
-
-//************************************************************************************* */
 
 export const getUserProfile = async () => {
   try {

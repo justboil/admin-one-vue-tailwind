@@ -5,6 +5,9 @@ import { mdiMinus, mdiPlus } from '@mdi/js'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
+import useLoginStore from '@/stores/login'
+
+const loginStore = useLoginStore()
 
 const props = defineProps({
   item: {
@@ -15,6 +18,17 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['menu-click'])
+
+const isVisible = computed(() => {
+  if (props.item.maxRole !== undefined) {
+    const currentRole = Number(loginStore.userLogged?.role ?? 7)
+    console.log('CurrentRole: ',currentRole)
+    console.log('Max Role: ',props.item.maxRole)
+    console.log('UserLogged: ',loginStore.userLogged)
+    return currentRole <= props.item.maxRole
+  }
+  return true
+})
 
 const hasColor = computed(() => props.item && props.item.color)
 
@@ -43,9 +57,9 @@ const menuClick = (event) => {
 </script>
 
 <template>
-  <li>
+  <li v-if="isVisible">
     <component
-      :is="item.to ? RouterLink : 'a'"
+    :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
       :to="item.to ?? null"
       :href="item.href ?? null"

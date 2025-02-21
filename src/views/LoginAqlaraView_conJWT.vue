@@ -12,6 +12,7 @@ import useLoginStore from '@/stores/login'
 import AqlaraLogo from '@/components/AqlaraLogo.vue'
 import { usePlantasStore } from '@/stores/plantas'
 import { supabase } from '@/services/supabase'
+import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
 const loginStore = useLoginStore()
@@ -21,6 +22,10 @@ const plantaStore= usePlantasStore()
 const isAuthenticating = ref(false)
 const errorMessage = ref('')
 const accessToken = ref('')
+
+const { user, loading, error, signInWithMicrosoft, signOut } = useAuth()
+
+console.log(user, loading, error, signInWithMicrosoft, signOut);
 
 
 
@@ -54,14 +59,21 @@ const loginWithMicrosoft = async () => {
     console.log('Login RESPONSE: ', loginResponse);
 
     // 2. Intercambiar token de Microsoft por token de Supabase
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'azure',
+      options: {
+          scopes:'email',
+        },
+        // token: loginResponse.idToken,
+      })
     // const { data, error } = await supabase.auth.signInWithIdToken({
     //     provider: 'azure',
     //     token: loginResponse.idToken,
     //   })
 
-    // if (error) throw error
+    if (error) throw error
 
-    // console.log('DATA: ', data);
+    console.log('DATA: ', data);
     // console.log('Login RESPONSE: ', accessToken.value);
 
     // // Intercambiar AccessToken por un JWT propio en tu backend

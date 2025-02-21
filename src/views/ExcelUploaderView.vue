@@ -4,6 +4,7 @@ import useUploadFile from '../composables/useUploadFile'
 import useExtractdata from '../composables/useExtractData'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 
+
 const store = useStore()
 
 const { handleFileUpload, sheetsData, errorMessage } = useUploadFile()
@@ -158,6 +159,7 @@ const getHeaders = (sheetData) => {
       <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
     </div>
   </div>
+ 
 </LayoutAuthenticated>
 </template>
 

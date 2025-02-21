@@ -40,25 +40,25 @@ const menuClick = (event, item) => {
      router.push('/login')
   
 
-    //
+    
   }
 }
 </script>
 
 <template>
   <div
+  v-if="loginStore.isAuthenticated">
     :class="{
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded
     }"
-  >
     <div
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class="pt-14 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
       <NavBar
-        :menu="menuNavBar"
-        :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
-        @menu-click="menuClick"
+      :menu="menuNavBar"
+      :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
+      @menu-click="menuClick"
       >
         <NavBarItemPlain
           display="flex lg:hidden"
@@ -90,4 +90,5 @@ const menuClick = (event, item) => {
       </FooterBar>
     </div>
   </div>
+  
 </template>

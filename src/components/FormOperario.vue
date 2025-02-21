@@ -175,14 +175,14 @@ defineExpose({
           />
         </div>
 
-        <div class="grid md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+        <div class=" md-grid-cols-1 md:grid-cols-5 gap-4 mb-6">
           <div class="w-full">
             <FormKit
               v-model="form.zonas"
               :options="buscaZonasUO(form.ud_operativa_fk)"
               type="checkbox"
               name="zonas"
-              options-class="mb-4 flex jutify-between items-center space-x-2 p-10 rounded-md w-full"
+              options-class="mb-4  flex jutify-between items-center space-x-2 p-10 rounded-md w-full"
               option-class="w-full"
             />
           </div>
