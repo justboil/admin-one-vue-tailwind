@@ -158,7 +158,6 @@ defineExpose({
           <th />
           <th>ID</th>
           <th>Nombre</th>
-          <th>Nombre</th>
           <th>Comunidad Autonoma</th>
           <th>Unidad Operativa</th>
 

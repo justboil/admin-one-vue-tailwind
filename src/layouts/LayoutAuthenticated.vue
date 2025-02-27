@@ -12,6 +12,8 @@ import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import useLoginStore from '@/stores/login.js'
+import UnAutorizedComponent from '@/components/UnAutorizedComponent.vue'
+
 
 const loginStore = useLoginStore()
 
@@ -47,7 +49,7 @@ const menuClick = (event, item) => {
 
 <template>
   <div
-  v-if="loginStore.isAuthenticated">
+  v-if="loginStore.isAuthenticated "  >
     :class="{
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded
     }"
@@ -89,6 +91,9 @@ const menuClick = (event, item) => {
         Ciclo Integral de Agua
       </FooterBar>
     </div>
+  </div>
+  <div v-else>
+    <UnAutorizedComponent/>
   </div>
   
 </template>

@@ -22,7 +22,8 @@ const downloadXML = () => {
   console.log('TablaAnaliticas:', tablaAnaliticas.value)
   console.log('CheckedRows:', tablaAnaliticas.value?.checkedRows)
   // Obtener analíticas seleccionadas
-  const analiticasSeleccionadas = tablaAnaliticas.value?.checkedRows || []
+  const analiticasSeleccionadas = (tablaAnaliticas.value?.checkedRows || [])
+    .filter(item => item.type === 28 || item.type === 29) // solo als analiticas del tipo 28 y 29 (Operacional y Rutina)
 
   console.log('Analíticas seleccionadas:', analiticasSeleccionadas)
   

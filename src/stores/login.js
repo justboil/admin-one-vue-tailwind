@@ -13,13 +13,14 @@ export const useLoginStore = defineStore('loginStore', () => {
   const profilePhoto = ref(localStorage.getItem('profilePhoto') || '')
   const userAutenticated = ref(localStorage.getItem('userAutenticated') || '')
   const userRole=ref(localStorage.getItem('userRole') || '')
+  const userId=ref(localStorage.getItem('userId') || '')
 
   const userAvatar = computed(
     () =>      
     `https://ui-avatars.com/api/?name=${userName.value}&background=random&font-size=0.75&bold=true&color=fff`
   )
    // Watchers para persistencia
-   watch([isAuthenticated, user, userName, userEmail, userAvatar, userLogged, profilePhoto, userAutenticated, userRole], ([newAuth, newUser, newName, newEmail, newAvatar,newUserLogged, newProfilePhoto, newUserAutenticated, newUserRole]) => {
+   watch([isAuthenticated, user, userName, userEmail, userAvatar, userLogged, profilePhoto, userAutenticated, userRole,userId], ([newAuth, newUser, newName, newEmail, newAvatar,newUserLogged, newProfilePhoto, newUserAutenticated, newUserRole, newUserId]) => {
     localStorage.setItem('isAuthenticated', newAuth)
     if (newUser) localStorage.setItem('user', JSON.stringify(newUser))
     if (newName) localStorage.setItem('userName', newName)
@@ -29,6 +30,7 @@ export const useLoginStore = defineStore('loginStore', () => {
      if (newProfilePhoto) localStorage.setItem('profilePhoto', newProfilePhoto)
      if (newUserAutenticated) localStorage.setItem('userAutenticated', newUserAutenticated)
       if (newUserRole) localStorage.setItem('userRole', newUserRole)
+      if (newUserId) localStorage.setItem('userId', newUserId)
   })
 
 
@@ -65,6 +67,10 @@ export const useLoginStore = defineStore('loginStore', () => {
     localStorage.clear()
   }
 
+  const getUserLogged=computed(() => {
+    return userLogged.value
+  })
+
   const  setUser=(payload)=> {
     if (payload.name) {
       userName.value = payload.name
@@ -76,7 +82,6 @@ export const useLoginStore = defineStore('loginStore', () => {
     }
   }
 
-  
   const setUserRole = (role) => {
      // Si userLogged.value no es un objeto, lo inicializamos
      if (typeof userLogged.value !== 'object' || userLogged.value === null) {
@@ -88,6 +93,18 @@ export const useLoginStore = defineStore('loginStore', () => {
     }
     userRole.value = role
   }
+  const setUserId = (id) => {
+     // Si userLogged.value no es un objeto, lo inicializamos
+     if (typeof userLogged.value !== 'object' || userLogged.value === null) {
+      userLogged.value = {}
+    }
+    userLogged.value = {
+      ...userLogged.value,
+      id: id
+    }
+    userId.value = id
+  }
+
 
   const setAccount = (account) => {
     user.value = account
@@ -115,7 +132,10 @@ export const useLoginStore = defineStore('loginStore', () => {
     profilePhoto,
     setProfilePhoto,
     setUserRole,
-    userRole
+    userRole,
+    getUserLogged,
+    setUserId,
+    userId,
     
   }
 })

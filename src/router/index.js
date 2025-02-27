@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from '@/views/HomeView.vue'
 import useLoginStore from '@/stores/login';
 import LoginAqlaraView from '@/views/LoginAqlaraView.vue';
+import UnAutorizedComponent from '@/components/UnAutorizedComponent.vue';
 
 // const loginStore = useLoginStore();
 
@@ -13,6 +14,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginAqlaraView
+  },
+  {
+    path: '/unauthorized',
+    name: 'Unauthorized',
+    component: UnAutorizedComponent
   },
   {
     meta: {

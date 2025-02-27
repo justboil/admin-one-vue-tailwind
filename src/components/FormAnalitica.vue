@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, watch } from 'vue'
-
 import { usePlantasStore } from '@/stores/plantas'
 import { useLoginStore } from '@/stores/login'
 import useFormSelectData from '@/composables/useFormSelectData'
@@ -17,6 +16,10 @@ const props = defineProps({
     default: null
   }
 })
+
+const emit=defineEmits(['closeModal'])
+
+
 
 const {
   form,
@@ -93,9 +96,12 @@ const submitHandler = async () => {
     } else {
       plantaStore.loadAnaliticas()
       console.log('Datos insertados:', data)
-      alert('Datos insertados correctamente')
       resetForm()
-      fiestaConfetti()
+      emit('closeModal')
+      // fiestaConfetti()
+      
+      alert('Datos insertados correctamente')
+    
     }
   } catch (error) {
     console.error('Error en la solicitud:', error)
@@ -105,38 +111,41 @@ const submitHandler = async () => {
   }
 }
 
-const fiestaConfetti = async () => {
-  await confetti('tsparticles', {
-    /**
-     * @deprecated use count property instead
-     */
-    particleCount: 50,
-    /**
-     * @deprecated use position property instead
-     */
-    origin: {
-      x: 0.5,
-      y: 0.5
-    },
-    //------------------------------------------
-    angle: 90,
-    count: 700,
-    position: {
-      x: 50,
-      y: 50
-    },
-    spread: 45,
-    startVelocity: 45,
-    decay: 0.9,
-    gravity: 1,
-    drift: 0,
-    ticks: 200,
-    colors: ['#ffffff', '#ff0000'],
-    shapes: ['square', 'circle'],
-    scalar: 1,
-    zIndex: 100,
-    disableForReducedMotion: true
-  })
+const fiestaConfetti =  async() => {
+  
+    await confetti('tsparticles', {
+      /**
+       * @deprecated use count property instead
+       */
+      particleCount: 50,
+      /**
+       * @deprecated use position property instead
+       */
+      origin: {
+        x: 0.5,
+        y: 0.5
+      },
+      //------------------------------------------
+      angle: 90,
+      count: 700,
+      position: {
+        x: 50,
+        y: 50
+      },
+      spread: 45,
+      startVelocity: 45,
+      decay: 0.9,
+      gravity: 1,
+      drift: 0,
+      ticks: 200,
+      colors: ['#ffffff', '#ff0000'],
+      shapes: ['square', 'circle'],
+      scalar: 1,
+      zIndex: 100,
+      disableForReducedMotion: true
+    })
+
+  
 }
 
 onMounted(async () => {

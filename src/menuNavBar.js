@@ -17,11 +17,12 @@ export default [
   {
     icon: mdiMenu,
     label: 'Administración',
-    maxRole:0,
+    maxRole: 0,
+    minRole: 90,
     menu: [
       {
         icon:  mdiAccountCog,
-        label: 'Operarios',
+        label: 'Personal',
         to: {name:'operarios'}
       },
       {

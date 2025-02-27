@@ -348,7 +348,7 @@ defineExpose({
       <template #footer>
         <BaseButtons>
           <BaseButton type="submit" color="info" label="Guardar" @click="emit('submit', form)" />
-          <BaseButton type="submit" color="info" label="imprime" @click="imprime" />
+          <!-- <BaseButton type="submit" color="info" label="imprime" @click="imprime" /> -->
           <BaseButton
             type="reset"
             color="danger"

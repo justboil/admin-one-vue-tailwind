@@ -3,34 +3,37 @@ import BaseButton from '@/components/BaseButton.vue'
 import CardBox from '@/components/CardBox.vue'
 import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
 import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import { mdiDownload, mdiFilter, mdiFlaskEmptyOutline, mdiMap } from '@mdi/js'
+import { mdiCrosshairsGps, mdiDownload, mdiFilter, mdiFlaskEmptyOutline, mdiMap } from '@mdi/js'
 
 import { usePlantasStore } from '@/stores/plantas'
 
 import 'leaflet/dist/leaflet.css'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import CardBoxModal from '@/components/CardBoxModal.vue'
 import FormAnalitica from '@/components/FormAnalitica.vue'
 import SectionMain from '@/components/SectionMain.vue'
 import { getIconByInfraestructura } from '@/helpers/maps'
 import L from 'leaflet'
-
+import { onMounted } from 'vue'
 
 const plantasStore = usePlantasStore()
 const isModalActive = ref(false)
 const selectedPunto = ref(null)
+const isLoading = ref(false)
+const geoLocationError = ref(null)
+const map=ref(null)
 
+const center=ref([39.4679255214283, -0.3762874990439122])
 const zoom = ref(13)
 const API_KEY_ICONS = import.meta.env.VITE_ICONS_API_KEY
- const markerIcon = (icon) =>
-    L.icon({
-      iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
-      iconSize: [31, 46], // size of the icon
-      iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
-      popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
-    })
-  
+const markerIcon = (icon) =>
+  L.icon({
+    iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=blue&icon=${icon}&iconType=awesome&apiKey=${API_KEY_ICONS}`,
+    iconSize: [31, 46], // size of the icon
+    iconAnchor: [15.5, 42], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -45] // point from which the popup should open relative to the iconAnchor
+  })
 
 const crearAnalitica = (puntoId) => {
   isModalActive.value = true
@@ -41,42 +44,122 @@ const crearAnalitica = (puntoId) => {
 //   selectedPuntoId.value = puntoId.id
 // }
 
-const onDragEnd = (event) => {
+const puntosMuestreo = computed(() => plantasStore.getPuntosMuestreo.filter((punto) => punto.activo))
 
-  
-                  const posicion = {
-                    lat: event.target.getLatLng().lat,
-                    lon: event.target.getLatLng().lng
-                  }
-                  console.log('New position:', posicion)
-                
+const handleSubmitSuccess = async () => {
+  // Recargar datos
+  await plantasStore.loadAnaliticas()
+
+  // Cerrar modal
+  isModalActive.value = false
+
+  // Limpiar punto seleccionado
+  selectedPunto.value = null
+}
+
+const closeModal = () => {
+  isModalActive.value = false
+  selectedPunto.value = null
+}
+
+const onDragEnd = (event) => {
+  const posicion = {
+    lat: event.target.getLatLng().lat,
+    lon: event.target.getLatLng().lng
+  }
+  console.log('New position:', posicion)
+
   console.log(event.target.getLatLng())
 }
+
+const getUserLocation = () => {
+  if (!navigator.geolocation) {
+    console.error('Geolocalización no soportada por este navegador')
+    return
+  }
+  
+  isLoading.value = true
+  geoLocationError.value = null
+  
+  console.log('Solicitando ubicación del usuario...')
+  
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      console.log('Ubicación obtenida:', position.coords)
+      center.value = [position.coords.latitude, position.coords.longitude]
+      isLoading.value = false
+      
+      // Si tenemos referencia al mapa, forzar actualización
+      if (map.value) {
+        console.log('Actualizando centro del mapa')
+        map.value.leafletObject.setView(center.value, zoom.value)
+      }
+    },
+    (error) => {
+      console.error('Error de geolocalización:', error.message)
+      geoLocationError.value = error.message
+      isLoading.value = false
+      
+      // Intentar nuevamente después de 2 segundos si fue un error temporal
+      if (error.code === error.TIMEOUT || error.code === error.POSITION_UNAVAILABLE) {
+        setTimeout(() => {
+          console.log('Reintentando obtener ubicación...')
+          getUserLocation()
+        }, 2000)
+      }
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  )
+}
+// Botón para centrar en la ubicación del usuario
+const centerOnUserLocation = () => {
+  getUserLocation()
+}
+
+onMounted(() => {
+  console.log('Componente montado, solicitando ubicación...')
+  // Esperar un momento para que el mapa se inicialice completamente
+  setTimeout(() => {
+    getUserLocation()
+  }, 500)
+})
+
 </script>
 
 <template>
-<CardBoxModal v-model="isModalActive" :title="'Nueva analitica en '+ selectedPunto?.name" no-button class="modal-overlay" @confirm="isModalActive = false" :modal-size="'xl'">
-  
+  <CardBoxModal
+    v-model="isModalActive"
+    :title="'Nueva analitica en ' + selectedPunto?.name"
+    no-button
+    class="modal-overlay"
+    :modal-size="'xl'"
+    @confirm="handleSubmitSuccess"
+    @cancel="closeModal"
+  >
     <FormAnalitica
-      v-model="isModalActive"
       :initial-position="selectedPunto?.id"
       class="h-full"
-      @close="isModalActive = false"
-    />
+      @close-modal="closeModal"
+      />
+      <!-- @close="isModalActive = false" -->
+    <!-- v-model="isModalActive" -->
     <!-- <FormAnalitica
       v-model="isModalActive"
       :initial-position="selectedPunto?.id"
       class="modal-content"
       @close="isModalActive = false"
     /> -->
-     
-</CardBoxModal>
+  </CardBoxModal>
 
-<LayoutAuthenticated>
-  <SectionMain>
-    <SectionTitleLineWithButton :icon="mdiMap" title="Mapa Puntos Muestreo" main>
-      <div class="flex gap-2">
-        <!-- <BaseButton
+  <LayoutAuthenticated>
+    <SectionMain>
+      <SectionTitleLineWithButton :icon="mdiMap" title="Mapa Puntos Muestreo" main>
+        <div class="flex gap-2">
+          <!-- <BaseButton
         target="_blank"
         :icon="mdiDownload"
         label="Download XML"
@@ -102,25 +185,37 @@ const onDragEnd = (event) => {
       <CardBox class="mb-6" has-table>
         <div class="flex flex-col items-center justify-center">
           <div style="height: 600px; width: 95%">
+            <BaseButton
+  label="Centrar posicion"
+  :icon="mdiCrosshairsGps"
+  color="info"
+  rounded
+  small
+  :disabled="isLoading"
+  class="w-full"
+  @click="centerOnUserLocation"
+/>
             <l-map
               ref="map"
               v-model:zoom="zoom"
-              :center="[39.54982998070428, -0.4656852311920545]"
+              :center="center"
               :use-global-leaflet="false"
-            >
+              >
+              <!-- :center="[39.54982998070428, -0.4656852311920545]" -->
               <l-tile-layer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 layer-type="base"
                 name="OpenStreetMap"
               ></l-tile-layer>
-              <l-marker :lat-lng="[39.54982998070428, -0.4656852311920545]">
+
+              <!-- <l-marker :lat-lng="[39.54982998070428, -0.4656852311920545]">
                 <l-tooltip>
                   <div class="text-center">
                     <h1 class="text-lg font-bold">AQLARA Headquarters</h1>
                     <p class="text-sm">Oficinas Centrales</p>
                   </div>
                 </l-tooltip>
-                
+
                 <l-popup>
                   <div class="text-center">
                     <h1 class="text-lg font-bold">Punto 1</h1>
@@ -130,18 +225,18 @@ const onDragEnd = (event) => {
                     <p class="text-sm">Muestra 1</p>
                   </div>
                 </l-popup>
-              </l-marker>
-              <div v-for="punto in plantasStore.getPuntosMuestreo" :key="punto.id">
+              </l-marker> -->
+              <div v-for="punto in puntosMuestreo" :key="punto.id">
                 <l-marker
-                v-if="punto.posicion"
-                :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
-                draggable
-                :icon="markerIcon(getIconByInfraestructura(punto.infraestructura_fk))"
-                @dragend="onDragEnd"
+                  v-if="punto.posicion"
+                  :lat-lng="[punto.posicion.lat, punto.posicion.lon]"
+                  draggable
+                  :icon="markerIcon(getIconByInfraestructura(punto.infraestructura_fk))"
+                  @dragend="onDragEnd"
                 >
-                <!-- @dragend="onDragEnd" -->
-                <l-tooltip>
-                  <div class="text-center">
+                  <!-- @dragend="onDragEnd" -->
+                  <l-tooltip>
+                    <div class="text-center">
                       <h1 class="text-lg font-bold">{{ punto.name }}</h1>
                       <p class="text-sm">id: {{ punto.id }}</p>
                     </div>
@@ -153,7 +248,7 @@ const onDragEnd = (event) => {
                       <!-- <a href="http://google.com" target="_blank" class="text-sm">Ver en Google Maps</a> -->
                       <p class="text-sm">SINAC Id: {{ punto.id }}</p>
                       <BaseButton
-                      label="Añadir analítica"
+                        label="Añadir analítica"
                         color="info"
                         @click="crearAnalitica(punto)"
                       ></BaseButton>
@@ -162,10 +257,10 @@ const onDragEnd = (event) => {
                 </l-marker>
               </div>
             </l-map>
-            
           </div>
         </div>
       </CardBox>
+     
 
       <!-- <CardBox class="mb-6" has-table>
         <AnaliticsTablePrimeVue checkable />
@@ -196,5 +291,10 @@ const onDragEnd = (event) => {
 :deep(.modal-content) {
   z-index: 1001;
   position: relative;
+}
+
+/* Ensure modal content can scroll on mobile */
+:deep(.overflow-y-auto) {
+  -webkit-overflow-scrolling: touch;
 }
 </style>

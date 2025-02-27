@@ -14,7 +14,7 @@ export default function useExtractdata() {
   //* Extrae los datos de cada una de las hojas
   const datosBoletin = (sheetsData) => {
     const sheets = Object.values(sheetsData);
-    console.log("Hojas: ", sheets);
+    // console.log("Hojas: ", sheets);
 
     //* (Filas) Extraemos las filas necesarias de cada una de las hojas
     const dataVector = [];
@@ -22,13 +22,13 @@ export default function useExtractdata() {
       let fecha = "";
       try {
         fecha = formatDateToSpanish(excelDateToJSDate(sheet[3].__EMPTY_1));
-        console.log("FECHA: ", fecha);
+        // console.log("FECHA: ", fecha);
       } catch (error) {
         console.error("Error al convertir la fecha:", error);
       }
       //en el caso que sea un analisis de RUTINA
       if (sheet[3].__EMPTY_10) {
-        console.log("rutina", sheet[3].__EMPTY_10);
+        // console.log("rutina", sheet[3].__EMPTY_10);
 
         const codPuntoExtraccion1 = sheet[4].__EMPTY_6;
         const codPuntoExtraccion2 = sheet[4].__EMPTY_12;
@@ -62,7 +62,7 @@ export default function useExtractdata() {
 
           const insertData = (data) => {
             if ([data[3], data[7], data[8]].some((value) => value !== "")) {
-              console.log("DATA: ", data);
+              // console.log("DATA: ", data);
               dataVector.push(data);
             }
           };
@@ -112,7 +112,7 @@ export default function useExtractdata() {
             cod2: row.__EMPTY_2,
             cod3: row.__EMPTY_3,
           };
-          console.log("DATA_OBJECT:", data_object);
+          // console.log("DATA_OBJECT:", data_object);
 
           const insertData = (data) => {
             if (
@@ -130,7 +130,7 @@ export default function useExtractdata() {
         console.log("no hay nada");
       }
     });
-    console.log("DATAVECTOR: ", dataVector);
+    // console.log("DATAVECTOR: ", dataVector);
     store.dataSamples = dataVector;
   };
 

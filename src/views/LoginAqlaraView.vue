@@ -11,19 +11,14 @@ import msalInstance from '@/services/msalConfig'
 import useLoginStore from '@/stores/login'
 import AqlaraLogo from '@/components/AqlaraLogo.vue'
 import { usePlantasStore } from '@/stores/plantas'
-import { supabase } from '@/services/supabase'
 
 const router = useRouter()
 const loginStore = useLoginStore()
-const plantaStore= usePlantasStore()
-
+const plantaStore = usePlantasStore()
 
 const isAuthenticating = ref(false)
 const errorMessage = ref('')
 const accessToken = ref('')
-
-
-
 
 const submit = () => {
   router.push('/')
@@ -32,10 +27,16 @@ const submit = () => {
 // Función para determinar el rol según el email (puedes modificar el criterio)
 const determineRoleFromAccount = async (userEmail) => {
   const email = userEmail.toLowerCase()
-  // Por ejemplo, si el email termina en "@admin.com", asigna rol 'admin'
-  const rolOperario = await plantaStore.getOperarios.find((operario => operario.email === email))?.type
-  loginStore.setUserRole(rolOperario)
-  console.log('rolOperario', rolOperario);
+  const operario = await plantaStore.getOperarios.find((operario) => operario.email === email)
+
+  if (!operario) {
+    console.log('No se encontró el operario', email)
+    return null
+  }
+
+  console.log('Operario encontrado', operario)
+
+  return operario
 }
 
 const loginWithMicrosoft = async () => {
@@ -47,36 +48,11 @@ const loginWithMicrosoft = async () => {
 
   try {
     const loginResponse = await msalInstance.loginPopup({
-      scopes:['User.Read', 'profile', 'email']
+      scopes: ['User.Read', 'profile', 'email']
     })
 
     accessToken.value = loginResponse.accessToken
-    console.log('Login RESPONSE: ', loginResponse);
-
-    // 2. Intercambiar token de Microsoft por token de Supabase
-    // const { data, error } = await supabase.auth.signInWithIdToken({
-    //     provider: 'azure',
-    //     token: loginResponse.idToken,
-    //   })
-
-    // if (error) throw error
-
-    // console.log('DATA: ', data);
-    // console.log('Login RESPONSE: ', accessToken.value);
-
-    // // Intercambiar AccessToken por un JWT propio en tu backend
-    // const backendResponse = await fetch('https://tu-backend.com/api/auth/microsoft', {
-    //   method: 'POST',https://tecvasa-my.sharepoint.com/:x:/g/personal/mariajose_munoz_aqlara_com/EeShNP-R2otIg69ZtB64EhQBGST8wryZfmspqYD9yI6KWA?wdOrigin=TEAMS-MAGLEV.p2p_ns.rwc&wdExp=TEAMS-TREATMENT&wdhostclicktime=1739530551932&web=1
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ microsoftAccessToken: loginResponse.accessToken })
-    // }).then((res) => res.json())
-
-    // if (!backendResponse.token) {
-    //   throw new Error('No se recibió token válido')
-    // }
-
-    // // Guardar JWT en localStorage
-    // localStorage.setItem('jwt', backendResponse.token)
+    console.log('Login RESPONSE: ', loginResponse)
 
     // Guardar datos básicos en el store
     console.log('Login successful:', loginResponse)
@@ -84,15 +60,21 @@ const loginWithMicrosoft = async () => {
     loginStore.setIsAuthenticated(true)
     loginStore.setAccount(loginResponse.account)
     loginStore.setUser(loginResponse.account)
-    // loginStore.setRole(loginStore.userEmail)
-    // console.log('loginResponse Username: ', loginResponse.account.username);
 
-    // Determinar y guardar el rol del usuario
-    const userRole = determineRoleFromAccount(loginResponse.account.username)
-    loginStore.setUserRole(userRole)
-    
-    // await getProfilePhoto()
-    router.push('/')
+    // Verificar si el usuario existe en la tabla operarios
+    const operario = await determineRoleFromAccount(loginResponse.account.username)
+
+    if (!operario) {
+      // Usuario no existe en la tabla operarios
+      console.log('Usuario no autorizado: no existe en tabla operarios')
+      router.push('/unauthorized')
+    } else {
+      // Usuario existe en la tabla operarios
+      console.log('Usuario autorizado con rol:', operario.type)
+      loginStore.setUserRole(operario.type)
+      loginStore.setUserId(operario.id)
+      router.push('/mapa')
+    }
   } catch (error) {
     console.error('Login failed:', error)
     errorMessage.value = `LOGIN FAILED ${error.message}`

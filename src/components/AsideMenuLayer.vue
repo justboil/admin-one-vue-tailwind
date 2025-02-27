@@ -4,6 +4,8 @@ import { computed } from 'vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
+import AqlaraLogo from './AqlaraLogo.vue'
+import aqlaraLogoPequeno from '@/assets/logos/aqlara_logo_pequeno.png'
 
 defineProps({
   menu: {
@@ -37,8 +39,12 @@ const asideLgCloseClick = (event) => {
   >
     <div class="aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900">
       <div class="aside-brand flex flex-row h-14 items-center justify-between dark:bg-slate-900">
-        <div class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-          <b class="font-black">AQLARA</b>
+        <!-- <div class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"> -->
+          <!-- <b class="font-black">AQLARA</b> -->
+        <!-- </div> -->
+        <div class=" mt-4 flex-1 flex justify-center ">
+
+          <AqlaraLogo :logo=aqlaraLogoPequeno class=" mb-4 w-36"/>
         </div>
         <button class="hidden lg:inline-block xl:hidden p-3" @click.prevent="asideLgCloseClick">
           <BaseIcon :path="mdiClose" />

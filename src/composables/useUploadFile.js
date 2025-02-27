@@ -35,12 +35,12 @@ export default function useUploadFile() {
           }, {});
   
           datosBoletin(sheetsData.value);
-          console.log("SHEETDATA: ", sheetsData);
+          // console.log("SHEETDATA: ", sheetsData);
   
           // Añadir mensaje de depuración
-          console.log("Hojas leídas:", Object.keys(sheetsData.value));
-          console.log("Object Value:", Object.values(sheetsData.value));
-          console.log("Datos de las hojas:", sheetsData.value);
+          // console.log("Hojas leídas:", Object.keys(sheetsData.value));
+          // console.log("Object Value:", Object.values(sheetsData.value));
+          // console.log("Datos de las hojas:", sheetsData.value);
         } catch (error) {
           errorMessage.value = `Error al leer el archivo: ${error.message}`;
           console.error(error);

@@ -22,7 +22,7 @@ const plantaStore = usePlantasStore()
 const loginStore = useLoginStore()
 
 const ORGANOLEPTIC_CORRECT = 1
-const ORGANOLEPTIC_WRONG = 0
+// const ORGANOLEPTIC_WRONG = 0
 
 const turbidezValues = {
   min: 0,
@@ -95,16 +95,84 @@ const currentPage = ref(0)
 //   analitics.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
 // )
 
+// Obtener las zonas del usuario logueado
+const userZonas = computed(() => {
+  // Si el rol del usuario es 99, no filtramos por zona (puede ver todo)
+  if (loginStore.userRole === 99) {
+    return null
+  }
+
+  // Buscar el operario correspondiente al usuario logueado
+  const operario = plantasStore.getOperarios.find(
+    (op) => op.email?.toLowerCase() === loginStore.userEmail?.toLowerCase()
+  )
+  
+  if (!operario) return null
+
+  // Devolver las zonas asignadas al operario
+  // console.log(operario.zonas);
+  return operario.zonas || []
+})
+
+// Función para obtener la zona de una analítica a través del punto de muestreo
+const getZonaFromAnalitica = (analitica) => {
+  const puntoMuestreo = plantasStore.getPuntosMuestreo.find(
+    punto => punto.id === analitica.punto_muestreo_fk
+  )
+  return puntoMuestreo ? puntoMuestreo.zona_fk : null
+}
+
+
+
+// const analiticsFiltered = computed(() =>
+//   plantaStore.getAnaliticas.filter((analitica) => {
+//     const wrongValuesFilter = !showOnlyWrongValues.value || isWrongValues(analitica)
+//     return (
+//       wrongValuesFilter &&
+//       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
+//       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
+//       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
+//       (!filters.persona || analitica.personal_fk === filters.persona) &&
+//       (!filters.zona || analitica.zona_fk === filters.zona) &&
+//       (!filters.operario || analitica.personal_fk === filters.operario) &&
+//       (!filters.infraestructura || analitica.infraestructura_id === filters.infraestructura) &&
+//       (!filters.type || analitica.type === filters.type)
+//     )
+//   })
+// )
+
+// Modificar el filtrado para incluir restricción por zonas del usuario
 const analiticsFiltered = computed(() =>
   plantaStore.getAnaliticas.filter((analitica) => {
+    //console.log('USER ZONAS: ', userZonas.value)
+    // Restricción por zona según el rol del usuario
+    const zonaFilter = 
+      loginStore.userRole === 99 || // Administrador ve todo
+      // !userZonas.value || // Si no hay zonas definidas para el usuario
+      // userZonas.value.length === 0 || // Si el array de zonas está vacío
+      userZonas.value.some(zona => zona === getZonaFromAnalitica(analitica))
+    console.log('ZONAFILTER: ', zonaFilter, 'ANALITICA: ', analitica)
+    // Analítica pertenece a alguna de sus zonas
+    // const zonaFilter = 
+    //    loginStore.userRole === 99 || // Administrador ve todo
+    //    !userZonas.value || // Si no hay zonas definidas para el usuario
+    //    userZonas.value.length === 0 || // Si el array de zonas está vacío
+    //   userZonas.value.some(zona => zona.id === getZonaFromAnalitica(analitica)) // Analítica pertenece a alguna de sus zonas
+
+
+      console.log('ZonaFilter: ',zonaFilter)
     const wrongValuesFilter = !showOnlyWrongValues.value || isWrongValues(analitica)
+
+    
+    
     return (
+      zonaFilter && // Nueva restricción por zona
       wrongValuesFilter &&
       (!filters.fecha_inicio || analitica.fecha >= filters.fecha_inicio) &&
       (!filters.fecha_final || analitica.fecha <= filters.fecha_final) &&
       (!filters.punto_muestreo_fk || analitica.punto_muestreo_fk === filters.punto_muestreo_fk) &&
       (!filters.persona || analitica.personal_fk === filters.persona) &&
-      (!filters.zona || analitica.zona_fk === filters.zona) &&
+      (!filters.zona || getZonaFromAnalitica(analitica) === filters.zona) &&
       (!filters.operario || analitica.personal_fk === filters.operario) &&
       (!filters.infraestructura || analitica.infraestructura_id === filters.infraestructura) &&
       (!filters.type || analitica.type === filters.type)
@@ -189,15 +257,19 @@ const allRowsChecked = computed(() => {
 })
 
 const isCloroWrong = (analitica) => {
+  if (analitica.cloro === null || analitica.cloro === undefined) return false
   return analitica.cloro < cloroValues.min || analitica.cloro > cloroValues.max
 }
 const isPhWrong = (analitica) => {
+  if (analitica.ph === null || analitica.ph === undefined) return false
   return analitica.ph < phValues.min || analitica.ph > phValues.max
 }
 const isTurbidezWrong = (analitica) => {
+  if (analitica.turbidez === null || analitica.turbidez === undefined) return false
   return analitica.turbidez < turbidezValues.min || analitica.turbidez > turbidezValues.max
 }
 const isOrganolepticWrong = (organolepticValue) => {
+  if (organolepticValue === null || organolepticValue === undefined) return false
   return +organolepticValue === 0
 }
 
@@ -456,13 +528,13 @@ onMounted(() => {
             <!-- Información adicional aquí -->
             <div class="flex justify-center gap-40">
               <div>
-                <li class="text-gray-600">
+                <li  class="text-gray-600" >
                   <span
                     class="font-semibold text-lg text-gray-700"
                     :class="{ 'text-red-500 underline': isCloroWrong(analitica) }"
                     >Cloro:</span
                   >
-                  {{ analitica.cloro }} mg/l
+                  {{ analitica.cloro?analitica.cloro+' mg/l':'Sin muestra' }}
                 </li>
                 <li class="text-gray-600">
                   <span
@@ -470,15 +542,15 @@ onMounted(() => {
                     :class="{ 'text-red-500 underline': isPhWrong(analitica) }"
                     >pH:</span
                   >
-                  {{ analitica.ph }} ud
+                  {{ analitica.ph?analitica.ph+' ud':'Sin Muestra' }}
                 </li>
-                <li class="text-gray-600">
+                <li  class="text-gray-600">
                   <span
                     class="font-semibold text-lg text-gray-700"
                     :class="{ 'text-red-500 underline': isTurbidezWrong(analitica) }"
                     >Turbidez:</span
                   >
-                  {{ analitica.turbidez }} UNT
+                  {{ analitica.turbidez?analitica.turbidez+' UNT':'Sin Muestra' }} 
                 </li>
               </div>
               <div v-if="analitica.type === 29">

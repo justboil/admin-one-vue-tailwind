@@ -10,17 +10,20 @@ export default [
       {
         label: 'Excel uploader',
         to: '/sinaq',
+        maxRole: 1,
+        minRole: 90
         // icon: mdiWaterCircle
       },
       {
-        label: 'Formulario Analitica',
+        label: 'Formulario Analítica',
         to: {name: "forms"},
         // icon: mdiSquareEditOutline
       },
       {
-        label: 'Analiticas',
+        label: 'Analíticas',
         to: { name: "tablaAnaliticas" },
-        maxRole:1
+        // maxRole: 1,
+        // minRole: 90
         // icon: mdiSquareEditOutline
       },
       {

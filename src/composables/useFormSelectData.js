@@ -8,28 +8,16 @@ export default function useFormSelectData() {
 
 
   const findOperarioByUser = (usuarioMail) => {
-    console.log(usuarioMail);
     // Verificar que existe el store y los datos
     if (!plantasStore?.getOperarios) return 'HOLA'
 
     const operario = plantasStore.getOperarios.find(
       (user) => user.email === usuarioMail
     )
-    console.log('Operario:', operario);
     
     return operario ? operario.id : null
   }
 
-//   const operarioLogueado = computed(() => {
-//     if (loginStore.userEmail) { // Check if userEmail is not null or undefined
-//       const operario = plantasStore.getOperarios.find(
-//         op => op.email.toLowerCase() === loginStore.userEmail.toLowerCase()
-//       )
-//       return operario ? operario : null
-//     }
-// else {
-//   return null
-// }
   // })
   const operarioLogueado = computed(() => {
     // Verificar si existe userEmail y plantasStore
@@ -141,14 +129,6 @@ export default function useFormSelectData() {
       })
   })
 
-  // const selectPunto = computed(() => {
-  //   if (!form.zona) return []
-  //   return plantasStore.getPuntosMuestreo
-  //     .filter((punto) => punto.zonas_abastecimiento_fk === form.zona)
-  //     .map((punto) => {
-  //       return { value: punto.id, label: punto.name }
-  //     })
-  // })
 
   const operarioPorZona = computed(() => {
     if (!form.uo) return plantasStore.getOperarios.map((operario) => {return { value: operario.id, label: operario.name }})

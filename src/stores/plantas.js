@@ -15,6 +15,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const zonas_infraestructuras = ref([])
   const analiticaToUpdate = ref(null)
   const tipoPersonal = ref([])
+  const zonas_personal = ref([])
 
   // onMounted(() => {
   //   loadZonas()
@@ -53,9 +54,13 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     const { data } = await supabase.from('zonas_abastecimiento').select('*')
     zonas.value = data
   }
-  const loadOperarios = async () => {
-    const { data } = await supabase.from('personal').select('*')
-    operarios.value = data
+  // const loadOperarios = async () => {
+  //   const { data } = await supabase.from('personal').select('*')
+  //   operarios.value = data
+  // }
+  const loadZonasOperarios = async () => {
+    const { data } = await supabase.from('zonas_personal').select('*')
+    zonas_personal.value = data
   }
   // const loadAnaliticas = async () => {
   //   const { data } = await supabase.from('analiticas').select('*')
@@ -68,34 +73,52 @@ export const usePlantasStore = defineStore('plantasStore', () => {
         .from('analiticas')
         .select(`
           *,
-          punto_muestreo_id:punto_muestreo_fk,
-          punto_muestreo_name:puntos_muestreo(name),
-          punto_muestreo_infraestructura_fk:puntos_muestreo(infraestructura_fk),
-          infraestructura_id:puntos_muestreo(infraestructuras(id)),
-          infraestructura_name:puntos_muestreo(infraestructuras(name)),
-          zona_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(id))),
-          zona_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(name))),
-          comunidad_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(comunidades_autonomas(id)))),
-          comunidad_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(comunidades_autonomas(name)))),
-          unidad_id:puntos_muestreo(infraestructuras(zonas_abastecimiento(unidades_operativas(id)))),
-          unidad_name:puntos_muestreo(infraestructuras(zonas_abastecimiento(unidades_operativas(name))))
+          puntos_muestreo (
+            id,
+            name,
+            infraestructuras (
+              id,
+              name,
+              zonas_abastecimiento (
+                id,
+                name,
+                unidades_operativas (
+                  id,
+                  name
+                ),
+                comunidades_autonomas (
+                  id,
+                  name
+                )
+              )
+            )
+          )
         `)
   
       if (error) throw error
   
       if (data) {
-        const mappedData = data.map(item => ({
-          ...item,
-          pmuestreo_name: item.punto_muestreo_name.name,
-              infraestructura_id: item.infraestructura_id.infraestructuras.id,
-              infraestructura_name:item.infraestructura_name.name,
-              zona_id: item.zona_id.infraestructuras.zonas_abastecimiento,
-              zona_name: item.zona_name.infraestructuras.zonas_abastecimiento,
-              comunidad_id: item.comunidad_id.infraestructuras.zonas_abastecimiento,
-              comunidad_name: item.comunidad_name.infraestructuras.zonas_abastecimiento,
-              unidad_id: item.unidad_id.infraestructuras.zonas_abastecimiento[0].unidades_operativas.id,
-              unidad_name: item.unidad_name.infraestructuras.zonas_abastecimiento[0].unidades_operativas.id
-        }))
+        const mappedData = data.map(item => {
+          const puntoMuestreo = item.puntos_muestreo
+          const infraestructura = puntoMuestreo?.infraestructuras || {}
+          const zonaAbastecimiento = infraestructura?.zonas_abastecimiento || {}
+          const unidadOperativa = zonaAbastecimiento?.unidades_operativas || {}
+          const comunidadAutonoma = zonaAbastecimiento?.comunidades_autonomas || {}
+  
+          return {
+            ...item,
+            punto_muestreo_id: puntoMuestreo?.id,
+            punto_muestreo_name: puntoMuestreo?.name,
+            infraestructura_id: infraestructura?.id,
+            infraestructura_name: infraestructura?.name,
+            zona_id: zonaAbastecimiento?.id,
+            zona_name: zonaAbastecimiento?.name,
+            unidad_id: unidadOperativa?.id,
+            unidad_name: unidadOperativa?.name,
+            comunidad_id: comunidadAutonoma?.id,
+            comunidad_name: comunidadAutonoma?.name
+          }
+        })
         
         analiticas.value = mappedData
         return mappedData
@@ -106,6 +129,52 @@ export const usePlantasStore = defineStore('plantasStore', () => {
       throw error
     }
   }
+
+  // Modificar loadOperarios para incluir las zonas de cada operario
+const loadOperarios = async () => {
+  try {
+    const { data: operariosData, error } = await supabase.from('personal').select('*')
+    
+    if (error) throw error
+
+    const {data:zonasPersonal } = await supabase.from('zonas_personal').select('*')
+    
+    // Enriquecer cada operario con sus zonas asignadas
+    operarios.value = operariosData.map(operario => {
+      // Filtrar las relaciones de zonas_personal para este operario
+
+
+
+      const relacionesZonas = zonasPersonal.filter(
+        relacion => relacion.personal_fk === operario.id).map(relacion => relacion.zonas_fk)
+    
+
+      // console.log('relacionesZonas: ',relacionesZonas);
+      
+      // Obtener los IDs de las zonas asignadas a este operario
+      // const zonasIds = relacionesZonas.map(relacion => relacion.zonas_fk)
+
+      // console.log('zonasIds: ',zonasIds);
+      
+      // Buscar los datos completos de cada zona
+      // const zonasOperario = zonas.value.filter(zona => 
+      //   zonasIds.includes(zona.id)
+      // )
+      
+     // console.log('zonasOperario:',zonasOperario)
+      // Añadir las zonas al objeto operario
+      return {
+        ...operario,
+        zonas: relacionesZonas || []
+      }
+    })
+    
+    return operarios.value
+  } catch (error) {
+    console.error('Error cargando operarios:', error)
+    return []
+  }
+}
 
   const loadTipoPersonal = async () => {
     const { data } = await supabase.from('tipo_personal').select('*')
@@ -146,6 +215,7 @@ export const usePlantasStore = defineStore('plantasStore', () => {
   const getOperarios = computed(() => {
     return operarios.value
   })
+
 
   const getAnaliticas = computed(() => {
     return analiticas.value
@@ -189,6 +259,14 @@ export const usePlantasStore = defineStore('plantasStore', () => {
       }
     })
   })
+
+  // Añadir un computed getter para facilitar el acceso a las zonas de un operario específico
+const getZonasOperario = computed(() => {
+  return (operarioId) => {
+    const operario = operarios.value.find(op => op.id === operarioId)
+    return operario?.zonas || []
+  }
+})
 
   const getAnaliticasTotal = computed(() => {
     //quiero qeu devuelva todos los puntos de muestreo con su zona de abastecimiento y su zona de infraestructura
@@ -257,6 +335,9 @@ export const usePlantasStore = defineStore('plantasStore', () => {
     loadZonasInfraestructuras,
     loadTipoPersonal,
     analiticaToUpdate,
-    initializeStore
+    initializeStore,
+    zonas_personal,
+    loadZonasOperarios,
+    getZonasOperario
   }
 })

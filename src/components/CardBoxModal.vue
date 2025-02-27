@@ -83,7 +83,7 @@ defineExpose({
         />
       </CardBoxComponentTitle>
 
-      <div class="space-y-3">
+      <div class="space-y-3 overflow-y-auto max-h-[calc(100vh-250px)]">
         <slot @submitHandler="confirma"/>
       </div>
 

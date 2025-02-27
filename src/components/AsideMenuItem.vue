@@ -21,11 +21,12 @@ const emit = defineEmits(['menu-click'])
 
 const isVisible = computed(() => {
   if (props.item.maxRole !== undefined) {
-    const currentRole = Number(loginStore.userLogged?.role ?? 7)
-    console.log('CurrentRole: ',currentRole)
-    console.log('Max Role: ',props.item.maxRole)
-    console.log('UserLogged: ',loginStore.userLogged)
-    return currentRole <= props.item.maxRole
+    const currentRole = Number(loginStore.userLogged?.role ?? 9)
+    // console.log('CurrentRole: ',currentRole)
+    // console.log('Max Role: ',props.item.maxRole)
+    // console.log('Min Role: ',props.item.minRole)
+    // console.log('UserLogged: ',loginStore.userLogged)
+    return currentRole >= props.item.minRole
   }
   return true
 })

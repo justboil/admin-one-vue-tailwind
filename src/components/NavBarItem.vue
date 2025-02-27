@@ -25,9 +25,9 @@ const loginStore = useLoginStore()
 // Computed que determina si se muestra el ítem basado en la propiedad maxRole
 const isVisible = computed(() => {
   // Si el ítem tiene propiedad maxRole, se verifica que el role del usuario sea menor
-  if (props.item.maxRole !== undefined) {
-    const currentRole = Number(loginStore.userLogged.role)
-    return currentRole <= props.item.maxRole
+  if (props.item.minRole !== undefined) {
+    const currentRole = Number(loginStore.userLogged?.role)
+    return currentRole >= props.item.minRole
   }
   return true
 })
