@@ -186,7 +186,7 @@ onMounted(() => {
         <div class="flex flex-col items-center justify-center">
           <div style="height: 600px; width: 95%">
             <BaseButton
-  label="Centrar posicion"
+  label="Centrar posición"
   :icon="mdiCrosshairsGps"
   color="info"
   rounded
