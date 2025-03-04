@@ -8,7 +8,7 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 
 - Built with **Vue.js 3**, **Tailwind CSS 4** framework & **Composition API**
 - **Laravel** build tools
-- **Laravel Breeze** with **Inertia + Vue** stack
+- **Laravel Jetstream** with **Inertia + Vue** stack
 - **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 - **Pinia** state library (official Vuex 5)
 - **Dark mode**
@@ -34,14 +34,14 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 
 First, [install Laravel](https://laravel.com/docs/installation) application
 
-### Install Breeze
+### Install Jetstream
 
-Then `cd` to project dir and install Breeze with Vue option
+Then `cd` to project dir and install Jetstream with Inertia Vue stack
 
 ```bash
-composer require laravel/breeze --dev
+composer require laravel/jetstream
 
-php artisan breeze:install vue
+php artisan jetstream:install inertia
 
 php artisan migrate
 
@@ -51,12 +51,12 @@ npm install
 ### Install dependencies
 
 ```bash
-npm i pinia @tailwindcss/line-clamp @mdi/js chart.js numeral -D
+npm i pinia @mdi/js chart.js numeral -D
 ```
 
 ## Copy styles, components and scripts
 
-**Before you start,** we recommend to rename Laravel Breeze's original folders (so you'll keep them for future reference) — `resources/js/Components` `resources/js/Layouts` `resources/js/Pages` to something like ComponentsBreeze, LayoutsBreeze, etc.
+**Before you start,** we recommend to rename Laravel Jetsreams's original folders (so you'll keep them for future reference) — `resources/js/Components` `resources/js/Layouts` `resources/js/Pages` to something like ComponentsJetsteam, LayoutsJetstream, etc.
 
 Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project somewhere locally (into any separate folder)
 
@@ -70,9 +70,9 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 ### [optional] lowecase vs Capitalized folder names
 
-Fresh Laravel install with Breeze provides **Capitalized** folder names such as `Components`, `Layouts`, etc. For the sake of simplicity we just follow Vue conventions with lowercase folder names. However, you may opt-in to capitalize folder names:
+Fresh Laravel install with Jetstream provides **Capitalized** folder names such as `Components`, `Layouts`, etc. For the sake of simplicity we just follow Vue conventions with lowercase folder names. However, you may opt-in to capitalize folder names:
 
-- Make sure you've removed original Laravel Breeze's `resources/js/Layouts` and `resources/js/Components` folders
+- Make sure you've removed original Laravel Jetstream's `resources/js/Layouts` and `resources/js/Components` folders
 - Rename the folders you've copied in the previous section: `resources/js/layouts` to `Layouts`; `components` to `Components`; `stores` to `Stores`
 - Replace everywhere in imports: `@/layouts/` with `@/Layouts/`; `@/components/` with `@/Components/`; `@/stores/` with `@/Stores/`
 
@@ -481,9 +481,10 @@ indent_size = 2
 
 ### resources/js/bootstrap.js
 
-Global `lodash` and `axios` aren't needed, as we import them directly when needed. Most likely, you'd not need `axios` at all, as Laravel pushes all data via Inertia.
+Global `lodash` and `axios` aren't needed, as we import them directly when necessary.
 
 ## Laravel & Inertia docs
 
 - [Laravel Docs](https://laravel.com/docs)
+- [Laravel Jetstream Docs](https://jetstream.laravel.com/)
 - [Inertia](https://inertiajs.com/)
