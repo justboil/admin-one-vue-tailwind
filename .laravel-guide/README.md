@@ -1,12 +1,12 @@
-# Free Laravel Vue 3.x Tailwind 3.x Dashboard
+# Free Laravel Vue 3.x Tailwind 4.x Dashboard
 
-[![Vue 3.x Tailwind 3.x admin dashboard demo](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Vue 3.x Tailwind 4.x admin dashboard demo](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 3 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
+This guide will help you integrate your Laravel application with [Admin One - free Vue 3 Tailwind 4 Admin Dashboard with dark mode](https://github.com/justboil/admin-one-vue-tailwind).
 
-**Admin One** is simple, fast and free Vue.js 3.x Tailwind CSS 3.x admin dashboard with Laravel 9.x integration.
+**Admin One** is simple, fast and free Vue.js 3.x Tailwind CSS 4.x admin dashboard with Laravel 9.x integration.
 
-- Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
+- Built with **Vue.js 3**, **Tailwind CSS 4** framework & **Composition API**
 - **Laravel** build tools
 - **Laravel Breeze** with **Inertia + Vue** stack
 - **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)

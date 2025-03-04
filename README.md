@@ -1,18 +1,18 @@
-# [Admin One &mdash; Free Vue 3.x Tailwind 3.x Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+# [Admin One &mdash; Free Vue 3.x Tailwind 4.x Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
-### Tailwind 3.x Vue 3.x with Vite or Nuxt or Laravel
+### Tailwind 4.x Vue 3.x with Vite or Nuxt or Laravel
 
-[![Free Vue 3 Tailwind 3 admin dashboard with dark mode](https://static.justboil.me/templates/one/repo-tailwind-vue.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind 4 admin dashboard with dark mode](https://static.justboil.me/templates/one/repo-tailwind-vue.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 [![Vue Tailwind white & dark styles](https://static.justboil.me/templates/one/repo-styles.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-### Tailwind 3.x Vue 3.x with Vite or Nuxt or Laravel
+### Tailwind 4.x Vue 3.x with Vite or Nuxt or Laravel
 
-**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 3.x admin dashboard. Nuxt 3.x or Laravel 9.x integrations available
+**Admin One** is simple, beautiful and free Vue.js 3.x Tailwind CSS 4.x admin dashboard. Nuxt 3.x or Laravel 12.x integrations available
 
-* Built with **Vue.js 3**, **Tailwind CSS 3** framework & **Composition API**
+* Built with **Vue.js 3**, **Tailwind CSS 4** framework & **Composition API**
 * **Vite** under the hood &mdash; [Info](https://vitejs.dev)
 * **Nuxt 3** integration available &mdash; [Info](#nuxt-3-integration)
 * **Laravel Breeze Inertia Vue** integration available &mdash; [Info](#laravel-9x-integration)
@@ -60,21 +60,21 @@ Looking for **Tailwind React TypeScript**? Check [Admin One - React TypeScript T
 
 Mobile layout with hidden aside menu and collapsable cards & tables
 
-[![Free Vue 3 Tailwind CSS 3 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS 4 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ### Small laptops 1024px
 
 Small laptop layout with show/hide aside menu option
 
-[![Free Vue 3 Tailwind CSS 3 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-1024.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS 4 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-1024.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
-[![Free Vue 3 Tailwind CSS 3 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS 4 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ### Laptops & desktops
 
 Classic layout with aside menus on the left
 
-[![Free Vue 3 Tailwind CSS 3 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png)](https://justboil.github.io/admin-one-vue-tailwind/)
+[![Free Vue 3 Tailwind CSS 4 admin dashboard](https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png)](https://justboil.github.io/admin-one-vue-tailwind/)
 
 ## Demo
 
@@ -94,7 +94,7 @@ Get code & install. Then `dev` or `build` with [Vite](#vite-builds) or integrate
 * [Vite builds](#vite-builds)
 * [Linting](#linting)
 * [Nuxt 3.x integration](#nuxt-3x-integration)
-* [Laravel 9.x integration](#laravel-9x-integration)
+* [Laravel 12.x integration](#laravel-12x-integration)
 
 ### Get code & install
 
@@ -142,9 +142,9 @@ npm run lint
 
 This dashboard can be integrated with Nuxt 3.x. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.nuxt-guide) for more information
 
-### Laravel 9.x integration
+### Laravel 12.x integration
 
-This dashboard can be integrated with Laravel 9.x Breeze Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
+This dashboard can be integrated with Laravel 12.x Breeze Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
 
 ## Docs
 
@@ -170,7 +170,7 @@ The issue list is reserved exclusively for bug reports and feature requests. Tha
 
 ## Licensing
 
-- Copyright &copy; 2019-2022 JustBoil.me (https://justboil.me)
+- Copyright &copy; 2019-2025 JustBoil.me (https://justboil.me)
 - Licensed under MIT
 
 ## Useful Links
