@@ -31,7 +31,7 @@ const buttonClick = (event) => {
     </div>
     <button
       v-if="buttonIcon"
-      class="flex items-center p-2 justify-center ring-blue-700 focus:ring"
+      class="flex items-center p-2 justify-center ring-blue-700 focus:ring-3"
       @click="buttonClick"
     >
       <BaseIcon :path="buttonIcon" />

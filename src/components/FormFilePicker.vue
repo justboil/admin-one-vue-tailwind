@@ -97,7 +97,7 @@ const upload = (event) => {
       <input
         ref="root"
         type="file"
-        class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-1"
+        class="absolute top-0 left-0 w-full h-full opacity-0 outline-hidden cursor-pointer -z-1"
         :accept="accept"
         @input="upload"
       />

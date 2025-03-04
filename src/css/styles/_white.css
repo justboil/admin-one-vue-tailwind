@@ -1,5 +1,5 @@
-@layer components {
-  .style-white:not(.dark) {
+@utility style-white {
+  &:not(.dark) {
     .aside {
       @apply bg-white;
     }

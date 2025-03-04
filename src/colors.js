@@ -1,4 +1,4 @@
-export const gradientBgBase = 'bg-gradient-to-tr'
+export const gradientBgBase = 'bg-linear-to-tr'
 export const gradientBgPurplePink = `${gradientBgBase} from-purple-400 via-pink-500 to-red-500`
 export const gradientBgDark = `${gradientBgBase} from-slate-700 via-slate-900 to-slate-800`
 export const gradientBgPinkRed = `${gradientBgBase} from-pink-400 via-red-500 to-yellow-500`
@@ -67,16 +67,16 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     bgHover: {
       white: 'hover:bg-gray-100',
-      whiteDark: 'hover:bg-gray-100 hover:dark:bg-slate-800',
-      lightDark: 'hover:bg-gray-200 hover:dark:bg-slate-700',
-      contrast: 'hover:bg-gray-700 hover:dark:bg-slate-100',
+      whiteDark: 'hover:bg-gray-100 dark:hover:bg-slate-800',
+      lightDark: 'hover:bg-gray-200 dark:hover:bg-slate-700',
+      contrast: 'hover:bg-gray-700 dark:hover:bg-slate-100',
       success:
-        'hover:bg-emerald-700 hover:border-emerald-700 hover:dark:bg-emerald-600 hover:dark:border-emerald-600',
+        'hover:bg-emerald-700 hover:border-emerald-700 dark:hover:bg-emerald-600 dark:hover:border-emerald-600',
       danger:
-        'hover:bg-red-700 hover:border-red-700 hover:dark:bg-red-600 hover:dark:border-red-600',
+        'hover:bg-red-700 hover:border-red-700 dark:hover:bg-red-600 dark:hover:border-red-600',
       warning:
-        'hover:bg-yellow-700 hover:border-yellow-700 hover:dark:bg-yellow-600 hover:dark:border-yellow-600',
-      info: 'hover:bg-blue-700 hover:border-blue-700 hover:dark:bg-blue-600 hover:dark:border-blue-600'
+        'hover:bg-yellow-700 hover:border-yellow-700 dark:hover:bg-yellow-600 dark:hover:border-yellow-600',
+      info: 'hover:bg-blue-700 hover:border-blue-700 dark:hover:bg-blue-600 dark:hover:border-blue-600'
     },
     borders: {
       white: 'border-white',
@@ -97,14 +97,14 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
     outlineHover: {
       contrast:
-        'hover:bg-gray-800 hover:text-gray-100 hover:dark:bg-slate-100 hover:dark:text-black',
+        'hover:bg-gray-800 hover:text-gray-100 dark:hover:bg-slate-100 dark:hover:text-black',
       success:
-        'hover:bg-emerald-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-emerald-600',
+        'hover:bg-emerald-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-emerald-600',
       danger:
-        'hover:bg-red-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-red-600',
+        'hover:bg-red-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-red-600',
       warning:
-        'hover:bg-yellow-600 hover:text-white hover:text-white hover:dark:text-white hover:dark:border-yellow-600',
-      info: 'hover:bg-blue-600 hover:text-white hover:dark:text-white hover:dark:border-blue-600'
+        'hover:bg-yellow-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-yellow-600',
+      info: 'hover:bg-blue-600 hover:text-white dark:hover:text-white dark:hover:border-blue-600'
     }
   }
 
