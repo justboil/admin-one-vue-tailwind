@@ -1,6 +1,7 @@
 {
   "name": "admin-one-vue-tailwind",
   "version": "4.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
