@@ -12,7 +12,7 @@ export const useDarkModeStore = defineStore('darkMode', () => {
 
       document.documentElement.classList[isEnabled.value ? 'add' : 'remove'](
         'dark',
-        'dark-scrollbars-compat'
+        'dark-scrollbars-compat',
       )
     }
 
@@ -24,6 +24,6 @@ export const useDarkModeStore = defineStore('darkMode', () => {
 
   return {
     isEnabled,
-    set
+    set,
   }
 })

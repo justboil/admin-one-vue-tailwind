@@ -10,8 +10,8 @@ export const useMainStore = defineStore('main', () => {
     () =>
       `https://api.dicebear.com/7.x/avataaars/svg?seed=${userEmail.value.replace(
         /[^a-z0-9]+/gi,
-        '-'
-      )}`
+        '-',
+      )}`,
   )
 
   const isFieldFocusRegistered = ref(false)
@@ -59,6 +59,6 @@ export const useMainStore = defineStore('main', () => {
     history,
     setUser,
     fetchSampleClients,
-    fetchSampleHistory
+    fetchSampleHistory,
   }
 })

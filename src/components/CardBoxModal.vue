@@ -10,28 +10,28 @@ import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   button: {
     type: String,
-    default: 'info'
+    default: 'info',
   },
   buttonLabel: {
     type: String,
-    default: 'Done'
+    default: 'Done',
   },
   hasCancel: Boolean,
   modelValue: {
     type: [String, Number, Boolean],
-    default: null
-  }
+    default: null,
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
 
 const value = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value),
 })
 
 const confirmCancel = (mode) => {

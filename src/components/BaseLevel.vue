@@ -7,8 +7,8 @@ export default defineComponent({
     mobile: Boolean,
     type: {
       type: String,
-      default: 'justify-between'
-    }
+      default: 'justify-between',
+    },
   },
   render() {
     const parentClass = [this.type, 'items-center']
@@ -22,7 +22,7 @@ export default defineComponent({
     return h(
       'div',
       {
-        class: parentClass.concat(this.mobile ? parentMobileClass : parentBaseClass)
+        class: parentClass.concat(this.mobile ? parentMobileClass : parentBaseClass),
       },
       this.$slots.default().map((element, index) => {
         const childClass =
@@ -31,8 +31,8 @@ export default defineComponent({
             : childBaseClass
 
         return h('div', { class: childClass }, [element])
-      })
+      }),
     )
-  }
+  },
 })
 </script>

@@ -14,7 +14,7 @@ import LayoutGuest from '@/layouts/LayoutGuest.vue'
 const form = reactive({
   login: 'john.doe',
   pass: 'highly-secure-password-fYjUw-',
-  remember: true
+  remember: true,
 })
 
 const router = useRouter()

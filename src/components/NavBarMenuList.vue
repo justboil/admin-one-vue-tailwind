@@ -4,8 +4,8 @@ import NavBarItem from '@/components/NavBarItem.vue'
 defineProps({
   menu: {
     type: Array,
-    default: () => []
-  }
+    default: () => [],
+  },
 })
 
 const emit = defineEmits(['menu-click'])

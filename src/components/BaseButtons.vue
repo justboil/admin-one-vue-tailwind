@@ -7,16 +7,16 @@ export default defineComponent({
     noWrap: Boolean,
     type: {
       type: String,
-      default: 'justify-start'
+      default: 'justify-start',
     },
     classAddon: {
       type: String,
-      default: 'mr-3 last:mr-0 mb-3'
+      default: 'mr-3 last:mr-0 mb-3',
     },
     mb: {
       type: String,
-      default: '-mb-3'
-    }
+      default: '-mb-3',
+    },
   },
   render() {
     const hasSlot = this.$slots && this.$slots.default
@@ -25,7 +25,7 @@ export default defineComponent({
       'flex',
       'items-center',
       this.type,
-      this.noWrap ? 'flex-nowrap' : 'flex-wrap'
+      this.noWrap ? 'flex-nowrap' : 'flex-wrap',
     ]
 
     if (this.mb) {
@@ -43,14 +43,14 @@ export default defineComponent({
                 {},
                 element.children.map((child) => {
                   return h(child, { class: [this.classAddon] })
-                })
+                }),
               )
             }
 
             return h(element, { class: [this.classAddon] })
           })
-        : null
+        : null,
     )
-  }
+  },
 })
 </script>

@@ -4,8 +4,8 @@ import { colorsBgLight } from '@/colors.js'
 defineProps({
   color: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 </script>
 

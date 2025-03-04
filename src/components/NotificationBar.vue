@@ -9,17 +9,17 @@ import BaseButton from '@/components/BaseButton.vue'
 const props = defineProps({
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   outline: Boolean,
   color: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const componentClass = computed(() =>
-  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color]
+  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color],
 )
 
 const isDismissed = ref(false)

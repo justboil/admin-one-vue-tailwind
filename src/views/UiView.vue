@@ -10,7 +10,7 @@ import {
   mdiOpenInNew,
   mdiClose,
   mdiReload,
-  mdiTrendingUp
+  mdiTrendingUp,
 } from '@mdi/js'
 import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
@@ -55,7 +55,7 @@ const pillsOutline = computed(() => pillsSettingsModel.value.indexOf('outline') 
 const pillsSmall = computed(() => pillsSettingsModel.value.indexOf('small') > -1)
 
 const pillsIcon = computed(() =>
-  pillsSettingsModel.value.indexOf('icon') > -1 ? mdiTrendingUp : null
+  pillsSettingsModel.value.indexOf('icon') > -1 ? mdiTrendingUp : null,
 )
 
 const darkModeStore = useDarkModeStore()
@@ -236,7 +236,7 @@ const darkModeStore = useDarkModeStore()
               outline: 'Outline',
               small: 'Small',
               rounded: 'Rounded',
-              disabled: 'Disabled'
+              disabled: 'Disabled',
             }"
           />
         </FormField>

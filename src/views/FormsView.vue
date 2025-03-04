@@ -18,7 +18,7 @@ import NotificationBarInCard from '@/components/NotificationBarInCard.vue'
 const selectOptions = [
   { id: 1, label: 'Business development' },
   { id: 2, label: 'Marketing' },
-  { id: 3, label: 'Sales' }
+  { id: 3, label: 'Sales' },
 ]
 
 const form = reactive({
@@ -27,14 +27,14 @@ const form = reactive({
   phone: '',
   department: selectOptions[0],
   subject: '',
-  question: ''
+  question: '',
 })
 
 const customElementsForm = reactive({
   checkbox: ['lorem'],
   radio: 'one',
   switch: ['one'],
-  file: null
+  file: null,
 })
 
 const submit = () => {

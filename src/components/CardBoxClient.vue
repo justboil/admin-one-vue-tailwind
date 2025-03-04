@@ -9,28 +9,28 @@ import UserAvatar from '@/components/UserAvatar.vue'
 const props = defineProps({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   login: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: String,
-    required: true
+    required: true,
   },
   progress: {
     type: Number,
-    default: 0
+    default: 0,
   },
   text: {
     type: String,
-    default: null
+    default: null,
   },
   type: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 })
 
 const pillType = computed(() => {
@@ -57,7 +57,7 @@ const pillIcon = computed(() => {
     success: mdiTrendingUp,
     warning: mdiTrendingNeutral,
     danger: mdiTrendingDown,
-    info: null
+    info: null,
   }[pillType.value]
 })
 

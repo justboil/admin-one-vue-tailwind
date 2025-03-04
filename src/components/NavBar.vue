@@ -9,8 +9,8 @@ import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
 defineProps({
   menu: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const emit = defineEmits(['menu-click'])

@@ -8,8 +8,8 @@ import BaseIcon from '@/components/BaseIcon.vue'
 defineProps({
   menu: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const emit = defineEmits(['menu-click', 'aside-lg-close-click'])
@@ -18,7 +18,7 @@ const logoutItem = computed(() => ({
   label: 'Logout',
   icon: mdiLogout,
   color: 'info',
-  isLogout: true
+  isLogout: true,
 }))
 
 const menuClick = (event, item) => {

@@ -4,8 +4,8 @@ import { ref, watch } from 'vue'
 defineProps({
   type: {
     type: String,
-    default: 'td'
-  }
+    default: 'td',
+  },
 })
 
 const emit = defineEmits(['checked'])

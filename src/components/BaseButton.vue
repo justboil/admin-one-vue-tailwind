@@ -7,45 +7,45 @@ import BaseIcon from '@/components/BaseIcon.vue'
 const props = defineProps({
   label: {
     type: [String, Number],
-    default: null
+    default: null,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   iconSize: {
     type: [String, Number],
-    default: null
+    default: null,
   },
   href: {
     type: String,
-    default: null
+    default: null,
   },
   target: {
     type: String,
-    default: null
+    default: null,
   },
   to: {
     type: [String, Object],
-    default: null
+    default: null,
   },
   type: {
     type: String,
-    default: null
+    default: null,
   },
   color: {
     type: String,
-    default: 'white'
+    default: 'white',
   },
   as: {
     type: String,
-    default: null
+    default: null,
   },
   small: Boolean,
   outline: Boolean,
   active: Boolean,
   disabled: Boolean,
-  roundedFull: Boolean
+  roundedFull: Boolean,
 })
 
 const is = computed(() => {
@@ -87,7 +87,7 @@ const componentClass = computed(() => {
     'border',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
     props.roundedFull ? 'rounded-full' : 'rounded-sm',
-    getButtonColor(props.color, props.outline, !props.disabled, props.active)
+    getButtonColor(props.color, props.outline, !props.disabled, props.active),
   ]
 
   if (!props.label && props.icon) {

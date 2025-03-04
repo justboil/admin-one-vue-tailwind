@@ -2,7 +2,7 @@
 defineProps({
   custom: Boolean,
   first: Boolean,
-  last: Boolean
+  last: Boolean,
 })
 </script>
 

@@ -10,7 +10,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 
 defineProps({
-  checkable: Boolean
+  checkable: Boolean,
 })
 
 const mainStore = useMainStore()
@@ -28,7 +28,7 @@ const currentPage = ref(0)
 const checkedRows = ref([])
 
 const itemsPaginated = computed(() =>
-  items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+  items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1)),
 )
 
 const numPages = computed(() => Math.ceil(items.value.length / perPage.value))

@@ -4,16 +4,16 @@ import BaseIcon from '@/components/BaseIcon.vue'
 defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   buttonIcon: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 })
 
 const emit = defineEmits(['button-click'])

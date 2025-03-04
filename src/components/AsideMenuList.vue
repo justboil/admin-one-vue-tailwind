@@ -5,8 +5,8 @@ defineProps({
   isDropdownList: Boolean,
   menu: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const emit = defineEmits(['menu-click'])

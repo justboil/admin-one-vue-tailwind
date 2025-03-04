@@ -11,8 +11,8 @@ import BaseDivider from '@/components/BaseDivider.vue'
 const props = defineProps({
   item: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const emit = defineEmits(['menu-click'])
@@ -34,7 +34,7 @@ const componentClass = computed(() => {
     isDropdownActive.value
       ? `navbar-item-label-active dark:text-slate-400`
       : `navbar-item-label dark:text-white dark:hover:text-slate-400`,
-    props.item.menu ? 'lg:py-2 lg:px-3' : 'py-2 px-3'
+    props.item.menu ? 'lg:py-2 lg:px-3' : 'py-2 px-3',
   ]
 
   if (props.item.isDesktopNoLabel) {
@@ -45,7 +45,7 @@ const componentClass = computed(() => {
 })
 
 const itemLabel = computed(() =>
-  props.item.isCurrentUser ? useMainStore().userName : props.item.label
+  props.item.isCurrentUser ? useMainStore().userName : props.item.label,
 )
 
 const isDropdownActive = ref(false)
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
       class="flex items-center"
       :class="{
         'bg-gray-100 dark:bg-slate-800 lg:bg-transparent lg:dark:bg-transparent p-3 lg:p-0':
-          item.menu
+          item.menu,
       }"
     >
       <UserAvatarCurrentUser v-if="item.isCurrentUser" class="w-6 h-6 mr-3 inline-flex" />

@@ -8,13 +8,13 @@ import IconRounded from '@/components/IconRounded.vue'
 defineProps({
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
-  main: Boolean
+  main: Boolean,
 })
 
 const hasSlot = computed(() => useSlots().default)

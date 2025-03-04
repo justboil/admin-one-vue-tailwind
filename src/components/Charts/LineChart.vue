@@ -7,14 +7,14 @@ import {
   LineController,
   LinearScale,
   CategoryScale,
-  Tooltip
+  Tooltip,
 } from 'chart.js'
 
 const props = defineProps({
   data: {
     type: Object,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const root = ref(null)
@@ -32,18 +32,18 @@ onMounted(() => {
       maintainAspectRatio: false,
       scales: {
         y: {
-          display: false
+          display: false,
         },
         x: {
-          display: true
-        }
+          display: true,
+        },
       },
       plugins: {
         legend: {
-          display: false
-        }
-      }
-    }
+          display: false,
+        },
+      },
+    },
   })
 })
 

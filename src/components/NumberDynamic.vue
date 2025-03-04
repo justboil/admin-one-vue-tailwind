@@ -5,26 +5,26 @@ import numeral from 'numeral'
 const props = defineProps({
   prefix: {
     type: String,
-    default: null
+    default: null,
   },
   suffix: {
     type: String,
-    default: null
+    default: null,
   },
   value: {
     type: Number,
-    default: 0
+    default: 0,
   },
   duration: {
     type: Number,
-    default: 500
-  }
+    default: 500,
+  },
 })
 
 const newValue = ref(0)
 
 const newValueFormatted = computed(() =>
-  newValue.value < 1000 ? newValue.value : numeral(newValue.value).format('0,0')
+  newValue.value < 1000 ? newValue.value : numeral(newValue.value).format('0,0'),
 )
 
 const value = computed(() => props.value)

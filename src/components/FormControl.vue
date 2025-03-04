@@ -6,48 +6,48 @@ import FormControlIcon from '@/components/FormControlIcon.vue'
 const props = defineProps({
   name: {
     type: String,
-    default: null
+    default: null,
   },
   id: {
     type: String,
-    default: null
+    default: null,
   },
   autocomplete: {
     type: String,
-    default: null
+    default: null,
   },
   maxlength: {
     type: String,
-    default: null
+    default: null,
   },
   placeholder: {
     type: String,
-    default: null
+    default: null,
   },
   inputmode: {
     type: String,
-    default: null
+    default: null,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   options: {
     type: Array,
-    default: null
+    default: null,
   },
   type: {
     type: String,
-    default: 'text'
+    default: 'text',
   },
   modelValue: {
     type: [String, Number, Boolean, Array, Object],
-    default: ''
+    default: '',
   },
   required: Boolean,
   borderless: Boolean,
   transparent: Boolean,
-  ctrlKFocus: Boolean
+  ctrlKFocus: Boolean,
 })
 
 const emit = defineEmits(['update:modelValue', 'setRef'])
@@ -56,7 +56,7 @@ const computedValue = computed({
   get: () => props.modelValue,
   set: (value) => {
     emit('update:modelValue', value)
-  }
+  },
 })
 
 const inputElClass = computed(() => {
@@ -65,7 +65,7 @@ const inputElClass = computed(() => {
     'dark:placeholder-gray-400',
     computedType.value === 'textarea' ? 'h-24' : 'h-12',
     props.borderless ? 'border-0' : 'border',
-    props.transparent ? 'bg-transparent' : 'bg-white dark:bg-slate-800'
+    props.transparent ? 'bg-transparent' : 'bg-white dark:bg-slate-800',
   ]
 
   if (props.icon) {

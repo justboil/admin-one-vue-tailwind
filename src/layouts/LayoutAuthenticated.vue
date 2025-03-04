@@ -40,7 +40,7 @@ const menuClick = (event, item) => {
 <template>
   <div
     :class="{
-      'overflow-hidden lg:overflow-visible': isAsideMobileExpanded
+      'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
     }"
   >
     <div

@@ -2,8 +2,8 @@ export const chartColors = {
   default: {
     primary: '#00D1B2',
     info: '#209CEE',
-    danger: '#FF3860'
-  }
+    danger: '#FF3860',
+  },
 }
 
 const randomChartData = (n) => {
@@ -32,7 +32,7 @@ const datasetObject = (color, points) => {
     pointRadius: 4,
     data: randomChartData(points),
     tension: 0.5,
-    cubicInterpolationMode: 'default'
+    cubicInterpolationMode: 'default',
   }
 }
 
@@ -48,7 +48,7 @@ export const sampleChartData = (points = 9) => {
     datasets: [
       datasetObject('primary', points),
       datasetObject('info', points),
-      datasetObject('danger', points)
-    ]
+      datasetObject('danger', points),
+    ],
   }
 }

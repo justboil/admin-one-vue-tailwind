@@ -5,10 +5,10 @@ import OverlayLayer from '@/components/OverlayLayer.vue'
 defineProps({
   menu: {
     type: Array,
-    required: true
+    required: true,
   },
   isAsideMobileExpanded: Boolean,
-  isAsideLgActive: Boolean
+  isAsideLgActive: Boolean,
 })
 
 const emit = defineEmits(['menu-click', 'aside-lg-close-click'])
@@ -27,7 +27,7 @@ const asideLgCloseClick = (event) => {
     :menu="menu"
     :class="[
       isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0',
-      { 'lg:hidden xl:flex': !isAsideLgActive }
+      { 'lg:hidden xl:flex': !isAsideLgActive },
     ]"
     @menu-click="menuClick"
     @aside-lg-close-click="asideLgCloseClick"

@@ -4,13 +4,13 @@ import BaseIcon from '@/components/BaseIcon.vue'
 defineProps({
   label: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
-  small: Boolean
+  small: Boolean,
 })
 </script>
 

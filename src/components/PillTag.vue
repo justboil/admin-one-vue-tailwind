@@ -6,23 +6,23 @@ import PillTagPlain from '@/components/PillTagPlain.vue'
 const props = defineProps({
   label: {
     type: String,
-    required: true
+    required: true,
   },
   color: {
     type: String,
-    required: true
+    required: true,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   small: Boolean,
-  outline: Boolean
+  outline: Boolean,
 })
 
 const componentClass = computed(() => [
   props.small ? 'py-1 px-3' : 'py-1.5 px-4',
-  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color]
+  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color],
 ])
 </script>
 

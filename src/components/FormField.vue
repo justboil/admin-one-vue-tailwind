@@ -4,16 +4,16 @@ import { computed, useSlots } from 'vue'
 defineProps({
   label: {
     type: String,
-    default: null
+    default: null,
   },
   labelFor: {
     type: String,
-    default: null
+    default: null,
   },
   help: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 })
 
 const slots = useSlots()

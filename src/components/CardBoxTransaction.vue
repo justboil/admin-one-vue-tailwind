@@ -9,51 +9,51 @@ import IconRounded from '@/components/IconRounded.vue'
 const props = defineProps({
   amount: {
     type: Number,
-    required: true
+    required: true,
   },
   date: {
     type: String,
-    required: true
+    required: true,
   },
   business: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
   },
   account: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 })
 
 const icon = computed(() => {
   if (props.type === 'withdrawal') {
     return {
       icon: mdiCashMinus,
-      type: 'danger'
+      type: 'danger',
     }
   } else if (props.type === 'deposit') {
     return {
       icon: mdiCashPlus,
-      type: 'success'
+      type: 'success',
     }
   } else if (props.type === 'invoice') {
     return {
       icon: mdiReceipt,
-      type: 'warning'
+      type: 'warning',
     }
   }
 
   return {
     icon: mdiCreditCardOutline,
-    type: 'info'
+    type: 'info',
   }
 })
 </script>

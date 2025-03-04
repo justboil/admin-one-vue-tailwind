@@ -18,13 +18,13 @@ const mainStore = useMainStore()
 
 const profileForm = reactive({
   name: mainStore.userName,
-  email: mainStore.userEmail
+  email: mainStore.userEmail,
 })
 
 const passwordForm = reactive({
   password_current: '',
   password: '',
-  password_confirmation: ''
+  password_confirmation: '',
 })
 
 const submitProfile = () => {

@@ -6,39 +6,39 @@ import PillTag from '@/components/PillTag.vue'
 const props = defineProps({
   trend: {
     type: String,
-    required: true
+    required: true,
   },
   trendType: {
     type: String,
-    default: null
+    default: null,
   },
-  small: Boolean
+  small: Boolean,
 })
 
 const trendStyle = computed(() => {
   if (props.trendType === 'up') {
     return {
       icon: mdiChevronUp,
-      style: 'success'
+      style: 'success',
     }
   }
 
   if (props.trendType === 'down') {
     return {
       icon: mdiChevronDown,
-      style: 'danger'
+      style: 'danger',
     }
   }
 
   if (props.trendType === 'alert') {
     return {
       icon: mdiAlertCircleOutline,
-      style: 'warning'
+      style: 'warning',
     }
   }
 
   return {
-    style: 'info'
+    style: 'info',
   }
 })
 </script>

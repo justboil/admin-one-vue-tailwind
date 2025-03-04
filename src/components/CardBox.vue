@@ -6,17 +6,17 @@ import CardBoxComponentFooter from '@/components/CardBoxComponentFooter.vue'
 const props = defineProps({
   rounded: {
     type: String,
-    default: 'rounded-2xl'
+    default: 'rounded-2xl',
   },
   flex: {
     type: String,
-    default: 'flex-col'
+    default: 'flex-col',
   },
   hasComponentLayout: Boolean,
   hasTable: Boolean,
   isForm: Boolean,
   isHoverable: Boolean,
-  isModal: Boolean
+  isModal: Boolean,
 })
 
 const emit = defineEmits(['submit'])
@@ -29,7 +29,7 @@ const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.isModal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70'
+    props.isModal ? 'dark:bg-slate-900' : 'dark:bg-slate-900/70',
   ]
 
   if (props.isHoverable) {

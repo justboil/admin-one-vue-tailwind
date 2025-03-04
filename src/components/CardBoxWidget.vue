@@ -10,36 +10,36 @@ import BaseButton from '@/components/BaseButton.vue'
 defineProps({
   number: {
     type: Number,
-    default: 0
+    default: 0,
   },
   icon: {
     type: String,
-    default: null
+    default: null,
   },
   prefix: {
     type: String,
-    default: null
+    default: null,
   },
   suffix: {
     type: String,
-    default: null
+    default: null,
   },
   label: {
     type: String,
-    default: null
+    default: null,
   },
   color: {
     type: String,
-    default: null
+    default: null,
   },
   trend: {
     type: String,
-    default: null
+    default: null,
   },
   trendType: {
     type: String,
-    default: null
-  }
+    default: null,
+  },
 })
 </script>
 

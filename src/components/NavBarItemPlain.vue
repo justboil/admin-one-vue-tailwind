@@ -2,9 +2,9 @@
 defineProps({
   display: {
     type: String,
-    default: 'flex'
+    default: 'flex',
   },
-  useMargin: Boolean
+  useMargin: Boolean,
 })
 </script>
 

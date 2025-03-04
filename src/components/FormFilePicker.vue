@@ -6,25 +6,25 @@ import BaseButton from '@/components/BaseButton.vue'
 const props = defineProps({
   modelValue: {
     type: [Object, File, Array],
-    default: null
+    default: null,
   },
   label: {
     type: String,
-    default: null
+    default: null,
   },
   icon: {
     type: String,
-    default: mdiUpload
+    default: mdiUpload,
   },
   accept: {
     type: String,
-    default: null
+    default: null,
   },
   color: {
     type: String,
-    default: 'info'
+    default: 'info',
   },
-  isRoundIcon: Boolean
+  isRoundIcon: Boolean,
 })
 
 const emit = defineEmits(['update:modelValue'])
