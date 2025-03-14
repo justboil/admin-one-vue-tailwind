@@ -6,6 +6,7 @@ import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
 import { mdiCrosshairsGps, mdiDownload, mdiFilter, mdiFlaskEmptyOutline, mdiMap } from '@mdi/js'
 
 import { usePlantasStore } from '@/stores/plantas'
+import {useLoginStore} from '@/stores/login'
 
 import 'leaflet/dist/leaflet.css'
 import { LMap, LTileLayer, LMarker, LTooltip, LPopup } from '@vue-leaflet/vue-leaflet'
@@ -16,8 +17,11 @@ import SectionMain from '@/components/SectionMain.vue'
 import { getIconByInfraestructura } from '@/helpers/maps'
 import L from 'leaflet'
 import { onMounted } from 'vue'
+import aqlaraIcon from '@/assets/icons/aqlara-icon-192.png'
+import AqlaraLogo from '@/components/AqlaraLogo.vue'
 
 const plantasStore = usePlantasStore()
+const loginStore=useLoginStore()
 const isModalActive = ref(false)
 const selectedPunto = ref(null)
 const isLoading = ref(false)
@@ -44,7 +48,36 @@ const crearAnalitica = (puntoId) => {
 //   selectedPuntoId.value = puntoId.id
 // }
 
-const puntosMuestreo = computed(() => plantasStore.getPuntosMuestreo.filter((punto) => punto.activo))
+// const puntosMuestreo = computed(() => plantasStore.getPuntosMuestreo.filter((punto) => punto.activo))
+
+const puntosMuestreo = computed(() => {
+  // Si es rol 99, mostrar todos los puntos activos
+  if (loginStore.userRole === 99) {
+    return plantasStore.getPuntosMuestreo.filter((punto) => punto.activo)
+  }
+  
+  // Para otros roles, filtrar por las zonas del operario
+  const operarioActual = plantasStore.getOperarios.find(
+    (op) => op.email?.toLowerCase() === loginStore.userEmail?.toLowerCase()
+  )
+  
+  if (!operarioActual || !operarioActual.zonas || operarioActual.zonas.length === 0) {
+    console.warn('Operario sin zonas asignadas:', loginStore.userEmail)
+    return [] // No mostrar puntos si no tiene zonas asignadas
+  }
+  
+  // Obtener IDs de zonas asignadas al operario
+  const zonasIds = operarioActual.zonas.map(zona => 
+    typeof zona === 'object' ? zona.id : zona
+  )
+  
+  console.log('Zonas asignadas al operario:', zonasIds)
+  
+  // Filtrar puntos de muestreo por zona y activos
+  return plantasStore.getPuntosMuestreo.filter(punto => 
+    punto.activo && zonasIds.includes(punto.zona_fk)
+  )
+})
 
 const handleSubmitSuccess = async () => {
   // Recargar datos
@@ -208,24 +241,36 @@ onMounted(() => {
                 name="OpenStreetMap"
               ></l-tile-layer>
 
-              <!-- <l-marker :lat-lng="[39.54982998070428, -0.4656852311920545]">
+                <l-marker 
+                :lat-lng="[39.54982998070428, -0.4656852311920545]"
+                :icon="L.icon({
+                  iconUrl: aqlaraIcon,
+                  iconSize: [32, 32],
+                  iconAnchor: [16, 32],
+                  popupAnchor: [0, -32]
+                })"
+                >
                 <l-tooltip>
                   <div class="text-center">
-                    <h1 class="text-lg font-bold">AQLARA Headquarters</h1>
-                    <p class="text-sm">Oficinas Centrales</p>
+                    <AqlaraLogo class="text-center w-32"/>
+                  <!-- <h1 class="text-lg font-bold">AQLARA</h1> -->
+                  <p class="text-sm">Oficinas Centrales</p>
+                  <p class="text-sm">Rda. de Narcís Monturiol, nº 4</p>
+                  <p class="text-sm"> oficina 214-A, 46980 Paterna, Valencia</p>
+                  <p class="text-sm"> Tfno: 963 153 232</p>
                   </div>
                 </l-tooltip>
 
-                <l-popup>
+                <!-- <l-popup>
                   <div class="text-center">
-                    <h1 class="text-lg font-bold">Punto 1</h1>
-                    <a href="http://google.com" target="_blank" class="text-sm"
-                      >Ver en Google Maps</a
-                    >
-                    <p class="text-sm">Muestra 1</p>
+                  <h1 class="text-lg font-bold">Punto 1</h1>
+                  <a href="http://www.aqlara.com" target="_blank" class="text-sm"
+                    >AQLARA</a
+                  >
+                  <p class="text-sm">Muestra 1</p>
                   </div>
-                </l-popup>
-              </l-marker> -->
+                </l-popup> -->
+                </l-marker>
               <div v-for="punto in puntosMuestreo" :key="punto.id">
                 <l-marker
                   v-if="punto.posicion"

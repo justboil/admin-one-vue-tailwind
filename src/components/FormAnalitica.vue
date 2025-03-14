@@ -220,7 +220,7 @@ watch(
             v-model.number="form.type"
             type="radio"
             :options="{ 29: 'Rutina', 28: 'Operacional', 99: 'Seguimiento' }"
-            label="Tipo de Analitica"
+            label="Tipo de Analítica"
           />
         </div>
         <div v-if="form.type">

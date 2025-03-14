@@ -360,12 +360,21 @@ const updateAnaliticaSeleccionada = async (analitica) => {
   // Crear copia profunda para evitar referencias
   analiticaToEdit.value = JSON.parse(JSON.stringify(analitica))
 
+  
+
   const today = new Date().toLocaleDateString()
+  
+  // Crear el nuevo registro de modificación
+  const nuevoRegistro = `${today} - Modificado por: ${loginStore.userName}\n${analiticaToEdit.value.observaciones}`
+  
+  // Añadir el registro nuevo al existente en lugar de reemplazarlo
   if (analiticaToEdit.value.registro) {
-    analiticaToEdit.value.registro = `${today} - Modificado por: ${loginStore.userName}\n${analiticaToEdit.value.observaciones}`
+    // Añadir el nuevo registro al principio, seguido de un salto de línea
+    analiticaToEdit.value.registro = `${nuevoRegistro}\n${analiticaToEdit.value.registro}`
   } else {
-    analiticaToEdit.value.registro = `${today} - Modificado por: ${loginStore.userName}`
+    analiticaToEdit.value.registro = nuevoRegistro
   }
+  
   await nextTick()
   isModalActive.value = true
 }
@@ -509,7 +518,7 @@ onMounted(() => {
           <td data-label="Persona">
             {{ getNameOperario(analitica.personal_fk) }}
           </td>
-          <td data-label="Tipo Analitica" class="lg:w-32">
+          <td data-label="Tipo Analítica" class="lg:w-32">
             {{ getTipoAnalitica(analitica.type) }}
           </td>
 
