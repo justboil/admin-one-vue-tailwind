@@ -64,7 +64,7 @@ export default function useExtractdata() {
         }
   
         // Valores cualitativos
-        if (analitica.olor) {
+        if (analitica.olor && analitica.type === 29) {
           determinaciones.push(`
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>057</COD_PARAMETRO>
@@ -75,7 +75,7 @@ export default function useExtractdata() {
           `)
         }
   
-        if (analitica.color) {
+        if (analitica.color && analitica.type === 29) {
           determinaciones.push(`
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>056</COD_PARAMETRO>
@@ -86,7 +86,7 @@ export default function useExtractdata() {
           `)
         }
   
-        if (analitica.sabor) {
+        if (analitica.sabor && analitica.type === 29) {
           determinaciones.push(`
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>058</COD_PARAMETRO>
