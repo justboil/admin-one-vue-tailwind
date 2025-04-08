@@ -7,6 +7,13 @@
 // } from "../helpers/index";
 // import { codParametro, codAnalisis, codParametroOperacional } from "../helpers/data";
 // import useStore from "../stores/index";
+import {
+  formatDateToSpanish,
+  excelDateToJSDate,
+  fechaFinal,
+  formatDatos,
+  codMuestraLab,
+} from "../helpers/index";
 
 import { formatDate } from "@/helpers"
 
@@ -28,7 +35,7 @@ export default function useExtractdata() {
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>045</COD_PARAMETRO>
               <ID_MET_ANALISIS>50680</ID_MET_ANALISIS>
-              <VALOR_CUANTIF>${analitica.cloro}</VALOR_CUANTIF>
+              <VALOR_CUANTIF>${formatDatos(analitica.cloro)}</VALOR_CUANTIF>
               <COD_ANALISTA>${COD_ANALISTA}</COD_ANALISTA>
             </DETERMINACION_BOLETIN>
           `)
@@ -39,7 +46,7 @@ export default function useExtractdata() {
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>051</COD_PARAMETRO>
               <ID_MET_ANALISIS>50678</ID_MET_ANALISIS>
-              <VALOR_CUANTIF>${analitica.ph}</VALOR_CUANTIF>
+              <VALOR_CUANTIF>${formatDatos(analitica.ph)}</VALOR_CUANTIF>
               <COD_ANALISTA>${COD_ANALISTA}</COD_ANALISTA>
             </DETERMINACION_BOLETIN>
           `)
@@ -50,7 +57,7 @@ export default function useExtractdata() {
             <DETERMINACION_BOLETIN>
               <COD_PARAMETRO>054</COD_PARAMETRO>
               <ID_MET_ANALISIS>50679</ID_MET_ANALISIS>
-              <VALOR_CUANTIF>${analitica.turbidez}</VALOR_CUANTIF>
+              <VALOR_CUANTIF>${formatDatos(analitica.turbidez)}</VALOR_CUANTIF>
               <COD_ANALISTA>${COD_ANALISTA}</COD_ANALISTA>
             </DETERMINACION_BOLETIN>
           `)
