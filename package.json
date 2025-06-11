@@ -22,6 +22,8 @@
     "axios": "^1.5.0",
     "chart.js": "^4.4.0",
     "date-fns": "^4.1.0",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "leaflet": "^1.9.4",
     "numeral": "^2.0.6",
     "pinia": "^2.1.6",

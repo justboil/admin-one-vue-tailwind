@@ -60,7 +60,8 @@ const today = new Date();
 const year = today.getFullYear();
 const month = (today.getMonth() + 1).toString().padStart(2, '0');
   const day = today.getDate().toString().padStart(2, '0');
+  const random= Math.random().toString().slice(2, 6);//genera un numero aleatorio de 4 cifras
   
-return `LAB${year}${month}${day}${puntMuestra}_${fecha}`
+return `LAB${year}${month}${day}${puntMuestra}_${fecha}${random}`
 .split('/')[0]
  });

@@ -70,6 +70,8 @@ export default function useFormSelectData() {
       form[key] = null
     })
   }
+
+  
   const selectUO = computed(() => {
     return plantasStore.getUnidadesOperativas.map((uo) => {
       return { value: uo.id, label: uo.name }

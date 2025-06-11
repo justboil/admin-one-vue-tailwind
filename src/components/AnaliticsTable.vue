@@ -56,7 +56,7 @@ defineProps({
   checkable: Boolean
 })
 
-defineExpose({ resetForm, checkedRows })
+defineExpose({ resetForm, checkedRows, filters })
 
 // const selectedAnaliticas = ref([])
 // const headerChecked = ref(false)
@@ -148,16 +148,8 @@ const analiticsFiltered = computed(() =>
     // Restricción por zona según el rol del usuario
     const zonaFilter = 
       loginStore.userRole === 99 || // Administrador ve todo
-      // !userZonas.value || // Si no hay zonas definidas para el usuario
-      // userZonas.value.length === 0 || // Si el array de zonas está vacío
       userZonas.value.some(zona => zona === getZonaFromAnalitica(analitica))
-    console.log('ZONAFILTER: ', zonaFilter, 'ANALITICA: ', analitica)
-    // Analítica pertenece a alguna de sus zonas
-    // const zonaFilter = 
-    //    loginStore.userRole === 99 || // Administrador ve todo
-    //    !userZonas.value || // Si no hay zonas definidas para el usuario
-    //    userZonas.value.length === 0 || // Si el array de zonas está vacío
-    //   userZonas.value.some(zona => zona.id === getZonaFromAnalitica(analitica)) // Analítica pertenece a alguna de sus zonas
+    
 
 
       console.log('ZonaFilter: ',zonaFilter)
@@ -382,6 +374,7 @@ const updateAnaliticaSeleccionada = async (analitica) => {
 
 
 onMounted(() => {
+  console.log('FILTROS: ', filters.value)
   resetForm()
 })
 </script>

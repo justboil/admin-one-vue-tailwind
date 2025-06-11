@@ -1,12 +1,4 @@
-// import {
-//   formatDateToSpanish,
-//   excelDateToJSDate,
-//   fechaFinal,
-//   formatDatos,
-//   codMuestraLab,
-// } from "../helpers/index";
-// import { codParametro, codAnalisis, codParametroOperacional } from "../helpers/data";
-// import useStore from "../stores/index";
+
 import {
   formatDateToSpanish,
   excelDateToJSDate,
@@ -106,7 +98,10 @@ export default function useExtractdata() {
               <BOLETIN>
                 <FECHA_LLEGADA_LAB>${fechaFormateada}</FECHA_LLEGADA_LAB>
                 <ID_LABORATORIO>${ID_LABORATORIO}</ID_LABORATORIO>
-                <COD_MUESTRA_LAB>M${analitica.punto_muestreo_fk}${analitica.fecha.replace(/[^0-9]/g, '')}</COD_MUESTRA_LAB>
+                <COD_MUESTRA_LAB>${codMuestraLab(
+                                  analitica.punto_muestreo_fk,
+                                  analitica.fecha.slice(8,10)
+                                )}</COD_MUESTRA_LAB>
                 <FECHA_INFORME>${fechaFormateada}</FECHA_INFORME>
                 <DETERMINACIONES>
                   ${determinaciones.join('\n')}
