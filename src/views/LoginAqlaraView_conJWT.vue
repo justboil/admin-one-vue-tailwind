@@ -153,6 +153,14 @@ onMounted(() => {
               label="Login with Microsoft"
               @click="loginWithMicrosoft"
             />
+            <BaseButton
+              :disabled="isAuthenticating"
+              type="submit"
+              :icon="mdiMicrosoftWindows"
+              color="info"
+              label="Login with Supabase"
+              @click="signInWithMicrosoft"
+            />
             <!-- <BaseButton label="Login with Factorial HR" :icon="mdiAccount" color="danger" @click="loginWithFactorial"  /> -->
           </BaseButtons>
 
