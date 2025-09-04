@@ -97,8 +97,8 @@ const currentPage = ref(0)
 
 // Obtener las zonas del usuario logueado
 const userZonas = computed(() => {
-  // Si el rol del usuario es 99, no filtramos por zona (puede ver todo)
-  if (loginStore.userRole === 99) {
+  // Si el rol del usuario es admin (antes era 99), no filtramos por zona (puede ver todo)
+  if (loginStore.userRole === 'admin' || loginStore.userRole === 99 || loginStore.userRole === '99') {
     return null
   }
 
@@ -144,15 +144,12 @@ const getZonaFromAnalitica = (analitica) => {
 // Modificar el filtrado para incluir restricción por zonas del usuario
 const analiticsFiltered = computed(() =>
   plantaStore.getAnaliticas.filter((analitica) => {
-    //console.log('USER ZONAS: ', userZonas.value)
     // Restricción por zona según el rol del usuario
+    const isAdmin = loginStore.userRole === 'admin' || loginStore.userRole === 99 || loginStore.userRole === '99'
     const zonaFilter = 
-      loginStore.userRole === 99 || // Administrador ve todo
-      userZonas.value.some(zona => zona === getZonaFromAnalitica(analitica))
-    
-
-
-      console.log('ZonaFilter: ',zonaFilter)
+      isAdmin || // Administrador ve todo
+      (userZonas.value && userZonas.value.some(zona => zona === getZonaFromAnalitica(analitica))) ||
+      !userZonas.value // Si no hay restricciones de zona, mostrar todo
     const wrongValuesFilter = !showOnlyWrongValues.value || isWrongValues(analitica)
 
     

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { supabase } from '@/services/supabase'
 
 export const usePlantasStore = defineStore('plantasStore', () => {

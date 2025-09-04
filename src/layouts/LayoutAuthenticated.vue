@@ -13,9 +13,13 @@ import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import useLoginStore from '@/stores/login.js'
 import UnAutorizedComponent from '@/components/UnAutorizedComponent.vue'
+import { useSessionSecurity } from '@/composables/useSessionSecurity.js'
 
 
 const loginStore = useLoginStore()
+
+// Inicializar seguridad de sesión
+useSessionSecurity()
 
 const layoutAsidePadding = 'xl:pl-60'
 

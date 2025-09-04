@@ -128,13 +128,13 @@ const avatarBodyTemplate = (rowData) => ({
 
   <div class="prime-table-wrapper">
     <DataTable
+      v-model:selection="selectedClient"
       :value="operarios"
       paginator
       :rows="10"
-      :rowsPerPageOptions="[5, 10, 20, 50]"
+      :rows-per-page-options="[5, 10, 20, 50]"
       table-style="min-width: 50rem"
-      v-model:selection="selectedClient"
-      dataKey="id"
+      data-key="id"
       :row-hover="true"
       responsive-layout="scroll"
       striped-rows
@@ -147,7 +147,7 @@ const avatarBodyTemplate = (rowData) => ({
 
       <Column header="Avatar" :body="avatarBodyTemplate" style="width: 5rem" />
       <Column field="name" header="Nombre" sortable />
-      <Column header="Tipo" :body="typeBodyTemplate" sortable :sortField="'type'" />
+      <Column header="Tipo" :body="typeBodyTemplate" sortable :sort-field="'type'" />
       <Column field="email" header="e-mail" sortable />
       <Column field="ud_operativa_fk" header="UO" :body="(slotProps) => nombreUO(slotProps.ud_operativa_fk)" sortable />
       <Column header="Acciones" :body="actionsBodyTemplate" style="width: 10rem" />

@@ -22,8 +22,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'Aqlara Login',
-      requiresAuth: true
+      title: 'Aqlara Admin Panel',
+      requiresAuth: true,
+      requiredRole: 'admin'
     },
     path: '/admin',
     name: 'admin',
@@ -96,7 +97,8 @@ const routes = [
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
       title: 'Panel de Control',
-      requiresAuth: true
+      requiresAuth: true,
+      requiredRole: 'admin'
     },
     path: '/settings',
     name: 'settings',
@@ -206,21 +208,40 @@ const router = createRouter({
 
 
 
-// Guard de navegacion
+// Guard de navegacion mejorado con seguridad de sesión
 
 router.beforeEach((to, from, next) => {
-  // const { useLoginStore } = require('@/stores/login')
   const loginStore = useLoginStore();
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  // if (requiresAuth && !localStorage.getItem('token')) {
-  if (requiresAuth && !loginStore.isAuthenticated) {
-    
-    next({name:'login'});
-  } else {
-    next();
+  if (requiresAuth) {
+    // Verificar si está autenticado
+    if (!loginStore.isAuthenticated) {
+      console.warn('Usuario no autenticado, redirigiendo a login')
+      next({name: 'login'});
+      return;
+    }
+
+    // Verificar si la sesión ha expirado
+    if (!loginStore.checkSessionExpiry()) {
+      console.warn('Sesión expirada, redirigiendo a login')
+      next({name: 'login'});
+      return;
+    }
+
+    // Verificar autorización por roles si es requerido
+    const requiredRole = to.meta.requiredRole;
+    if (requiredRole && loginStore.userRole !== requiredRole) {
+      console.warn('Usuario sin permisos suficientes')
+      next({name: 'Unauthorized'});
+      return;
+    }
+
+    // Renovar sesión en cada navegación autenticada
+    loginStore.renewSession();
   }
-  // to and from are both route objects. must call `next`.
+
+  next();
 })
 
 export default router

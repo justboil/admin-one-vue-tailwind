@@ -4,42 +4,96 @@ import { getUserProfile } from '@/services/msalConfig'
 
 
 export const useLoginStore = defineStore('loginStore', () => {
-  const user = ref(JSON.parse(localStorage.getItem('user')) || null)
-  const isAuthenticated = ref(localStorage.getItem('isAuthenticated') === 'true')
-  const userName = ref(localStorage.getItem('userName') || '')
-  const userEmail = ref(localStorage.getItem('userEmail') || '')
-  // const userAvatar = ref(localStorage.getItem('userAvatar') || '')
-  const userLogged = ref(JSON.parse(localStorage.getItem('userLogged')) || {})
-  const profilePhoto = ref(localStorage.getItem('profilePhoto') || '')
-  const userAutenticated = ref(localStorage.getItem('userAutenticated') || '')
-  const userRole=ref(localStorage.getItem('userRole') || '')
-  const userId=ref(localStorage.getItem('userId') || '')
+  const user = ref(JSON.parse(sessionStorage.getItem('user')) || null)
+  const isAuthenticated = ref(sessionStorage.getItem('isAuthenticated') === 'true')
+  const userName = ref(sessionStorage.getItem('userName') || '')
+  const userEmail = ref(sessionStorage.getItem('userEmail') || '')
+  // const userAvatar = ref(sessionStorage.getItem('userAvatar') || '')
+  const userLogged = ref(JSON.parse(sessionStorage.getItem('userLogged')) || {})
+  const profilePhoto = ref(sessionStorage.getItem('profilePhoto') || '')
+  const userAutenticated = ref(sessionStorage.getItem('userAutenticated') || '')
+  const userRole=ref(sessionStorage.getItem('userRole') || '')
+  const userId=ref(sessionStorage.getItem('userId') || '')
+  
+  // Variables para manejo de sesión
+  const sessionTimeout = ref(null)
+  const SESSION_DURATION = 30 * 60 * 1000 // 30 minutos en ms
 
   const userAvatar = computed(
     () =>      
     `https://ui-avatars.com/api/?name=${userName.value}&background=random&font-size=0.75&bold=true&color=fff`
   )
-   // Watchers para persistencia
+   // Watchers para persistencia segura
    watch([isAuthenticated, user, userName, userEmail, userAvatar, userLogged, profilePhoto, userAutenticated, userRole,userId], ([newAuth, newUser, newName, newEmail, newAvatar,newUserLogged, newProfilePhoto, newUserAutenticated, newUserRole, newUserId]) => {
-    localStorage.setItem('isAuthenticated', newAuth)
-    if (newUser) localStorage.setItem('user', JSON.stringify(newUser))
-    if (newName) localStorage.setItem('userName', newName)
-    if (newEmail) localStorage.setItem('userEmail', newEmail)
-    if (newAvatar) localStorage.setItem('userAvatar', newAvatar)
-    if (newUserLogged) localStorage.setItem('userLogged', JSON.stringify(newUserLogged))
-     if (newProfilePhoto) localStorage.setItem('profilePhoto', newProfilePhoto)
-     if (newUserAutenticated) localStorage.setItem('userAutenticated', newUserAutenticated)
-      if (newUserRole) localStorage.setItem('userRole', newUserRole)
-      if (newUserId) localStorage.setItem('userId', newUserId)
+    sessionStorage.setItem('isAuthenticated', newAuth)
+    if (newUser) sessionStorage.setItem('user', JSON.stringify(newUser))
+    if (newName) sessionStorage.setItem('userName', newName)
+    if (newEmail) sessionStorage.setItem('userEmail', newEmail)
+    if (newAvatar) sessionStorage.setItem('userAvatar', newAvatar)
+    if (newUserLogged) sessionStorage.setItem('userLogged', JSON.stringify(newUserLogged))
+     if (newProfilePhoto) sessionStorage.setItem('profilePhoto', newProfilePhoto)
+     if (newUserAutenticated) sessionStorage.setItem('userAutenticated', newUserAutenticated)
+      if (newUserRole) sessionStorage.setItem('userRole', newUserRole)
+      if (newUserId) sessionStorage.setItem('userId', newUserId)
   })
 
 
 
 
+  // Función para limpiar timeout de sesión
+  const clearSessionTimeout = () => {
+    if (sessionTimeout.value) {
+      clearTimeout(sessionTimeout.value)
+      sessionTimeout.value = null
+    }
+  }
+
+  // Función para iniciar timeout de sesión
+  const startSessionTimeout = () => {
+    clearSessionTimeout()
+    
+    sessionTimeout.value = setTimeout(() => {
+      console.warn('Sesión expirada por inactividad')
+      logout()
+      // Opcional: mostrar mensaje al usuario
+      alert('Tu sesión ha expirado por inactividad. Por favor, inicia sesión nuevamente.')
+    }, SESSION_DURATION)
+  }
+
+  // Función para renovar sesión (reiniciar timeout)
+  const renewSession = () => {
+    if (isAuthenticated.value) {
+      const lastActivity = Date.now()
+      sessionStorage.setItem('lastActivity', lastActivity.toString())
+      startSessionTimeout()
+    }
+  }
+
+  // Verificar si la sesión ha expirado
+  const checkSessionExpiry = () => {
+    const lastActivity = sessionStorage.getItem('lastActivity')
+    if (lastActivity) {
+      const timeDiff = Date.now() - parseInt(lastActivity)
+      if (timeDiff > SESSION_DURATION) {
+        logout()
+        return false
+      }
+    }
+    return true
+  }
+
   const login = async (userData) => {
     try {
       isAuthenticated.value = true
       user.value = userData
+      
+      // Inicializar timestamp de sesión
+      const loginTime = Date.now()
+      sessionStorage.setItem('loginTime', loginTime.toString())
+      sessionStorage.setItem('lastActivity', loginTime.toString())
+      
+      // Iniciar timeout de sesión
+      startSessionTimeout()
       
       // Obtener perfil completo
       const userProfile = await getUserProfile()
@@ -58,13 +112,16 @@ export const useLoginStore = defineStore('loginStore', () => {
   }
   
   const logout = async () => {
+    // Limpiar timeout de sesión
+    clearSessionTimeout()
+    
     user.value = null
     isAuthenticated.value = false
     userName.value = ''
     userEmail.value = ''
-    // localStorage.removeItem('isAuthenticated')
-    // localStorage.removeItem('user')
-    localStorage.clear()
+    // sessionStorage.removeItem('isAuthenticated')
+    // sessionStorage.removeItem('user')
+    sessionStorage.clear()
   }
 
   const getUserLogged=computed(() => {
@@ -74,11 +131,11 @@ export const useLoginStore = defineStore('loginStore', () => {
   const  setUser=(payload)=> {
     if (payload.name) {
       userName.value = payload.name
-      localStorage.setItem('userName', payload.name)
+      sessionStorage.setItem('userName', payload.name)
     }
     if (payload.username) {
       userEmail.value = payload.username
-      localStorage.setItem('userEmail', payload.username)
+      sessionStorage.setItem('userEmail', payload.username)
     }
   }
 
@@ -136,7 +193,10 @@ export const useLoginStore = defineStore('loginStore', () => {
     getUserLogged,
     setUserId,
     userId,
-    
+    // Funciones de seguridad de sesión
+    renewSession,
+    checkSessionExpiry,
+    clearSessionTimeout
   }
 })
 
