@@ -179,8 +179,7 @@ onMounted(async() => {
               label="Punto de Muestra"
             />
           </div>
-         
-
+        
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FormKit
               v-model.number="form.type"

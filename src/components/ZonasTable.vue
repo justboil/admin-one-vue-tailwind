@@ -9,11 +9,15 @@ import {
   mdiChevronLeft,
   mdiMapMarker,
   mdiPencil,
-  mdiTrashCan
+  mdiTrashCan,
+  mdiFilterRemove
 } from '@mdi/js'
 import BaseIcon from './BaseIcon.vue'
 import CardBoxModal from './CardBoxModal.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
+import FormControl from './FormControl.vue'
+import FormField from './FormField.vue'
+import BaseLevel from './BaseLevel.vue'
 // import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
 import { createZona, anularZona, updateZona } from '@/services/zonas'
@@ -27,7 +31,75 @@ defineProps({
 })
 
 const plantaStore = usePlantasStore()
-const zonasAbastecimiento = computed(() => plantaStore.getZonas.filter((zona) => zona.activa))
+
+// Variables para filtros
+const filters = ref({
+  nombre: '',
+  unidadOperativa: '',
+  comunidadAutonoma: ''
+})
+
+// Función para limpiar filtros
+const clearFilters = () => {
+  filters.value.nombre = ''
+  filters.value.unidadOperativa = ''
+  filters.value.comunidadAutonoma = ''
+}
+
+// Opciones para los selectores
+const unidadesOperativasOptions = computed(() => {
+  const options = [{ value: '', label: 'Todas las unidades operativas' }]
+  plantaStore.getUnidadesOperativas.forEach(uo => {
+    options.push({ value: uo.id, label: uo.name })
+  })
+  return options
+})
+
+const comunidadesAutonomasOptions = computed(() => {
+  const options = [{ value: '', label: 'Todas las comunidades autónomas' }]
+  plantaStore.getComunidadesAutonomas.forEach(comunidad => {
+    options.push({ value: comunidad.id, label: comunidad.name })
+  })
+  return options
+})
+
+// Computed para filtrar zonas
+const zonasFiltradas = computed(() => {
+  let zonas = plantaStore.getZonas.filter((zona) => zona.activa)
+  
+  // Filtrar por nombre
+  if (filters.value.nombre) {
+    zonas = zonas.filter(zona => 
+      zona.name.toLowerCase().includes(filters.value.nombre.toLowerCase())
+    )
+  }
+  
+  // Filtrar por unidad operativa
+  if (filters.value.unidadOperativa) {
+    const uoId = (typeof filters.value.unidadOperativa === 'object' && filters.value.unidadOperativa.value !== undefined) 
+      ? filters.value.unidadOperativa.value 
+      : filters.value.unidadOperativa
+    
+    if (uoId !== '' && uoId !== null) {
+      zonas = zonas.filter(zona => zona.unidades_operativas_fk == uoId)
+    }
+  }
+  
+  // Filtrar por comunidad autónoma
+  if (filters.value.comunidadAutonoma) {
+    const comunidadId = (typeof filters.value.comunidadAutonoma === 'object' && filters.value.comunidadAutonoma.value !== undefined) 
+      ? filters.value.comunidadAutonoma.value 
+      : filters.value.comunidadAutonoma
+    
+    if (comunidadId !== '' && comunidadId !== null) {
+      zonas = zonas.filter(zona => zona.com_autonoma_fk == comunidadId)
+    }
+  }
+  
+  return zonas
+})
+
+const zonasAbastecimiento = computed(() => zonasFiltradas.value)
 
 const isModalDangerActive = ref(false)
 const dataToEdit = ref(null)
@@ -150,6 +222,55 @@ defineExpose({
     </p>
     <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
+
+  <!-- Sección de Filtros -->
+  <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+    <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-200">Filtros de Búsqueda</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <!-- Filtro por nombre -->
+      <FormField label="Buscar por nombre">
+        <FormControl
+          v-model="filters.nombre"
+          placeholder="Nombre de la zona..."
+          :icon="mdiMapMarker"
+        />
+      </FormField>
+
+      <!-- Filtro por unidad operativa -->
+      <FormField label="Unidad operativa">
+        <FormControl
+          v-model="filters.unidadOperativa"
+          :options="unidadesOperativasOptions"
+          placeholder="Seleccionar unidad operativa..."
+        />
+      </FormField>
+
+      <!-- Filtro por comunidad autónoma -->
+      <FormField label="Comunidad autónoma">
+        <FormControl
+          v-model="filters.comunidadAutonoma"
+          :options="comunidadesAutonomasOptions"
+          placeholder="Seleccionar comunidad..."
+        />
+      </FormField>
+    </div>
+
+    <!-- Botones de acción -->
+    <BaseLevel class="justify-between">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        Mostrando {{ zonasAbastecimiento.length }} zona(s) de abastecimiento
+      </div>
+      <BaseButton
+        :icon="mdiFilterRemove"
+        label="Limpiar filtros"
+        color="light"
+        outline
+        small
+        @click="clearFilters"
+      />
+    </BaseLevel>
+  </div>
 
   <div>
     <table>

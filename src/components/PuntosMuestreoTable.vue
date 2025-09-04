@@ -9,11 +9,15 @@ import {
   mdiChevronLeft,
   mdiMapMarker,
   mdiPencil,
-  mdiTrashCan
+  mdiTrashCan,
+  mdiFilterRemove
 } from '@mdi/js'
 import BaseIcon from './BaseIcon.vue'
 import CardBoxModal from './CardBoxModal.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
+import FormControl from './FormControl.vue'
+import FormField from './FormField.vue'
+import BaseLevel from './BaseLevel.vue'
 // import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
 import { createZona, anularZona, updateZona } from '@/services/zonas'
@@ -34,7 +38,100 @@ defineProps({
 })
 
 const plantaStore = usePlantasStore()
-const puntosMuestreo = computed(() => plantaStore.getPuntosMuestreo.filter((punto) => punto.activo))
+
+// Variables para filtros
+const filters = ref({
+  nombre: '',
+  zona: '',
+  infraestructura: ''
+})
+
+// Funciones para limpiar filtros
+const clearFilters = () => {
+  filters.value.nombre = ''
+  filters.value.zona = ''
+  filters.value.infraestructura = ''
+}
+
+
+// Computed para filtrar puntos de muestreo
+const puntosMuestreoFiltrados = computed(() => {
+  let puntos = plantaStore.getPuntosMuestreo.filter((punto) => punto.activo)
+  
+  // Filtrar por nombre
+  if (filters.value.nombre) {
+    puntos = puntos.filter(punto => 
+      punto.name.toLowerCase().includes(filters.value.nombre.toLowerCase())
+    )
+  }
+  
+  // Filtrar por zona
+  if (filters.value.zona) {
+    const zonaId = (typeof filters.value.zona === 'object' && filters.value.zona.value !== undefined) 
+      ? filters.value.zona.value 
+      : filters.value.zona
+    
+    if (zonaId !== '' && zonaId !== null) {
+      puntos = puntos.filter(punto => punto.zona_fk == zonaId)
+    }
+  }
+  
+  // Filtrar por infraestructura
+  if (filters.value.infraestructura) {
+    const infraId = (typeof filters.value.infraestructura === 'object' && filters.value.infraestructura.value !== undefined) 
+      ? filters.value.infraestructura.value 
+      : filters.value.infraestructura
+    
+    if (infraId !== '' && infraId !== null) {
+      puntos = puntos.filter(punto => punto.infraestructura_fk == infraId)
+    }
+  }
+  
+  return puntos
+})
+
+// Opciones para los filtros
+const zonasOptions = computed(() => {
+  const options = [{ value: '', label: 'Todas las zonas' }]
+  
+  // Crear un Set para evitar duplicados basándose en zona_fk de los puntos
+  const zonasEnUso = new Set()
+  plantaStore.getPuntosMuestreo.forEach(punto => {
+    if (punto.zona_fk) zonasEnUso.add(punto.zona_fk)
+  })
+  
+  // Agregar solo las zonas que tienen puntos asociados
+  Array.from(zonasEnUso).forEach(zonaId => {
+    const zona = plantaStore.getZonas.find(z => z.id === zonaId)
+    if (zona) {
+      options.push({ value: zonaId, label: zona.name })
+    }
+  })
+  
+  return options
+})
+
+const infraestructurasOptions = computed(() => {
+  const options = [{ value: '', label: 'Todas las infraestructuras' }]
+  
+  // Crear un Set para evitar duplicados basándose en infraestructura_fk de los puntos
+  const infrasEnUso = new Set()
+  plantaStore.getPuntosMuestreo.forEach(punto => {
+    if (punto.infraestructura_fk) infrasEnUso.add(punto.infraestructura_fk)
+  })
+  
+  // Agregar solo las infraestructuras que tienen puntos asociados
+  Array.from(infrasEnUso).forEach(infraId => {
+    const infra = plantaStore.getInfraestructuras.find(i => i.id === infraId)
+    if (infra) {
+      options.push({ value: infraId, label: infra.name })
+    }
+  })
+  
+  return options
+})
+
+const puntosMuestreo = computed(() => puntosMuestreoFiltrados.value)
 const isLoading = ref(true)
 
 const isModalDangerActive = ref(false)
@@ -142,7 +239,57 @@ defineExpose({
     <span class="text-gray-500">Cargando datos...</span>
   </div>
   <div v-else>
-  <CardBoxModalForm
+    <!-- Sección de Filtros -->
+    <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-200">Filtros de Búsqueda</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <!-- Filtro por nombre -->
+        <FormField label="Buscar por nombre">
+          <FormControl
+            v-model="filters.nombre"
+            placeholder="Nombre del punto de muestreo..."
+            :icon="mdiMapMarker"
+          />
+        </FormField>
+
+        <!-- Filtro por zona -->
+        <FormField label="Zona">
+          <FormControl
+            v-model="filters.zona"
+            :options="zonasOptions"
+            placeholder="Seleccionar zona..."
+          />
+        </FormField>
+
+        <!-- Filtro por infraestructura -->
+        <FormField label="Infraestructura">
+          <FormControl
+            v-model="filters.infraestructura"
+            :options="infraestructurasOptions"
+            placeholder="Seleccionar infraestructura..."
+          />
+        </FormField>
+      </div>
+
+      <!-- Botones de acción -->
+      <BaseLevel class="justify-between">
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          Mostrando {{ puntosMuestreo.length }} punto(s) de muestreo
+        </div>
+        <BaseButton
+          :icon="mdiFilterRemove"
+          label="Limpiar filtros"
+          color="light"
+          outline
+          small
+          @click="clearFilters"
+        />
+      </BaseLevel>
+    </div>
+
+    <!-- Modales -->
+    <CardBoxModalForm
     v-if="dataToEdit !== null"
     v-model="isModalOpen"
     :uo="dataToEdit"

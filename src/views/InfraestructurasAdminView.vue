@@ -47,7 +47,7 @@ const createInfraestructura = () => {
           <BaseButton
           target="_blank"
           :icon="mdiPlusBox"
-          label="Nueva Zona"
+          label="Nueva Infraestructura"
           color="info"
           outline          
           rounded-full

@@ -206,7 +206,18 @@ const router = createRouter({
   }
 })
 
-
+// Función para verificar permisos de usuario
+const checkUserPermission = (userRole, requiredRole) => {
+  // Normalizar roles de admin: '99', 99, y 'admin' son equivalentes
+  const adminRoles = ['admin', '99', 99]
+  
+  if (requiredRole === 'admin') {
+    return adminRoles.includes(userRole)
+  }
+  
+  // Para otros roles, comparación directa
+  return userRole === requiredRole
+}
 
 // Guard de navegacion mejorado con seguridad de sesión
 
@@ -231,10 +242,16 @@ router.beforeEach((to, from, next) => {
 
     // Verificar autorización por roles si es requerido
     const requiredRole = to.meta.requiredRole;
-    if (requiredRole && loginStore.userRole !== requiredRole) {
-      console.warn('Usuario sin permisos suficientes')
-      next({name: 'Unauthorized'});
-      return;
+    if (requiredRole) {
+      const hasPermission = checkUserPermission(loginStore.userRole, requiredRole);
+      if (!hasPermission) {
+        console.warn('Usuario sin permisos suficientes', {
+          userRole: loginStore.userRole,
+          requiredRole: requiredRole
+        });
+        next({name: 'Unauthorized'});
+        return;
+      }
     }
 
     // Renovar sesión en cada navegación autenticada

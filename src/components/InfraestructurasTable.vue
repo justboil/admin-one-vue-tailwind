@@ -9,11 +9,15 @@ import {
   mdiChevronLeft,
   mdiMapMarker,
   mdiPencil,
-  mdiTrashCan
+  mdiTrashCan,
+  mdiFilterRemove
 } from '@mdi/js'
 import BaseIcon from './BaseIcon.vue'
 import CardBoxModal from './CardBoxModal.vue'
 import CardBoxModalForm from './CardBoxModalForm.vue'
+import FormControl from './FormControl.vue'
+import FormField from './FormField.vue'
+import BaseLevel from './BaseLevel.vue'
 // import { anularUO as anularZona, createUO, updateUO } from '@/services/uo'
 import FormZona from './FormZona.vue'
 import { createZona, anularZona, updateZona } from '@/services/zonas'
@@ -28,7 +32,56 @@ defineProps({
 })
 
 const plantaStore = usePlantasStore()
-const infraestructuras = computed(() => plantaStore.getInfraestructuras.filter((infraestructura) => infraestructura.activo))
+
+// Variables para filtros
+const filters = ref({
+  nombre: '',
+  tipo: ''
+})
+
+// Función para limpiar filtros
+const clearFilters = () => {
+  filters.value.nombre = ''
+  filters.value.tipo = ''
+}
+
+
+// Opciones para los selectores
+const tiposOptions = computed(() => {
+  const options = [{ value: '', label: 'Todos los tipos' }]
+  plantaStore.getTipoInfraestructura.forEach(tipo => {
+    options.push({ value: tipo.id, label: tipo.name })
+  })
+  return options
+})
+
+
+// Computed para filtrar infraestructuras
+const infraestructurasFiltradas = computed(() => {
+  let infras = plantaStore.getInfraestructuras.filter((infraestructura) => infraestructura.activo)
+  
+  // Filtrar por nombre
+  if (filters.value.nombre) {
+    infras = infras.filter(infra => 
+      infra.name.toLowerCase().includes(filters.value.nombre.toLowerCase())
+    )
+  }
+  
+  // Filtrar por tipo
+  if (filters.value.tipo) {
+    const tipoId = (typeof filters.value.tipo === 'object' && filters.value.tipo.value !== undefined) 
+      ? filters.value.tipo.value 
+      : filters.value.tipo
+    
+    if (tipoId !== '' && tipoId !== null) {
+      infras = infras.filter(infra => infra.type == tipoId)
+    }
+  }
+  
+  return infras
+})
+
+const infraestructuras = computed(() => infraestructurasFiltradas.value)
 
 const isModalDangerActive = ref(false)
 const dataToEdit = ref(null)
@@ -38,7 +91,7 @@ const expandedRows = ref([])
 
 
 const getTypeById = (typeId) => {
-  const tipoPlanta= plantaStore.getTipoInfraestructura.find((tipo) => tipo.id === typeId)?.name?? '-'
+  const tipoPlanta = plantaStore.getTipoInfraestructura.find((tipo) => tipo.id === typeId)?.name ?? '-'
   return tipoPlanta
 }
 
@@ -145,6 +198,49 @@ defineExpose({
     </p>
     <p>Esta operación no se puede deshacer.</p>
   </CardBoxModal>
+
+  <!-- Sección de Filtros -->
+  <div class="mb-6 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+    <h3 class="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-200">Filtros de Búsqueda</h3>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <!-- Filtro por nombre -->
+      <FormField label="Buscar por nombre">
+        <FormControl
+          v-model="filters.nombre"
+          placeholder="Nombre de la infraestructura..."
+          :icon="mdiMapMarker"
+        />
+      </FormField>
+
+      <!-- Filtro por tipo -->
+      <FormField label="Tipo de infraestructura">
+        <FormControl
+          v-model="filters.tipo"
+          :options="tiposOptions"
+          placeholder="Seleccionar tipo..."
+        />
+      </FormField>
+
+    </div>
+
+    <!-- Botones de acción -->
+    <BaseLevel class="justify-between">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        Mostrando {{ infraestructuras.length }} infraestructura(s)
+      </div>
+      <div class="flex gap-2">
+        <BaseButton
+          :icon="mdiFilterRemove"
+          label="Limpiar filtros"
+          color="light"
+          outline
+          small
+          @click="clearFilters"
+        />
+      </div>
+    </BaseLevel>
+  </div>
 
   <div>
     <table>
