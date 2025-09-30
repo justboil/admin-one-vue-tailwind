@@ -1,0 +1,8 @@
+{
+  "outputStyle": "Explanatory",
+  "permissions": {
+    "allow": [
+      "Read(/C:\\Users\\alejandro.minguez\\Documents\\webDev\\GitHub\\admin-one-vue-tailwind\\src\\stores/**)"
+    ]
+  }
+}

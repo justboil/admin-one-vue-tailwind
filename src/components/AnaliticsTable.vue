@@ -13,6 +13,7 @@ import { usePlantasStore } from '../stores/plantas'
 import { useLoginStore } from '../stores/login'
 // import { getAnaliticas } from '@/services/analiticas'
 import useFormSelectData from '../composables/useFormSelectData'
+import { useAnalyticsLoader } from '../composables/useAnalyticsLoader'
 import { FormKit } from '@formkit/vue'
 const checkedRows = ref([])
 import { deleteAnalitica, updateAnaliticabyId } from '@/services/supabase'
@@ -20,6 +21,7 @@ import CardBoxModal from './CardBoxModal.vue'
 
 const plantaStore = usePlantasStore()
 const loginStore = useLoginStore()
+const { loadAnalytics, loading: analyticsLoading } = useAnalyticsLoader()
 
 const ORGANOLEPTIC_CORRECT = 1
 // const ORGANOLEPTIC_WRONG = 0
@@ -370,9 +372,17 @@ const updateAnaliticaSeleccionada = async (analitica) => {
 
 
 
-onMounted(() => {
+// Cargar analíticas solo cuando este componente se monte
+onMounted(async () => {
   console.log('FILTROS: ', filters.value)
   resetForm()
+  
+  // Usar el composable para carga inteligente
+  try {
+    await loadAnalytics()
+  } catch (error) {
+    console.error('❌ Error cargando analíticas:', error)
+  }
 })
 </script>
 
