@@ -14,17 +14,30 @@ export default function useExtractdata() {
   //* Extrae los datos de cada una de las hojas
   const datosBoletin = (sheetsData) => {
     const sheets = Object.values(sheetsData);
-    // console.log("Hojas: ", sheets);
+    console.log("Hojas: ", sheets);
 
     //* (Filas) Extraemos las filas necesarias de cada una de las hojas
     const dataVector = [];
-    sheets.forEach((sheet) => {
+    
+    sheets.forEach((sheet, sheetIndex) => {
       let fecha = "";
       try {
-        fecha = formatDateToSpanish(excelDateToJSDate(sheet[3].__EMPTY_1));
-        // console.log("FECHA: ", fecha);
+        // Validar que sheet[3] existe y tiene la propiedad esperada
+        if (!sheet[3] || sheet[3].__EMPTY_1 === undefined) {
+          console.error(`Hoja ${sheetIndex + 1}: No se encontró la fecha en la celda esperada (sheet[3].__EMPTY_1)`);
+          console.log("Estructura de sheet[3]:", sheet[3]);
+          return; // Saltar esta hoja
+        }
+
+        const excelSerialDate = sheet[3].__EMPTY_1;
+        console.log(`Hoja ${sheetIndex + 1}: Valor de fecha Excel:`, excelSerialDate);
+
+        fecha = formatDateToSpanish(excelDateToJSDate(excelSerialDate));
+        console.log("FECHA convertida: ", fecha);
       } catch (error) {
-        console.error("Error al convertir la fecha:", error);
+        console.error(`Error al convertir la fecha en la hoja ${sheetIndex + 1}:`, error.message);
+        console.error("Datos de la fila 3:", sheet[3]);
+        return; // Saltar esta hoja si hay error en la fecha
       }
       //en el caso que sea un analisis de RUTINA
       if (sheet[3].__EMPTY_10) {

@@ -2,10 +2,33 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 export const formatDateToSpanish = (date) => {
-  return format(new Date(date), "/MM/yyyy", { locale: es });
+  if (!date) {
+    throw new Error('Date is required');
+  }
+
+  const dateObj = new Date(date);
+
+  if (isNaN(dateObj.getTime())) {
+    throw new Error(`Invalid date value: ${date}`);
+  }
+
+  return format(dateObj, "/MM/yyyy", { locale: es });
 };
 
 export const excelDateToJSDate = (serial) => {
+  if (serial === null || serial === undefined) {
+    throw new Error('Excel serial date is null or undefined');
+  }
+
+  if (typeof serial !== 'number' || isNaN(serial)) {
+    throw new Error(`Invalid Excel serial date: ${serial}`);
+  }
+
+  // Excel dates typically range from 1 (1900-01-01) to ~60000 (year 2064)
+  if (serial < 1 || serial > 100000) {
+    throw new Error(`Excel serial date out of valid range: ${serial}`);
+  }
+
   const utc_days = Math.floor(serial - 25569);
   const utc_value = utc_days * 86400;
   const date_info = new Date(utc_value * 1000);
