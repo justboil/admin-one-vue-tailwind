@@ -3,8 +3,8 @@
     .aside {
       @apply bg-white;
     }
-    .aside-scrollbars {
-      @apply aside-scrollbars-light;
+    .aside-scrollbar {
+      @apply scrollbar-styled-light;
     }
     .aside-menu-item {
       @apply text-blue-600 hover:text-black;

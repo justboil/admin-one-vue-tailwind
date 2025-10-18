@@ -1,6 +1,65 @@
-@import './tailwind/_base.css';
-@import './tailwind/_components.css';
-@import './tailwind/_utilities.css';
+@import 'tailwindcss';
+@plugin "@tailwindcss/forms";
+
+@source inline("style-{basic,white}");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --transition-position: right, left, top, bottom, margin, padding;
+
+  --animate-fade-in: fade-in 250ms ease-in-out;
+  --animate-fade-out: fade-out 250ms ease-in-out;
+
+  --scrollbar-track-basic: var(--color-gray-900);
+  --scrollbar-thumb-basic: var(--color-gray-600);
+  --scrollbar-basic: var(--scrollbar-thumb-basic) var(--scrollbar-track-basic);
+
+  --scrollbar-track-light: var(--color-gray-100);
+  --scrollbar-thumb-light: var(--color-gray-300);
+  --scrollbar-light: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
+
+  --scrollbar-track-dark: var(--color-slate-900);
+  --scrollbar-thumb-dark: var(--color-slate-600);
+  --scrollbar-dark: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
+}
+
+@utility scrollbar-styled-* {
+  scrollbar-width: thin;
+  scrollbar-color: --value(--scrollbar-*);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: --value(--scrollbar-track-*);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.25rem;
+    background-color: --value(--scrollbar-thumb-*);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 
 @import './_checkbox-radio-switch.css';
 @import './_progress.css';
@@ -10,4 +69,22 @@
 @import './styles/_basic.css';
 @import './styles/_white.css';
 
-@config '../../tailwind.config.js';
+/* @config '../../tailwind.config.js'; */
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

@@ -3,8 +3,8 @@
     .aside {
       @apply bg-gray-800;
     }
-    .aside-scrollbars {
-      @apply aside-scrollbars-gray;
+    .aside-scrollbar {
+      @apply scrollbar-styled-basic;
     }
     .aside-brand {
       @apply bg-gray-900 text-white;
