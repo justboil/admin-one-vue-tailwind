@@ -1,1 +1,0 @@
-import{a1 as t,p as o,o as r,i as s}from"./index-C76QD15C.js";const n={},a={class:"text-center py-24 text-gray-500 dark:text-slate-400"};function c(p,e){return r(),o("div",a,[...e[0]||(e[0]=[s("p",null,"Nothing's here…",-1)])])}const d=t(n,[["render",c]]);export{d as C};
