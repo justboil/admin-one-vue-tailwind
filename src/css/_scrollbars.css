@@ -1,5 +1,5 @@
 @utility dark-scrollbars-compat {
-  scrollbar-color: rgb(71, 85, 105) rgb(30, 41, 59);
+  scrollbar-color: var(--color-slate-600) var(--color-slate-800);
 }
 
 @utility dark-scrollbars {
@@ -19,7 +19,7 @@
 @layer base {
   html {
     scrollbar-width: thin;
-    scrollbar-color: rgb(156, 163, 175) rgb(249, 250, 251);
+    scrollbar-color: var(--color-gray-400) var(--color-gray-50);
   }
 
   body::-webkit-scrollbar {
