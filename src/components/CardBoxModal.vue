@@ -6,6 +6,8 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
 import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
+import CardBoxComponentBody from './CardBoxComponentBody.vue'
+import CardBoxComponentFooter from './CardBoxComponentFooter.vue'
 
 const props = defineProps({
   title: {
@@ -56,9 +58,12 @@ window.addEventListener('keydown', (e) => {
       v-show="value"
       class="z-50 max-h-[calc(100dvh-(--spacing(40)))] w-11/12 shadow-lg md:w-3/5 lg:w-2/5 xl:w-4/12"
       is-modal
+      has-component-layout
     >
-      <CardBoxComponentTitle :title="title">
-        <BaseButton
+      <div class="px-6 pt-6">
+
+        <CardBoxComponentTitle :title="title">
+          <BaseButton
           v-if="hasCancel"
           :icon="mdiClose"
           color="whiteDark"
@@ -67,17 +72,20 @@ window.addEventListener('keydown', (e) => {
           @click.prevent="cancel"
         />
       </CardBoxComponentTitle>
+    </div>
 
-      <div class="space-y-3">
-        <slot />
-      </div>
+      <CardBoxComponentBody class="overflow-y-auto py-6 pl-6 pr-3 mr-3" no-padding>
+        <div class="space-y-3">
+          <slot />
+        </div>
+      </CardBoxComponentBody>
 
-      <template #footer>
+      <CardBoxComponentFooter>
         <BaseButtons>
           <BaseButton :label="buttonLabel" :color="button" @click="confirm" />
           <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
         </BaseButtons>
-      </template>
+      </CardBoxComponentFooter>
     </CardBox>
   </OverlayLayer>
 </template>
