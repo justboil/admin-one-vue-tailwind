@@ -32,7 +32,7 @@
   }
 
   body::-webkit-scrollbar-thumb {
-    @apply bg-gray-400 rounded-sm;
+    @apply rounded-sm bg-gray-400;
   }
 
   body::-webkit-scrollbar-thumb:hover {

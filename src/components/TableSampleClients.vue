@@ -93,8 +93,8 @@ const checked = (isChecked, client) => {
     <tbody>
       <tr v-for="client in itemsPaginated" :key="client.id">
         <TableCheckboxCell v-if="checkable" @checked="checked($event, client)" />
-        <td class="border-b-0 lg:w-6 before:hidden">
-          <UserAvatar :username="client.name" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
+        <td class="border-b-0 before:hidden lg:w-6">
+          <UserAvatar :username="client.name" class="mx-auto h-24 w-24 lg:h-6 lg:w-6" />
         </td>
         <td data-label="Name">
           {{ client.name }}
@@ -110,12 +110,12 @@ const checked = (isChecked, client) => {
             {{ client.progress }}
           </progress>
         </td>
-        <td data-label="Created" class="lg:w-1 whitespace-nowrap">
+        <td data-label="Created" class="whitespace-nowrap lg:w-1">
           <small class="text-gray-500 dark:text-slate-400" :title="client.created">{{
             client.created
           }}</small>
         </td>
-        <td class="before:hidden lg:w-1 whitespace-nowrap">
+        <td class="whitespace-nowrap before:hidden lg:w-1">
           <BaseButtons type="justify-start lg:justify-end" no-wrap>
             <BaseButton color="info" :icon="mdiEye" small @click="isModalActive = true" />
             <BaseButton
@@ -129,7 +129,7 @@ const checked = (isChecked, client) => {
       </tr>
     </tbody>
   </table>
-  <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
+  <div class="border-t border-gray-100 p-3 lg:px-6 dark:border-slate-800">
     <BaseLevel>
       <BaseButtons>
         <BaseButton

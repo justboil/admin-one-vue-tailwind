@@ -1,12 +1,12 @@
 @utility checkbox {
-  @apply inline-flex items-center cursor-pointer relative;
+  @apply relative inline-flex cursor-pointer items-center;
 
   & input[type='checkbox'] {
-    @apply absolute left-0 opacity-0 -z-1;
+    @apply absolute left-0 -z-1 opacity-0;
   }
 
   & input[type='checkbox'] + .check {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   & input[type='checkbox']:focus + .check {
@@ -14,7 +14,7 @@
   }
 
   & input[type='checkbox'] + .check {
-    @apply block w-5 h-5;
+    @apply block h-5 w-5;
   }
 
   & input[type='checkbox'] + .check {
@@ -22,7 +22,7 @@
   }
 
   & input[type='checkbox']:checked + .check {
-    @apply bg-no-repeat bg-center border-4;
+    @apply border-4 bg-center bg-no-repeat;
   }
 
   & input[type='checkbox']:checked + .check {
@@ -30,19 +30,19 @@
   }
 
   & input[type='checkbox']:checked + .check {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 }
 
 @utility radio {
-  @apply inline-flex items-center cursor-pointer relative;
+  @apply relative inline-flex cursor-pointer items-center;
 
   & input[type='radio'] {
-    @apply absolute left-0 opacity-0 -z-1;
+    @apply absolute left-0 -z-1 opacity-0;
   }
 
   & input[type='radio'] + .check {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   & input[type='radio']:focus + .check {
@@ -50,7 +50,7 @@
   }
 
   & input[type='radio'] + .check {
-    @apply block w-5 h-5;
+    @apply block h-5 w-5;
   }
 
   & input[type='radio'] + .check {
@@ -58,7 +58,7 @@
   }
 
   & input[type='radio']:checked + .check {
-    @apply bg-no-repeat bg-center border-4;
+    @apply border-4 bg-center bg-no-repeat;
   }
 
   & input[type='radio']:checked + .check {
@@ -66,19 +66,19 @@
   }
 
   & input[type='radio']:checked + .check {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 }
 
 @utility switch {
-  @apply inline-flex items-center cursor-pointer relative;
+  @apply relative inline-flex cursor-pointer items-center;
 
   & input[type='checkbox'] {
-    @apply absolute left-0 opacity-0 -z-1;
+    @apply absolute left-0 -z-1 opacity-0;
   }
 
   & input[type='checkbox'] + .check {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   & input[type='checkbox']:focus + .check {
@@ -86,7 +86,7 @@
   }
 
   & input[type='checkbox'] + .check {
-    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+    @apply flex h-6 w-12 shrink-0 items-center bg-gray-200 p-0.5;
   }
 
   & input[type='checkbox'] + .check {
@@ -98,12 +98,12 @@
   }
 
   & input[type='checkbox']:checked + .check {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 
   & input[type='checkbox'] + .check:before {
     content: '';
-    @apply block w-5 h-5 bg-white border border-gray-700;
+    @apply block h-5 w-5 border border-gray-700 bg-white;
   }
 
   & input[type='checkbox']:checked + .check:before {
@@ -114,15 +114,15 @@
 
 @utility check {
   .checkbox input[type='checkbox'] + & {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   .radio input[type='radio'] + & {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   .switch input[type='checkbox'] + & {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border border-gray-700 transition-colors duration-200 dark:bg-slate-800;
   }
 
   .checkbox input[type='checkbox']:focus + & {
@@ -138,11 +138,11 @@
   }
 
   .checkbox input[type='checkbox'] + & {
-    @apply block w-5 h-5;
+    @apply block h-5 w-5;
   }
 
   .radio input[type='radio'] + & {
-    @apply block w-5 h-5;
+    @apply block h-5 w-5;
   }
 
   .checkbox input[type='checkbox'] + & {
@@ -150,7 +150,7 @@
   }
 
   .switch input[type='checkbox'] + & {
-    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+    @apply flex h-6 w-12 shrink-0 items-center bg-gray-200 p-0.5;
   }
 
   .radio input[type='radio'] + & {
@@ -166,11 +166,11 @@
   }
 
   .checkbox input[type='checkbox']:checked + & {
-    @apply bg-no-repeat bg-center border-4;
+    @apply border-4 bg-center bg-no-repeat;
   }
 
   .radio input[type='radio']:checked + & {
-    @apply bg-no-repeat bg-center border-4;
+    @apply border-4 bg-center bg-no-repeat;
   }
 
   .checkbox input[type='checkbox']:checked + & {
@@ -182,20 +182,20 @@
   }
 
   .switch input[type='checkbox']:checked + & {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 
   .checkbox input[type='checkbox']:checked + & {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 
   .radio input[type='radio']:checked + & {
-    @apply bg-blue-600 border-blue-600;
+    @apply border-blue-600 bg-blue-600;
   }
 
   .switch input[type='checkbox'] + &:before {
     content: '';
-    @apply block w-5 h-5 bg-white border border-gray-700;
+    @apply block h-5 w-5 border border-gray-700 bg-white;
   }
 
   .switch input[type='checkbox']:checked + &:before {

@@ -86,8 +86,8 @@ const darkModeStore = useDarkModeStore()
     <SectionTitle first>Dark mode</SectionTitle>
 
     <SectionMain>
-      <CardBox class="md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-2xl md:mx-auto">
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-slate-400">
+      <CardBox class="shadow-2xl md:mx-auto md:w-7/12 lg:w-5/12 xl:w-4/12">
+        <div class="py-24 text-center text-gray-500 lg:py-12 dark:text-slate-400">
           <BaseButton label="Toggle" color="contrast" @click="darkModeStore.set()" />
         </div>
       </CardBox>
@@ -98,7 +98,7 @@ const darkModeStore = useDarkModeStore()
     <SectionMain>
       <div class="space-y-12">
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer shadow-2xl md:mx-auto md:w-7/12 lg:w-5/12"
           is-hoverable
           @click="modalOneActive = true"
         >
@@ -118,7 +118,7 @@ const darkModeStore = useDarkModeStore()
         </CardBox>
 
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer shadow-2xl md:mx-auto md:w-7/12 lg:w-5/12"
           is-hoverable
           @click="modalTwoActive = true"
         >
@@ -136,7 +136,7 @@ const darkModeStore = useDarkModeStore()
         </CardBox>
 
         <CardBox
-          class="cursor-pointer md:w-7/12 lg:w-5/12 shadow-2xl md:mx-auto"
+          class="cursor-pointer shadow-2xl md:mx-auto md:w-7/12 lg:w-5/12"
           is-hoverable
           @click="modalThreeActive = true"
         >
@@ -155,7 +155,7 @@ const darkModeStore = useDarkModeStore()
 
     <SectionTitle custom>
       <h1 class="text-2xl text-gray-500 dark:text-slate-400">Notifications</h1>
-      <div class="flex items-center justify-center mt-6">
+      <div class="mt-6 flex items-center justify-center">
         <FormCheckRadioGroup
           v-model="notificationSettingsModel"
           type="switch"
@@ -466,7 +466,7 @@ const darkModeStore = useDarkModeStore()
     <SectionTitle>Cards</SectionTitle>
 
     <SectionMain>
-      <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
+      <div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <CardBox>
           <CardBoxComponentTitle title="With title & icon">
             <BaseButton :icon="mdiReload" color="whiteDark" rounded-full />

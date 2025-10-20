@@ -29,14 +29,14 @@ const handleStyleChange = (slug) => {
   <LayoutGuest>
     <div :class="gradientBgPurplePink" class="flex min-h-screen items-center justify-center">
       <SectionMain>
-        <h1 class="text-4xl md:text-5xl text-center text-white font-bold mt-12 mb-3 lg:mt-0">
+        <h1 class="mt-12 mb-3 text-center text-4xl font-bold text-white md:text-5xl lg:mt-0">
           Pick a style&hellip;
         </h1>
-        <h2 class="text-xl md:text-xl text-center text-white mb-12">
+        <h2 class="mb-12 text-center text-xl text-white md:text-xl">
           Style switching with a single
-          <code class="px-1.5 py-0.5 rounded-sm bg-white/20">modifier</code>
+          <code class="rounded-sm bg-white/20 px-1.5 py-0.5">modifier</code>
         </h2>
-        <div class="grid gap-6 grid-cols-1 lg:grid-cols-2 px-6 max-w-6xl mx-auto">
+        <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 lg:grid-cols-2">
           <CardBox
             v-for="style in styles"
             :key="style"
@@ -52,7 +52,7 @@ const handleStyleChange = (slug) => {
               />
             </div>
 
-            <h1 class="text-xl md:text-2xl font-black capitalize">
+            <h1 class="text-xl font-black capitalize md:text-2xl">
               {{ style }}
             </h1>
             <h2 class="text-lg md:text-xl">& Dark mode</h2>

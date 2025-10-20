@@ -61,20 +61,19 @@ window.addEventListener('keydown', (e) => {
       has-component-layout
     >
       <div class="px-6 pt-6">
-
         <CardBoxComponentTitle :title="title">
           <BaseButton
-          v-if="hasCancel"
-          :icon="mdiClose"
-          color="whiteDark"
-          small
-          rounded-full
-          @click.prevent="cancel"
-        />
-      </CardBoxComponentTitle>
-    </div>
+            v-if="hasCancel"
+            :icon="mdiClose"
+            color="whiteDark"
+            small
+            rounded-full
+            @click.prevent="cancel"
+          />
+        </CardBoxComponentTitle>
+      </div>
 
-      <CardBoxComponentBody class="overflow-y-auto py-6 pl-6 pr-3 mr-3" no-padding>
+      <CardBoxComponentBody class="mr-3 overflow-y-auto py-6 pr-3 pl-6" no-padding>
         <div class="space-y-3">
           <slot />
         </div>

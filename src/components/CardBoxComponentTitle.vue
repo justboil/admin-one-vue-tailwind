@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex items-center justify-between mb-3">
+  <div class="mb-3 flex items-center justify-between">
     <h1 class="text-2xl">
       {{ title }}
     </h1>

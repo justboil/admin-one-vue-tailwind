@@ -37,10 +37,10 @@ const hasRightSlot = computed(() => slots.right)
   <div
     v-if="!isDismissed"
     :class="componentClass"
-    class="px-3 py-6 md:py-3 mb-6 last:mb-0 border rounded-lg transition-colors duration-150"
+    class="mb-6 rounded-lg border px-3 py-6 transition-colors duration-150 last:mb-0 md:py-3"
   >
     <BaseLevel>
-      <div class="flex flex-col md:flex-row items-center">
+      <div class="flex flex-col items-center md:flex-row">
         <BaseIcon
           v-if="icon"
           :path="icon"
@@ -49,7 +49,7 @@ const hasRightSlot = computed(() => slots.right)
           size="24"
           class="md:mr-2"
         />
-        <span class="text-center md:text-left md:py-2"><slot /></span>
+        <span class="text-center md:py-2 md:text-left"><slot /></span>
       </div>
       <slot v-if="hasRightSlot" name="right" />
       <BaseButton v-else :icon="mdiClose" small rounded-full color="white" @click="dismiss" />

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/forms";
+@plugin '@tailwindcss/forms';
 
-@source inline("style-{basic,white}");
+@source inline('style-{basic,white}');
 
 @custom-variant dark (&:where(.dark, .dark *));
 

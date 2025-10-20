@@ -38,7 +38,7 @@ const computedValue = computed({
 </script>
 
 <template>
-  <div class="flex justify-start flex-wrap -mb-3" :class="{ 'flex-col': isColumn }">
+  <div class="-mb-3 flex flex-wrap justify-start" :class="{ 'flex-col': isColumn }">
     <FormCheckRadio
       v-for="(value, key) in options"
       :key="key"
