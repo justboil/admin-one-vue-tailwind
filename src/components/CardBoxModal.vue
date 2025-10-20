@@ -51,10 +51,10 @@ window.addEventListener('keydown', (e) => {
 </script>
 
 <template>
-  <OverlayLayer v-show="value" @overlay-click="cancel">
+  <OverlayLayer :is-active="value" @overlay-click="cancel">
     <CardBox
       v-show="value"
-      class="shadow-lg max-h-[calc(100dvh-(--spacing(40)))] w-11/12 md:w-3/5 lg:w-2/5 xl:w-4/12 z-50"
+      class="z-50 max-h-[calc(100dvh-(--spacing(40)))] w-11/12 shadow-lg md:w-3/5 lg:w-2/5 xl:w-4/12"
       is-modal
     >
       <CardBoxComponentTitle :title="title">
