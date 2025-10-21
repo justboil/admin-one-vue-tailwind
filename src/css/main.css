@@ -7,30 +7,10 @@
 
 @theme {
   --transition-position: right, left, top, bottom, margin, padding;
-
-  --animate-fade-in: fade-in 250ms ease-in-out;
-  --animate-fade-out: fade-out 250ms ease-in-out;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }
 
 @import './_checkbox-radio-switch.css';
+@import './_keyframes.css';
 @import './_progress.css';
 @import './_scrollbars.css';
 @import './_table.css';
