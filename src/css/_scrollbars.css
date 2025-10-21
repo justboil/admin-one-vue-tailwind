@@ -41,14 +41,6 @@
 }
 
 @theme {
-  --scrollbar-track-basic: var(--color-gray-900);
-  --scrollbar-thumb-basic: var(--color-gray-600);
-  --scrollbar-basic: var(--scrollbar-thumb-basic) var(--scrollbar-track-basic);
-
-  --scrollbar-track-light: var(--color-gray-100);
-  --scrollbar-thumb-light: var(--color-gray-300);
-  --scrollbar-light: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
-
   --scrollbar-track-dark: var(--color-slate-900);
   --scrollbar-thumb-dark: var(--color-slate-600);
   --scrollbar-dark: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
