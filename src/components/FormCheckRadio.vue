@@ -63,7 +63,7 @@ const darkModeStore = useDarkModeStore()
       class="absolute left-0 -z-1 opacity-0"
     />
     <span
-      class="jb-check border focus:ring focus:ring-blue-700"
+      class="jb-check border"
       :class="{
         'transition-colors duration-200': !darkModeStore.isInProgress,
         'block size-5': ['radio', 'checkbox'].includes(type),
