@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
+import { useDarkModeStore } from '@/stores/darkMode'
 
 const props = defineProps({
   label: {
@@ -81,9 +82,8 @@ const componentClass = computed(() => {
     'items-center',
     'whitespace-nowrap',
     'focus:outline-hidden',
-    'transition-colors',
+    useDarkModeStore().isInProgress ? '' : 'transition-colors',
     'focus:ring-3',
-    'duration-150',
     'border',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
     props.roundedFull ? 'rounded-full' : 'rounded-sm',

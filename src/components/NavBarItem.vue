@@ -7,6 +7,7 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue'
 import NavBarMenuList from '@/components/NavBarMenuList.vue'
 import BaseDivider from '@/components/BaseDivider.vue'
+import { useDarkModeStore } from '@/stores/darkMode'
 
 const props = defineProps({
   item: {
@@ -81,6 +82,8 @@ onBeforeUnmount(() => {
     window.removeEventListener('click', forceClose)
   }
 })
+
+const darkModeStore = useDarkModeStore()
 </script>
 
 <template>
@@ -104,16 +107,24 @@ onBeforeUnmount(() => {
       }"
     >
       <UserAvatarCurrentUser v-if="item.isCurrentUser" class="mr-3 inline-flex h-6 w-6" />
-      <BaseIcon v-if="item.icon" :path="item.icon" class="transition-colors" />
+      <BaseIcon
+        v-if="item.icon"
+        :path="item.icon"
+        :class="{ 'transition-colors': !darkModeStore.isInProgress }"
+      />
       <span
-        class="px-2 transition-colors"
-        :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
+        class="px-2"
+        :class="{
+          'lg:hidden': item.isDesktopNoLabel && item.icon,
+          'transition-colors': !darkModeStore.isInProgress,
+        }"
         >{{ itemLabel }}</span
       >
       <BaseIcon
         v-if="item.menu"
         :path="isDropdownActive ? mdiChevronUp : mdiChevronDown"
-        class="hidden transition-colors lg:inline-flex"
+        :class="{ 'transition-colors': !darkModeStore.isInProgress }"
+        class="hidden lg:inline-flex"
       />
     </div>
     <div
