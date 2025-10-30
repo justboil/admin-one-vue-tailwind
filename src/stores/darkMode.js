@@ -1,36 +1,59 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
+const darkModeKey = 'darkMode'
+
 export const useDarkModeStore = defineStore('darkMode', () => {
   const isEnabled = ref(false)
   const isInProgress = ref(false)
 
-  function set(payload = null) {
-    isInProgress.value = true
-    isEnabled.value = payload !== null ? payload : !isEnabled.value
-
-    if (typeof document !== 'undefined') {
-      document.body.classList[isEnabled.value ? 'add' : 'remove']('dark-scrollbars')
-
-      document.documentElement.classList[isEnabled.value ? 'add' : 'remove'](
-        'dark',
-        'dark-scrollbars-compat',
-      )
+  function init() {
+    if (
+      typeof localStorage !== 'undefined' &&
+      typeof window !== 'undefined' &&
+      ((!localStorage[darkModeKey] && window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+        localStorage[darkModeKey] === '1')
+    ) {
+      set(true)
     }
+  }
 
-    setTimeout(() => {
-      isInProgress.value = false
-    }, 200)
+  function reset() {
+    localStorage.removeItem(darkModeKey)
+    init()
+  }
 
-    // You can persist dark mode setting
-    // if (typeof localStorage !== 'undefined') {
-    //   localStorage.setItem('darkMode', isEnabled.value ? '1' : '0')
-    // }
+  function set(payload = null, persist = false) {
+    const setIsEnabled = payload !== null ? payload : !isEnabled.value
+
+    if (isEnabled.value !== setIsEnabled) {
+      isEnabled.value = setIsEnabled
+      isInProgress.value = true
+
+      if (typeof document !== 'undefined') {
+        document.body.classList[setIsEnabled ? 'add' : 'remove']('dark-scrollbars')
+
+        document.documentElement.classList[setIsEnabled ? 'add' : 'remove'](
+          'dark',
+          'dark-scrollbars-compat',
+        )
+      }
+
+      setTimeout(() => {
+        isInProgress.value = false
+      }, 200)
+
+      if (persist && typeof localStorage !== 'undefined') {
+        localStorage.setItem(darkModeKey, setIsEnabled ? '1' : '0')
+      }
+    }
   }
 
   return {
     isEnabled,
     isInProgress,
+    init,
+    reset,
     set,
   }
 })

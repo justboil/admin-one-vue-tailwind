@@ -28,7 +28,7 @@ router.beforeEach(() => {
 
 const menuClick = (event, item) => {
   if (item.isToggleLightDark) {
-    darkModeStore.set()
+    darkModeStore.set(null, true)
   }
 
   if (item.isLogout) {
