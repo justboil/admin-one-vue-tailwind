@@ -22,7 +22,10 @@ const props = defineProps({
     type: String,
     default: 'Done',
   },
+  hasCustomButtons: Boolean,
   hasCancel: Boolean,
+  isForm: Boolean,
+  isProcessing: Boolean,
   modelValue: {
     type: [String, Number, Boolean],
     default: null,
@@ -37,7 +40,10 @@ const value = computed({
 })
 
 const confirmCancel = (mode) => {
-  value.value = false
+  if (mode === 'cancel' || (mode === 'confirm' && !props.isForm)) {
+    value.value = false
+  }
+
   emit(mode)
 }
 
@@ -58,6 +64,8 @@ window.addEventListener('keydown', (e) => {
       class="z-50 max-h-[calc(100dvh-(--spacing(40)))] w-11/12 animate-fade-in shadow-lg md:w-3/5 lg:w-2/5 xl:w-4/12"
       is-modal
       has-component-layout
+      :is-form="isForm"
+      @submit.prevent="confirm"
     >
       <div class="px-6 pt-6">
         <CardBoxComponentTitle :title="title">
@@ -79,8 +87,16 @@ window.addEventListener('keydown', (e) => {
       </CardBoxComponentBody>
 
       <CardBoxComponentFooter>
-        <BaseButtons>
-          <BaseButton :label="buttonLabel" :color="button" @click="confirm" />
+        <slot v-if="hasCustomButtons" name="buttons" />
+        <BaseButtons v-else>
+          <BaseButton
+            :label="buttonLabel"
+            :color="button"
+            @click="isForm ? null : confirm()"
+            :type="isForm ? 'submit' : 'button'"
+            :disabled="isProcessing"
+            :class="{ 'opacity-25': isProcessing }"
+          />
           <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
         </BaseButtons>
       </CardBoxComponentFooter>
