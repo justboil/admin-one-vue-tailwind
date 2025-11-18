@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
@@ -51,10 +51,18 @@ const confirm = () => confirmCancel('confirm')
 
 const cancel = () => confirmCancel('cancel')
 
-window.addEventListener('keydown', (e) => {
+const closeWithEscapeEvent = (e) => {
   if (e.key === 'Escape' && value.value) {
     cancel()
   }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', closeWithEscapeEvent)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', closeWithEscapeEvent)
 })
 </script>
 
