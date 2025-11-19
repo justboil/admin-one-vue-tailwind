@@ -1,13 +1,12 @@
 <script setup>
 import { computed, onMounted, onUnmounted } from 'vue'
-import { mdiClose } from '@mdi/js'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseButtons from '@/components/BaseButtons.vue'
 import CardBox from '@/components/CardBox.vue'
 import OverlayLayer from '@/components/OverlayLayer.vue'
-import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
-import CardBoxComponentBody from './CardBoxComponentBody.vue'
-import CardBoxComponentFooter from './CardBoxComponentFooter.vue'
+import CardBoxComponentFooter from '@/components/CardBoxComponentFooter.vue'
+import CardBoxModalHeader from '@/components/CardBoxModalHeader.vue'
+import CardBoxModalBody from '@/components/CardBoxModalBody.vue'
 
 const props = defineProps({
   title: {
@@ -22,7 +21,7 @@ const props = defineProps({
     type: String,
     default: 'Done',
   },
-  hasCustomButtons: Boolean,
+  hasCustomLayout: Boolean,
   hasCancel: Boolean,
   isForm: Boolean,
   isProcessing: Boolean,
@@ -75,39 +74,29 @@ onUnmounted(() => {
       :is-form="isForm"
       @submit.prevent="confirm"
     >
-      <div class="px-6 pt-6">
-        <CardBoxComponentTitle :title="title">
-          <BaseButton
-            v-if="hasCancel"
-            :icon="mdiClose"
-            color="whiteDark"
-            small
-            rounded-full
-            @click.prevent="cancel"
-          />
-        </CardBoxComponentTitle>
-      </div>
+      <CardBoxModalHeader :title="title" :has-cancel="hasCancel" @cancel="cancel" />
 
-      <CardBoxComponentBody class="mr-3 overflow-y-auto py-6 pr-3 pl-6" no-padding>
-        <div class="space-y-3">
+      <slot v-if="hasCustomLayout" />
+
+      <template v-else>
+        <CardBoxModalBody>
           <slot />
-        </div>
-      </CardBoxComponentBody>
+        </CardBoxModalBody>
 
-      <CardBoxComponentFooter>
-        <slot v-if="hasCustomButtons" name="buttons" />
-        <BaseButtons v-else>
-          <BaseButton
-            :label="buttonLabel"
-            :color="button"
-            @click="isForm ? null : confirm()"
-            :type="isForm ? 'submit' : 'button'"
-            :disabled="isProcessing"
-            :class="{ 'opacity-25': isProcessing }"
-          />
-          <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
-        </BaseButtons>
-      </CardBoxComponentFooter>
+        <CardBoxComponentFooter>
+          <BaseButtons>
+            <BaseButton
+              :label="buttonLabel"
+              :color="button"
+              @click="isForm ? null : confirm()"
+              :type="isForm ? 'submit' : 'button'"
+              :disabled="isProcessing"
+              :class="{ 'opacity-25': isProcessing }"
+            />
+            <BaseButton v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
+          </BaseButtons>
+        </CardBoxComponentFooter>
+      </template>
     </CardBox>
   </OverlayLayer>
 </template>
