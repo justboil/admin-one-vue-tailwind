@@ -14,8 +14,8 @@
 
 * Built with **Vue.js 3**, **Tailwind CSS 4** framework & **Composition API**
 * **Vite** under the hood &mdash; [Info](https://vitejs.dev)
+* **Laravel Inertia Vue** integration available &mdash; [Info](#laravel-12x-integration)
 * **Nuxt 3** integration available &mdash; [Info](#nuxt-3-integration)
-* **Laravel Breeze Inertia Vue** integration available &mdash; [Info](#laravel-9x-integration)
 * **SFC** `<script setup>` &mdash; [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
 * **Pinia** state library (official Vuex 5) &mdash; [Info](https://pinia.vuejs.org/)
 * **Dark mode**
@@ -144,7 +144,7 @@ This dashboard can be integrated with Nuxt 3.x. [Check guide](https://github.com
 
 ### Laravel 12.x integration
 
-This dashboard can be integrated with Laravel 12.x Breeze Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
+This dashboard can be integrated with Laravel 12.x Inertia + Vue.js stack. [Check guide](https://github.com/justboil/admin-one-vue-tailwind/tree/master/.laravel-guide) for more information
 
 ## Docs
 
