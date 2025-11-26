@@ -33,8 +33,15 @@ First, [install Laravel with Vue starter kit](https://laravel.com/docs/starter-k
 
 ### Install npm dependencies
 
+Install default packages:
+
 ```bash
 npm install
+```
+
+Install additional dashboard packages:
+
+```bash
 npm i @mdi/js@^7 chart.js numeral axios pinia @tailwindcss/forms
 ```
 
@@ -64,13 +71,13 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 
 ## Start app
 
-Run default database migrations, if you didn't run before
+Run default database migrations, if you didn't run before:
 
 ```bash
 php artisan migrate
 ```
 
-Then, start app in dev mode
+Then, start app in dev mode:
 
 ```bash
 npm run dev
