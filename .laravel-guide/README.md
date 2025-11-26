@@ -7,10 +7,8 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 **Admin One** is simple, fast and free Vue.js 3.x Tailwind CSS 4.x admin dashboard with Laravel 12.x integration.
 
 - Built with **Vue.js 3**, **Tailwind CSS 4** framework & **Composition API**
-- **Laravel** build tools
-- **Laravel Jetstream** with **Inertia + Vue** stack
+- **Laravel Inertia Vue** stack
 - **SFC** `<script setup>` [Info](https://v3.vuejs.org/api/sfc-script-setup.html)
-- **Pinia** state library (official Vuex 5)
 - **Dark mode**
 - **Styled** scrollbars
 - **Production CSS** is only **&thickapprox;38kb**
@@ -20,10 +18,9 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 ## Table of contents
 
 - [Install](#install)
+- [Remove default starter kit files](#remove-default-starter-kit-files)
 - [Copy styles, components and scripts](#copy-styles-components-and-scripts)
-- [Add pages](#add-pages)
-- [Fix router links](#fix-router-links)
-- [Add Inertia-related stuff](#add-inertia-related-stuff)
+- [Start app](#start-app)
 - [Upgrading to Premium version](#upgrading-to-premium-version)
 - [Optional steps](#optional-steps)
 - [Laravel & Inertia docs](#laravel--inertia-docs)
@@ -32,348 +29,51 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 
 ### Install Laravel
 
-First, [install Laravel](https://laravel.com/docs/installation) application
+First, [install Laravel with Vue starter kit](https://laravel.com/docs/starter-kits)
 
-### Install Jetstream
-
-Then `cd` to project dir and install Jetstream with Inertia Vue stack
+### Install npm dependencies
 
 ```bash
-composer require laravel/jetstream
-
-php artisan jetstream:install inertia
-
-php artisan migrate
-
 npm install
+npm i @mdi/js@^7 chart.js numeral axios pinia @tailwindcss/forms
 ```
 
-### Install dependencies
+## Remove default starter kit files
 
-```bash
-npm i pinia @mdi/js chart.js numeral -D
-```
+- Remove `resources/js/components`
+- Remove `resources/js/layouts`
+- Remove `resources/js/pages/auth`
+- Remove `resources/js/pages/settings`
+- Remove `resources/js/pages/Dashboard.vue`
+- Remove `resources/js/app.ts`
+- Remove `resources/css/app.css`
+
+We'll replace these files with dashboard files in the next step.
 
 ## Copy styles, components and scripts
 
-**Before you start,** we recommend to rename Laravel Jetsreams's original folders (so you'll keep them for future reference) — `resources/js/Components` `resources/js/Layouts` `resources/js/Pages` to something like ComponentsJetsteam, LayoutsJetstream, etc.
-
-Now clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project somewhere locally (into any separate folder)
+Clone [justboil/admin-one-vue-tailwind](https://github.com/justboil/admin-one-vue-tailwind) project somewhere locally (into any separate folder)
 
 Next, copy these files **from justboil/admin-one-vue-tailwind project** directory **to laravel project** directory:
 
-- Copy `tailwind.config.js` to `/`
-- Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` `src/menuAside.js` `src/menuNavBar.js` to `resources/js/`
-- Copy `.laravel-guide/resources/js/` to `resources/js/`
-- Delete `resources/css/app.css`
-- Copy `src/css` to `resources/css`
+- Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` to `resources/js/`
+- Copy contents of `src/css` to `resources/css`
+- Copy contents of `.laravel-guide/resources` to `resources`
+- Copy `.laravel-guide/.prettierrc` to laravel project root directory
+- Copy `.laravel-guide/eslint.config.hs` to laravel project root directory
 
-### [optional] lowecase vs Capitalized folder names
+## Start app
 
-Fresh Laravel install with Jetstream provides **Capitalized** folder names such as `Components`, `Layouts`, etc. For the sake of simplicity we just follow Vue conventions with lowercase folder names. However, you may opt-in to capitalize folder names:
+Run default database migrations, if you didn't run before
 
-- Make sure you've removed original Laravel Jetstream's `resources/js/Layouts` and `resources/js/Components` folders
-- Rename the folders you've copied in the previous section: `resources/js/layouts` to `Layouts`; `components` to `Components`; `stores` to `Stores`
-- Replace everywhere in imports: `@/layouts/` with `@/Layouts/`; `@/components/` with `@/Components/`; `@/stores/` with `@/Stores/`
-
-### In tailwind.config.js
-
-Please make sure, you've copied template's `tailwind.config.js`. Then replace `content`, to reflect Laravel's structure:
-
-```js
-module.exports = {
-  content: [
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-    './storage/framework/views/*.php',
-    './resources/views/**/*.blade.php',
-    './resources/js/**/*.vue',
-    './resources/js/**/*.js'
-  ]
-  // ...
-}
+```bash
+php artisan migrate
 ```
 
-### In resources/views/app.blade.php
+Then, start app in dev mode
 
-- Remove `<link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">`
-
-## Add Pages
-
-Let's just add first page. You can repeat these steps for other pages, if you wish to.
-
-First, copy `src/views/HomeView.vue` (from justboil/admin-one-vue-tailwind project) to `resources/js/Pages/` (in your Laravel project).
-
-Then, open `resources/js/Pages/HomeView.vue` and add `<Head>`:
-
-```vue
-<script setup>
-import { Head } from '@inertiajs/vue3'
-// ...
-</script>
-
-<template>
-  <LayoutAuthenticated>
-    <Head title="Dashboard" />
-    <!-- ... -->
-  </LayoutAuthenticated>
-</template>
-```
-
-Add route in `routes/web.php`. There's a `/dashboard` route already defined by default, so just replace `Inertia::render('Dashboard')` with `Inertia::render('HomeView')`:
-
-```php
-Route::get('/dashboard', function () {
-  return Inertia::render('HomeView');
-})->middleware(['auth', 'verified'])->name('dashboard');
-```
-
-## Fix router links
-
-Here we replace RouterLink with Inertia Link.
-
-### resources/js/menuAside.js and resources/js/menuNavBar.js
-
-Optionally, you can pass menu via Inertia shared props, so you'll be able to control it with PHP. Here we'd just use JS.
-
-`to` should be replaced with `route` which specifies route name defined in `routes/web.php`. For external links `href` should be used instead. Here's an example for `menuAside.js`:
-
-```javascript
-export default [
-  'General',
-  [
-    {
-      route: 'dashboard',
-      icon: mdiMonitor,
-      label: 'Dashboard'
-    },
-    // {
-    //   route: "another-route-name",
-    //   icon: mdiMonitor,
-    //   label: "Dashboard 2",
-    // },
-    {
-      href: 'https://example.com/',
-      icon: mdiMonitor,
-      label: 'Example.com'
-    }
-  ]
-]
-```
-
-Route names reflect ones defined in `routes/web.php`:
-
-```php
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Home');
-})->name('dashboard');
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard-2', function () {
-//     return Inertia::render('Home2');
-// })->name('another-route-name');
-```
-
-Now, let's update vue files, to make them work with route names and Inertia links.
-
-### resources/js/components/AsideMenuItem.vue
-
-Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>` and add consts:
-
-```vue
-<script setup>
-import { Link } from '@inertiajs/vue3'
-// import { RouterLink } from "vue-router";
-// ...
-
-// Add itemHref
-const itemHref = computed(() => (props.item.route ? route(props.item.route) : props.item.href))
-
-// Add activeInactiveStyle
-const activeInactiveStyle = computed(() =>
-  props.item.route && route().current(props.item.route)
-    ? darkModeStore.asideMenuItemActiveStyle
-    : ''
-)
-
-// ...
-</script>
-```
-
-In `<template>` section:
-
-- In `<component>` remove `v-slot` and `:to` attributes; replace `:is` with `:is="item.route ? Link : 'a'"` and `:href` with `:href="itemHref"`
-- Inside `<component>` replace `:class` attribute for both `<BaseIcon>` components, `<span>` and another `<BaseIcon>` with `:class="activeInactiveStyle"`
-- ...and for `<span>` (also inside `<component>`) replace `:class` attribute with `:class="[{ 'pr-12': !hasDropdown }, activeInactiveStyle]"`
-
-### resources/js/components/BaseButton.vue
-
-Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
-
-```vue
-<script setup>
-import { Link } from '@inertiajs/vue3'
-// import { RouterLink } from "vue-router";
-// ...
-</script>
-```
-
-Replace `to` prop declaration with `routeName`:
-
-```javascript
-const props = defineProps({
-  // ...
-  routeName: {
-    type: String,
-    default: null
-  }
-  // ...
-})
-```
-
-Fix `const is` declaration, so it returns the `Link` component when `props.routeName` is set:
-
-```javascript
-const is = computed(() => {
-  if (props.as) {
-    return props.as
-  }
-
-  if (props.routeName) {
-    return Link
-  }
-
-  if (props.href) {
-    return 'a'
-  }
-
-  return 'button'
-})
-```
-
-Remove `:to` and replace `:href` in `<component>` with `:href="routeName ? route(routeName) : href"`:
-
-```vue
-<template>
-  <component
-    :is="is"
-    :class="componentClass"
-    :href="routeName ? route(routeName) : href"
-    :type="computedType"
-    :target="target"
-    :disabled="disabled"
-  >
-    <!-- ... -->
-  </component>
-</template>
-```
-
-### resources/js/components/NavBarItem.vue
-
-Replace `RouterLink` imported from `vue-router` with `Link` import in `<script setup>`:
-
-```vue
-<script setup>
-import { Link } from '@inertiajs/vue3'
-// import { RouterLink } from "vue-router";
-// ...
-
-// Add itemHref
-const itemHref = computed(() => (props.item.route ? route(props.item.route) : props.item.href))
-
-// Update `const is` to return `Link` when `props.routeName` is set:
-const is = computed(() => {
-  if (props.item.href) {
-    return 'a'
-  }
-
-  if (props.item.route) {
-    return Link
-  }
-
-  return 'div'
-})
-</script>
-```
-
-Then, remove `:to` attribute and set `:href` attribute to `:href="itemHref"` in `<component>`.
-
-## Add Inertia-related stuff
-
-### resources/js/layouts/LayoutAuthenticated.vue
-
-```vue
-<script setup>
-// Remove vue-router stuff:
-
-// import { useRouter } from 'vue-router'
-
-// const router = useRouter()
-
-// router.beforeEach(() => {
-//   isAsideMobileExpanded.value = false
-//   isAsideLgActive.value = false
-// })
-
-// Add:
-
-import { router } from '@inertiajs/vue3'
-
-router.on('navigate', () => {
-  isAsideMobileExpanded.value = false
-  isAsideLgActive.value = false
-})
-
-// Replace `isLogout` logic:
-
-const menuClick = (event, item) => {
-  // ...
-
-  if (item.isLogout) {
-    // Add:
-    router.post(route('logout'))
-  }
-}
-
-// ...
-</script>
-```
-
-### resources/js/components/UserAvatarCurrentUser.vue
-
-Let's fetch user avatar initials based on username stored in database.
-
-```vue
-<script setup>
-import { computed } from 'vue'
-import { usePage } from '@inertiajs/vue3'
-import UserAvatar from '@/components/UserAvatar.vue'
-
-const userName = computed(() => usePage().props.auth.user.name)
-</script>
-
-<template>
-  <UserAvatar :username="userName" api="initials">
-    <slot />
-  </UserAvatar>
-</template>
-```
-
-### resources/js/components/NavBarItem.vue
-
-```vue
-<script setup>
-// Add usePage:
-import { usePage } from '@inertiajs/vue3'
-// Remove unused useMainStore:
-// import { useMainStore } from '@/stores/main.js'
-// ...
-
-// Update itemLabel:
-const itemLabel = computed(() =>
-  props.item.isCurrentUser ? usePage().props.auth.user.name : props.item.label
-)
-
-// ...
-</script>
+```bash
+npm run dev
 ```
 
 ## Upgrading to Premium version
@@ -390,8 +90,8 @@ npm i @headlessui/vue -D
 
 Copy files to your Laravel project (overwrite free version ones or merge if you have changed something):
 
-- Copy `src/components/Premium` to `resources/js/components/Premium`
-- Copy `src/stores` to `resources/js/stores`
+- Copy contents of `src/components/Premium` to `resources/js/components/Premium`
+- Copy contents of `src/stores` to `resources/js/stores`
 - Copy `src/config.js` to `resources/js/config.js`
 - Copy `src/sampleButtonMenuOptions.js` to `resources/js/sampleButtonMenuOptions.js`
 - Copy `src/colorsPremium.js` to `resources/js/colorsPremium.js`
@@ -470,21 +170,7 @@ Optionally, you may update layouts of login and signup, located at `resources/js
 
 It's likely, you'll use only one app style. Follow [this guide](https://justboil.github.io/docs/customization/#default-style) to set one of choice.
 
-### Fix .editorconfig
-
-Add to .editorconfig:
-
-```editorconfig
-[*.{js,jsx,ts,tsx,vue,html,css}]
-indent_size = 2
-```
-
-### resources/js/bootstrap.js
-
-Global `lodash` and `axios` aren't needed, as we import them directly when necessary.
-
 ## Laravel & Inertia docs
 
 - [Laravel Docs](https://laravel.com/docs)
-- [Laravel Jetstream Docs](https://jetstream.laravel.com/)
 - [Inertia](https://inertiajs.com/)
