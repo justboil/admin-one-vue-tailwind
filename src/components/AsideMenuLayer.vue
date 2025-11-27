@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
 import AsideMenuItem from '@/components/AsideMenuItem.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
+import PremiumVersionBadge from './PremiumVersionBadge.vue'
 
 defineProps({
   menu: {
@@ -48,6 +49,9 @@ const asideLgCloseClick = (event) => {
         class="aside-scrollbar flex-1 overflow-x-hidden overflow-y-auto dark:scrollbar-styled-dark"
       >
         <AsideMenuList :menu="menu" @menu-click="menuClick" />
+        <div class="py-3 px-6">
+          <PremiumVersionBadge />
+        </div>
       </div>
 
       <ul>
