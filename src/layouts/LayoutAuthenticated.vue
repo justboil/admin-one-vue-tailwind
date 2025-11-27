@@ -2,7 +2,7 @@
 import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import menuAside from '@/menuAside.js'
+import { menuAsideMain, menuAsideBottom } from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
 import { useDarkModeStore } from '@/stores/darkMode.js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -69,7 +69,8 @@ const menuClick = (event, item) => {
       <AsideMenu
         :is-aside-mobile-expanded="isAsideMobileExpanded"
         :is-aside-lg-active="isAsideLgActive"
-        :menu="menuAside"
+        :menu="menuAsideMain"
+        :menu-bottom="menuAsideBottom"
         @menu-click="menuClick"
         @aside-lg-close-click="isAsideLgActive = false"
       />

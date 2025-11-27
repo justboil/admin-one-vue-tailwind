@@ -10,11 +10,10 @@ import {
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiReact,
-  mdiStar,
+  mdiLogout,
 } from '@mdi/js'
 
-export default [
+export const menuAsideMain = [
   {
     to: '/dashboard',
     icon: mdiMonitor,
@@ -77,5 +76,14 @@ export default [
     label: 'GitHub',
     icon: mdiGithub,
     target: '_blank',
+  },
+]
+
+export const menuAsideBottom = [
+  {
+    label: 'Logout',
+    icon: mdiLogout,
+    color: 'info',
+    isLogout: true,
   },
 ]

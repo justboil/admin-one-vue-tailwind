@@ -7,6 +7,7 @@ defineProps({
     type: Array,
     required: true,
   },
+  menuBottom: Array,
   isAsideMobileExpanded: Boolean,
   isAsideLgActive: Boolean,
 })
@@ -25,6 +26,7 @@ const asideLgCloseClick = (event) => {
 <template>
   <AsideMenuLayer
     :menu="menu"
+    :menu-bottom="menuBottom"
     :class="[
       isAsideMobileExpanded ? 'left-0' : '-left-60 lg:left-0',
       { 'lg:hidden xl:flex': !isAsideLgActive },
