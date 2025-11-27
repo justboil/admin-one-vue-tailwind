@@ -33,7 +33,7 @@ const menuClick = (event, item) => {
   }
 
   if (item.isLogout) {
-    //
+    alert('Logout clicked')
   }
 }
 </script>
