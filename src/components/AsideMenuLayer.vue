@@ -49,7 +49,7 @@ const asideLgCloseClick = (event) => {
         class="aside-scrollbar flex-1 overflow-x-hidden overflow-y-auto dark:scrollbar-styled-dark"
       >
         <AsideMenuList :menu="menu" @menu-click="menuClick" />
-        <div class="py-3 px-6">
+        <div class="px-6 py-3">
           <PremiumVersionBadge />
         </div>
       </div>
