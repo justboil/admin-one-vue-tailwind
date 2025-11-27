@@ -21,7 +21,6 @@ This guide will help you integrate your Laravel application with [Admin One - fr
 - [Remove default starter kit files](#remove-default-starter-kit-files)
 - [Copy styles, components and scripts](#copy-styles-components-and-scripts)
 - [Start app](#start-app)
-- [Upgrading to Premium version](#upgrading-to-premium-version)
 - [Optional steps](#optional-steps)
 - [Laravel & Inertia docs](#laravel--inertia-docs)
 
@@ -66,8 +65,9 @@ Next, copy these files **from justboil/admin-one-vue-tailwind project** director
 - Copy `src/components` `src/layouts` `src/stores` `src/colors.js` `src/config.js` to `resources/js/`
 - Copy contents of `src/css` to `resources/css`
 - Copy contents of `.laravel-guide/resources` to `resources`
+- Copy `src/views/HomeView.vue` to `resources/js/pages/Dashboard.vue`
 - Copy `.laravel-guide/.prettierrc` to laravel project root directory
-- Copy `.laravel-guide/eslint.config.hs` to laravel project root directory
+- Copy `.laravel-guide/eslint.config.js` to laravel project root directory
 
 ## Start app
 
@@ -82,94 +82,6 @@ Then, start app in dev mode:
 ```bash
 npm run dev
 ```
-
-## Upgrading to Premium version
-
-Please make sure you have completed all previous steps in this guide, so you have everything up and running. Then download and uzip the Premium version files. Next, follow steps described below.
-
-### Add deps
-
-```bash
-npm i @headlessui/vue -D
-```
-
-### Copy files
-
-Copy files to your Laravel project (overwrite free version ones or merge if you have changed something):
-
-- Copy contents of `src/components/Premium` to `resources/js/components/Premium`
-- Copy contents of `src/stores` to `resources/js/stores`
-- Copy `src/config.js` to `resources/js/config.js`
-- Copy `src/sampleButtonMenuOptions.js` to `resources/js/sampleButtonMenuOptions.js`
-- Copy `src/colorsPremium.js` to `resources/js/colorsPremium.js`
-
-### Update tailwind.config.js
-
-Replace `tailwind.config.js` in your Laravel project with the Premium one. Make sure to preserve `module.exports.content`:
-
-```js
-module.exports = {
-  content: [
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-    './storage/framework/views/*.php',
-    './resources/views/**/*.blade.php',
-    './resources/js/**/*.vue',
-    './resources/js/**/*.js'
-  ]
-  // ...
-}
-```
-
-### Update resources/js/app.js
-
-Add layout store to `resources/js/app.js`:
-
-```js
-// Add layout store
-import { useLayoutStore } from '@/stores/layout.js'
-
-const layoutStore = useLayoutStore(pinia)
-
-layoutStore.responsiveLayoutControl()
-window.onresize = () => layoutStore.responsiveLayoutControl()
-```
-
-### Update resources/js/layouts/LayoutAuthenticated.vue
-
-Replace contents of `resources/js/layouts/LayoutAuthenticated.vue` with contents of `src/js/layouts/LayoutAuthenticated.vue` (from the Premium version)
-
-```vue
-<script setup>
-// Replace router use:
-
-// import { useRouter } from "vue-router";
-import { router } from '@inertiajs/vue3'
-
-// const router = useRouter();
-
-// router.beforeEach(() => {
-//   layoutStore.isAsideMobileExpanded = false;
-// });
-
-router.on('navigate', () => {
-  layoutStore.isAsideMobileExpanded = false
-})
-
-// Add logout:
-
-const menuClick = (event, item) => {
-  // ...
-
-  if (item.isLogout) {
-    router.post(route('logout'))
-  }
-}
-</script>
-```
-
-### Use premium login and signup layouts
-
-Optionally, you may update layouts of login and signup, located at `resources/js/Pages/Auth` with Premium version layouts from `src/views/Premium/LoginView.vue` and `src/views/Premium/SignupView.vue`
 
 ## Optional steps
 
