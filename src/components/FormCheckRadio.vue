@@ -12,14 +12,8 @@ const props = defineProps({
     default: 'checkbox',
     validator: (value) => ['checkbox', 'radio', 'switch'].includes(value),
   },
-  label: {
-    type: String,
-    default: null,
-  },
-  modelValue: {
-    type: [Array, String, Number, Boolean],
-    default: null,
-  },
+  label: String,
+  modelValue: [Array, String, Number, Boolean],
   inputValue: {
     type: [String, Number, Boolean],
     required: true,

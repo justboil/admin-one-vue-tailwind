@@ -3,14 +3,8 @@ import { computed, ref, watch, onMounted } from 'vue'
 import numeral from 'numeral'
 
 const props = defineProps({
-  prefix: {
-    type: String,
-    default: null,
-  },
-  suffix: {
-    type: String,
-    default: null,
-  },
+  prefix: String,
+  suffix: String,
   value: {
     type: Number,
     default: 0,

@@ -12,10 +12,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  icon: {
-    type: String,
-    default: null,
-  },
+  icon: String,
   small: Boolean,
   outline: Boolean,
 })

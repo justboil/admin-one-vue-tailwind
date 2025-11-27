@@ -12,34 +12,13 @@ defineProps({
     type: Number,
     default: 0,
   },
-  icon: {
-    type: String,
-    default: null,
-  },
-  prefix: {
-    type: String,
-    default: null,
-  },
-  suffix: {
-    type: String,
-    default: null,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
-  color: {
-    type: String,
-    default: null,
-  },
-  trend: {
-    type: String,
-    default: null,
-  },
-  trendType: {
-    type: String,
-    default: null,
-  },
+  icon: String,
+  prefix: String,
+  suffix: String,
+  label: String,
+  color: String,
+  trend: String,
+  trendType: String,
 })
 </script>
 

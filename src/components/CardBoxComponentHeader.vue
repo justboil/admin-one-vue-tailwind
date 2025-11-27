@@ -6,14 +6,8 @@ defineProps({
     type: String,
     required: true,
   },
-  icon: {
-    type: String,
-    default: null,
-  },
-  buttonIcon: {
-    type: String,
-    default: null,
-  },
+  icon: String,
+  buttonIcon: String,
 })
 
 const emit = defineEmits(['button-click'])

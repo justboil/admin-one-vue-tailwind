@@ -16,15 +16,9 @@ const props = defineProps({
     default: 'checkbox',
     validator: (value) => ['checkbox', 'radio', 'switch'].includes(value),
   },
-  componentClass: {
-    type: String,
-    default: null,
-  },
+  componentClass: String,
   isColumn: Boolean,
-  modelValue: {
-    type: [Array, String, Number, Boolean],
-    default: null,
-  },
+  modelValue: [Array, String, Number, Boolean],
 })
 
 const emit = defineEmits(['update:modelValue'])

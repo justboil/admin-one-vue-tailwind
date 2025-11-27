@@ -25,10 +25,7 @@ const props = defineProps({
   hasCancel: Boolean,
   isForm: Boolean,
   isProcessing: Boolean,
-  modelValue: {
-    type: [String, Number, Boolean],
-    default: null,
-  },
+  modelValue: [String, Number, Boolean],
 })
 
 const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])

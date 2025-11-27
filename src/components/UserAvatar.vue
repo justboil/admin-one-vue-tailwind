@@ -6,10 +6,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  avatar: {
-    type: String,
-    default: null,
-  },
+  avatar: String,
   api: {
     type: String,
     default: 'avataaars',

@@ -8,10 +8,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import { useDarkModeStore } from '@/stores/darkMode'
 
 const props = defineProps({
-  icon: {
-    type: String,
-    default: null,
-  },
+  icon: String,
   outline: Boolean,
   color: {
     type: String,

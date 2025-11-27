@@ -6,10 +6,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import IconRounded from '@/components/IconRounded.vue'
 
 defineProps({
-  icon: {
-    type: String,
-    default: null,
-  },
+  icon: String,
   title: {
     type: String,
     required: true,

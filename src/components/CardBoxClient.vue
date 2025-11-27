@@ -23,14 +23,8 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  text: {
-    type: String,
-    default: null,
-  },
-  type: {
-    type: String,
-    default: null,
-  },
+  text: String,
+  type: String,
 })
 
 const pillType = computed(() => {

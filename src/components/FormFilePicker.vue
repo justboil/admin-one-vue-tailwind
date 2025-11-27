@@ -4,22 +4,13 @@ import { computed, ref, watch } from 'vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 const props = defineProps({
-  modelValue: {
-    type: [Object, File, Array],
-    default: null,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
+  modelValue: [Object, File, Array],
+  label: String,
   icon: {
     type: String,
     default: mdiUpload,
   },
-  accept: {
-    type: String,
-    default: null,
-  },
+  accept: String,
   color: {
     type: String,
     default: 'info',

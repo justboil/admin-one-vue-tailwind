@@ -6,42 +6,18 @@ import BaseIcon from '@/components/BaseIcon.vue'
 import { useDarkModeStore } from '@/stores/darkMode'
 
 const props = defineProps({
-  label: {
-    type: [String, Number],
-    default: null,
-  },
-  icon: {
-    type: String,
-    default: null,
-  },
-  iconSize: {
-    type: [String, Number],
-    default: null,
-  },
-  href: {
-    type: String,
-    default: null,
-  },
-  target: {
-    type: String,
-    default: null,
-  },
-  to: {
-    type: [String, Object],
-    default: null,
-  },
-  type: {
-    type: String,
-    default: null,
-  },
+  label: [String, Number],
+  icon: String,
+  iconSize: [String, Number],
+  href: String,
+  target: String,
+  to: [String, Object],
+  type: String,
   color: {
     type: String,
     default: 'white',
   },
-  as: {
-    type: String,
-    default: null,
-  },
+  as: String,
   small: Boolean,
   outline: Boolean,
   active: Boolean,

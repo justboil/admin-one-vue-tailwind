@@ -14,10 +14,7 @@ const props = defineProps({
     type: String,
     default: 'h-6',
   },
-  size: {
-    type: [String, Number],
-    default: null,
-  },
+  size: [String, Number],
 })
 
 const spanClass = computed(() => `inline-flex justify-center items-center ${props.w} ${props.h}`)

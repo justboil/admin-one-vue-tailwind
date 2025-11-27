@@ -4,38 +4,14 @@ import { useMainStore } from '@/stores/main'
 import FormControlIcon from '@/components/FormControlIcon.vue'
 
 const props = defineProps({
-  name: {
-    type: String,
-    default: null,
-  },
-  id: {
-    type: String,
-    default: null,
-  },
-  autocomplete: {
-    type: String,
-    default: null,
-  },
-  maxlength: {
-    type: String,
-    default: null,
-  },
-  placeholder: {
-    type: String,
-    default: null,
-  },
-  inputmode: {
-    type: String,
-    default: null,
-  },
-  icon: {
-    type: String,
-    default: null,
-  },
-  options: {
-    type: Array,
-    default: null,
-  },
+  name: String,
+  id: String,
+  autocomplete: String,
+  maxlength: String,
+  placeholder: String,
+  inputmode: String,
+  icon: String,
+  options: Array,
   type: {
     type: String,
     default: 'text',
