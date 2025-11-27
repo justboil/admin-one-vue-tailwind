@@ -9,7 +9,7 @@ defineProps({
   },
   color: {
     type: String,
-    default: null,
+    required: true,
   },
   w: {
     type: String,
