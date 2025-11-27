@@ -65,7 +65,7 @@ const menuClick = (event) => {
       <span
         class="line-clamp-1 grow text-ellipsis"
         :class="[
-          { 'pr-12': !hasDropdown },
+          { 'pr-6': !hasDropdown },
           vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
         ]"
         >{{ item.label }}</span
