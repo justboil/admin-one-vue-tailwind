@@ -6,7 +6,7 @@ import SectionMain from '@/components/SectionMain.vue'
 import CardBox from '@/components/CardBox.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
 
-const styles = ['white', 'basic']
+const styles = ['basic', 'white']
 
 const darkModeStore = useDarkModeStore()
 
