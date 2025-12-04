@@ -6,6 +6,10 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 // const isModalDeleteActive = ref(false)
 // const analiticaToDelete = ref(null)
 
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase configuration. Please check your environment variables.');
+}
+
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
     autoRefreshToken: true,
